@@ -6,289 +6,293 @@
     <title>Оцифровка хаоса | Федор Цветков</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0B0C10;
-            --card-bg: #1F2833;
-            --text-main: #FFFFFF;
-            --text-muted: #C5C6C7;
-            --accent-color: #66FCF1;
-            --accent-hover: #45E3D8;
+            --bg-color: #030303;
+            --card-bg: #09090b;
+            --border-color: #1e1e24;
+            --text-main: #f4f4f5;
+            --text-muted: #8e8e93;
+            --accent-neon: #00f2fe;
+            --accent-purple: #7928ca;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Hero Highlight Background Effect */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 242, 254, 0.06), transparent 80%),
+                radial-gradient(circle 600px at 20% 30%, rgba(121, 40, 202, 0.04), transparent 70%);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Hero Section */
-        header {
-            text-align: center;
-            padding: 100px 20px 80px 20px;
+            padding: 120px 24px;
             position: relative;
+            z-index: 1;
         }
 
+        /* Hero Header */
+        header { max-width: 800px; margin-bottom: 100px; }
         header h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            background: linear-gradient(180deg, #FFFFFF 0%, #A3A3A3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 4.5rem; font-weight: 900; letter-spacing: -0.05em; line-height: 1.05;
+            text-transform: uppercase; margin-bottom: 28px;
+            background: linear-gradient(180deg, #FFFFFF 30%, #555555 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        header p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; line-height: 1.6; }
+
+        /* Bento Grid with Border Gradient Hover */
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px;
+        }
+        .bento-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 40px;
+            position: relative; overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 242, 254, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.05);
+        }
+        .card-num { font-size: 0.8rem; font-weight: 700; color: var(--accent-neon); letter-spacing: 0.1em; margin-bottom: 24px; text-transform: uppercase; }
+        .bento-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.03em; }
+        .bento-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; }
+
+        /* Buttons with Text Encrypt Effect */
+        .actions { display: flex; gap: 20px; margin-bottom: 120px; }
+        .encrypt-btn {
+            background: #ffffff; color: #000000;
+            padding: 18px 36px; font-size: 1rem; font-weight: 600;
+            border-radius: 12px; text-decoration: none; border: none;
+            cursor: pointer; display: inline-flex; align-items: center;
+            font-family: 'Inter', monospace; transition: all 0.2s ease;
+        }
+        .encrypt-btn:hover {
+            background: var(--accent-neon);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+            transform: translateY(-1px);
+        }
+        .encrypt-btn.secondary {
+            background: transparent; color: #ffffff; border: 1px solid var(--border-color);
+        }
+        .encrypt-btn.secondary:hover {
+            border-color: #ffffff; background: rgba(255,255,255,0.02);
+            box-shadow: none;
         }
 
-        header p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 400;
+        /* Expandable Interactive Section */
+        .interactive-box {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 24px; padding: 60px; max-width: 650px;
         }
-
-        /* Grid Section (01, 02, 03) */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 80px;
+        .interactive-box h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 40px; }
+        
+        .expandable-row {
+            border-bottom: 1px solid var(--border-color); padding: 24px 0; cursor: pointer;
         }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 40px 30px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+        .row-header { display: flex; justify-content: space-between; align-items: center; }
+        .row-header h4 { font-size: 1.15rem; font-weight: 500; transition: color 0.2s ease; }
+        .expandable-row:hover .row-header h4 { color: var(--accent-neon); }
+        .icon-plus {
+            font-size: 1.5rem; color: var(--text-muted);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
+        .row-content {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1), margin-top 0.3s ease;
+            color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;
         }
+        /* Active State for Expandable Rows */
+        .expandable-row.active .row-content { max-height: 150px; margin-top: 16px; }
+        .expandable-row.active .icon-plus { transform: rotate(45deg); color: var(--accent-neon); }
 
-        .card-num {
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: var(--accent-color);
-            letter-spacing: 0.1em;
-            margin-bottom: 15px;
+        .form-group { margin-top: 40px; display: flex; flex-direction: column; gap: 12px; }
+        .form-group label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; }
+        .input-tg {
+            background: #000000; border: 1px solid var(--border-color); border-radius: 10px;
+            padding: 16px; color: #fff; font-size: 1rem; font-family: inherit; transition: border-color 0.2s;
         }
-
-        .card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            letter-spacing: -0.02em;
+        .input-tg:focus { outline: none; border-color: var(--accent-neon); }
+        
+        .submit-btn {
+            background: #fff; color: #000; border: none; padding: 18px; border-radius: 10px;
+            font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 24px; width: 100%;
+            transition: background 0.2s;
         }
+        .submit-btn:hover { background: var(--accent-neon); }
 
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Buttons Section */
-        .cta-actions {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 100px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 16px 32px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: #000000;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            transform: scale(1.02);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-main);
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        /* Footer / Form Section */
-        .form-section {
-            background-color: rgba(31, 40, 51, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 50px 40px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-section h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            text-align: center;
-            letter-spacing: -0.03em;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .form-control {
-            width: 100%;
-            background-color: #0B0C10;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            padding: 14px;
-            color: var(--text-main);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.2s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-
-        select.form-control {
-            appearance: none;
-            cursor: pointer;
-        }
-
-        .form-section button {
-            width: 100%;
-            border: none;
-        }
-
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.5rem; }
-            .cta-actions { flex-direction: column; gap: 15px; }
-            .form-section { padding: 30px 20px; }
+        @media (max-width: 900px) {
+            header h1 { font-size: 3rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .actions { flex-direction: column; }
+            .interactive-box { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-glow" id="glow"></div>
+
     <div class="container">
         <header>
-            <h1>Оцифровка хаоса</h1>
+            <h1>Оцифровка<br>хаоса</h1>
             <p>Системная трансформация маркетинга, продаж и ИИ-инфраструктуры бизнеса. Строго на основе данных.</p>
         </header>
 
-        <section class="services-grid">
-            <div class="card">
-                <div class="card-num">01 / ОПТИМИЗАЦИЯ</div>
-                <h3>Трафик и Аналитика</h3>
-                <p>Аудит перформанс-маркетинга. Сквозная аналитика (CAC, LTV, ROI). Глубокая докрутка и оптимизация работы отделов продаж на основе жестких цифр.</p>
+        <section class="bento-grid">
+            <div class="bento-card">
+                <div class="card-num">01 / Оптимизация</div>
+                <h3>Трафик & Аналитика</h3>
+                <p>Аудит перформанс-маркетинга. Сквозная аналитика (CAC, LTV, ROI). Глубокая пересборка и оптимизация работы отделов продаж на основе жестких цифр.</p>
             </div>
-            <div class="card">
-                <div class="card-num">02 / АВТОМАТИЗАЦИЯ</div>
-                <h3>Инфраструктура и CRM</h3>
+            <div class="bento-card">
+                <div class="card-num">02 / Автоматизация</div>
+                <h3>Инфраструктура & CRM</h3>
                 <p>Архитектура CRM-систем. Проектирование сложных e-commerce экосистем: от бесшовного трекинга событий до автоматизации логистики и мессенджеров.</p>
             </div>
-            <div class="card">
-                <div class="card-num">03 / ИИиЗАЦИЯ</div>
-                <h3>Масштабирование и Ретеншн</h3>
-                <p>Внедрение автономных ИИ-ассистентов для квалификации лидов 24/7. Автоматический возврат клиентов (Retention Loops) на основе продвинутой RFM-сегментации базы.</p>
+            <div class="bento-card">
+                <div class="card-num">03 / ИИизация</div>
+                <h3>Масштабирование & Ретеншн</h3>
+                <p>Внедрение автономных ИИ-ассистентов для квалификации лидов 24/7. Автоматический возврат клиентов (Retention Loops) на основе умной RFM-сегментации базы.</p>
             </div>
         </section>
 
-        <div class="cta-actions">
-            <a href="#apply-form" class="btn btn-primary" onclick="setService('Экспресс-аудит воронки')">Нужен экспресс-аудит воронки</a>
-            <a href="#apply-form" class="btn btn-secondary" onclick="setService('Трансформация под ключ')">Нужна трансформация под ключ</a>
+        <div class="actions">
+            <a href="#apply" class="encrypt-btn" data-value="Экспресс-аудит воронки">Экспресс-аудит воронки</a>
+            <a href="#apply" class="encrypt-btn secondary" data-value="Трансформация под ключ">Трансформация под ключ</a>
         </div>
 
-        <section id="apply-form" class="form-section">
-            <h2>Оставить заявку</h2>
-            <form action="https://submit-form.com/ВАШ_ID" method="POST"> <div class="form-group">
-                    <label>Сфера бизнеса</label>
-                    <select name="business_type" class="form-control" required>
-                        <option value="" disabled selected>Выберите вариант</option>
-                        <option value="E-com">E-commerce</option>
-                        <option value="B2B">B2B производство / услуги</option>
-                        <option value="SaaS">SaaS и IT-продукты</option>
-                        <option value="Premium">Локальный премиум-бизнес</option>
-                    </select>
+        <section id="apply" class="interactive-box">
+            <h2>Где горит сильнее всего?</h2>
+            
+            <div class="expandable-row" onclick="toggleRow(this, 'Слив бюджета')">
+                <div class="row-header">
+                    <h4>Слив рекламного бюджета</h4>
+                    <div class="icon-plus">+</div>
                 </div>
+                <div class="row-content">
+                    Трафик льется, но окупаемости нет. Алгоритмы рекламных платформ ищут мусорную аудиторию из-за кривой разметки событий и отсутствия сквозной аналитики. Оптимизируем юнит-экономику.
+                </div>
+            </div>
 
+            <div class="expandable-row" onclick="toggleRow(this, 'Хаос в CRM')">
+                <div class="row-header">
+                    <h4>Хаос в CRM и отделе продаж</h4>
+                    <div class="icon-plus">+</div>
+                </div>
+                <div class="row-content">
+                    Менеджеры забывают звонить, лиды теряются на этапах воронки, сквозной трекинг отсутствует. Выстроим жесткую архитектуру процессов, пайплайны и автоматизируем рутину.
+                </div>
+            </div>
+
+            <div class="expandable-row" onclick="toggleRow(this, 'Отток клиентов')">
+                <div class="row-header">
+                    <h4>Отток клиентов / База не покупает</h4>
+                    <div class="icon-plus">+</div>
+                </div>
+                <div class="row-content">
+                    Старая база лежит мертвым грузом. Запустим автоматические сценарии удержания и ИИ-сегментацию по RFM-метрикам для генерации скрытой прибыли без затрат на новую рекламу.
+                </div>
+            </div>
+
+            <div class="expandable-row" onclick="toggleRow(this, 'Внедрение ИИ')">
+                <div class="row-header">
+                    <h4>Хотим внедрить ИИ-решения</h4>
+                    <div class="icon-plus">+</div>
+                </div>
+                <div class="row-content">
+                    Нужны автономные ИИ-агенты для квалификации входящих заявок, умные автоответчики в мессенджерах и интеграция нейросетей в операционные процессы бизнеса для срезания костов.
+                </div>
+            </div>
+
+            <form action="#" method="POST">
+                <input type="hidden" id="selected-pain" name="pain" value="">
+                <input type="hidden" id="selected-service" name="service" value="">
+                
                 <div class="form-group">
-                    <label>Где горит сильнее всего?</label>
-                    <select name="main_pain" class="form-control" required>
-                        <option value="" disabled selected>Выберите главную проблему</option>
-                        <option value="Budget">Слив бюджета в рекламе</option>
-                        <option value="CRM">Хаос в CRM / Менеджеры тупят</option>
-                        <option value="Retention">Отток клиентов / Низкий повторный чек</option>
-                        <option value="AI">Хотим внедрить ИИ-автоматизацию</option>
-                    </select>
+                    <label>Ваш Telegram для связи</label>
+                    <input type="text" name="telegram" class="input-tg" placeholder="@username" required>
                 </div>
-
-                <div class="form-group">
-                    <label>Какая услуга интересует?</label>
-                    <select id="service-select" name="requested_service" class="form-control" required>
-                        <option value="Не выбрано">Выберите нажатием на кнопку выше</option>
-                        <option value="Экспресс-аудит воронки">Экспресс-аудит воронки</option>
-                        <option value="Трансформация под ключ">Трансформация под ключ</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Твой Telegram для связи</label>
-                    <input type="text" name="telegram" class="form-control" placeholder="@username" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Отправить данные</button>
+                <button type="submit" class="submit-btn">Оставить заявку</button>
             </form>
         </section>
     </div>
 
     <script>
-        // Скрипт автоматического выбора услуги при клике на кнопки
-        function setService(serviceName) {
-            document.getElementById('service-select').value = serviceName;
+        // Effect 1: Mouse Move Background Glow
+        const glow = document.getElementById('glow');
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            glow.style.setProperty('--mouse-x', `${x}%`);
+            glow.style.setProperty('--mouse-y', `${y}%`);
+        });
+
+        // Effect 2: Text Encrypt Animation for Buttons
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#$@*0123456789";
+        document.querySelectorAll('.encrypt-btn').forEach(button => {
+            const originalText = button.innerText;
+            let interval = null;
+            
+            button.addEventListener('mouseenter', () => {
+                let iteration = 0;
+                clearInterval(interval);
+                
+                interval = setInterval(() => {
+                    button.innerText = originalText.split("").map((letter, index) => {
+                        if(index < iteration) return originalText[index];
+                        return letters[Math.floor(Math.random() * 40)];
+                    }).join("");
+                    
+                    if(iteration >= originalText.length) clearInterval(interval);
+                    iteration += 1 / 3;
+                }, 30);
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                clearInterval(interval);
+                button.innerText = originalText;
+            });
+
+            button.addEventListener('click', () => {
+                document.getElementById('selected-service').value = button.getAttribute('data-value');
+            });
+        });
+
+        // Effect 3: Accordion Expandable Rows
+        function toggleRow(element, painValue) {
+            const rows = document.querySelectorAll('.expandable-row');
+            const isActive = element.classList.contains('active');
+            
+            rows.forEach(row => row.classList.remove('active'));
+            
+            if (!isActive) {
+                element.classList.add('active');
+                document.getElementById('selected-pain').value = painValue;
+            } else {
+                document.getElementById('selected-pain').value = '';
+            }
         }
     </script>
 </body>
