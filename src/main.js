@@ -1,3 +1,4 @@
+import './app.css'; // Подключаем стили Tailwind к проекту
 import App from './App.svelte';
 
 const app = new App({
