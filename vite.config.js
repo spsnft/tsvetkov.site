@@ -10,15 +10,14 @@ export default defineConfig({
     })
   ],
   build: {
-    // Нацеливаем сборщик на стабильные и проверенные стандарты
-    target: 'es2022',
-    // Отключаем минификацию esbuild, которая могла агрессивно вырезать полифилы прототипов
+    // Переключаем дефолтный esbuild на terser для бережного сжатия прототипов
     minify: 'terser',
     terserOptions: {
       compress: {
-        /* Пассивное сжатие, чтобы не ломать внутренние call-методы Svelte */
+        // Запрещаем оптимизатору портить вызовы функций и кеш прототипов
         keep_fnames: true,
-        keep_classnames: true
+        keep_classnames: true,
+        reduce_vars: false
       }
     }
   }
