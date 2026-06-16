@@ -10,15 +10,7 @@ export default defineConfig({
     })
   ],
   build: {
-    // Переключаем дефолтный esbuild на terser для бережного сжатия прототипов
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        // Запрещаем оптимизатору портить вызовы функций и кеш прототипов
-        keep_fnames: true,
-        keep_classnames: true,
-        reduce_vars: false
-      }
-    }
+    // Отключаем минификацию полностью. Бандл не будет сжиматься и ломаться.
+    minify: false
   }
 });
