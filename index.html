@@ -21,7 +21,7 @@
       }
     </script>
     <style>
-      body { background-color: #030303; color: #f4f4f5; }
+      html, body { background-color: #030303; color: #f4f4f5; margin: 0; padding: 0; min-height: 100vh; }
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: #030303; }
       ::-webkit-scrollbar-thumb { background: #1e1e24; border-radius: 3px; }
@@ -29,6 +29,7 @@
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <!-- Убрали слэш перед src, теперь путь относительный и Vite его точно увидит -->
+    <script type="module" src="src/main.js"></script>
   </body>
 </html>
