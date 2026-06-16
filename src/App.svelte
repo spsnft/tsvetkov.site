@@ -16,27 +16,32 @@
         mouseY = (e.clientY / window.innerHeight) * 100;
     }
 
-    // Логика для Hyper Text анимации заголовка (чистый Svelte 5)
+    // Железобетонная логика для Hyper Text анимации заголовка (чистый Svelte 5)
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#$@*0123456789";
     
-    let words = $state([
-        { current: "Optimize.", target: "Optimize." },
-        { current: "Automate.", target: "Automate." },
-        { current: "Outmaneuver.", target: "Outmaneuver." }
-    ]);
+    let word0 = $state("Optimize.");
+    let word1 = $state("Automate.");
+    let word2 = $state("Outmaneuver.");
+
+    const targets = ["Optimize.", "Automate.", "Outmaneuver."];
 
     function triggerHyperText(index) {
         let iterations = 0;
-        const targetWord = words[index].target;
+        const targetWord = targets[index];
         
         const interval = setInterval(() => {
-            words[index].current = targetWord
+            const nextValue = targetWord
                 .split("")
                 .map((letter, idx) => {
                     if (idx < iterations) return targetWord[idx];
                     return letters[Math.floor(Math.random() * letters.length)];
                 })
                 .join("");
+
+            // Прямое безопасное обновление плоского состояния
+            if (index === 0) word0 = nextValue;
+            if (index === 1) word1 = nextValue;
+            if (index === 2) word2 = nextValue;
 
             if (iterations >= targetWord.length) {
                 clearInterval(interval);
@@ -69,9 +74,9 @@
         
         <header class="max-w-[900px] mb-16">
             <h1 class="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-8 leading-[0.95] bg-gradient-to-b from-white to-[#444444] bg-clip-text text-transparent select-none">
-                <span class="cursor-pointer inline-block transition-colors hover:text-[#00f2fe]" onmouseenter={() => triggerHyperText(0)}>{words[0].current}</span><br>
-                <span class="cursor-pointer inline-block transition-colors hover:text-[#00f2fe]" onmouseenter={() => triggerHyperText(1)}>{words[1].current}</span><br>
-                <span class="cursor-pointer inline-block text-[#00f2fe]" onmouseenter={() => triggerHyperText(2)}>{words[2].current}</span>
+                <span class="cursor-pointer inline-block transition-colors hover:text-[#00f2fe]" onmouseenter={() => triggerHyperText(0)}>{word0}</span><br>
+                <span class="cursor-pointer inline-block transition-colors hover:text-[#00f2fe]" onmouseenter={() => triggerHyperText(1)}>{word1}</span><br>
+                <span class="cursor-pointer inline-block text-[#00f2fe]" onmouseenter={() => triggerHyperText(2)}>{word2}</span>
             </h1>
             <p class="text-xl md:text-2xl text-[#8e8e93] max-w-[700px] font-normal leading-relaxed">
                 Stop running blind. I transform fragmented marketing data and CRM chaos into autonomous intelligence systems that leave competitors chasing your tail.
@@ -161,88 +166,4 @@
             </div>
         </section>
 
-        <section id="friction-form" class="bg-[#09090b] border border-[#1e1e24] rounded-3xl p-12 max-w-[750px] mx-auto mb-24 relative overflow-hidden group hover:border-[#00f2fe]/30 transition-all duration-300">
-            <div class="absolute -top-24 -right-24 w-48 h-48 bg-[#00f2fe]/5 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <h2 class="text-3xl font-bold tracking-tight mb-3 text-white">Where is the friction?</h2>
-            <p class="text-[#8e8e93] mb-8">Select your primary bottleneck to initialize the solution architecture.</p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                <button type="button" onclick={() => selectedPain = "Budget Leaks"} class="p-4 rounded-xl border text-left font-medium transition-all outline-none {selectedPain === 'Budget Leaks' ? 'border-[#00f2fe] bg-[#0c1013] text-white shadow-[0_0_15px_rgba(0,242,254,0.1)]' : 'border-[#1e1e24] text-[#8e8e93] hover:border-zinc-700'}" style="content-visibility: auto;">
-                    Wasting Marketing Budget
-                </button>
-                <button type="button" onclick={() => selectedPain = "CRM Chaos"} class="p-4 rounded-xl border text-left font-medium transition-all outline-none {selectedPain === 'CRM Chaos' ? 'border-[#00f2fe] bg-[#0c1013] text-white shadow-[0_0_15px_rgba(0,242,254,0.1)]' : 'border-[#1e1e24] text-[#8e8e93] hover:border-zinc-700'}" style="content-visibility: auto;">
-                    CRM Chaos & Leaky Pipes
-                </button>
-                <button type="button" onclick={() => selectedPain = "Low Retention"} class="p-4 rounded-xl border text-left font-medium transition-all outline-none {selectedPain === 'Low Retention' ? 'border-[#00f2fe] bg-[#0c1013] text-white shadow-[0_0_15px_rgba(0,242,254,0.1)]' : 'border-[#1e1e24] text-[#8e8e93] hover:border-zinc-700'}" style="content-visibility: auto;">
-                    Dead Database & Low LTV
-                </button>
-                <button type="button" onclick={() => selectedPain = "AI Integration"} class="p-4 rounded-xl border text-left font-medium transition-all outline-none {selectedPain === 'AI Integration' ? 'border-[#00f2fe] bg-[#0c1013] text-white shadow-[0_0_15px_rgba(0,242,254,0.1)]' : 'border-[#1e1e24] text-[#8e8e93] hover:border-zinc-700'}" style="content-visibility: auto;">
-                    Ready for AI Automation
-                </button>
-            </div>
-
-            <form onsubmit={(e) => e.preventDefault()} class="space-y-6">
-                {#if selectedService}
-                    <div class="text-xs font-mono text-zinc-500 uppercase tracking-widest animate-[blurFade_0.2s_ease-out]">
-                        Selected Flow: <span class="text-[#00f2fe]">{selectedService}</span>
-                    </div>
-                {/if}
-                
-                <div class="flex flex-col gap-2">
-                    <label for="contact" class="text-xs font-bold text-zinc-500 uppercase tracking-wider">Your Telegram or Email</label>
-                    <input id="contact" type="text" bind:value={contactInput} placeholder="@username or email" required
-                           class="bg-black border border-[#1e1e24] rounded-xl p-4 text-white focus:outline-none focus:border-[#00f2fe] transition-all font-mono" />
-                </div>
-                
-                <button type="submit" class="w-full bg-white text-black p-4 rounded-xl font-bold transition-all hover:bg-[#00f2fe] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)]">
-                    Request Architecture Brief
-                </button>
-            </form>
-        </section>
-
-        <footer class="border-t border-[#1e1e24] pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-sm text-[#8e8e93]">&copy; 2026 tsvetkov.site. All systems operational.</p>
-            <div class="flex gap-6 text-sm text-[#8e8e93]">
-                <a href="https://t.me/advertisment_th" target="_blank" class="hover:text-[#00f2fe] transition-colors">Telegram</a>
-                <a href="#" class="hover:text-[#00f2fe] transition-colors">Instagram</a>
-                <a href="#" class="hover:text-[#00f2fe] transition-colors">Threads</a>
-                <a href="#" class="hover:text-[#00f2fe] transition-colors">TikTok</a>
-            </div>
-        </footer>
-    </div>
-</div>
-
-<style>
-    @keyframes shimmer {
-        100% { transform: translateX(100%); }
-    }
-    @keyframes blurFade {
-        0% { filter: blur(6px); opacity: 0; transform: translateY(8px); }
-        100% { filter: blur(0); opacity: 1; transform: translateY(0); }
-    }
-    .bg-grid-animate {
-        animation: gridPulse 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-    @keyframes gridPulse {
-        0%, 100% { opacity: 0.15; }
-        50% { opacity: 0.25; }
-    }
-    .btn-ripple {
-        position: relative;
-    }
-    .btn-ripple::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: 12px;
-        box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4);
-        animation: ripplePulse 2.5s infinite;
-        pointer-events: none;
-    }
-    @keyframes ripplePulse {
-        0% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4); }
-        70% { box-shadow: 0 0 0 15px rgba(0, 242, 254, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
-    }
-</style>
+        <section id="friction-form" class="bg-[#09090b] border border-
