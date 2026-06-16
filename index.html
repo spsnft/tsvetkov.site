@@ -6,25 +6,26 @@
     <title>Optimize. Automate. Outmaneuver. | Growth Architecture</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;900&family=JetBrains+Mono:wght=400;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      if (typeof tailwind !== 'undefined') {
-        tailwind.config = {
-          theme: {
-            extend: {
-              fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-                mono: ['JetBrains Mono', 'monospace'],
-              }
-            }
-          }
-        }
-      }
-    </script>
+    
     <style>
-      html, body { background-color: #030303; color: #f4f4f5; margin: 0; padding: 0; min-height: 100vh; }
+      /* Назначаем шрифты глобально через чистый CSS, чтобы Svelte не падал, ожидая конфиг Tailwind */
+      html, body { 
+        font-family: 'Inter', sans-serif;
+        background-color: #030303; 
+        color: #f4f4f5; 
+        margin: 0; 
+        padding: 0; 
+        min-height: 100vh; 
+      }
+      
+      /* Класс для моноширинного шрифта, если он используется в компонентах */
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace !important;
+      }
+
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: #030303; }
       ::-webkit-scrollbar-thumb { background: #1e1e24; border-radius: 3px; }
