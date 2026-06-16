@@ -55,13 +55,11 @@
 
 <div onmousemove={handleMouseMove} class="relative min-h-screen overflow-hidden font-sans select-none pb-32 bg-[#030303] text-[#f4f4f5]">
     
-    <!-- 1. BACKGROUND: Animated Grid Pattern WITH HERO HIGHLIGHT -->
     <div class="fixed inset-0 pointer-events-none z-0" 
          style="background: 
             radial-gradient(circle 550px at {mouseX}% {mouseY}%, rgba(0, 242, 254, 0.05), transparent 80%),
             radial-gradient(circle 700px at 10% 20%, rgba(121, 40, 202, 0.02), transparent 70%);">
         
-        <!-- Инновационная чертежная сетка с анимацией мерцания неоновых зон -->
         <div class="absolute inset-0 opacity-20 bg-grid-animate" 
              style="background-image: linear-gradient(to right, #1e1e24 1px, transparent 1px), linear-gradient(to bottom, #1e1e24 1px, transparent 1px); background-size: 60px 60px;">
         </div>
@@ -69,7 +67,6 @@
 
     <div class="max-w-[1100px] mx-auto px-6 pt-36 relative z-10">
         
-        <!-- 2. HERO TITLE: Hyper Text Trigger (Optimize. Automate. Outmaneuver.) -->
         <header class="max-w-[900px] mb-16">
             <h1 class="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-8 leading-[0.95] bg-gradient-to-b from-white to-[#444444] bg-clip-text text-transparent select-none">
                 <span class="cursor-pointer inline-block transition-colors hover:text-[#00f2fe]" onmouseenter={() => triggerHyperText(0)}>{words[0].current}</span><br>
@@ -81,55 +78,46 @@
             </p>
         </header>
 
-        <!-- 3. ACTION BUTTONS: Shimmer vs Ripple Test -->
         <div class="flex flex-col sm:flex-row gap-6 mb-32">
-            <!-- SHIMMER BUTTON (Бегущий луч по контуру) -->
             <button onclick={() => scrollToForm('Express Audit')} class="relative group overflow-hidden bg-black border border-[#1e1e24] text-white px-8 py-4 rounded-xl font-mono text-sm tracking-wide transition-all hover:border-[#00f2fe] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)]">
                 <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
                 [EXECUTE_EXPRESS_AUDIT]
             </button>
 
-            <!-- RIPPLE BUTTON (Пульсирующая глубина) -->
             <button onclick={() => scrollToForm('Full Transformation')} class="relative overflow-hidden bg-[#f4f4f5] text-black px-8 py-4 rounded-xl font-mono text-sm font-bold transition-all hover:bg-[#00f2fe] hover:shadow-[0_0_40px_rgba(0,242,254,0.3)] btn-ripple">
                 FULL_SYSTEM_TRANSFORMATION →
             </button>
         </div>
 
-        <!-- 4. PRODUCTS: CUSTOM BENTO-COMMUTATOR (image_2.png Schema) -->
         <section class="mb-32">
-            <!-- Верхний ярус коммутатора: динамически перестраивается -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 transition-all duration-500 ease-out">
                 
-                <!-- Блок 01 -->
                 <button onclick={() => activeBlock = (activeBlock === 1 ? null : 1)} 
-                     class="text-left bg-[#09090b] border p-8 rounded-2xl transition-all duration-300 group outline-none
+                     class="text-left bg-[#09090b] border p-8 rounded-2xl transition-all duration-300 group outline-none 
                             {activeBlock === 1 ? 'border-[#00f2fe] bg-[#0c1013]' : 'border-[#1e1e24] hover:border-zinc-700'} 
                             {activeBlock !== null && activeBlock !== 1 ? 'opacity-40 scale-98' : ''}">
                     <div class="text-xs font-bold text-[#00f2fe] tracking-widest uppercase mb-4 transition-colors group-hover:text-white">01 / TRAFFIC & DATA</div>
                     <h3 class="text-xl font-bold transition-all {activeBlock !== null && activeBlock !== 1 ? 'text-sm' : ''}">Performance Audit</h3>
                 </button>
 
-                <!-- Блок 02 -->
                 <button onclick={() => activeBlock = (activeBlock === 2 ? null : 2)} 
-                     class="text-left bg-[#09090b] border p-8 rounded-2xl transition-all duration-300 group outline-none
-                            {activeBlock === 2 ? 'border-[#00f2fe] bg-[#0c1013]' : 'border-[#1e1e24] hover:border-zinc-700'}
+                     class="text-left bg-[#09090b] border p-8 rounded-2xl transition-all duration-300 group outline-none 
+                            {activeBlock === 2 ? 'border-[#00f2fe] bg-[#0c1013]' : 'border-[#1e1e24] hover:border-zinc-700'} 
                             {activeBlock !== null && activeBlock !== 2 ? 'opacity-40 scale-98' : ''}">
                     <div class="text-xs font-bold text-[#00f2fe] tracking-widest uppercase mb-4 transition-colors group-hover:text-white">02 / INFRASTRUCTURE</div>
                     <h3 class="text-xl font-bold transition-all {activeBlock !== null && activeBlock !== 2 ? 'text-sm' : ''}">Advanced CRM Engineering</h3>
                 </button>
 
-                <!-- Блок 03 -->
                 <button onclick={() => activeBlock = (activeBlock === 3 ? null : 3)} 
-                     class="text-left bg-[#09090b] border p-8 rounded-2xl transition-all duration-300 group outline-none
-                            {activeBlock === 3 ? 'border-[#00f2fe] bg-[#0c1013]' : 'border-[#1e1e24] hover:border-zinc-700'}
+                     class="text-left bg-[#09090b] border p-8 rounded-2xl transition-all duration-300 group outline-none 
+                            {activeBlock === 3 ? 'border-[#00f2fe] bg-[#0c1013]' : 'border-[#1e1e24] hover:border-zinc-700'} 
                             {activeBlock !== null && activeBlock !== 3 ? 'opacity-40 scale-98' : ''}">
                     <div class="text-xs font-bold text-[#00f2fe] tracking-widest uppercase mb-4 transition-colors group-hover:text-white">03 / AI CORE</div>
                     <h3 class="text-xl font-bold transition-all {activeBlock !== null && activeBlock !== 3 ? 'text-sm' : ''}">Autonomous Retention</h3>
                 </button>
             </div>
 
-            <!-- Нижний главный ярус коммутатора: Сюда падает контент с iOS-физикой -->
-            <div class="relative bg-[#09090b] border rounded-3xl transition-all duration-500 overflow-hidden
+            <div class="relative bg-[#09090b] border rounded-3xl transition-all duration-500 overflow-hidden 
                         {activeBlock !== null ? 'p-12 border-zinc-700 max-h-[600px] opacity-100 mt-4' : 'p-0 max-h-0 opacity-0 border-none pointer-events-none'}">
                 
                 {#if activeBlock === 1}
@@ -173,14 +161,12 @@
             </div>
         </section>
 
-        <!-- 5. FORM SECTION: Blur Fade Reveal Form -->
         <section id="friction-form" class="bg-[#09090b] border border-[#1e1e24] rounded-3xl p-12 max-w-[750px] mx-auto mb-24 relative overflow-hidden group hover:border-[#00f2fe]/30 transition-all duration-300">
             <div class="absolute -top-24 -right-24 w-48 h-48 bg-[#00f2fe]/5 rounded-full blur-3xl pointer-events-none"></div>
             
             <h2 class="text-3xl font-bold tracking-tight mb-3 text-white">Where is the friction?</h2>
             <p class="text-[#8e8e93] mb-8">Select your primary bottleneck to initialize the solution architecture.</p>
             
-            <!-- Bottleneck Choice Buttons -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 <button type="button" onclick={() => selectedPain = "Budget Leaks"} class="p-4 rounded-xl border text-left font-medium transition-all outline-none {selectedPain === 'Budget Leaks' ? 'border-[#00f2fe] bg-[#0c1013] text-white shadow-[0_0_15px_rgba(0,242,254,0.1)]' : 'border-[#1e1e24] text-[#8e8e93] hover:border-zinc-700'}" style="content-visibility: auto;">
                     Wasting Marketing Budget
@@ -196,7 +182,6 @@
                 </button>
             </div>
 
-            <!-- Inputs and Submit -->
             <form onsubmit={(e) => e.preventDefault()} class="space-y-6">
                 {#if selectedService}
                     <div class="text-xs font-mono text-zinc-500 uppercase tracking-widest animate-[blurFade_0.2s_ease-out]">
@@ -216,7 +201,6 @@
             </form>
         </section>
 
-        <!-- 6. FOOTER WITH ICON PLACEHOLDERS -->
         <footer class="border-t border-[#1e1e24] pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
             <p class="text-sm text-[#8e8e93]">&copy; 2026 tsvetkov.site. All systems operational.</p>
             <div class="flex gap-6 text-sm text-[#8e8e93]">
@@ -230,7 +214,6 @@
 </div>
 
 <style>
-    /* Кастомные CSS анимации высокого разрешения */
     @keyframes shimmer {
         100% { transform: translateX(100%); }
     }
