@@ -1,5 +1,5 @@
 <script>
-    // Исправили импорт на прямой относительный путь
+    // Прямой относительный путь. Проверь на гитхабе, чтобы папка была src/lib/components/FlickeringGrid.svelte
     import FlickeringGrid from './lib/components/FlickeringGrid.svelte';
 
     let activeBlock = $state(null);
@@ -255,9 +255,9 @@
         <p class="text-xs text-[#333] font-mono">© 2026 tsvetkov.site · All systems operational.</p>
         <div class="flex gap-6 text-sm text-[#8e8e93]">
             <a href="https://t.me/advertisment_th" target="_blank" class="hover:text-[#00f2fe] transition-colors">Telegram</a>
-            <a href="javascript:void(0)" class="hover:text-[#00f2fe] transition-colors">Instagram</a>
-            <a href="javascript:void(0)" class="hover:text-[#00f2fe] transition-colors">Threads</a>
-            <a href="javascript:void(0)" class="hover:text-[#00f2fe] transition-colors">TikTok</a>
+            <span role="link" tabindex="0" class="hover:text-[#00f2fe] transition-colors cursor-pointer">Instagram</span>
+            <span role="link" tabindex="0" class="hover:text-[#00f2fe] transition-colors cursor-pointer">Threads</span>
+            <span role="link" tabindex="0" class="hover:text-[#00f2fe] transition-colors cursor-pointer">TikTok</span>
         </div>
     </footer>
 </div>
