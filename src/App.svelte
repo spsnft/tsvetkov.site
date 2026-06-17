@@ -1,5 +1,6 @@
 <script>
-    import FlickeringGrid from '$lib/components/FlickeringGrid.svelte';
+    // Исправили импорт на прямой относительный путь
+    import FlickeringGrid from './lib/components/FlickeringGrid.svelte';
 
     let activeBlock = $state(null);
     let selectedPain = $state("");
@@ -77,7 +78,6 @@
 
 <div class="relative min-h-screen overflow-x-hidden font-sans bg-[#030303] text-[#f4f4f5]">
 
-    <!-- Flickering Grid фон -->
     <div class="fixed inset-0 z-0 pointer-events-none">
         <FlickeringGrid
             color="rgb(0, 242, 254)"
@@ -87,34 +87,36 @@
             gridGap={8}
             class="w-full h-full"
         />
-        <!-- Градиент поверх чтобы не было слишком навязчиво -->
         <div class="absolute inset-0 bg-gradient-to-b from-[#030303]/30 via-transparent to-[#030303]/60"></div>
     </div>
 
-    <!-- ══════════════════════ HERO ══════════════════════ -->
     <section class="relative min-h-screen flex flex-col justify-center px-6 pt-20 pb-16 z-10">
         <div class="max-w-[1100px] mx-auto w-full">
 
-            <!-- Eyebrow -->
             <div class="flex items-center gap-3 mb-6">
                 <div class="w-1.5 h-1.5 rounded-full bg-[#00f2fe] shadow-[0_0_8px_#00f2fe] animate-pulse"></div>
                 <span class="text-[11px] font-mono text-[#00f2fe] tracking-[0.22em] uppercase">Growth Architecture · Phuket</span>
             </div>
 
-            <!-- Headline -->
             <h1 class="font-black tracking-tighter uppercase leading-[0.88] mb-6 select-none"
                 style="font-size: clamp(2.8rem, 12vw, 7.5rem)">
                 <span
+                    role="button"
+                    tabindex="0"
                     class="block bg-gradient-to-b from-white to-[#555] bg-clip-text text-transparent cursor-pointer transition-all duration-200 hover:from-[#00f2fe] hover:to-[#007a87]"
                     onmouseenter={() => triggerHyperText(0)}
                     ontouchstart={() => triggerHyperText(0)}
                 >{word0}</span>
                 <span
+                    role="button"
+                    tabindex="0"
                     class="block bg-gradient-to-b from-white to-[#555] bg-clip-text text-transparent cursor-pointer transition-all duration-200 hover:from-[#00f2fe] hover:to-[#007a87]"
                     onmouseenter={() => triggerHyperText(1)}
                     ontouchstart={() => triggerHyperText(1)}
                 >{word1}</span>
                 <span
+                    role="button"
+                    tabindex="0"
                     class="block cursor-pointer transition-all duration-200"
                     style="font-size: clamp(1.8rem, 7vw, 4.5rem); color: #00f2fe; opacity: 0.7; font-style: italic;"
                     onmouseenter={() => triggerHyperText(2)}
@@ -122,12 +124,10 @@
                 >{word2}</span>
             </h1>
 
-            <!-- Sub -->
             <p class="text-sm md:text-lg text-[#8e8e93] max-w-[500px] leading-relaxed mb-8 font-light">
                 Stop running blind. I transform fragmented marketing data and CRM chaos into autonomous intelligence systems that leave competitors chasing your tail.
             </p>
 
-            <!-- CTAs -->
             <div class="flex flex-col sm:flex-row gap-3">
                 <button
                     onclick={() => scrollToForm('Express Audit')}
@@ -145,14 +145,12 @@
             </div>
         </div>
 
-        <!-- Scroll hint -->
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-20 pointer-events-none">
             <div class="w-px h-8 bg-gradient-to-b from-transparent to-[#00f2fe] animate-pulse"></div>
             <span class="text-[9px] font-mono text-[#00f2fe] tracking-[0.3em]">SCROLL</span>
         </div>
     </section>
 
-    <!-- ══════════════════════ SERVICES ══════════════════════ -->
     <section class="relative px-6 pb-16 max-w-[1100px] mx-auto z-10">
 
         <div class="flex items-center gap-4 mb-6">
@@ -205,7 +203,6 @@
         </div>
     </section>
 
-    <!-- ══════════════════════ FORM ══════════════════════ -->
     <section id="friction-form" class="relative px-6 pb-20 max-w-[750px] mx-auto z-10">
         <div class="bg-[#09090b]/90 backdrop-blur-sm border border-[#1e1e24] rounded-3xl p-7 md:p-10 relative overflow-hidden transition-all duration-500 hover:border-[#00f2fe]/20">
             <div class="absolute -top-20 -right-20 w-56 h-56 bg-[#00f2fe]/4 rounded-full blur-3xl pointer-events-none"></div>
@@ -254,14 +251,13 @@
         </div>
     </section>
 
-    <!-- ══════════════════════ FOOTER ══════════════════════ -->
     <footer class="relative border-t border-[#1e1e24] px-6 py-6 max-w-[1100px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 z-10">
         <p class="text-xs text-[#333] font-mono">© 2026 tsvetkov.site · All systems operational.</p>
         <div class="flex gap-6 text-sm text-[#8e8e93]">
             <a href="https://t.me/advertisment_th" target="_blank" class="hover:text-[#00f2fe] transition-colors">Telegram</a>
-            <a href="#" class="hover:text-[#00f2fe] transition-colors">Instagram</a>
-            <a href="#" class="hover:text-[#00f2fe] transition-colors">Threads</a>
-            <a href="#" class="hover:text-[#00f2fe] transition-colors">TikTok</a>
+            <a href="javascript:void(0)" class="hover:text-[#00f2fe] transition-colors">Instagram</a>
+            <a href="javascript:void(0)" class="hover:text-[#00f2fe] transition-colors">Threads</a>
+            <a href="javascript:void(0)" class="hover:text-[#00f2fe] transition-colors">TikTok</a>
         </div>
     </footer>
 </div>
