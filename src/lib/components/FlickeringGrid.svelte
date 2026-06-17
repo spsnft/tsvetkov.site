@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { cn } from "$lib/utils";
+	import { cn } from "../utils.js";
 
 	interface FlickeringGridProps {
 		squareSize?: number;
