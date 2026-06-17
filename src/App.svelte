@@ -4,6 +4,16 @@
     let activeBlock = $state(null);
     let selectedService = $state("");
     let contactInput = $state("");
+    
+    // Новые состояния для кастомной формы связи
+    let messengerType = $state("Telegram");
+    
+    // Реактивное изменение подсказки (placeholder) в зависимости от выбранного мессенджера
+    let inputPlaceholder = $derived(
+        messengerType === "Telegram" || messengerType === "Instagram" 
+            ? "укажите логин" 
+            : "укажите номер телефона"
+    );
 
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#$@*0123456789";
     let word0 = $state("Optimize");
@@ -72,13 +82,13 @@
     <div class="fixed inset-0 z-0 pointer-events-none">
         <FlickeringGrid
             color="rgb(0, 242, 254)"
-            maxOpacity={0.06}
-            flickerChance={0.12}
+            maxOpacity={0.15} 
+            flickerChance={0.20}
             squareSize={3}
             gridGap={8}
             class="w-full h-full"
         />
-        <div class="absolute inset-0 bg-gradient-to-b from-[#030303]/20 via-transparent to-[#030303]/70"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030303]/10 via-transparent to-[#030303]/60"></div>
     </div>
 
     <div class="max-w-[1100px] mx-auto px-6 relative z-10">
@@ -86,7 +96,7 @@
         <section class="relative pt-24 pb-12 flex flex-col justify-center">
             <div class="flex items-center gap-3 mb-4">
                 <div class="w-1.5 h-1.5 rounded-full bg-[#00f2fe] shadow-[0_0_8px_#00f2fe] animate-pulse"></div>
-                <span class="text-[11px] font-mono text-[#00f2fe] tracking-[0.22em] uppercase">Growth Architecture · Phuket</span>
+                <span class="text-[11px] font-mono text-[#00f2fe] tracking-[0.22em] uppercase">Growth Architecture</span>
             </div>
 
             <h1 class="font-black tracking-tighter uppercase leading-[0.85] mb-6 select-none"
@@ -115,8 +125,8 @@
                 >{word2}</span>
             </h1>
 
-            <p class="text-sm md:text-lg text-[#8e8e93] max-w-[500px] leading-relaxed font-light">
-                I transform fragmented marketing data and CRM chaos into autonomous intelligence systems that leave competitors chasing your tail.
+            <p class="text-sm md:text-lg text-[#8e8e93] max-w-[550px] leading-relaxed font-light">
+                Transform fragmented marketing data into autonomous intelligence systems that leave competitors chasing your tail.
             </p>
         </section>
 
@@ -170,7 +180,7 @@
                 <div class="absolute -top-20 -right-20 w-56 h-56 bg-[#00f2fe]/4 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="relative z-10">
                     <h2 class="text-xl md:text-2xl font-bold tracking-tight mb-2 text-white">Initialize Solution Architecture</h2>
-                    <p class="text-[#8e8e93] mb-6 text-xs md:text-sm">Leave your contact below to anchor the bridge between chaos and system intelligence.</p>
+                    <p class="text-[#8e8e93] mb-6 text-xs md:text-sm">Leave your preferred channel below to anchor the bridge between chaos and system intelligence.</p>
 
                     <form onsubmit={(e) => e.preventDefault()} class="space-y-4">
                         {#if selectedService}
@@ -178,20 +188,41 @@
                                 Requested context: <span class="text-[#00f2fe]">{selectedService}</span>
                             </div>
                         {/if}
-                        <div>
-                            <label for="contact" class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block mb-2">Telegram or Email</label>
-                            <input
-                                id="contact"
-                                type="text"
-                                bind:value={contactInput}
-                                placeholder="@username or email address"
-                                required
-                                class="w-full bg-black border border-[#1e1e24] rounded-xl p-3.5 text-white focus:outline-none focus:border-[#00f2fe] transition-all font-mono text-sm placeholder-zinc-800"
-                            />
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="flex flex-col gap-2">
+                                <label for="messenger" class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block">Preferred Channel</label>
+                                <select
+                                    id="messenger"
+                                    bind:value={messengerType}
+                                    class="w-full bg-black border border-[#1e1e24] rounded-xl p-3.5 text-white focus:outline-none focus:border-[#00f2fe] transition-all font-sans text-sm cursor-pointer appearance-none"
+                                    style="background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"292.4\" height=\"292.4\" fill=\"%238e8e93\"><path d=\"M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4L287 95c3.5-3.5 5.4-7.8 5.4-12.8 0-5-1.9-9.2-5.5-12.8z\"/></svg>'); background-repeat: no-repeat; background-position: right 14px top 50%; background-size: 10px auto;"
+                                >
+                                    <option value="Telegram">Telegram</option>
+                                    <option value="Instagram">Instagram</option>
+                                    <option value="WhatsApp">WhatsApp</option>
+                                    <option value="Facebook">Facebook</option>
+                                    <option value="Line">Line</option>
+                                    <option value="Phone/SMS">Phone / SMS</option>
+                                </select>
+                            </div>
+
+                            <div class="flex flex-col gap-2 sm:col-span-2">
+                                <label for="contact" class="text-[10px] font-bold text-zinc-500 uppercase tracking-wider block">Contact Details</label>
+                                <input
+                                    id="contact"
+                                    type="text"
+                                    bind:value={contactInput}
+                                    placeholder={inputPlaceholder}
+                                    required
+                                    class="w-full bg-black border border-[#1e1e24] rounded-xl p-3.5 text-white focus:outline-none focus:border-[#00f2fe] transition-all font-mono text-sm placeholder-zinc-700"
+                                />
+                            </div>
                         </div>
+
                         <button
                             type="submit"
-                            class="w-full bg-white text-black p-3.5 rounded-xl font-bold text-sm transition-all hover:bg-[#00f2fe] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)] active:scale-[0.98]"
+                            class="w-full bg-white text-black p-3.5 rounded-xl font-bold text-sm transition-all hover:bg-[#00f2fe] hover:shadow-[0_0_30px_rgba(0,242,254,0.2)] active:scale-[0.98] mt-2"
                         >
                             Request Architecture Brief
                         </button>
