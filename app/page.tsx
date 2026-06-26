@@ -1,17 +1,13 @@
-import Header from './components/Header';
-import Hero from './components/Hero';
-import AboutSection from './components/AboutSection';
-import ProjectsSection from './components/ProjectsSection';
-import Footer from './components/Footer';
+import TsvetkovB2C from './components/TsvetkovB2C';
+
+export const metadata = {
+  title: 'Fedorov Tsvetkov - Growth Architecture & Business Transformation',
+  description: 'Превращаю хаотичные бизнес-процессы в автоматизированные системы. Диагностика + интеграция + результат.',
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
 
 export default function Home() {
-  return (
-    <main className="flex flex-col min-h-screen">
-      <Header />
-      <Hero />
-      <AboutSection />
-      <ProjectsSection />
-      <Footer />
-    </main>
-  );
+  return <TsvetkovB2C />;
 }
