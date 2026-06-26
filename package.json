@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "push": "powershell -ExecutionPolicy Bypass -File push.ps1",
+    "push:linux": "bash push.sh"
   },
   "dependencies": {
     "next": "16.2.9",
