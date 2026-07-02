@@ -219,7 +219,7 @@ const Expertise = () => {
     <section id="expertise" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0 }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3.5rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Three pillars.<br />One scalable machine.</h2>
         </motion.div>
         <div className="bento" style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
@@ -284,7 +284,7 @@ const Services = () => {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
+            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
             <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Three protocols.<br />Measurable results.</h2>
           </motion.div>
         </div>
@@ -318,7 +318,7 @@ const Services = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// CASE STUDIES — Optimized Accordion Rows (No Period, Relocated Tags)
+// CASE STUDIES — Premium Accordion Rows (All English & Active Tags)
 // ─────────────────────────────────────────────────────────────────
 const CaseStudies = () => {
   const [openId, setOpenId] = useState<number | null>(null);
@@ -327,22 +327,22 @@ const CaseStudies = () => {
     {
       id: 1, industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
       title: 'Performance Infrastructure Scaling',
-      problem: 'Хаос в маркетинговых кампаниях, отсутствие сквозной синхронизации CRM с аналитикой и критические потери лидов на стыке отделов.',
-      solution: 'Развернули прозрачную инфраструктуру данных, внедрили сквозной трекинг воронки и оптимизировали юнит-экономику под реальную маржу, а не пустые клики.',
+      problem: 'Chaos in marketing campaigns, lack of end-to-end CRM and analytics synchronization, and critical lead leakage across departments.',
+      solution: 'Deployed a transparent data infrastructure, implemented full-funnel tracking, and optimized unit economics for actual margin rather than empty clicks.',
       color: T.accent,
     },
     {
       id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CUSTOMER ACQUISITION COST',
       title: 'Global User Acquisition Optimization',
-      problem: 'Агрессивная перегретая конкуренция на рынках США и Европы, выжигающая рекламный бюджет, и высокая базовая стоимость привлечения клиента.',
-      solution: 'Запустили систему прецизионного таргетинга поведенческих факторов, перестроили логику аукционов и оптимизировали конверсию посадочных страниц.',
+      problem: 'Aggressive, overheated competition in the US and EU markets burning ad budgets, and a high baseline customer acquisition cost.',
+      solution: 'Launched a precision targeting system based on behavioral factors, restructured auction logic, and optimized landing page conversion rates.',
       color: T.acc2,
     },
     {
       id: 3, industry: 'B2B Manufacturing', highlight: '1,000+', suffix: 'LEADS/MO',
       title: 'Digital Inbound Expansion Protocol',
-      problem: 'Полная зависимость бизнеса от офлайн-продаж, нулевой входящий поток из цифровых каналов и отсутствие системной B2B-квалификации заявок.',
-      solution: 'Оцифровали привлечение с нуля, выстроили автоматические воронки распределения лидов и масштабировали омниканальный захват на 40+ международных рынков.',
+      problem: 'Complete business reliance on offline sales, zero inbound flow from digital channels, and lack of systematic B2B lead qualification.',
+      solution: 'Digitized acquisition from scratch, built automated lead routing funnels, and scaled omnichannel capture across 40+ international markets.',
       color: '#C084FC',
     },
   ];
@@ -352,7 +352,7 @@ const CaseStudies = () => {
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Results that speak<br />for themselves.</h2>
         </motion.div>
 
@@ -391,9 +391,20 @@ const CaseStudies = () => {
 
                   </div>
 
-                  {/* Right Controls: Relocated Industry Tag and Action Arrow */}
+                  {/* Right Controls: Color Highlighted Industry Tag and Action Arrow */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: 'auto' }}>
-                    <span style={{ display: 'inline-block', padding: '4px 10px', borderRadius: 6, fontSize: 10, fontWeight: 700, background: `${c.color}12', border: 1px solid ${c.color}25`, border: `1px solid ${c.color}25`, color: c.color, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <span style={{ 
+                      display: 'inline-block', 
+                      padding: '4px 10px', 
+                      borderRadius: 6, 
+                      fontSize: 10, 
+                      fontWeight: 700, 
+                      background: `${c.color}12`, 
+                      border: `1px solid ${c.color}25`, 
+                      color: c.color, 
+                      textTransform: 'uppercase', 
+                      letterSpacing: '0.05em' 
+                    }}>
                       {c.industry}
                     </span>
                     <motion.svg
@@ -474,7 +485,7 @@ const Contact = () => {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 1rem' }}>Ready to scale?</h2>
           <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6 }}>
             Drop your details below or message directly on Telegram.<br />
@@ -506,7 +517,7 @@ const Contact = () => {
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
           <div style={{ flex: 1, height: 1, background: T.border }} />
-          <span style={{ color: T.muted, fontSize: '0.75rem', letterSpacing: '0.05em', textTransform: 'uppercase' as const }}>or leave your details</span>
+          <span style={{ color: T.muted, fontSize: '0.75rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>or leave your details</span>
           <div style={{ flex: 1, height: 1, background: T.border }} />
         </div>
 
@@ -520,11 +531,11 @@ const Contact = () => {
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Name</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Name</label>
                 <input type="text" required placeholder="Your name" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Contact Info (Email / Telegram)</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Contact Info (Email / Telegram)</label>
                 <input type="text" required placeholder="How should we reach you?" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
               </div>
 
