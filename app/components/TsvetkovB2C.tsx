@@ -124,14 +124,14 @@ const Hero = () => {
 
       <motion.div style={{ y, opacity, position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 960, width: '100%' }}>
         
-        {/* Badge */}
+        {/* Badge — FIXED TYPE ERROR: changed 'items' to 'alignItems' */}
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}
         >
           <span style={{
-            display: 'inline-flex', items: 'center', gap: 8,
+            display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '6px 16px', borderRadius: 999,
             background: 'rgba(0,255,179,0.05)', border: `1px solid ${T.accent}20`,
             fontSize: 10, fontWeight: 700, color: T.accent, letterSpacing: '0.15em',
