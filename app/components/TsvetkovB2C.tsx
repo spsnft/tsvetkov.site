@@ -129,13 +129,6 @@ const Hero = () => {
       position: 'relative', overflow: 'hidden',
       padding: 'clamp(5rem,12vw,9rem) 1rem clamp(4rem,8vw,6rem)',
     }}>
-      <div style={{
-        position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
-        width: 'clamp(300px,60vw,650px)', height: 'clamp(300px,60vw,650px)',
-        borderRadius: '50%',
-        background: `radial-gradient(circle,${T.glow} 0%,transparent 70%)`, pointerEvents: 'none',
-      }} />
-
       <motion.div style={{ y, opacity, position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 960, width: '100%' }}>
         
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
@@ -255,27 +248,27 @@ const Expertise = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// SERVICES — 3 High-Value Protocols
+// SERVICES — 3 High-Value Protocols with Clean Copy & 2x2 Grids
 // ─────────────────────────────────────────────────────────────────
 const Services = () => {
   const offers = [
     {
       num: '01', color: T.accent,
       title: 'Upgraded Sales Infrastructure',
-      copy: "Every business wants a smoother, more efficient machine. By fixing the leaks in your current sales process and connecting everything into one clean system, no leads are left behind. Your team gets to focus on closing deals, not copy-pasting data.",
-      tags: ['CRM Integration', 'Pipeline Automation', 'Lead Routing'],
+      copy: "Fix the leaks in your sales process and connect everything into one system, no leads are left behind. Your team gets to focus on closing deals, not copy-pasting data.",
+      tags: ['CRM Integration', 'Pipeline Auto', 'Lead Routing', 'Analytics Sync'],
     },
     {
       num: '02', color: T.acc2,
       title: 'Profit-Focused Ad Scaling',
-      copy: "Let’s talk about margins and profit, not just clicks. We manage ad campaigns where every single dollar is tracked — stopping the budget bleed, cutting out what doesn't work, and doubling down on channels that actually bring paying clients to grow your bottom line.",
-      tags: ['Paid Media', 'ROAS Optimization', 'Multi-channel'],
+      copy: "We manage ad campaigns where every single dollar is tracked — stopping the budget bleed, cutting out what doesn't work, and doubling down on channels that actually bring paying clients to grow your bottom line.",
+      tags: ['Paid Media', 'ROAS Opt', 'Multi-channel', 'Funnel Tracking'],
     },
     {
       num: '03', color: '#C084FC',
       title: 'Practical AI Integration',
-      copy: "The AI hype is everywhere, but you don't need to buy expensive, overcomplicated corporate software. We help you implement simple, affordable AI tools that actually work for your daily tasks. Automate the boring routine, speed up your team, and keep your business ahead of the curve without the headache.",
-      tags: ['AI Automation', 'Workflow Design', 'Tool Implementation'],
+      copy: "We implement simple, affordable AI tools that actually work for your daily tasks. Automate the boring routine, speed up your team, and keep your business ahead of the trends without the headache.",
+      tags: ['AI Automation', 'Workflow Design', 'Tool Deploy', 'Routine Cuts'],
     },
   ];
 
@@ -293,15 +286,20 @@ const Services = () => {
           {offers.map((offer, i) => (
             <div key={i} style={{ background: 'rgba(255,255,255,0.015)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '2rem', position: 'relative' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
-                <div>
+                <div style={{ width: '100%' }}>
                   <span style={{ fontSize: '0.85rem', fontWeight: 700, color: offer.color }}>{offer.num}</span>
                   <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginTop: '0.5rem', marginBottom: '0.75rem' }}>{offer.title}</h3>
-                  <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 750, marginBottom: '1.25rem' }}>{offer.copy}</p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 750, marginBottom: '1.5rem' }}>{offer.copy}</p>
+                  
+                  {/* Symmetrical 2x2 grid for advantages / specifications */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', maxWidth: 360 }}>
                     {offer.tags.map((tag, ti) => (
-                      <span key={ti} style={{ padding: '3px 10px', borderRadius: 6, fontSize: '0.75rem', background: `${offer.color}08`, border: `1px solid ${offer.color}15`, color: offer.color }}>{tag}</span>
+                      <span key={ti} style={{ padding: '6px 10px', borderRadius: 6, fontSize: '0.75rem', background: `${offer.color}08`, border: `1px solid ${offer.color}15`, color: offer.color, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {tag}
+                      </span>
                     ))}
                   </div>
+
                 </div>
               </div>
             </div>
