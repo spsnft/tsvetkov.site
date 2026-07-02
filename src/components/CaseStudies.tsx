@@ -8,13 +8,13 @@ const cases = [
   {
     id: 1, industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
     title: 'Performance Infrastructure Scaling', color: T.accent,
-    problem: 'Chaos in marketing campaigns, lack of end-to-end CRM and analytics synchronization, and critical lead leakage across departments.',
+    problem: 'Lack of end-to-end CRM and analytics synchronization, chaos in marketing campaigns, and critical lead leakage across departments.',
     solution: 'Deployed a transparent data infrastructure, implemented full-funnel tracking, and optimized unit economics for actual margin rather than empty clicks.',
   },
   {
     id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CUSTOMER ACQUISITION COST',
     title: 'Global User Acquisition Optimization', color: T.acc2,
-    problem: 'Aggressive, overheated competition in the US and EU markets burning ad budgets, and a high baseline customer acquisition cost.',
+    problem: 'Aggressive, overheated competition in the US and EU markets burning ad budgets, and a high baseline CAC.',
     solution: 'Launched a precision targeting system based on behavioral factors, restructured auction logic, and optimized landing page conversion rates.',
   },
   {
