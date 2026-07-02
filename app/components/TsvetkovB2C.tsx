@@ -63,7 +63,7 @@ const Nav = () => {
       transition={{ duration: 0.6 }}
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: '0 clamp(1.25rem,5vw,2.5rem)', height: 64,
+        padding: '0 clamp(1rem,5vw,2.5rem)', height: 64,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: scrolled ? 'rgba(10,10,12,0.9)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
@@ -72,17 +72,14 @@ const Nav = () => {
         transition: 'background .3s, border-color .3s',
       }}
     >
-      <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+      <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         <Logo />
-        <span style={{ fontWeight: 700, fontSize: '1.05rem', color: '#fff', letterSpacing: '-0.02em' }}>
-          TSVETKOV<span style={{ color: T.accent }}>.</span>
-        </span>
       </a>
 
-      <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+      <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(1rem, 3vw, 1.5rem)' }}>
         {[['#expertise','Expertise'],['#services','Services'],['#work','Work'],['#contact','Contact']].map(([href,label]) => (
           <a key={href} href={href}
-            style={{ color: T.sub, textDecoration: 'none', fontSize: '0.87rem', fontWeight: 500, transition: 'color .2s' }}
+            style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}
             onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = '#fff')}
             onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = T.sub)}
           >{label}</a>
@@ -92,9 +89,9 @@ const Nav = () => {
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
           style={{
-            padding: '9px 20px', borderRadius: 10,
+            padding: '8px 16px', borderRadius: 10,
             background: `linear-gradient(135deg,${T.accent},${T.acc2})`,
-            color: '#0A0A0C', fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none',
+            color: '#0A0A0C', fontWeight: 700, fontSize: '0.8rem', textDecoration: 'none',
           }}
         >Let&apos;s talk</motion.a>
       </div>
@@ -116,7 +113,7 @@ const Hero = () => {
       minHeight: '100vh',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
-      padding: 'clamp(5rem,12vw,9rem) clamp(1.25rem,5vw,2.5rem) clamp(4rem,8vw,6rem)',
+      padding: 'clamp(5rem,12vw,9rem) clamp(1rem,5vw,2.5rem) clamp(4rem,8vw,6rem)',
     }}>
       <div style={{
         position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
@@ -127,17 +124,17 @@ const Hero = () => {
 
       <motion.div style={{ y, opacity, position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 960, width: '100%' }}>
         
-        {/* Unified Eyebrow Badge */}
+        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{ display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}
+          style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}
         >
           <span style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
+            display: 'inline-flex', items: 'center', gap: 8,
             padding: '6px 16px', borderRadius: 999,
             background: 'rgba(0,255,179,0.05)', border: `1px solid ${T.accent}20`,
-            fontSize: 11, fontWeight: 700, color: T.accent, letterSpacing: '0.15em',
+            fontSize: 10, fontWeight: 700, color: T.accent, letterSpacing: '0.15em',
           }}>
             TSVETKOV 
             <span style={{ width: 5, height: 5, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} />
@@ -145,37 +142,40 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Clean 2-Line Headline */}
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           style={{
-            fontSize: 'clamp(2.5rem,7.5vw,5.2rem)',
-            fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.04em',
-            color: '#fff', marginBottom: '1.8rem',
+            fontSize: 'clamp(2.1rem, 6.5vw, 4.8rem)',
+            fontWeight: 900, lineHeight: 1.15, letterSpacing: '-0.04em',
+            color: '#fff', marginBottom: '2rem',
           }}
         >
-          High-Ticket Growth Engines.<br />
+          Value Growth.<br />
           <span style={{
             background: `linear-gradient(135deg,${T.accent} 0%,${T.acc2} 100%)`,
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
           }}>Engineered to Scale.</span>
         </motion.h1>
 
-        {/* Human-Centric Business Subtitle */}
+        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
           style={{
-            fontSize: 'clamp(1rem,2.2vw,1.25rem)',
+            fontSize: 'clamp(0.95rem, 2vw, 1.2rem)',
             color: T.sub, lineHeight: 1.6,
-            maxWidth: 740, margin: '0 auto 3.5rem', fontWeight: 400,
+            maxWidth: 720, margin: '0 auto 3.5rem', fontWeight: 400,
           }}
         >
-          We eliminate chaos in your marketing and digital systems. No fluff — just high-performance architectures that track every dollar and automate your sales flow.
+          We eliminate chaos in your marketing and digital systems.
+          <span style={{ display: 'block', marginTop: '1.25rem', color: T.body, fontWeight: 500 }}>
+            No fluff — just high-performance architectures that track every dollar and automate your sales flow.
+          </span>
         </motion.p>
 
-        {/* Audit Call to Action */}
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
@@ -189,7 +189,7 @@ const Hero = () => {
               display: 'inline-flex', alignItems: 'center', gap: 10,
               padding: '16px 36px', borderRadius: 999,
               background: `linear-gradient(135deg,${T.accent},${T.acc2})`,
-              color: '#0A0A0C', fontWeight: 700, fontSize: '1rem', textDecoration: 'none',
+              color: '#0A0A0C', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
               transition: 'box-shadow 0.3s ease',
             }}
           >
@@ -251,7 +251,7 @@ const Expertise = () => {
     <section id="expertise" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0 }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3.5rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Three pillars.<br />One scalable machine.</h2>
         </motion.div>
         <div className="bento" style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
@@ -307,7 +307,7 @@ const Services = () => {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
+            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
             <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Three protocols.<br />Measurable results.</h2>
           </motion.div>
         </div>
@@ -315,12 +315,10 @@ const Services = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {offers.map((offer, i) => (
             <div key={i} style={{ background: 'rgba(255,255,255,0.015)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '2rem', position: 'relative' }}>
-              {/* FIXED TYPE ERROR HERE: changed 'items' to 'alignItems' */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                   <span style={{ fontSize: '0.85rem', fontWeight: 700, color: offer.color }}>{offer.num}</span>
                   <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginTop: '0.5rem', marginBottom: '0.75rem' }}>{offer.title}</h3>
-                  {/* FIXED TYPE ERROR HERE: changed 'maxwidth' to 'maxWidth' */}
                   <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 750, marginBottom: '1.25rem' }}>{offer.copy}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                     {offer.tags.map((tag, ti) => (
@@ -363,7 +361,7 @@ const CaseStudies = () => {
     <section id="work" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0, borderTop: `1px solid ${T.border}` }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Results that speak<br />for themselves.</h2>
         </motion.div>
 
@@ -386,7 +384,7 @@ const CaseStudies = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// CONTACT (Form width optimized to max-w: 460px for premium feel)
+// CONTACT
 // ─────────────────────────────────────────────────────────────────
 const Contact = () => {
   const [form, setForm] = useState({ name: '', contact: '' });
@@ -420,8 +418,7 @@ const Contact = () => {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
-          {/* FIXED TYPE ERROR HERE: changed 'tracking' to 'letterSpacing' */}
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 1rem' }}>Ready to scale?</h2>
           <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6 }}>
             Drop your details below or message directly on Telegram.<br />
@@ -429,7 +426,7 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Telegram Direct Link — Verified Username */}
+        {/* Telegram Direct Link */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}>
           <motion.a
             href="https://t.me/advertisment_th"
@@ -453,7 +450,7 @@ const Contact = () => {
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
           <div style={{ flex: 1, height: 1, background: T.border }} />
-          <span style={{ color: T.muted, fontSize: '0.75rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>or leave your details</span>
+          <span style={{ color: T.muted, fontSize: '0.75rem', letterSpacing: '0.05em', textTransform: 'uppercase' as const }}>or leave your details</span>
           <div style={{ flex: 1, height: 1, background: T.border }} />
         </div>
 
@@ -467,11 +464,11 @@ const Contact = () => {
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Name</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Name</label>
                 <input type="text" required placeholder="Your name" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Contact Info (Email / Telegram)</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Contact Info (Email / Telegram)</label>
                 <input type="text" required placeholder="How should we reach you?" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
               </div>
 
@@ -482,7 +479,6 @@ const Contact = () => {
                 whileTap={{ scale: 0.99 }}
                 style={{
                   padding: '14px 28px', borderRadius: 999, border: 'none', fontFamily: 'inherit', fontWeight: 700, fontSize: '1rem',
-                  /* FIXED TYPE ERROR HERE: changed 'justifycontent' to 'justifyContent' */
                   cursor: status === 'sending' ? 'not-allowed' : 'pointer', background: `linear-gradient(135deg,${T.accent},${T.acc2})`, color: '#0A0A0C',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: '0.5rem',
                 }}
