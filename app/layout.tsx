@@ -1,25 +1,34 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Fedor Tsvetkov — Growth Architect & Performance Marketer",
   description:
-    "Data-driven performance marketer managing high-budget ad campaigns and AI-powered automation. Growth Architecture, CRM Automation, Performance Marketing.",
+    "We build high-ticket growth engines. No fluff, just architecture that scales.",
+  openGraph: {
+    title: "Fedor Tsvetkov — Growth Architect & Performance Marketer",
+    description:
+      "Managing $500K+ annual media budgets. Scaled monthly revenue 7×. 1,000+ qualified B2B leads per month.",
+    url: "https://tsvetkov.site",
+    siteName: "Fedor Tsvetkov",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={spaceGrotesk.variable}>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

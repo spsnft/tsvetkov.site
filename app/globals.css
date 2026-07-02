@@ -2,59 +2,77 @@
    TSVETKOV.SITE — Global CSS (Dark Premium)
    ============================================================ */
 
-*, *::before, *::after {
-  margin: 0; padding: 0; box-sizing: border-box;
-}
+*,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+html { scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale; }
 
 body {
-  background: #0A0A0C;
-  color: #ffffff;
-  overflow-x: hidden;
-  font-family: var(--font-display, 'Space Grotesk', system-ui, sans-serif);
+  background:#0A0A0C;
+  color:#fff;
+  overflow-x:hidden;
+  font-family:'Space Grotesk',system-ui,sans-serif;
 }
 
-::selection {
-  background: rgba(0, 255, 179, 0.18);
-  color: #fff;
+::selection { background:rgba(0,255,179,.18);color:#fff; }
+::placeholder { color:rgba(255,255,255,.22); }
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:#0A0A0C; }
+::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1);border-radius:2px; }
+
+/* ── Layout classes (grid/flex controlled by media queries) ──── */
+
+/* Nav links strip */
+.nav-links { display:flex;gap:2rem;align-items:center; }
+
+/* Bento grid — asymmetric 3-col */
+.bento {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-areas:"g1 g1 g2" "g3 g3 g3";
+  gap:1.25rem;
+}
+.bento-g1 { grid-area:g1; }
+.bento-g2 { grid-area:g2; }
+.bento-g3 { grid-area:g3; }
+
+/* Case studies — 3-col equal */
+.cases-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem; }
+
+/* Service card inner — number | text | arrow */
+.svc-inner {
+  display:grid;
+  grid-template-columns:72px 1fr 44px;
+  gap:clamp(1rem,2.5vw,2rem);
+  align-items:start;
 }
 
-::placeholder {
-  color: rgba(255, 255, 255, 0.22);
+/* ── Responsive ─────────────────────────────────────────────── */
+@media(max-width:960px) {
+  .bento { grid-template-columns:1fr 1fr;grid-template-areas:"g1 g2""g3 g3"; }
+  .cases-grid { grid-template-columns:1fr 1fr; }
 }
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0A0A0C; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-
-/* ── Responsive helpers ─────────────────────────────────────── */
-@media (max-width: 768px) {
-  .sg-4  { grid-template-columns: repeat(2, 1fr) !important; }
-  .sg-3  { grid-template-columns: 1fr !important; }
-  .sg-2  { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-  .sg-ce { grid-template-columns: 1fr !important; }
-  .sg-form { grid-template-columns: 1fr !important; }
-  .stat-border { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.07); }
+@media(max-width:640px) {
+  .bento { grid-template-columns:1fr;grid-template-areas:"g1""g2""g3"; }
+  .cases-grid { grid-template-columns:1fr; }
+  /* Service rows: hide decorative number, keep text + arrow */
+  .svc-inner { grid-template-columns:1fr 44px;gap:1rem; }
+  .svc-num { display:none!important; }
+  /* Nav: hide text links on mobile, show only logo + CTA */
+  .nav-links { display:none; }
 }
 
 /* ── Keyframes ───────────────────────────────────────────────── */
 @keyframes pdot {
-  0%,100% { opacity:1; transform:scale(1); }
-  50%     { opacity:.4; transform:scale(.7); }
+  0%,100% { opacity:1;transform:scale(1); }
+  50%     { opacity:.4;transform:scale(.7); }
 }
-
 @keyframes float-a {
-  0%,100% { transform: translateY(0) translateX(0); }
-  33%     { transform: translateY(-28px) translateX(14px); }
-  66%     { transform: translateY(14px) translateX(-14px); }
+  0%,100% { transform:translateY(0) translateX(0); }
+  33%     { transform:translateY(-28px) translateX(14px); }
+  66%     { transform:translateY(14px) translateX(-14px); }
 }
-
 @keyframes float-b {
-  0%,100% { transform: translateY(0) translateX(0); }
-  50%     { transform: translateY(22px) translateX(-20px); }
+  0%,100% { transform:translateY(0) translateX(0); }
+  50%     { transform:translateY(22px) translateX(-20px); }
 }
