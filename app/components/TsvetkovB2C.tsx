@@ -318,7 +318,7 @@ const Services = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// CASE STUDIES — Premium Accordion Rows (Variant B)
+// CASE STUDIES — Optimized Accordion Rows (No Period, Relocated Tags)
 // ─────────────────────────────────────────────────────────────────
 const CaseStudies = () => {
   const [openId, setOpenId] = useState<number | null>(null);
@@ -329,21 +329,21 @@ const CaseStudies = () => {
       title: 'Performance Infrastructure Scaling',
       problem: 'Хаос в маркетинговых кампаниях, отсутствие сквозной синхронизации CRM с аналитикой и критические потери лидов на стыке отделов.',
       solution: 'Развернули прозрачную инфраструктуру данных, внедрили сквозной трекинг воронки и оптимизировали юнит-экономику под реальную маржу, а не пустые клики.',
-      color: T.accent, period: '18 months',
+      color: T.accent,
     },
     {
-      id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CAC',
+      id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CUSTOMER ACQUISITION COST',
       title: 'Global User Acquisition Optimization',
       problem: 'Агрессивная перегретая конкуренция на рынках США и Европы, выжигающая рекламный бюджет, и высокая базовая стоимость привлечения клиента.',
       solution: 'Запустили систему прецизионного таргетинга поведенческих факторов, перестроили логику аукционов и оптимизировали конверсию посадочных страниц.',
-      color: T.acc2, period: 'US & EU markets',
+      color: T.acc2,
     },
     {
       id: 3, industry: 'B2B Manufacturing', highlight: '1,000+', suffix: 'LEADS/MO',
       title: 'Digital Inbound Expansion Protocol',
       problem: 'Полная зависимость бизнеса от офлайн-продаж, нулевой входящий поток из цифровых каналов и отсутствие системной B2B-квалификации заявок.',
       solution: 'Оцифровали привлечение с нуля, выстроили автоматические воронки распределения лидов и масштабировали омниканальный захват на 40+ международных рынков.',
-      color: '#C084FC', period: '40+ markets',
+      color: '#C084FC',
     },
   ];
 
@@ -376,25 +376,26 @@ const CaseStudies = () => {
               >
                 {/* Header Row */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', flex: 1 }}>
                     
                     {/* Big Stat Segment */}
-                    <div style={{ minWidth: 150 }}>
-                      <span style={{ fontSize: '2.4rem', fontWeight: 900, color: '#fff', marginRight: 8, letterSpacing: '-0.02em' }}>{c.highlight}</span>
-                      <span style={{ fontSize: '0.85rem', fontWeight: 800, color: c.color, letterSpacing: '0.06em' }}>{c.suffix}</span>
+                    <div style={{ minWidth: 150, flexShrink: 0 }}>
+                      <div style={{ fontSize: '2.4rem', fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>{c.highlight}</div>
+                      <div style={{ fontSize: '0.7rem', fontWeight: 800, color: c.color, letterSpacing: '0.06em', marginTop: 4, textTransform: 'uppercase' }}>{c.suffix}</div>
                     </div>
 
-                    {/* Meta Title Description */}
-                    <div>
-                      <span style={{ display: 'inline-block', padding: '3px 8px', borderRadius: 4, fontSize: 10, fontWeight: 700, background: `${c.color}15`, color: c.color, marginRight: 12, textTransform: 'uppercase', verticalAlign: 'middle' }}>{c.industry}</span>
-                      <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)', verticalAlign: 'middle' }}>{c.title}</span>
+                    {/* Title Description */}
+                    <div style={{ flex: 1, minWidth: 240 }}>
+                      <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)', lineHeight: 1.4 }}>{c.title}</span>
                     </div>
 
                   </div>
 
-                  {/* Right Controls & Meta */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                    <span style={{ fontSize: '0.85rem', color: T.muted, fontWeight: 500 }}>{c.period}</span>
+                  {/* Right Controls: Relocated Industry Tag and Action Arrow */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: 'auto' }}>
+                    <span style={{ display: 'inline-block', padding: '4px 10px', borderRadius: 6, fontSize: 10, fontWeight: 700, background: `${c.color}12', border: 1px solid ${c.color}25`, border: `1px solid ${c.color}25`, color: c.color, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      {c.industry}
+                    </span>
                     <motion.svg
                       animate={{ rotate: isOpen ? 180 : 0 }}
                       transition={{ duration: 0.25, ease: 'easeInOut' }}
