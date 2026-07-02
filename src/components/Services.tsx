@@ -6,13 +6,13 @@ import { T } from '@/src/theme/tokens';
 const offers = [
   {
     num: '01', color: T.accent,
-    title: 'Upgraded Sales Infrastructure',
-    copy: "Fix the leaks in your sales process and connect everything into one system, no leads are left behind. Your team gets to focus on closing deals, not copy-pasting data.",
+    title: 'Upgraded Sales Engine',
+    copy: "Fix the leaks in your sales process and connect everything into one system. Your team gets to focus on closing deals, not copy-pasting data.",
     tags: ['CRM Integration', 'Pipeline Auto', 'Lead Routing', 'Analytics Sync'],
   },
   {
     num: '02', color: T.acc2,
-    title: 'Profit-Focused Ad Scaling',
+    title: 'Precision Ad Scaling',
     copy: "We manage ad campaigns where every single dollar is tracked — stopping the budget bleed, cutting out what doesn't work, and doubling down on channels that actually bring paying clients to grow your bottom line.",
     tags: ['Paid Media', 'ROAS Opt', 'Multi-channel', 'Funnel Tracking'],
   },
