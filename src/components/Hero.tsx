@@ -4,11 +4,18 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
+// Массив конфигураций для живых светящихся частиц (Вариант Б)
+const particles = [
+  { id: 1, size: 280, color: T.accent, opacity: 0.05, top: '15%', left: '20%', duration: 18, delay: 0, xRange: [0, 40, -20, 0], yRange: [0, -30, 20, 0] },
+  { id: 2, size: 340, color: T.acc2, opacity: 0.04, top: '45%', right: '15%', duration: 22, delay: 1, xRange: [0, -50, 30, 0], yRange: [0, 40, -20, 0] },
+  { id: 3, size: 220, color: '#C084FC', opacity: 0.03, bottom: '20%', left: '35%', duration: 25, delay: 2, xRange: [0, 30, -30, 0], yRange: [0, -25, 30, 0] },
+];
+
 export const Hero = () => {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   
-  // Сохраняем исходные трансформации для всего контента
+  // Исходный параллакс для контента
   const y       = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
@@ -22,132 +29,103 @@ export const Hero = () => {
     }}>
 
       {/* ───────────────────────────────────────────────────────────────
-          BACKGROUND LAYERS (3D EFFECTS & TEXTURE)
+          ВАРИАНТ Б: ЖИВЫЕ СВЕТЯЩИЕСЯ ЧАСТИЦЫ (GLOW PARTICLES)
           ─────────────────────────────────────────────────────────────── */}
-      
-      {/* ИДЕЯ 3: Матовый пленочный микрозернистый шум (Текстура) */}
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            animate={{
+              x: p.xRange,
+              y: p.yRange,
+            }}
+            transition={{
+              duration: p.duration,
+              delay: p.delay,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            style={{
+              position: 'absolute',
+              top: p.top,
+              left: p.left,
+              right: p.right,
+              bottom: p.bottom,
+              width: p.size,
+              height: p.size,
+              borderRadius: '50%',
+              background: `radial-gradient(circle, ${p.color} 100%, transparent 70%)`,
+              opacity: p.opacity,
+              filter: 'blur(80px)',
+              willChange: 'transform', // Подсказка браузеру для выноса на GPU
+            }}
+          />
+        ))}
+
+        {/* Исходный центральный Ambient glow orb */}
+        <div style={{
+          position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
+          width: 'clamp(300px,60vw,650px)', height: 'clamp(300px,60vw,650px)',
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${T.glow} 0%, transparent 70%)`,
+          opacity: 0.8,
+        }} />
+      </div>
+
+      {/* Матовый пленочный шум для текстурности (Идея 3) */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-        <filter id="film-noise">
-          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.022 0" />
+        <filter id="hero-film-noise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.018 0" />
         </filter>
       </svg>
-      <div style={{ position: 'absolute', inset: 0, filter: 'url(#film-noise)', pointerEvents: 'none', zIndex: 1, opacity: 0.7 }} />
-
-      {/* Исходный Ambient glow orb */}
-      <div style={{
-        position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
-        width: 'clamp(300px,60vw,650px)', height: 'clamp(300px,60vw,650px)',
-        borderRadius: '50%',
-        background: `radial-gradient(circle,${T.glow} 0%,transparent 70%)`,
-        pointerEvents: 'none', zIndex: 2
-      }} />
-
-      {/* Дополнительное живое неоновое облако для глубины сферы */}
-      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 2 }}>
-        <motion.div
-          animate={{ x: [-10, 20, -10], y: [-20, 10, -20] }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', top: '25%', right: '15%', width: 400, height: 400, borderRadius: '50%', background: `${T.accent}04`, filter: 'blur(100px)' }}
-        />
-      </div>
-
-      {/* ИДЕЯ 1: Бесконечная 3D-сетка в перспективе (Perspective Floor) */}
-      <div 
-        style={{ 
-          position: 'absolute', bottom: 0, left: 0, right: 0, height: '50vh',
-          perspective: '450px', perspectiveOrigin: '50% 0%', overflow: 'hidden', zIndex: 3,
-          maskImage: 'linear-gradient(to top, black 20%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to top, black 20%, transparent 100%)'
-        }}
-      >
-        <motion.div
-          animate={{ backgroundPositionY: ['0px', '40px'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-          style={{
-            width: '200%', height: '200%', left: '-50%', top: 0, position: 'absolute',
-            transform: 'rotateX(65deg)', transformOrigin: '50% 0%',
-            backgroundImage: `linear-gradient(to right, ${T.accent}07 1px, transparent 1px), linear-gradient(to bottom, ${T.accent}07 1px, transparent 1px)`,
-            backgroundSize: '40px 40px',
-          }}
-        />
-      </div>
-
-      {/* ИДЕЯ 2: Векторная 3D-сфера (Интегрирована как адаптивный бэк-элемент) */}
-      <style>{`
-        .bg-sphere-container {
-          position: absolute; z-index: 3; pointer-events: none; opacity: 0.15;
-          right: -120px; top: 30%; width: 340px; height: 340px;
-        }
-        @media (min-width: 1200px) {
-          .bg-sphere-container {
-            right: 8%; top: 20%; width: 460px; height: 460px; opacity: 0.85;
-          }
-        }
-        @media (min-width: 1440px) {
-          .bg-sphere-container {
-            right: 12%; width: 500px; height: 500px;
-          }
-        }
-      `}</style>
-
-      <motion.div className="bg-sphere-container" style={{ y: useTransform(scrollYProgress, [0, 1], ['0%', '12%']), opacity: useTransform(scrollYProgress, [0, 0.6], [1, 0]) }}>
-        <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%', filter: `drop-shadow(0 0 30px ${T.accent}15)` }}>
-          <motion.circle cx="100" cy="100" r="90" stroke={`${T.accent}10`} strokeWidth="0.5" fill="none" strokeDasharray="4 8" animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: 'linear' }} />
-          <motion.ellipse cx="100" cy="100" rx="80" ry="26" stroke={`url(#sphere-grad-1)`} strokeWidth="0.8" fill="none" animate={{ rotateX: [0, 360], rotateZ: [0, 180] }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }} />
-          <motion.ellipse cx="100" cy="100" rx="26" ry="80" stroke={`url(#sphere-grad-2)`} strokeWidth="0.8" fill="none" animate={{ rotateY: [0, 360], rotateZ: [180, 0] }} transition={{ duration: 15, repeat: Infinity, ease: 'linear' }} />
-          <motion.circle cx="100" cy="100" r="48" stroke={T.accent} strokeWidth="1.2" fill="none" strokeDasharray="30 120" animate={{ rotate: -360 }} transition={{ duration: 7, repeat: Infinity, ease: 'linear' }} />
-          <circle cx="100" cy="100" r="10" fill={`url(#core-glow)`} />
-          <motion.circle cx="100" cy="100" r="5" fill="#fff" animate={{ scale: [0.9, 1.1, 0.9] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }} style={{ filter: `drop-shadow(0 0 6px ${T.accent})` }} />
-          <defs>
-            <linearGradient id="sphere-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor={T.accent} stopOpacity="0.7" />
-              <stop offset="50%" stopColor={T.acc2} stopOpacity="0.1" />
-              <stop offset="100%" stopColor="#C084FC" stopOpacity="0.6" />
-            </linearGradient>
-            <linearGradient id="sphere-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor={T.acc2} stopOpacity="0.8" />
-              <stop offset="100%" stopColor={T.accent} stopOpacity="0.05" />
-            </linearGradient>
-            <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#fff" stopOpacity="1" />
-              <stop offset="50%" stopColor={T.accent} stopOpacity="0.7" />
-              <stop offset="100%" stopColor={T.accent} stopOpacity="0" />
-            </radialGradient>
-          </defs>
-        </svg>
-      </motion.div>
+      <div style={{ position: 'absolute', inset: 0, filter: 'url(#hero-film-noise)', pointerEvents: 'none', zIndex: 1, opacity: 0.6 }} />
 
 
       {/* ───────────────────────────────────────────────────────────────
-          ИДЕАЛЬНЫЙ СИНХРОНИЗИРОВАННЫЙ КОНТЕНТ (ИЗ ТВОЕЙ АКТУАЛЬНОЙ ВЕРСИИ)
+          ВАРИАНТ В: ТЕХНОЛОГИЧНЫЕ РАМКИ И UI-МИКРОЭЛЕМЕНТЫ
           ─────────────────────────────────────────────────────────────── */}
-      
-      {/* Адаптивное смещение контента влево на десктопе, чтобы не перекрывать сферу */}
-      <style>{`
-        .hero-content-box {
-          position: relative; z-index: 4; text-align: center; max-width: 960px; width: 100%;
-        }
-        @media (min-width: 1200px) {
-          .hero-content-box {
-            text-align: left !important;
-            margin-right: auto !important;
-            padding-left: 2rem !important;
-            max-width: 680px !important;
-          }
-          .hero-badge-flex, .hero-cta-flex {
-            justify-content: flex-start !important;
-          }
-        }
-      `}</style>
+      {/* Деликатная фоновая сетка из точек (Dot Matrix) взамен лагающих линий */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
+        backgroundImage: `radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)`,
+        backgroundSize: '24px 24px',
+        maskImage: 'radial-gradient(circle at 50% 40%, black 30%, transparent 85%)',
+        WebkitMaskImage: 'radial-gradient(circle at 50% 40%, black 30%, transparent 85%)',
+      }} />
 
-      <motion.div className="hero-content-box" style={{ y, opacity }}>
+      {/* Ограничивающий технологичный контейнер для контента */}
+      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 3 }}>
+        <div style={{ 
+          width: '100%', maxWidth: 1040, height: '70vh', maxHeigth: 600,
+          position: 'relative', margin: '0 1.5rem',
+          borderLeft: '1px solid rgba(255,255,255,0.02)',
+          borderRight: '1px solid rgba(255,255,255,0.02)',
+        }}>
+          {/* Инженерные засечки (Плюсы) по углам виртуального дашборда */}
+          <span style={{ position: 'absolute', top: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
+          <span style={{ position: 'absolute', top: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
+          <span style={{ position: 'absolute', bottom: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
+          <span style={{ position: 'absolute', bottom: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
+          
+          {/* Акцентный маркер дизайн-системы сверху слева */}
+          <div style={{ position: 'absolute', top: 12, left: 16, display: 'flex', gap: 4, opacity: 0.3 }}>
+            <div style={{ width: 4, height: 4, borderRadius: '50%', background: T.accent }} />
+            <div style={{ width: 12, height: 1, background: 'rgba(255,255,255,0.4)', marginTop: 1.5 }} />
+          </div>
+        </div>
+      </div>
+
+
+      {/* ───────────────────────────────────────────────────────────────
+          НЕИЗМЕННЫЙ ИСХОДНЫЙ КОНТЕНТ (С СОХРАНЕНИЕМ ВСЕХ ТАЙМИНГОВ)
+          ─────────────────────────────────────────────────────────────── */}
+      <motion.div style={{ y, opacity, position: 'relative', zIndex: 4, textAlign: 'center', maxWidth: 960, width: '100%' }}>
 
         {/* Agency badge */}
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="hero-badge-flex"
           style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}
         >
           <span style={{
@@ -189,7 +167,6 @@ export const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="hero-cta-flex"
           style={{ display: 'flex', justifyContent: 'center', marginBottom: '4rem' }}
         >
           <motion.a
@@ -206,7 +183,7 @@ export const Hero = () => {
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.8 }}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, color: T.muted, fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', margin: '0 auto' }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, color: T.muted, fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase' }}
         >
           <span>Scroll</span>
           <motion.div
