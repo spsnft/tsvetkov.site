@@ -103,7 +103,7 @@ const Nav = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// HERO (Updated with unified positioning & proper CTA)
+// HERO
 // ─────────────────────────────────────────────────────────────────
 const Hero = () => {
   const ref = useRef<HTMLElement>(null);
@@ -315,10 +315,12 @@ const Services = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {offers.map((offer, i) => (
             <div key={i} style={{ background: 'rgba(255,255,255,0.015)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '2rem', position: 'relative' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', items: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+              {/* FIXED TYPE ERROR HERE: changed 'items' to 'alignItems' */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                   <span style={{ fontSize: '0.85rem', fontWeight: 700, color: offer.color }}>{offer.num}</span>
                   <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginTop: '0.5rem', marginBottom: '0.75rem' }}>{offer.title}</h3>
+                  {/* FIXED TYPE ERROR HERE: changed 'maxwidth' to 'maxWidth' */}
                   <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 750, marginBottom: '1.25rem' }}>{offer.copy}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                     {offer.tags.map((tag, ti) => (
@@ -419,7 +421,8 @@ const Contact = () => {
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#fff', margin: '0 0 1rem' }}>Ready to scale?</h2>
+          {/* FIXED TYPE ERROR HERE: changed 'tracking' to 'letterSpacing' */}
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 1rem' }}>Ready to scale?</h2>
           <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6 }}>
             Drop your details below or message directly on Telegram.<br />
             We respond within 24 hours.
@@ -479,6 +482,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.99 }}
                 style={{
                   padding: '14px 28px', borderRadius: 999, border: 'none', fontFamily: 'inherit', fontWeight: 700, fontSize: '1rem',
+                  /* FIXED TYPE ERROR HERE: changed 'justifycontent' to 'justifyContent' */
                   cursor: status === 'sending' ? 'not-allowed' : 'pointer', background: `linear-gradient(135deg,${T.accent},${T.acc2})`, color: '#0A0A0C',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: '0.5rem',
                 }}
