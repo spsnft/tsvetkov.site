@@ -57,11 +57,13 @@ export const CaseStudies = () => {
                 {/* Header row */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', flex: 1 }}>
-                    {/* Giant stat */}
-                    <div style={{ minWidth: 150, flexShrink: 0 }}>
+                    
+                    {/* Giant stat with rigid desktop alignment */}
+                    <div style={{ width: '260px', maxWidth: '100%', flexShrink: 0 }}>
                       <div style={{ fontSize: '2.4rem', fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>{c.highlight}</div>
                       <div style={{ fontSize: '0.7rem', fontWeight: 800, color: c.color, letterSpacing: '0.06em', marginTop: 4, textTransform: 'uppercase' as const }}>{c.suffix}</div>
                     </div>
+                    
                     {/* Title */}
                     <div style={{ flex: 1, minWidth: 240 }}>
                       <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)', lineHeight: 1.4 }}>{c.title}</span>
