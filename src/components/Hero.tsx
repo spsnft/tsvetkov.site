@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
-// Массив конфигураций для живых светящихся частиц (Вариант Б)
+// Configuration array for smooth ambient glowing particles
 const particles = [
   { id: 1, size: 280, color: T.accent, opacity: 0.05, top: '15%', left: '20%', duration: 18, delay: 0, xRange: [0, 40, -20, 0], yRange: [0, -30, 20, 0] },
   { id: 2, size: 340, color: T.acc2, opacity: 0.04, top: '45%', right: '15%', duration: 22, delay: 1, xRange: [0, -50, 30, 0], yRange: [0, 40, -20, 0] },
@@ -15,7 +15,7 @@ export const Hero = () => {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   
-  // Исходный параллакс для контента
+  // Base content parallax transformations
   const y       = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
@@ -29,7 +29,7 @@ export const Hero = () => {
     }}>
 
       {/* ───────────────────────────────────────────────────────────────
-          ВАРИАНТ Б: ЖИВЫЕ СВЕТЯЩИЕСЯ ЧАСТИЦЫ (GLOW PARTICLES)
+          GLOW PARTICLES LAYERS
           ─────────────────────────────────────────────────────────────── */}
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
         {particles.map((p) => (
@@ -57,12 +57,12 @@ export const Hero = () => {
               background: `radial-gradient(circle, ${p.color} 100%, transparent 70%)`,
               opacity: p.opacity,
               filter: 'blur(80px)',
-              willChange: 'transform', // Подсказка браузеру для выноса на GPU
+              willChange: 'transform',
             }}
           />
         ))}
 
-        {/* Исходный центральный Ambient glow orb */}
+        {/* Core base radial glow */}
         <div style={{
           position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
           width: 'clamp(300px,60vw,650px)', height: 'clamp(300px,60vw,650px)',
@@ -72,7 +72,7 @@ export const Hero = () => {
         }} />
       </div>
 
-      {/* Матовый пленочный шум для текстурности (Идея 3) */}
+      {/* Cinematic film grain overlay */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <filter id="hero-film-noise">
           <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
@@ -81,11 +81,10 @@ export const Hero = () => {
       </svg>
       <div style={{ position: 'absolute', inset: 0, filter: 'url(#hero-film-noise)', pointerEvents: 'none', zIndex: 1, opacity: 0.6 }} />
 
-
       {/* ───────────────────────────────────────────────────────────────
-          ВАРИАНТ В: ТЕХНОЛОГИЧНЫЕ РАМКИ И UI-МИКРОЭЛЕМЕНТЫ
+          UI TECH INFRASTRUCTURE ELEMENTS
           ─────────────────────────────────────────────────────────────── */}
-      {/* Деликатная фоновая сетка из точек (Dot Matrix) взамен лагающих линий */}
+      {/* Subtle Dot Matrix Background */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
         backgroundImage: `radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)`,
@@ -94,21 +93,21 @@ export const Hero = () => {
         WebkitMaskImage: 'radial-gradient(circle at 50% 40%, black 30%, transparent 85%)',
       }} />
 
-      {/* Ограничивающий технологичный контейнер для контента */}
+      {/* Structural Framing Container */}
       <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 3 }}>
         <div style={{ 
-          width: '100%', maxWidth: 1040, height: '70vh', maxHeigth: 600,
+          width: '100%', maxWidth: 1040, height: '70vh', maxHeight: 600,
           position: 'relative', margin: '0 1.5rem',
           borderLeft: '1px solid rgba(255,255,255,0.02)',
           borderRight: '1px solid rgba(255,255,255,0.02)',
         }}>
-          {/* Инженерные засечки (Плюсы) по углам виртуального дашборда */}
+          {/* Engineering Crosshairs (+) */}
           <span style={{ position: 'absolute', top: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', top: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', bottom: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', bottom: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           
-          {/* Акцентный маркер дизайн-системы сверху слева */}
+          {/* Top-Left Status Nodes */}
           <div style={{ position: 'absolute', top: 12, left: 16, display: 'flex', gap: 4, opacity: 0.3 }}>
             <div style={{ width: 4, height: 4, borderRadius: '50%', background: T.accent }} />
             <div style={{ width: 12, height: 1, background: 'rgba(255,255,255,0.4)', marginTop: 1.5 }} />
@@ -116,16 +115,33 @@ export const Hero = () => {
         </div>
       </div>
 
-
       {/* ───────────────────────────────────────────────────────────────
-          НЕИЗМЕННЫЙ ИСХОДНЫЙ КОНТЕНТ (С СОХРАНЕНИЕМ ВСЕХ ТАЙМИНГОВ)
+          SYNCHRONIZED CONTENT GRAPH
           ─────────────────────────────────────────────────────────────── */}
-      <motion.div style={{ y, opacity, position: 'relative', zIndex: 4, textAlign: 'center', maxWidth: 960, width: '100%' }}>
+      <style>{`
+        .hero-content-box {
+          position: relative; z-index: 4; text-align: center; max-width: 960px; width: 100%;
+        }
+        @media (min-width: 1200px) {
+          .hero-content-box {
+            text-align: left !important;
+            margin-right: auto !important;
+            padding-left: 2rem !important;
+            max-width: 680px !important;
+          }
+          .hero-badge-flex, .hero-cta-flex {
+            justify-content: flex-start !important;
+          }
+        }
+      `}</style>
+
+      <motion.div className="hero-content-box" style={{ y, opacity }}>
 
         {/* Agency badge */}
         <motion.div
           initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          className="hero-badge-flex"
           style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}
         >
           <span style={{
@@ -167,6 +183,7 @@ export const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
+          className="hero-cta-flex"
           style={{ display: 'flex', justifyContent: 'center', marginBottom: '4rem' }}
         >
           <motion.a
