@@ -87,7 +87,6 @@ const Nav = () => {
         <Logo />
       </a>
 
-      {/* Links are hidden on mobile using inline conditional rendering */}
       {!isMobile && (
         <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
           {[['#expertise','Expertise'],['#services','Services'],['#work','Work'],['#contact','Contact']].map(([href,label]) => (
@@ -130,6 +129,13 @@ const Hero = () => {
       position: 'relative', overflow: 'hidden',
       padding: 'clamp(5rem,12vw,9rem) 1rem clamp(4rem,8vw,6rem)',
     }}>
+      <div style={{
+        position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
+        width: 'clamp(300px,60vw,650px)', height: 'clamp(300px,60vw,650px)',
+        borderRadius: '50%',
+        background: `radial-gradient(circle,${T.glow} 0%,transparent 70%)`, pointerEvents: 'none',
+      }} />
+
       <motion.div style={{ y, opacity, position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 960, width: '100%' }}>
         
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
@@ -167,42 +173,43 @@ const Hero = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// EXPERTISE — Asymmetrical Bento Grid
+// EXPERTISE — Side-by-Side Row & Symmetrical 2x2 Grid
 // ─────────────────────────────────────────────────────────────────
 const Expertise = () => {
   const cards = [
     {
-      id: 'demand', gridClass: 'bento-g1', tag: '01', color: T.accent,
+      id: 'demand', color: T.accent,
       title: 'Demand & Acquisition Engines',
       desc: 'Precision targeting. Maximum scale.',
-      items: ['High-Budget Ad Buying', 'Omnichannel Scaling', 'Advanced B2B Lead Gen', 'Performance SEO'],
+      items: ['High-Budget Ads', 'Omnichannel Scale', 'B2B Lead Gen', 'Performance SEO'],
       icon: (
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <path d="M3 23L9 17l4 4 6-8 8-6" stroke={T.accent} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
+          <path d="M3 23L9 17l4 4 6-8 8-6" stroke={T.accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
     },
     {
-      id: 'data', gridClass: 'bento-g2', tag: '02', color: T.acc2,
-      title: 'Data Architecture & Unit Economics',
+      id: 'data', color: T.acc2,
+      title: 'Data & Unit Economics',
       desc: 'Numbers that tell the real story.',
-      items: ['Custom BI Dashboards', 'GA4 Infrastructure', 'Conversion Rate Optimization', 'LTV & Funnel Analytics'],
+      items: ['BI Dashboards', 'GA4 Infrastructure', 'CRO Optimization', 'Funnel Analytics'],
       icon: (
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <rect x="3"  y="19" width="5" height="8" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.2"/>
-          <rect x="11" y="13" width="5" height="14" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.2"/>
-          <rect x="19" y="7"  width="5" height="20" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.2"/>
+        <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
+          <rect x="3"  y="19" width="5" height="8" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.5"/>
+          <rect x="11" y="13" width="5" height="14" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.5"/>
+          <rect x="19" y="7"  width="5" height="20" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.5"/>
         </svg>
       ),
     },
     {
-      id: 'ai', gridClass: 'bento-g3', tag: '03', color: '#C084FC',
+      id: 'ai', color: '#C084FC',
       title: 'AI Workflows & CRM Logic',
       desc: 'Systems that think ahead.',
-      items: ['Proprietary CRM Systems', 'AI-Driven Lead Processing', 'Workflow Automation', 'Retention Architectures'],
+      items: ['Custom CRM Systems', 'AI Lead Processing', 'Workflow Design', 'Retention Loops'],
       icon: (
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <rect x="11" y="3"  width="8" height="8" rx="2" stroke="#C084FC" strokeWidth="1.4"/>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C084FC" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+          <circle cx="12" cy="12" r="3" fill="rgba(192, 132, 252, 0.15)" />
         </svg>
       ),
     },
@@ -212,21 +219,30 @@ const Expertise = () => {
     <section id="expertise" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0 }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3.5rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Three pillars.<br />One scalable machine.</h2>
         </motion.div>
         <div className="bento" style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
           {cards.map((card, i) => (
             <motion.div key={card.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-              <div style={{ height: '100%', minHeight: 240, background: 'rgba(255,255,255,0.02)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative' }}>
-                <div style={{ width: 44, height: 44, borderRadius: 10, background: `${card.color}10`, border: `1px solid ${card.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{card.icon}</div>
-                <div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem' }}>{card.title}</h3>
-                  <p style={{ fontSize: '0.85rem', color: T.muted }}>{card.desc}</p>
+              <div style={{ height: '100%', minHeight: 250, background: 'rgba(255,255,255,0.02)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', position: 'relative' }}>
+                
+                {/* Row Header: Icon + Title aligned together */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 10, background: `${card.color}10`, border: `1px solid ${card.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    {card.icon}
+                  </div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>{card.title}</h3>
                 </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: 'auto' }}>
+
+                <p style={{ fontSize: '0.85rem', color: T.muted, margin: 0, lineHeight: 1.4 }}>{card.desc}</p>
+                
+                {/* Symmetrical 2x2 Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginTop: 'auto' }}>
                   {card.items.map((item, j) => (
-                    <span key={j} style={{ padding: '4px 10px', borderRadius: 6, fontSize: '0.75rem', background: `${card.color}08`, border: `1px solid ${card.color}15`, color: card.color }}>{item}</span>
+                    <span key={j} style={{ padding: '6px 8px', borderRadius: 6, fontSize: '0.75rem', background: `${card.color}08`, border: `1px solid ${card.color}15`, color: card.color, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {item}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -268,7 +284,7 @@ const Services = () => {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
+            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
             <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Three protocols.<br />Measurable results.</h2>
           </motion.div>
         </div>
@@ -322,7 +338,7 @@ const CaseStudies = () => {
     <section id="work" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0, borderTop: `1px solid ${T.border}` }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Results that speak<br />for themselves.</h2>
         </motion.div>
 
@@ -379,7 +395,7 @@ const Contact = () => {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 1rem' }}>Ready to scale?</h2>
           <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6 }}>
             Drop your details below or message directly on Telegram.<br />
@@ -411,7 +427,7 @@ const Contact = () => {
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
           <div style={{ flex: 1, height: 1, background: T.border }} />
-          <span style={{ color: T.muted, fontSize: '0.75rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>or leave your details</span>
+          <span style={{ color: T.muted, fontSize: '0.75rem', letterSpacing: '0.05em', textTransform: 'uppercase' as const }}>or leave your details</span>
           <div style={{ flex: 1, height: 1, background: T.border }} />
         </div>
 
@@ -425,11 +441,11 @@ const Contact = () => {
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Name</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Name</label>
                 <input type="text" required placeholder="Your name" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Contact Info (Email / Telegram)</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Contact Info (Email / Telegram)</label>
                 <input type="text" required placeholder="How should we reach you?" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
               </div>
 
