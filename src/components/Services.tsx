@@ -26,6 +26,23 @@ const offers = [
 
 export const Services = () => (
   <section id="services" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg1, borderTop: `1px solid ${T.border}` }}>
+    {/* Media query for tags layout optimization */}
+    <style>{`
+      .services-tag-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        max-width: 360px;
+      }
+      @media (min-width: 768px) {
+        .services-tag-container {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          max-width: 100% !important;
+        }
+      }
+    `}</style>
+
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
@@ -52,10 +69,10 @@ export const Services = () => (
               <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginTop: '0.5rem', marginBottom: '0.75rem' }}>{offer.title}</h3>
               <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 750, marginBottom: '1.5rem' }}>{offer.copy}</p>
 
-              {/* Symmetrical 2×2 tag grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', maxWidth: 360 }}>
+              {/* Symmetrical grid converting to a row line on desktop */}
+              <div className="services-tag-container">
                 {offer.tags.map((tag, ti) => (
-                  <span key={ti} style={{ padding: '6px 10px', borderRadius: 6, fontSize: '0.75rem', background: `${offer.color}08`, border: `1px solid ${offer.color}15`, color: offer.color, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <span key={ti} style={{ padding: '6px 12px', borderRadius: 6, fontSize: '0.75rem', background: `${offer.color}08`, border: `1px solid ${offer.color}15`, color: offer.color, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {tag}
                   </span>
                 ))}
