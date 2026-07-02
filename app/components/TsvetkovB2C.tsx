@@ -129,6 +129,13 @@ const Hero = () => {
       position: 'relative', overflow: 'hidden',
       padding: 'clamp(5rem,12vw,9rem) 1rem clamp(4rem,8vw,6rem)',
     }}>
+      <div style={{
+        position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
+        width: 'clamp(300px,60vw,650px)', height: 'clamp(300px,60vw,650px)',
+        borderRadius: '50%',
+        background: `radial-gradient(circle,${T.glow} 0%,transparent 70%)`, pointerEvents: 'none',
+      }} />
+
       <motion.div style={{ y, opacity, position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: 960, width: '100%' }}>
         
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
@@ -311,47 +318,120 @@ const Services = () => {
 };
 
 // ─────────────────────────────────────────────────────────────────
-// CASE STUDIES — NOGOOD Style: Giant Numbers
+// CASE STUDIES — Premium Accordion Rows (Variant B)
 // ─────────────────────────────────────────────────────────────────
 const CaseStudies = () => {
+  const [openId, setOpenId] = useState<number | null>(null);
+
   const cases = [
     {
-      industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
-      context: 'Scaled monthly revenue 7x within 18 months by building performance infrastructure and integrating custom CRM.',
+      id: 1, industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
+      title: 'Performance Infrastructure Scaling',
+      problem: 'Хаос в маркетинговых кампаниях, отсутствие сквозной синхронизации CRM с аналитикой и критические потери лидов на стыке отделов.',
+      solution: 'Развернули прозрачную инфраструктуру данных, внедрили сквозной трекинг воронки и оптимизировали юнит-экономику под реальную маржу, а не пустые клики.',
       color: T.accent, period: '18 months',
     },
     {
-      industry: 'HealthTech', highlight: '$3–5', suffix: 'CAC',
-      context: 'Managed highly efficient user acquisition campaigns in competitive US/EU English-speaking markets.',
+      id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CAC',
+      title: 'Global User Acquisition Optimization',
+      problem: 'Агрессивная перегретая конкуренция на рынках США и Европы, выжигающая рекламный бюджет, и высокая базовая стоимость привлечения клиента.',
+      solution: 'Запустили систему прецизионного таргетинга поведенческих факторов, перестроили логику аукционов и оптимизировали конверсию посадочных страниц.',
       color: T.acc2, period: 'US & EU markets',
     },
     {
-      industry: 'B2B Manufacturing', highlight: '1,000+', suffix: 'LEADS/MO',
-      context: 'Transitioned offline business to digital, driving expansion across 40+ markets from zero inbound flow.',
+      id: 3, industry: 'B2B Manufacturing', highlight: '1,000+', suffix: 'LEADS/MO',
+      title: 'Digital Inbound Expansion Protocol',
+      problem: 'Полная зависимость бизнеса от офлайн-продаж, нулевой входящий поток из цифровых каналов и отсутствие системной B2B-квалификации заявок.',
+      solution: 'Оцифровали привлечение с нуля, выстроили автоматические воронки распределения лидов и масштабировали омниканальный захват на 40+ международных рынков.',
       color: '#C084FC', period: '40+ markets',
     },
   ];
 
   return (
     <section id="work" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0, borderTop: `1px solid ${T.border}` }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+        
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
           <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Results that speak<br />for themselves.</h2>
         </motion.div>
 
-        <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
-          {cases.map((c, i) => (
-            <div key={i} style={{ background: 'rgba(255,255,255,0.02)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <span style={{ display: 'inline-block', padding: '3px 10px', borderRadius: 999, alignSelf: 'flex-start', fontSize: 10, fontWeight: 700, background: `${c.color}10`, border: `1px solid ${c.color}20`, color: c.color, letterSpacing: '0.05em' }}>{c.industry}</span>
-              <div>
-                <div style={{ fontSize: 'clamp(4.5rem,10vw,6.5rem)', fontWeight: 900, lineHeight: 0.9, color: '#fff' }}>{c.highlight}</div>
-                <div style={{ fontSize: '1rem', fontWeight: 800, color: c.color, letterSpacing: '0.05em' }}>{c.suffix}</div>
+        {/* Full-width interactive rows container */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {cases.map((c) => {
+            const isOpen = openId === c.id;
+            return (
+              <div
+                key={c.id}
+                onClick={() => setOpenId(isOpen ? null : c.id)}
+                style={{
+                  background: isOpen ? 'rgba(255,255,255,0.025)' : 'rgba(255,255,255,0.01)',
+                  border: `1px solid ${isOpen ? `${c.color}45` : T.border}`,
+                  borderRadius: 16,
+                  padding: '1.5rem 2rem',
+                  cursor: 'pointer',
+                  userSelect: 'none',
+                  transition: 'background 0.3s, border-color 0.3s',
+                }}
+              >
+                {/* Header Row */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+                    
+                    {/* Big Stat Segment */}
+                    <div style={{ minWidth: 150 }}>
+                      <span style={{ fontSize: '2.4rem', fontWeight: 900, color: '#fff', marginRight: 8, letterSpacing: '-0.02em' }}>{c.highlight}</span>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 800, color: c.color, letterSpacing: '0.06em' }}>{c.suffix}</span>
+                    </div>
+
+                    {/* Meta Title Description */}
+                    <div>
+                      <span style={{ display: 'inline-block', padding: '3px 8px', borderRadius: 4, fontSize: 10, fontWeight: 700, background: `${c.color}15`, color: c.color, marginRight: 12, textTransform: 'uppercase', verticalAlign: 'middle' }}>{c.industry}</span>
+                      <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)', verticalAlign: 'middle' }}>{c.title}</span>
+                    </div>
+
+                  </div>
+
+                  {/* Right Controls & Meta */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                    <span style={{ fontSize: '0.85rem', color: T.muted, fontWeight: 500 }}>{c.period}</span>
+                    <motion.svg
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={isOpen ? c.color : T.sub} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </motion.svg>
+                  </div>
+                </div>
+
+                {/* Animated Body Accordion Content */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <div style={{ paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '1.25rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+                        <div>
+                          <span style={{ display: 'block', fontSize: 11, fontWeight: 700, color: T.muted, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Problem Context</span>
+                          <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>{c.problem}</p>
+                        </div>
+                        <div>
+                          <span style={{ display: 'block', fontSize: 11, fontWeight: 700, color: c.color, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Engineered Solution</span>
+                          <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>{c.solution}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
               </div>
-              <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, flex: 1 }}>{c.context}</p>
-              <div style={{ fontSize: '0.75rem', color: T.muted, borderTop: `1px solid ${T.border}`, paddingTop: '0.75rem' }}>{c.period}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
