@@ -1,0 +1,118 @@
+'use client';
+
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { T } from '@/src/theme/tokens';
+
+const cases = [
+  {
+    id: 1, industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
+    title: 'Performance Infrastructure Scaling', color: T.accent,
+    problem: 'Chaos in marketing campaigns, lack of end-to-end CRM and analytics synchronization, and critical lead leakage across departments.',
+    solution: 'Deployed a transparent data infrastructure, implemented full-funnel tracking, and optimized unit economics for actual margin rather than empty clicks.',
+  },
+  {
+    id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CUSTOMER ACQUISITION COST',
+    title: 'Global User Acquisition Optimization', color: T.acc2,
+    problem: 'Aggressive, overheated competition in the US and EU markets burning ad budgets, and a high baseline customer acquisition cost.',
+    solution: 'Launched a precision targeting system based on behavioral factors, restructured auction logic, and optimized landing page conversion rates.',
+  },
+  {
+    id: 3, industry: 'B2B Manufacturing', highlight: '1,000+', suffix: 'LEADS/MO',
+    title: 'Digital Inbound Expansion Protocol', color: '#C084FC',
+    problem: 'Complete business reliance on offline sales, zero inbound flow from digital channels, and lack of systematic B2B lead qualification.',
+    solution: 'Digitized acquisition from scratch, built automated lead routing funnels, and scaled omnichannel capture across 40+ international markets.',
+  },
+];
+
+export const CaseStudies = () => {
+  const [openId, setOpenId] = useState<number | null>(null);
+
+  return (
+    <section id="work" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0, borderTop: `1px solid ${T.border}` }}>
+      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
+          <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
+            Results that speak<br />for themselves.
+          </h2>
+        </motion.div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {cases.map((c) => {
+            const isOpen = openId === c.id;
+            return (
+              <div
+                key={c.id}
+                onClick={() => setOpenId(isOpen ? null : c.id)}
+                style={{
+                  background: isOpen ? 'rgba(255,255,255,0.025)' : 'rgba(255,255,255,0.01)',
+                  border: `1px solid ${isOpen ? `${c.color}45` : T.border}`,
+                  borderRadius: 16, padding: '1.5rem 2rem',
+                  cursor: 'pointer', userSelect: 'none',
+                  transition: 'background 0.3s, border-color 0.3s',
+                }}
+              >
+                {/* Header row */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', flex: 1 }}>
+                    {/* Giant stat */}
+                    <div style={{ minWidth: 150, flexShrink: 0 }}>
+                      <div style={{ fontSize: '2.4rem', fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>{c.highlight}</div>
+                      <div style={{ fontSize: '0.7rem', fontWeight: 800, color: c.color, letterSpacing: '0.06em', marginTop: 4, textTransform: 'uppercase' as const }}>{c.suffix}</div>
+                    </div>
+                    {/* Title */}
+                    <div style={{ flex: 1, minWidth: 240 }}>
+                      <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)', lineHeight: 1.4 }}>{c.title}</span>
+                    </div>
+                  </div>
+
+                  {/* Right: industry tag + chevron */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginLeft: 'auto' }}>
+                    <span style={{ display: 'inline-block', padding: '4px 10px', borderRadius: 6, fontSize: 10, fontWeight: 700, background: `${c.color}12`, border: `1px solid ${c.color}25`, color: c.color, textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}>
+                      {c.industry}
+                    </span>
+                    <motion.svg
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke={isOpen ? c.color : T.sub} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </motion.svg>
+                  </div>
+                </div>
+
+                {/* Accordion body */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <div style={{ paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '1.25rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1.5rem' }}>
+                        <div>
+                          <span style={{ display: 'block', fontSize: 11, fontWeight: 700, color: T.muted, textTransform: 'uppercase' as const, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Problem Context</span>
+                          <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>{c.problem}</p>
+                        </div>
+                        <div>
+                          <span style={{ display: 'block', fontSize: 11, fontWeight: 700, color: c.color, textTransform: 'uppercase' as const, letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Engineered Solution</span>
+                          <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.5, margin: 0 }}>{c.solution}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
+    </section>
+  );
+};
