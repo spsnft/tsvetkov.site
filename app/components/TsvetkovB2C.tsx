@@ -150,13 +150,13 @@ const Hero = () => {
         </motion.h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }} style={{ fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', color: T.sub, lineHeight: 1.6, maxWidth: 640, margin: '0 auto 3rem', fontWeight: 400 }}>
-          We eliminate chaos in marketing and digital systems.
-          <span style={{ display: 'block', marginTop: '1rem', color: T.body, fontWeight: 500 }}>No fluff — just high-performance architectures.</span>
-          <span style={{ display: 'block', marginTop: '0.25rem', color: T.body, fontWeight: 500 }}>Track every dollar and automate sales flow.</span>
+          We eliminate chaos in marketing and digital systems
+          <span style={{ display: 'block', marginTop: '1rem', color: T.body, fontWeight: 500 }}>No fluff — just high-performance architectures</span>
+          <span style={{ display: 'block', marginTop: '0.25rem', color: T.body, fontWeight: 500 }}>Track every dollar and automate sales flow</span>
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} style={{ display: 'flex', justifyContent: 'center', marginBottom: '4rem' }}>
-          <motion.a href="#contact" whileHover={{ scale: 1.03, boxShadow: `0 0 40px ${T.glow}` }} whileTap={{ scale: 0.97 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', borderRadius: 999, background: `linear-gradient(135deg,${T.accent},${T.acc2})`, color: '#0A0A0C', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none' }}>
+          <motion.a href="#contact" whileHover={{ scale: 1.03, boxShadow: `0 0 40px ${T.glow}` }} whileTap={{ scale: 0.97 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 36px', borderRadius: 12, background: `linear-gradient(135deg,${T.accent},${T.acc2})`, color: '#0A0A0C', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none' }}>
             Audit My Business
           </motion.a>
         </motion.div>
@@ -219,7 +219,7 @@ const Expertise = () => {
     <section id="expertise" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0 }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3.5rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Three pillars.<br />One scalable machine.</h2>
         </motion.div>
         <div className="bento" style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
@@ -284,7 +284,7 @@ const Services = () => {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
+            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
             <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Three protocols.<br />Measurable results.</h2>
           </motion.div>
         </div>
@@ -352,7 +352,7 @@ const CaseStudies = () => {
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>Results that speak<br />for themselves.</h2>
         </motion.div>
 
@@ -485,7 +485,7 @@ const Contact = () => {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
+          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact</span>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 1rem' }}>Ready to scale?</h2>
           <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6 }}>
             Drop your details below or message directly on Telegram.<br />
@@ -503,7 +503,7 @@ const Contact = () => {
             whileTap={{ scale: 0.98 }}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 10,
-              padding: '14px 28px', borderRadius: 999,
+              padding: '14px 28px', borderRadius: 12,
               background: 'linear-gradient(135deg,rgba(39,174,228,0.1),rgba(39,174,228,0.04))',
               border: '1px solid rgba(39,174,228,0.3)',
               color: '#27AEE4', textDecoration: 'none',
@@ -517,7 +517,7 @@ const Contact = () => {
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
           <div style={{ flex: 1, height: 1, background: T.border }} />
-          <span style={{ color: T.muted, fontSize: '0.75rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>or leave your details</span>
+          <span style={{ color: T.muted, fontSize: '0.75rem', letterSpacing: '0.05em', textTransform: 'uppercase' as const }}>or leave your details</span>
           <div style={{ flex: 1, height: 1, background: T.border }} />
         </div>
 
@@ -531,11 +531,11 @@ const Contact = () => {
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Name</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Name</label>
                 <input type="text" required placeholder="Your name" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase', marginBottom: '0.5rem' }}>Contact Info (Email / Telegram)</label>
+                <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 600, textTransform: 'uppercase' as const, marginBottom: '0.5rem' }}>Contact Info (Email / Telegram)</label>
                 <input type="text" required placeholder="How should we reach you?" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
               </div>
 
@@ -545,7 +545,7 @@ const Contact = () => {
                 whileHover={{ scale: 1.01, boxShadow: `0 0 30px ${T.glow}` }}
                 whileTap={{ scale: 0.99 }}
                 style={{
-                  padding: '14px 28px', borderRadius: 999, border: 'none', fontFamily: 'inherit', fontWeight: 700, fontSize: '1rem',
+                  padding: '14px 28px', borderRadius: 12, border: 'none', fontFamily: 'inherit', fontWeight: 700, fontSize: '1rem',
                   cursor: status === 'sending' ? 'not-allowed' : 'pointer', background: `linear-gradient(135deg,${T.accent},${T.acc2})`, color: '#0A0A0C',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: '0.5rem',
                 }}
@@ -570,13 +570,13 @@ const Footer = () => (
     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
     flexWrap: 'wrap', gap: '1rem',
   }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
       <Logo size={32} />
-      <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#fff', letterSpacing: '-0.02em' }}>
-        TSVETKOV<span style={{ color: T.accent }}>.</span>
-      </span>
+      <a href="https://t.me/advertisment_th" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '0.9rem', textDecoration: 'none', fontWeight: 700, letterSpacing: '-0.02em' }}>
+        @advertisment_th
+      </a>
     </div>
-    <p style={{ color: T.muted, fontSize: '0.8rem' }}>© {new Date().getFullYear()} TSVETKOV. All rights reserved.</p>
+    <p style={{ color: T.muted, fontSize: '0.8rem' }}>© {new Date().getFullYear()}. All rights reserved.</p>
     <a href="https://t.me/advertisment_th" target="_blank" rel="noopener noreferrer" style={{ color: T.sub, fontSize: '0.82rem', textDecoration: 'none', fontWeight: 500 }}>@advertisment_th</a>
   </footer>
 );
