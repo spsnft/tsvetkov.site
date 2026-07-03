@@ -25,7 +25,7 @@ const offers = [
 ];
 
 export const Services = () => (
-  <section id="services" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg1, borderTop: `1px solid ${T.border}` }}>
+  <section id="services" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}` }}>
     {/* Media query for tags layout optimization */}
     <style>{`
       .services-tag-container {
@@ -61,7 +61,7 @@ export const Services = () => (
             initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ delay: i * 0.1 }}
           >
-            <div style={{ background: 'rgba(255,255,255,0.015)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '2rem', position: 'relative' }}>
+            <div style={{ background: 'rgba(255,255,255,0.015)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '2rem', position: 'relative', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
               {/* Left accent stripe */}
               <div style={{ position: 'absolute', left: 0, top: '15%', bottom: '15%', width: 2.5, borderRadius: 2, background: `linear-gradient(to bottom,${offer.color},${offer.color}44)` }} />
 
