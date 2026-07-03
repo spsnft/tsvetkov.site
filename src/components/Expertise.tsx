@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
@@ -62,10 +63,14 @@ export const Expertise = () => (
           >
             <div style={{
               height: '100%', minHeight: 250,
-              background: 'rgba(255,255,255,0.02)', border: `1px solid ${T.border}`,
+              // Глубокий темный микс + 2% цветного напыления на дне
+              background: `linear-gradient(135deg, rgba(10, 10, 12, 0.75) 0%, ${card.color}05 100%)`, 
+              // Подкрашенная неоновая рамка для high-tech эффекта
+              border: `1px solid ${card.color}18`, 
               borderRadius: 20, padding: '1.75rem',
               display: 'flex', flexDirection: 'column', gap: '1.25rem', position: 'relative',
-              backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', // Эффект стекла поверх частиц
+              backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+              boxShadow: `0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
             }}>
               {/* Icon + Title row */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
