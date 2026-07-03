@@ -18,7 +18,7 @@ export const Hero = () => {
         minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
         position: 'relative', overflow: 'hidden',
         padding: 'clamp(5rem,12vw,9rem) 1rem clamp(4rem,8vw,6rem)',
-        transform: 'translate3d(0, 0, 0)', WebkitTransform: 'translate3d(0, 0, 0)', // Аппаратное ускорение слоев
+        transform: 'translate3d(0, 0, 0)', WebkitTransform: 'translate3d(0, 0, 0)',
       }}
     >
       <style>{`
@@ -28,9 +28,14 @@ export const Hero = () => {
         }
         .hero-left { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .live-tracker { display: none; }
-        
-        /* Смещение скролла выше на мобилке */
         .scroll-indicator { position: absolute; bottom: 3rem; display: flex; } 
+        
+        /* Умный перенос: работает на мобилках, исчезает на ПК */
+        .mobile-br { display: block; }
+        
+        @media (min-width: 640px) {
+          .mobile-br { display: none; }
+        }
         
         @media (min-width: 968px) {
           .hero-grid { grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
@@ -54,14 +59,14 @@ export const Hero = () => {
             <span style={{ background: `linear-gradient(135deg,${T.accent} 0%,${T.acc2} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Engineered to Scale.</span>
           </h1>
 
-          {/* Разделение подзаголовка на строки */}
-          <div style={{ fontSize: 'clamp(1rem,2vw,1.1rem)', color: T.sub, lineHeight: 1.8, marginBottom: '3rem', maxWidth: 520 }}>
-            <span style={{ display: 'block' }}>We eliminate chaos in marketing and digital systems.</span>
-            <span style={{ display: 'block', color: T.body, fontWeight: 500 }}>No fluff — just high-performance architectures.</span>
-            <span style={{ display: 'block', color: T.body, fontWeight: 500 }}>Track every dollar and automate sales flow.</span>
+          {/* ПУНКТ 1 и 4: Перенесли T.body и weight 500 на родителя, чтобы все 3 строки были одинаково яркими */}
+          {/* ПУНКТ 2: Точки из концов всех предложений успешно удалены */}
+          <div style={{ fontSize: 'clamp(1rem,2vw,1.1rem)', color: T.body, fontWeight: 500, lineHeight: 1.8, marginBottom: '3rem', maxWidth: 520 }}>
+            <span style={{ display: 'block' }}>We eliminate chaos in <br className="mobile-br" />marketing and digital systems</span>
+            <span style={{ display: 'block' }}>No fluff — just high-performance architectures</span>
+            <span style={{ display: 'block' }}>Track every dollar and automate sales flow</span>
           </div>
 
-          {/* Кнопка (градиент + текст) */}
           <a href="#contact" style={{ 
             display: 'inline-flex', padding: '16px 36px', borderRadius: 12, 
             background: `linear-gradient(135deg,${T.accent},${T.acc2})`, 
