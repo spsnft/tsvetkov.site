@@ -1,26 +1,175 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
-// Configuration array for smooth ambient glowing particles
-const particles = [
-  { id: 1, size: 280, color: T.accent, opacity: 0.05, top: '15%', left: '20%', duration: 18, delay: 0, xRange: [0, 40, -20, 0], yRange: [0, -30, 20, 0] },
-  { id: 2, size: 340, color: T.acc2, opacity: 0.04, top: '45%', right: '15%', duration: 22, delay: 1, xRange: [0, -50, 30, 0], yRange: [0, 40, -20, 0] },
-  { id: 3, size: 220, color: '#C084FC', opacity: 0.03, bottom: '20%', left: '35%', duration: 25, delay: 2, xRange: [0, 30, -30, 0], yRange: [0, -25, 30, 0] },
-];
+// Vertex Shader: Базовый каркас для отрисовки 2D-плоскости
+const vsSource = `
+  attribute vec2 position;
+  void main() {
+    gl_Position = vec4(position, 0.0, 1.0);
+  }
+`;
+
+// Fragment Shader: Математический просчет жидких неоновых волн (WebGL Fluid Engine)
+const fsSource = `
+  precision highp float;
+  uniform float u_time;
+  uniform vec2 u_resolution;
+  uniform vec2 u_mouse;
+
+  void main() {
+    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+    vec2 p = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+    vec2 mouse = (u_mouse * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+
+    // Искажение пространства от положения курсора
+    float mouseDist = length(p - mouse);
+    p += (p / (mouseDist + 0.6)) * 0.08 * smoothstep(1.2, 0.0, mouseDist);
+
+    // Математическая симуляция перетекания плазмы/жидкости (Fluid Math)
+    float t = u_time * 0.25;
+    for(float i = 1.0; i < 4.0; i++) {
+      p.x += sin(p.y + t + mouse.x * 0.2) * 0.45 / i;
+      p.y += cos(p.x + t + mouse.y * 0.2) * 0.35 / i;
+    }
+
+    // Фирменные цвета агентства (RGB)
+    vec3 colAccent = vec3(0.0, 1.0, 0.7); // T.accent (#00FFB3)
+    vec3 colAcc2   = vec3(0.0, 0.77, 1.0); // T.acc2 (#00C6FF)
+    vec3 colPurple = vec3(0.75, 0.52, 0.98); // #C084FC
+
+    // Смешивание слоев жидкости
+    float k = sin(p.x + p.y) * 0.5 + 0.5;
+    vec3 fluidColor = mix(colAccent, colAcc2, k);
+    fluidColor = mix(fluidColor, colPurple, cos(p.x * 0.4) * 0.5 + 0.5);
+
+    // Виньетка и мягкое затухание к краям для премиального темного тона
+    float edgeMask = smoothstep(1.1, 0.2, length(uv - vec2(0.5)));
+    
+    // Мягкая интенсивность свечения (удерживаем 0.09, чтобы фон не слепил глаза)
+    gl_FragColor = vec4(fluidColor * 0.09 * edgeMask, 1.0);
+  }
+`;
 
 export const Hero = () => {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const containerRef = useRef<HTMLElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   
-  // Base content parallax transformations
+  // Исходная скролл-анимация контента
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
   const y       = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const gl = canvas.getContext('webgl');
+    if (!gl) return;
+
+    // Сборка и компиляция шейдеров
+    const createShader = (gl: WebGLRenderingContext, type: number, source: string) => {
+      const shader = gl.createShader(type);
+      if (!shader) return null;
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      return shader;
+    };
+
+    const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
+    const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+    if (!vs || !fs) return;
+
+    const program = gl.createProgram();
+    if (!program) return;
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    gl.useProgram(program);
+
+    // Буфер плоскости (Full-screen quad)
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,  1, -1, -1,  1,
+      -1,  1,  1, -1,  1,  1,
+    ]), gl.STATIC_DRAW);
+
+    const positionLocation = gl.getAttribLocation(program, 'position');
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+    // Поиск униформ-переменных шейдера
+    const timeLoc = gl.getUniformLocation(program, 'u_time');
+    const resLoc = gl.getUniformLocation(program, 'u_resolution');
+    const mouseLoc = gl.getUniformLocation(program, 'u_mouse');
+
+    let animationFrameId: number;
+    let lastMouseX = window.innerWidth / 2;
+    let lastMouseY = window.innerHeight / 2;
+    let currentMouseX = lastMouseX;
+    let currentMouseY = lastMouseY;
+
+    // Отслеживание размеров
+    const resize = () => {
+      if (!canvas || !gl) return;
+      const dpr = Math.min(window.devicePixelRatio, 2); // Ограничиваем DPR для экономии батареи мобильных устройств
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform2f(resLoc, canvas.width, canvas.height);
+    };
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Отслеживание курсора
+    const handleMouseMove = (e: MouseEvent) => {
+      currentMouseX = e.clientX;
+      currentMouseY = window.innerHeight - e.clientY; // Инвертируем Y для WebGL осей
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Рендер-цикл (60 FPS)
+    const render = (time: number) => {
+      if (!gl || !canvas) return;
+
+      // Плавная интерполяция мыши (смягчает рывки курсора)
+      lastMouseX += (currentMouseX - lastMouseX) * 0.08;
+      lastMouseY += (currentMouseY - lastMouseY) * 0.08;
+
+      const dpr = Math.min(window.devicePixelRatio, 2);
+      gl.uniform1f(timeLoc, time * 0.001);
+      gl.uniform2f(mouseLoc, lastMouseX * dpr, lastMouseY * dpr);
+
+      gl.clearColor(0.04, 0.04, 0.047, 1.0); // T.bg0 (#0A0A0C)
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    animationFrameId = requestAnimationFrame(render);
+
+    // Чистка памяти при размонтировании
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (gl) {
+        gl.bindBuffer(gl.ARRAY_BUFFER, null);
+        gl.deleteBuffer(positionBuffer);
+        gl.deleteProgram(program);
+        gl.deleteShader(vs);
+        gl.deleteShader(fs);
+      }
+    };
+  }, []);
+
   return (
-    <section ref={ref} style={{
+    <section ref={containerRef} style={{
       minHeight: '100vh',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
@@ -29,85 +178,42 @@ export const Hero = () => {
     }}>
 
       {/* ───────────────────────────────────────────────────────────────
-          GLOW PARTICLES LAYERS
+          WEBGL LIQUID ENGINE LAYER
           ─────────────────────────────────────────────────────────────── */}
-      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
-        {particles.map((p) => (
-          <motion.div
-            key={p.id}
-            animate={{
-              x: p.xRange,
-              y: p.yRange,
-            }}
-            transition={{
-              duration: p.duration,
-              delay: p.delay,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            style={{
-              position: 'absolute',
-              top: p.top,
-              left: p.left,
-              right: p.right,
-              bottom: p.bottom,
-              width: p.size,
-              height: p.size,
-              borderRadius: '50%',
-              background: `radial-gradient(circle, ${p.color} 100%, transparent 70%)`,
-              opacity: p.opacity,
-              filter: 'blur(80px)',
-              willChange: 'transform',
-            }}
-          />
-        ))}
+      <canvas 
+        ref={canvasRef} 
+        style={{ 
+          position: 'absolute', inset: 0, width: '100%', height: '100%', 
+          zIndex: 0, pointerEvents: 'none' 
+        }} 
+      />
 
-        {/* Core base radial glow */}
-        <div style={{
-          position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
-          width: 'clamp(300px,60vw,650px)', height: 'clamp(300px,60vw,650px)',
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${T.glow} 0%, transparent 70%)`,
-          opacity: 0.8,
-        }} />
-      </div>
-
-      {/* Cinematic film grain overlay */}
+      {/* Матовый пленочный шум поверх WebGL для текстурности */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <filter id="hero-film-noise">
           <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
-          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.018 0" />
+          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.016 0" />
         </filter>
       </svg>
       <div style={{ position: 'absolute', inset: 0, filter: 'url(#hero-film-noise)', pointerEvents: 'none', zIndex: 1, opacity: 0.6 }} />
 
       {/* ───────────────────────────────────────────────────────────────
-          UI TECH INFRASTRUCTURE ELEMENTS
+          UI INFRASTRUCTURE ELEMENTS (СТРОГАЯ ГЕОМЕТРИЯ)
           ─────────────────────────────────────────────────────────────── */}
-      {/* Subtle Dot Matrix Background */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
-        backgroundImage: `radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)`,
-        backgroundSize: '24px 24px',
-        maskImage: 'radial-gradient(circle at 50% 40%, black 30%, transparent 85%)',
-        WebkitMaskImage: 'radial-gradient(circle at 50% 40%, black 30%, transparent 85%)',
-      }} />
-
-      {/* Structural Framing Container */}
-      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 3 }}>
+      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 2 }}>
         <div style={{ 
           width: '100%', maxWidth: 1040, height: '70vh', maxHeight: 600,
           position: 'relative', margin: '0 1.5rem',
-          borderLeft: '1px solid rgba(255,255,255,0.02)',
-          borderRight: '1px solid rgba(255,255,255,0.02)',
+          borderLeft: '1px solid rgba(255,255,255,0.025)',
+          borderRight: '1px solid rgba(255,255,255,0.025)',
         }}>
-          {/* Engineering Crosshairs (+) */}
+          {/* Инженерные засечки (+) по углам виртуального контейнера */}
           <span style={{ position: 'absolute', top: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', top: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', bottom: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', bottom: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           
-          {/* Top-Left Status Nodes */}
+          {/* Статусный маркер дизайн-системы */}
           <div style={{ position: 'absolute', top: 12, left: 16, display: 'flex', gap: 4, opacity: 0.3 }}>
             <div style={{ width: 4, height: 4, borderRadius: '50%', background: T.accent }} />
             <div style={{ width: 12, height: 1, background: 'rgba(255,255,255,0.4)', marginTop: 1.5 }} />
@@ -116,11 +222,11 @@ export const Hero = () => {
       </div>
 
       {/* ───────────────────────────────────────────────────────────────
-          SYNCHRONIZED CONTENT GRAPH
+          СИНХРОНИЗИРОВАННЫЙ ИСХОДНЫЙ КОНТЕНТ (БЕЗ ИЗМЕНЕНИЙ)
           ─────────────────────────────────────────────────────────────── */}
       <style>{`
         .hero-content-box {
-          position: relative; z-index: 4; text-align: center; max-width: 960px; width: 100%;
+          position: relative; z-index: 3; text-align: center; max-width: 960px; width: 100%;
         }
         @media (min-width: 1200px) {
           .hero-content-box {
