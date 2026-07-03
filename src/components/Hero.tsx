@@ -12,7 +12,7 @@ const vsSource = `
   }
 `;
 
-// Fragment Shader: Математический просчет жидких неоновых волн (WebGL Fluid Engine)
+// Fragment Shader: Просчет жидких неоновых волн с адаптивной яркостью под мобильные дисплеи
 const fsSource = `
   precision highp float;
   uniform float u_time;
@@ -24,32 +24,32 @@ const fsSource = `
     vec2 p = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
     vec2 mouse = (u_mouse * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
 
-    // Искажение пространства от положения курсора
+    // Искажение пространства от положения курсора или пальца
     float mouseDist = length(p - mouse);
-    p += (p / (mouseDist + 0.6)) * 0.08 * smoothstep(1.2, 0.0, mouseDist);
+    p += (p / (mouseDist + 0.6)) * 0.09 * smoothstep(1.2, 0.0, mouseDist);
 
-    // Математическая симуляция перетекания плазмы/жидкости (Fluid Math)
-    float t = u_time * 0.25;
+    // Ускоренный автономный дрейф волн (чтобы фон двигался сам по себе)
+    float t = u_time * 0.35;
     for(float i = 1.0; i < 4.0; i++) {
-      p.x += sin(p.y + t + mouse.x * 0.2) * 0.45 / i;
-      p.y += cos(p.x + t + mouse.y * 0.2) * 0.35 / i;
+      p.x += sin(p.y + t + mouse.x * 0.15) * 0.45 / i;
+      p.y += cos(p.x + t + mouse.y * 0.15) * 0.35 / i;
     }
 
-    // Фирменные цвета агентства (RGB)
-    vec3 colAccent = vec3(0.0, 1.0, 0.7); // T.accent (#00FFB3)
-    vec3 colAcc2   = vec3(0.0, 0.77, 1.0); // T.acc2 (#00C6FF)
+    // Фирменные цвета (RGB)
+    vec3 colAccent = vec3(0.0, 1.0, 0.7);    // T.accent (#00FFB3)
+    vec3 colAcc2   = vec3(0.0, 0.77, 1.0);   // T.acc2 (#00C6FF)
     vec3 colPurple = vec3(0.75, 0.52, 0.98); // #C084FC
 
-    // Смешивание слоев жидкости
+    // Смешивание слоев плазмы
     float k = sin(p.x + p.y) * 0.5 + 0.5;
     vec3 fluidColor = mix(colAccent, colAcc2, k);
     fluidColor = mix(fluidColor, colPurple, cos(p.x * 0.4) * 0.5 + 0.5);
 
-    // Виньетка и мягкое затухание к краям для премиального темного тона
-    float edgeMask = smoothstep(1.1, 0.2, length(uv - vec2(0.5)));
+    // Мягкое затемнение к краям экрана
+    float edgeMask = smoothstep(1.1, 0.15, length(uv - vec2(0.5)));
     
-    // Мягкая интенсивность свечения (удерживаем 0.09, чтобы фон не слепил глаза)
-    gl_FragColor = vec4(fluidColor * 0.09 * edgeMask, 1.0);
+    // Яркость скорректирована до 0.13 для сочной картинки на мобильных OLED/Retina
+    gl_FragColor = vec4(fluidColor * 0.13 * edgeMask, 1.0);
   }
 `;
 
@@ -69,7 +69,7 @@ export const Hero = () => {
     const gl = canvas.getContext('webgl');
     if (!gl) return;
 
-    // Сборка и компиляция шейдеров
+    // Компиляция шейдеров
     const createShader = (gl: WebGLRenderingContext, type: number, source: string) => {
       const shader = gl.createShader(type);
       if (!shader) return null;
@@ -89,7 +89,7 @@ export const Hero = () => {
     gl.linkProgram(program);
     gl.useProgram(program);
 
-    // Буфер плоскости (Full-screen quad)
+    // Отрисовка геометрии плоскости
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
@@ -101,7 +101,6 @@ export const Hero = () => {
     gl.enableVertexAttribArray(positionLocation);
     gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-    // Поиск униформ-переменных шейдера
     const timeLoc = gl.getUniformLocation(program, 'u_time');
     const resLoc = gl.getUniformLocation(program, 'u_resolution');
     const mouseLoc = gl.getUniformLocation(program, 'u_mouse');
@@ -112,10 +111,10 @@ export const Hero = () => {
     let currentMouseX = lastMouseX;
     let currentMouseY = lastMouseY;
 
-    // Отслеживание размеров
+    // Ресайз с ограничением пикселей для экономии заряда батареи iOS
     const resize = () => {
       if (!canvas || !gl) return;
-      const dpr = Math.min(window.devicePixelRatio, 2); // Ограничиваем DPR для экономии батареи мобильных устройств
+      const dpr = Math.min(window.devicePixelRatio, 2);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       gl.viewport(0, 0, canvas.width, canvas.height);
@@ -125,18 +124,35 @@ export const Hero = () => {
     window.addEventListener('resize', resize);
     resize();
 
-    // Отслеживание курсора
+    // 1. Десктоп трекинг мыши
     const handleMouseMove = (e: MouseEvent) => {
       currentMouseX = e.clientX;
-      currentMouseY = window.innerHeight - e.clientY; // Инвертируем Y для WebGL осей
+      currentMouseY = window.innerHeight - e.clientY;
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Рендер-цикл (60 FPS)
+    // 2. Мобильный трекинг тач-событий (iOS / Android)
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        currentMouseX = e.touches[0].clientX;
+        currentMouseY = window.innerHeight - e.touches[0].clientY;
+      }
+    };
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        currentMouseX = e.touches[0].clientX;
+        currentMouseY = window.innerHeight - e.touches[0].clientY;
+      }
+    };
+
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+
+    // Рендер-петля
     const render = (time: number) => {
       if (!gl || !canvas) return;
 
-      // Плавная интерполяция мыши (смягчает рывки курсора)
+      // Инерция движения (сглаживание трекинга)
       lastMouseX += (currentMouseX - lastMouseX) * 0.08;
       lastMouseY += (currentMouseY - lastMouseY) * 0.08;
 
@@ -144,7 +160,7 @@ export const Hero = () => {
       gl.uniform1f(timeLoc, time * 0.001);
       gl.uniform2f(mouseLoc, lastMouseX * dpr, lastMouseY * dpr);
 
-      gl.clearColor(0.04, 0.04, 0.047, 1.0); // T.bg0 (#0A0A0C)
+      gl.clearColor(0.04, 0.04, 0.047, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
 
@@ -153,11 +169,13 @@ export const Hero = () => {
 
     animationFrameId = requestAnimationFrame(render);
 
-    // Чистка памяти при размонтировании
+    // Полная очистка памяти при уходе с экрана
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchstart', handleTouchStart);
       if (gl) {
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
         gl.deleteBuffer(positionBuffer);
@@ -177,9 +195,7 @@ export const Hero = () => {
       padding: 'clamp(5rem,12vw,9rem) 1rem clamp(4rem,8vw,6rem)',
     }}>
 
-      {/* ───────────────────────────────────────────────────────────────
-          WEBGL LIQUID ENGINE LAYER
-          ─────────────────────────────────────────────────────────────── */}
+      {/* WEBGL CANVAS LAYER */}
       <canvas 
         ref={canvasRef} 
         style={{ 
@@ -188,7 +204,7 @@ export const Hero = () => {
         }} 
       />
 
-      {/* Матовый пленочный шум поверх WebGL для текстурности */}
+      {/* FILM NOISE OVERLAY */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <filter id="hero-film-noise">
           <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
@@ -197,9 +213,7 @@ export const Hero = () => {
       </svg>
       <div style={{ position: 'absolute', inset: 0, filter: 'url(#hero-film-noise)', pointerEvents: 'none', zIndex: 1, opacity: 0.6 }} />
 
-      {/* ───────────────────────────────────────────────────────────────
-          UI INFRASTRUCTURE ELEMENTS (СТРОГАЯ ГЕОМЕТРИЯ)
-          ─────────────────────────────────────────────────────────────── */}
+      {/* UI INFRASTRUCTURE ELEMENTS */}
       <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 2 }}>
         <div style={{ 
           width: '100%', maxWidth: 1040, height: '70vh', maxHeight: 600,
@@ -207,13 +221,13 @@ export const Hero = () => {
           borderLeft: '1px solid rgba(255,255,255,0.025)',
           borderRight: '1px solid rgba(255,255,255,0.025)',
         }}>
-          {/* Инженерные засечки (+) по углам виртуального контейнера */}
+          {/* Engineering Crosshairs (+) */}
           <span style={{ position: 'absolute', top: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', top: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', bottom: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', bottom: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           
-          {/* Статусный маркер дизайн-системы */}
+          {/* Status Node */}
           <div style={{ position: 'absolute', top: 12, left: 16, display: 'flex', gap: 4, opacity: 0.3 }}>
             <div style={{ width: 4, height: 4, borderRadius: '50%', background: T.accent }} />
             <div style={{ width: 12, height: 1, background: 'rgba(255,255,255,0.4)', marginTop: 1.5 }} />
@@ -221,9 +235,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* ───────────────────────────────────────────────────────────────
-          СИНХРОНИЗИРОВАННЫЙ ИСХОДНЫЙ КОНТЕНТ (БЕЗ ИЗМЕНЕНИЙ)
-          ─────────────────────────────────────────────────────────────── */}
+      {/* SYNCHRONIZED CONTENT GRAPH */}
       <style>{`
         .hero-content-box {
           position: relative; z-index: 3; text-align: center; max-width: 960px; width: 100%;
