@@ -4,55 +4,6 @@ import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
-// Vertex Shader: Базовый каркас для отрисовки 2D-плоскости
-const vsSource = `
-  attribute vec2 position;
-  void main() {
-    gl_Position = vec4(position, 0.0, 1.0);
-  }
-`;
-
-// Fragment Shader: Просчет жидких неоновых волн с адаптивной яркостью под мобильные дисплеи
-const fsSource = `
-  precision highp float;
-  uniform float u_time;
-  uniform vec2 u_resolution;
-  uniform vec2 u_mouse;
-
-  void main() {
-    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-    vec2 p = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
-    vec2 mouse = (u_mouse * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
-
-    // Искажение пространства от положения курсора или пальца
-    float mouseDist = length(p - mouse);
-    p += (p / (mouseDist + 0.6)) * 0.09 * smoothstep(1.2, 0.0, mouseDist);
-
-    // Ускоренный автономный дрейф волн (чтобы фон двигался сам по себе)
-    float t = u_time * 0.35;
-    for(float i = 1.0; i < 4.0; i++) {
-      p.x += sin(p.y + t + mouse.x * 0.15) * 0.45 / i;
-      p.y += cos(p.x + t + mouse.y * 0.15) * 0.35 / i;
-    }
-
-    // Фирменные цвета (RGB)
-    vec3 colAccent = vec3(0.0, 1.0, 0.7);    // T.accent (#00FFB3)
-    vec3 colAcc2   = vec3(0.0, 0.77, 1.0);   // T.acc2 (#00C6FF)
-    vec3 colPurple = vec3(0.75, 0.52, 0.98); // #C084FC
-
-    // Смешивание слоев плазмы
-    float k = sin(p.x + p.y) * 0.5 + 0.5;
-    vec3 fluidColor = mix(colAccent, colAcc2, k);
-    fluidColor = mix(fluidColor, colPurple, cos(p.x * 0.4) * 0.5 + 0.5);
-
-    // Мягкое затемнение к краям экрана
-    float edgeMask = smoothstep(1.1, 0.15, length(uv - vec2(0.5)));
-    
-    // Яркость скорректирована до 0.13 для сочной картинки на мобильных OLED/Retina
-    gl_FragColor = vec4(fluidColor * 0.13 * edgeMask, 1.0);
-  }
-`;
-
 export const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -66,123 +17,164 @@ export const Hero = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext('webgl');
-    if (!gl) return;
-
-    // Компиляция шейдеров
-    const createShader = (gl: WebGLRenderingContext, type: number, source: string) => {
-      const shader = gl.createShader(type);
-      if (!shader) return null;
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      return shader;
-    };
-
-    const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
-    const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
-    if (!vs || !fs) return;
-
-    const program = gl.createProgram();
-    if (!program) return;
-    gl.attachShader(program, vs);
-    gl.attachShader(program, fs);
-    gl.linkProgram(program);
-    gl.useProgram(program);
-
-    // Отрисовка геометрии плоскости
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-      -1, -1,  1, -1, -1,  1,
-      -1,  1,  1, -1,  1,  1,
-    ]), gl.STATIC_DRAW);
-
-    const positionLocation = gl.getAttribLocation(program, 'position');
-    gl.enableVertexAttribArray(positionLocation);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-    const timeLoc = gl.getUniformLocation(program, 'u_time');
-    const resLoc = gl.getUniformLocation(program, 'u_resolution');
-    const mouseLoc = gl.getUniformLocation(program, 'u_mouse');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     let animationFrameId: number;
-    let lastMouseX = window.innerWidth / 2;
-    let lastMouseY = window.innerHeight / 2;
-    let currentMouseX = lastMouseX;
-    let currentMouseY = lastMouseY;
+    const nodeCount = 32;
+    const nodes: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      color: string;
+    }> = [];
 
-    // Ресайз с ограничением пикселей для экономии заряда батареи iOS
+    // Координаты мыши / тача
+    const mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000, active: false };
+
+    // Инициализация адаптивных размеров холста
     const resize = () => {
-      if (!canvas || !gl) return;
       const dpr = Math.min(window.devicePixelRatio, 2);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.uniform2f(resLoc, canvas.width, canvas.height);
+      ctx.scale(dpr, dpr);
     };
-
     window.addEventListener('resize', resize);
     resize();
 
-    // 1. Десктоп трекинг мыши
-    const handleMouseMove = (e: MouseEvent) => {
-      currentMouseX = e.clientX;
-      currentMouseY = window.innerHeight - e.clientY;
-    };
-    window.addEventListener('mousemove', handleMouseMove);
+    // Генерация нод экосистемы
+    const colors = [T.accent, T.acc2, '#C084FC'];
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 0.35, // Мягкая скорость дрейфа
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 1.5 + 1,
+        color: colors[i % colors.length],
+      });
+    }
 
-    // 2. Мобильный трекинг тач-событий (iOS / Android)
-    const handleTouchMove = (e: TouchEvent) => {
+    // Слушатели десктопного курсора
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+      mouse.active = true;
+    };
+    const onMouseLeave = () => {
+      mouse.active = false;
+    };
+
+    // Слушатели мобильного тача (iOS / iPadOS)
+    const onTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
-        currentMouseX = e.touches[0].clientX;
-        currentMouseY = window.innerHeight - e.touches[0].clientY;
+        mouse.targetX = e.touches[0].clientX;
+        mouse.targetY = e.touches[0].clientY;
+        mouse.active = true;
       }
     };
-    const handleTouchStart = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        currentMouseX = e.touches[0].clientX;
-        currentMouseY = window.innerHeight - e.touches[0].clientY;
-      }
+    const onTouchEnd = () => {
+      mouse.active = false;
     };
 
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseleave', onMouseLeave);
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchstart', onTouchMove, { passive: true });
+    window.addEventListener('touchend', onTouchEnd);
 
-    // Рендер-петля
-    const render = (time: number) => {
-      if (!gl || !canvas) return;
+    // Главный цикл анимации (60 FPS)
+    const render = () => {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-      // Инерция движения (сглаживание трекинга)
-      lastMouseX += (currentMouseX - lastMouseX) * 0.08;
-      lastMouseY += (currentMouseY - lastMouseY) * 0.08;
+      // Плавное сглаживание координат курсора/тача
+      if (mouse.active) {
+        if (mouse.x === -1000) {
+          mouse.x = mouse.targetX;
+          mouse.y = mouse.targetY;
+        } else {
+          mouse.x += (mouse.targetX - mouse.x) * 0.1;
+          mouse.y += (mouse.targetY - mouse.y) * 0.1;
+        }
+      } else {
+        mouse.x = -1000;
+        mouse.y = -1000;
+      }
 
-      const dpr = Math.min(window.devicePixelRatio, 2);
-      gl.uniform1f(timeLoc, time * 0.001);
-      gl.uniform2f(mouseLoc, lastMouseX * dpr, lastMouseY * dpr);
+      // 1. Обновление позиций и физики нод
+      nodes.forEach((node) => {
+        node.x += node.vx;
+        node.y += node.vy;
 
-      gl.clearColor(0.04, 0.04, 0.047, 1.0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+        // Мягкий отскок от границ экрана
+        if (node.x < 0 || node.x > window.innerWidth) node.vx *= -1;
+        if (node.y < 0 || node.y > window.innerHeight) node.vy *= -1;
+
+        // Взаимодействие с курсором/пальцем (притяжение к траектории)
+        if (mouse.active) {
+          const dx = mouse.x - node.x;
+          const dy = mouse.y - node.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = 180;
+
+          if (dist < maxDist) {
+            const force = (maxDist - dist) / maxDist;
+            node.x += (dx / dist) * force * 0.8;
+            node.y += (dy / dist) * force * 0.8;
+          }
+        }
+      });
+
+      // 2. Отрисовка связей (Линий цифровой сети)
+      const connectionDist = 140;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n1 = nodes[i];
+          const n2 = nodes[j];
+          const dx = n1.x - n2.x;
+          const dy = n1.y - n2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < connectionDist) {
+            // Альфа-канал зависит от близости нод друг к другу
+            const alpha = (1 - dist / connectionDist) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.strokeStyle = `rgba(0, 255, 179, ${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 3. Отрисовка самих светящихся узлов (Нод)
+      nodes.forEach((node) => {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fillStyle = node.color;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = node.color;
+        ctx.fill();
+        ctx.shadowBlur = 0; // Сброс тени для оптимизации отрисовки линий
+      });
 
       animationFrameId = requestAnimationFrame(render);
     };
 
     animationFrameId = requestAnimationFrame(render);
 
-    // Полная очистка памяти при уходе с экрана
+    // Полное освобождение ресурсов и памяти
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchstart', handleTouchStart);
-      if (gl) {
-        gl.bindBuffer(gl.ARRAY_BUFFER, null);
-        gl.deleteBuffer(positionBuffer);
-        gl.deleteProgram(program);
-        gl.deleteShader(vs);
-        gl.deleteShader(fs);
-      }
+      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchstart', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
     };
   }, []);
 
@@ -195,7 +187,7 @@ export const Hero = () => {
       padding: 'clamp(5rem,12vw,9rem) 1rem clamp(4rem,8vw,6rem)',
     }}>
 
-      {/* WEBGL CANVAS LAYER */}
+      {/* INTERACTIVE DIGITAL ACCELERATED CANVAS */}
       <canvas 
         ref={canvasRef} 
         style={{ 
@@ -204,17 +196,28 @@ export const Hero = () => {
         }} 
       />
 
-      {/* FILM NOISE OVERLAY */}
+      {/* Core base radial glow */}
+      <div style={{
+        position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
+        width: 'clamp(300px,60vw,650px)', height: 'clamp(300px,60vw,650px)',
+        borderRadius: '50%',
+        background: `radial-gradient(circle, ${T.glow} 0%, transparent 70%)`,
+        opacity: 0.9, zIndex: 1, pointerEvents: 'none'
+      }} />
+
+      {/* Cinematic film grain overlay */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <filter id="hero-film-noise">
           <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
           <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.016 0" />
         </filter>
       </svg>
-      <div style={{ position: 'absolute', inset: 0, filter: 'url(#hero-film-noise)', pointerEvents: 'none', zIndex: 1, opacity: 0.6 }} />
+      <div style={{ position: 'absolute', inset: 0, filter: 'url(#hero-film-noise)', pointerEvents: 'none', zIndex: 2, opacity: 0.6 }} />
 
-      {/* UI INFRASTRUCTURE ELEMENTS */}
-      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 2 }}>
+      {/* ───────────────────────────────────────────────────────────────
+          UI TECH INFRASTRUCTURE ELEMENTS
+          ─────────────────────────────────────────────────────────────── */}
+      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 3 }}>
         <div style={{ 
           width: '100%', maxWidth: 1040, height: '70vh', maxHeight: 600,
           position: 'relative', margin: '0 1.5rem',
@@ -227,7 +230,7 @@ export const Hero = () => {
           <span style={{ position: 'absolute', bottom: -6, left: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           <span style={{ position: 'absolute', bottom: -6, right: -6, fontSize: 11, fontFamily: 'monospace', color: 'rgba(255,255,255,0.15)', userSelect: 'none' }}>+</span>
           
-          {/* Status Node */}
+          {/* Top-Left Status Nodes */}
           <div style={{ position: 'absolute', top: 12, left: 16, display: 'flex', gap: 4, opacity: 0.3 }}>
             <div style={{ width: 4, height: 4, borderRadius: '50%', background: T.accent }} />
             <div style={{ width: 12, height: 1, background: 'rgba(255,255,255,0.4)', marginTop: 1.5 }} />
@@ -235,10 +238,12 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* SYNCHRONIZED CONTENT GRAPH */}
+      {/* ───────────────────────────────────────────────────────────────
+          SYNCHRONIZED CONTENT GRAPH
+          ─────────────────────────────────────────────────────────────── */}
       <style>{`
         .hero-content-box {
-          position: relative; z-index: 3; text-align: center; max-width: 960px; width: 100%;
+          position: relative; z-index: 4; text-align: center; max-width: 960px; width: 100%;
         }
         @media (min-width: 1200px) {
           .hero-content-box {
