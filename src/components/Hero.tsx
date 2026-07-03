@@ -50,29 +50,33 @@ export const Hero = () => {
       nodes.push({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.35, // Мягкая скорость дрейфа
+        vx: (Math.random() - 0.5) * 0.35, // Мягкая скорость базового дрейфа
         vy: (Math.random() - 0.5) * 0.35,
         radius: Math.random() * 1.5 + 1,
         color: colors[i % colors.length],
       });
     }
 
+    // Высокоточный перевод экранных координат в локальные координаты Canvas с учетом скролла
+    const updateMouseCoords = (clientX: number, clientY: number) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.targetX = clientX - rect.left;
+      mouse.targetY = clientY - rect.top;
+      mouse.active = true;
+    };
+
     // Слушатели десктопного курсора
     const onMouseMove = (e: MouseEvent) => {
-      mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY;
-      mouse.active = true;
+      updateMouseCoords(e.clientX, e.clientY);
     };
     const onMouseLeave = () => {
       mouse.active = false;
     };
 
-    // Слушатели мобильного тача (iOS / iPadOS)
+    // Слушатели мобильного тача (iOS / iPadOS) с полной стабилизацией при скролле
     const onTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
-        mouse.targetX = e.touches[0].clientX;
-        mouse.targetY = e.touches[0].clientY;
-        mouse.active = true;
+        updateMouseCoords(e.touches[0].clientX, e.touches[0].clientY);
       }
     };
     const onTouchEnd = () => {
@@ -89,14 +93,14 @@ export const Hero = () => {
     const render = () => {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-      // Плавное сглаживание координат курсора/тача
+      // Ускоренное сглаживание координат (0.25 вместо 0.1) — точки догоняют палец мгновенно
       if (mouse.active) {
         if (mouse.x === -1000) {
           mouse.x = mouse.targetX;
           mouse.y = mouse.targetY;
         } else {
-          mouse.x += (mouse.targetX - mouse.x) * 0.1;
-          mouse.y += (mouse.targetY - mouse.y) * 0.1;
+          mouse.x += (mouse.targetX - mouse.x) * 0.25;
+          mouse.y += (mouse.targetY - mouse.y) * 0.25;
         }
       } else {
         mouse.x = -1000;
@@ -112,7 +116,7 @@ export const Hero = () => {
         if (node.x < 0 || node.x > window.innerWidth) node.vx *= -1;
         if (node.y < 0 || node.y > window.innerHeight) node.vy *= -1;
 
-        // Взаимодействие с курсором/пальцем (притяжение к траектории)
+        // Взаимодействие с курсором/пальцем (Мощный спортивный магнитный импульс)
         if (mouse.active) {
           const dx = mouse.x - node.x;
           const dy = mouse.y - node.y;
@@ -121,8 +125,9 @@ export const Hero = () => {
 
           if (dist < maxDist) {
             const force = (maxDist - dist) / maxDist;
-            node.x += (dx / dist) * force * 0.8;
-            node.y += (dy / dist) * force * 0.8;
+            // Коэффициент притяжения увеличен до 2.2 для максимальной резкости и отзывчивости
+            node.x += (dx / dist) * force * 2.2;
+            node.y += (dy / dist) * force * 2.2;
           }
         }
       });
@@ -138,7 +143,6 @@ export const Hero = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < connectionDist) {
-            // Альфа-канал зависит от близости нод друг к другу
             const alpha = (1 - dist / connectionDist) * 0.12;
             ctx.beginPath();
             ctx.moveTo(n1.x, n1.y);
@@ -158,7 +162,7 @@ export const Hero = () => {
         ctx.shadowBlur = 6;
         ctx.shadowColor = node.color;
         ctx.fill();
-        ctx.shadowBlur = 0; // Сброс тени для оптимизации отрисовки линий
+        ctx.shadowBlur = 0;
       });
 
       animationFrameId = requestAnimationFrame(render);
@@ -166,7 +170,7 @@ export const Hero = () => {
 
     animationFrameId = requestAnimationFrame(render);
 
-    // Полное освобождение ресурсов и памяти
+    // Полное освобождение ресурсов и памяти при размонтировании
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resize);
