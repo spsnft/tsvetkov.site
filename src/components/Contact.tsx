@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 export const Contact = () => {
-  const [form, setForm] = useState({ name: '', contact: '', website: '', budget: '' });
+  const [form, setForm] = useState({ contact: '', website: '', budget: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +22,14 @@ export const Contact = () => {
     } catch {
       setStatus('error');
     }
+  };
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault(); // Предотвращаем триггер mailto при клике конкретно на копирование
+    e.stopPropagation();
+    navigator.clipboard.writeText('hi@tsvetkov.site');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const inputStyle: React.CSSProperties = {
@@ -54,7 +63,7 @@ export const Contact = () => {
 
       <div className="contact-grid">
         
-        {/* ЛЕВАЯ КОЛОНКА: ДОВЕРИТЕЛЬНЫЕ B2B КАНАЛЫ */}
+        {/* ЛЕВАЯ КОЛОНКА: ДОВЕРИТЕЛЬНЫЕ B2B КАНАЛЫ СВЯЗИ */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <span style={{ display: 'inline-block', alignSelf: 'flex-start', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact Protocols</span>
           
@@ -68,7 +77,7 @@ export const Contact = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 360 }}>
             
-            {/* Кнопка календаря */}
+            {/* Кнопка Календаря */}
             <motion.a
               href="#book-call" 
               whileHover={{ scale: 1.01, boxShadow: `0 0 30px ${T.glow}` }} whileTap={{ scale: 0.99 }}
@@ -78,7 +87,7 @@ export const Contact = () => {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0C" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </motion.a>
 
-            {/* LinkedIn */}
+            {/* LinkedIn с аккуратной векторной иконкой под общий стиль */}
             <motion.a
               href="https://linkedin.com/in/YOUR_PROFILE"
               target="_blank" rel="noopener noreferrer"
@@ -86,28 +95,56 @@ export const Contact = () => {
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.08)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'background 0.2s, border-color 0.2s' }}
             >
               <span style={{ color: 'rgba(255,255,255,0.85)' }}>Connect on LinkedIn</span>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: T.acc2, letterSpacing: '0.05em' }}>OFFICIAL PRO</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
             </motion.a>
 
-            {/* Email */}
+            {/* Email с исправленной геометрией конверта и кнопкой быстрого копирования */}
             <motion.a
               href="mailto:hi@tsvetkov.site"
               whileHover={{ scale: 1.01, background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.2)' }} whileTap={{ scale: 0.99 }}
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.08)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'background 0.2s, border-color 0.2s' }}
             >
               <span style={{ color: 'rgba(255,255,255,0.85)' }}>hi@tsvetkov.site</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                {/* Кнопка Копирования (Pill-badge дизайн) */}
+                <button
+                  onClick={handleCopyEmail}
+                  style={{
+                    background: 'transparent', padding: '4px 10px', borderRadius: 6,
+                    fontSize: '11px', fontWeight: 700, color: copied ? T.accent : 'rgba(255,255,255,0.4)',
+                    cursor: 'pointer', display: 'inline-flex', alignItems: 'center',
+                    backgroundColor: copied ? 'rgba(0,255,179,0.06)' : 'rgba(255,255,255,0.03)',
+                    border: `1px solid ${copied ? `${T.accent}30` : 'rgba(255,255,255,0.08)'}`,
+                    transition: 'all 0.2s', fontFamily: 'inherit'
+                  }}
+                  onMouseEnter={(e) => { if (!copied) e.currentTarget.style.color = '#fff'; }}
+                  onMouseLeave={(e) => { if (!copied) e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
+                >
+                  {copied ? 'Copied' : 'Copy'}
+                </button>
+
+                {/* Исправленная иконка почты: идеальные стыки без нахлестов линий */}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2"/>
+                  <path d="m3 7 9 6 9-6"/>
+                </svg>
+              </div>
             </motion.a>
 
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА: КВАЛИФИЦИРУЮЩАЯ ФОРМА С ИЗУМРУДНОЙ ПОДСВЕТКОЙ */}
+        {/* ПРАВАЯ КОЛОНКА: ОПТИМИЗИРОВАННАЯ 3-ПОЛЬНАЯ ФОРМА (ИЗУМРУДНЫЙ ТОН) */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ 
             width: '100%',
             background: `linear-gradient(135deg, rgba(12, 12, 15, 0.8) 0%, ${T.accent}03 100%)`, 
-            border: `1px solid ${T.accent}16`, // Изумрудная рамка вместо фиолетовой
+            border: `1px solid ${T.accent}16`, 
             borderRadius: 20, padding: '2rem',
             backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
             boxShadow: `0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
@@ -123,10 +160,6 @@ export const Contact = () => {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Name / Company</label>
-                    <input className="contact-input" type="text" required placeholder="John Doe" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
-                  </div>
                   
                   <div>
                     <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Contact Email</label>
