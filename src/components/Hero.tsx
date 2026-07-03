@@ -16,9 +16,9 @@ export const Hero = () => {
       ref={containerRef} 
       style={{
         minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-        position: 'relative', overflow: 'hidden', // Пункт 3: жесткая обрезка вылетающих пикселей
+        position: 'relative', overflow: 'hidden',
         padding: 'clamp(5rem,12vw,9rem) 1rem clamp(4rem,8vw,6rem)',
-        transform: 'translate3d(0, 0, 0)', WebkitTransform: 'translate3d(0, 0, 0)', // Аппаратное ускорение
+        transform: 'translate3d(0, 0, 0)', WebkitTransform: 'translate3d(0, 0, 0)', // Аппаратное ускорение слоев
       }}
     >
       <style>{`
@@ -29,7 +29,7 @@ export const Hero = () => {
         .hero-left { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .live-tracker { display: none; }
         
-        /* Пункт 2: Смещение скролла выше на мобилке */
+        /* Смещение скролла выше на мобилке */
         .scroll-indicator { position: absolute; bottom: 3rem; display: flex; } 
         
         @media (min-width: 968px) {
@@ -54,14 +54,14 @@ export const Hero = () => {
             <span style={{ background: `linear-gradient(135deg,${T.accent} 0%,${T.acc2} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Engineered to Scale.</span>
           </h1>
 
-          {/* Пункт 4: Разделение подзаголовка на строки */}
+          {/* Разделение подзаголовка на строки */}
           <div style={{ fontSize: 'clamp(1rem,2vw,1.1rem)', color: T.sub, lineHeight: 1.8, marginBottom: '3rem', maxWidth: 520 }}>
             <span style={{ display: 'block' }}>We eliminate chaos in marketing and digital systems.</span>
             <span style={{ display: 'block', color: T.body, fontWeight: 500 }}>No fluff — just high-performance architectures.</span>
             <span style={{ display: 'block', color: T.body, fontWeight: 500 }}>Track every dollar and automate sales flow.</span>
           </div>
 
-          {/* Пункт 1: Кнопка возвращена в исходный вид (градиент + текст) */}
+          {/* Кнопка (градиент + текст) */}
           <a href="#contact" style={{ 
             display: 'inline-flex', padding: '16px 36px', borderRadius: 12, 
             background: `linear-gradient(135deg,${T.accent},${T.acc2})`, 
@@ -73,7 +73,7 @@ export const Hero = () => {
 
         {/* ПРАВАЯ КОЛОНКА (ПК) */}
         <div className="live-tracker">
-          <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16 }}>
+          <div style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, width: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem', fontFamily: 'monospace', fontSize: 10, color: T.muted }}>
               <span>SYSTEM_STATUS: ONLINE</span>
               <span>LIVE_DATA</span>
@@ -92,7 +92,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Пункт 2: Скролл поднят выше */}
+      {/* Скролл */}
       <div className="scroll-indicator" style={{ flexDirection: 'column', alignItems: 'center', gap: 8, zIndex: 10 }}>
         <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.2em', color: T.muted }}>SCROLL</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }} style={{ width: 1, height: 32, background: `linear-gradient(to bottom, ${T.accent}, transparent)` }} />
