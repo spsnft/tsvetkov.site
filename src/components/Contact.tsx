@@ -8,6 +8,7 @@ export const Contact = () => {
   const [form, setForm] = useState({ contact: '', website: '', budget: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [copied, setCopied] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +26,7 @@ export const Contact = () => {
   };
 
   const handleCopyEmail = (e: React.MouseEvent) => {
-    e.preventDefault(); // Предотвращаем триггер mailto при клике конкретно на копирование
+    e.preventDefault();
     e.stopPropagation();
     navigator.clipboard.writeText('hi@tsvetkov.site');
     setCopied(true);
@@ -40,7 +41,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}` }}>
+    <section id="contact" style={{ position: 'relative', padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}` }}>
       
       <style>{`
         .contact-grid {
@@ -51,19 +52,23 @@ export const Contact = () => {
           background: rgba(255,255,255,0.04) !important;
         }
         .contact-select option {
-          background: #0C0C0F;
-          color: #fff;
+          background: #0C0C0F; color: #fff;
         }
         @media (min-width: 868px) {
           .contact-grid {
             grid-template-columns: 1fr 1.1fr; gap: 4rem;
           }
         }
+        /* Фикс скролла внутри встроенного календаря на iOS */
+        .calendar-frame {
+          width: 100%; height: 100%; border: none; background: transparent;
+          -webkit-overflow-scrolling: touch;
+        }
       `}</style>
 
       <div className="contact-grid">
         
-        {/* ЛЕВАЯ КОЛОНКА: ДОВЕРИТЕЛЬНЫЕ B2B КАНАЛЫ СВЯЗИ */}
+        {/* ЛЕВАЯ КОЛОНКА: ИНТЕРАКТИВНЫЕ B2B КАНАЛЫ */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <span style={{ display: 'inline-block', alignSelf: 'flex-start', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact Protocols</span>
           
@@ -77,17 +82,17 @@ export const Contact = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 360 }}>
             
-            {/* Кнопка Календаря */}
-            <motion.a
-              href="#book-call" 
+            {/* Интерактивный триггер вызова поп-апа с календарем */}
+            <motion.button
+              onClick={() => setIsModalOpen(true)}
               whileHover={{ scale: 1.01, boxShadow: `0 0 30px ${T.glow}` }} whileTap={{ scale: 0.99 }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: `linear-gradient(135deg, ${T.accent}, ${T.acc2})`, color: '#0A0A0C', textDecoration: 'none', fontWeight: 700, fontSize: '0.95rem' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: `linear-gradient(135deg, ${T.accent}, ${T.acc2})`, color: '#0A0A0C', fontWeight: 700, fontSize: '0.95rem', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
             >
               <span>Book a 15-Min Strategy Call</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0C" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </motion.a>
+            </motion.button>
 
-            {/* LinkedIn с аккуратной векторной иконкой под общий стиль */}
+            {/* LinkedIn */}
             <motion.a
               href="https://linkedin.com/in/YOUR_PROFILE"
               target="_blank" rel="noopener noreferrer"
@@ -102,7 +107,7 @@ export const Contact = () => {
               </svg>
             </motion.a>
 
-            {/* Email с исправленной геометрией конверта и кнопкой быстрого копирования */}
+            {/* Email + Copy Badger */}
             <motion.a
               href="mailto:hi@tsvetkov.site"
               whileHover={{ scale: 1.01, background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.2)' }} whileTap={{ scale: 0.99 }}
@@ -111,7 +116,6 @@ export const Contact = () => {
               <span style={{ color: 'rgba(255,255,255,0.85)' }}>hi@tsvetkov.site</span>
               
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                {/* Кнопка Копирования (Pill-badge дизайн) */}
                 <button
                   onClick={handleCopyEmail}
                   style={{
@@ -128,7 +132,6 @@ export const Contact = () => {
                   {copied ? 'Copied' : 'Copy'}
                 </button>
 
-                {/* Исправленная иконка почты: идеальные стыки без нахлестов линий */}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="5" width="18" height="14" rx="2"/>
                   <path d="m3 7 9 6 9-6"/>
@@ -139,7 +142,7 @@ export const Contact = () => {
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА: ОПТИМИЗИРОВАННАЯ 3-ПОЛЬНАЯ ФОРМА (ИЗУМРУДНЫЙ ТОН) */}
+        {/* ПРАВАЯ КОЛОНКА: ОПТИМИЗИРОВАННАЯ ФОРМА */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ 
             width: '100%',
@@ -160,7 +163,6 @@ export const Contact = () => {
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  
                   <div>
                     <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Contact Email</label>
                     <input className="contact-input" type="email" required placeholder="john@company.com" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
@@ -200,12 +202,6 @@ export const Contact = () => {
                   >
                     {status === 'sending' ? 'Transmitting…' : 'Submit Audit Request'}
                   </motion.button>
-
-                  {status === 'error' && (
-                    <span style={{ color: '#EF4444', fontSize: '0.8rem', textAlign: 'center', marginTop: '0.25rem' }}>
-                      Transmission failed. Please utilize direct links.
-                    </span>
-                  )}
                 </form>
               )}
             </AnimatePresence>
@@ -213,6 +209,64 @@ export const Contact = () => {
         </div>
 
       </div>
+
+      {/* ───────────────────────────────────────────────────────────────
+          PREMIUM GLASSMORPHIC MODAL INTERFACE (CALENDLY GATEWAY)
+          ─────────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, padding: '1rem' }}>
+            
+            {/* Размытый оверлей заднего плана */}
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              style={{ position: 'absolute', inset: 0, background: 'rgba(5, 5, 7, 0.85)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
+            />
+
+            {/* Контейнер модального окна */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ type: 'spring', duration: 0.4 }}
+              style={{
+                position: 'relative', width: '100%', maxWidth: '840px', height: '90vh', maxHeight: '680px',
+                background: '#0C0C0F', border: `1px solid rgba(0, 255, 179, 0.15)`,
+                borderRadius: 24, display: 'flex', flexDirection: 'column', overflow: 'hidden',
+                boxShadow: '0 30px 60px rgba(0,0,0,0.8), 0 0 50px rgba(0,255,179,0.02)'
+              }}
+            >
+              {/* Шапка модального окна */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.25rem 2rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} />
+                  <span style={{ fontSize: '11px', fontWeight: 700, color: '#fff', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Secure Scheduling Protocol</span>
+                </div>
+                
+                {/* Кнопка закрытия окна (Крестик) */}
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  style={{ background: 'transparent', border: 'none', color: T.muted, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4px', transition: 'color 0.2s' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = T.muted}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+
+              {/* Тело модального окна: Высокопроизводительный инлайн-фрейм календаря */}
+              <div style={{ flex: 1, background: 'transparent', position: 'relative' }}>
+                <iframe 
+                  className="calendar-frame"
+                  // ⚠️ Замени URL ниже на свой прямой инвайт-адрес из личного кабинета Calendly или Cal.com
+                  src="https://calendly.com/YOUR_CALENDLY_USERNAME?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=0c0c0f&text_color=ffffff&primary_color=00ffb3"
+                  title="B2B Strategy Scheduler"
+                />
+              </div>
+            </motion.div>
+
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
