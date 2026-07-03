@@ -43,7 +43,7 @@ const cards = [
 ];
 
 export const Expertise = () => (
-  <section id="expertise" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0 }}>
+  <section id="expertise" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent' }}>
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
       <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3.5rem' }}>
@@ -65,6 +65,7 @@ export const Expertise = () => (
               background: 'rgba(255,255,255,0.02)', border: `1px solid ${T.border}`,
               borderRadius: 20, padding: '1.75rem',
               display: 'flex', flexDirection: 'column', gap: '1.25rem', position: 'relative',
+              backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', // Эффект стекла поверх частиц
             }}>
               {/* Icon + Title row */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
