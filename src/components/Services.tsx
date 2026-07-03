@@ -26,7 +26,6 @@ const offers = [
 
 export const Services = () => (
   <section id="services" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}` }}>
-    {/* Media query for tags layout optimization */}
     <style>{`
       .services-tag-container {
         display: grid;
@@ -61,7 +60,13 @@ export const Services = () => (
             initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ delay: i * 0.1 }}
           >
-            <div style={{ background: 'rgba(255,255,255,0.015)', border: `1px solid ${T.border}`, borderRadius: 20, padding: '2rem', position: 'relative', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
+            <div style={{ 
+              background: `linear-gradient(135deg, rgba(10, 10, 12, 0.75) 0%, ${offer.color}04 100%)`, 
+              border: `1px solid ${offer.color}15`, 
+              borderRadius: 20, padding: '2rem', position: 'relative',
+              backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+              boxShadow: `0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
+            }}>
               {/* Left accent stripe */}
               <div style={{ position: 'absolute', left: 0, top: '15%', bottom: '15%', width: 2.5, borderRadius: 2, background: `linear-gradient(to bottom,${offer.color},${offer.color}44)` }} />
 
