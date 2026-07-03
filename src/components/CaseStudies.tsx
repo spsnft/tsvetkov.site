@@ -29,7 +29,7 @@ export const CaseStudies = () => {
   const [openId, setOpenId] = useState<number | null>(null);
 
   return (
-    <section id="work" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: T.bg0, borderTop: `1px solid ${T.border}` }}>
+    <section id="work" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}` }}>
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
 
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
@@ -52,6 +52,7 @@ export const CaseStudies = () => {
                   borderRadius: 16, padding: '1.5rem 2rem',
                   cursor: 'pointer', userSelect: 'none',
                   transition: 'background 0.3s, border-color 0.3s',
+                  backdropFilter: 'blur(5px)', WebkitBackdropFilter: 'blur(5px)',
                 }}
               >
                 {/* Header row */}
