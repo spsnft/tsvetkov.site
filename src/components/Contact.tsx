@@ -38,10 +38,11 @@ export const Contact = () => {
     background: 'rgba(255,255,255,0.02)', border: `1px solid rgba(255,255,255,0.06)`,
     borderRadius: 10, color: '#fff', fontSize: '0.95rem',
     fontFamily: 'inherit', outline: 'none', transition: 'border-color .2s, background-color .2s',
+    boxSizing: 'border-box' // Фикс: защита полей ввода от выталкивания границ
   };
 
   return (
-    <section id="contact" style={{ position: 'relative', padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}` }}>
+    <section id="contact" style={{ position: 'relative', padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}`, overflow: 'hidden' }}>
       
       <style>{`
         .contact-grid {
@@ -56,6 +57,22 @@ export const Contact = () => {
         }
         .element-wrapper {
           width: 100%; maxWidth: 420px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center;
+          box-sizing: border-box;
+        }
+        /* Тотальный иммунитет ко всем внутренним отступам */
+        .element-wrapper * {
+          box-sizing: border-box !important;
+        }
+        /* Умное адаптивное управление поведением карточки формы */
+        .contact-card {
+          width: 100%; height: auto;
+          background: linear-gradient(135deg, rgba(12, 12, 15, 0.8) 0%, ${T.accent}03 100%); 
+          border: 1px solid ${T.accent}16; 
+          border-radius: 20px; padding: 2.5rem 2rem;
+          backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03);
+          box-sizing: border-box;
+          display: flex; flexDirection: column; justify-content: center;
         }
         @media (min-width: 868px) {
           .contact-grid {
@@ -64,6 +81,9 @@ export const Contact = () => {
           }
           .element-wrapper {
             margin: 0; maxWidth: 100%; height: 100%;
+          }
+          .contact-card {
+            height: 100% !important; /* На ПК идеально тянется до нижнего уровня */
           }
         }
         .calendar-frame {
@@ -140,17 +160,8 @@ export const Contact = () => {
 
         {/* ПРАВАЯ КОЛОНКА */}
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <div className="element-wrapper" style={{ width: '100%', height: '100%' }}>
-            <div style={{ 
-              width: '100%', height: '100%',
-              background: `linear-gradient(135deg, rgba(12, 12, 15, 0.8) 0%, ${T.accent}03 100%)`, 
-              border: `1px solid ${T.accent}16`, 
-              borderRadius: 20, padding: '2.5rem 2rem',
-              backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-              boxShadow: `0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
-              boxSizing: 'border-box',
-              display: 'flex', flexDirection: 'column', justifyContent: 'center'
-            }}>
+          <div className="element-wrapper" style={{ width: '100%' }}>
+            <div className="contact-card">
               <AnimatePresence mode="wait">
                 {status === 'success' ? (
                   <motion.div key="success" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: '2rem' }}>
@@ -161,7 +172,7 @@ export const Contact = () => {
                     <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.5, margin: 0 }}>We have captured your request. Expect intercept within 24 hours.</p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%' }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Contact Email</label>
                       <input className="contact-input" type="email" required placeholder="john@company.com" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
@@ -196,7 +207,7 @@ export const Contact = () => {
                       style={{
                         padding: '14px 28px', borderRadius: 12, border: 'none', fontFamily: 'inherit', fontWeight: 700, fontSize: '0.95rem',
                         cursor: status === 'sending' ? 'not-allowed' : 'pointer', background: '#fff', color: '#0A0A0C',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: '0.5rem'
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: '0.5rem', width: '100%'
                       }}
                     >
                       {status === 'sending' ? 'Transmitting…' : 'Submit Audit Request'}
