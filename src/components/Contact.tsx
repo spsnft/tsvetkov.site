@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 export const Contact = () => {
-  const [form, setForm] = useState({ name: '', contact: '' });
+  const [form, setForm] = useState({ name: '', contact: '', website: '', budget: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,6 +41,10 @@ export const Contact = () => {
           border-color: ${T.accent}50 !important;
           background: rgba(255,255,255,0.04) !important;
         }
+        .contact-select option {
+          background: #0C0C0F;
+          color: #fff;
+        }
         @media (min-width: 868px) {
           .contact-grid {
             grid-template-columns: 1fr 1.1fr; gap: 4rem;
@@ -50,7 +54,7 @@ export const Contact = () => {
 
       <div className="contact-grid">
         
-        {/* ЛЕВАЯ КОЛОНКА: ПРЕЗЕНТАЦИЯ ФАНДЕРА И ПРЯМЫЕ КАНАЛЫ (TRUST LOOP) */}
+        {/* ЛЕВАЯ КОЛОНКА: ДОВЕРИТЕЛЬНЫЕ B2B КАНАЛЫ */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <span style={{ display: 'inline-block', alignSelf: 'flex-start', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact Protocols</span>
           
@@ -62,13 +66,11 @@ export const Contact = () => {
             Choose your preferred communication node. We baseline operations within 24 hours. No fluff, no endless alignment loops.
           </p>
 
-          {/* Стек B2B-каналов связи */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: 360 }}>
             
-            {/* 1. Бронирование звонка (Основной B2B триггер) */}
+            {/* Кнопка календаря */}
             <motion.a
-              href="https://calendly.com/YOUR_LINK" // Сюда потом вставишь Calendly или Cal.com
-              target="_blank" rel="noopener noreferrer"
+              href="#book-call" 
               whileHover={{ scale: 1.01, boxShadow: `0 0 30px ${T.glow}` }} whileTap={{ scale: 0.99 }}
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: `linear-gradient(135deg, ${T.accent}, ${T.acc2})`, color: '#0A0A0C', textDecoration: 'none', fontWeight: 700, fontSize: '0.95rem' }}
             >
@@ -76,9 +78,9 @@ export const Contact = () => {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0C" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </motion.a>
 
-            {/* 2. LinkedIn (Пруф экспертности) */}
+            {/* LinkedIn */}
             <motion.a
-              href="https://linkedin.com/in/YOUR_PROFILE" // Твой личный линкедин
+              href="https://linkedin.com/in/YOUR_PROFILE"
               target="_blank" rel="noopener noreferrer"
               whileHover={{ scale: 1.01, background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.2)' }} whileTap={{ scale: 0.99 }}
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.08)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'background 0.2s, border-color 0.2s' }}
@@ -87,9 +89,9 @@ export const Contact = () => {
               <span style={{ fontSize: '0.75rem', fontWeight: 700, color: T.acc2, letterSpacing: '0.05em' }}>OFFICIAL PRO</span>
             </motion.a>
 
-            {/* 3. Корпоративный Email */}
+            {/* Email */}
             <motion.a
-              href="mailto:hi@tsvetkov.site" // Твоя рабочая почта
+              href="mailto:hi@tsvetkov.site"
               whileHover={{ scale: 1.01, background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.2)' }} whileTap={{ scale: 0.99 }}
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.08)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'background 0.2s, border-color 0.2s' }}
             >
@@ -100,12 +102,12 @@ export const Contact = () => {
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА: СТИЛИЗОВАННАЯ ФОРМА (DATA ARCHITECTURE) */}
+        {/* ПРАВАЯ КОЛОНКА: КВАЛИФИЦИРУЮЩАЯ ФОРМА С ИЗУМРУДНОЙ ПОДСВЕТКОЙ */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ 
             width: '100%',
-            background: `linear-gradient(135deg, rgba(12, 12, 15, 0.8) 0%, #C084FC03 100%)`, 
-            border: `1px solid rgba(192, 132, 252, 0.16)`, // Фиолетовый оттенок стекла под форму
+            background: `linear-gradient(135deg, rgba(12, 12, 15, 0.8) 0%, ${T.accent}03 100%)`, 
+            border: `1px solid ${T.accent}16`, // Изумрудная рамка вместо фиолетовой
             borderRadius: 20, padding: '2rem',
             backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
             boxShadow: `0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
@@ -125,9 +127,32 @@ export const Contact = () => {
                     <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Name / Company</label>
                     <input className="contact-input" type="text" required placeholder="John Doe" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
                   </div>
+                  
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Secure Corporate Contact (Email)</label>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Contact Email</label>
                     <input className="contact-input" type="email" required placeholder="john@company.com" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Website / Socials</label>
+                    <input className="contact-input" type="text" required placeholder="company.com or linkedin.com/in/..." value={form.website} onChange={e => setForm(p => ({ ...p, website: e.target.value }))} style={inputStyle} />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Monthly Ad Budget</label>
+                    <select 
+                      className="contact-input contact-select" 
+                      required 
+                      value={form.budget} 
+                      onChange={e => setForm(p => ({ ...p, budget: e.target.value }))} 
+                      style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
+                    >
+                      <option value="" disabled hidden>Select your budget range</option>
+                      <option value="under-5k">Under $5,000 / mo</option>
+                      <option value="5k-20k">$5,000 - $20,000 / mo</option>
+                      <option value="20k-50k">$20,000 - $50,000 / mo</option>
+                      <option value="50k-plus">$50,000+ / mo</option>
+                    </select>
                   </div>
 
                   <motion.button
