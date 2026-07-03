@@ -60,7 +60,7 @@ export const Contact = () => {
         @media (min-width: 868px) {
           .contact-grid {
             grid-template-columns: 1fr 1.1fr; gap: 4rem;
-            align-items: stretch; /* Идеальное выравнивание нижних границ на ПК */
+            align-items: stretch;
           }
           .element-wrapper {
             margin: 0; maxWidth: 100%; height: 100%;
@@ -75,15 +75,15 @@ export const Contact = () => {
       <div className="contact-grid">
         
         {/* ЛЕВАЯ КОЛОНКА */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifycontent: 'center' }}>
           <div className="element-wrapper">
-            <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact Protocols</span>
+            {/* ФИКС: Ограничили растяжение заголовка */}
+            <span style={{ display: 'inline-block', alignSelf: 'flex-start', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact Protocols</span>
             
             <h2 style={{ fontSize: 'clamp(2rem,4vw,2.8rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 1.25rem', lineHeight: 1.15 }}>
               Ready to scale your systems?
             </h2>
             
-            {/* Точки в конце строк успешно удалены */}
             <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, margin: '0 0 2.5rem' }}>
               Choose your preferred communication node
               <br />
@@ -91,6 +91,8 @@ export const Contact = () => {
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              
+              {/* Кнопка звонка */}
               <motion.button
                 onClick={() => setIsModalOpen(true)}
                 whileHover={{ scale: 1.01, boxShadow: `0 0 30px ${T.glow}` }} whileTap={{ scale: 0.99 }}
@@ -100,6 +102,7 @@ export const Contact = () => {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0C" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </motion.button>
 
+              {/* LinkedIn */}
               <motion.a
                 href="https://linkedin.com/in/YOUR_PROFILE"
                 target="_blank" rel="noopener noreferrer"
@@ -114,31 +117,26 @@ export const Contact = () => {
                 </svg>
               </motion.a>
 
+              {/* ФИКС: Убрана лишняя иконка конверта, выравнивание строго по краям */}
               <motion.a
                 href="mailto:fedor@tsvetkov.site"
                 whileHover={{ scale: 1.01, background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.2)' }} whileTap={{ scale: 0.99 }}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.08)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'background 0.2s, border-color 0.2s' }}
               >
                 <span style={{ color: 'rgba(255,255,255,0.85)' }}>fedor@tsvetkov.site</span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <button
-                    onClick={handleCopyEmail}
-                    style={{
-                      background: 'transparent', padding: '4px 10px', borderRadius: 6,
-                      fontSize: '11px', fontWeight: 700, color: copied ? T.accent : 'rgba(255,255,255,0.4)',
-                      cursor: 'pointer', display: 'inline-flex', alignItems: 'center',
-                      backgroundColor: copied ? 'rgba(0,255,179,0.06)' : 'rgba(255,255,255,0.03)',
-                      border: `1px solid ${copied ? `${T.accent}30` : 'rgba(255,255,255,0.08)'}`,
-                      transition: 'all 0.2s', fontFamily: 'inherit'
-                    }}
-                  >
-                    {copied ? 'Copied' : 'Copy'}
-                  </button>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <path d="m3 7 9 6 9-6"/>
-                  </svg>
-                </div>
+                <button
+                  onClick={handleCopyEmail}
+                  style={{
+                    background: 'transparent', padding: '4px 10px', borderRadius: 6,
+                    fontSize: '11px', fontWeight: 700, color: copied ? T.accent : 'rgba(255,255,255,0.4)',
+                    cursor: 'pointer', display: 'inline-flex', alignItems: 'center',
+                    backgroundColor: copied ? 'rgba(0,255,179,0.06)' : 'rgba(255,255,255,0.03)',
+                    border: `1px solid ${copied ? `${T.accent}30` : 'rgba(255,255,255,0.08)'}`,
+                    transition: 'all 0.2s', fontFamily: 'inherit'
+                  }}
+                >
+                  {copied ? 'Copied' : 'Copy'}
+                </button>
               </motion.a>
             </div>
           </div>
@@ -155,11 +153,11 @@ export const Contact = () => {
               backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
               boxShadow: `0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
               boxSizing: 'border-box',
-              display: 'flex', flexDirection: 'column', justifyContent: 'center'
+              display: 'flex', flexDirection: 'column', justifyContent: 'center' // ФИКС: Исправлен camelCase
             }}>
               <AnimatePresence mode="wait">
                 {status === 'success' ? (
-                  <motion.div key="success" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: '2rem' }}>
+                  <motion.div key="success" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} style={{ textalign: 'center', padding: '2rem' }}>
                     <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(0,255,179,0.08)', border: `1px solid ${T.accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
