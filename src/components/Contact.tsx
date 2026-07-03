@@ -55,15 +55,15 @@ export const Contact = () => {
           background: #0C0C0F; color: #fff;
         }
         .element-wrapper {
-          width: 100%; maxWidth: 420px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center;
+          width: 100%; maxWidth: 420px; margin: 0 auto;
         }
         @media (min-width: 868px) {
           .contact-grid {
             grid-template-columns: 1fr 1.1fr; gap: 4rem;
-            align-items: stretch; /* Идеальное выравнивание нижних границ на ПК */
+            align-items: center; /* ПУНКТ 4: Вертикальное центрирование формы на ПК */
           }
           .element-wrapper {
-            margin: 0; maxWidth: 100%; height: 100%;
+            margin: 0; maxWidth: 100%; /* На ПК расправляем на всю ширину колонки */
           }
         }
         .calendar-frame {
@@ -83,11 +83,11 @@ export const Contact = () => {
               Ready to scale your systems?
             </h2>
             
-            {/* Точки в конце строк успешно удалены */}
+            {/* ПУНКТ 3: Чистый текст, разбитый на 2 строки */}
             <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, margin: '0 0 2.5rem' }}>
-              Choose your preferred communication node
+              Choose your preferred communication node.
               <br />
-              We baseline operations within 24 hours
+              We baseline operations within 24 hours.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -144,18 +144,18 @@ export const Contact = () => {
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА */}
+        {/* ПРАВАЯ КОЛОНКА: ИДЕАЛЬНО ВЫРОВНЕННАЯ ФОРМА */}
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <div className="element-wrapper" style={{ width: '100%', height: '100%' }}>
+          {/* ПУНКТ 5: Обернули форму в элемент с общим max-width для идеального схождения линий на мобилке */}
+          <div className="element-wrapper" style={{ width: '100%' }}>
             <div style={{ 
-              width: '100%', height: '100%',
+              width: '100%',
               background: `linear-gradient(135deg, rgba(12, 12, 15, 0.8) 0%, ${T.accent}03 100%)`, 
               border: `1px solid ${T.accent}16`, 
-              borderRadius: 20, padding: '2.5rem 2rem',
+              borderRadius: 20, padding: '2rem',
               backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
               boxShadow: `0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
-              boxSizing: 'border-box',
-              display: 'flex', flexDirection: 'column', justifyContent: 'center'
+              boxSizing: 'border-box'
             }}>
               <AnimatePresence mode="wait">
                 {status === 'success' ? (
