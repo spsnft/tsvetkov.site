@@ -75,9 +75,8 @@ export const Contact = () => {
       <div className="contact-grid">
         
         {/* ЛЕВАЯ КОЛОНКА */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifycontent: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <div className="element-wrapper">
-            {/* ФИКС: Ограничили растяжение заголовка */}
             <span style={{ display: 'inline-block', alignSelf: 'flex-start', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Contact Protocols</span>
             
             <h2 style={{ fontSize: 'clamp(2rem,4vw,2.8rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 1.25rem', lineHeight: 1.15 }}>
@@ -92,7 +91,6 @@ export const Contact = () => {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               
-              {/* Кнопка звонка */}
               <motion.button
                 onClick={() => setIsModalOpen(true)}
                 whileHover={{ scale: 1.01, boxShadow: `0 0 30px ${T.glow}` }} whileTap={{ scale: 0.99 }}
@@ -102,7 +100,6 @@ export const Contact = () => {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0C" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </motion.button>
 
-              {/* LinkedIn */}
               <motion.a
                 href="https://linkedin.com/in/YOUR_PROFILE"
                 target="_blank" rel="noopener noreferrer"
@@ -117,7 +114,6 @@ export const Contact = () => {
                 </svg>
               </motion.a>
 
-              {/* ФИКС: Убрана лишняя иконка конверта, выравнивание строго по краям */}
               <motion.a
                 href="mailto:fedor@tsvetkov.site"
                 whileHover={{ scale: 1.01, background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.2)' }} whileTap={{ scale: 0.99 }}
@@ -153,11 +149,11 @@ export const Contact = () => {
               backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
               boxShadow: `0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
               boxSizing: 'border-box',
-              display: 'flex', flexDirection: 'column', justifyContent: 'center' // ФИКС: Исправлен camelCase
+              display: 'flex', flexDirection: 'column', justifyContent: 'center'
             }}>
               <AnimatePresence mode="wait">
                 {status === 'success' ? (
-                  <motion.div key="success" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} style={{ textalign: 'center', padding: '2rem' }}>
+                  <motion.div key="success" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: '2rem' }}>
                     <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(0,255,179,0.08)', border: `1px solid ${T.accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
