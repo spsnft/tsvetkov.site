@@ -47,12 +47,16 @@ export const CaseStudies = () => {
                 key={c.id}
                 onClick={() => setOpenId(isOpen ? null : c.id)}
                 style={{
-                  background: isOpen ? 'rgba(255,255,255,0.025)' : 'rgba(255,255,255,0.01)',
-                  border: `1px solid ${isOpen ? `${c.color}45` : T.border}`,
+                  // Усиленный бэкграунд и неоновый ховер-бордер при раскрытии кейса
+                  background: isOpen 
+                    ? `linear-gradient(135deg, rgba(14, 14, 18, 0.85) 0%, ${c.color}06 100%)` 
+                    : `linear-gradient(135deg, rgba(10, 10, 12, 0.75) 0%, ${c.color}02 100%)`,
+                  border: `1px solid ${isOpen ? `${c.color}35` : `${c.color}12`}`,
                   borderRadius: 16, padding: '1.5rem 2rem',
                   cursor: 'pointer', userSelect: 'none',
-                  transition: 'background 0.3s, border-color 0.3s',
-                  backdropFilter: 'blur(5px)', WebkitBackdropFilter: 'blur(5px)',
+                  transition: 'background 0.3s, border-color 0.3s, box-shadow 0.3s',
+                  backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
+                  boxShadow: isOpen ? `0 15px 40px rgba(0,0,0,0.6)` : `0 4px 20px rgba(0,0,0,0.3)`,
                 }}
               >
                 {/* Header row */}
