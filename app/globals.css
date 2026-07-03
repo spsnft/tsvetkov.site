@@ -4,12 +4,19 @@
 
 *,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
 
+/* Железобетонная фиксация вьюпорта от боковых сдвигов и багов Safari */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  position: relative;
+}
+
 html { scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale; }
 
 body {
   background:#0A0A0C;
   color:#fff;
-  overflow-x:hidden;
   font-family:'Space Grotesk',system-ui,sans-serif;
 }
 
