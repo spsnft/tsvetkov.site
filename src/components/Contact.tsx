@@ -262,7 +262,7 @@ export const Contact = () => {
               <div style={{ flex: 1, position: 'relative' }}>
                 <iframe 
                   className="calendar-frame"
-                  src="https://calendly.com/YOUR_CALENDLY_USERNAME?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=0c0c0f&text_color=ffffff&primary_color=00ffb3"
+                  src="https://calendly.com/fediatsvetkov/15min?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=0c0c0f&text_color=ffffff&primary_color=00ffb3"
                   title="B2B Strategy Scheduler"
                 />
               </div>
