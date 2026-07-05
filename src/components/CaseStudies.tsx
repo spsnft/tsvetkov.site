@@ -8,24 +8,23 @@ const cases = [
   {
     id: 1, industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
     title: 'Performance Infrastructure Scaling', color: T.accent,
-    // ИСПРАВЛЕНО: Текст ужат в финале, убрано "across departments"
-    problem: 'Lack of end-to-end CRM and analytics synchronization, chaotic marketing campaigns, and critical cross-department lead leakage.',
+    // ИСПРАВЛЕНО: analytics sync и lead leaks вместо длинных аналогов
+    problem: 'Lack of end-to-end CRM and analytics sync, chaotic marketing campaigns, and severe cross-department lead leaks.',
     solution: 'Deployed a transparent data infrastructure, implemented full-funnel tracking, and optimized unit economics for actual margin rather than empty clicks.',
   },
   {
     id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CUSTOMER ACQUISITION COST',
     title: 'Global User Acquisition Optimization', color: T.acc2,
     problem: 'Aggressive, overheated competition in the US and EU markets burning ad budgets, and a high baseline CAC.',
-    // ИСПРАВЛЕНО: Заменено громоздкое "conversion rates" на лаконичное "conversions"
-    solution: 'Launched a precision targeting system based on behavioral factors, restructured auction logic, and optimized landing page conversions.',
+    // ИСПРАВЛЕНО: Упаковано в behavior-driven и сокращено landing page до page
+    solution: 'Launched behavior-driven precision targeting, restructured auction logic, and optimized page conversions.',
   },
   {
     id: 3, industry: 'B2B Manufacturing', highlight: '1,000+', suffix: 'LEADS/MO',
     title: 'Digital Inbound Expansion Protocol', color: '#C084FC',
-    // ИСПРАВЛЕНО: Убрано лишнее "business", "from digital channels" заменено на "digital inbound flow"
     problem: 'Complete reliance on offline sales, zero digital inbound flow, and lack of systematic B2B lead qualification.',
-    // ИСПРАВЛЕНО: Длинное "international" заменено на емкое и премиальное "global"
-    solution: 'Digitized acquisition from scratch, built automated lead routing funnels, and scaled omnichannel capture across 40+ global markets.',
+    // ИСПРАВЛЕНО: Убрано from scratch и funnels для разгрузки финала строки
+    solution: 'Digitized acquisition, automated lead routing, and scaled omnichannel capture across 40+ global markets.',
   },
 ];
 
@@ -38,8 +37,6 @@ export const CaseStudies = () => {
 
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
           <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
-          
-          {/* ИСПРАВЛЕНО: Точка в конце заголовка удалена по аналогии со всем сайтом */}
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
             Results that speak<br />for themselves
           </h2>
