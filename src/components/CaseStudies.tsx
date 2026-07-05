@@ -8,8 +8,8 @@ const cases = [
   {
     id: 1, industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
     title: 'Performance Infrastructure Scaling', color: T.accent,
-    // ИСПРАВЛЕНО: Максимально плотный и емкий текст, чтобы "leaks" не выпадало на ПК
-    problem: 'Lack of end-to-end CRM & analytics sync, chaotic marketing, and cross-department lead leaks.',
+    // ИСПРАВЛЕНО: Добавили operations, чтобы вытолкнуть целую фразу на новую строку и убрать одинокое выпадение
+    problem: 'Lack of end-to-end CRM & analytics sync, chaotic marketing operations, and cross-department lead leaks.',
     solution: 'Deployed a transparent data infrastructure, implemented full-funnel tracking, and optimized unit economics for actual margin rather than empty clicks.',
   },
   {
