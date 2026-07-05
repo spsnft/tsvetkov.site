@@ -30,11 +30,13 @@ export const Hero = () => {
         .live-tracker { display: none; }
         .scroll-indicator { position: absolute; bottom: 3rem; display: flex; } 
         
-        /* Умный перенос: работает на мобилках, исчезает на ПК */
-        .mobile-br { display: block; }
+        /* Умное сокращение строки: скрываем/показываем нужную длину текста */
+        .dt-only { display: inline; }
+        .mb-only { display: none; }
         
-        @media (min-width: 640px) {
-          .mobile-br { display: none; }
+        @media (max-width: 967px) {
+          .dt-only { display: none; }
+          .mb-only { display: inline; white-space: nowrap; }
         }
         
         @media (min-width: 968px) {
@@ -50,19 +52,23 @@ export const Hero = () => {
 
       <div className="hero-grid">
         <motion.div className="hero-left" style={{ y, opacity }}>
+          {/* Исправлено: без слова GROWTH */}
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 999, marginBottom: '2rem', fontSize: 10, fontWeight: 700, color: T.accent, background: 'rgba(0,255,179,0.05)', border: `1px solid ${T.accent}20`, letterSpacing: '0.15em' }}>
-            TSVETKOV <div style={{ width: 5, height: 5, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} /> FOUNDER-LED GROWTH AGENCY
+            TSVETKOV <div style={{ width: 5, height: 5, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} /> FOUNDER-LED AGENCY
           </span>
 
+          {/* Исправлено: без точек в конце строк */}
           <h1 style={{ fontSize: 'clamp(2.1rem,6.5vw,4.8rem)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-0.04em', color: '#fff', marginBottom: '2rem' }}>
-            Value Growth.<br />
-            <span style={{ background: `linear-gradient(135deg,${T.accent} 0%,${T.acc2} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Engineered to Scale.</span>
+            Value Growth<br />
+            <span style={{ background: `linear-gradient(135deg,${T.accent} 0%,${T.acc2} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Engineered to Scale</span>
           </h1>
 
-          {/* ПУНКТ 1 и 4: Перенесли T.body и weight 500 на родителя, чтобы все 3 строки были одинаково яркими */}
-          {/* ПУНКТ 2: Точки из концов всех предложений успешно удалены */}
           <div style={{ fontSize: 'clamp(1rem,2vw,1.1rem)', color: T.body, fontWeight: 500, lineHeight: 1.8, marginBottom: '3rem', maxWidth: 520 }}>
-            <span style={{ display: 'block' }}>We eliminate chaos in <br className="mobile-br" />marketing and digital systems</span>
+            {/* Исправлено: на мобилках строка сокращается и встает строго в один ряд */}
+            <span style={{ display: 'block' }}>
+              <span className="dt-only">We eliminate chaos in marketing and digital systems</span>
+              <span className="mb-only">We eliminate marketing & digital chaos</span>
+            </span>
             <span style={{ display: 'block' }}>No fluff — just high-performance architectures</span>
             <span style={{ display: 'block' }}>Track every dollar and automate sales flow</span>
           </div>
