@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 export const Contact = () => {
-  const [form, setForm] = useState({ contact: '', website: '', budget: '' });
+  // ИСПРАВЛЕНО: Добавлено поле name в стейт формы
+  const [form, setForm] = useState({ name: '', contact: '', website: '', budget: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [copied, setCopied] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +39,7 @@ export const Contact = () => {
     background: 'rgba(255,255,255,0.02)', border: `1px solid rgba(255,255,255,0.06)`,
     borderRadius: 10, color: '#fff', fontSize: '0.95rem',
     fontFamily: 'inherit', outline: 'none', transition: 'border-color .2s, background-color .2s',
-    boxSizing: 'border-box' // Фикс: защита полей ввода от выталкивания границ
+    boxSizing: 'border-box'
   };
 
   return (
@@ -46,7 +47,7 @@ export const Contact = () => {
       
       <style>{`
         .contact-grid {
-          display: grid; grid-template-columns: 1fr; gap: 3rem; width: 100%; maxWidth: 1000px; margin: 0 auto;
+          display: grid; grid-template-columns: 1fr; gap: 3rem; width: 100%; max-width: 1000px; margin: 0 auto;
         }
         .contact-input:focus {
           border-color: ${T.accent}50 !important;
@@ -56,14 +57,12 @@ export const Contact = () => {
           background: #0C0C0F; color: #fff;
         }
         .element-wrapper {
-          width: 100%; maxWidth: 420px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center;
+          width: 100%; max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center;
           box-sizing: border-box;
         }
-        /* Тотальный иммунитет ко всем внутренним отступам */
         .element-wrapper * {
           box-sizing: border-box !important;
         }
-        /* Умное адаптивное управление поведением карточки формы */
         .contact-card {
           width: 100%; height: auto;
           background: linear-gradient(135deg, rgba(12, 12, 15, 0.8) 0%, ${T.accent}03 100%); 
@@ -72,7 +71,7 @@ export const Contact = () => {
           backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
           box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03);
           box-sizing: border-box;
-          display: flex; flexDirection: column; justify-content: center;
+          display: flex; flex-direction: column; justify-content: center;
         }
         @media (min-width: 868px) {
           .contact-grid {
@@ -80,10 +79,10 @@ export const Contact = () => {
             align-items: stretch;
           }
           .element-wrapper {
-            margin: 0; maxWidth: 100%; height: 100%;
+            margin: 0; max-width: 100%; height: 100%;
           }
           .contact-card {
-            height: 100% !important; /* На ПК идеально тянется до нижнего уровня */
+            height: 100% !important;
           }
         }
         .calendar-frame {
@@ -173,6 +172,12 @@ export const Contact = () => {
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%' }}>
+                    {/* ИСПРАВЛЕНО: Добавлено поле Contact Name */}
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Your Name</label>
+                      <input className="contact-input" type="text" required placeholder="John Doe" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
+                    </div>
+
                     <div>
                       <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Contact Email</label>
                       <input className="contact-input" type="email" required placeholder="john@company.com" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
@@ -180,11 +185,13 @@ export const Contact = () => {
 
                     <div>
                       <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Website / Socials</label>
-                      <input className="contact-input" type="text" required placeholder="company.com or linkedin.com/in/..." value={form.website} onChange={e => setForm(p => ({ ...p, website: e.target.value }))} style={inputStyle} />
+                      {/* ИСПРАВЛЕНО: Компактная чистая подсказка */}
+                      <input className="contact-input" type="text" required placeholder="company.com or @company" value={form.website} onChange={e => setForm(p => ({ ...p, website: e.target.value }))} style={inputStyle} />
                     </div>
 
                     <div>
                       <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Monthly Ad Budget</label>
+                      {/* ИСПРАВЛЕНО: Демократичные понятные диапазоны бюджетов */}
                       <select 
                         className="contact-input contact-select" 
                         required 
@@ -193,10 +200,10 @@ export const Contact = () => {
                         style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
                       >
                         <option value="" disabled hidden>Select your budget range</option>
-                        <option value="under-5k">Under $5,000 / mo</option>
-                        <option value="5k-20k">$5,000 - $20,000 / mo</option>
-                        <option value="20k-50k">$20,000 - $50,000 / mo</option>
-                        <option value="50k-plus">$50,000+ / mo</option>
+                        <option value="under-3k">Under $3,000 / mo</option>
+                        <option value="3k-10k">$3,000 - $10,000 / mo</option>
+                        <option value="10k-25k">$10,000 - $25,000 / mo</option>
+                        <option value="25k-plus">$25,000+ / mo</option>
                       </select>
                     </div>
 
