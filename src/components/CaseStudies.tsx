@@ -8,22 +8,20 @@ const cases = [
   {
     id: 1, industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
     title: 'Performance Infrastructure Scaling', color: T.accent,
-    // ИСПРАВЛЕНО: analytics sync и lead leaks вместо длинных аналогов
-    problem: 'Lack of end-to-end CRM and analytics sync, chaotic marketing campaigns, and severe cross-department lead leaks.',
+    // ИСПРАВЛЕНО: Максимально плотный и емкий текст, чтобы "leaks" не выпадало на ПК
+    problem: 'Lack of end-to-end CRM & analytics sync, chaotic marketing, and cross-department lead leaks.',
     solution: 'Deployed a transparent data infrastructure, implemented full-funnel tracking, and optimized unit economics for actual margin rather than empty clicks.',
   },
   {
     id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CUSTOMER ACQUISITION COST',
     title: 'Global User Acquisition Optimization', color: T.acc2,
     problem: 'Aggressive, overheated competition in the US and EU markets burning ad budgets, and a high baseline CAC.',
-    // ИСПРАВЛЕНО: Упаковано в behavior-driven и сокращено landing page до page
     solution: 'Launched behavior-driven precision targeting, restructured auction logic, and optimized page conversions.',
   },
   {
     id: 3, industry: 'B2B Manufacturing', highlight: '1,000+', suffix: 'LEADS/MO',
     title: 'Digital Inbound Expansion Protocol', color: '#C084FC',
     problem: 'Complete reliance on offline sales, zero digital inbound flow, and lack of systematic B2B lead qualification.',
-    // ИСПРАВЛЕНО: Убрано from scratch и funnels для разгрузки финала строки
     solution: 'Digitized acquisition, automated lead routing, and scaled omnichannel capture across 40+ global markets.',
   },
 ];
