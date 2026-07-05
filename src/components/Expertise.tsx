@@ -49,8 +49,10 @@ export const Expertise = () => (
 
       <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3.5rem' }}>
         <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Expertise</span>
+        
+        {/* ИСПРАВЛЕНО: Точки в конце строк удалены для визуальной чистоты */}
         <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
-          Three pillars.<br />One scalable machine.
+          Three pillars<br />One scalable machine
         </h2>
       </motion.div>
 
@@ -63,21 +65,31 @@ export const Expertise = () => (
           >
             <div style={{
               height: '100%', minHeight: 250,
-              // Глубокий темный микс + 2% цветного напыления на дне
               background: `linear-gradient(135deg, rgba(10, 10, 12, 0.75) 0%, ${card.color}05 100%)`, 
-              // Подкрашенная неоновая рамка для high-tech эффекта
               border: `1px solid ${card.color}18`, 
               borderRadius: 20, padding: '1.75rem',
               display: 'flex', flexDirection: 'column', gap: '1.25rem', position: 'relative',
               backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
               boxShadow: `0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
             }}>
-              {/* Icon + Title row */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              {/* Row: Icon + Title */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%' }}>
                 <div style={{ width: 44, height: 44, borderRadius: 10, background: `${card.color}10`, border: `1px solid ${card.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   {card.icon}
                 </div>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>{card.title}</h3>
+                
+                {/* ИСПРАВЛЕНО: Шрифт с clamp, отрицательный трекинг и жесткий nowrap удерживают строку цельной */}
+                <h3 style={{ 
+                  fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', 
+                  fontWeight: 700, 
+                  color: '#fff', 
+                  margin: 0, 
+                  lineHeight: 1.3,
+                  whiteSpace: 'nowrap',
+                  letterSpacing: '-0.02em'
+                }}>
+                  {card.title}
+                </h3>
               </div>
 
               <p style={{ fontSize: '0.85rem', color: T.muted, margin: 0, lineHeight: 1.4 }}>{card.desc}</p>
