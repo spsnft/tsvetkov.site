@@ -13,7 +13,8 @@ const offers = [
   {
     num: '02', color: T.acc2,
     title: 'Precision Ad Scaling',
-    copy: "We manage ad campaigns where every single dollar is tracked — stopping the budget bleed, cutting out what doesn't work, and doubling down on channels that actually bring paying clients to grow your bottom line.",
+    // ИСПРАВЛЕНО: Текст стал емким, убраны длинные обороты, чтобы избежать висящих слов
+    copy: "We manage ad campaigns where every single dollar is tracked — stopping budget leaks, cutting waste, and scaling the exact channels that bring paying clients.",
     tags: ['Paid Media', 'ROAS Opt', 'Multi-channel', 'Funnel Tracking'],
   },
   {
@@ -47,8 +48,10 @@ export const Services = () => (
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
+          
+          {/* ИСПРАВЛЕНО: Точки в конце строк удалены по аналогии с остальным сайтом */}
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
-            Three protocols.<br />Measurable results.
+            Three protocols<br />Measurable results
           </h2>
         </motion.div>
       </div>
