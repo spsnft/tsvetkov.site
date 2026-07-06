@@ -28,7 +28,7 @@ export const Hero = () => {
         }
         .hero-left { display: flex; flex-direction: column; align-items: center; text-align: center; }
         
-        /* Правая колонка: Карта потоков данных */
+        /* Правая колонка: Кибер-терминал */
         .hero-right { display: none; }
         .scroll-indicator { position: absolute; bottom: 3rem; display: flex; } 
         
@@ -41,46 +41,48 @@ export const Hero = () => {
         }
         
         @media (min-width: 968px) {
-          .hero-grid { grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+          .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
           .hero-left { align-items: flex-start; text-align: left; }
           .hero-right { display: flex; width: 100%; }
           .scroll-indicator { display: none !important; }
         }
 
-        /* Высокотехнологичная интерактивная карточка-планшет */
-        .blueprint-card {
+        /* Окно терминала с эффектом стеклянного прибора */
+        .terminal-box {
           position: relative; width: 100%;
-          background: linear-gradient(135deg, rgba(12, 12, 15, 0.7) 0%, rgba(255, 255, 255, 0.01) 100%);
-          border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px;
-          padding: 1.5rem; box-sizing: border-box; overflow: hidden;
-          backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02);
-          background-image: 
-            linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-          background-size: 20px 20px;
+          background: rgba(10, 10, 12, 0.8);
+          border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 14px;
+          box-sizing: border-box; overflow: hidden;
+          backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
         }
 
-        /* Бегущие линии передачи информации */
-        .flow-line {
-          animation: flowAnimation 1.5s linear infinite;
+        /* Анимация бегущей строки логов консоли */
+        .log-stream {
+          display: flex; flex-direction: column; gap: 6px;
+          animation: scrollLogs 18s linear infinite;
         }
 
-        @keyframes flowAnimation {
-          to {
-            stroke-dashoffset: -18;
-          }
+        @keyframes scrollLogs {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
         }
 
-        /* Пульсация узлов накопления */
-        @keyframes pulseDot {
-          0%, 100% { transform: scale(1); opacity: 0.3; }
-          50% { transform: scale(1.6); opacity: 0.7; }
+        /* Мерцание курсора терминала */
+        .terminal-cursor {
+          display: inline-block; width: 6px; height: 12px; background: ${T.accent};
+          animation: blinkCursor 1s step-end infinite;
+          vertical-align: middle; margin-left: 4px;
+        }
+
+        @keyframes blinkCursor {
+          from, to { background-color: transparent }
+          50% { background-color: ${T.accent} }
         }
       `}</style>
 
       {/* ФОНОВЫЕ ЭФФЕКТЫ */}
-      <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '600px', height: '600px', borderRadius: '50%', background: `radial-gradient(circle, ${T.glow} 0%, transparent 70%)`, opacity: 0.6, zIndex: 2, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '600px', height: '600px', borderRadius: '50%', background: `radial-gradient(circle, ${T.glow} 0%, transparent 70%)`, opacity: 0.5, zIndex: 2, pointerEvents: 'none' }} />
 
       <div className="hero-grid">
         <motion.div className="hero-left" style={{ y, opacity }}>
@@ -111,72 +113,102 @@ export const Hero = () => {
           </a>
         </motion.div>
 
-        {/* ПРАВАЯ КОЛОНКА (ПК) — СИСТЕМНАЯ АРХИТЕКТУРА И КАРТА ПОТОКОВ */}
+        {/* ПРАВАЯ КОЛОНКА (ПК) — КИБЕР-ТЕРМИНАЛ С УПРАВЛЕНИЕМ ПОТОКАМИ */}
         <div className="hero-right">
-          <div className="blueprint-card">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', fontFamily: 'monospace', fontSize: 10, color: T.muted }}>
-              <span>SYSTEM_ARCHITECTURE: ONLINE</span>
-              <span style={{ color: T.accent, display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} />
-                LIVE_FLOW
-              </span>
-            </div>
-
-            <div style={{ position: 'relative', width: '100%', height: '260px' }}>
-              <svg width="100%" height="100%" viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
-                
-                {/* Статические фоновые трубопроводы */}
-                <path d="M 55 130 L 200 65 M 55 130 L 200 195 M 200 65 L 345 130 M 200 195 L 345 130" stroke="rgba(255,255,255,0.03)" strokeWidth="3" fill="none" />
-                
-                {/* Живые пульсирующие потоки трафика и лидов */}
-                <path className="flow-line" d="M 55 130 L 200 65" stroke={T.accent} strokeWidth="1.5" strokeDasharray="6, 12" fill="none" opacity="0.7" />
-                <path className="flow-line" d="M 55 130 L 200 195" stroke={T.accent} strokeWidth="1.5" strokeDasharray="6, 12" fill="none" opacity="0.7" />
-                <path className="flow-line" d="M 200 65 L 345 130" stroke={T.acc2} strokeWidth="1.5" strokeDasharray="6, 12" fill="none" opacity="0.7" />
-                <path className="flow-line" d="M 200 195 L 345 130" stroke={T.acc2} strokeWidth="1.5" strokeDasharray="6, 12" fill="none" opacity="0.7" />
-
-                {/* Свечение на пересечениях */}
-                <circle cx="55" cy="130" r="12" fill={`${T.accent}05`} style={{ transformOrigin: '55px 130px', animation: 'pulseDot 2s infinite ease-in-out' }} />
-                <circle cx="345" cy="130" r="16" fill={`${T.acc2}08`} style={{ transformOrigin: '345px 130px', animation: 'pulseDot 2.5s infinite ease-in-out' }} />
-
-                {/* NODE 1: Входной поток (Хаос трафика) */}
-                <g transform="translate(15, 110)">
-                  <rect width="80" height="40" rx="6" fill="#0C0C0F" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                  <rect width="4" height="40" rx="2" fill={T.accent} />
-                  <text x="12" y="18" fill={T.muted} fontSize="8" fontWeight="700" fontFamily="monospace">SOURCE</text>
-                  <text x="12" y="29" fill="#fff" fontSize="10" fontWeight="800" fontFamily="monospace">INBOUND</text>
-                </g>
-
-                {/* NODE 2: CRM & Сквозная аналитика */}
-                <g transform="translate(150, 45)">
-                  <rect width="100" height="40" rx="6" fill="#0C0C0F" stroke={`${T.accent}30`} strokeWidth="1" style={{ filter: `drop-shadow(0 0 8px ${T.accent}10)` }} />
-                  <circle cx="12" cy="20" r="3" fill={T.accent} />
-                  <text x="24" y="18" fill={T.accent} fontSize="8" fontWeight="700" fontFamily="monospace">PROCESSING</text>
-                  <text x="24" y="29" fill="#fff" fontSize="10" fontWeight="800" fontFamily="monospace">CRM & SYNC</text>
-                </g>
-
-                {/* NODE 3: Инфраструктурная автоматизация */}
-                <g transform="translate(150, 175)">
-                  <rect width="100" height="40" rx="6" fill="#0C0C0F" stroke={`${T.accent}30`} strokeWidth="1" style={{ filter: `drop-shadow(0 0 8px ${T.accent}10)` }} />
-                  <circle cx="12" cy="20" r="3" fill={T.accent} />
-                  <text x="24" y="18" fill={T.accent} fontSize="8" fontWeight="700" fontFamily="monospace">ROUTING</text>
-                  <text x="24" y="29" fill="#fff" fontSize="10" fontWeight="800" fontFamily="monospace">AUTOMATION</text>
-                </g>
-
-                {/* NODE 4: Маржа бизнеса (Выходной контролируемый узел) */}
-                <g transform="translate(305, 110)">
-                  <rect width="85" height="40" rx="6" fill="#0C0C0F" stroke={`${T.acc2}40`} strokeWidth="1" style={{ filter: `drop-shadow(0 0 12px ${T.acc2}15)` }} />
-                  <rect x="81" y="0" width="4" height="40" rx="2" fill={T.acc2} />
-                  <text x="10" y="18" fill={T.acc2} fontSize="8" fontWeight="700" fontFamily="monospace">OUTPUT</text>
-                  <text x="10" y="29" fill="#fff" fontSize="10" fontWeight="800" fontFamily="monospace">NET MARGIN</text>
-                </g>
-
-              </svg>
-            </div>
+          <div className="terminal-box">
             
-            {/* Логи состояния терминала */}
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.03)', fontFamily: 'monospace', fontSize: 9, color: T.muted }}>
-              <span style={{ color: T.accent }}>[OK] CAPTURE_ACTIVE</span>
-              <span>[INTEGRATION]: 100%</span>
+            {/* Хедер окна терминала (Mac Style Dots) */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+              <div style={{ display: 'flex', gap: 6 }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#EF4444', opacity: 0.4 }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#F59E0B', opacity: 0.4 }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', opacity: 0.4 }} />
+              </div>
+              <span style={{ fontFamily: 'monospace', fontSize: 10, color: T.muted, letterSpacing: '0.05em' }}>
+                feedia@tsvetkov: ~/growth-core
+              </span>
+              <div style={{ width: 24 }} />
+            </div>
+
+            {/* Тело терминала */}
+            <div style={{ padding: '1.25rem' }}>
+              
+              {/* Секция 1: Живой графический монитор (Интеграция ROAS) */}
+              <div style={{ marginBottom: '1.25rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.03)', borderRadius: 8, padding: '1rem 1rem 0.5rem', position: 'relative' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 9, color: T.muted, marginBottom: '0.75rem' }}>
+                  <span>METRIC: SCALE_VELOCITY</span>
+                  <span style={{ color: T.accent, fontWeight: 700 }}>ROAS +214.8%</span>
+                </div>
+                
+                {/* Векторный живой неоновый график */}
+                <div style={{ width: '100%', height: '80px' }}>
+                  <svg width="100%" height="100%" viewBox="0 0 340 80" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+                    <defs>
+                      <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor={T.accent} stopOpacity="0.15" />
+                        <stop offset="100%" stopColor={T.accent} stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    {/* Градиентная подложка */}
+                    <path d="M 0 70 Q 40 65 80 50 T 160 55 T 240 25 T 340 5 L 340 80 L 0 80 Z" fill="url(#chartGlow)" />
+                    {/* Сетка монитора */}
+                    <line x1="0" y1="25" x2="340" y2="25" stroke="rgba(255,255,255,0.02)" strokeWidth="1" strokeDasharray="4,4" />
+                    <line x1="0" y1="50" x2="340" y2="50" stroke="rgba(255,255,255,0.02)" strokeWidth="1" strokeDasharray="4,4" />
+                    {/* Главная светящаяся траектория */}
+                    <motion.path 
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 2, ease: 'easeOut' }}
+                      d="M 0 70 Q 40 65 80 50 T 160 55 T 240 25 T 340 5" 
+                      stroke={`linear-gradient(90deg, ${T.accent}, ${T.acc2})`}
+                      strokeWidth="2" 
+                      fill="none" 
+                      style={{ stroke: T.accent, filter: `drop-shadow(0 0 6px ${T.accent})` }}
+                    />
+                    {/* Финальная пульсирующая точка */}
+                    <circle cx="340" cy="5" r="3" fill="#fff" style={{ filter: `drop-shadow(0 0 8px ${T.accent})` }} />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Секция 2: Поток системных логов */}
+              <div style={{ height: '110px', overflow: 'hidden', position: 'relative', background: 'rgba(0,0,0,0.15)', borderRadius: 8, padding: '0.75rem 1rem' }}>
+                {/* Эффект затухания логов сверху и снизу */}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0C0C0F 0%, transparent 15%, transparent 85%, #0C0C0F 100%)', zIndex: 2, pointerEvents: 'none' }} />
+                
+                <div className="log-stream">
+                  {/* Дублируем массив дважды для бесшовного зацикливания */}
+                  {[...Array(2)].map((_, outerIdx) => (
+                    <React.Fragment key={outerIdx}>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted }}>
+                        <span style={{ color: T.accent }}>[init]</span> Establishing end-to-end analytics sync...
+                      </div>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: 'rgba(255,255,255,0.8)' }}>
+                        <span style={{ color: '#10B981' }}>[ok]</span> CRM synchronized across 3 departments
+                      </div>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted }}>
+                        <span style={{ color: T.acc2 }}>[calib]</span> Restructuring auction bidding logic
+                      </div>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#fff', fontWeight: 600 }}>
+                        <span style={{ color: T.accent }}>[data]</span> Unit economics matched to true net margin
+                      </div>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted }}>
+                        <span style={{ color: T.accent }}>[proc]</span> Deploying behavior-driven targeting vectors
+                      </div>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: 'rgba(255,255,255,0.8)' }}>
+                        <span style={{ color: '#10B981' }}>[ok]</span> Traffic leakage eliminated completely
+                      </div>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted }}>
+                        <span style={{ color: T.acc2 }}>[scale]</span> Omnichannel funnels: ACTIVE // 40+ markets
+                      </div>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.accent, fontWeight: 700 }}>
+                        <span style={{ color: '#fff' }}>[system]</span> System architecture stabilized.<span className="terminal-cursor" />
+                      </div>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
