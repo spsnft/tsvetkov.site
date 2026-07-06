@@ -41,26 +41,28 @@ export const Hero = () => {
         }
         
         @media (min-width: 968px) {
-          .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
-          .hero-left { align-items: flex-start; text-align: left; }
+          /* stretch выравнивает высоту терминала ровно по границам левой колонки */
+          .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: stretch; }
+          .hero-left { align-items: flex-start; text-align: left; justify-content: center; }
           .hero-right { display: flex; width: 100%; }
           .scroll-indicator { display: none !important; }
         }
 
         /* Окно терминала с эффектом стеклянного прибора */
         .terminal-box {
-          position: relative; width: 100%;
+          position: relative; width: 100%; height: 100%;
           background: rgba(10, 10, 12, 0.8);
           border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 14px;
           box-sizing: border-box; overflow: hidden;
           backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
           box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+          display: flex; flex-direction: column;
         }
 
         /* Анимация бегущей строки логов консоли */
         .log-stream {
           display: flex; flex-direction: column; gap: 6px;
-          animation: scrollLogs 18s linear infinite;
+          animation: scrollLogs 20s linear infinite;
         }
 
         @keyframes scrollLogs {
@@ -113,11 +115,11 @@ export const Hero = () => {
           </a>
         </motion.div>
 
-        {/* ПРАВАЯ КОЛОНКА (ПК) — КИБЕР-ТЕРМИНАЛ С УПРАВЛЕНИЕМ ПОТОКАМИ */}
+        {/* ПРАВАЯ КОЛОНКА (ПК) — СБАЛАНСИРОВАННЫЙ КИБЕР-ТЕРМИНАЛ */}
         <div className="hero-right">
           <div className="terminal-box">
             
-            {/* Хедер окна терминала (Mac Style Dots) */}
+            {/* Хедер окна терминала (Исправлена почта и путь) */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
               <div style={{ display: 'flex', gap: 6 }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#EF4444', opacity: 0.4 }} />
@@ -125,83 +127,76 @@ export const Hero = () => {
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', opacity: 0.4 }} />
               </div>
               <span style={{ fontFamily: 'monospace', fontSize: 10, color: T.muted, letterSpacing: '0.05em' }}>
-                feedia@tsvetkov: ~/growth-core
+                fedia@tsvetkov.site: ~/performance-core
               </span>
               <div style={{ width: 24 }} />
             </div>
 
             {/* Тело терминала */}
-            <div style={{ padding: '1.25rem' }}>
+            <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '1.25rem', justifyContent: 'space-between' }}>
               
-              {/* Секция 1: Живой графический монитор (Интеграция ROAS) */}
-              <div style={{ marginBottom: '1.25rem', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.03)', borderRadius: 8, padding: '1rem 1rem 0.5rem', position: 'relative' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 9, color: T.muted, marginBottom: '0.75rem' }}>
-                  <span>METRIC: SCALE_VELOCITY</span>
-                  <span style={{ color: T.accent, fontWeight: 700 }}>ROAS +214.8%</span>
+              {/* Секция 1: Графический монитор окупаемости (Понятные маркеры) */}
+              <div style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.03)', borderRadius: 8, padding: '1.25rem 1.25rem 0.75rem', position: 'relative', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 9, color: T.muted }}>
+                  <span>TRACKER: MARKETING_ROI</span>
+                  <span style={{ color: T.accent, fontWeight: 700, letterSpacing: '0.05em' }}>ROI: 5.2X AVERAGE</span>
                 </div>
                 
-                {/* Векторный живой неоновый график */}
-                <div style={{ width: '100%', height: '80px' }}>
-                  <svg width="100%" height="100%" viewBox="0 0 340 80" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+                {/* Векторный масштабируемый график */}
+                <div style={{ width: '100%', height: '110px', marginTop: '1rem' }}>
+                  <svg width="100%" height="100%" viewBox="0 0 340 110" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
                     <defs>
                       <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor={T.accent} stopOpacity="0.15" />
                         <stop offset="100%" stopColor={T.accent} stopOpacity="0.0" />
                       </linearGradient>
                     </defs>
-                    {/* Градиентная подложка */}
-                    <path d="M 0 70 Q 40 65 80 50 T 160 55 T 240 25 T 340 5 L 340 80 L 0 80 Z" fill="url(#chartGlow)" />
-                    {/* Сетка монитора */}
-                    <line x1="0" y1="25" x2="340" y2="25" stroke="rgba(255,255,255,0.02)" strokeWidth="1" strokeDasharray="4,4" />
-                    <line x1="0" y1="50" x2="340" y2="50" stroke="rgba(255,255,255,0.02)" strokeWidth="1" strokeDasharray="4,4" />
-                    {/* Главная светящаяся траектория */}
+                    <path d="M 0 100 Q 40 90 80 70 T 160 75 T 240 35 T 340 10 L 340 110 L 0 110 Z" fill="url(#chartGlow)" />
+                    <line x1="0" y1="35" x2="340" y2="35" stroke="rgba(255,255,255,0.02)" strokeWidth="1" strokeDasharray="4,4" />
+                    <line x1="0" y1="70" x2="340" y2="70" stroke="rgba(255,255,255,0.02)" strokeWidth="1" strokeDasharray="4,4" />
                     <motion.path 
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
                       transition={{ duration: 2, ease: 'easeOut' }}
-                      d="M 0 70 Q 40 65 80 50 T 160 55 T 240 25 T 340 5" 
-                      stroke={`linear-gradient(90deg, ${T.accent}, ${T.acc2})`}
+                      d="M 0 100 Q 40 90 80 70 T 160 75 T 240 35 T 340 10" 
                       strokeWidth="2" 
                       fill="none" 
                       style={{ stroke: T.accent, filter: `drop-shadow(0 0 6px ${T.accent})` }}
                     />
-                    {/* Финальная пульсирующая точка */}
-                    <circle cx="340" cy="5" r="3" fill="#fff" style={{ filter: `drop-shadow(0 0 8px ${T.accent})` }} />
+                    <circle cx="340" cy="10" r="3" fill="#fff" style={{ filter: `drop-shadow(0 0 8px ${T.accent})` }} />
                   </svg>
                 </div>
               </div>
 
-              {/* Секция 2: Поток системных логов */}
-              <div style={{ height: '110px', overflow: 'hidden', position: 'relative', background: 'rgba(0,0,0,0.15)', borderRadius: 8, padding: '0.75rem 1rem' }}>
-                {/* Эффект затухания логов сверху и снизу */}
+              {/* Секция 2: Поток очищенных системных логов */}
+              <div style={{ height: '120px', overflow: 'hidden', position: 'relative', background: 'rgba(0,0,0,0.15)', borderRadius: 8, padding: '0.75rem 1rem' }}>
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0C0C0F 0%, transparent 15%, transparent 85%, #0C0C0F 100%)', zIndex: 2, pointerEvents: 'none' }} />
                 
                 <div className="log-stream">
-                  {/* Дублируем массив дважды для бесшовного зацикливания */}
                   {[...Array(2)].map((_, outerIdx) => (
                     <React.Fragment key={outerIdx}>
-                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted, lineHeight: 1.4 }}>
                         <span style={{ color: T.accent }}>[init]</span> Establishing end-to-end analytics sync...
                       </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: 'rgba(255,255,255,0.8)' }}>
-                        <span style={{ color: '#10B981' }}>[ok]</span> CRM synchronized across 3 departments
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: 'rgba(255,255,255,0.8)', lineHeight: 1.4 }}>
+                        <span style={{ color: '#10B981' }}>[ok]</span> CRM synchronized across departments
                       </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted, lineHeight: 1.4 }}>
                         <span style={{ color: T.acc2 }}>[calib]</span> Restructuring auction bidding logic
                       </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#fff', fontWeight: 600 }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#fff', fontWeight: 600, lineHeight: 1.4 }}>
                         <span style={{ color: T.accent }}>[data]</span> Unit economics matched to true net margin
                       </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted, lineHeight: 1.4 }}>
                         <span style={{ color: T.accent }}>[proc]</span> Deploying behavior-driven targeting vectors
                       </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: 'rgba(255,255,255,0.8)' }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: 'rgba(255,255,255,0.8)', lineHeight: 1.4 }}>
                         <span style={{ color: '#10B981' }}>[ok]</span> Traffic leakage eliminated completely
                       </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted }}>
-                        <span style={{ color: T.acc2 }}>[scale]</span> Omnichannel funnels: ACTIVE // 40+ markets
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.muted, lineHeight: 1.4 }}>
+                        <span style={{ color: T.acc2 }}>[scale]</span> Omnichannel scaling infrastructure: ACTIVE
                       </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.accent, fontWeight: 700 }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: 11, color: T.accent, fontWeight: 700, lineHeight: 1.4 }}>
                         <span style={{ color: '#fff' }}>[system]</span> System architecture stabilized.<span className="terminal-cursor" />
                       </div>
                     </React.Fragment>
