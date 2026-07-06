@@ -166,7 +166,7 @@ export const Hero = () => {
                 position: 'absolute', top: '50%', left: '50%',
                 width: '80px', height: '80px',
                 transform: 'translate3d(-50%, -50%, 0)',
-                display: 'flex', alignItems: 'center', justifyComponents: 'center',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', // ИСПРАВЛЕНО: ТИПИЗАЦИЯ СТИЛЕЙ
                 transformStyle: 'preserve-3d'
               }}>
                 {/* Внутреннее размытое неоновое свечение */}
