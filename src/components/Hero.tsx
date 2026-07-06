@@ -1,35 +1,15 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 export const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  // Стейт для интерактивного наклона ядра мышкой
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-
+  
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '22%']);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
-  // Расчет движения мыши для интерактивного 3D-наклона
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const box = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - box.left - box.width / 2;
-    const y = e.clientY - box.top - box.height / 2;
-    setRotateX(-y * 0.08); // Угол наклона по вертикали
-    setRotateY(x * 0.08);  // Угол наклона по горизонтали
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-  };
 
   return (
     <section 
@@ -48,8 +28,8 @@ export const Hero = () => {
         }
         .hero-left { display: flex; flex-direction: column; align-items: center; text-align: center; }
         
-        /* Правая колонка с 3D ядром */
-        .hero-right { display: none; position: relative; width: 100%; height: 420px; justify-content: center; align-items: center; }
+        /* Правая колонка: Карта потоков данных */
+        .hero-right { display: none; }
         .scroll-indicator { position: absolute; bottom: 3rem; display: flex; } 
         
         .dt-only { display: inline; }
@@ -63,20 +43,39 @@ export const Hero = () => {
         @media (min-width: 968px) {
           .hero-grid { grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
           .hero-left { align-items: flex-start; text-align: left; }
-          .hero-right { display: flex; }
+          .hero-right { display: flex; width: 100%; }
           .scroll-indicator { display: none !important; }
         }
 
-        /* Стилизация 3D слоев ядра */
-        .core-container {
-          position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-          perspective: 1000px;
+        /* Высокотехнологичная интерактивная карточка-планшет */
+        .blueprint-card {
+          position: relative; width: 100%;
+          background: linear-gradient(135deg, rgba(12, 12, 15, 0.7) 0%, rgba(255, 255, 255, 0.01) 100%);
+          border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px;
+          padding: 1.5rem; box-sizing: border-box; overflow: hidden;
+          backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02);
+          background-image: 
+            linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+          background-size: 20px 20px;
         }
-        .core-wrapper {
-          position: relative; width: 320px; height: 320px; transform-style: preserve-3d; transition: transform 0.2s ease-out;
+
+        /* Бегущие линии передачи информации */
+        .flow-line {
+          animation: flowAnimation 1.5s linear infinite;
         }
-        .core-ring {
-          position: absolute; inset: 0; border: 1px solid rgba(255,255,255,0.03); border-radius: 50%; transform-style: preserve-3d;
+
+        @keyframes flowAnimation {
+          to {
+            stroke-dashoffset: -18;
+          }
+        }
+
+        /* Пульсация узлов накопления */
+        @keyframes pulseDot {
+          0%, 100% { transform: scale(1); opacity: 0.3; }
+          50% { transform: scale(1.6); opacity: 0.7; }
         }
       `}</style>
 
@@ -112,83 +111,73 @@ export const Hero = () => {
           </a>
         </motion.div>
 
-        {/* ПРАВАЯ КОЛОНКА (ПК) — ИНТЕРАКТИВНОЕ 3D ЯДРО СИСТЕМЫ */}
-        <div className="hero-right" ref={cardRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-          <div className="core-container">
-            <motion.div 
-              className="core-wrapper"
-              style={{ transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)` }}
-            >
-              
-              {/* Слой 1: Внешнее технологическое кольцо разметки */}
-              <motion.div 
-                className="core-ring"
-                animate={{ rotateZ: 360 }}
-                transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
-                style={{ border: `1px dashed ${T.accent}20`, padding: '10px' }}
-              >
-                <div style={{ position: 'absolute', top: 0, left: '50%', width: 4, height: 4, background: T.accent, borderRadius: '50%', boxShadow: `0 0 10px ${T.accent}` }} />
-                <div style={{ position: 'absolute', bottom: 0, right: '50%', width: 4, height: 4, background: T.acc2, borderRadius: '50%' }} />
-              </motion.div>
+        {/* ПРАВАЯ КОЛОНКА (ПК) — СИСТЕМНАЯ АРХИТЕКТУРА И КАРТА ПОТОКОВ */}
+        <div className="hero-right">
+          <div className="blueprint-card">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', fontFamily: 'monospace', fontSize: 10, color: T.muted }}>
+              <span>SYSTEM_ARCHITECTURE: ONLINE</span>
+              <span style={{ color: T.accent, display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} />
+                LIVE_FLOW
+              </span>
+            </div>
 
-              {/* Слой 2: Горизонтальная орбита AXIS_X */}
-              <motion.div 
-                className="core-ring"
-                animate={{ rotateX: [20, 20], rotateY: [0, 360] }}
-                transition={{ repeat: Infinity, duration: 12, ease: 'linear' }}
-                style={{ border: `1px solid ${T.accent}40`, boxShadow: `inset 0 0 15px ${T.accent}10, 0 0 15px ${T.accent}10` }}
-              />
+            <div style={{ position: 'relative', width: '100%', height: '260px' }}>
+              <svg width="100%" height="100%" viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
+                
+                {/* Статические фоновые трубопроводы */}
+                <path d="M 55 130 L 200 65 M 55 130 L 200 195 M 200 65 L 345 130 M 200 195 L 345 130" stroke="rgba(255,255,255,0.03)" strokeWidth="3" fill="none" />
+                
+                {/* Живые пульсирующие потоки трафика и лидов */}
+                <path className="flow-line" d="M 55 130 L 200 65" stroke={T.accent} strokeWidth="1.5" strokeDasharray="6, 12" fill="none" opacity="0.7" />
+                <path className="flow-line" d="M 55 130 L 200 195" stroke={T.accent} strokeWidth="1.5" strokeDasharray="6, 12" fill="none" opacity="0.7" />
+                <path className="flow-line" d="M 200 65 L 345 130" stroke={T.acc2} strokeWidth="1.5" strokeDasharray="6, 12" fill="none" opacity="0.7" />
+                <path className="flow-line" d="M 200 195 L 345 130" stroke={T.acc2} strokeWidth="1.5" strokeDasharray="6, 12" fill="none" opacity="0.7" />
 
-              {/* Слой 3: Вертикальная орбита AXIS_Y */}
-              <motion.div 
-                className="core-ring"
-                animate={{ rotateX: [70, 70], rotateY: [360, 0] }}
-                transition={{ repeat: Infinity, duration: 16, ease: 'linear' }}
-                style={{ border: `1px solid ${T.acc2}40`, boxShadow: `inset 0 0 15px ${T.acc2}10, 0 0 15px ${T.acc2}10` }}
-              />
+                {/* Свечение на пересечениях */}
+                <circle cx="55" cy="130" r="12" fill={`${T.accent}05`} style={{ transformOrigin: '55px 130px', animation: 'pulseDot 2s infinite ease-in-out' }} />
+                <circle cx="345" cy="130" r="16" fill={`${T.acc2}08`} style={{ transformOrigin: '345px 130px', animation: 'pulseDot 2.5s infinite ease-in-out' }} />
 
-              {/* Слой 4: Диагональное текстурное кольцо с точками данных */}
-              <motion.div 
-                className="core-ring"
-                animate={{ rotateX: [45, 45], rotateZ: [0, 360] }}
-                transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}
-                style={{ border: '1px double rgba(255,255,255,0.05)' }}
-              >
-                <svg width="100%" height="100%" style={{ transform: 'rotate(45deg)', opacity: 0.4 }}>
-                  <circle cx="50%" cy="10%" r="2" fill="#fff" />
-                  <circle cx="90%" cy="50%" r="2" fill={T.accent} />
-                  <circle cx="10%" cy="50%" r="1.5" fill="#fff" />
-                </svg>
-              </motion.div>
+                {/* NODE 1: Входной поток (Хаос трафика) */}
+                <g transform="translate(15, 110)">
+                  <rect width="80" height="40" rx="6" fill="#0C0C0F" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+                  <rect width="4" height="40" rx="2" fill={T.accent} />
+                  <text x="12" y="18" fill={T.muted} fontSize="8" fontWeight="700" fontFamily="monospace">SOURCE</text>
+                  <text x="12" y="29" fill="#fff" fontSize="10" fontWeight="800" fontFamily="monospace">INBOUND</text>
+                </g>
 
-              {/* Слой 5: Центральное объемное светящееся ядро (Core Engine) */}
-              <div style={{
-                position: 'absolute', top: '50%', left: '50%',
-                width: '80px', height: '80px',
-                transform: 'translate3d(-50%, -50%, 0)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', // ИСПРАВЛЕНО: ТИПИЗАЦИЯ СТИЛЕЙ
-                transformStyle: 'preserve-3d'
-              }}>
-                {/* Внутреннее размытое неоновое свечение */}
-                <motion.div 
-                  animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.5, 0.8, 0.5] }}
-                  transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-                  style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', background: `radial-gradient(circle, ${T.accent} 0%, transparent 70%)`, filter: 'blur(8px)', pointerEvents: 'none' }}
-                />
-                {/* Плотная физическая текстурная сфера */}
-                <div style={{ 
-                  width: '40px', height: '40px', margin: '0 auto', borderRadius: '50%',
-                  background: `linear-gradient(135deg, #fff 0%, ${T.acc2} 50%, #060608 100%)`,
-                  boxShadow: `0 0 30px ${T.accent}, inset 2px 2px 5px rgba(255,255,255,0.4)`
-                }} />
-              </div>
+                {/* NODE 2: CRM & Сквозная аналитика */}
+                <g transform="translate(150, 45)">
+                  <rect width="100" height="40" rx="6" fill="#0C0C0F" stroke={`${T.accent}30`} strokeWidth="1" style={{ filter: `drop-shadow(0 0 8px ${T.accent}10)` }} />
+                  <circle cx="12" cy="20" r="3" fill={T.accent} />
+                  <text x="24" y="18" fill={T.accent} fontSize="8" fontWeight="700" fontFamily="monospace">PROCESSING</text>
+                  <text x="24" y="29" fill="#fff" fontSize="10" fontWeight="800" fontFamily="monospace">CRM & SYNC</text>
+                </g>
 
-              {/* Слой 6: Цифровой маркер состояния системы вокруг ядра */}
-              <div style={{ position: 'absolute', bottom: '-20px', left: '50%', transform: 'translateX(-50%) translateZ(40px)', fontFamily: 'monospace', fontSize: 9, color: T.muted, letterSpacing: '0.1em', whiteSpace: 'nowrap', background: '#0A0A0C', padding: '2px 8px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.05)' }}>
-                CORE_ENGINE // <span style={{ color: T.accent }}>ACTIVE</span>
-              </div>
+                {/* NODE 3: Инфраструктурная автоматизация */}
+                <g transform="translate(150, 175)">
+                  <rect width="100" height="40" rx="6" fill="#0C0C0F" stroke={`${T.accent}30`} strokeWidth="1" style={{ filter: `drop-shadow(0 0 8px ${T.accent}10)` }} />
+                  <circle cx="12" cy="20" r="3" fill={T.accent} />
+                  <text x="24" y="18" fill={T.accent} fontSize="8" fontWeight="700" fontFamily="monospace">ROUTING</text>
+                  <text x="24" y="29" fill="#fff" fontSize="10" fontWeight="800" fontFamily="monospace">AUTOMATION</text>
+                </g>
 
-            </motion.div>
+                {/* NODE 4: Маржа бизнеса (Выходной контролируемый узел) */}
+                <g transform="translate(305, 110)">
+                  <rect width="85" height="40" rx="6" fill="#0C0C0F" stroke={`${T.acc2}40`} strokeWidth="1" style={{ filter: `drop-shadow(0 0 12px ${T.acc2}15)` }} />
+                  <rect x="81" y="0" width="4" height="40" rx="2" fill={T.acc2} />
+                  <text x="10" y="18" fill={T.acc2} fontSize="8" fontWeight="700" fontFamily="monospace">OUTPUT</text>
+                  <text x="10" y="29" fill="#fff" fontSize="10" fontWeight="800" fontFamily="monospace">NET MARGIN</text>
+                </g>
+
+              </svg>
+            </div>
+            
+            {/* Логи состояния терминала */}
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.03)', fontFamily: 'monospace', fontSize: 9, color: T.muted }}>
+              <span style={{ color: T.accent }}>[OK] CAPTURE_ACTIVE</span>
+              <span>[INTEGRATION]: 100%</span>
+            </div>
           </div>
         </div>
       </div>
