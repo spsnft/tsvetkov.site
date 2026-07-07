@@ -40,7 +40,7 @@ export const Footer = () => {
             {/* Профессиональные каналы связи */}
             <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
               <a 
-                href="https://linkedin.com/in/YOUR_PROFILE" 
+                href="https://linkedin.com/in/tsvetkov-marketing/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 style={{ color: T.muted, fontSize: '0.85rem', textDecoration: 'none', transition: 'color 0.2s', fontWeight: 500 }}
