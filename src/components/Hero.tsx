@@ -127,7 +127,7 @@ export const Hero = () => {
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#10B981', opacity: 0.4 }} />
               </div>
               <span style={{ fontFamily: 'monospace', fontSize: 10, color: T.muted, letterSpacing: '0.05em' }}>
-                fedia@tsvetkov.site: ~/performance-core
+                fedor@tsvetkov.site: ~/performance-core
               </span>
               <div style={{ width: 24 }} />
             </div>
