@@ -120,7 +120,7 @@ export const Contact = () => {
               </motion.button>
 
               <motion.a
-                href="https://linkedin.com/in/YOUR_PROFILE"
+                href="https://linkedin.com/in/tsvetkov-marketing/"
                 target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.01, background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.2)' }} whileTap={{ scale: 0.99 }}
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.08)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem', transition: 'background 0.2s, border-color 0.2s' }}
