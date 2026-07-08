@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "Fedor Tsvetkov",
-    "base_headline": "Growth Architect | Building Scalable Marketing Systems",
+    "summary": "Data-driven performance marketer with 10+ years managing high-budget ad campaigns, SEO programs, and AI-powered automation across fintech, e-commerce, retail, and SaaS. Proven track record managing $500K+ annual media budgets. Hands-on experience with Google Ads, Meta Ads, SEO, and AI-driven workflow automation. Active crypto exchange user with practical experience in currency arbitrage.",
     "contacts": {
       "email": "fediatsvetkov@gmail.com",
       "phone": "+66-95-518-37-83",
@@ -11,39 +11,69 @@
   "experience_pool": [
     {
       "id": "bndretail",
-      "company": "BNDretail.ltd",
-      "role": "Head of Marketing Operations",
-      "period": "Sep 2023 - May 2026",
+      "company": "BNDRETAIL LTD",
+      "location": "THAILAND",
+      "role": "HEAD OF OPERATIONS & MARKETING",
+      "period": "sep23-current",
       "bullets": [
-        "Architected and deployed core digital marketing infrastructure from scratch, driving a 7x increase in monthly revenue within the first 18 months.",
-        "Managed multi-channel digital performance campaigns across Google Ads and Meta Ads, maintaining consistent, high-converting inbound traffic funnels.",
-        "Deployed advanced AI-driven automation workflows for optimized lead processing, customer retention, and lifecycle marketing management.",
-        "Integrated proprietary CRM architecture with custom order-management systems, directly increasing LTV and repeat purchase rates."
+        "Built performance marketing infrastructure from scratch. Scaled monthly revenue 7x within first 18 months",
+        "Managed multi-channel digital campaigns across Google Ads and Meta Ads driving consistent inbound traffic",
+        "Deployed Al-driven automation for lead processing, retention, and customer lifecycle management",
+        "Integrated proprietary CRM with custom order management platform, increasing LTV and repeat purchase rates"
       ]
     },
     {
       "id": "setka",
-      "company": "Setka",
-      "role": "Marketing Strategy Lead",
-      "period": "Mar 2023 - Mar 2024",
+      "company": "SETKA (HEALTHTECH)",
+      "location": "REMOTE",
+      "role": "MARKETING STRATEGY LEAD",
+      "period": "mar23-mar24",
       "bullets": [
-        "Directed comprehensive user acquisition and performance campaigns for iOS and Android applications, specifically targeting competitive US and Western European markets.",
-        "Successfully maintained and optimized CAC within $3-$5 range in saturated, high-intent English-speaking markets.",
-        "Managed and mentored a cross-functional, agile, and distributed growth team to ensure rapid hypothesis testing and iterative execution."
+        "Managed user acquisition campaigns for iOS/Android app targeting US and EU markets",
+        "Achieved CAC $3-5 in competitive English-speaking markets",
+        "Led cross-functional agile team for GTM execution"
       ]
     },
     {
-      "id": "new_holland",
-      "company": "New Holland Agriculture (Metal-Fach)",
-      "role": "Chief Marketing Officer",
-      "period": "Feb 2018 - Feb 2023",
+      "id": "metal_fach",
+      "company": "METAL-FACH SP. Z OO",
+      "location": "RUSSIA/POLAND",
+      "role": "CHIEF MARKETING OFFICER (CMO)",
+      "period": "feb18-feb23",
       "bullets": [
-        "Accountable for a $500K+ annual media and marketing budget across all digital and corporate channels, consistently delivering positive ROI.",
-        "Successfully transitioned a traditional, offline-heavy B2B enterprise entirely into high-performing digital inbound channels.",
-        "Scaled qualified inbound lead generation from absolute zero to 1,000+ verified leads per month via Google Ads, content marketing, and scalable SEO funnels.",
-        "Directed a comprehensive international SEO program, successfully ranking primary product pages into Top 5–50 spots for high-volume query groups.",
-        "Coordinated digital market expansion and localized strategy executions across 40+ international markets (EU, CIS, Africa) in tandem with European HQ."
+        "Managed $500K+ annual marketing budget across digital channels with consistent positive ROI",
+        "Grew inbound lead generation from 0 to 1,000+ qualified leads/month via Google Ads, SEO, and content marketing",
+        "Led SEO program: grew key product pages from 500+ positions to top 5-50 for primary queries",
+        "Drove digital expansion across 40+ markets (Russia, CIS, EU, Africa) coordinating with European HQ",
+        "Built structured dealer network across Russia and transitioned offline B2B business entirely into digital channels"
       ]
+    }
+  ],
+  "skills_categories": [
+    {
+      "category": "Performance Marketing & Ad Buying",
+      "items": ["Google Ads (Search, Display, Video)", "Meta Ads Manager", "SEO Strategy & Management", "Programmatic Advertising", "Google Analytics / GA4", "Looker Studio", "SEMrush / Ahrefs"]
+    },
+    {
+      "category": "Al-Driven Marketing & Automation",
+      "items": ["A/B Testing & CRO", "Sales Funnel Optimization", "UX/UI & Conversion Rate Optimization", "CRM Architecture & Logic Design", "Omnichannel Automation", "Unit Economics & Budget Management"]
+    }
+  ],
+  "education_pool": [
+    {
+      "degree": "MARKETING MANAGEMENT",
+      "school": "Higher School of Economics",
+      "period": "2020-2021"
+    },
+    {
+      "degree": "DIGITAL MARKETING SPECIALIST",
+      "school": "Yandex Practicum",
+      "period": "2018-2019"
+    },
+    {
+      "degree": "FAMILY LAW | MASTERS DEGREE",
+      "school": "TSU (Tver State University)",
+      "period": "2012-2018"
     }
   ]
 }
