@@ -2,64 +2,77 @@ import cvData from './cv-data.json';
 
 export default function CVPage() {
   return (
-    <div className="bg-[#f3f4f6] min-h-screen py-8 print:py-0 print:bg-white subpixel-antialiased">
-      {/* Контейнер А4 */}
-      <main className="mx-auto w-[210mm] h-[297mm] bg-white text-[#1a1a1a] p-[12mm] relative shadow-lg print:shadow-none print:p-[10mm] flex flex-col justify-between select-none">
+    <div style={{ backgroundColor: '#f3f4f6', minHeight: '100vh', padding: '2rem 0', color: '#1a1a1a', fontFamily: 'system-ui, sans-serif' }}>
+      
+      {/* Контейнер листа А4 */}
+      <main style={{
+        className: 'print-page',
+        width: '210mm',
+        height: '297mm',
+        backgroundColor: '#ffffff',
+        margin: '0 auto',
+        padding: '12mm',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        boxSizing: 'border-box',
+        WebkitPrintColorAdjust: 'exact',
+        printColorAdjust: 'exact'
+      }}>
         
         {/* Основной двухколоночный грид */}
-        <div className="grid grid-cols-12 gap-[8mm] items-start">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '8mm', alignItems: 'start' }}>
           
           {/* ЛЕВАЯ КОЛОНКА (Широкая): Фото, Имя, Опыт */}
-          <div className="col-span-7 space-y-5">
+          <div style={{ gridColumn: 'span 7', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             
             {/* Хедер: Фото + Имя + Саммари */}
-            <div className="space-y-3">
-              {/* Фото с закругленными углами как на макете */}
-              <div className="w-[32mm] h-[38mm] relative overflow-hidden rounded-[4mm] border border-gray-200">
-                {/* Укажи здесь правильный путь к своей фотке в папке public */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {/* Жесткие размеры контейнера для фото */}
+              <div style={{ width: '32mm', height: '38mm', overflow: 'hidden', borderRadius: '4mm', border: '1px solid #e5e7eb' }}>
                 <img 
                   src="/avatar.png" 
                   alt="Fedor Tsvetkov" 
-                  className="w-full h-full object-cover grayscale contrast-[1.05]"
+                  style={{ width: '100%', height: '100%', objectCover: 'cover', filter: 'grayscale(100%) contrast(105%)' }}
                 />
               </div>
               
               <div>
-                <h1 className="text-2xl font-black tracking-tighter text-black uppercase leading-none">
+                <h1 style={{ fontSize: '1.5rem', fontWeight: 900, tracking: '-0.05em', textTransform: 'uppercase', lineHeight: 1, color: '#000000', margin: 0 }}>
                   {cvData.meta.name.split(' ')[0]}<br />
                   {cvData.meta.name.split(' ')[1]}
                 </h1>
-                <p className="text-[9.5px] text-gray-700 leading-relaxed font-normal mt-2 pr-2 text-justify">
+                <p style={{ fontSize: '9.5px', color: '#374151', lineHeight: '1.4', textAlign: 'justify', marginTop: '0.5rem', paddingRight: '0.5rem', marginBottom: 0 }}>
                   {cvData.meta.summary}
                 </p>
               </div>
             </div>
 
             {/* Секция: EXPERIENCE */}
-            <div className="space-y-4">
-              <h2 className="text-[11px] font-black tracking-widest text-black uppercase border-b-2 border-black pb-0.5">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <h2 style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '0.1em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '2px', margin: 0 }}>
                 EXPERIENCE
               </h2>
               
-              <div className="space-y-4">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {cvData.experience_pool.map((job) => (
-                  <div key={job.id} className="print:break-inside-avoid space-y-1">
-                    <div className="flex justify-between items-baseline">
-                      <h3 className="text-[10px] font-black text-black uppercase tracking-tight">
+                  <div key={job.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                      <h3 style={{ fontSize: '10px', fontWeight: 900, color: '#000000', margin: 0, tracking: '-0.02em' }}>
                         {job.role}
                       </h3>
-                      <span className="text-[8.5px] font-bold text-gray-500 lowercase tracking-tighter">
+                      <span style={{ fontSize: '8.5px', fontWeight: 700, color: '#6b7280', textTransform: 'lowercase' }}>
                         {job.period}
                       </span>
                     </div>
-                    <div className="text-[8.5px] font-extrabold text-gray-600 uppercase tracking-wide">
+                    <div style={{ fontSize: '8.5px', fontWeight: 800, color: '#4b5563', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                       {job.company}, {job.location}
                     </div>
-                    <ul className="space-y-1 mt-1">
+                    <ul style={{ margin: '0.25rem 0 0 0', paddingLeft: '1rem', listStyleType: 'disc' }}>
                       {job.bullets.map((bullet, idx) => (
-                        <li key={idx} className="text-[8.5px] text-gray-800 leading-snug flex items-start">
-                          <span className="text-black mr-1.5 select-none">•</span>
-                          <span>{bullet}</span>
+                        <li key={idx} style={{ fontSize: '8.5px', color: '#1f2937', lineHeight: '1.3', marginBottom: '0.25rem' }}>
+                          {bullet}
                         </li>
                       ))}
                     </ul>
@@ -71,39 +84,30 @@ export default function CVPage() {
           </div>
 
           {/* ПРАВАЯ КОЛОНКА (Узкая): Контакты, Скиллы, Образование */}
-          <div className="col-span-5 space-y-5 pl-[2mm]">
+          <div style={{ gridColumn: 'span 5', display: 'flex', flexDirection: 'column', gap: '1.25rem', paddingLeft: '2mm' }}>
             
-            {/* Контакты сверху */}
-            <div className="text-[9px] font-medium text-gray-800 space-y-0.5 pt-1">
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-black">Email:</span>
-                <a href={`mailto:${cvData.meta.contacts.email}`} className="hover:underline">{cvData.meta.contacts.email}</a>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-black">Phone:</span>
-                <span>{cvData.meta.contacts.phone}</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-black">Web:</span>
-                <a href={`https://${cvData.meta.contacts.site}`} target="_blank" className="hover:underline font-bold text-black">{cvData.meta.contacts.site}</a>
-              </div>
+            {/* Контакты */}
+            <div style={{ fontSize: '9px', color: '#1f2937', display: 'flex', flexDirection: 'column', gap: '2px', paddingTop: '4px' }}>
+              <div><strong style={{ color: '#000000' }}>Email:</strong> {cvData.meta.contacts.email}</div>
+              <div><strong style={{ color: '#000000' }}>Phone:</strong> {cvData.meta.contacts.phone}</div>
+              <div><strong style={{ color: '#000000' }}>Web:</strong> <span style={{ fontWeight: 700, color: '#000000' }}>{cvData.meta.contacts.site}</span></div>
             </div>
 
             {/* Секция: CORE SKILLS */}
-            <div className="space-y-3">
-              <h2 className="text-[11px] font-black tracking-widest text-black uppercase border-b-2 border-black pb-0.5">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <h2 style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '0.1em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '2px', margin: 0 }}>
                 CORE SKILLS
               </h2>
               
-              <div className="space-y-3">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {cvData.skills_categories.map((cat, idx) => (
-                  <div key={idx} className="space-y-1">
-                    <h4 className="text-[9px] font-black text-black tracking-tight">
+                  <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <h4 style={{ fontSize: '9px', fontWeight: 900, color: '#000000', margin: 0 }}>
                       {cat.category}
                     </h4>
-                    <div className="flex flex-wrap gap-x-3 gap-y-1">
+                    <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: '0.75rem', rowGap: '0.25rem' }}>
                       {cat.items.map((skill, sIdx) => (
-                        <span key={sIdx} className="text-[8.5px] text-gray-700 font-medium leading-none">
+                        <span key={sIdx} style={{ fontSize: '8.5px', color: '#374151', fontWeight: 500 }}>
                           {skill}
                         </span>
                       ))}
@@ -114,19 +118,19 @@ export default function CVPage() {
             </div>
 
             {/* Секция: EDUCATION */}
-            <div className="space-y-3">
-              <h2 className="text-[11px] font-black tracking-widest text-black uppercase border-b-2 border-black pb-0.5">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <h2 style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '0.1em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '2px', margin: 0 }}>
                 EDUCATION
               </h2>
               
-              <div className="space-y-2">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 {cvData.education_pool.map((edu, idx) => (
-                  <div key={idx} className="space-y-0.5">
-                    <h4 className="text-[9px] font-black text-black uppercase leading-tight tracking-tight">
+                  <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
+                    <h4 style={{ fontSize: '9px', fontWeight: 900, color: '#000000', textTransform: 'uppercase', margin: 0, lineHeight: 1.1 }}>
                       {edu.degree}
                     </h4>
-                    <div className="text-[8.5px] font-bold text-gray-600">
-                      {edu.school} <span className="text-gray-400 font-normal">| {edu.period}</span>
+                    <div style={{ fontSize: '8.5px', fontWeight: 700, color: '#4b5563' }}>
+                      {edu.school} <span style={{ color: '#9ca3af', fontWeight: 400 }}>| {edu.period}</span>
                     </div>
                   </div>
                 ))}
@@ -136,11 +140,20 @@ export default function CVPage() {
           </div>
         </div>
 
-        {/* Фирменный вертикально-горизонтальный футер в правом нижнем углу как на макете */}
-        <div className="flex justify-between items-end border-t border-gray-200 pt-2 text-gray-400 text-[7.5px] font-bold tracking-widest uppercase">
+        {/* Подвал листа */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', borderTop: '1px solid #e5e7eb', paddingTop: '0.5rem', color: '#9ca3af', fontSize: '7.5px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
           <div>{cvData.meta.name}</div>
           <div>CV | RESUME</div>
         </div>
+
+        {/* Инжектим базовые печатные стили, чтобы скрыть серый фон при выводе в PDF */}
+        <style dangerouslySetInnerHTML={{__html: `
+          @media print {
+            body { background: none !important; padding: 0 !important; }
+            main { box-shadow: none !important; margin: 0 !important; padding: 10mm !important; }
+            .print-page { width: 210mm !important; height: 297mm !important; }
+          }
+        `}} />
 
       </main>
     </div>
