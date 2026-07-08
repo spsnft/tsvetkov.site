@@ -4,9 +4,8 @@ export default function CVPage() {
   return (
     <div style={{ backgroundColor: '#f3f4f6', minHeight: '100vh', padding: '2rem 0', color: '#1a1a1a', fontFamily: 'system-ui, sans-serif' }}>
       
-      {/* Контейнер листа А4 */}
-      <main style={{
-        className: 'print-page',
+         {/* Контейнер листа А4 */}
+      <main className="print-page" style={{
         width: '210mm',
         height: '297mm',
         backgroundColor: '#ffffff',
