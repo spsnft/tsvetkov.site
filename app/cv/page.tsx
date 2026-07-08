@@ -39,8 +39,8 @@ export default function CVPage() {
         {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР) */}
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10mm' }}>
           
-          {/* Левая часть хедера */}
-          <div style={{ width: '132mm' }}>
+          {/* Левая часть хедера: адаптирована под увеличенный аватар */}
+          <div style={{ width: '125mm' }}>
             <h1 style={{ fontSize: '3.3rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: '0.9', color: '#000000', margin: 0, whiteSpace: 'nowrap' }}>
               {cvData.meta.name}
             </h1>
@@ -63,8 +63,8 @@ export default function CVPage() {
             </div>
           </div>
 
-          {/* Правая часть хедера: Фото */}
-          <div style={{ width: '42mm', height: '46mm', overflow: 'hidden', borderRadius: '4mm', border: '1.5px solid #1a1a1a', flexShrink: 0 }}>
+          {/* Правая часть хедера: Увеличенное фото для баланса веса */}
+          <div style={{ width: '49mm', height: '55mm', overflow: 'hidden', borderRadius: '4mm', border: '1.5px solid #1a1a1a', flexShrink: 0 }}>
             <img 
               src="/avatar.png" 
               alt="Fedor Tsvetkov" 
@@ -111,7 +111,7 @@ export default function CVPage() {
 
           </div>
 
-          {/* ПРАВАЯ КОЛОНКА: Сбалансированное распределение с плавающим Education */}
+          {/* ПРАВАЯ КОЛОНКА: Разжатые скиллы + плавающий Education */}
           <div style={{ 
             gridColumn: 'span 5', 
             display: 'flex', 
@@ -132,7 +132,7 @@ export default function CVPage() {
                   <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
                     Marketing Strategy & Global Growth
                   </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap увеличен до 6px */}
                     {[
                       "Global Go-To-Market (GTM) Strategy & Execution",
                       "Performance Marketing Architecture",
@@ -151,7 +151,7 @@ export default function CVPage() {
                   <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
                     MarTech Infrastructure & Automation
                   </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap увеличен до 6px */}
                     {[
                       "B2B Business Digitization & Systems Design",
                       "Enterprise CRM Architecture",
@@ -171,7 +171,7 @@ export default function CVPage() {
                   <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
                     Executive Leadership & Operations
                   </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap увеличен до 6px */}
                     {[
                       "P&L & Media Budget Management",
                       "Team Scaling & Agile Leadership",
@@ -187,10 +187,10 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* ВЕРХНИЙ РАСПОР: Занимает 50% оставшейся пустоты */}
+            {/* ВЕРХНИЙ РАСПОР: Балансирует свободное пространство */}
             <div style={{ flexGrow: 1 }} />
 
-            {/* Секция: EDUCATION — Теперь висит точно посредине свободного пространства */}
+            {/* Секция: EDUCATION — центрирована в оставшейся нише */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
                 EDUCATION
@@ -210,7 +210,7 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* НИЖНИЙ РАСПОР: Занимает вторые 50% пустоты, не давая прилипнуть к футеру */}
+            {/* НИЖНИЙ РАСПОР: Защита от прилипания к футеру */}
             <div style={{ flexGrow: 1 }} />
 
           </div>
