@@ -4,7 +4,7 @@ export default function CVPage() {
   return (
     <div style={{ backgroundColor: '#f3f4f6', minHeight: '100vh', padding: '2rem 0', color: '#1a1a1a', fontFamily: 'system-ui, sans-serif' }}>
       
-         {/* Контейнер листа А4 */}
+      {/* Контейнер листа А4 */}
       <main className="print-page" style={{
         width: '210mm',
         height: '297mm',
@@ -33,12 +33,12 @@ export default function CVPage() {
                 <img 
                   src="/avatar.png" 
                   alt="Fedor Tsvetkov" 
-                  style={{ width: '100%', height: '100%', objectCover: 'cover', filter: 'grayscale(100%) contrast(105%)' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%) contrast(105%)' }}
                 />
               </div>
               
               <div>
-                <h1 style={{ fontSize: '1.5rem', fontWeight: 900, tracking: '-0.05em', textTransform: 'uppercase', lineHeight: 1, color: '#000000', margin: 0 }}>
+                <h1 style={{ fontSize: '1.5rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: 1, color: '#000000', margin: 0 }}>
                   {cvData.meta.name.split(' ')[0]}<br />
                   {cvData.meta.name.split(' ')[1]}
                 </h1>
@@ -58,7 +58,7 @@ export default function CVPage() {
                 {cvData.experience_pool.map((job) => (
                   <div key={job.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                      <h3 style={{ fontSize: '10px', fontWeight: 900, color: '#000000', margin: 0, tracking: '-0.02em' }}>
+                      <h3 style={{ fontSize: '10px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.02em' }}>
                         {job.role}
                       </h3>
                       <span style={{ fontSize: '8.5px', fontWeight: 700, color: '#6b7280', textTransform: 'lowercase' }}>
