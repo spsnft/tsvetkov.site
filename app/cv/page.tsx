@@ -73,7 +73,7 @@ export default function CVPage() {
                       {job.period}
                     </span>
                   </div>
-                  <div style={{ fontSize: '9px', fontTriangle: 'bold', fontWeight: 800, color: '#4a5568', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                  <div style={{ fontSize: '9px', fontWeight: 800, color: '#4a5568', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
                     {job.company}, {job.location}
                   </div>
                   <ul style={{ margin: '0.3rem 0 0 0', paddingLeft: '0.9rem', listStyleType: 'disc' }}>
