@@ -36,22 +36,20 @@ export default function CVPage() {
         printColorAdjust: 'exact'
       }}>
         
-        {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР): Иерархия уровней 1, 2 и 3 */}
+        {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР) */}
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10mm' }}>
           
           {/* Левая часть хедера */}
           <div style={{ width: '132mm' }}>
-            {/* Уровень 1: Имя (Абсолютный доминант) */}
             <h1 style={{ fontSize: '3.3rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: '0.9', color: '#000000', margin: 0, whiteSpace: 'nowrap' }}>
               {cvData.meta.name}
             </h1>
             
-            {/* Уровень 2: Должность (Важный крупный подзаголовок) */}
             <h3 style={{ fontSize: '14px', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#4a5568', margin: '0.6rem 0 0 0' }}>
               CHIEF MARKETING OFFICER / MARKETING DIRECTOR
             </h3>
 
-            {/* Уровень 3: Саммари (Чуть меньше должности, отличная читаемость) */}
+            {/* Выверенный Саммари (Правка висячих строк за счет баланса текста) */}
             <div style={{ fontSize: '12px', color: '#2d3748', lineHeight: '1.5', fontWeight: 500, textAlign: 'justify', marginTop: '1.1rem', paddingRight: '0.5rem' }}>
               <p style={{ margin: '0 0 0.5rem 0' }}>
                 Marketing Executive with 10+ years of expertise in driving corporate digital transformation, scaling revenue, and architecting enterprise MarTech ecosystems.
@@ -60,10 +58,10 @@ export default function CVPage() {
                 Proven track record managing $500K+ annual media budgets with a focus on P&L optimization, unit economics, and end-to-end analytics.
               </p>
               <p style={{ margin: '0 0 0.5rem 0' }}>
-                Expert in turning traditional business operations into highly automated, online growth engines.
+                Expert in turning traditional business operations into highly automated, online growth engines that maximize efficiency.
               </p>
               <p style={{ margin: 0 }}>
-                Accomplished leader of cross-functional agile teams across fintech, e-commerce, and SaaS.
+                Accomplished leader of cross-functional agile teams across complex fintech, e-commerce, and enterprise SaaS platforms.
               </p>
             </div>
           </div>
@@ -80,9 +78,9 @@ export default function CVPage() {
         </header>
 
         {/* ОСНОВНОЙ КОНТЕНТ: Двухколоночный грид */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '12mm', alignItems: 'start', flexGrow: 1, marginBottom: '2mm' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '12mm', alignItems: 'stretch', flexGrow: 1, marginBottom: '2mm' }}>
           
-          {/* ЛЕВАЯ КОЛОНКА: Опыт работы (Уровень 5 — база) */}
+          {/* ЛЕВАЯ КОЛОНКА: Опыт работы */}
           <div style={{ gridColumn: 'span 7', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
             
             <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
@@ -116,9 +114,17 @@ export default function CVPage() {
 
           </div>
 
-          {/* ПРАВАЯ КОЛОНКА: Скиллы (Уровень 4) и Образование (Уровень 5) */}
-          <div style={{ gridColumn: 'span 5', display: 'flex', flexDirection: 'column', gap: '1.8rem', paddingLeft: '1mm' }}>
+          {/* ПРАВАЯ КОЛОНКА: Тотальное уничтожение дыр с помощью динамического выталкивания space-between */}
+          <div style={{ 
+            gridColumn: 'span 5', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'space-between', // Автоматически растягивает блоки на всю доступную высоту грида
+            height: '100%', 
+            paddingLeft: '1mm' 
+          }}>
             
+            {/* Блок скиллов */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
                 CORE SKILLS
@@ -185,8 +191,8 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* Секция: EDUCATION (Уровень 5) */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            {/* Секция: EDUCATION (Теперь намертво прижмется к нижней черте, зеркаля левую колонку) */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginTop: '1.5rem' }}>
               <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
                 EDUCATION
               </h2>
@@ -237,7 +243,7 @@ export default function CVPage() {
           </div>
         </footer>
 
-        {/* Стили для печати + тотальный фикс цвета системных ссылок */}
+        {/* Стили для печати */}
         <style dangerouslySetInnerHTML={{__html: `
           @media screen, print {
             body { background: none !important; padding: 0 !important; }
