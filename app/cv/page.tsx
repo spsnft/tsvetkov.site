@@ -49,19 +49,16 @@ export default function CVPage() {
               CHIEF MARKETING OFFICER / MARKETING DIRECTOR
             </h3>
 
-            {/* Выверенный Саммари (Правка висячих строк за счет баланса текста) */}
+            {/* Выверенный Саммари — Строго по скриншоту image_7.png */}
             <div style={{ fontSize: '12px', color: '#2d3748', lineHeight: '1.5', fontWeight: 500, textAlign: 'justify', marginTop: '1.1rem', paddingRight: '0.5rem' }}>
-              <p style={{ margin: '0 0 0.5rem 0' }}>
+              <p style={{ margin: '0 0 0.6rem 0' }}>
                 Marketing Executive with 10+ years of expertise in driving corporate digital transformation, scaling revenue, and architecting enterprise MarTech ecosystems.
               </p>
-              <p style={{ margin: '0 0 0.5rem 0' }}>
+              <p style={{ margin: '0 0 0.6rem 0' }}>
                 Proven track record managing $500K+ annual media budgets with a focus on P&L optimization, unit economics, and end-to-end analytics.
               </p>
-              <p style={{ margin: '0 0 0.5rem 0' }}>
-                Expert in turning traditional business operations into highly automated, online growth engines that maximize efficiency.
-              </p>
               <p style={{ margin: 0 }}>
-                Accomplished leader of cross-functional agile teams across complex fintech, e-commerce, and enterprise SaaS platforms.
+                Expert in turning business operations into automated, online growth engines that maximize efficiency. Accomplished leader of cross-functional agile teams across complex fintech, e-commerce, and enterprise SaaS platforms.
               </p>
             </div>
           </div>
@@ -114,12 +111,11 @@ export default function CVPage() {
 
           </div>
 
-          {/* ПРАВАЯ КОЛОНКА: Тотальное уничтожение дыр с помощью динамического выталкивания space-between */}
+          {/* ПРАВАЯ КОЛОНКА: Сбалансированное распределение с плавающим Education */}
           <div style={{ 
             gridColumn: 'span 5', 
             display: 'flex', 
             flexDirection: 'column', 
-            justifyContent: 'space-between', // Автоматически растягивает блоки на всю доступную высоту грида
             height: '100%', 
             paddingLeft: '1mm' 
           }}>
@@ -191,8 +187,11 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* Секция: EDUCATION (Теперь намертво прижмется к нижней черте, зеркаля левую колонку) */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginTop: '1.5rem' }}>
+            {/* ВЕРХНИЙ РАСПОР: Занимает 50% оставшейся пустоты */}
+            <div style={{ flexGrow: 1 }} />
+
+            {/* Секция: EDUCATION — Теперь висит точно посредине свободного пространства */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
                 EDUCATION
               </h2>
@@ -210,6 +209,9 @@ export default function CVPage() {
                 ))}
               </div>
             </div>
+
+            {/* НИЖНИЙ РАСПОР: Занимает вторые 50% пустоты, не давая прилипнуть к футеру */}
+            <div style={{ flexGrow: 1 }} />
 
           </div>
         </div>
