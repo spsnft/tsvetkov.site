@@ -34,8 +34,8 @@ export default function CVPage() {
             </p>
           </div>
 
-          {/* Правая часть хедера: Фото уехало НАПРАВО */}
-          <div style={{ width: '42mm', height: '48mm', overflow: 'hidden', rounded: '5mm', borderRadius: '5mm', border: '1.5px solid #1a1a1a', flexShrink: 0 }}>
+          {/* Правая часть хедера: Фото */}
+          <div style={{ width: '42mm', height: '48mm', overflow: 'hidden', borderRadius: '5mm', border: '1.5px solid #1a1a1a', flexShrink: 0 }}>
             <img 
               src="/avatar.png" 
               alt="Fedor Tsvetkov" 
@@ -83,7 +83,7 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* Контакты в самом низу левой колонки (с активной ссылкой на сайт) */}
+            {/* Контакты в самом низу левой колонки */}
             <div style={{ fontSize: '9.5px', color: '#000000', fontWeight: 700, display: 'flex', gap: '1.25rem', borderTop: '1px solid #cbd5e1', paddingTop: '0.75rem', marginTop: 'auto' }}>
               <div>{cvData.meta.contacts.email}</div>
               <div>{cvData.meta.contacts.phone}</div>
