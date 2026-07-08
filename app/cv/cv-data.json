@@ -1,1 +1,49 @@
-
+{
+  "meta": {
+    "name": "Fedor Tsvetkov",
+    "base_headline": "Growth Architect | Building Scalable Marketing Systems",
+    "contacts": {
+      "email": "fediatsvetkov@gmail.com",
+      "phone": "+66-95-518-37-83",
+      "site": "tsvetkov.site"
+    }
+  },
+  "experience_pool": [
+    {
+      "id": "bndretail",
+      "company": "BNDretail.ltd",
+      "role": "Head of Marketing Operations",
+      "period": "Sep 2023 - May 2026",
+      "bullets": [
+        "Architected and deployed core digital marketing infrastructure from scratch, driving a 7x increase in monthly revenue within the first 18 months.",
+        "Managed multi-channel digital performance campaigns across Google Ads and Meta Ads, maintaining consistent, high-converting inbound traffic funnels.",
+        "Deployed advanced AI-driven automation workflows for optimized lead processing, customer retention, and lifecycle marketing management.",
+        "Integrated proprietary CRM architecture with custom order-management systems, directly increasing LTV and repeat purchase rates."
+      ]
+    },
+    {
+      "id": "setka",
+      "company": "Setka",
+      "role": "Marketing Strategy Lead",
+      "period": "Mar 2023 - Mar 2024",
+      "bullets": [
+        "Directed comprehensive user acquisition and performance campaigns for iOS and Android applications, specifically targeting competitive US and Western European markets.",
+        "Successfully maintained and optimized CAC within $3-$5 range in saturated, high-intent English-speaking markets.",
+        "Managed and mentored a cross-functional, agile, and distributed growth team to ensure rapid hypothesis testing and iterative execution."
+      ]
+    },
+    {
+      "id": "new_holland",
+      "company": "New Holland Agriculture (Metal-Fach)",
+      "role": "Chief Marketing Officer",
+      "period": "Feb 2018 - Feb 2023",
+      "bullets": [
+        "Accountable for a $500K+ annual media and marketing budget across all digital and corporate channels, consistently delivering positive ROI.",
+        "Successfully transitioned a traditional, offline-heavy B2B enterprise entirely into high-performing digital inbound channels.",
+        "Scaled qualified inbound lead generation from absolute zero to 1,000+ verified leads per month via Google Ads, content marketing, and scalable SEO funnels.",
+        "Directed a comprehensive international SEO program, successfully ranking primary product pages into Top 5–50 spots for high-volume query groups.",
+        "Coordinated digital market expansion and localized strategy executions across 40+ international markets (EU, CIS, Africa) in tandem with European HQ."
+      ]
+    }
+  ]
+}
