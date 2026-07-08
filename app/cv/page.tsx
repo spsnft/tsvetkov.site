@@ -39,9 +39,10 @@ export default function CVPage() {
         {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР) */}
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10mm' }}>
           
-          {/* Левая часть хедера: адаптирована под увеличенный аватар */}
-          <div style={{ width: '125mm' }}>
-            <h1 style={{ fontSize: '3.3rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: '0.9', color: '#000000', margin: 0, whiteSpace: 'nowrap' }}>
+          {/* Левая часть хедера */}
+          <div style={{ width: '122mm' }}>
+            {/* Оптический фикс: marginLeft: '-4px' убирает микро-зазор шрифта и выравнивает букву F строго по сетке */}
+            <h1 style={{ fontSize: '3.3rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: '0.9', color: '#000000', margin: 0, marginLeft: '-4px', whiteSpace: 'nowrap' }}>
               {cvData.meta.name}
             </h1>
             
@@ -49,7 +50,7 @@ export default function CVPage() {
               CHIEF MARKETING OFFICER / MARKETING DIRECTOR
             </h3>
 
-            {/* Выверенный Саммари — Строго по скриншоту image_7.png */}
+            {/* Выверенный Саммари (Плотная журнальная верстка) */}
             <div style={{ fontSize: '12px', color: '#2d3748', lineHeight: '1.5', fontWeight: 500, textAlign: 'justify', marginTop: '1.1rem', paddingRight: '0.5rem' }}>
               <p style={{ margin: '0 0 0.6rem 0' }}>
                 Marketing Executive with 10+ years of expertise in driving corporate digital transformation, scaling revenue, and architecting enterprise MarTech ecosystems.
@@ -63,8 +64,8 @@ export default function CVPage() {
             </div>
           </div>
 
-          {/* Правая часть хедера: Увеличенное фото для баланса веса */}
-          <div style={{ width: '49mm', height: '55mm', overflow: 'hidden', borderRadius: '4mm', border: '1.5px solid #1a1a1a', flexShrink: 0 }}>
+          {/* Правая часть хедера: Большое статусное фото 52x65мм */}
+          <div style={{ width: '52mm', height: '65mm', overflow: 'hidden', borderRadius: '4mm', border: '1.5px solid #1a1a1a', flexShrink: 0 }}>
             <img 
               src="/avatar.png" 
               alt="Fedor Tsvetkov" 
@@ -111,7 +112,7 @@ export default function CVPage() {
 
           </div>
 
-          {/* ПРАВАЯ КОЛОНКА: Разжатые скиллы + плавающий Education */}
+          {/* ПРАВАЯ КОЛОНКА: Разжатые скиллы (gap 6px) + Идеально сцентрированный Education */}
           <div style={{ 
             gridColumn: 'span 5', 
             display: 'flex', 
@@ -132,7 +133,7 @@ export default function CVPage() {
                   <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
                     Marketing Strategy & Global Growth
                   </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap увеличен до 6px */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap 6px для читаемости */}
                     {[
                       "Global Go-To-Market (GTM) Strategy & Execution",
                       "Performance Marketing Architecture",
@@ -151,7 +152,7 @@ export default function CVPage() {
                   <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
                     MarTech Infrastructure & Automation
                   </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap увеличен до 6px */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap 6px для читаемости */}
                     {[
                       "B2B Business Digitization & Systems Design",
                       "Enterprise CRM Architecture",
@@ -171,7 +172,7 @@ export default function CVPage() {
                   <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
                     Executive Leadership & Operations
                   </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap увеличен до 6px */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap 6px для читаемости */}
                     {[
                       "P&L & Media Budget Management",
                       "Team Scaling & Agile Leadership",
@@ -187,10 +188,10 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* ВЕРХНИЙ РАСПОР: Балансирует свободное пространство */}
+            {/* ВЕРХНИЙ РАСПОР: Забирает половину пустой высоты */}
             <div style={{ flexGrow: 1 }} />
 
-            {/* Секция: EDUCATION — центрирована в оставшейся нише */}
+            {/* Секция: EDUCATION — Парит ровно посередине между скиллами и футером */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
                 EDUCATION
@@ -210,7 +211,7 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* НИЖНИЙ РАСПОР: Защита от прилипания к футеру */}
+            {/* НИЖНИЙ РАСПОР: Забирает вторую половину пустой высоты, балансируя блок */}
             <div style={{ flexGrow: 1 }} />
 
           </div>
