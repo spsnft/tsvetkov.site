@@ -9,9 +9,6 @@ export default function CVPage() {
     return job;
   });
 
-  // Новый директорский summary (Вариант 1)
-  const executiveSummary = "Data-Driven Marketing Executive (CMO / Growth Architect) with 10+ years of expertise in driving corporate digital transformation, scaling international revenue, and architecting enterprise MarTech ecosystems. Proven track record managing $500K+ annual media budgets with a focus on P&L optimization, unit economics, and end-to-end analytics. Expert in turning traditional and B2B business operations into highly automated, online growth engines and leading cross-functional agile teams across fintech, e-commerce, and SaaS.";
-
   return (
     <div style={{ 
       backgroundColor: '#d1d5db', 
@@ -19,9 +16,9 @@ export default function CVPage() {
       padding: '2rem 0', 
       color: '#1a1a1a', 
       fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-      display: 'flex',          // Фикс центрирования: включаем flex
-      justifyContent: 'center', // Фикс центрирования: ровняем по горизонтали
-      alignItems: 'center'      // Фикс центрирования: ровняем по вертикали
+      display: 'flex',          // Жесткое центрирование по горизонтали
+      justifyContent: 'center', 
+      alignItems: 'center'      
     }}>
       
       {/* Контейнер листа А4 */}
@@ -39,23 +36,35 @@ export default function CVPage() {
         printColorAdjust: 'exact'
       }}>
         
-        {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР): Монументальное имя + Должность + Фото */}
+        {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР): Монументальное имя во всю ширину + Должность + Фото */}
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10mm' }}>
           
-          {/* Левая часть хедера: Крупное имя, Должность и Саммари */}
+          {/* Левая часть хедера: Крупное имя, Должность и Саммари по абзацам */}
           <div style={{ width: '132mm' }}>
             <h1 style={{ fontSize: '3.3rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: '0.9', color: '#000000', margin: 0, whiteSpace: 'nowrap' }}>
               {cvData.meta.name}
             </h1>
             
             {/* Твоя целевая топ-должность */}
-            <h3 style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4a5568', margin: '0.4rem 0 0 0' }}>
-              CHIEF MARKETING OFFICER / GROWTH ARCHITECT
+            <h3 style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4a5568', margin: '0.5rem 0 0 0' }}>
+              CHIEF MARKETING OFFICER / MARKETING DIRECTOR
             </h3>
 
-            <p style={{ fontSize: '10.5px', color: '#2d3748', lineHeight: '1.5', fontWeight: 500, textAlign: 'justify', marginTop: '0.85rem', paddingRight: '0.5rem', marginBottom: 0 }}>
-              {executiveSummary}
-            </p>
+            {/* Выверенный Саммари с делением на абзацы */}
+            <div style={{ fontSize: '10.5px', color: '#2d3748', lineHeight: '1.5', fontWeight: 500, textAlign: 'justify', marginTop: '1rem', paddingRight: '0.5rem' }}>
+              <p style={{ margin: '0 0 0.4rem 0' }}>
+                Marketing Executive with 10+ years of expertise in driving corporate digital transformation, scaling revenue, and architecting enterprise MarTech ecosystems.[span_3](start_span)[span_3](end_span)
+              </p>
+              <p style={{ margin: '0 0 0.4rem 0' }}>
+                Proven track record managing $500K+ annual media budgets with a focus on P&L optimization, unit economics, and end-to-end analytics.[span_4](start_span)[span_4](end_span)
+              </p>
+              <p style={{ margin: '0 0 0.4rem 0' }}>
+                Expert in turning traditional business operations into highly automated, online growth engines.[span_5](start_span)[span_5](end_span)
+              </p>
+              <p style={{ margin: 0 }}>
+                Accomplished leader of cross-functional agile teams across fintech, e-commerce, and SaaS.[span_6](start_span)[span_6](end_span)
+              </p>
+            </div>
           </div>
 
           {/* Правая часть хедера: Фото */}
@@ -106,7 +115,7 @@ export default function CVPage() {
 
           </div>
 
-          {/* ПРАВАЯ КОЛОНКА: Скиллы и Образование */}
+          {/* ПРАВАЯ КОЛОНКА: Скиллы и Образование по твоей структуре */}
           <div style={{ gridColumn: 'span 5', display: 'flex', flexDirection: 'column', gap: '2.5rem', paddingLeft: '1mm' }}>
             
             {/* Секция: CORE SKILLS */}
@@ -124,13 +133,13 @@ export default function CVPage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     {[
                       "Global Go-To-Market (GTM) Strategy & Execution",
-                      "P&L & Media Budget Management ($500K+)",
-                      "High-Budget Performance Marketing Architecture",
-                      "Global Market Expansion (40+ Countries)",
-                      "Data-Driven User Acquisition Strategy",
-                      "Cross-Functional Team Scaling & Agile Leadership"
+                      "P&L & Media Budget Management",
+                      "Performance Marketing Architecture",
+                      "Global Market Expansion",
+                      "User Acquisition Strategy",
+                      "Team Scaling & Agile Leadership"
                     ].map((skill, sIdx) => (
-                      <span key={sIdx} style={{ fontSize: '10px', color: '#2d3748', fontWeight: 500, lineHeight: '1.3' }}>
+                      <span key={sIdx} style={{ fontSize: '10px', color: '#2d3748', fontWeight: 500, lineHeight: '1.35' }}>
                         {skill}
                       </span>
                     ))}
@@ -145,13 +154,13 @@ export default function CVPage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     {[
                       "B2B Business Digitization & Systems Design",
-                      "Enterprise CRM Architecture (amoCRM Automation)",
+                      "Enterprise CRM Architecture",
                       "AI-Driven Marketing & Corporate Workflows",
                       "End-to-End Data & Analytics Synchronization",
                       "Unit Economics & Customer LTV Optimization",
-                      "Web3 Growth Protocols & Tokenomics Alignment"
+                      "Web3 Growth & Tokenomics Strategy"
                     ].map((skill, sIdx) => (
-                      <span key={sIdx} style={{ fontSize: '10px', color: '#2d3748', fontWeight: 500, lineHeight: '1.3' }}>
+                      <span key={sIdx} style={{ fontSize: '10px', color: '#2d3748', fontWeight: 500, lineHeight: '1.35' }}>
                         {skill}
                       </span>
                     ))}
@@ -183,7 +192,7 @@ export default function CVPage() {
           </div>
         </div>
 
-        {/* 3-КОЛОНОЧНЫЙ ДИРЕКТОРСКИЙ ФУТЕР БЕЗ ДУБЛИРОВАНИЯ ИМЕНИ */}
+        {/* 3-КОЛОНОЧНЫЙ ЧИСТЫЙ ФУТЕР БЕЗ ДУБЛИРОВАНИЯ ИМЕНИ */}
         <footer style={{ 
           display: 'grid', 
           gridTemplateColumns: '1.2fr 1fr 1fr', 
@@ -201,7 +210,8 @@ export default function CVPage() {
             </a>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <span className="phone-link" style={{ color: '#1a1a1a', textDecoration: 'none', fontStyle: 'normal' }}>
+            {/* Защищаем номер от принудительного окрашивания в синий цвет */}
+            <span className="phone-link" style={{ color: '#1a1a1a', textDecoration: 'none', fontStyle: 'normal', fontWeight: 900 }}>
               +66-95-518-37-83
             </span>
           </div>
@@ -212,13 +222,13 @@ export default function CVPage() {
           </div>
         </footer>
 
-        {/* Стили для печати + фикс цвета ссылок */}
+        {/* Стили для печати + тотальный фикс цвета системных ссылок */}
         <style dangerouslySetInnerHTML={{__html: `
           @media screen, print {
             body { background: none !important; padding: 0 !important; }
             main { box-shadow: none !important; margin: 0 !important; padding: 12mm 12mm !important; background-color: #f2efea !important; }
             .print-page { width: 210mm !important; height: 297mm !important; }
-            /* Подавляем любые попытки Safari перекрасить телефон */
+            /* Подавляем любые попытки мобильных браузеров перекрасить телефон */
             .phone-link, a[href^="tel"] { color: #1a1a1a !important; text-decoration: none !important; pointer-events: none !important; }
           }
         `}} />
