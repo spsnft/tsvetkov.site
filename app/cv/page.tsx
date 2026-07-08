@@ -9,15 +9,26 @@ export default function CVPage() {
     return job;
   });
 
+  // Новый директорский summary (Вариант 1)
+  const executiveSummary = "Data-Driven Marketing Executive (CMO / Growth Architect) with 10+ years of expertise in driving corporate digital transformation, scaling international revenue, and architecting enterprise MarTech ecosystems. Proven track record managing $500K+ annual media budgets with a focus on P&L optimization, unit economics, and end-to-end analytics. Expert in turning traditional and B2B business operations into highly automated, online growth engines and leading cross-functional agile teams across fintech, e-commerce, and SaaS.";
+
   return (
-    <div style={{ backgroundColor: '#d1d5db', minHeight: '100vh', padding: '2rem 0', color: '#1a1a1a', fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif' }}>
+    <div style={{ 
+      backgroundColor: '#d1d5db', 
+      minHeight: '100vh', 
+      padding: '2rem 0', 
+      color: '#1a1a1a', 
+      fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+      display: 'flex',          // Фикс центрирования: включаем flex
+      justifyContent: 'center', // Фикс центрирования: ровняем по горизонтали
+      alignItems: 'center'      // Фикс центрирования: ровняем по вертикали
+    }}>
       
       {/* Контейнер листа А4 */}
       <main className="print-page" style={{
         width: '210mm',
         height: '297mm',
         backgroundColor: '#f2efea', // Плотный бежевый оттенок дорогой верже-бумаги
-        margin: '0 auto',
         padding: '16mm 14mm 12mm 14mm',
         boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.15)',
         display: 'flex',
@@ -28,16 +39,22 @@ export default function CVPage() {
         printColorAdjust: 'exact'
       }}>
         
-        {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР): Монументальное имя во всю ширину + Фото */}
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10mm' }}>
+        {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР): Монументальное имя + Должность + Фото */}
+        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10mm' }}>
           
-          {/* Левая часть хедера: Крупное имя + Саммари */}
+          {/* Левая часть хедера: Крупное имя, Должность и Саммари */}
           <div style={{ width: '132mm' }}>
-            <h1 style={{ fontSize: '3.3rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: '0.95', color: '#000000', margin: 0, whiteSpace: 'nowrap' }}>
+            <h1 style={{ fontSize: '3.3rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: '0.9', color: '#000000', margin: 0, whiteSpace: 'nowrap' }}>
               {cvData.meta.name}
             </h1>
-            <p style={{ fontSize: '10.5px', color: '#2d3748', lineHeight: '1.5', fontWeight: 500, textAlign: 'justify', marginTop: '1rem', paddingRight: '0.5rem', marginBottom: 0 }}>
-              {cvData.meta.summary}
+            
+            {/* Твоя целевая топ-должность */}
+            <h3 style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#4a5568', margin: '0.4rem 0 0 0' }}>
+              CHIEF MARKETING OFFICER / GROWTH ARCHITECT
+            </h3>
+
+            <p style={{ fontSize: '10.5px', color: '#2d3748', lineHeight: '1.5', fontWeight: 500, textAlign: 'justify', marginTop: '0.85rem', paddingRight: '0.5rem', marginBottom: 0 }}>
+              {executiveSummary}
             </p>
           </div>
 
@@ -52,7 +69,7 @@ export default function CVPage() {
 
         </header>
 
-        {/* ОСНОВНОЙ КОНТЕНТ: Двухколоночный грид с распределенной высотой */}
+        {/* ОСНОВНОЙ КОНТЕНТ: Двухколоночный грид */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '12mm', alignItems: 'start', flexGrow: 1, marginBottom: '8mm' }}>
           
           {/* ЛЕВАЯ КОЛОНКА: Опыт работы */}
@@ -66,7 +83,7 @@ export default function CVPage() {
               {updatedExperience.map((job) => (
                 <div key={job.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <h3 style={{ fontSize: '11.5px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
+                    <h3 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
                       {job.role}
                     </h3>
                     <span style={{ fontSize: '9.5px', fontWeight: 700, color: '#4a5568', textTransform: 'lowercase', letterSpacing: '-0.01em' }}>
@@ -89,7 +106,7 @@ export default function CVPage() {
 
           </div>
 
-          {/* ПРАВАЯ КОЛОНКА: Сбалансированные по высоте Скиллы и Образование */}
+          {/* ПРАВАЯ КОЛОНКА: Скиллы и Образование */}
           <div style={{ gridColumn: 'span 5', display: 'flex', flexDirection: 'column', gap: '2.5rem', paddingLeft: '1mm' }}>
             
             {/* Секция: CORE SKILLS */}
@@ -166,10 +183,10 @@ export default function CVPage() {
           </div>
         </div>
 
-        {/* 3-КОЛОНОЧНЫЙ ЧИСТЫЙ ФУТЕР БЕЗ ИМЕНИ */}
+        {/* 3-КОЛОНОЧНЫЙ ДИРЕКТОРСКИЙ ФУТЕР БЕЗ ДУБЛИРОВАНИЯ ИМЕНИ */}
         <footer style={{ 
           display: 'grid', 
-          gridTemplateColumns: '1fr 1fr 1fr', 
+          gridTemplateColumns: '1.2fr 1fr 1fr', 
           borderTop: '1.5px solid #1a1a1a', 
           paddingTop: '0.6rem', 
           color: '#000000', 
@@ -179,29 +196,30 @@ export default function CVPage() {
           textTransform: 'uppercase' 
         }}>
           <div>
-            <a href="mailto:fedor@tsvetkov.site" style={{ color: '#000000', textDecoration: 'none' }}>fedor@tsvetkov.site</a>
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            {/* Явно глушим синий цвет ссылки для мобильных устройств */}
-            <a href="tel:+66955183783" className="phone-link" style={{ color: '#000000', textDecoration: 'none', pointerEvents: 'none' }}>
-              +66-95-518-37-83
+            <a href="mailto:fedor@tsvetkov.site" style={{ color: '#000000', textDecoration: 'none', fontWeight: 900 }}>
+              fedor@tsvetkov.site
             </a>
           </div>
+          <div style={{ textAlign: 'center' }}>
+            <span className="phone-link" style={{ color: '#1a1a1a', textDecoration: 'none', fontStyle: 'normal' }}>
+              +66-95-518-37-83
+            </span>
+          </div>
           <div style={{ textAlign: 'right' }}>
-            <a href={`https://${cvData.meta.contacts.site}`} target="_blank" rel="noopener noreferrer" style={{ color: '#000000', textDecoration: 'none', borderBottom: '1px solid #1a1a1a', fontWeight: 900 }}>
+            <a href={`https://${cvData.meta.contacts.site}`} target="_blank" rel="noopener noreferrer" style={{ color: '#000000', textDecoration: 'none', fontWeight: 900 }}>
               {cvData.meta.contacts.site}
             </a>
           </div>
         </footer>
 
-        {/* Стили для печати + жесткий фикс системного цвета ссылок */}
+        {/* Стили для печати + фикс цвета ссылок */}
         <style dangerouslySetInnerHTML={{__html: `
           @media screen, print {
             body { background: none !important; padding: 0 !important; }
             main { box-shadow: none !important; margin: 0 !important; padding: 12mm 12mm !important; background-color: #f2efea !important; }
             .print-page { width: 210mm !important; height: 297mm !important; }
-            /* Железобетонный запрет браузерам подсвечивать телефон синим */
-            a.phone-link, a[href^="tel"] { color: #000000 !important; text-decoration: none !important; }
+            /* Подавляем любые попытки Safari перекрасить телефон */
+            .phone-link, a[href^="tel"] { color: #1a1a1a !important; text-decoration: none !important; pointer-events: none !important; }
           }
         `}} />
 
