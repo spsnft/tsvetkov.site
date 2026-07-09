@@ -67,7 +67,7 @@ export default function CVPage() {
           {/* Фото 52x65мм */}
           <div style={{ width: '52mm', height: '65mm', overflow: 'hidden', borderRadius: '4mm', border: '1.5px solid #1a1a1a', flexShrink: 0 }}>
             <img 
-              src="/avatar.png" 
+              src="/avatar.jpeg" 
               alt={cvData.meta.name} 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
