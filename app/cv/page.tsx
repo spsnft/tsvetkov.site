@@ -1,13 +1,18 @@
 import cvData from './cv-data.json';
 
 export default function CVPage() {
-  // Форсируем правильные даты для BNDRetail напрямую в шаблоне для надежности
-  const updatedExperience = cvData.experience_pool.map(job => {
-    if (job.id === 'bndretail') {
-      return { ...job, period: 'sep23-may26' };
-    }
-    return job;
-  });
+  // СЕЛЕКТОР ВАКАНСИЙ: Выбирай, какие ID из пула отобразить на странице (сохраняя лимит А4)
+  const activeJobIds = ['bndretail', 'setka', 'metal_fach'];
+
+  // Фильтруем и форсируем правильные даты
+  const displayedExperience = cvData.experience_pool
+    .filter(job => activeJobIds.includes(job.id))
+    .map(job => {
+      if (job.id === 'bndretail') {
+        return { ...job, period: 'sep23-may26' };
+      }
+      return job;
+    });
 
   return (
     <div style={{ 
@@ -21,11 +26,11 @@ export default function CVPage() {
       alignItems: 'center'      
     }}>
       
-      {/* Контейнер листа А4 */}
+      {/* Лист А4 */}
       <main className="print-page" style={{
         width: '210mm',
         height: '297mm',
-        backgroundColor: '#f2efea', // Плотный бежевый оттенок дорогой верже-бумаги
+        backgroundColor: '#f2efea', 
         padding: '16mm 14mm 12mm 14mm',
         boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.15)',
         display: 'flex',
@@ -36,57 +41,51 @@ export default function CVPage() {
         printColorAdjust: 'exact'
       }}>
         
-        {/* ВЕРХНЯЯ СЕКЦИЯ (ХЕДЕР) */}
+        {/* ХЕДЕР */}
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10mm' }}>
           
-          {/* Левая часть хедера */}
           <div style={{ width: '122mm' }}>
-            {/* Оптический фикс: marginLeft: '-4px' убирает микро-зазор шрифта и выравнивает букву F строго по сетке */}
+            {/* Оптический фикс: marginLeft: '-4px' идеально ровняет первую букву по сетке */}
             <h1 style={{ fontSize: '3.3rem', fontWeight: 900, letterSpacing: '-0.05em', textTransform: 'uppercase', lineHeight: '0.9', color: '#000000', margin: 0, marginLeft: '-4px', whiteSpace: 'nowrap' }}>
               {cvData.meta.name}
             </h1>
             
             <h3 style={{ fontSize: '14px', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#4a5568', margin: '0.6rem 0 0 0' }}>
-              CHIEF MARKETING OFFICER / MARKETING DIRECTOR
+              {cvData.meta.title}
             </h3>
 
-            {/* Выверенный Саммари (Плотная журнальная верстка) */}
+            {/* Саммари из JSON */}
             <div style={{ fontSize: '12px', color: '#2d3748', lineHeight: '1.5', fontWeight: 500, textAlign: 'justify', marginTop: '1.1rem', paddingRight: '0.5rem' }}>
-              <p style={{ margin: '0 0 0.6rem 0' }}>
-                Marketing Executive with 10+ years of expertise in driving corporate digital transformation, scaling revenue, and architecting enterprise MarTech ecosystems.
-              </p>
-              <p style={{ margin: '0 0 0.6rem 0' }}>
-                Proven track record managing $500K+ annual media budgets with a focus on P&L optimization, unit economics, and end-to-end analytics.
-              </p>
-              <p style={{ margin: 0 }}>
-                Expert in turning business operations into automated, online growth engines that maximize efficiency. Accomplished leader of cross-functional agile teams across complex fintech, e-commerce, and enterprise SaaS platforms.
-              </p>
+              {cvData.meta.summary.map((paragraph, idx) => (
+                <p key={idx} style={{ margin: idx === cvData.meta.summary.length - 1 ? 0 : '0 0 0.6rem 0' }}>
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
 
-          {/* Правая часть хедера: Большое статусное фото 52x65мм */}
+          {/* Фото 52x65мм */}
           <div style={{ width: '52mm', height: '65mm', overflow: 'hidden', borderRadius: '4mm', border: '1.5px solid #1a1a1a', flexShrink: 0 }}>
             <img 
               src="/avatar.png" 
-              alt="Fedor Tsvetkov" 
+              alt={cvData.meta.name} 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
 
         </header>
 
-        {/* ОСНОВНОЙ КОНТЕНТ: Двухколоночный грид */}
+        {/* ОСНОВНОЙ КОНТЕНТ */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '12mm', alignItems: 'stretch', flexGrow: 1, marginBottom: '2mm' }}>
           
-          {/* ЛЕВАЯ КОЛОНКА: Опыт работы */}
+          {/* ЛЕВАЯ КОЛОНКА */}
           <div style={{ gridColumn: 'span 7', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-            
             <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
               EXPERIENCE
             </h2>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.8rem' }}>
-              {updatedExperience.map((job) => (
+              {displayedExperience.map((job) => (
                 <div key={job.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                     <h3 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
@@ -109,89 +108,39 @@ export default function CVPage() {
                 </div>
               ))}
             </div>
-
           </div>
 
-          {/* ПРАВАЯ КОЛОНКА: Разжатые скиллы (gap 6px) + Идеально сцентрированный Education */}
-          <div style={{ 
-            gridColumn: 'span 5', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            height: '100%', 
-            paddingLeft: '1mm' 
-          }}>
+          {/* ПРАВАЯ КОЛОНКА */}
+          <div style={{ gridColumn: 'span 5', display: 'flex', flexDirection: 'column', height: '100%', paddingLeft: '1mm' }}>
             
-            {/* Блок скиллов */}
+            {/* Динамический блок скиллов */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
                 CORE SKILLS
               </h2>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                {/* Категория 1 */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
-                    Marketing Strategy & Global Growth
-                  </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap 6px для читаемости */}
-                    {[
-                      "Global Go-To-Market (GTM) Strategy & Execution",
-                      "Performance Marketing Architecture",
-                      "Global Market Expansion",
-                      "User Acquisition Strategy"
-                    ].map((skill, sIdx) => (
-                      <span key={sIdx} style={{ fontSize: '10.5px', color: '#2d3748', fontWeight: 500, lineHeight: '1.35' }}>
-                        {skill}
-                      </span>
-                    ))}
+                {cvData.skills_categories.map((cat, idx) => (
+                  <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
+                      {cat.category}
+                    </h4>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      {cat.items.map((skill, sIdx) => (
+                        <span key={sIdx} style={{ fontSize: '10.5px', color: '#2d3748', fontWeight: 500, lineHeight: '1.35' }}>
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-
-                {/* Категория 2 */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
-                    MarTech Infrastructure & Automation
-                  </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap 6px для читаемости */}
-                    {[
-                      "B2B Business Digitization & Systems Design",
-                      "Enterprise CRM Architecture",
-                      "AI-Driven Marketing & Corporate Workflows",
-                      "End-to-End Data & Analytics Synchronization",
-                      "Unit Economics & Customer LTV Optimization"
-                    ].map((skill, sIdx) => (
-                      <span key={sIdx} style={{ fontSize: '10.5px', color: '#2d3748', fontWeight: 500, lineHeight: '1.35' }}>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Категория 3 */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <h4 style={{ fontSize: '11px', fontWeight: 900, color: '#000000', margin: 0, letterSpacing: '-0.01em' }}>
-                    Executive Leadership & Operations
-                  </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> {/* Gap 6px для читаемости */}
-                    {[
-                      "P&L & Media Budget Management",
-                      "Team Scaling & Agile Leadership",
-                      "Web3 Growth & Tokenomics Strategy",
-                      "OKR & KPI Frameworks Implementation"
-                    ].map((skill, sIdx) => (
-                      <span key={sIdx} style={{ fontSize: '10.5px', color: '#2d3748', fontWeight: 500, lineHeight: '1.35' }}>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
-            {/* ВЕРХНИЙ РАСПОР: Забирает половину пустой высоты */}
+            {/* ВЕРХНИЙ РАСПОР */}
             <div style={{ flexGrow: 1 }} />
 
-            {/* Секция: EDUCATION — Парит ровно посередине между скиллами и футером */}
+            {/* Блок образования */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <h2 style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.12em', color: '#000000', borderBottom: '2px solid #000000', paddingBottom: '4px', margin: 0 }}>
                 EDUCATION
@@ -211,13 +160,13 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* НИЖНИЙ РАСПОР: Забирает вторую половину пустой высоты, балансируя блок */}
+            {/* НИЖНИЙ РАСПОР */}
             <div style={{ flexGrow: 1 }} />
 
           </div>
         </div>
 
-        {/* 3-КОЛОНОЧНЫЙ ЧИСТЫЙ ФУТЕР */}
+        {/* ФУТЕР */}
         <footer style={{ 
           display: 'grid', 
           gridTemplateColumns: '1.2fr 1fr 1fr', 
@@ -230,13 +179,13 @@ export default function CVPage() {
           textTransform: 'uppercase' 
         }}>
           <div>
-            <a href="mailto:fedor@tsvetkov.site" style={{ color: '#000000', textDecoration: 'none', fontWeight: 900 }}>
-              fedor@tsvetkov.site
+            <a href={`mailto:${cvData.meta.contacts.email}`} style={{ color: '#000000', textDecoration: 'none', fontWeight: 900 }}>
+              {cvData.meta.contacts.email}
             </a>
           </div>
           <div style={{ textAlign: 'center' }}>
             <span className="phone-link" style={{ color: '#1a1a1a', textDecoration: 'none', fontStyle: 'normal', fontWeight: 900 }}>
-              +66-95-518-37-83
+              {cvData.meta.contacts.phone}
             </span>
           </div>
           <div style={{ textAlign: 'right' }}>
@@ -246,7 +195,6 @@ export default function CVPage() {
           </div>
         </footer>
 
-        {/* Стили для печати */}
         <style dangerouslySetInnerHTML={{__html: `
           @media screen, print {
             body { background: none !important; padding: 0 !important; }
