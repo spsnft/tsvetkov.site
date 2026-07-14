@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { T } from '../../src/theme/tokens';
-import Logo from '../../src/ui/Logo'; // Проверь путь к твоему компоненту Logo
+import { Logo } from '../../src/ui/Logo'; // Исправлено: именованный импорт в фигурных скобках
 
 export default function HospitalityB2B() {
   const [lang, setLang] = useState<'en' | 'th'>('en');
@@ -122,8 +122,10 @@ export default function HospitalityB2B() {
         </div>
       </header>
 
-      {/* HERO SECTION */}
+      {/* MAIN CONTENT */}
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 10 }}>
+        
+        {/* HERO SECTION */}
         <section style={{ padding: '6rem 0 4rem 0', textAlign: 'center' }}>
           <span style={{ color: T.acc2, textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.85rem', fontWeight: 600 }}>
             {t.badge}
@@ -231,7 +233,7 @@ export default function HospitalityB2B() {
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
-        {/* ABOUT (Замена блока Integrator) */}
+        {/* ABOUT */}
         <section style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '3rem', borderRadius: '8px', textAlign: 'center' }}>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '1rem' }}>{t.aboutTitle}</h2>
           <p style={{ color: T.body, lineHeight: 1.6, maxWidth: '600px', margin: '0 auto 2rem auto' }}>
