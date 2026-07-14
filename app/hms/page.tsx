@@ -17,7 +17,7 @@ export default function HospitalityB2B() {
       btnLine: "Line",
       problemTitle: "How Much Money Are You Giving Away to OTAs?",
       prob1Title: "1. The 15-20% Leak",
-      prob1Desc: "Every booking through Agoda or Booking.com costs you up to 20%. We install a direct booking engine on your website. Guests pay securely, and the money goes straight to your account.",
+      prob1Desc: "Every booking through Agoda or Booking.com costs you up to 20%. We install a direct booking engine on your website so guests pay directly into your merchant account.",
       prob2Title: "2. Zero Direct Traffic",
       prob2Desc: "Without OTAs, who will find you? We set up your Google Maps profile for local search and deploy automated WhatsApp/Email campaigns to bring past guests back for a direct discount.",
       prob3Title: "3. Double-Booking Fines",
@@ -32,13 +32,15 @@ export default function HospitalityB2B() {
       tier1F4: "✓ Google Maps Setup",
       tier2Title: "STANDARD (10-30 Rooms)",
       tier2Desc: "For boutique hotels and resorts",
-      tier2F1: "✓ Everything in LITE",
+      tier2F1: "✓ Everything in ",
+      tier2F1Badge: "LITE",
       tier2F2: "✓ Connect 300+ OTA Channels",
       tier2F3: "✓ Guest Return System",
       tier2F4: "✓ Guides for your Staff (Visual SOPs)",
       tier3Title: "ENTERPRISE (30+ Rooms)",
-      tier3Desc: "For hotel chains and large management firms",
-      tier3F1: "✓ Everything in STANDARD",
+      tier3Desc: "For hotel chains and management firms",
+      tier3F1: "✓ Everything in ",
+      tier3F1Badge: "STANDARD",
       tier3F2: "✓ Anti-Theft Logs",
       tier3F3: "✓ Multichannel Ads Setup",
       tier3F4: "✓ Analytics Dashboard",
@@ -72,13 +74,15 @@ export default function HospitalityB2B() {
       tier1F4: "✓ Google Maps Setup",
       tier2Title: "STANDARD (10-30 ห้อง)",
       tier2Desc: "สำหรับบูติกโฮเทลและรีสอร์ท",
-      tier2F1: "✓ Everything in LITE",
+      tier2F1: "✓ Everything in ",
+      tier2F1Badge: "LITE",
       tier2F2: "✓ Connect 300+ OTA Channels",
       tier2F3: "✓ Guest Return System",
       tier2F4: "✓ Guides for your Staff (Visual SOPs)",
       tier3Title: "ENTERPRISE (30+ ห้อง)",
       tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการขนาดใหญ่",
-      tier3F1: "✓ Everything in STANDARD",
+      tier3F1: "✓ Everything in ",
+      tier3F1Badge: "STANDARD",
       tier3F2: "✓ Anti-Theft Logs",
       tier3F3: "✓ Multichannel Ads Setup",
       tier3F4: "✓ Analytics Dashboard",
@@ -208,7 +212,7 @@ export default function HospitalityB2B() {
 
           <div className="cases-grid">
             {/* LITE */}
-            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.muted}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <span style={{ color: T.muted, fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>{t.tier1Title}</span>
                 <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.5rem' }}>$500</h3>
@@ -229,7 +233,7 @@ export default function HospitalityB2B() {
                 <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.5rem' }}>$1,200</h3>
                 <p style={{ color: T.sub, fontSize: '0.9rem', marginTop: '0.5rem', marginBottom: '2rem' }}>{t.tier2Desc}</p>
                 <ul style={{ listStyleType: 'none', padding: 0, color: T.body, fontSize: '0.95rem', lineHeight: 1.8 }}>
-                  <li>{t.tier2F1}</li>
+                  <li>{t.tier2F1}<span style={{ color: T.muted, fontWeight: 600 }}>{t.tier2F1Badge}</span></li>
                   <li>{t.tier2F2}</li>
                   <li>{t.tier2F3}</li>
                   <li>{t.tier2F4}</li>
@@ -238,13 +242,13 @@ export default function HospitalityB2B() {
             </div>
 
             {/* ENTERPRISE */}
-            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.acc2}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <span style={{ color: T.muted, fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>{t.tier3Title}</span>
+                <span style={{ color: T.acc2, fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>{t.tier3Title}</span>
                 <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.5rem' }}>Custom</h3>
                 <p style={{ color: T.sub, fontSize: '0.9rem', marginTop: '0.5rem', marginBottom: '2rem' }}>{t.tier3Desc}</p>
                 <ul style={{ listStyleType: 'none', padding: 0, color: T.body, fontSize: '0.95rem', lineHeight: 1.8 }}>
-                  <li>{t.tier3F1}</li>
+                  <li>{t.tier3F1}<span style={{ color: T.accent, fontWeight: 600 }}>{t.tier3F1Badge}</span></li>
                   <li>{t.tier3F2}</li>
                   <li>{t.tier3F3}</li>
                   <li>{t.tier3F4}</li>
@@ -270,7 +274,7 @@ export default function HospitalityB2B() {
         {/* FINAL CTA */}
         <section style={{ textAlign: 'center', padding: '6rem 0 2rem 0' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '2.5rem' }}>{t.footerTitle}</h2>
-          <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer"
+          <a href="https://calendly.com/fedor_tsvetkov/30min" target="_blank" rel="noopener noreferrer"
             style={{ backgroundColor: T.accent, color: T.bg0, padding: '1.2rem 3rem', borderRadius: '4px', fontWeight: 700, textDecoration: 'none', display: 'inline-block', boxShadow: `0 0 30px ${T.glow}` }}>
             {t.footerBtn}
           </a>
