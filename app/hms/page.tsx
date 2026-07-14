@@ -2,30 +2,26 @@
 
 import React, { useState } from 'react';
 import { T } from '../../src/theme/tokens';
-import { Logo } from '../../src/ui/Logo'; // Исправлено: именованный импорт в фигурных скобках
+import { Logo } from '../../src/ui/Logo';
 
 export default function HospitalityB2B() {
   const [lang, setLang] = useState<'en' | 'th'>('en');
 
-  // Словари с упрощенным копирайтингом для ЛПР
   const content = {
     en: {
       badge: "Phuket Hospitality Solutions",
-      heroTitle: "Stop Paying 18% Commission to Booking.com & Agoda.",
-      heroSub: "I will connect your hotel directly to your guests, stop double-bookings, and keep 100% of the profit in your pocket.",
-      btnChat: "Discuss on WhatsApp",
-      btnLine: "Contact on Line",
-      problemTitle: "Why you are losing money right now",
-      prob1Title: "High Commissions",
-      prob1Desc: "Every time a guest books through an app, you lose up to 18% of your money. You are paying for guests that could book directly with you.",
-      prob2Title: "The Solution",
-      prob2Desc: "One simple system. When a guest books on Agoda, your Booking.com and website calendars close automatically. Zero mistakes.",
-      feat1: "No Double Bookings",
-      feat1Desc: "All calendars update in 1 second.",
-      feat2: "Easy for Staff",
-      feat2Desc: "Check-in guests and manage cleaning from one simple screen.",
-      feat3: "Direct Money",
-      feat3Desc: "Guests pay securely on your website. Money goes directly to you.",
+      heroTitle: "Stop Paying 15-20% Commission to Booking.com & Agoda.",
+      heroSub1: "Connect your hotel directly to guests and stop double-bookings.",
+      heroSub2: "Keep 100% of the profit in your pocket.",
+      btnChat: "WhatsApp",
+      btnLine: "Line",
+      problemTitle: "How Much Money Are You Giving Away to OTAs?",
+      prob1Title: "The 15-20% Leak",
+      prob1Desc: "Every booking through Agoda or Booking.com shaves off up to 20% of your margin. A direct booking engine keeps 100% of the guest's money in your business.",
+      prob2Title: "Instant Calendar Sync",
+      prob2Desc: "Manual updates lead to double-bookings and penalties. All calendars (Agoda, Booking, Airbnb) update automatically in 1 second. Zero manual errors.",
+      prob3Title: "Automated Cashflow",
+      prob3Desc: "Secure guest payments go directly to your accounts. Automated invoicing and digital check-ins eliminate front-desk chaos.",
       priceTitle: "Simple Pricing. No Hidden Fees.",
       priceSub: "Pay once for the setup. Keep all your direct booking money forever.",
       tier1Title: "LITE (1-10 Rooms)",
@@ -38,29 +34,31 @@ export default function HospitalityB2B() {
       tier2F1: "✓ Full system and calendar setup",
       tier2F2: "✓ Connect ALL apps (Airbnb, Expedia, etc.)",
       tier2F3: "✓ Staff training at your hotel",
-      aboutTitle: "Who am I?",
-      aboutDesc: "I am a digital business expert based in Phuket. I help hotels upgrade their systems so owners make more profit with less stress.",
-      aboutBtn: "View My Full Executive Profile",
+      tier3Title: "ENTERPRISE (30+ Rooms)",
+      tier3Desc: "Best for hotel chains and large management firms.",
+      tier3F1: "✓ Custom MarTech integration",
+      tier3F2: "✓ CRM for guest retention",
+      tier3F3: "✓ BI analytics dashboards",
+      aboutTitle: "Who are we?",
+      aboutDesc: "A local Phuket-based digital growth agency. We architect enterprise-grade hospitality systems that protect your margins and eliminate operational chaos.",
+      aboutBtn: "View Agency Profile",
       footerTitle: "Ready to make more money?",
       footerBtn: "Book a Free Hotel Audit"
     },
     th: {
       badge: "โซลูชั่นสำหรับโรงแรมในภูเก็ต",
-      heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 18% ให้ Booking.com และ Agoda",
-      heroSub: "เราจะเชื่อมต่อโรงแรมของคุณกับลูกค้าโดยตรง แก้ปัญหาการจองซ้ำซ้อน และให้คุณรับกำไรเต็ม 100%",
-      btnChat: "คุยผ่าน WhatsApp",
-      btnLine: "ติดต่อทาง Line",
-      problemTitle: "ทำไมคุณถึงเสียรายได้ในตอนนี้?",
-      prob1Title: "ค่าคอมมิชชั่นสูง",
-      prob1Desc: "ทุกครั้งที่ลูกค้าจองผ่านแอป คุณเสียเงินสูงสุด 18% คุณกำลังจ่ายเงินให้กับลูกค้าที่สามารถจองตรงกับคุณได้",
-      prob2Title: "ทางออกของเรา",
-      prob2Desc: "ระบบเดียวที่จัดการได้ทั้งหมด เมื่อลูกค้าจองผ่าน Agoda ปฏิทินใน Booking.com และเว็บไซต์ของคุณจะปิดอัตโนมัติ ไม่มีข้อผิดพลาด",
-      feat1: "หมดปัญหาจองซ้ำซ้อน",
-      feat1Desc: "ปฏิทินทั้งหมดอัปเดตตรงกันใน 1 วินาที",
-      feat2: "พนักงานทำงานง่ายขึ้น",
-      feat2Desc: "เช็คอินลูกค้าและจัดการทำความสะอาดได้ในหน้าจอเดียว",
-      feat3: "รับเงินโดยตรง",
-      feat3Desc: "ลูกค้าจ่ายเงินอย่างปลอดภัยบนเว็บไซต์ของคุณ เงินเข้าบัญชีคุณโดยตรง",
+      heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
+      heroSub1: "เชื่อมต่อโรงแรมของคุณกับลูกค้าโดยตรงและหยุดปัญหาการจองซ้ำซ้อน",
+      heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
+      btnChat: "WhatsApp",
+      btnLine: "Line",
+      problemTitle: "คุณกำลังเสียเงินให้แอปจองที่พักเท่าไหร่?",
+      prob1Title: "เสียกำไร 15-20%",
+      prob1Desc: "การจองผ่าน Agoda หรือ Booking.com หักกำไรคุณสูงสุด 20% ระบบจองตรงช่วยให้คุณเก็บเงินลูกค้าไว้เต็มจำนวน 100%",
+      prob2Title: "ซิงค์ปฏิทินทันที",
+      prob2Desc: "ลดปัญหาการจองซ้ำซ้อนและค่าปรับ ปฏิทินทั้งหมด (Agoda, Booking, Airbnb) จะอัปเดตอัตโนมัติใน 1 วินาที ไม่มีข้อผิดพลาด",
+      prob3Title: "ระบบการเงินอัตโนมัติ",
+      prob3Desc: "ลูกค้าชำระเงินอย่างปลอดภัยเข้าบัญชีคุณโดยตรง ออกใบแจ้งหนี้อัตโนมัติ ลดความวุ่นวายหน้าเคาน์เตอร์",
       priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
       priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว และรับรายได้จากการจองตรงของคุณตลอดไป",
       tier1Title: "LITE (1-10 ห้อง)",
@@ -73,9 +71,14 @@ export default function HospitalityB2B() {
       tier2F1: "✓ ติดตั้งระบบและปฏิทินเต็มรูปแบบ",
       tier2F2: "✓ เชื่อมต่อทุกแอป (Airbnb, Expedia ฯลฯ)",
       tier2F3: "✓ อบรมพนักงานที่โรงแรมของคุณ",
+      tier3Title: "ENTERPRISE (30+ ห้อง)",
+      tier3Desc: "เหมาะสำหรับเครือโรงแรมและบริษัทจัดการขนาดใหญ่",
+      tier3F1: "✓ ติดตั้งระบบ MarTech ตามความต้องการ",
+      tier3F2: "✓ ระบบ CRM เพื่อรักษาฐานลูกค้า",
+      tier3F3: "✓ แดชบอร์ดวิเคราะห์ข้อมูล BI",
       aboutTitle: "เกี่ยวกับเรา",
-      aboutDesc: "ผมคือผู้เชี่ยวชาญด้านธุรกิจดิจิทัลในภูเก็ต ช่วยโรงแรมอัปเกรดระบบเพื่อเพิ่มกำไรและลดความวุ่นวายให้เจ้าของ",
-      aboutBtn: "ดูประวัติการทำงานแบบเต็ม",
+      aboutDesc: "เอเจนซี่พัฒนาระบบดิจิทัลในภูเก็ต เราสร้างระบบจัดการโรงแรมระดับองค์กรเพื่อปกป้องผลกำไรของคุณและลดความวุ่นวายในการดำเนินงาน",
+      aboutBtn: "ดูประวัติองค์กร",
       footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
       footerBtn: "นัดหมายตรวจสอบระบบฟรี"
     }
@@ -86,10 +89,10 @@ export default function HospitalityB2B() {
   return (
     <div style={{ backgroundColor: T.bg0, color: '#fff', minHeight: '100vh', paddingBottom: '6rem', overflow: 'hidden', position: 'relative' }}>
       
-      {/* Имитация глобального анимированного фона с основного сайта */}
+      {/* Интерактивный анимированный фон */}
       <div style={{ position: 'absolute', width: '100%', height: '100%', zIndex: 0, opacity: 0.5, pointerEvents: 'none' }}>
-        <div style={{ position: 'absolute', top: '20%', left: '10%', width: '300px', height: '300px', background: T.glow, filter: 'blur(100px)', borderRadius: '50%' }} />
-        <div style={{ position: 'absolute', bottom: '20%', right: '10%', width: '400px', height: '400px', background: T.glow2, filter: 'blur(120px)', borderRadius: '50%' }} />
+        <div style={{ position: 'absolute', top: '15%', left: '10%', width: '350px', height: '350px', background: T.glow, filter: 'blur(100px)', borderRadius: '50%', animation: 'float-a 12s ease-in-out infinite' }} />
+        <div style={{ position: 'absolute', bottom: '15%', right: '10%', width: '450px', height: '450px', background: T.glow2, filter: 'blur(120px)', borderRadius: '50%', animation: 'float-b 14s ease-in-out infinite' }} />
       </div>
 
       {/* HEADER */}
@@ -107,7 +110,6 @@ export default function HospitalityB2B() {
           </a>
           
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            {/* Language Toggle */}
             <div style={{ display: 'flex', backgroundColor: T.bg1, border: `1px solid ${T.border}`, borderRadius: '4px', overflow: 'hidden' }}>
               <button 
                 onClick={() => setLang('en')}
@@ -126,7 +128,7 @@ export default function HospitalityB2B() {
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 10 }}>
         
         {/* HERO SECTION */}
-        <section style={{ padding: '6rem 0 4rem 0', textAlign: 'center' }}>
+        <section style={{ padding: '7rem 0 5rem 0', textAlign: 'center' }}>
           <span style={{ color: T.acc2, textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.85rem', fontWeight: 600 }}>
             {t.badge}
           </span>
@@ -140,16 +142,24 @@ export default function HospitalityB2B() {
           }}>
             {t.heroTitle}
           </h1>
-          <p style={{ color: T.body, fontSize: 'clamp(1.1rem, 2vw, 1.3rem)', maxWidth: '760px', margin: '0 auto 2.5rem auto', lineHeight: 1.5 }}>
-            {t.heroSub}
-          </p>
+          <div style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', maxWidth: '800px', margin: '0 auto 3rem auto', lineHeight: 1.6 }}>
+            <p style={{ color: T.body, margin: 0 }}>{t.heroSub1}</p>
+            <p style={{ color: T.accent, margin: '0.5rem 0 0 0', fontWeight: 600 }}>{t.heroSub2}</p>
+          </div>
+          
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer"
-              style={{ backgroundColor: T.accent, color: T.bg0, padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: T.accent, color: T.bg0, padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
               {t.btnChat}
             </a>
             <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer"
-              style={{ backgroundColor: T.bg1, color: '#fff', border: `1px solid ${T.border}`, padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#06C755', color: '#fff', border: `1px solid #06C755`, padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 3.987 8.922 9.421 9.611.368.077.869.237 1.002.544.119.278.077.712.036 1.005l-.26 1.57c-.053.315-.246 1.22.1.84.978-1.071 5.275-5.215 7.42-8.074 4.195-5.592 6.281-9.088 6.281-5.496zM10.158 13.91H7.818a.654.654 0 01-.653-.653V8.049c0-.361.293-.654.653-.654h2.34c.361 0 .653.293.653.654 0 .361-.292.653-.653.653H9.124v1.543h1.034c.361 0 .653.293.653.654 0 .361-.292.653-.653.653H9.124v1.705h1.034c.361 0 .653.293.653.653 0 .361-.292.652-.653.652zm2.083 0c-.361 0-.654-.291-.654-.653V8.049c0-.361.293-.654.654-.654.361 0 .653.293.653.654v5.208c0 .362-.292.653-.653.653zm5.717 0c-.36 0-.652-.291-.652-.653v-2.909l-2.072 2.766a.64.64 0 01-.264.204.646.646 0 01-.252.05h-.002a.654.654 0 01-.653-.653V8.049c0-.361.293-.654.653-.654.361 0 .653.293.653.654v2.908l2.072-2.766c.097-.13.25-.205.41-.205h.001c.361 0 .653.293.653.654v5.208c0 .362-.292.653-.653.653zm-5.717-3.771V8.049c0-.361.293-.654.654-.654h1.728c.361 0 .654.293.654.654 0 .361-.293.653-.654.653h-1.074v1.438z"/>
+              </svg>
               {t.btnLine}
             </a>
           </div>
@@ -157,43 +167,33 @@ export default function HospitalityB2B() {
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '3rem 0' }} />
 
-        {/* PROBLEM VS SOLUTION */}
+        {/* 3 POWERFUL BLOCKS (PROBLEM/SOLUTION) */}
         <section style={{ padding: '2rem 0' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '3rem', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '3rem', textAlign: 'center' }}>
             {t.problemTitle}
           </h2>
           
-          <div className="bento">
-            <div className="bento-g1" style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px' }}>
+          <div className="cases-grid">
+            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px' }}>
               <h3 style={{ color: '#FF4D4D', fontSize: '1.3rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob1Title}</h3>
-              <p style={{ color: T.body, lineHeight: 1.6 }}>{t.prob1Desc}</p>
+              <p style={{ color: T.body, lineHeight: 1.6, fontSize: '0.95rem' }}>{t.prob1Desc}</p>
             </div>
             
-            <div className="bento-g2" style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px', boxShadow: `inset 0 0 20px ${T.glow2}` }}>
+            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px' }}>
               <h3 style={{ color: T.acc2, fontSize: '1.3rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob2Title}</h3>
-              <p style={{ color: T.body, lineHeight: 1.6 }}>{t.prob2Desc}</p>
+              <p style={{ color: T.body, lineHeight: 1.6, fontSize: '0.95rem' }}>{t.prob2Desc}</p>
             </div>
 
-            <div className="bento-g3" style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-              <div>
-                <h4 style={{ color: '#fff', marginBottom: '0.5rem', fontWeight: 600 }}>{t.feat1}</h4>
-                <p style={{ color: T.muted, fontSize: '0.95rem', lineHeight: 1.5 }}>{t.feat1Desc}</p>
-              </div>
-              <div>
-                <h4 style={{ color: '#fff', marginBottom: '0.5rem', fontWeight: 600 }}>{t.feat2}</h4>
-                <p style={{ color: T.muted, fontSize: '0.95rem', lineHeight: 1.5 }}>{t.feat2Desc}</p>
-              </div>
-              <div>
-                <h4 style={{ color: '#fff', marginBottom: '0.5rem', fontWeight: 600 }}>{t.feat3}</h4>
-                <p style={{ color: T.muted, fontSize: '0.95rem', lineHeight: 1.5 }}>{t.feat3Desc}</p>
-              </div>
+            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px' }}>
+              <h3 style={{ color: T.accent, fontSize: '1.3rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob3Title}</h3>
+              <p style={{ color: T.body, lineHeight: 1.6, fontSize: '0.95rem' }}>{t.prob3Desc}</p>
             </div>
           </div>
         </section>
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
-        {/* PRICING */}
+        {/* PRICING WITH 3 TIERS */}
         <section style={{ padding: '2rem 0' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '1rem' }}>{t.priceTitle}</h2>
@@ -228,12 +228,26 @@ export default function HospitalityB2B() {
                 </ul>
               </div>
             </div>
+
+            {/* ENTERPRISE */}
+            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <span style={{ color: T.muted, fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>{t.tier3Title}</span>
+                <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.5rem' }}>Custom</h3>
+                <p style={{ color: T.sub, fontSize: '0.9rem', marginTop: '0.5rem', marginBottom: '2rem' }}>{t.tier3Desc}</p>
+                <ul style={{ listStyleType: 'none', padding: 0, color: T.body, fontSize: '0.95rem', lineHeight: 1.8 }}>
+                  <li>{t.tier3F1}</li>
+                  <li>{t.tier3F2}</li>
+                  <li>{t.tier3F3}</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
-        {/* ABOUT */}
+        {/* ABOUT AGENCY */}
         <section style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '3rem', borderRadius: '8px', textAlign: 'center' }}>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '1rem' }}>{t.aboutTitle}</h2>
           <p style={{ color: T.body, lineHeight: 1.6, maxWidth: '600px', margin: '0 auto 2rem auto' }}>
