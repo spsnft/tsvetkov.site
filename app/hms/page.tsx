@@ -16,29 +16,32 @@ export default function HospitalityB2B() {
       btnChat: "WhatsApp",
       btnLine: "Line",
       problemTitle: "How Much Money Are You Giving Away to OTAs?",
-      prob1Title: "The 15-20% Leak",
-      prob1Desc: "Every booking through Agoda or Booking.com shaves off up to 20% of your margin. A direct booking engine keeps 100% of the guest's money in your business.",
-      prob2Title: "Instant Calendar Sync",
-      prob2Desc: "Manual updates lead to double-bookings and penalties. All calendars (Agoda, Booking, Airbnb) update automatically in 1 second. Zero manual errors.",
-      prob3Title: "Automated Cashflow",
-      prob3Desc: "Secure guest payments go directly to your accounts. Automated invoicing and digital check-ins eliminate front-desk chaos.",
+      prob1Title: "1. The 15-20% Leak",
+      prob1Desc: "Every booking through Agoda or Booking.com costs you up to 20%. We install a direct booking engine on your website. Guests pay securely, and the money goes straight to your account.",
+      prob2Title: "2. Zero Direct Traffic",
+      prob2Desc: "Without OTAs, who will find you? We set up your Google Maps profile for local search and deploy automated WhatsApp/Email campaigns to bring past guests back for a direct discount.",
+      prob3Title: "3. Double-Booking Fines",
+      prob3Desc: "Manual calendar updates lead to costly errors. When a room is booked on Agoda, it closes on Booking.com and your website in 1 second. 100% automated synchronization.",
       priceTitle: "Simple Pricing. No Hidden Fees.",
       priceSub: "Pay once for the setup. Keep all your direct booking money forever.",
       tier1Title: "LITE (1-10 Rooms)",
       tier1Desc: "Best for independent villas and small guesthouses.",
-      tier1F1: "✓ System setup for your property",
-      tier1F2: "✓ 'Book Now' button for your website",
-      tier1F3: "✓ Connect Booking.com + Agoda",
+      tier1F1: "✓ Core PMS (Dashboard) Setup",
+      tier1F2: "✓ Direct 'Book Now' Website Button",
+      tier1F3: "✓ Sync 2 Channels (Booking + Agoda)",
+      tier1F4: "✓ Google Maps Profile Setup",
       tier2Title: "STANDARD (10-30 Rooms)",
       tier2Desc: "Best for boutique hotels and resorts.",
-      tier2F1: "✓ Full system and calendar setup",
-      tier2F2: "✓ Connect ALL apps (Airbnb, Expedia, etc.)",
-      tier2F3: "✓ Staff training at your hotel",
+      tier2F1: "✓ Everything in LITE",
+      tier2F2: "✓ Connect 300+ Global OTA Channels",
+      tier2F3: "✓ WhatsApp/Email Guest Return System",
+      tier2F4: "✓ Visual SOPs (Guides for your Staff)",
       tier3Title: "ENTERPRISE (30+ Rooms)",
       tier3Desc: "Best for hotel chains and large management firms.",
-      tier3F1: "✓ Custom MarTech integration",
-      tier3F2: "✓ CRM for guest retention",
-      tier3F3: "✓ BI analytics dashboards",
+      tier3F1: "✓ Everything in STANDARD",
+      tier3F2: "✓ Advanced CRM & Anti-Theft Audit Logs",
+      tier3F3: "✓ Google/Meta Ads Setup (Ready for Traffic)",
+      tier3F4: "✓ Custom Owner Analytics Dashboard",
       aboutTitle: "Who are we?",
       aboutDesc: "A local Phuket-based digital growth agency. We architect enterprise-grade hospitality systems that protect your margins and eliminate operational chaos.",
       aboutBtn: "View Agency Profile",
@@ -53,29 +56,32 @@ export default function HospitalityB2B() {
       btnChat: "WhatsApp",
       btnLine: "Line",
       problemTitle: "คุณกำลังเสียเงินให้แอปจองที่พักเท่าไหร่?",
-      prob1Title: "เสียกำไร 15-20%",
-      prob1Desc: "การจองผ่าน Agoda หรือ Booking.com หักกำไรคุณสูงสุด 20% ระบบจองตรงช่วยให้คุณเก็บเงินลูกค้าไว้เต็มจำนวน 100%",
-      prob2Title: "ซิงค์ปฏิทินทันที",
-      prob2Desc: "ลดปัญหาการจองซ้ำซ้อนและค่าปรับ ปฏิทินทั้งหมด (Agoda, Booking, Airbnb) จะอัปเดตอัตโนมัติใน 1 วินาที ไม่มีข้อผิดพลาด",
-      prob3Title: "ระบบการเงินอัตโนมัติ",
-      prob3Desc: "ลูกค้าชำระเงินอย่างปลอดภัยเข้าบัญชีคุณโดยตรง ออกใบแจ้งหนี้อัตโนมัติ ลดความวุ่นวายหน้าเคาน์เตอร์",
+      prob1Title: "1. เสียกำไร 15-20%",
+      prob1Desc: "การจองผ่าน Agoda หรือ Booking.com หักกำไรคุณสูงสุด 20% เราติดตั้งระบบจองตรงบนเว็บไซต์ ลูกค้าจ่ายเงินเข้าบัญชีคุณโดยตรง",
+      prob2Title: "2. ไม่มีลูกค้าจองตรง",
+      prob2Desc: "เราจัดการโปรไฟล์ Google Maps สำหรับการค้นหาในพื้นที่ และตั้งระบบดึงดูดลูกค้าเก่าให้กลับมาจองตรงผ่าน WhatsApp/Email ด้วยส่วนลดพิเศษ",
+      prob3Title: "3. โดนปรับเพราะจองซ้ำซ้อน",
+      prob3Desc: "การอัปเดตปฏิทินเองทำให้เกิดข้อผิดพลาด เมื่อมีคนจองผ่าน Agoda ระบบจะปิดห้องใน Booking.com ทันทีใน 1 วินาที อัตโนมัติ 100%",
       priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
       priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว และรับรายได้จากการจองตรงของคุณตลอดไป",
       tier1Title: "LITE (1-10 ห้อง)",
       tier1Desc: "เหมาะสำหรับวิลล่าส่วนตัวและเกสต์เฮาส์ขนาดเล็ก",
-      tier1F1: "✓ ติดตั้งระบบสำหรับที่พักของคุณ",
-      tier1F2: "✓ ปุ่ม 'จองเลย' สำหรับเว็บไซต์ของคุณ",
-      tier1F3: "✓ เชื่อมต่อ Booking.com + Agoda",
+      tier1F1: "✓ ติดตั้งระบบจัดการที่พัก (PMS)",
+      tier1F2: "✓ ปุ่ม 'จองเลย' บนเว็บไซต์ของคุณ",
+      tier1F3: "✓ ซิงค์ปฏิทิน Booking.com + Agoda",
+      tier1F4: "✓ ตั้งค่าโปรไฟล์ Google Maps",
       tier2Title: "STANDARD (10-30 ห้อง)",
       tier2Desc: "เหมาะสำหรับบูติกโฮเทลและรีสอร์ท",
-      tier2F1: "✓ ติดตั้งระบบและปฏิทินเต็มรูปแบบ",
-      tier2F2: "✓ เชื่อมต่อทุกแอป (Airbnb, Expedia ฯลฯ)",
-      tier2F3: "✓ อบรมพนักงานที่โรงแรมของคุณ",
+      tier2F1: "✓ ได้รับทุกอย่างในแพ็กเกจ LITE",
+      tier2F2: "✓ เชื่อมต่อเว็บไซต์จองที่พักกว่า 300+ แห่ง",
+      tier2F3: "✓ ระบบดึงลูกค้าเก่ากลับมาจองผ่าน WhatsApp/Email",
+      tier2F4: "✓ คู่มือการใช้งานระบบสำหรับพนักงาน",
       tier3Title: "ENTERPRISE (30+ ห้อง)",
       tier3Desc: "เหมาะสำหรับเครือโรงแรมและบริษัทจัดการขนาดใหญ่",
-      tier3F1: "✓ ติดตั้งระบบ MarTech ตามความต้องการ",
-      tier3F2: "✓ ระบบ CRM เพื่อรักษาฐานลูกค้า",
-      tier3F3: "✓ แดชบอร์ดวิเคราะห์ข้อมูล BI",
+      tier3F1: "✓ ได้รับทุกอย่างในแพ็กเกจ STANDARD",
+      tier3F2: "✓ ระบบ CRM และตรวจสอบการทำงานของพนักงาน",
+      tier3F3: "✓ ตั้งค่าโฆษณา Google/Meta Ads (พร้อมใช้งาน)",
+      tier3F4: "✓ แดชบอร์ดวิเคราะห์รายได้สำหรับเจ้าของ",
       aboutTitle: "เกี่ยวกับเรา",
       aboutDesc: "เอเจนซี่พัฒนาระบบดิจิทัลในภูเก็ต เราสร้างระบบจัดการโรงแรมระดับองค์กรเพื่อปกป้องผลกำไรของคุณและลดความวุ่นวายในการดำเนินงาน",
       aboutBtn: "ดูประวัติองค์กร",
@@ -167,7 +173,7 @@ export default function HospitalityB2B() {
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '3rem 0' }} />
 
-        {/* 3 POWERFUL BLOCKS (PROBLEM/SOLUTION) */}
+        {/* 3 POWERFUL BLOCKS */}
         <section style={{ padding: '2rem 0' }}>
           <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '3rem', textAlign: 'center' }}>
             {t.problemTitle}
@@ -175,17 +181,17 @@ export default function HospitalityB2B() {
           
           <div className="cases-grid">
             <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px' }}>
-              <h3 style={{ color: '#FF4D4D', fontSize: '1.3rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob1Title}</h3>
+              <h3 style={{ color: '#FF4D4D', fontSize: '1.25rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob1Title}</h3>
               <p style={{ color: T.body, lineHeight: 1.6, fontSize: '0.95rem' }}>{t.prob1Desc}</p>
             </div>
             
             <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px' }}>
-              <h3 style={{ color: T.acc2, fontSize: '1.3rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob2Title}</h3>
+              <h3 style={{ color: T.acc2, fontSize: '1.25rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob2Title}</h3>
               <p style={{ color: T.body, lineHeight: 1.6, fontSize: '0.95rem' }}>{t.prob2Desc}</p>
             </div>
 
             <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '8px' }}>
-              <h3 style={{ color: T.accent, fontSize: '1.3rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob3Title}</h3>
+              <h3 style={{ color: T.accent, fontSize: '1.25rem', marginBottom: '1rem', fontWeight: 600 }}>{t.prob3Title}</h3>
               <p style={{ color: T.body, lineHeight: 1.6, fontSize: '0.95rem' }}>{t.prob3Desc}</p>
             </div>
           </div>
@@ -193,7 +199,7 @@ export default function HospitalityB2B() {
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
-        {/* PRICING WITH 3 TIERS */}
+        {/* PRICING */}
         <section style={{ padding: '2rem 0' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '1rem' }}>{t.priceTitle}</h2>
@@ -211,6 +217,7 @@ export default function HospitalityB2B() {
                   <li>{t.tier1F1}</li>
                   <li>{t.tier1F2}</li>
                   <li>{t.tier1F3}</li>
+                  <li>{t.tier1F4}</li>
                 </ul>
               </div>
             </div>
@@ -225,6 +232,7 @@ export default function HospitalityB2B() {
                   <li>{t.tier2F1}</li>
                   <li>{t.tier2F2}</li>
                   <li>{t.tier2F3}</li>
+                  <li>{t.tier2F4}</li>
                 </ul>
               </div>
             </div>
@@ -239,6 +247,7 @@ export default function HospitalityB2B() {
                   <li>{t.tier3F1}</li>
                   <li>{t.tier3F2}</li>
                   <li>{t.tier3F3}</li>
+                  <li>{t.tier3F4}</li>
                 </ul>
               </div>
             </div>
