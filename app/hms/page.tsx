@@ -47,7 +47,7 @@ export default function HospitalityB2B() {
 
       {/* HERO SECTION */}
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-        <section style={{ padding: '6rem 0 4rem 0', textAlign: 'center', relative: 'relative' }}>
+        <section style={{ padding: '6rem 0 4rem 0', textAlign: 'center', position: 'relative' }}>
           <div style={{ 
             position: 'absolute', 
             top: '10%', 
@@ -60,7 +60,7 @@ export default function HospitalityB2B() {
             pointerEvents: 'none'
           }} />
           
-          <span style={{ color: T.acc2, uppercase: 'true', letterSpacing: '0.15em', fontSize: '0.85rem', fontWeight: 600 }}>
+          <span style={{ color: T.acc2, textTransform: 'uppercase', letterSpacing: '0.15em', fontSize: '0.85rem', fontWeight: 600 }}>
             PHUKET HOSPITALITY AUTOMATION
           </span>
           <h1 style={{ 
@@ -87,7 +87,7 @@ export default function HospitalityB2B() {
               Discuss via WhatsApp
             </a>
             <a 
-              href="https://line.me/ti/p/~fedor_tsvetkov" // Подставь свой актуальный Line ID/ссылку
+              href="https://line.me/ti/p/~fedor_tsvetkov" 
               target="_blank" 
               rel="noopener noreferrer"
               style={{ backgroundColor: T.bg1, color: '#fff', border: `1px solid ${T.border}`, padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}
@@ -150,7 +150,7 @@ export default function HospitalityB2B() {
             {/* LITE */}
             <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <span style={{ color: T.muted, fontSize: '0.85rem', fontWeight: 600, uppercase: 'true' }}>LITE ARCHITECTURE</span>
+                <span style={{ color: T.muted, fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>LITE ARCHITECTURE</span>
                 <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.5rem' }}>$500</h3>
                 <p style={{ color: T.sub, fontSize: '0.9rem', marginTop: '0.5rem', marginBottom: '2rem' }}>Best for independent villas & small guesthouses (Up to 10 units)</p>
                 <ul style={{ listStyleType: 'none', padding: 0, color: T.body, fontSize: '0.95rem', lineHeight: 1.8 }}>
@@ -164,10 +164,10 @@ export default function HospitalityB2B() {
             </div>
 
             {/* STANDARD */}
-            <div style={{ backgroundColor: T.bg1, border: `2px solid ${T.accent}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', relative: 'relative', boxShadow: `0 0 30px ${T.glow}` }}>
+            <div style={{ backgroundColor: T.bg1, border: `2px solid ${T.accent}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', boxShadow: `0 0 30px ${T.glow}` }}>
               <div style={{ position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)', backgroundColor: T.accent, color: T.bg0, padding: '2px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>MOST POPULAR</div>
               <div>
-                <span style={{ color: T.accent, fontSize: '0.85rem', fontWeight: 600, uppercase: 'true' }}>STANDARD SCALE</span>
+                <span style={{ color: T.accent, fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>STANDARD SCALE</span>
                 <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.5rem' }}>$1,200</h3>
                 <p style={{ color: T.sub, fontSize: '0.9rem', marginTop: '0.5rem', marginBottom: '2rem' }}>Best for boutique hotels & resorts (10–30 units)</p>
                 <ul style={{ listStyleType: 'none', padding: 0, color: T.body, fontSize: '0.95rem', lineHeight: 1.8 }}>
@@ -183,7 +183,7 @@ export default function HospitalityB2B() {
             {/* ENTERPRISE */}
             <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '3rem 2rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
-                <span style={{ color: T.muted, fontSize: '0.85rem', fontWeight: 600, uppercase: 'true' }}>CUSTOM ENTERPRISE</span>
+                <span style={{ color: T.muted, fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>CUSTOM ENTERPRISE</span>
                 <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.5rem' }}>Custom</h3>
                 <p style={{ color: T.sub, fontSize: '0.9rem', marginTop: '0.5rem', marginBottom: '2rem' }}>Best for hotel chains & large villa management firms (30+ units)</p>
                 <ul style={{ listStyleType: 'none', padding: 0, color: T.body, fontSize: '0.95rem', lineHeight: 1.8 }}>
