@@ -9,10 +9,10 @@ export default function HospitalityB2B() {
 
   const content = {
     en: {
-      badge: "Phuket Hospitality Solutions",
-      heroTitle: "Stop Paying 15-20% Commission to Booking.com & Agoda.",
-      heroSub1: "Connect your hotel directly to guests and stop double-bookings.",
-      heroSub2: "Keep 100% of the profit in your pocket.",
+      badge: "Hospitality Growth Solutions",
+      heroTitle: "Stop Paying 15-20% Commission to Booking.com & Agoda",
+      heroSub1: "Connect your hotel directly to guests and stop double-bookings",
+      heroSub2: "Keep 100% of the profit in your pocket",
       btnChat: "WhatsApp",
       btnLine: "Line",
       problemTitle: "How Much Money Are You Giving Away to OTAs?",
@@ -25,31 +25,31 @@ export default function HospitalityB2B() {
       priceTitle: "Simple Pricing. No Hidden Fees.",
       priceSub: "Pay once for the setup. Keep all your direct booking money forever.",
       tier1Title: "LITE (1-10 Rooms)",
-      tier1Desc: "Best for independent villas and small guesthouses.",
-      tier1F1: "✓ Core PMS (Dashboard) Setup",
-      tier1F2: "✓ Direct 'Book Now' Website Button",
-      tier1F3: "✓ Sync 2 Channels (Booking + Agoda)",
-      tier1F4: "✓ Google Maps Profile Setup",
+      tier1Desc: "For independent villas and small guesthouses",
+      tier1F1: "✓ Core System Setup (PMS/Dashboard)",
+      tier1F2: "✓ Direct Website Booking button",
+      tier1F3: "✓ Booking & Agoda Synchronization",
+      tier1F4: "✓ Google Maps Setup",
       tier2Title: "STANDARD (10-30 Rooms)",
-      tier2Desc: "Best for boutique hotels and resorts.",
+      tier2Desc: "For boutique hotels and resorts",
       tier2F1: "✓ Everything in LITE",
-      tier2F2: "✓ Connect 300+ Global OTA Channels",
-      tier2F3: "✓ WhatsApp/Email Guest Return System",
-      tier2F4: "✓ Visual SOPs (Guides for your Staff)",
+      tier2F2: "✓ Connect 300+ OTA Channels",
+      tier2F3: "✓ Guest Return System",
+      tier2F4: "✓ Guides for your Staff (Visual SOPs)",
       tier3Title: "ENTERPRISE (30+ Rooms)",
-      tier3Desc: "Best for hotel chains and large management firms.",
+      tier3Desc: "For hotel chains and large management firms",
       tier3F1: "✓ Everything in STANDARD",
-      tier3F2: "✓ Advanced CRM & Anti-Theft Audit Logs",
-      tier3F3: "✓ Google/Meta Ads Setup (Ready for Traffic)",
-      tier3F4: "✓ Custom Owner Analytics Dashboard",
-      aboutTitle: "Who are we?",
-      aboutDesc: "A local Phuket-based digital growth agency. We architect enterprise-grade hospitality systems that protect your margins and eliminate operational chaos.",
-      aboutBtn: "View Agency Profile",
+      tier3F2: "✓ Anti-Theft Logs",
+      tier3F3: "✓ Multichannel Ads Setup",
+      tier3F4: "✓ Analytics Dashboard",
+      aboutTitle: "Growth Architect & Tech Partner",
+      aboutDesc: "An international software integration and growth architecture provider. We deploy enterprise-grade hospitality systems globally, operating as an offshore tech partner to maximize your direct revenue and eliminate operational chaos.",
+      aboutBtn: "View Professional Profile",
       footerTitle: "Ready to make more money?",
       footerBtn: "Book a Free Hotel Audit"
     },
     th: {
-      badge: "โซลูชั่นสำหรับโรงแรมในภูเก็ต",
+      badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
       heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
       heroSub1: "เชื่อมต่อโรงแรมของคุณกับลูกค้าโดยตรงและหยุดปัญหาการจองซ้ำซ้อน",
       heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
@@ -65,26 +65,26 @@ export default function HospitalityB2B() {
       priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
       priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว และรับรายได้จากการจองตรงของคุณตลอดไป",
       tier1Title: "LITE (1-10 ห้อง)",
-      tier1Desc: "เหมาะสำหรับวิลล่าส่วนตัวและเกสต์เฮาส์ขนาดเล็ก",
-      tier1F1: "✓ ติดตั้งระบบจัดการที่พัก (PMS)",
-      tier1F2: "✓ ปุ่ม 'จองเลย' บนเว็บไซต์ของคุณ",
-      tier1F3: "✓ ซิงค์ปฏิทิน Booking.com + Agoda",
-      tier1F4: "✓ ตั้งค่าโปรไฟล์ Google Maps",
+      tier1Desc: "สำหรับวิลล่าส่วนตัวและเกสต์เฮาส์ขนาดเล็ก",
+      tier1F1: "✓ Core System Setup (PMS/Dashboard)",
+      tier1F2: "✓ Direct Website Booking button",
+      tier1F3: "✓ Booking & Agoda Synchronization",
+      tier1F4: "✓ Google Maps Setup",
       tier2Title: "STANDARD (10-30 ห้อง)",
-      tier2Desc: "เหมาะสำหรับบูติกโฮเทลและรีสอร์ท",
-      tier2F1: "✓ ได้รับทุกอย่างในแพ็กเกจ LITE",
-      tier2F2: "✓ เชื่อมต่อเว็บไซต์จองที่พักกว่า 300+ แห่ง",
-      tier2F3: "✓ ระบบดึงลูกค้าเก่ากลับมาจองผ่าน WhatsApp/Email",
-      tier2F4: "✓ คู่มือการใช้งานระบบสำหรับพนักงาน",
+      tier2Desc: "สำหรับบูติกโฮเทลและรีสอร์ท",
+      tier2F1: "✓ Everything in LITE",
+      tier2F2: "✓ Connect 300+ OTA Channels",
+      tier2F3: "✓ Guest Return System",
+      tier2F4: "✓ Guides for your Staff (Visual SOPs)",
       tier3Title: "ENTERPRISE (30+ ห้อง)",
-      tier3Desc: "เหมาะสำหรับเครือโรงแรมและบริษัทจัดการขนาดใหญ่",
-      tier3F1: "✓ ได้รับทุกอย่างในแพ็กเกจ STANDARD",
-      tier3F2: "✓ ระบบ CRM และตรวจสอบการทำงานของพนักงาน",
-      tier3F3: "✓ ตั้งค่าโฆษณา Google/Meta Ads (พร้อมใช้งาน)",
-      tier3F4: "✓ แดชบอร์ดวิเคราะห์รายได้สำหรับเจ้าของ",
-      aboutTitle: "เกี่ยวกับเรา",
-      aboutDesc: "เอเจนซี่พัฒนาระบบดิจิทัลในภูเก็ต เราสร้างระบบจัดการโรงแรมระดับองค์กรเพื่อปกป้องผลกำไรของคุณและลดความวุ่นวายในการดำเนินงาน",
-      aboutBtn: "ดูประวัติองค์กร",
+      tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการขนาดใหญ่",
+      tier3F1: "✓ Everything in STANDARD",
+      tier3F2: "✓ Anti-Theft Logs",
+      tier3F3: "✓ Multichannel Ads Setup",
+      tier3F4: "✓ Analytics Dashboard",
+      aboutTitle: "พันธมิตรเทคโนโลยีและผู้วางระบบการเติบโต",
+      aboutDesc: "ผู้ให้บริการติดตั้งระบบซอฟต์แวร์และวางโครงสร้างการเติบโตระดับสากล เราพัฒนาระบบการจัดการโรงแรมระดับองค์กรทั่วโลกในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการดำเนินงาน",
+      aboutBtn: "ดูโปรไฟล์การทำงาน",
       footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
       footerBtn: "นัดหมายตรวจสอบระบบฟรี"
     }
@@ -155,14 +155,14 @@ export default function HospitalityB2B() {
           
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: T.accent, color: T.bg0, padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#2cb742', color: '#fff', padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
               </svg>
               {t.btnChat}
             </a>
             <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#06C755', color: '#fff', border: `1px solid #06C755`, padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#06C755', color: '#fff', padding: '1rem 2rem', borderRadius: '4px', fontWeight: 600, textDecoration: 'none' }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 3.987 8.922 9.421 9.611.368.077.869.237 1.002.544.119.278.077.712.036 1.005l-.26 1.57c-.053.315-.246 1.22.1.84.978-1.071 5.275-5.215 7.42-8.074 4.195-5.592 6.281-9.088 6.281-5.496zM10.158 13.91H7.818a.654.654 0 01-.653-.653V8.049c0-.361.293-.654.653-.654h2.34c.361 0 .653.293.653.654 0 .361-.292.653-.653.653H9.124v1.543h1.034c.361 0 .653.293.653.654 0 .361-.292.653-.653.653H9.124v1.705h1.034c.361 0 .653.293.653.653 0 .361-.292.652-.653.652zm2.083 0c-.361 0-.654-.291-.654-.653V8.049c0-.361.293-.654.654-.654.361 0 .653.293.653.654v5.208c0 .362-.292.653-.653.653zm5.717 0c-.36 0-.652-.291-.652-.653v-2.909l-2.072 2.766a.64.64 0 01-.264.204.646.646 0 01-.252.05h-.002a.654.654 0 01-.653-.653V8.049c0-.361.293-.654.653-.654.361 0 .653.293.653.654v2.908l2.072-2.766c.097-.13.25-.205.41-.205h.001c.361 0 .653.293.653.654v5.208c0 .362-.292.653-.653.653zm-5.717-3.771V8.049c0-.361.293-.654.654-.654h1.728c.361 0 .654.293.654.654 0 .361-.293.653-.654.653h-1.074v1.438z"/>
               </svg>
