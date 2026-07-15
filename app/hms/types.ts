@@ -55,21 +55,21 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tabs: [
       {
         num: "01",
-        title: "Up to 20% OTA Commission",
-        desc: "Every booking through Agoda or Booking.com costs up to 20% in commission. Integrate a direct booking engine and keep 100% of the revenue in-house.",
-        uiType: "revenue"
-      },
-      {
-        num: "02",
-        title: "Zero Direct Traffic",
-        desc: "Drive direct bookings with local search and automated retention campaigns.",
-        uiType: "traffic"
-      },
-      {
-        num: "03",
         title: "Overbooking & Penalties",
         desc: "Each reservation instantly locks your entire grid across 300+ channels.",
         uiType: "sync"
+      },
+      {
+        num: "02",
+        title: "Up to 20% OTA Commission",
+        desc: "Integrate a direct booking engine and keep 100% of the revenue in-house.",
+        uiType: "revenue"
+      },
+      {
+        num: "03",
+        title: "Zero Direct Traffic",
+        desc: "Drive direct bookings with local search and automated retention campaigns.",
+        uiType: "traffic"
       }
     ],
     priceTitle: "Simple Pricing. No Hidden Fees.",
@@ -111,21 +111,21 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tabs: [
       {
         num: "01",
-        title: "ค่าคอมมิชชั่น OTA สูงสุด 20%",
-        desc: "ทุกการจองผ่าน Agoda หรือ Booking.com มีค่าใช้จ่ายคอมมิชชั่นสูงสุด 20% ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม 100% เข้าบัญชีคุณโดยตรง",
-        uiType: "revenue"
-      },
-      {
-        num: "02",
-        title: "ขาดช่องทางการจองตรง",
-        desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
-        uiType: "traffic"
-      },
-      {
-        num: "03",
         title: "การจองซ้ำซ้อนและค่าปรับ",
         desc: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางกว่า 300+ แห่งโดยอัตโนมัติในทันที",
         uiType: "sync"
+      },
+      {
+        num: "02",
+        title: "ค่าคอมมิชชั่น OTA สูงสุด 20%",
+        desc: "ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม 100% เข้าบัญชีคุณโดยตรง",
+        uiType: "revenue"
+      },
+      {
+        num: "03",
+        title: "ขาดช่องทางการจองตรง",
+        desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
+        uiType: "traffic"
       }
     ],
     priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
