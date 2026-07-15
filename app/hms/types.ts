@@ -1,7 +1,7 @@
 export interface TabItem {
   num: string;
   titlePrefix?: string;
-  titleHighlight: string; // Синхронизировано с компонентом
+  titleAccent: string;
   titleSuffix: string;
   subPrefix: string;
   subSuffix: string;
@@ -59,7 +59,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
       {
         num: "01",
         titlePrefix: "",
-        titleHighlight: "24/7",
+        titleAccent: "24/7",
         titleSuffix: "manual updates",
         subPrefix: "Each reservation locks your entire grid in less than ",
         subSuffix: " second",
@@ -68,7 +68,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
       {
         num: "02",
         titlePrefix: "Up to ",
-        titleHighlight: "20%",
+        titleAccent: "20%",
         titleSuffix: "OTA commission",
         subPrefix: "Integrate a direct booking engine and keep ",
         subSuffix: "% of the revenue in-house.",
@@ -77,7 +77,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
       {
         num: "03",
         titlePrefix: "",
-        titleHighlight: "0",
+        titleAccent: "0",
         titleSuffix: "leads from direct traffic",
         subPrefix: "Drive ",
         subSuffix: " direct bookings with local search and automated retention campaigns.",
@@ -124,7 +124,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
       {
         num: "01",
         titlePrefix: "",
-        titleHighlight: "24/7",
+        titleAccent: "24/7",
         titleSuffix: "อัปเดตระบบด้วยมือ",
         subPrefix: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางในเวลาไม่ถึง ",
         subSuffix: " วินาที",
@@ -133,7 +133,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
       {
         num: "02",
         titlePrefix: "ต้องเสียค่าคอมสูงถึง ",
-        titleHighlight: "20%",
+        titleAccent: "20%",
         titleSuffix: "ให้กับ OTA",
         subPrefix: "ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม ",
         subSuffix: "% เข้าบัญชีคุณโดยตรง",
@@ -142,7 +142,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
       {
         num: "03",
         titlePrefix: "",
-        titleHighlight: "0",
+        titleAccent: "0",
         titleSuffix: "ยอดจองตรงบนเว็บไซต์",
         subPrefix: "ดึงยอดจองตรงเข้าโรงแรม ",
         subSuffix: " ด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้า",
