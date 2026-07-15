@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { T } from '../../../src/theme/tokens';
-import { TabItem } from '../types';
+import { T } from '../../src/theme/tokens';
+import { TabItem } from './types';
 
 interface B2BAccordionProps {
   tabs: TabItem[];
@@ -46,12 +46,12 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '1.5rem', whiteSpace: 'nowrap' }}>
                   {tab.title}
                 </h3>
-                <div style={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0, transition: 'all 0.4s ease', pointerEvents: isActive ? 'auto' : 'none' }}>
+                <div style={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0, transform: isActive ? 'translateY(0)' : 'translateY(10px)', transition: 'all 0.4s ease', pointerEvents: isActive ? 'auto' : 'none' }}>
                   <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6 }}>{tab.desc}</p>
                 </div>
               </div>
 
-              {/* Data-Driven CSS Metric Component (Concept A) */}
+              {/* Data-Driven CSS Metric Component */}
               {isActive && (
                 <div style={{ marginTop: '2rem', padding: '2rem', backgroundColor: T.bg0, borderRadius: '12px', border: `1px solid ${T.border}`, animation: 'fadeIn 0.5s ease', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '180px' }}>
                   {tab.uiType === 'revenue' && (
@@ -70,7 +70,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                   {tab.uiType === 'traffic' && (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1.25rem', backgroundColor: T.bg1, borderRadius: '8px', border: `1px solid rgba(0, 163, 255, 0.2)` }}>
-                        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: T.body }}>Google Maps Local Visibilty</span>
+                        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: T.body }}>Google Maps Local Visibility</span>
                         <span style={{ color: T.acc2, fontSize: '0.85rem', fontWeight: 800 }}>RANK #1</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1.25rem', backgroundColor: T.bg1, borderRadius: '8px', border: `1px solid rgba(44, 183, 66, 0.2)` }}>
@@ -120,9 +120,9 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                   
                   {/* Mobile CSS Metric solution preview */}
                   <div style={{ padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}` }}>
-                    {tab.uiType === 'revenue' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAlign: 'center', color: '#2cb742' }}>Direct Keeping: 100%</div>}
-                    {tab.uiType === 'traffic' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAlign: 'center', color: T.acc2 }}>Google Maps Ranking: #1</div>}
-                    {tab.uiType === 'sync' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAlign: 'center', color: T.accent }}>Live Channels Sync: 0.8s</div>}
+                    {tab.uiType === 'revenue' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAngle: 'center', color: '#2cb742', textAlign: 'center' }}>Direct Keeping: 100%</div>}
+                    {tab.uiType === 'traffic' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAngle: 'center', color: T.acc2, textAlign: 'center' }}>Google Maps Ranking: #1</div>}
+                    {tab.uiType === 'sync' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAngle: 'center', color: T.accent, textAlign: 'center' }}>Live Channels Sync: 0.8s</div>}
                   </div>
                 </div>
               </div>
