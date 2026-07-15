@@ -1,6 +1,8 @@
 export interface TabItem {
   num: string;
-  title: string;
+  titlePrefix?: string;
+  titleHighlight: string;
+  titleSuffix: string;
   desc: string;
   uiType: string;
 }
@@ -55,19 +57,23 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tabs: [
       {
         num: "01",
-        title: "Overbooking & Penalties",
+        titleHighlight: "24/7",
+        titleSuffix: "manual updates",
         desc: "Each reservation instantly locks your entire grid across 300+ channels.",
         uiType: "sync"
       },
       {
         num: "02",
-        title: "Up to 20% OTA Commission",
+        titlePrefix: "Up to",
+        titleHighlight: "20%",
+        titleSuffix: "OTA commission",
         desc: "Integrate a direct booking engine and keep 100% of the revenue in-house.",
         uiType: "revenue"
       },
       {
         num: "03",
-        title: "Zero Direct Traffic",
+        titleHighlight: "0",
+        titleSuffix: "leads from direct traffic",
         desc: "Drive direct bookings with local search and automated retention campaigns.",
         uiType: "traffic"
       }
@@ -111,19 +117,23 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tabs: [
       {
         num: "01",
-        title: "การจองซ้ำซ้อนและค่าปรับ",
+        titleHighlight: "24/7",
+        titleSuffix: "อัปเดตระบบด้วยมือ",
         desc: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางกว่า 300+ แห่งโดยอัตโนมัติในทันที",
         uiType: "sync"
       },
       {
         num: "02",
-        title: "ค่าคอมมิชชั่น OTA สูงสุด 20%",
+        titlePrefix: "เสียค่าคอม",
+        titleHighlight: "20%",
+        titleSuffix: "ให้กับ OTA",
         desc: "ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม 100% เข้าบัญชีคุณโดยตรง",
         uiType: "revenue"
       },
       {
         num: "03",
-        title: "ขาดช่องทางการจองตรง",
+        titleHighlight: "0",
+        titleSuffix: "ลูกค้าจองตรงบนเว็บไซต์",
         desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
         uiType: "traffic"
       }
