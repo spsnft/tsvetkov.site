@@ -175,7 +175,7 @@ export default function HospitalityB2B() {
           </div>
         </section>
 
-        {/* 3 CORE BLOCKS (CONCEPT 1 - Text + UI) */}
+        {/* 3 CORE BLOCKS (CONCEPT 2 - Problem Text + Solution UI) */}
         <section style={{ padding: '4rem 0' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '4rem', textAlign: 'center', letterSpacing: '-0.02em' }}>{t.problemTitle}</h2>
           <div className="cases-grid">
@@ -183,19 +183,17 @@ export default function HospitalityB2B() {
             {/* Block 1: Revenue */}
             <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ color: '#FF4D4D', fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 700 }}>{t.prob1Title}</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
-                <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.5, borderLeft: `2px solid ${T.border}`, paddingLeft: '1rem' }}>{t.prob1P}</p>
-                <p style={{ color: '#fff', fontSize: '1rem', lineHeight: 1.5, fontWeight: 500 }}>{t.prob1S}</p>
-              </div>
-              {/* SaaS UI Mockup */}
-              <div style={{ marginTop: '2rem', padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}`, display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <div style={{ flex: 1, padding: '1rem', backgroundColor: 'rgba(255, 77, 77, 0.05)', borderRadius: '6px', border: '1px solid rgba(255, 77, 77, 0.2)' }}>
-                  <div style={{ fontSize: '0.65rem', color: '#FF4D4D', marginBottom: '0.3rem', fontWeight: 700, letterSpacing: '0.05em' }}>OTA BOOKING</div>
-                  <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>$500 <span style={{ fontSize: '0.8rem', color: '#FF4D4D', fontWeight: 600 }}>(-20%)</span></div>
-                </div>
-                <div style={{ flex: 1, padding: '1rem', backgroundColor: `rgba(44, 183, 66, 0.05)`, borderRadius: '6px', border: `1px solid rgba(44, 183, 66, 0.2)` }}>
-                  <div style={{ fontSize: '0.65rem', color: '#2cb742', marginBottom: '0.3rem', fontWeight: 700, letterSpacing: '0.05em' }}>DIRECT SYSTEM</div>
-                  <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>$500 <span style={{ fontSize: '0.8rem', color: '#2cb742', fontWeight: 600 }}>(KEEP 100%)</span></div>
+              <p style={{ color: T.body, fontSize: '1rem', lineHeight: 1.6, flex: 1 }}>{t.prob1P}</p>
+              
+              {/* SaaS UI Solution */}
+              <div style={{ marginTop: '2.5rem', padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid rgba(44, 183, 66, 0.3)`, position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', backgroundColor: '#2cb742' }} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <div style={{ fontSize: '0.7rem', color: T.sub, textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700, marginBottom: '0.4rem' }}>Direct Engine Active</div>
+                    <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>Revenue Kept: 100%</div>
+                  </div>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2cb742" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 </div>
               </div>
             </div>
@@ -203,25 +201,18 @@ export default function HospitalityB2B() {
             {/* Block 2: Traffic */}
             <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ color: T.acc2, fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 700 }}>{t.prob2Title}</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
-                <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.5, borderLeft: `2px solid ${T.border}`, paddingLeft: '1rem' }}>{t.prob2P}</p>
-                <p style={{ color: '#fff', fontSize: '1rem', lineHeight: 1.5, fontWeight: 500 }}>{t.prob2S}</p>
-              </div>
-              {/* SaaS UI Mockup */}
-              <div style={{ marginTop: '2rem', padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}`, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.8rem 1rem', backgroundColor: T.bg1, borderRadius: '6px', border: `1px solid ${T.border}` }}>
-                  <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: T.acc2, boxShadow: `0 0 10px ${T.acc2}` }} />
-                  <div>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff' }}>Local SEO Traffic</div>
-                    <div style={{ fontSize: '0.7rem', color: T.sub }}>Google Maps ranking improved</div>
-                  </div>
+              <p style={{ color: T.body, fontSize: '1rem', lineHeight: 1.6, flex: 1 }}>{t.prob2P}</p>
+              
+              {/* SaaS UI Solution */}
+              <div style={{ marginTop: '2.5rem', padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid rgba(0, 163, 255, 0.3)`, position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', backgroundColor: T.acc2 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.8rem' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: T.acc2 }} />
+                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>Google Maps Ranking: #1</div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.8rem 1rem', backgroundColor: T.bg1, borderRadius: '6px', border: `1px solid ${T.border}` }}>
-                  <i className="fab fa-whatsapp" style={{ color: '#2cb742', fontSize: '1.2rem' }} />
-                  <div>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#fff' }}>Retention Campaign</div>
-                    <div style={{ fontSize: '0.7rem', color: T.sub }}>"Book direct for 10% off" sent</div>
-                  </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <i className="fab fa-whatsapp" style={{ color: '#2cb742', fontSize: '1rem' }} />
+                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>Retention Campaign: +24% ROI</div>
                 </div>
               </div>
             </div>
@@ -229,17 +220,16 @@ export default function HospitalityB2B() {
             {/* Block 3: Sync */}
             <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
               <h3 style={{ color: T.accent, fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 700 }}>{t.prob3Title}</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
-                <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.5, borderLeft: `2px solid ${T.border}`, paddingLeft: '1rem' }}>{t.prob3P}</p>
-                <p style={{ color: '#fff', fontSize: '1rem', lineHeight: 1.5, fontWeight: 500 }}>{t.prob3S}</p>
-              </div>
-              {/* SaaS UI Mockup */}
-              <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ padding: '0.6rem 1rem', backgroundColor: T.bg1, borderRadius: '4px', border: `1px solid ${T.border}`, fontSize: '0.75rem', fontWeight: 700, color: '#fff' }}>OTA</div>
-                <div style={{ flex: 1, height: '2px', background: `linear-gradient(90deg, transparent, ${T.accent}, transparent)`, position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', backgroundColor: T.accent, color: T.bg0, padding: '2px 8px', borderRadius: '10px', fontSize: '0.6rem', fontWeight: 800 }}>0.8s SYNC</div>
+              <p style={{ color: T.body, fontSize: '1rem', lineHeight: 1.6, flex: 1 }}>{t.prob3P}</p>
+              
+              {/* SaaS UI Solution */}
+              <div style={{ marginTop: '2.5rem', padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid rgba(255, 179, 71, 0.3)`, position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', backgroundColor: T.accent }} />
+                <div style={{ fontSize: '0.7rem', color: T.sub, textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700, marginBottom: '0.8rem' }}>Calendar Status</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#fff' }}>All Channels</div>
+                  <div style={{ backgroundColor: 'rgba(44, 183, 66, 0.1)', color: '#2cb742', padding: '4px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700, border: '1px solid rgba(44, 183, 66, 0.2)' }}>Auto-Synced (0.8s)</div>
                 </div>
-                <div style={{ padding: '0.6rem 1rem', backgroundColor: T.bg1, borderRadius: '4px', border: `1px solid ${T.border}`, fontSize: '0.75rem', fontWeight: 700, color: '#fff' }}>Direct</div>
               </div>
             </div>
 
