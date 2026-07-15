@@ -46,50 +46,56 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '1.5rem', whiteSpace: 'nowrap' }}>
                   {tab.title}
                 </h3>
-                <div style={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0, transform: isActive ? 'translateY(0)' : 'translateY(10px)', transition: 'all 0.4s ease', pointerEvents: isActive ? 'auto' : 'none' }}>
+                <div style={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0, transition: 'all 0.4s ease', pointerEvents: isActive ? 'auto' : 'none' }}>
                   <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6 }}>{tab.desc}</p>
                 </div>
               </div>
 
-              {/* Data-Driven CSS Metric Component */}
+              {/* Concept B: Transformation Animated Area */}
               {isActive && (
-                <div style={{ marginTop: '2rem', padding: '2rem', backgroundColor: T.bg0, borderRadius: '12px', border: `1px solid ${T.border}`, animation: 'fadeIn 0.5s ease', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '180px' }}>
-                  {tab.uiType === 'revenue' && (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '100%' }}>
-                      <div style={{ textAlign: 'center', opacity: 0.4, textDecoration: 'line-through', color: '#FF4D4D' }}>
-                        <div style={{ fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.2rem' }}>OTA BOOKING</div>
-                        <div style={{ fontSize: '2rem', fontWeight: 800 }}>-20%</div>
-                      </div>
-                      <div style={{ fontSize: '2rem', color: T.border, fontWeight: 300 }}>→</div>
-                      <div style={{ textAlign: 'center', color: '#2cb742', textShadow: '0 0 20px rgba(44, 183, 66, 0.2)' }}>
-                        <div style={{ fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.2rem', letterSpacing: '0.05em' }}>DIRECT KEEP</div>
-                        <div style={{ fontSize: '2.5rem', fontWeight: 900 }}>100%</div>
-                      </div>
-                    </div>
-                  )}
-                  {tab.uiType === 'traffic' && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1.25rem', backgroundColor: T.bg1, borderRadius: '8px', border: `1px solid rgba(0, 163, 255, 0.2)` }}>
-                        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: T.body }}>Google Maps Local Visibility</span>
-                        <span style={{ color: T.acc2, fontSize: '0.85rem', fontWeight: 800 }}>RANK #1</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1.25rem', backgroundColor: T.bg1, borderRadius: '8px', border: `1px solid rgba(44, 183, 66, 0.2)` }}>
-                        <span style={{ fontSize: '0.9rem', fontWeight: 600, color: T.body }}>Automated Guest Retention</span>
-                        <span style={{ color: '#2cb742', fontSize: '0.85rem', fontWeight: 800 }}>LAUNCHED</span>
-                      </div>
-                    </div>
-                  )}
+                <div style={{ marginTop: '2rem', padding: '2.5rem', backgroundColor: T.bg0, borderRadius: '12px', border: `1px solid ${T.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '200px', position: 'relative', overflow: 'hidden' }}>
+                  
+                  {/* Tab 01: Overbooking Sync Transformation */}
                   {tab.uiType === 'sync' && (
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '0.5rem 1rem' }}>
-                      <div>
-                        <div style={{ fontSize: '0.75rem', color: T.sub, fontWeight: 700, marginBottom: '0.2rem' }}>GRID DISTRIBUTION</div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff' }}>300+ Active OTA Channels</div>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100px', position: 'relative' }}>
+                      <div className="anim-pain-sync" style={{ position: 'absolute', color: '#FF4D4D', fontSize: '1.8rem', fontWeight: 800, letterSpacing: '0.05em', textAlign: 'center' }}>
+                        <div style={{ fontSize: '0.7rem', color: 'rgba(255,77,77,0.6)', marginBottom: '0.3rem' }}>CHANNEL CONFLICT</div>
+                        OVERBOOKING DETECTED
                       </div>
-                      <div style={{ backgroundColor: 'rgba(44, 183, 66, 0.08)', color: '#2cb742', padding: '6px 16px', borderRadius: '30px', fontSize: '0.75rem', fontWeight: 800, border: '1px solid rgba(44, 183, 66, 0.2)', boxShadow: '0 0 15px rgba(44, 183, 66, 0.1)' }}>
-                        LOCKED IN 0.8s
+                      <div className="anim-success-sync" style={{ position: 'absolute', color: '#2cb742', fontSize: '2.4rem', fontWeight: 900, textAlign: 'center', opacity: 0, textShadow: '0 0 30px rgba(44,183,66,0.3)' }}>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(44,183,66,0.7)', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '0.1em' }}>GRID DISTRIBUTION</div>
+                        0 OVERBOOKINGS
                       </div>
                     </div>
                   )}
+
+                  {/* Tab 02: Commission Slash Transformation */}
+                  {tab.uiType === 'revenue' && (
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100px', position: 'relative' }}>
+                      <div className="anim-pain-revenue" style={{ position: 'absolute', color: '#FF4D4D', fontSize: '3.5rem', fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        -20%
+                        <div className="anim-slash-line" style={{ position: 'absolute', height: '6px', backgroundColor: '#FF4D4D', left: '-10%', right: '-10%', borderRadius: '4px', transform: 'rotate(-15deg) scaleX(0)', transformOrigin: 'left' }} />
+                      </div>
+                      <div className="anim-success-revenue" style={{ position: 'absolute', color: '#2cb742', fontSize: '2.6rem', fontWeight: 900, opacity: 0, textAlign: 'center', textShadow: '0 0 30px rgba(44,183,66,0.3)' }}>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(44,183,66,0.7)', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '0.1em' }}>MERCHANT ЭКВАЙРИНГ</div>
+                        100% KEPT
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tab 03: Traffic Zero to Hero Transformation */}
+                  {tab.uiType === 'traffic' && (
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100px', position: 'relative' }}>
+                      <div className="anim-pain-traffic" style={{ position: 'absolute', color: '#fff', opacity: 0.2, fontSize: '1.8rem', fontWeight: 800 }}>
+                        DIRECT VISITS: 0%
+                      </div>
+                      <div className="anim-success-traffic" style={{ position: 'absolute', color: T.acc2, fontSize: '2.6rem', fontWeight: 900, opacity: 0, textAlign: 'center', textShadow: `0 0 30px rgba(0, 163, 255, 0.3)` }}>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(0, 163, 255, 0.7)', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '0.1em' }}>LOCAL SEARCH ARCHITECTURE</div>
+                        GOOGLE MAPS #1
+                      </div>
+                    </div>
+                  )}
+
                 </div>
               )}
             </div>
@@ -118,11 +124,11 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 <div style={{ padding: '0 1.5rem 1.5rem 1.5rem' }}>
                   <p style={{ color: T.body, fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 1.5rem 0' }}>{tab.desc}</p>
                   
-                  {/* Mobile CSS Metric solution preview */}
+                  {/* Mobile Static Metric Preview */}
                   <div style={{ padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}` }}>
-                    {tab.uiType === 'revenue' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#2cb742', textAlign: 'center' }}>Direct Keeping: 100%</div>}
-                    {tab.uiType === 'traffic' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: T.acc2, textAlign: 'center' }}>Google Maps Ranking: #1</div>}
-                    {tab.uiType === 'sync' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: T.accent, textAlign: 'center' }}>Live Channels Sync: 0.8s</div>}
+                    {tab.uiType === 'sync' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#2cb742', textAlign: 'center' }}>0 Overbookings / 300+ Channels</div>}
+                    {tab.uiType === 'revenue' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#2cb742', textAlign: 'center' }}>Revenue Kept: 100%</div>}
+                    {tab.uiType === 'traffic' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: T.acc2, textAlign: 'center' }}>Google Maps Visibility: #1</div>}
                   </div>
                 </div>
               </div>
@@ -130,6 +136,54 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
           );
         })}
       </div>
+
+      {/* Concept B Global CSS Transformation Keyframes */}
+      <style jsx global>{`
+        /* 1. Sync Box Animations */
+        .anim-pain-sync {
+          animation: flashRed 0.8s ease-in-out infinite alternate, fadeOutMetric 0.4s ease forwards 1.4s;
+        }
+        .anim-success-sync {
+          animation: fadeInMetric 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.7s;
+        }
+
+        /* 2. Revenue Box Animations */
+        .anim-pain-revenue {
+          animation: fadeOutMetric 0.4s ease forwards 1.5s;
+        }
+        .anim-slash-line {
+          animation: drawSlash 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
+        }
+        .anim-success-revenue {
+          animation: fadeInMetric 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.8s;
+        }
+
+        /* 3. Traffic Box Animations */
+        .anim-pain-traffic {
+          animation: blurOut 0.5s ease forwards 1.2s;
+        }
+        .anim-success-traffic {
+          animation: fadeInMetric 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.5s;
+        }
+
+        /* Keyframes Library */
+        @keyframes flashRed {
+          from { opacity: 0.4; }
+          to { opacity: 1; text-shadow: 0 0 15px rgba(255,77,77,0.4); }
+        }
+        @keyframes drawSlash {
+          to { transform: rotate(-15deg) scaleX(1); }
+        }
+        @keyframes fadeOutMetric {
+          to { opacity: 0; transform: scale(0.9); filter: blur(8px); }
+        }
+        @keyframes blurOut {
+          to { opacity: 0; filter: blur(6px); transform: scale(0.95); }
+        }
+        @keyframes fadeInMetric {
+          to { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
     </section>
   );
 }
