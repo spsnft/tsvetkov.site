@@ -31,7 +31,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 borderRight: idx !== tabs.length - 1 ? `1px solid ${T.border}` : 'none',
                 padding: '3.5rem 2.5rem',
                 cursor: isActive ? 'default' : 'pointer',
-                transition: 'all 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
+                transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)',
                 backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent',
                 display: 'flex',
                 flexDirection: 'column',
@@ -46,52 +46,50 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '1.5rem', whiteSpace: 'nowrap' }}>
                   {tab.title}
                 </h3>
-                <div style={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0, transition: 'all 0.4s ease', pointerEvents: isActive ? 'auto' : 'none' }}>
+                <div style={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0, transform: isActive ? 'translateY(0)' : 'translateY(10px)', transition: 'all 0.4s ease', pointerEvents: isActive ? 'auto' : 'none' }}>
                   <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6 }}>{tab.desc}</p>
                 </div>
               </div>
 
-              {/* Concept B: Transformation Animated Area */}
+              {/* Concept B: High-End Bold Typography Metrics */}
               {isActive && (
-                <div style={{ marginTop: '2rem', padding: '2.5rem', backgroundColor: T.bg0, borderRadius: '12px', border: `1px solid ${T.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '200px', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ marginTop: '2rem', padding: '2rem', backgroundColor: T.bg0, borderRadius: '12px', border: `1px solid ${T.border}`, animation: 'fadeIn 0.4s ease', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '200px' }}>
                   
-                  {/* Tab 01: Overbooking Sync Transformation */}
+                  {/* Tab 01: Overbookings -> Stark 0 */}
                   {tab.uiType === 'sync' && (
-                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100px', position: 'relative' }}>
-                      <div className="anim-pain-sync" style={{ position: 'absolute', color: '#FF4D4D', fontSize: '1.8rem', fontWeight: 800, letterSpacing: '0.05em', textAlign: 'center' }}>
-                        <div style={{ fontSize: '0.7rem', color: 'rgba(255,77,77,0.6)', marginBottom: '0.3rem' }}>CHANNEL CONFLICT</div>
-                        OVERBOOKING DETECTED
+                    <div style={{ textAlign: 'center' }}>
+                      <div style={{ fontSize: 'clamp(4rem, 7vw, 6rem)', fontWeight: 900, color: '#2cb742', lineHeight: 1, letterSpacing: '-0.05em', textShadow: '0 0 40px rgba(44, 183, 66, 0.15)' }}>
+                        0
                       </div>
-                      <div className="anim-success-sync" style={{ position: 'absolute', color: '#2cb742', fontSize: '2.4rem', fontWeight: 900, textAlign: 'center', opacity: 0, textShadow: '0 0 30px rgba(44,183,66,0.3)' }}>
-                        <div style={{ fontSize: '0.75rem', color: 'rgba(44,183,66,0.7)', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '0.1em' }}>GRID DISTRIBUTION</div>
-                        0 OVERBOOKINGS
+                      <div style={{ fontSize: '0.7rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', marginTop: '0.5rem', textTransform: 'uppercase' }}>
+                        Overbooking Errors Permitted
                       </div>
                     </div>
                   )}
 
-                  {/* Tab 02: Commission Slash Transformation */}
+                  {/* Tab 02: Commission -> Aggressive -20% */}
                   {tab.uiType === 'revenue' && (
-                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100px', position: 'relative' }}>
-                      <div className="anim-pain-revenue" style={{ position: 'absolute', color: '#FF4D4D', fontSize: '3.5rem', fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ textAlign: 'center' }}>
+                      <div style={{ fontSize: 'clamp(3.5rem, 6vw, 5.5rem)', fontWeight: 900, color: '#FF4D4D', lineHeight: 1, letterSpacing: '-0.05em' }}>
                         -20%
-                        <div className="anim-slash-line" style={{ position: 'absolute', height: '6px', backgroundColor: '#FF4D4D', left: '-10%', right: '-10%', borderRadius: '4px', transform: 'rotate(-15deg) scaleX(0)', transformOrigin: 'left' }} />
                       </div>
-                      <div className="anim-success-revenue" style={{ position: 'absolute', color: '#2cb742', fontSize: '2.6rem', fontWeight: 900, opacity: 0, textAlign: 'center', textShadow: '0 0 30px rgba(44,183,66,0.3)' }}>
-                        <div style={{ fontSize: '0.75rem', color: 'rgba(44,183,66,0.7)', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '0.1em' }}>MERCHANT ЭКВАЙРИНГ</div>
-                        100% KEPT
+                      <div style={{ fontSize: '0.7rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', marginTop: '0.5rem', textTransform: 'uppercase' }}>
+                        Leaked to Third-Party OTAs
                       </div>
                     </div>
                   )}
 
-                  {/* Tab 03: Traffic Zero to Hero Transformation */}
+                  {/* Tab 03: Traffic -> Muted 0% Loss Chart */}
                   {tab.uiType === 'traffic' && (
-                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100px', position: 'relative' }}>
-                      <div className="anim-pain-traffic" style={{ position: 'absolute', color: '#fff', opacity: 0.2, fontSize: '1.8rem', fontWeight: 800 }}>
-                        DIRECT VISITS: 0%
+                    <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                        <div style={{ fontSize: 'clamp(3.5rem, 6vw, 5.5rem)', fontWeight: 900, color: '#4A4A4A', lineHeight: 1, letterSpacing: '-0.05em' }}>
+                          0%
+                        </div>
+                        <span style={{ color: '#FF4D4D', fontSize: '1.5rem', fontWeight: 700 }}>↓</span>
                       </div>
-                      <div className="anim-success-traffic" style={{ position: 'absolute', color: T.acc2, fontSize: '2.6rem', fontWeight: 900, opacity: 0, textAlign: 'center', textShadow: `0 0 30px rgba(0, 163, 255, 0.3)` }}>
-                        <div style={{ fontSize: '0.75rem', color: 'rgba(0, 163, 255, 0.7)', fontWeight: 700, marginBottom: '0.4rem', letterSpacing: '0.1em' }}>LOCAL SEARCH ARCHITECTURE</div>
-                        GOOGLE MAPS #1
+                      <div style={{ fontSize: '0.7rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                        Direct Guest Retention Share
                       </div>
                     </div>
                   )}
@@ -124,11 +122,11 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 <div style={{ padding: '0 1.5rem 1.5rem 1.5rem' }}>
                   <p style={{ color: T.body, fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 1.5rem 0' }}>{tab.desc}</p>
                   
-                  {/* Mobile Static Metric Preview */}
-                  <div style={{ padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}` }}>
-                    {tab.uiType === 'sync' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#2cb742', textAlign: 'center' }}>0 Overbookings / 300+ Channels</div>}
-                    {tab.uiType === 'revenue' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#2cb742', textAlign: 'center' }}>Revenue Kept: 100%</div>}
-                    {tab.uiType === 'traffic' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: T.acc2, textAlign: 'center' }}>Google Maps Visibility: #1</div>}
+                  {/* Mobile CSS Metric solution preview */}
+                  <div style={{ padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}`, display: 'flex', justifyContent: 'center' }}>
+                    {tab.uiType === 'sync' && <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#2cb742' }}>0 OVERBOOKINGS</div>}
+                    {tab.uiType === 'revenue' && <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#FF4D4D' }}>-20% COMMISSION</div>}
+                    {tab.uiType === 'traffic' && <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#4A4A4A' }}>0% DIRECT SHARE</div>}
                   </div>
                 </div>
               </div>
@@ -136,54 +134,6 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
           );
         })}
       </div>
-
-      {/* Concept B Global CSS Transformation Keyframes */}
-      <style jsx global>{`
-        /* 1. Sync Box Animations */
-        .anim-pain-sync {
-          animation: flashRed 0.8s ease-in-out infinite alternate, fadeOutMetric 0.4s ease forwards 1.4s;
-        }
-        .anim-success-sync {
-          animation: fadeInMetric 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.7s;
-        }
-
-        /* 2. Revenue Box Animations */
-        .anim-pain-revenue {
-          animation: fadeOutMetric 0.4s ease forwards 1.5s;
-        }
-        .anim-slash-line {
-          animation: drawSlash 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
-        }
-        .anim-success-revenue {
-          animation: fadeInMetric 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.8s;
-        }
-
-        /* 3. Traffic Box Animations */
-        .anim-pain-traffic {
-          animation: blurOut 0.5s ease forwards 1.2s;
-        }
-        .anim-success-traffic {
-          animation: fadeInMetric 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.5s;
-        }
-
-        /* Keyframes Library */
-        @keyframes flashRed {
-          from { opacity: 0.4; }
-          to { opacity: 1; text-shadow: 0 0 15px rgba(255,77,77,0.4); }
-        }
-        @keyframes drawSlash {
-          to { transform: rotate(-15deg) scaleX(1); }
-        }
-        @keyframes fadeOutMetric {
-          to { opacity: 0; transform: scale(0.9); filter: blur(8px); }
-        }
-        @keyframes blurOut {
-          to { opacity: 0; filter: blur(6px); transform: scale(0.95); }
-        }
-        @keyframes fadeInMetric {
-          to { opacity: 1; transform: scale(1); }
-        }
-      `}</style>
     </section>
   );
 }
