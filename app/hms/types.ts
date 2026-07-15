@@ -59,7 +59,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "01",
         titleHighlight: "24/7",
         titleSuffix: "manual updates",
-        desc: "Each reservation instantly locks your entire grid across 300+ channels in less than 1 second.",
+        desc: "Each reservation instantly locks your entire grid across 300+ channels.",
         uiType: "sync"
       },
       {
@@ -74,7 +74,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "03",
         titleHighlight: "0",
         titleSuffix: "leads from direct traffic",
-        desc: "Drive direct bookings with local search and automated retention campaigns for infinite brand equity growth.",
+        desc: "Drive direct bookings with local search and automated retention campaigns.",
         uiType: "traffic"
       }
     ],
@@ -119,7 +119,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "01",
         titleHighlight: "24/7",
         titleSuffix: "ต้องคอยอัปเดตระบบด้วยมือ",
-        desc: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางกว่า 300+ แห่งโดยอัตโนมัติในทันทีภายในเวลาไม่ถึง 1 วินาที",
+        desc: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางกว่า 300+ แห่งโดยอัตโนมัติในทันที",
         uiType: "sync"
       },
       {
@@ -134,7 +134,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "03",
         titleHighlight: "0",
         titleSuffix: "ยอดจองตรงผ่านช่องทางออนไลน์",
-        desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ เพื่อสร้างการเติบโตของแบรนด์อย่างไร้ขีดจำกัด",
+        desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
         uiType: "traffic"
       }
     ],
@@ -161,7 +161,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
     aboutTitle: "พันธมิตรด้านเทคโนโลยีเพื่อการเติบโต",
-    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
+    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นваตในการบริหารจัดการโรงแรมทั่วโลก",
     aboutBtn: "ดูประวัติการทำงาน",
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
