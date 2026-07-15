@@ -18,8 +18,8 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
         {title}
       </h2>
       
-      {/* Desktop Layout (Avikto Horizontal Pattern) */}
-      <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', minHeight: '520px' }}>
+      {/* Desktop Layout (Avikto Horizontal Accordion Pattern) */}
+      <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', minHeight: '480px' }}>
         {tabs.map((tab, idx) => {
           const isActive = activeTab === idx;
           return (
@@ -39,63 +39,66 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 overflow: 'hidden'
               }}
             >
+              {/* Верхняя часть: Номер и Заголовок таба */}
               <div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: isActive ? T.accent : T.sub, marginBottom: '1.5rem' }}>
+                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: isActive ? T.accent : T.sub, marginBottom: '1.5rem', transition: 'color 0.3s' }}>
                   {tab.num}
                 </div>
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '1.5rem', whiteSpace: 'nowrap' }}>
                   {tab.title}
                 </h3>
-                <div style={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0, transform: isActive ? 'translateY(0)' : 'translateY(10px)', transition: 'all 0.4s ease', pointerEvents: isActive ? 'auto' : 'none' }}>
-                  <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6 }}>{tab.desc}</p>
-                </div>
               </div>
 
-              {/* Concept B: High-End Bold Typography Metrics */}
-              {isActive && (
-                <div style={{ marginTop: '2rem', padding: '2rem', backgroundColor: T.bg0, borderRadius: '12px', border: `1px solid ${T.border}`, animation: 'fadeIn 0.4s ease', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '200px' }}>
-                  
-                  {/* Tab 01: Overbookings -> Stark 0 */}
-                  {tab.uiType === 'sync' && (
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: 'clamp(4rem, 7vw, 6rem)', fontWeight: 900, color: '#2cb742', lineHeight: 1, letterSpacing: '-0.05em', textShadow: '0 0 40px rgba(44, 183, 66, 0.15)' }}>
-                        0
-                      </div>
-                      <div style={{ fontSize: '0.7rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', marginTop: '0.5rem', textTransform: 'uppercase' }}>
-                        Overbooking Errors Permitted
-                      </div>
+              {/* Нижняя часть: Контент открывается только при isActive БЕЗ внутренних черных рамок */}
+              <div style={{ 
+                opacity: isActive ? 1 : 0, 
+                height: isActive ? '100%' : 0, 
+                transform: isActive ? 'translateY(0)' : 'translateY(15px)', 
+                transition: 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
+                display: 'flex',
+                alignItems: 'flex-end',
+                justifyContent: 'space-between',
+                flexGrow: 1,
+                gap: '2rem'
+              }}>
+                {isActive && (
+                  <>
+                    {/* Текстовое описание слева */}
+                    <div style={{ flex: '1.2', paddingBottom: '1rem' }}>
+                      <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+                        {tab.desc}
+                      </p>
                     </div>
-                  )}
 
-                  {/* Tab 02: Commission -> Aggressive -20% */}
-                  {tab.uiType === 'revenue' && (
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: 'clamp(3.5rem, 6vw, 5.5rem)', fontWeight: 900, color: '#FF4D4D', lineHeight: 1, letterSpacing: '-0.05em' }}>
-                        -20%
-                      </div>
-                      <div style={{ fontSize: '0.7rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', marginTop: '0.5rem', textTransform: 'uppercase' }}>
-                        Leaked to Third-Party OTAs
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tab 03: Traffic -> Muted 0% Loss Chart */}
-                  {tab.uiType === 'traffic' && (
-                    <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                        <div style={{ fontSize: 'clamp(3.5rem, 6vw, 5.5rem)', fontWeight: 900, color: '#4A4A4A', lineHeight: 1, letterSpacing: '-0.05em' }}>
+                    {/* Чистый гигантский акцент справа (БЕЗ КОРОБОК, только воздух и шрифт) */}
+                    <div style={{ 
+                      flex: '1', 
+                      display: 'flex', 
+                      flexDirection: 'column', 
+                      alignItems: 'flex-end', 
+                      justifyContent: 'flex-end',
+                      lineHeight: 0.9
+                    }}>
+                      {tab.uiType === 'sync' && (
+                        <span style={{ fontSize: '9rem', fontWeight: 900, color: '#2cb742', letterSpacing: '-0.05em', textShadow: '0 0 50px rgba(44, 183, 66, 0.15)' }}>
+                          0
+                        </span>
+                      )}
+                      {tab.uiType === 'revenue' && (
+                        <span style={{ fontSize: '8rem', fontWeight: 900, color: '#FF4D4D', letterSpacing: '-0.05em' }}>
+                          20%
+                        </span>
+                      )}
+                      {tab.uiType === 'traffic' && (
+                        <span style={{ fontSize: '8rem', fontWeight: 900, color: '#444', letterSpacing: '-0.05em' }}>
                           0%
-                        </div>
-                        <span style={{ color: '#FF4D4D', fontSize: '1.5rem', fontWeight: 700 }}>↓</span>
-                      </div>
-                      <div style={{ fontSize: '0.7rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                        Direct Guest Retention Share
-                      </div>
+                        </span>
+                      )}
                     </div>
-                  )}
+                  </>
+                )}
+              </div>
 
-                </div>
-              )}
             </div>
           );
         })}
@@ -119,14 +122,14 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
               </div>
               
               <div style={{ height: isActive ? 'auto' : 0, overflow: 'hidden', transition: 'all 0.4s ease' }}>
-                <div style={{ padding: '0 1.5rem 1.5rem 1.5rem' }}>
-                  <p style={{ color: T.body, fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 1.5rem 0' }}>{tab.desc}</p>
+                <div style={{ padding: '0 1.5rem 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <p style={{ color: T.body, fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>{tab.desc}</p>
                   
-                  {/* Mobile CSS Metric solution preview */}
-                  <div style={{ padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}`, display: 'flex', justifyContent: 'center' }}>
-                    {tab.uiType === 'sync' && <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#2cb742' }}>0 OVERBOOKINGS</div>}
-                    {tab.uiType === 'revenue' && <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#FF4D4D' }}>-20% COMMISSION</div>}
-                    {tab.uiType === 'traffic' && <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#4A4A4A' }}>0% DIRECT SHARE</div>}
+                  {/* Мобильный плоский акцент без рамок */}
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', lineHeight: 1 }}>
+                    {tab.uiType === 'sync' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#2cb742' }}>0</span>}
+                    {tab.uiType === 'revenue' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#FF4D4D' }}>20%</span>}
+                    {tab.uiType === 'traffic' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#444' }}>0%</span>}
                   </div>
                 </div>
               </div>
