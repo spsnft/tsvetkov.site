@@ -1,9 +1,10 @@
 export interface TabItem {
   num: string;
   titlePrefix?: string;
-  titleHighlight: string;
+  titleAccent: string;
   titleSuffix: string;
-  desc: string;
+  subPrefix: string;
+  subSuffix: string;
   uiType: string;
 }
 
@@ -57,24 +58,29 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tabs: [
       {
         num: "01",
-        titleHighlight: "24/7",
+        titlePrefix: "",
+        titleAccent: "24/7",
         titleSuffix: "manual updates",
-        desc: "Each reservation instantly locks your entire grid across 300+ channels.",
+        subPrefix: "Each reservation locks your entire grid in less than ",
+        subSuffix: " second",
         uiType: "sync"
       },
       {
         num: "02",
-        titlePrefix: "Up to",
-        titleHighlight: "20%",
+        titlePrefix: "Up to ",
+        titleAccent: "20%",
         titleSuffix: "OTA commission",
-        desc: "Integrate a direct booking engine and keep 100% of the revenue in-house.",
+        subPrefix: "Integrate a direct booking engine and keep ",
+        subSuffix: "% of the revenue in-house.",
         uiType: "revenue"
       },
       {
         num: "03",
-        titleHighlight: "0",
+        titlePrefix: "",
+        titleAccent: "0",
         titleSuffix: "leads from direct traffic",
-        desc: "Drive direct bookings with local search and automated retention campaigns.",
+        subPrefix: "Drive ",
+        subSuffix: " direct bookings with local search and automated retention campaigns.",
         uiType: "traffic"
       }
     ],
@@ -117,24 +123,29 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tabs: [
       {
         num: "01",
-        titleHighlight: "24/7",
-        titleSuffix: "ต้องคอยอัปเดตระบบด้วยมือ",
-        desc: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางกว่า 300+ แห่งโดยอัตโนมัติในทันที",
+        titlePrefix: "",
+        titleAccent: "24/7",
+        titleSuffix: "อัปเดตระบบด้วยมือ",
+        subPrefix: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางในเวลาไม่ถึง ",
+        subSuffix: " วินาที",
         uiType: "sync"
       },
       {
         num: "02",
-        titlePrefix: "ต้องเสียค่าคอมสูงถึง",
-        titleHighlight: "20%",
-        titleSuffix: "ให้กับแพลตฟอร์ม OTA",
-        desc: "ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม 100% เข้าบัญชีคุณโดยตรง",
+        titlePrefix: "ต้องเสียค่าคอมสูงถึง ",
+        titleAccent: "20%",
+        titleSuffix: "ให้กับ OTA",
+        subPrefix: "ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม ",
+        subSuffix: "% เข้าบัญชีคุณโดยตรง",
         uiType: "revenue"
       },
       {
         num: "03",
-        titleHighlight: "0",
-        titleSuffix: "ยอดจองตรงผ่านช่องทางออนไลน์",
-        desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
+        titlePrefix: "",
+        titleAccent: "0",
+        titleSuffix: "ยอดจองตรงบนเว็บไซต์",
+        subPrefix: "ดึงยอดจองตรงเข้าโรงแรม ",
+        subSuffix: " ด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้า",
         uiType: "traffic"
       }
     ],
@@ -161,7 +172,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
     aboutTitle: "พันธมิตรด้านเทคโนโลยีเพื่อการเติบโต",
-    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นваตในการบริหารจัดการโรงแรมทั่วโลก",
+    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
     aboutBtn: "ดูประวัติการทำงาน",
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
