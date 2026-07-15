@@ -51,109 +51,149 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    problemTitle: "Direct Revenue Infrastructure",
-    tabs: [
-      {
-        num: "01",
-        title: "Overbooking & Penalties",
-        desc: "Each reservation instantly locks your entire grid across 300+ channels.",
-        uiType: "sync"
-      },
-      {
-        num: "02",
-        title: "Up to 20% OTA Commission",
-        desc: "Integrate a direct booking engine and keep 100% of the revenue in-house.",
-        uiType: "revenue"
-      },
-      {
-        num: "03",
-        title: "Zero Direct Traffic",
-        desc: "Drive direct bookings with local search and automated retention campaigns.",
-        uiType: "traffic"
-      }
-    ],
-    priceTitle: "Simple Pricing. No Hidden Fees.",
-    priceSub: "Fixed setup fee. Zero commission on direct bookings forever.",
-    tier1Title: "LITE (1-10 Rooms)",
-    tier1Desc: "For independent villas and small guesthouses",
-    tier1F1: "✓ Core System Setup (PMS/Dashboard)",
-    tier1F2: "✓ Direct Website Booking button",
-    tier1F3: "✓ Booking & Agoda Synchronization",
-    tier1F4: "✓ Google Maps Setup",
-    tier2Title: "STANDARD (10-30 Rooms)",
-    tier2Desc: "For boutique hotels and resorts",
-    tier2F1: "✓ Everything in ",
-    tier2F1Badge: "LITE",
-    tier2F2: "✓ Connect 300+ OTA Channels",
-    tier2F3: "✓ Guest Return System",
-    tier2F4: "✓ Guides for your Staff (Visual SOPs)",
-    tier3Title: "ENTERPRISE (30+ Rooms)",
-    tier3Desc: "For hotel chains and management firms",
-    tier3F1: "✓ Everything in ",
-    tier3F1Badge: "STANDARD",
-    tier3F2: "✓ Anti-Theft Logs",
-    tier3F3: "✓ Multichannel Ads Setup",
-    tier3F4: "✓ Analytics Dashboard",
-    aboutTitle: "Growth Architect & Tech Partner",
-    aboutDesc: "International software integration and growth architecture provider. Operating as an offshore tech partner to maximize direct revenue and eliminate operational chaos for hospitality businesses globally.",
-    aboutBtn: "View Professional Profile",
-    footerTitle: "Ready to make more money?",
-    footerBtn: "Book a Free Hotel Audit"
-  },
-  th: {
-    badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
-    heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
-    heroSub1: "เชื่อมต่อโรงแรมของคุณกับลูกค้าโดยตรงและหยุดปัญหาการจองซ้ำซ้อน",
-    heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
-    btnChat: "WhatsApp",
-    btnLine: "Line",
-    problemTitle: "โครงสร้างพื้นฐานเพื่อรายได้โดยตรง",
-    tabs: [
-      {
-        num: "01",
-        title: "การจองซ้ำซ้อนและค่าปรับ",
-        desc: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางกว่า 300+ แห่งโดยอัตโนมัติในทันที",
-        uiType: "sync"
-      },
-      {
-        num: "02",
-        title: "ค่าคอมมิชชั่น OTA สูงสุด 20%",
-        desc: "ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม 100% เข้าบัญชีคุณโดยตรง",
-        uiType: "revenue"
-      },
-      {
-        num: "03",
-        title: "ขาดช่องทางการจองตรง",
-        desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
-        uiType: "traffic"
-      }
-    ],
-    priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
-    priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว รับรายได้จากการจองตรงเต็มจำนวนตลอดไป",
-    tier1Title: "LITE (1-10 ห้อง)",
-    tier1Desc: "สำหรับวิลล่าส่วนตัวและเกสต์เฮาส์ขนาดเล็ก",
-    tier1F1: "✓ ติดตั้งระบบจัดการที่พัก (PMS)",
-    tier1F2: "✓ ปุ่ม 'จองเลย' บนเว็บไซต์ของคุณ",
-    tier1F3: "✓ ซิงค์ปฏิทิน Booking & Agoda",
-    tier1F4: "✓ ตั้งค่าโปรไฟล์ Google Maps",
-    tier2Title: "STANDARD (10-30 ห้อง)",
-    tier2Desc: "สำหรับบูติกโฮเทลและรีสอร์ท",
-    tier2F1: "✓ รวมทุกอย่างในแพ็กเกจ ",
-    tier2F1Badge: "LITE",
-    tier2F2: "✓ เชื่อมต่อช่องทางจองกว่า 300+ แห่ง",
-    tier2F3: "✓ ระบบดึงลูกค้าเก่ากลับมาจองซ้ำ",
-    tier2F4: "✓ คู่มือการใช้งานสำหรับพนักงาน (SOPs)",
-    tier3Title: "ENTERPRISE (30+ ห้อง)",
-    tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
-    tier3F1: "✓ รวมทุกอย่างในแพ็กเกจ ",
-    tier3F1Badge: "STANDARD",
-    tier3F2: "✓ ระบบตรวจสอบการทำงานพนักงาน (Anti-Theft)",
-    tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
-    tier3F4: "✓ แดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
-    aboutTitle: "พันธมิตรด้านเทคโนโลยีเพื่อการเติบโต",
-    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
-    aboutBtn: "ดูประวัติการทำงาน",
-    footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
-    footerBtn: "นัดหมายตรวจสอบระบบฟรี"
-  }
-};
+    problemTitle: "Direct Revenue Infrastructure'use client';
+
+import React, { useState } from 'react';
+import { T } from '../../src/theme/tokens';
+import { TabItem } from './types';
+
+interface B2BAccordionProps {
+  tabs: TabItem[];
+  title: string;
+}
+
+export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
+  const [activeTab, setActiveTab] = useState<number>(0);
+
+  return (
+    <section style={{ padding: '4rem 0' }}>
+      <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '4rem', textAlign: 'center', letterSpacing: '-0.02em' }}>
+        {title}
+      </h2>
+      
+      {/* Desktop Layout (Avikto Horizontal Accordion Pattern) */}
+      <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', minHeight: '480px' }}>
+        {tabs.map((tab, idx) => {
+          const isActive = activeTab === idx;
+          return (
+            <div 
+              key={idx}
+              onClick={() => setActiveTab(idx)}
+              style={{ 
+                flex: isActive ? '3.5' : '1',
+                borderRight: idx !== tabs.length - 1 ? `1px solid ${T.border}` : 'none',
+                padding: '3.5rem 2.5rem',
+                cursor: isActive ? 'default' : 'pointer',
+                transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)',
+                backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                overflow: 'hidden'
+              }}
+            >
+              {/* Верхняя часть: Номер и Заголовок таба (всегда видны) */}
+              <div>
+                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: isActive ? T.accent : T.sub, marginBottom: '1.5rem', transition: 'color 0.3s' }}>
+                  {tab.num}
+                </div>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '1.5rem', whiteSpace: 'nowrap' }}>
+                  {tab.title}
+                </h3>
+              </div>
+
+              {/* Нижняя часть: Описание и Бесшовная гигантская цифра. Открывается только при isActive */}
+              <div style={{ 
+                opacity: isActive ? 1 : 0, 
+                height: isActive ? '100%' : 0, 
+                transform: isActive ? 'translateY(0)' : 'translateY(15px)', 
+                transition: 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
+                display: 'flex',
+                alignItems: 'flex-end',
+                justifyContent: 'space-between',
+                flexGrow: 1,
+                gap: '2rem'
+              }}>
+                {isActive && (
+                  <>
+                    {/* Текстовое описание слева */}
+                    <div style={{ flex: '1.2', paddingBottom: '1rem' }}>
+                      <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+                        {tab.desc}
+                      </p>
+                    </div>
+
+                    {/* Чистый гигантский акцент справа (БЕЗ КОРОБОК, только воздух и шрифт) */}
+                    <div style={{ 
+                      flex: '1', 
+                      display: 'flex', 
+                      flexDirection: 'column', 
+                      alignItems: 'flex-end', 
+                      justifyContent: 'flex-end',
+                      lineHeight: 0.9,
+                      fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' // Моноширинный шрифт для data-эффекта
+                    }}>
+                      {tab.uiType === 'sync' && (
+                        <>
+                          <span style={{ fontSize: '9rem', fontWeight: 900, color: '#FF4D4D', letterSpacing: '-0.05em' }}>∞</span>
+                          <span style={{ fontSize: '0.65rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Conflicts Peritted</span>
+                        </>
+                      )}
+                      {tab.uiType === 'revenue' && (
+                        <>
+                          <span style={{ fontSize: '9rem', fontWeight: 900, color: '#FF4D4D', letterSpacing: '-0.05em' }}>20%</span>
+                          <span style={{ fontSize: '0.65rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Third-Party Leak</span>
+                        </>
+                      )}
+                      {tab.uiType === 'traffic' && (
+                        <>
+                          <span style={{ fontSize: '9rem', fontWeight: 900, color: '#444', letterSpacing: '-0.05em' }}>0%</span>
+                          <span style={{ fontSize: '0.65rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Direct Retention Share</span>
+                        </>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Mobile Layout (Avikto Vertical Accordion Pattern) */}
+      <div className="mobile-only" style={{ display: 'flex', flexDirection: 'column', border: `1px solid ${T.border}`, borderRadius: '12px', backgroundColor: T.bg1, overflow: 'hidden' }}>
+        {tabs.map((tab, idx) => {
+          const isActive = activeTab === idx;
+          return (
+            <div key={idx} style={{ borderBottom: idx !== tabs.length - 1 ? `1px solid ${T.border}` : 'none' }}>
+              <div 
+                onClick={() => setActiveTab(idx)}
+                style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent' }}
+              >
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 700, color: isActive ? T.accent : T.sub }}>{tab.num}</span>
+                  <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>{tab.title}</h3>
+                </div>
+                <span style={{ fontSize: '1.2rem', color: T.sub, transform: isActive ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s' }}>▼</span>
+              </div>
+              
+              <div style={{ height: isActive ? 'auto' : 0, overflow: 'hidden', transition: 'all 0.4s ease' }}>
+                <div style={{ padding: '0 1.5rem 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <p style={{ color: T.body, fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>{tab.desc}</p>
+                  
+                  {/* Мобильный плоский акцент без рамок */}
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', lineHeight: 1 }}>
+                    {tab.uiType === 'sync' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#FF4D4D' }}>∞</span>}
+                    {tab.uiType === 'revenue' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#FF4D4D' }}>20%</span>}
+                    {tab.uiType === 'traffic' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#444' }}>0%</span>}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
