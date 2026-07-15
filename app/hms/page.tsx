@@ -231,39 +231,20 @@ export default function HospitalityB2B() {
                     </div>
                   </div>
 
-                  {/* UI Render Area (Desktop Active State Only) */}
+                  {/* Image Render Area (Desktop Active State Only) */}
                   {isActive && (
-                    <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '10px', border: `1px solid ${T.border}`, animation: 'fadeIn 0.5s ease' }}>
-                      {tab.uiType === 'revenue' && (
-                        <div style={{ display: 'flex', gap: '1rem' }}>
-                          <div style={{ flex: 1, padding: '1rem', backgroundColor: 'rgba(255, 77, 77, 0.03)', borderRadius: '6px', border: '1px solid rgba(255, 77, 77, 0.15)' }}>
-                            <div style={{ fontSize: '0.65rem', color: '#FF4D4D', fontWeight: 700, marginBottom: '0.2rem' }}>OTA CHANNEL</div>
-                            <div style={{ fontSize: '1.1rem', fontWeight: 700 }}>$500 <span style={{ color: '#FF4D4D', fontSize: '0.8rem' }}>(-20%)</span></div>
-                          </div>
-                          <div style={{ flex: 1, padding: '1rem', backgroundColor: 'rgba(44, 183, 66, 0.03)', borderRadius: '6px', border: '1px solid rgba(44, 183, 66, 0.15)' }}>
-                            <div style={{ fontSize: '0.65rem', color: '#2cb742', fontWeight: 700, marginBottom: '0.2rem' }}>DIRECT ENGINE</div>
-                            <div style={{ fontSize: '1.1rem', fontWeight: 700 }}>$500 <span style={{ color: '#2cb742', fontSize: '0.8rem' }}>(100%)</span></div>
-                          </div>
-                        </div>
-                      )}
-                      {tab.uiType === 'traffic' && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.6rem 1rem', backgroundColor: T.bg1, borderRadius: '6px', border: `1px solid ${T.border}` }}>
-                            <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Google Maps Platform</span>
-                            <span style={{ color: T.acc2, fontSize: '0.75rem', fontWeight: 700 }}>RANKING #1</span>
-                          </div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.6rem 1rem', backgroundColor: T.bg1, borderRadius: '6px', border: `1px solid ${T.border}` }}>
-                            <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Guest Retention Broadcast</span>
-                            <span style={{ color: '#2cb742', fontSize: '0.75rem', fontWeight: 700 }}>ACTIVE</span>
-                          </div>
-                        </div>
-                      )}
-                      {tab.uiType === 'sync' && (
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem' }}>
-                          <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Global Extranet Distribution</span>
-                          <span style={{ backgroundColor: 'rgba(44, 183, 66, 0.1)', color: '#2cb742', padding: '4px 12px', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 800, border: '1px solid rgba(44, 183, 66, 0.2)' }}>LOCKED IN 0.8s</span>
-                        </div>
-                      )}
+                    <div style={{ marginTop: '2rem', animation: 'fadeIn 0.5s ease', borderRadius: '10px', overflow: 'hidden', border: `1px solid ${T.border}`, backgroundColor: T.bg0, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '200px' }}>
+                      {/* ЗАМЕНИ ПУТЬ НА СВОИ РЕАЛЬНЫЕ КАРТИНКИ В ПАПКЕ PUBLIC */}
+                      <img 
+                        src={`/${tab.uiType}-mockup.jpg`} 
+                        alt={tab.title}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        onError={(e) => {
+                          // Фолбэк, пока картинок нет
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentElement!.innerHTML = `<span style="color: ${T.sub}; font-size: 0.85rem;">[ Upload /public/${tab.uiType}-mockup.jpg ]</span>`;
+                        }}
+                      />
                     </div>
                   )}
                 </div>
@@ -292,17 +273,19 @@ export default function HospitalityB2B() {
                     <div style={{ padding: '0 1.5rem 1.5rem 1.5rem' }}>
                       <p style={{ color: T.body, fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 1.5rem 0' }}>{tab.desc}</p>
                       
-                      {/* Mobile UI Mockup */}
-                      <div style={{ padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}` }}>
-                        {tab.uiType === 'revenue' && (
-                          <div style={{ fontSize: '0.9rem', fontWeight: 700, textAlign: 'center', color: '#2cb742' }}>Direct Revenue Kept: 100%</div>
-                        )}
-                        {tab.uiType === 'traffic' && (
-                          <div style={{ fontSize: '0.9rem', fontWeight: 700, textAlign: 'center', color: T.acc2 }}>Google Maps SEO Active</div>
-                        )}
-                        {tab.uiType === 'sync' && (
-                          <div style={{ fontSize: '0.9rem', fontWeight: 700, textAlign: 'center', color: T.accent }}>Auto-Synced Grid (0.8s)</div>
-                        )}
+                      {/* Mobile Image Mockup */}
+                      <div style={{ borderRadius: '8px', overflow: 'hidden', border: `1px solid ${T.border}`, backgroundColor: T.bg0, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '150px' }}>
+                        {/* ЗАМЕНИ ПУТЬ НА СВОИ РЕАЛЬНЫЕ КАРТИНКИ В ПАПКЕ PUBLIC */}
+                        <img 
+                          src={`/${tab.uiType}-mockup.jpg`} 
+                          alt={tab.title}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                          onError={(e) => {
+                            // Фолбэк, пока картинок нет
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.parentElement!.innerHTML = `<span style="color: ${T.sub}; font-size: 0.8rem;">[ Upload /public/${tab.uiType}-mockup.jpg ]</span>`;
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -311,8 +294,6 @@ export default function HospitalityB2B() {
             })}
           </div>
         </section>
-
-        <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
         {/* PRICING */}
         <section style={{ padding: '6rem 0' }}>
