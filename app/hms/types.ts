@@ -3,6 +3,7 @@ export interface TabItem {
   titlePrefix?: string;
   titleAccent: string;
   titleSuffix: string;
+  subLine1?: string;
   subPrefix: string;
   subSuffix: string;
   uiType: string;
@@ -60,8 +61,8 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "01",
         titlePrefix: "",
         titleAccent: "24/7",
-        titleSuffix: "manual updates",
-        subPrefix: "Each reservation locks your entire grid in less than ",
+        titleSuffix: " manual updates",
+        subPrefix: "Each reservation locks your entire grid in ",
         subSuffix: " second",
         uiType: "sync"
       },
@@ -69,16 +70,17 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "02",
         titlePrefix: "Up to ",
         titleAccent: "20%",
-        titleSuffix: "OTA commission",
-        subPrefix: "Integrate a direct booking engine and keep ",
-        subSuffix: "% of the revenue in-house.",
+        titleSuffix: " OTA commission",
+        subLine1: "Integrate a direct booking engine",
+        subPrefix: "Keep ",
+        subSuffix: " of the revenue in-house.",
         uiType: "revenue"
       },
       {
         num: "03",
         titlePrefix: "",
         titleAccent: "0",
-        titleSuffix: "leads from direct traffic",
+        titleSuffix: " leads from direct traffic",
         subPrefix: "Drive ",
         subSuffix: " direct bookings with local search and automated retention campaigns.",
         uiType: "traffic"
@@ -125,8 +127,8 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "01",
         titlePrefix: "",
         titleAccent: "24/7",
-        titleSuffix: "อัปเดตระบบด้วยมือ",
-        subPrefix: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางในเวลาไม่ถึง ",
+        titleSuffix: " อัปเดตระบบด้วยมือ",
+        subPrefix: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางใน ",
         subSuffix: " วินาที",
         uiType: "sync"
       },
@@ -134,16 +136,17 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "02",
         titlePrefix: "ต้องเสียค่าคอมสูงถึง ",
         titleAccent: "20%",
-        titleSuffix: "ให้กับ OTA",
-        subPrefix: "ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม ",
-        subSuffix: "% เข้าบัญชีคุณโดยตรง",
+        titleSuffix: " ให้กับ OTA",
+        subLine1: "ติดตั้งระบบจองตรงบนเว็บไซต์",
+        subPrefix: "และรับรายได้เต็ม ",
+        subSuffix: " เข้าบัญชีคุณโดยตรง",
         uiType: "revenue"
       },
       {
         num: "03",
         titlePrefix: "",
         titleAccent: "0",
-        titleSuffix: "ยอดจองตรงบนเว็บไซต์",
+        titleSuffix: " ยอดจองตรงบนเว็บไซต์",
         subPrefix: "ดึงยอดจองตรงเข้าโรงแรม ",
         subSuffix: " ด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้า",
         uiType: "traffic"
