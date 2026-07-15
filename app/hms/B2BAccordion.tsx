@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { T } from '../../src/theme/tokens';
 import { TabItem } from './types';
 
+// Унифицированный компонент плавного роллинга цифр для демонстрации динамики
 function RollingCounter({ start, end, duration, isInfinity = false }: { 
   start: number; 
   end: number; 
@@ -20,7 +21,7 @@ function RollingCounter({ start, end, duration, isInfinity = false }: {
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const easeProgress = progress * (2 - progress);
+      const easeProgress = progress * (2 - progress); // easeOutQuad
       
       setCount(Math.round(start + easeProgress * (end - start)));
 
@@ -35,10 +36,10 @@ function RollingCounter({ start, end, duration, isInfinity = false }: {
   }, [start, end, duration]);
 
   if (isDone && isInfinity) {
-    return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>∞</span>;
+    return <span style={{ color: '#2cb742', fontWeight: 900, fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>∞</span>;
   }
 
-  return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>{count}</span>;
+  return <span style={{ color: '#2cb742', fontWeight: 900, fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>{count}</span>;
 }
 
 interface B2BAccordionProps {
@@ -79,7 +80,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 {tab.num}
               </div>
               
-              {/* Заголовок (Боль) - Базовый размер 1.3rem, Акцент 3.2rem */}
+              {/* Заголовок (Боль) */}
               <h3 style={{ 
                 fontSize: '1.3rem', 
                 fontWeight: 700, 
@@ -98,12 +99,12 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                   fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace',
                   letterSpacing: '-0.03em'
                 }}>
-                  {tab.titleAccent}
+                  {tab.titleHighlight}
                 </span>
                 <span>{tab.titleSuffix}</span>
               </h3>
 
-              {/* Подзаголовок (Решение) - Появляется бесшовно, стиль 1в1 как у заголовка */}
+              {/* Подзаголовок (Решение) с интегрированным каунтером */}
               <div style={{ 
                 opacity: isActive ? 1 : 0, 
                 height: isActive ? 'auto' : 0, 
@@ -166,7 +167,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                     padding: '0 0.2rem',
                     fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace'
                   }}>
-                    {tab.titleAccent}
+                    {tab.titleHighlight}
                   </span>
                   <span>{tab.titleSuffix}</span>
                 </h3>
