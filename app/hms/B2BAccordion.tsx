@@ -39,7 +39,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 overflow: 'hidden'
               }}
             >
-              {/* Верхняя часть: Номер и Заголовок таба */}
+              {/* Верхняя часть: Номер и Заголовок таба (видны всегда) */}
               <div>
                 <div style={{ fontSize: '0.85rem', fontWeight: 700, color: isActive ? T.accent : T.sub, marginBottom: '1.5rem', transition: 'color 0.3s' }}>
                   {tab.num}
@@ -49,7 +49,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 </h3>
               </div>
 
-              {/* Нижняя часть: Контент открывается только при isActive БЕЗ внутренних черных рамок */}
+              {/* Никаких рамок и коробок. Контент раскрывается плавно в свободное пространство */}
               <div style={{ 
                 opacity: isActive ? 1 : 0, 
                 height: isActive ? '100%' : 0, 
@@ -63,36 +63,52 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
               }}>
                 {isActive && (
                   <>
-                    {/* Текстовое описание слева */}
+                    {/* Текстовый блок слева */}
                     <div style={{ flex: '1.2', paddingBottom: '1rem' }}>
                       <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
                         {tab.desc}
                       </p>
                     </div>
 
-                    {/* Чистый гигантский акцент справа (БЕЗ КОРОБОК, только воздух и шрифт) */}
+                    {/* Правая часть: Брутальная дата-типографика без контейнеров */}
                     <div style={{ 
                       flex: '1', 
                       display: 'flex', 
                       flexDirection: 'column', 
                       alignItems: 'flex-end', 
                       justifyContent: 'flex-end',
-                      lineHeight: 0.9
+                      lineHeight: 0.85,
+                      fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace'
                     }}>
                       {tab.uiType === 'sync' && (
-                        <span style={{ fontSize: '9rem', fontWeight: 900, color: '#2cb742', letterSpacing: '-0.05em', textShadow: '0 0 50px rgba(44, 183, 66, 0.15)' }}>
-                          0
-                        </span>
+                        <>
+                          <span style={{ fontSize: '9.5rem', fontWeight: 900, color: '#FF4D4D', letterSpacing: '-0.05em' }}>
+                            ∞
+                          </span>
+                          <span style={{ fontSize: '0.65rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1rem', textTransform: 'uppercase', marginTop: '0.5rem' }}>
+                            Human Error Margin
+                          </span>
+                        </>
                       )}
                       {tab.uiType === 'revenue' && (
-                        <span style={{ fontSize: '8rem', fontWeight: 900, color: '#FF4D4D', letterSpacing: '-0.05em' }}>
-                          20%
-                        </span>
+                        <>
+                          <span style={{ fontSize: '8.5rem', fontWeight: 900, color: '#FF4D4D', letterSpacing: '-0.05em' }}>
+                            20%
+                          </span>
+                          <span style={{ fontSize: '0.65rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1rem', textTransform: 'uppercase', marginTop: '0.5rem' }}>
+                            Third-Party Commission Leak
+                          </span>
+                        </>
                       )}
                       {tab.uiType === 'traffic' && (
-                        <span style={{ fontSize: '8rem', fontWeight: 900, color: '#444', letterSpacing: '-0.05em' }}>
-                          0%
-                        </span>
+                        <>
+                          <span style={{ fontSize: '8.5rem', fontWeight: 900, color: '#3A3A3A', letterSpacing: '-0.05em' }}>
+                            0%
+                          </span>
+                          <span style={{ fontSize: '0.65rem', color: T.sub, fontWeight: 700, letterSpacing: '0.1rem', textTransform: 'uppercase', marginTop: '0.5rem' }}>
+                            Direct Guest Retention Share
+                          </span>
+                        </>
                       )}
                     </div>
                   </>
@@ -127,9 +143,9 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                   
                   {/* Мобильный плоский акцент без рамок */}
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', lineHeight: 1 }}>
-                    {tab.uiType === 'sync' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#2cb742' }}>0</span>}
+                    {tab.uiType === 'sync' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#FF4D4D' }}>∞</span>}
                     {tab.uiType === 'revenue' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#FF4D4D' }}>20%</span>}
-                    {tab.uiType === 'traffic' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#444' }}>0%</span>}
+                    {tab.uiType === 'traffic' && <span style={{ fontSize: '4.5rem', fontWeight: 900, color: '#3A3A3A' }}>0%</span>}
                   </div>
                 </div>
               </div>
