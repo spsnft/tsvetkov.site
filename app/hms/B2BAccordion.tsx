@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { T } from '../../src/theme/tokens';
 import { TabItem } from './types';
 
-// Унифицированный компонент плавного роллинга цифр для демонстрации динамики
 function RollingCounter({ start, end, duration, isInfinity = false }: { 
   start: number; 
   end: number; 
@@ -21,7 +20,7 @@ function RollingCounter({ start, end, duration, isInfinity = false }: {
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const easeProgress = progress * (2 - progress); // easeOutQuad
+      const easeProgress = progress * (2 - progress);
       
       setCount(Math.round(start + easeProgress * (end - start)));
 
@@ -36,10 +35,10 @@ function RollingCounter({ start, end, duration, isInfinity = false }: {
   }, [start, end, duration]);
 
   if (isDone && isInfinity) {
-    return <span style={{ color: '#2cb742', fontWeight: 900, fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>∞</span>;
+    return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>∞</span>;
   }
 
-  return <span style={{ color: '#2cb742', fontWeight: 900, fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>{count}</span>;
+  return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>{count}</span>;
 }
 
 interface B2BAccordionProps {
@@ -91,7 +90,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
               }}>
                 {tab.titlePrefix && <span>{tab.titlePrefix}</span>}
                 <span style={{ 
-                  fontSize: '3.2rem', 
+                  fontSize: '2.5rem', 
                   fontWeight: 900, 
                   color: tab.uiType === 'traffic' ? (isActive ? '#666' : '#444') : '#FF4D4D', 
                   verticalAlign: 'middle',
@@ -99,12 +98,12 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                   fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace',
                   letterSpacing: '-0.03em'
                 }}>
-                  {tab.titleHighlight}
+                  {tab.titleAccent}
                 </span>
                 <span>{tab.titleSuffix}</span>
               </h3>
 
-              {/* Подзаголовок (Решение) с интегрированным каунтером */}
+              {/* Подзаголовок (Решение) - Бесшовная интеграция акцентов */}
               <div style={{ 
                 opacity: isActive ? 1 : 0, 
                 height: isActive ? 'auto' : 0, 
@@ -122,7 +121,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                   }}>
                     {tab.subPrefix && <span>{tab.subPrefix}</span>}
                     <span style={{ 
-                      fontSize: '3.2rem', 
+                      fontSize: '2.5rem', 
                       fontWeight: 900, 
                       color: '#2cb742', 
                       verticalAlign: 'middle',
@@ -160,14 +159,14 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: isActive ? '#fff' : T.sub, margin: 0, lineHeight: 1.4 }}>
                   {tab.titlePrefix && <span>{tab.titlePrefix}</span>}
                   <span style={{ 
-                    fontSize: '2.4rem', 
+                    fontSize: '2rem', 
                     fontWeight: 900, 
                     color: tab.uiType === 'traffic' ? '#555' : '#FF4D4D', 
                     verticalAlign: 'middle',
                     padding: '0 0.2rem',
                     fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace'
                   }}>
-                    {tab.titleHighlight}
+                    {tab.titleAccent}
                   </span>
                   <span>{tab.titleSuffix}</span>
                 </h3>
@@ -179,7 +178,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                     <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginTop: '0.5rem' }}>
                       {tab.subPrefix && <span>{tab.subPrefix}</span>}
                       <span style={{ 
-                        fontSize: '2.4rem', 
+                        fontSize: '2rem', 
                         fontWeight: 900, 
                         color: '#2cb742', 
                         verticalAlign: 'middle',
