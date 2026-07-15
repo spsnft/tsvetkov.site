@@ -59,7 +59,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "01",
         titleHighlight: "24/7",
         titleSuffix: "manual updates",
-        desc: "Each reservation instantly locks your entire grid across 300+ channels.",
+        desc: "Each reservation instantly locks your entire grid across 300+ channels in less than 1 second.",
         uiType: "sync"
       },
       {
@@ -74,7 +74,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         num: "03",
         titleHighlight: "0",
         titleSuffix: "leads from direct traffic",
-        desc: "Drive direct bookings with local search and automated retention campaigns.",
+        desc: "Drive direct bookings with local search and automated retention campaigns for infinite brand equity growth.",
         uiType: "traffic"
       }
     ],
@@ -118,23 +118,23 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
       {
         num: "01",
         titleHighlight: "24/7",
-        titleSuffix: "อัปเดตระบบด้วยมือ",
-        desc: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางกว่า 300+ แห่งโดยอัตโนมัติในทันที",
+        titleSuffix: "ต้องคอยอัปเดตระบบด้วยมือ",
+        desc: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางกว่า 300+ แห่งโดยอัตโนมัติในทันทีภายในเวลาไม่ถึง 1 วินาที",
         uiType: "sync"
       },
       {
         num: "02",
-        titlePrefix: "เสียค่าคอม",
+        titlePrefix: "ต้องเสียค่าคอมสูงถึง",
         titleHighlight: "20%",
-        titleSuffix: "ให้กับ OTA",
+        titleSuffix: "ให้กับแพลตฟอร์ม OTA",
         desc: "ติดตั้งระบบจองตรงบนเว็บไซต์และรับรายได้เต็ม 100% เข้าบัญชีคุณโดยตรง",
         uiType: "revenue"
       },
       {
         num: "03",
         titleHighlight: "0",
-        titleSuffix: "ลูกค้าจองตรงบนเว็บไซต์",
-        desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
+        titleSuffix: "ยอดจองตรงผ่านช่องทางออนไลน์",
+        desc: "ดึงยอดจองตรงเข้าโรงแรมด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ เพื่อสร้างการเติบโตของแบรนด์อย่างไร้ขีดจำกัด",
         uiType: "traffic"
       }
     ],
