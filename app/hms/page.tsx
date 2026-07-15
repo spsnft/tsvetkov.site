@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { T } from '../../src/theme/tokens';
 import { Logo } from '../../src/ui/Logo';
 import { contentData } from './types';
-import B2BAccordion from './components/B2BAccordion';
+import B2BAccordion from './B2BAccordion'; // Исправленный путь импорта: файл лежит в той же папке
 
 export default function HospitalityB2B() {
   const [lang, setLang] = useState<'en' | 'th'>('en');
