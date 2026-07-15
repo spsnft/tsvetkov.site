@@ -6,6 +6,7 @@ import { Logo } from '../../src/ui/Logo';
 
 export default function HospitalityB2B() {
   const [lang, setLang] = useState<'en' | 'th'>('en');
+  const [activeTab, setActiveTab] = useState<number>(0);
 
   const content = {
     en: {
@@ -17,17 +18,26 @@ export default function HospitalityB2B() {
       btnLine: "Line",
       problemTitle: "Direct Revenue Infrastructure",
       
-      prob1Title: "The 15-20% Leak",
-      prob1P: "Problem: Every booking through Agoda or Booking.com costs up to 20% in commission.",
-      prob1S: "Solution: An integrated direct booking engine. Keep 100% of the revenue in-house.",
-
-      prob2Title: "Zero Direct Traffic",
-      prob2P: "Problem: Dependency on OTAs leads to low brand loyalty and zero direct bookings.",
-      prob2S: "Solution: Local search traffic via Google Maps & automated retention tools.",
-
-      prob3Title: "Double-Booking Fines",
-      prob3P: "Problem: Manual calendar updates lead to double-bookings and platform penalties.",
-      prob3S: "Solution: 100% automated synchronization. A reservation on one channel instantly updates the entire grid across all platforms in under a second.",
+      tabs: [
+        {
+          num: "01",
+          title: "Stop the 15-20% Leak",
+          desc: "Every booking through Agoda or Booking.com costs up to 20% in commission. An integrated direct booking engine keeps 100% of the revenue in-house.",
+          uiType: "revenue"
+        },
+        {
+          num: "02",
+          title: "Unlock Direct Traffic",
+          desc: "Dependency on OTAs leads to low brand loyalty and zero direct bookings. Get your own local search traffic from Google Maps & automated retention tools.",
+          uiType: "traffic"
+        },
+        {
+          num: "03",
+          title: "Zero Double-Booking Fines",
+          desc: "Manual calendar updates lead to double-bookings and platform penalties. Get 100% automated synchronization that updates the entire grid across all platforms in under a second.",
+          uiType: "sync"
+        }
+      ],
 
       priceTitle: "Simple Pricing. No Hidden Fees.",
       priceSub: "Fixed setup fee. Zero commission on direct bookings forever.",
@@ -70,17 +80,26 @@ export default function HospitalityB2B() {
       btnLine: "Line",
       problemTitle: "โครงสร้างพื้นฐานเพื่อรายได้โดยตรง",
       
-      prob1Title: "การสูญเสียรายได้ 15-20%",
-      prob1P: "ปัญหา: ทุกการจองผ่าน Agoda หรือ Booking.com มีค่าใช้จ่ายคอมมิชชั่นสูงสุด 20%",
-      prob1S: "ทางออก: ระบบจองตรงบนเว็บไซต์ รับรายได้เต็ม 100% เข้าบัญชีคุณโดยตรง",
-
-      prob2Title: "ขาดช่องทางการจองตรง",
-      prob2P: "ปัญหา: การพึ่งพาแอปจองที่พักเพียงอย่างเดียวทำให้ขาดความภักดีต่อแบรนด์และยอดจองตรงเป็นศูนย์",
-      prob2S: "ทางออก: ดึงลูกค้าจาก Google Maps และใช้เครื่องมือรักษาฐานลูกค้าอัตโนมัติ",
-
-      prob3Title: "ค่าปรับจากการจองซ้ำซ้อน",
-      prob3P: "ปัญหา: การอัปเดตปฏิทินด้วยมือทำให้เกิดการจองซ้ำและโดนค่าปรับจากแพลตฟอร์ม",
-      prob3S: "ทางออก: ระบบซิงค์อัตโนมัติ 100% เมื่อมีการจองในช่องทางหนึ่ง ระบบจะอัปเดตสถานะห้องในทุกแพลตฟอร์มทันทีใน 1 วินาที",
+      tabs: [
+        {
+          num: "01",
+          title: "หยุดจ่ายค่าคอมมิชชั่น 15-20%",
+          desc: "ทุกการจองผ่าน Agoda หรือ Booking.com มีค่าใช้จ่ายคอมมิชชั่นสูงสุด 20% ระบบจองตรงบนเว็บไซต์ช่วยให้คุณรับรายได้เต็ม 100% เข้าบัญชีคุณโดยตรง",
+          uiType: "revenue"
+        },
+        {
+          num: "02",
+          title: "ปลดล็อกลูกค้าจองตรง",
+          desc: "การพึ่งพาแอปจองที่พักเพียงอย่างเดียวทำให้ขาดความภักดีต่อแบรนด์และยอดจองตรงเป็นศูนย์ ดึงลูกค้าจาก Google Maps และใช้เครื่องมือรักษาฐานลูกค้าอัตโนมัติ",
+          uiType: "traffic"
+        },
+        {
+          num: "03",
+          title: "หมดปัญหาการจองซ้ำซ้อน",
+          desc: "การอัปเดตปฏิทินด้วยมือทำให้เกิดการจองซ้ำและโดนค่าปรับจากแพลตฟอร์ม ระบบซิงค์อัตโนมัติ 100% จะอัปเดตสถานะห้องในทุกแพลตฟอร์มทันทีใน 1 วินาที",
+          uiType: "sync"
+        }
+      ],
 
       priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
       priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว รับรายได้จากการจองตรงเต็มจำนวนตลอดไป",
@@ -175,66 +194,125 @@ export default function HospitalityB2B() {
           </div>
         </section>
 
-        {/* 3 CORE BLOCKS (CONCEPT 2 - Problem Text + Solution UI) */}
+        {/* INTERACTIVE ACCORDION (AVIKTO PATTERN) */}
         <section style={{ padding: '4rem 0' }}>
           <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '4rem', textAlign: 'center', letterSpacing: '-0.02em' }}>{t.problemTitle}</h2>
-          <div className="cases-grid">
-            
-            {/* Block 1: Revenue */}
-            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
-              <h3 style={{ color: '#FF4D4D', fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 700 }}>{t.prob1Title}</h3>
-              <p style={{ color: T.body, fontSize: '1rem', lineHeight: 1.6, flex: 1 }}>{t.prob1P}</p>
-              
-              {/* SaaS UI Solution */}
-              <div style={{ marginTop: '2.5rem', padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid rgba(44, 183, 66, 0.3)`, position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', backgroundColor: '#2cb742' }} />
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          
+          {/* Desktop Accordion Layout */}
+          <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', minHeight: '480px' }}>
+            {t.tabs.map((tab, idx) => {
+              const isActive = activeTab === idx;
+              return (
+                <div 
+                  key={idx}
+                  onClick={() => setActiveTab(idx)}
+                  style={{ 
+                    flex: isActive ? '3' : '1',
+                    borderRight: idx !== t.tabs.length - 1 ? `1px solid ${T.border}` : 'none',
+                    padding: '3rem 2.5rem',
+                    cursor: isActive ? 'default' : 'pointer',
+                    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    overflow: 'hidden'
+                  }}
+                >
                   <div>
-                    <div style={{ fontSize: '0.7rem', color: T.sub, textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700, marginBottom: '0.4rem' }}>Direct Engine Active</div>
-                    <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>Revenue Kept: 100%</div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 700, color: isActive ? T.accent : T.sub, marginBottom: '1.5rem', transition: 'color 0.3s' }}>
+                      {tab.num}
+                    </div>
+                    <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '1.5rem', whiteSpace: 'nowrap' }}>
+                      {tab.title}
+                    </h3>
+                    <div style={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0, transform: isActive ? 'translateY(0)' : 'translateY(10px)', transition: 'all 0.4s ease', pointerEvents: isActive ? 'auto' : 'none' }}>
+                      <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6 }}>{tab.desc}</p>
+                    </div>
                   </div>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2cb742" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                </div>
-              </div>
-            </div>
 
-            {/* Block 2: Traffic */}
-            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
-              <h3 style={{ color: T.acc2, fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 700 }}>{t.prob2Title}</h3>
-              <p style={{ color: T.body, fontSize: '1rem', lineHeight: 1.6, flex: 1 }}>{t.prob2P}</p>
-              
-              {/* SaaS UI Solution */}
-              <div style={{ marginTop: '2.5rem', padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid rgba(0, 163, 255, 0.3)`, position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', backgroundColor: T.acc2 }} />
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.8rem' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: T.acc2 }} />
-                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>Google Maps Ranking: #1</div>
+                  {/* UI Render Area (Desktop Active State Only) */}
+                  {isActive && (
+                    <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '10px', border: `1px solid ${T.border}`, animation: 'fadeIn 0.5s ease' }}>
+                      {tab.uiType === 'revenue' && (
+                        <div style={{ display: 'flex', gap: '1rem' }}>
+                          <div style={{ flex: 1, padding: '1rem', backgroundColor: 'rgba(255, 77, 77, 0.03)', borderRadius: '6px', border: '1px solid rgba(255, 77, 77, 0.15)' }}>
+                            <div style={{ fontSize: '0.65rem', color: '#FF4D4D', fontWeight: 700, marginBottom: '0.2rem' }}>OTA CHANNEL</div>
+                            <div style={{ fontSize: '1.1rem', fontWeight: 700 }}>$500 <span style={{ color: '#FF4D4D', fontSize: '0.8rem' }}>(-20%)</span></div>
+                          </div>
+                          <div style={{ flex: 1, padding: '1rem', backgroundColor: 'rgba(44, 183, 66, 0.03)', borderRadius: '6px', border: '1px solid rgba(44, 183, 66, 0.15)' }}>
+                            <div style={{ fontSize: '0.65rem', color: '#2cb742', fontWeight: 700, marginBottom: '0.2rem' }}>DIRECT ENGINE</div>
+                            <div style={{ fontSize: '1.1rem', fontWeight: 700 }}>$500 <span style={{ color: '#2cb742', fontSize: '0.8rem' }}>(100%)</span></div>
+                          </div>
+                        </div>
+                      )}
+                      {tab.uiType === 'traffic' && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.6rem 1rem', backgroundColor: T.bg1, borderRadius: '6px', border: `1px solid ${T.border}` }}>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Google Maps Platform</span>
+                            <span style={{ color: T.acc2, fontSize: '0.75rem', fontWeight: 700 }}>RANKING #1</span>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.6rem 1rem', backgroundColor: T.bg1, borderRadius: '6px', border: `1px solid ${T.border}` }}>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Guest Retention Broadcast</span>
+                            <span style={{ color: '#2cb742', fontSize: '0.75rem', fontWeight: 700 }}>ACTIVE</span>
+                          </div>
+                        </div>
+                      )}
+                      {tab.uiType === 'sync' && (
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem' }}>
+                          <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>Global Extranet Distribution</span>
+                          <span style={{ backgroundColor: 'rgba(44, 183, 66, 0.1)', color: '#2cb742', padding: '4px 12px', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 800, border: '1px solid rgba(44, 183, 66, 0.2)' }}>LOCKED IN 0.8s</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <i className="fab fa-whatsapp" style={{ color: '#2cb742', fontSize: '1rem' }} />
-                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#fff' }}>Retention Campaign: +24% ROI</div>
-                </div>
-              </div>
-            </div>
+              );
+            })}
+          </div>
 
-            {/* Block 3: Sync */}
-            <div style={{ backgroundColor: T.bg1, border: `1px solid ${T.border}`, padding: '2.5rem', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
-              <h3 style={{ color: T.accent, fontSize: '1.4rem', marginBottom: '1.5rem', fontWeight: 700 }}>{t.prob3Title}</h3>
-              <p style={{ color: T.body, fontSize: '1rem', lineHeight: 1.6, flex: 1 }}>{t.prob3P}</p>
-              
-              {/* SaaS UI Solution */}
-              <div style={{ marginTop: '2.5rem', padding: '1.5rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid rgba(255, 179, 71, 0.3)`, position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', backgroundColor: T.accent }} />
-                <div style={{ fontSize: '0.7rem', color: T.sub, textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700, marginBottom: '0.8rem' }}>Calendar Status</div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#fff' }}>All Channels</div>
-                  <div style={{ backgroundColor: 'rgba(44, 183, 66, 0.1)', color: '#2cb742', padding: '4px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700, border: '1px solid rgba(44, 183, 66, 0.2)' }}>Auto-Synced (0.8s)</div>
+          {/* Mobile Accordion Layout */}
+          <div className="mobile-only" style={{ display: 'flex', flexDirection: 'column', border: `1px solid ${T.border}`, borderRadius: '12px', backgroundColor: T.bg1, overflow: 'hidden' }}>
+            {t.tabs.map((tab, idx) => {
+              const isActive = activeTab === idx;
+              return (
+                <div key={idx} style={{ borderBottom: idx !== t.tabs.length - 1 ? `1px solid ${T.border}` : 'none' }}>
+                  <div 
+                    onClick={() => setActiveTab(idx)}
+                    style={{ padding: '1.5rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent' }}
+                  >
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: isActive ? T.accent : T.sub }}>{tab.num}</span>
+                      <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>{tab.title}</h3>
+                    </div>
+                    <span style={{ fontSize: '1.2rem', color: T.sub, transform: isActive ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s' }}>▼</span>
+                  </div>
+                  
+                  <div style={{ height: isActive ? 'auto' : 0, overflow: 'hidden', transition: 'all 0.4s ease' }}>
+                    <div style={{ padding: '0 1.5rem 1.5rem 1.5rem' }}>
+                      <p style={{ color: T.body, fontSize: '0.9rem', lineHeight: 1.6, margin: '0 0 1.5rem 0' }}>{tab.desc}</p>
+                      
+                      {/* Mobile UI Mockup */}
+                      <div style={{ padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}` }}>
+                        {tab.uiType === 'revenue' && (
+                          <div style={{ fontSize: '0.9rem', fontWeight: 700, textAlign: 'center', color: '#2cb742' }}>Direct Revenue Kept: 100%</div>
+                        )}
+                        {tab.uiType === 'traffic' && (
+                          <div style={{ fontSize: '0.9rem', fontWeight: 700, textAlign: 'center', color: T.acc2 }}>Google Maps SEO Active</div>
+                        )}
+                        {tab.uiType === 'sync' && (
+                          <div style={{ fontSize: '0.9rem', fontWeight: 700, textAlign: 'center', color: T.accent }}>Auto-Synced Grid (0.8s)</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
+              );
+            })}
           </div>
         </section>
+
+        <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
         {/* PRICING */}
         <section style={{ padding: '6rem 0' }}>
@@ -302,6 +380,22 @@ export default function HospitalityB2B() {
           </a>
         </section>
       </main>
+      
+      {/* Global Embedded CSS Keyframes & Media Queries for Avikto Layout compatibility */}
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @media (min-width: 769px) {
+          .desktop-only { display: flex !important; }
+          .mobile-only { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .desktop-only { display: none !important; }
+          .mobile-only { display: flex !important; }
+        }
+      `}</style>
     </div>
   );
 }
