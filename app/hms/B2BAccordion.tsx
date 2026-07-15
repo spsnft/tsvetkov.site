@@ -4,14 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { T } from '../../src/theme/tokens';
 import { TabItem } from './types';
 
-// Компонент плавного роллинга цифр для демонстрации динамики
-function RollingNumber({ start, end, duration, suffix = '', prefix = '', triggerInfinity = false }: { 
+function RollingCounter({ start, end, duration, isInfinity = false }: { 
   start: number; 
   end: number; 
   duration: number; 
-  suffix?: string;
-  prefix?: string;
-  triggerInfinity?: boolean;
+  isInfinity?: boolean;
 }) {
   const [count, setCount] = useState(start);
   const [isDone, setIsDone] = useState(false);
@@ -23,10 +20,9 @@ function RollingNumber({ start, end, duration, suffix = '', prefix = '', trigger
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const easeProgress = progress * (2 - progress); // easeOutQuad
+      const easeProgress = progress * (2 - progress);
       
-      const current = Math.round(start + easeProgress * (end - start));
-      setCount(current);
+      setCount(Math.round(start + easeProgress * (end - start)));
 
       if (progress < 1) {
         requestAnimationFrame(animate);
@@ -38,11 +34,11 @@ function RollingNumber({ start, end, duration, suffix = '', prefix = '', trigger
     requestAnimationFrame(animate);
   }, [start, end, duration]);
 
-  if (isDone && triggerInfinity) {
-    return <span style={{ color: '#2cb742', fontWeight: 900 }}>∞</span>;
+  if (isDone && isInfinity) {
+    return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>∞</span>;
   }
 
-  return <span style={{ color: '#2cb742', fontWeight: 900 }}>{prefix}{count}{suffix}</span>;
+  return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>{count}</span>;
 }
 
 interface B2BAccordionProps {
@@ -55,12 +51,12 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
 
   return (
     <section style={{ padding: '3rem 0' }}>
-      <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '3rem', textAlign: 'center', letterSpacing: '-0.02em' }}>
+      <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2.5rem', textAlign: 'center', letterSpacing: '-0.02em' }}>
         {title}
       </h2>
       
       {/* Desktop Layout */}
-      <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', minHeight: '380px' }}>
+      <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', minHeight: '340px' }}>
         {tabs.map((tab, idx) => {
           const isActive = activeTab === idx;
           return (
@@ -68,91 +64,78 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
               key={idx}
               onClick={() => setActiveTab(idx)}
               style={{ 
-                flex: isActive ? '4' : '1',
+                flex: isActive ? '3.5' : '1',
                 borderRight: idx !== tabs.length - 1 ? `1px solid ${T.border}` : 'none',
                 padding: '2.5rem 2rem',
                 cursor: isActive ? 'default' : 'pointer',
-                transition: 'all 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
+                transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)',
                 backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1rem',
                 overflow: 'hidden'
               }}
             >
-              {/* Номер вкладки */}
-              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: isActive ? T.accent : T.sub }}>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: isActive ? T.accent : T.sub, marginBottom: '1.5rem' }}>
                 {tab.num}
               </div>
-
-              {/* Блок заголовка (Боль): Всегда в одном лаконичном стиле */}
+              
+              {/* Заголовок (Боль) - Базовый размер 1.3rem, Акцент 3.2rem */}
               <h3 style={{ 
-                fontSize: '1.25rem', 
+                fontSize: '1.3rem', 
                 fontWeight: 700, 
                 color: isActive ? '#fff' : T.sub, 
-                margin: 0,
-                lineHeight: 1.3,
+                margin: 0, 
+                lineHeight: 1.4,
                 transition: 'color 0.3s ease'
               }}>
-                {tab.titlePrefix && <span style={{ color: T.sub, marginRight: '0.3rem' }}>{tab.titlePrefix}</span>}
-                <span style={{ color: tab.uiType === 'traffic' ? (isActive ? '#666' : '#444') : '#FF4D4D', fontWeight: 800 }}>
-                  {tab.titleHighlight}
-                </span>{' '}
-                {tab.titleSuffix}
+                {tab.titlePrefix && <span>{tab.titlePrefix}</span>}
+                <span style={{ 
+                  fontSize: '3.2rem', 
+                  fontWeight: 900, 
+                  color: tab.uiType === 'traffic' ? (isActive ? '#666' : '#444') : '#FF4D4D', 
+                  verticalAlign: 'middle',
+                  padding: '0 0.3rem',
+                  fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace',
+                  letterSpacing: '-0.03em'
+                }}>
+                  {tab.titleAccent}
+                </span>
+                <span>{tab.titleSuffix}</span>
               </h3>
 
-              {/* Зона Решения: Появляется бесшовно, убирая пустые пространства. Цифры внедрены прямо в текст подзаголовка */}
+              {/* Подзаголовок (Решение) - Появляется бесшовно, стиль 1в1 как у заголовка */}
               <div style={{ 
                 opacity: isActive ? 1 : 0, 
                 height: isActive ? 'auto' : 0, 
                 transform: isActive ? 'translateY(0)' : 'translateY(10px)', 
                 transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)',
                 overflow: 'hidden',
-                marginTop: isActive ? '0.5rem' : 0,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem'
+                marginTop: isActive ? '1.5rem' : 0
               }}>
                 {isActive && (
-                  <>
-                    {/* Подзаголовок с интегрированным динамическим каунтером */}
-                    <div style={{ 
-                      fontSize: '1.25rem', 
-                      fontWeight: 700, 
-                      color: '#fff', 
-                      lineHeight: 1.4,
-                      letterSpacing: '-0.01em'
+                  <div style={{ 
+                    fontSize: '1.3rem', 
+                    fontWeight: 700, 
+                    color: '#fff', 
+                    lineHeight: 1.4 
+                  }}>
+                    {tab.subPrefix && <span>{tab.subPrefix}</span>}
+                    <span style={{ 
+                      fontSize: '3.2rem', 
+                      fontWeight: 900, 
+                      color: '#2cb742', 
+                      verticalAlign: 'middle',
+                      padding: '0 0.3rem',
+                      letterSpacing: '-0.03em'
                     }}>
-                      {tab.uiType === 'sync' && (
-                        <>
-                          Each reservation locks your entire grid in less than{' '}
-                          <RollingCounter start={24} end={1} duration={1000} suffix=" second" />
-                        </>
-                      )}
-                      {tab.uiType === 'revenue' && (
-                        <>
-                          Integrate a direct booking engine and keep{' '}
-                          <RollingCounter start={20} end={100} duration={1200} suffix="% " />
-                          of the revenue in-house.
-                        </>
-                      )}
-                      {tab.uiType === 'traffic' && (
-                        <>
-                          Drive{' '}
-                          <RollingCounter start={0} end={99} duration={1100} triggerInfinity={true} />
-                          {' '}direct bookings with local search and automated retention campaigns.
-                        </>
-                      )}
-                    </div>
-
-                    {/* Развернутое описание */}
-                    <p style={{ color: T.body, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, maxWidth: '90%' }}>
-                      {tab.desc}
-                    </p>
-                  </>
+                      {tab.uiType === 'sync' && <RollingCounter start={24} end={1} duration={1000} />}
+                      {tab.uiType === 'revenue' && <RollingCounter start={20} end={100} duration={1200} />}
+                      {tab.uiType === 'traffic' && <RollingCounter start={0} end={99} duration={1100} isInfinity={true} />}
+                    </span>
+                    <span>{tab.subSuffix}</span>
+                  </div>
                 )}
               </div>
-
             </div>
           );
         })}
@@ -166,36 +149,48 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
             <div key={idx} style={{ borderBottom: idx !== tabs.length - 1 ? `1px solid ${T.border}` : 'none' }}>
               <div 
                 onClick={() => setActiveTab(idx)}
-                style={{ padding: '1.2rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '0.5rem', backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent' }}
+                style={{ padding: '1.2rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '0.8rem', backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent' }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.75rem', fontWeight: 700, color: isActive ? T.accent : T.sub }}>{tab.num}</span>
                   <span style={{ fontSize: '0.9rem', color: T.sub, transform: isActive ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s' }}>▼</span>
                 </div>
 
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: isActive ? '#fff' : T.sub, margin: 0, lineHeight: 1.3 }}>
-                  {tab.titlePrefix && <span style={{ color: T.sub, marginRight: '0.2rem' }}>{tab.titlePrefix}</span>}
-                  <span style={{ color: tab.uiType === 'traffic' ? '#555' : '#FF4D4D', fontWeight: 800 }}>{tab.titleHighlight}</span>{' '}
-                  {tab.titleSuffix}
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: isActive ? '#fff' : T.sub, margin: 0, lineHeight: 1.4 }}>
+                  {tab.titlePrefix && <span>{tab.titlePrefix}</span>}
+                  <span style={{ 
+                    fontSize: '2.4rem', 
+                    fontWeight: 900, 
+                    color: tab.uiType === 'traffic' ? '#555' : '#FF4D4D', 
+                    verticalAlign: 'middle',
+                    padding: '0 0.2rem',
+                    fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace'
+                  }}>
+                    {tab.titleAccent}
+                  </span>
+                  <span>{tab.titleSuffix}</span>
                 </h3>
               </div>
               
               <div style={{ height: isActive ? 'auto' : 0, overflow: 'hidden', transition: 'all 0.4s ease' }}>
-                <div style={{ padding: '0 1.2rem 1.2rem 1.2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <div style={{ padding: '0 1.2rem 1.2rem 1.2rem' }}>
                   {isActive && (
-                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', lineHeight: 1.4 }}>
-                      {tab.uiType === 'sync' && (
-                        <>Each reservation locks your entire grid in less than <RollingCounter start={24} end={1} duration={1000} suffix=" second" /></>
-                      )}
-                      {tab.uiType === 'revenue' && (
-                        <>Integrate a direct booking engine and keep <RollingCounter start={20} end={100} duration={1200} suffix="% " /> of the revenue in-house.</>
-                      )}
-                      {tab.uiType === 'traffic' && (
-                        <>Drive <RollingCounter start={0} end={99} duration={1100} triggerInfinity={true} /> direct bookings with local search and automated retention campaigns.</>
-                      )}
+                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', lineHeight: 1.4, marginTop: '0.5rem' }}>
+                      {tab.subPrefix && <span>{tab.subPrefix}</span>}
+                      <span style={{ 
+                        fontSize: '2.4rem', 
+                        fontWeight: 900, 
+                        color: '#2cb742', 
+                        verticalAlign: 'middle',
+                        padding: '0 0.2rem' 
+                      }}>
+                        {tab.uiType === 'sync' && <RollingCounter start={24} end={1} duration={1000} />}
+                        {tab.uiType === 'revenue' && <RollingCounter start={20} end={100} duration={1200} />}
+                        {tab.uiType === 'traffic' && <RollingCounter start={0} end={99} duration={1100} isInfinity={true} />}
+                      </span>
+                      <span>{tab.subSuffix}</span>
                     </div>
                   )}
-                  <p style={{ color: T.body, fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>{tab.desc}</p>
                 </div>
               </div>
             </div>
