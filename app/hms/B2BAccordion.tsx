@@ -120,9 +120,9 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                   
                   {/* Mobile CSS Metric solution preview */}
                   <div style={{ padding: '1.2rem', backgroundColor: T.bg0, borderRadius: '8px', border: `1px solid ${T.border}` }}>
-                    {tab.uiType === 'revenue' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAngle: 'center', color: '#2cb742', textAlign: 'center' }}>Direct Keeping: 100%</div>}
-                    {tab.uiType === 'traffic' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAngle: 'center', color: T.acc2, textAlign: 'center' }}>Google Maps Ranking: #1</div>}
-                    {tab.uiType === 'sync' && <div style={{ fontSize: '0.9rem', fontWeight: 800, textAngle: 'center', color: T.accent, textAlign: 'center' }}>Live Channels Sync: 0.8s</div>}
+                    {tab.uiType === 'revenue' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#2cb742', textAlign: 'center' }}>Direct Keeping: 100%</div>}
+                    {tab.uiType === 'traffic' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: T.acc2, textAlign: 'center' }}>Google Maps Ranking: #1</div>}
+                    {tab.uiType === 'sync' && <div style={{ fontSize: '0.9rem', fontWeight: 800, color: T.accent, textAlign: 'center' }}>Live Channels Sync: 0.8s</div>}
                   </div>
                 </div>
               </div>
