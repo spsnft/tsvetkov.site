@@ -22,16 +22,14 @@ interface LogEntry {
 export default function Hero({ t }: HeroProps) {
   const [liveAmount, setLiveAmount] = useState(148250);
   
-  // Стартовый набор из 5 строк, чтобы сразу забить пространство без дыр
   const [logs, setLogs] = useState<LogEntry[]>([
-    { time: '22:46:12', text: 'Booking.com room inventory locked' },
+    { time: '22:46:12', text: 'Booking.com room status locked' },
     { time: '22:45:54', text: 'Traveloka calendar synced' },
     { time: '22:44:01', text: 'Direct Booking • Room 101 secured' },
     { time: '22:43:41', text: 'Agoda rate parity verified' },
     { time: '22:41:10', text: 'Booking.com channel active' }
   ]);
 
-  // Разгоняем интервал до 2 секунд для мгновенного эффекта "живого софта"
   useEffect(() => {
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
@@ -46,7 +44,7 @@ export default function Hero({ t }: HeroProps) {
       
       setLogs(prev => [
         { time: timeStr, text: `${randomChannel} ${randomAction}` },
-        ...prev.slice(0, 4) // Строго удерживаем 5 строк
+        ...prev.slice(0, 4)
       ]);
     }, 2000);
 
@@ -61,13 +59,12 @@ export default function Hero({ t }: HeroProps) {
     <section className="hero-section">
       <style jsx>{`
         .hero-section {
-          padding: 2rem 0 4rem 0; /* Ужали дыру сверху */
+          padding: 2rem 0 4rem 0;
           position: relative;
           z-index: 10;
           overflow: hidden;
         }
         
-        /* Жесткая фиксация колонок в % полностью лечит баг с дерганьем макета */
         .hero-grid {
           display: grid;
           grid-template-columns: 54% 46%;
@@ -123,7 +120,7 @@ export default function Hero({ t }: HeroProps) {
           flex-wrap: wrap;
         }
         .btn-premium-cta {
-          display: flex;
+          display: inline-flex;
           align-items: center;
           gap: 0.8rem;
           color: #fff;
@@ -136,23 +133,14 @@ export default function Hero({ t }: HeroProps) {
           font-size: 0.95rem;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           backdrop-filter: blur(4px);
+          height: 54px;
+          box-sizing: border-box;
         }
         .btn-premium-cta:hover {
           transform: translateY(-2px);
           background-color: rgba(255, 255, 255, 0.05);
           border-color: rgba(255, 255, 255, 0.2);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* Контейнер-маска для выравнивания кривых SVG иконок */
-        .icon-wrapper {
-          width: 22px;
-          height: 22px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          position: relative;
         }
 
         /* КОЛОНКА С МОКАПОМ */
@@ -202,18 +190,22 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
 
-        /* АНАЛИТИКА */
+        /* АНАЛИТИКА: Абсолютная фиксация в пикселях лечит баг с дерганьем колонок */
         .pms-analytics {
           display: flex;
           flex-direction: column;
           gap: 0.6rem; 
-          flex: 0 0 30%;
+          flex: 0 0 190px; /* Жесткая неизменяемая ширина */
+          min-width: 0;
+          overflow: hidden;
         }
         .widget {
           background: rgba(255, 255, 255, 0.01);
           border: 1px solid rgba(255, 255, 255, 0.03);
           padding: 0.85rem 1rem;
           border-radius: 8px;
+          min-width: 0;
+          overflow: hidden;
         }
         .widget.primary-focus {
           border-left: 3px solid #00E599;
@@ -235,14 +227,14 @@ export default function Hero({ t }: HeroProps) {
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
-        /* ЖИВЫЕ ЛОГИ (Полная ликвидация дыры) */
+        /* ЖИВЫЕ ЛОГИ */
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.02);
           flex: 1;
           display: flex;
           flex-direction: column;
-          height: 135px; /* Жестко фиксируем высоту логов во избежание CLS сдвигов */
+          height: 135px;
         }
         .logs-container {
           display: flex;
@@ -257,6 +249,8 @@ export default function Hero({ t }: HeroProps) {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          width: 100%;
+          display: block;
         }
         .log-time {
           color: rgba(255, 255, 255, 0.15);
@@ -266,6 +260,7 @@ export default function Hero({ t }: HeroProps) {
         /* ШАХМАТКА БРОНИРОВАНИЙ */
         .pms-matrix {
           flex: 1;
+          min-width: 0; /* Важно для предотвращения распирания флексбокса */
           background: rgba(0, 0, 0, 0.15);
           border: 1px solid rgba(255, 255, 255, 0.03);
           border-radius: 8px;
@@ -321,7 +316,7 @@ export default function Hero({ t }: HeroProps) {
         @keyframes pulse {
           0% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
           70% { box-shadow: 0 0 0 6px rgba(0, 225, 153, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
         }
 
         @media (max-width: 992px) {
@@ -332,7 +327,7 @@ export default function Hero({ t }: HeroProps) {
           .utp-highlight { justify-content: center; }
           .dashboard-mockup { transform: none !important; width: 100% !important; }
           .pms-body { flex-direction: column; }
-          .pms-analytics { flex: none; gap: 0.6rem; }
+          .pms-analytics { flex: none; gap: 0.6rem; width: 100%; }
           .pms-matrix { display: none; }
         }
       `}</style>
@@ -353,18 +348,18 @@ export default function Hero({ t }: HeroProps) {
           
           <div className="cta-buttons">
             <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
-              <div className="icon-wrapper">
-                {/* Инлайн-стили исключают вспышку огромного логотипа при первой загрузке */}
-                <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+              {/* Инлайн стили для обертки резервируют точное место до загрузки SVG, убирая микро-скачки */}
+              <div style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+                <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" style={{ width: '22px', height: '22px', objectFit: 'contain', display: 'block' }} />
               </div>
-              {t.btnChat}
+              <span>{t.btnChat}</span>
             </a>
+            
             <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
-              <div className="icon-wrapper">
-                {/* Принудительный scale внутри маски идеально выравнивает LINE с WhatsApp */}
-                <img src="/logos/line.svg" alt="LINE" className="btn-icon" style={{ width: '32px', height: '32px', objectFit: 'contain', transform: 'scale(1.35)' }} />
+              <div style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
+                <img src="/logos/line.svg" alt="LINE" className="btn-icon" style={{ width: '32px', height: '32px', objectFit: 'contain', flexShrink: 0, transform: 'scale(1.35)', display: 'block' }} />
               </div>
-              {t.btnLine}
+              <span>{t.btnLine}</span>
             </a>
           </div>
         </div>
@@ -409,7 +404,7 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
 
-                  {/* ЖИВЫЕ СИСТЕМНЫЕ ЛОГИ */}
+                  {/* СИСТЕМНЫЕ ЛОГИ */}
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
