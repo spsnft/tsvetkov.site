@@ -37,19 +37,19 @@ export default function LogoMarquee() {
           display: flex;
           width: max-content;
           animation: scroll 35s linear infinite; /* Чуть замедлили, так как логотипов стало больше */
-          gap: 5rem;
-          align-items: center;
-        }
-        .marquee-track:hover {
-          animation-play-state: paused;
-        }
-        .logo-item {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
-          /* Этот фильтр делает все цветные логотипы идеально белыми */
-          filter: brightness(0) invert(1);
+     .logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  /* Убрали фильтр инверсии. Оставляем родные цвета, но деликатно гасим их */
+  opacity: 0.35; 
+}
+.logo-item:hover {
+  transform: scale(1.03);
+  opacity: 0.9; /* При наведении логотип плавно загорается своим родным цветом */
+}
+: brightness(0) invert(1);
           opacity: 0.3;
         }
         .logo-item:hover {
