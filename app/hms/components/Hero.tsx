@@ -22,15 +22,16 @@ interface LogEntry {
 export default function Hero({ t }: HeroProps) {
   const [liveAmount, setLiveAmount] = useState(148250);
   
-  // Инициализируем сразу 4 строки, чтобы на старте не было пустоты
+  // Стартовый набор из 5 строк, чтобы сразу забить пространство без дыр
   const [logs, setLogs] = useState<LogEntry[]>([
-    { time: '22:26:54', text: 'Traveloka inventory synced' },
-    { time: '22:25:12', text: 'Booking.com room inventory locked' },
-    { time: '22:23:41', text: 'Agoda rate parity verified' },
-    { time: '22:21:05', text: 'Direct Booking • Villa 1 secured' }
+    { time: '22:46:12', text: 'Booking.com room inventory locked' },
+    { time: '22:45:54', text: 'Traveloka calendar synced' },
+    { time: '22:44:01', text: 'Direct Booking • Room 101 secured' },
+    { time: '22:43:41', text: 'Agoda rate parity verified' },
+    { time: '22:41:10', text: 'Booking.com channel active' }
   ]);
 
-  // Быстрая анимация: обновление каждые 2.5 секунды для демонстрации "живости"
+  // Разгоняем интервал до 2 секунд для мгновенного эффекта "живого софта"
   useEffect(() => {
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
@@ -45,9 +46,9 @@ export default function Hero({ t }: HeroProps) {
       
       setLogs(prev => [
         { time: timeStr, text: `${randomChannel} ${randomAction}` },
-        ...prev.slice(0, 3) // Удерживаем ровно 4 строки в консоли
+        ...prev.slice(0, 4) // Строго удерживаем 5 строк
       ]);
-    }, 2500);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -60,15 +61,16 @@ export default function Hero({ t }: HeroProps) {
     <section className="hero-section">
       <style jsx>{`
         .hero-section {
-          padding: 3.5rem 0 4rem 0; /* Ужали верхний отступ, убирая дыру над заголовком */
+          padding: 2rem 0 4rem 0; /* Ужали дыру сверху */
           position: relative;
           z-index: 10;
           overflow: hidden;
         }
         
+        /* Жесткая фиксация колонок в % полностью лечит баг с дерганьем макета */
         .hero-grid {
           display: grid;
-          grid-template-columns: 1.05fr 0.95fr;
+          grid-template-columns: 54% 46%;
           gap: 3rem;
           align-items: center;
           position: relative;
@@ -142,20 +144,15 @@ export default function Hero({ t }: HeroProps) {
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
         }
         
-        .btn-icon { 
-          height: 22px; 
-          width: 22px; 
-          object-fit: contain;
-        }
-        
-        /* Фикс размера LINE: компенсируем внутренние пустые поля SVG файла */
-        .line-icon {
-          height: 34px !important;
-          width: 34px !important;
-          margin-top: -6px;
-          margin-bottom: -6px;
-          margin-left: -5px;
-          margin-right: -5px;
+        /* Контейнер-маска для выравнивания кривых SVG иконок */
+        .icon-wrapper {
+          width: 22px;
+          height: 22px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          position: relative;
         }
 
         /* КОЛОНКА С МОКАПОМ */
@@ -215,7 +212,7 @@ export default function Hero({ t }: HeroProps) {
         .widget {
           background: rgba(255, 255, 255, 0.01);
           border: 1px solid rgba(255, 255, 255, 0.03);
-          padding: 0.95rem 1.1rem;
+          padding: 0.85rem 1rem;
           border-radius: 8px;
         }
         .widget.primary-focus {
@@ -238,13 +235,14 @@ export default function Hero({ t }: HeroProps) {
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
-        /* ЖИВЫЕ ЛОГИ (Заполнение пространства на 4 строки) */
+        /* ЖИВЫЕ ЛОГИ (Полная ликвидация дыры) */
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.02);
-          flex: 1; /* Позволяет виджету занять всё оставшееся до низа пространство */
+          flex: 1;
           display: flex;
           flex-direction: column;
+          height: 135px; /* Жестко фиксируем высоту логов во избежание CLS сдвигов */
         }
         .logs-container {
           display: flex;
@@ -253,8 +251,6 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 0.4rem;
           font-family: 'SF Mono', monospace;
           font-size: 0.62rem;
-          flex: 1;
-          justify-content: flex-start;
         }
         .log-line {
           color: rgba(255, 255, 255, 0.35);
@@ -329,7 +325,7 @@ export default function Hero({ t }: HeroProps) {
         }
 
         @media (max-width: 992px) {
-          .hero-section { padding: 3.5rem 0 2rem 0; }
+          .hero-section { padding: 2rem 0 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; }
           .cta-buttons { justify-content: center; }
@@ -357,11 +353,17 @@ export default function Hero({ t }: HeroProps) {
           
           <div className="cta-buttons">
             <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
-              <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" /> 
+              <div className="icon-wrapper">
+                {/* Инлайн-стили исключают вспышку огромного логотипа при первой загрузке */}
+                <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+              </div>
               {t.btnChat}
             </a>
             <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
-              <img src="/logos/line.svg" alt="LINE" className="btn-icon line-icon" /> 
+              <div className="icon-wrapper">
+                {/* Принудительный scale внутри маски идеально выравнивает LINE с WhatsApp */}
+                <img src="/logos/line.svg" alt="LINE" className="btn-icon" style={{ width: '32px', height: '32px', objectFit: 'contain', transform: 'scale(1.35)' }} />
+              </div>
               {t.btnLine}
             </a>
           </div>
@@ -407,7 +409,7 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
 
-                  {/* РАСШИРЕННЫЙ СИСТЕМНЫЙ ЛОГ */}
+                  {/* ЖИВЫЕ СИСТЕМНЫЕ ЛОГИ */}
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
