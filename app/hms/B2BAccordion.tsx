@@ -25,7 +25,7 @@ function RollingCounter({ start, end, duration, decimals = 0, padStart = 0, suff
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      const easeProgress = progress * (2 - progress); // easeOutQuad
+      const easeProgress = progress * (2 - progress);
       
       const current = start + easeProgress * (end - start);
       setCount(current.toFixed(decimals).padStart(padStart, '0'));
@@ -38,7 +38,7 @@ function RollingCounter({ start, end, duration, decimals = 0, padStart = 0, suff
     requestAnimationFrame(animate);
   }, [isVisible, start, end, duration, decimals, padStart]);
 
-  return <span style={{ color: '#2cb742', fontWeight: 800 }}>{count}{suffix}</span>;
+  return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>{count}{suffix}</span>;
 }
 
 interface B2BAccordionProps {
@@ -68,7 +68,6 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
 
   return (
     <section ref={sectionRef} style={{ padding: '3rem 0', position: 'relative' }}>
-      {/* Внедрение трехслойного премиум-фона для всего сайта */}
       <style jsx global>{`
         body {
           background-color: #0b0b0d !important;
@@ -96,17 +95,13 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
         {title}
       </h2>
       
-      {/* Desktop Layout с жестко заданной высотой 380px */}
-      <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', height: '380px', position: 'relative' }}>
+      {/* Desktop Layout с динамическим Hug Content по высоте, но строгой синхронной высотой всех колонок */}
+      <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', position: 'relative', alignItems: 'stretch' }}>
         
-        {/* Инфраструктурная PMS-сетка внутри блока */}
         <div style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
+          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-          pointerEvents: 'none',
-          zIndex: 0
+          backgroundSize: '40px 40px', pointerEvents: 'none', zIndex: 0
         }} />
 
         {tabs.map((tab, idx) => {
@@ -118,7 +113,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
               style={{ 
                 flex: isActive ? '3.5' : '1',
                 borderRight: idx !== tabs.length - 1 ? `1px solid ${T.border}` : 'none',
-                padding: '2rem 1.75rem',
+                padding: '2.5rem 2rem',
                 cursor: isActive ? 'default' : 'pointer',
                 transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)',
                 backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent',
@@ -129,18 +124,26 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 overflow: 'hidden'
               }}
             >
-              {/* Компактный номер */}
-              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: isActive ? T.accent : T.sub, marginBottom: '0.75rem' }}>
+              {/* Вариант А: Нумерация вынесена абсолютно в правый верхний угол карточки */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '2.5rem', 
+                right: '2rem', 
+                fontSize: '0.75rem', 
+                fontWeight: 700, 
+                color: isActive ? T.accent : T.sub,
+                transition: 'color 0.3s ease'
+              }}>
                 {tab.num}
               </div>
               
-              {/* Контейнер заголовков (Переключение без изменения геометрии) */}
-              <div style={{ position: 'relative', height: '4.5rem' }}>
+              {/* Чистая CSS Grid разметка для смены заголовков без прыжков по высоте */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', alignItems: 'start' }}>
                 <h3 style={{ 
+                  gridArea: '1/1/2/2',
                   fontSize: '1.3rem', fontWeight: 700, color: T.sub, margin: 0, lineHeight: 1.4,
-                  position: 'absolute', top: 0, left: 0,
                   opacity: isActive ? 0 : 1,
-                  transform: isActive ? 'translateY(-5px)' : 'translateY(0)',
+                  transform: isActive ? 'translateY(-4px)' : 'translateY(0)',
                   transition: 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
                   whiteSpace: 'nowrap'
                 }}>
@@ -148,11 +151,12 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 </h3>
 
                 <h3 style={{ 
+                  gridArea: '1/1/2/2',
                   fontSize: '1.3rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.4,
-                  position: 'absolute', top: 0, left: 0,
                   opacity: isActive ? 1 : 0,
-                  transform: isActive ? 'translateY(0)' : 'translateY(5px)',
+                  transform: isActive ? 'translateY(0)' : 'translateY(4px)',
                   transition: 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.05s',
+                  paddingRight: '2rem'
                 }}>
                   {tab.openTitlePrefix && <span>{tab.openTitlePrefix}</span>}
                   <span style={{ color: tab.uiType === 'traffic' ? '#666' : '#FF4D4D', fontWeight: 800 }}>{tab.openTitleAccent}</span>
@@ -160,38 +164,42 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 </h3>
               </div>
 
-              {/* Зона Решения с фиксированной высотой для устранения дерганья */}
+              {/* Зона решения: без пиксельной фиксации высоты, устранены провисания */}
               <div style={{ 
                 opacity: isActive ? 1 : 0, 
                 filter: isActive ? 'blur(0)' : 'blur(4px)',
-                transform: isActive ? 'translateY(0)' : 'translateY(12px)', 
-                transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.15s',
-                marginTop: '1rem',
-                height: '140px',
-                overflow: 'hidden'
+                transform: isActive ? 'translateY(0)' : 'translateY(10px)', 
+                transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.12s',
+                marginTop: '1.25rem',
+                display: isActive ? 'block' : 'none'
               }}>
                 <div style={{ 
                   fontSize: '1.3rem', 
                   fontWeight: 700, 
                   color: '#fff', 
-                  lineHeight: 1.6,
+                  lineHeight: 1.5,
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '0.3rem'
+                  gap: '0.4rem'
                 }}>
-                  {/* Строка 1 с бесшовно интегрированным каунтером */}
+                  {/* Первое логическое поле */}
                   <span>
                     {tab.subLine1Prefix}
                     {tab.uiType === 'sync' && (
-                      <RollingCounter start={24} end={1} duration={1400} decimals={2} padStart={5} suffix=" second" isVisible={isVisible && isActive} />
+                      <span style={{ color: '#2cb742' }}>
+                        <RollingCounter start={24} end={1} duration={1400} decimals={2} padStart={5} isVisible={isVisible && isActive} />
+                        {tab.subLine1Suffix}
+                      </span>
                     )}
                     {tab.uiType === 'revenue' && <span>{tab.subLine1Suffix}</span>}
                     {tab.uiType === 'traffic' && (
-                      <RollingCounter start={0} end={10} duration={1200} suffix="x direct bookings" isVisible={isVisible && isActive} />
+                      <span style={{ color: '#2cb742' }}>
+                        <RollingCounter start={0} end={10} duration={1200} suffix="x direct bookings" isVisible={isVisible && isActive} />
+                      </span>
                     )}
                   </span>
 
-                  {/* Строка 2 с бесшовно интегрированным каунтером */}
+                  {/* Второе логическое поле */}
                   <span style={{ color: T.body, fontWeight: 600 }}>
                     {tab.subLine2Prefix}
                     {tab.uiType === 'revenue' && (
@@ -220,14 +228,14 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
             <div key={idx} style={{ borderBottom: idx !== tabs.length - 1 ? `1px solid ${T.border}` : 'none', position: 'relative', zIndex: 1 }}>
               <div 
                 onClick={() => setActiveTab(idx)}
-                style={{ padding: '1.2rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '0.5rem', backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent' }}
+                style={{ padding: '1.2rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '0.5rem', backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent', position: 'relative' }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ position: 'absolute', top: '1.2rem', right: '1.2rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.7rem', fontWeight: 700, color: isActive ? T.accent : T.sub }}>{tab.num}</span>
                   <span style={{ fontSize: '0.85rem', color: T.sub, transform: isActive ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s' }}>▼</span>
                 </div>
 
-                <div style={{ position: 'relative', minHeight: '2.2rem' }}>
+                <div style={{ position: 'relative', minHeight: '2rem', paddingRight: '2.5rem' }}>
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: T.sub, margin: 0, lineHeight: 1.4, position: 'absolute', top: 0, left: 0, opacity: isActive ? 0 : 1, transition: 'all 0.3s' }}>
                     {tab.closedTitle}
                   </h3>
@@ -243,15 +251,15 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
                 <div style={{ padding: '0 1.2rem 1.5rem 1.2rem' }}>
                   {isActive && (
                     <div style={{ 
-                      fontSize: '1.1rem', fontWeight: 700, color: '#fff', lineHeight: 1.5,
+                      fontSize: '1.05rem', fontWeight: 700, color: '#fff', lineHeight: 1.5,
                       display: 'flex', flexDirection: 'column', gap: '0.3rem',
                       animation: 'fadeInBlurAhead 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards'
                     }}>
                       <span>
                         {tab.subLine1Prefix}
-                        {tab.uiType === 'sync' && <RollingCounter start={24} end={1} duration={1400} decimals={2} padStart={5} suffix=" second" isVisible={isVisible && isActive} />}
+                        {tab.uiType === 'sync' && <span style={{ color: '#2cb742' }}><RollingCounter start={24} end={1} duration={1400} decimals={2} padStart={5} suffix=" second" isVisible={isVisible && isActive} /></span>}
                         {tab.uiType === 'revenue' && <span>{tab.subLine1Suffix}</span>}
-                        {tab.uiType === 'traffic' && <RollingCounter start={0} end={10} duration={1200} suffix="x direct bookings" isVisible={isVisible && isActive} />}
+                        {tab.uiType === 'traffic' && <span style={{ color: '#2cb742' }}><RollingCounter start={0} end={10} duration={1200} suffix="x direct bookings" isVisible={isVisible && isActive} /></span>}
                       </span>
                       <span style={{ color: T.body, fontWeight: 600 }}>
                         {tab.subLine2Prefix}
@@ -268,7 +276,7 @@ export default function B2BAccordion({ tabs, title }: B2BAccordionProps) {
       </div>
       <style jsx global>{`
         @keyframes fadeInBlurAhead {
-          from { opacity: 0; filter: blur(4px); transform: translateY(8px); }
+          from { opacity: 0; filter: blur(3px); transform: translateY(6px); }
           to { opacity: 1; filter: blur(0); transform: translateY(0); }
         }
       `}</style>
