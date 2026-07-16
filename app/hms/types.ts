@@ -66,7 +66,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitleAccent: "24/7",
         openTitleSuffix: " manual updates",
         subLine1Prefix: "Each reservation locks your entire grid in ",
-        subLine1Suffix: "",
+        subLine1Suffix: " second",
         subLine2Prefix: "Zero risk of human error and overbooking.",
         subLine2Suffix: "",
         uiType: "sync"
@@ -90,7 +90,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitleAccent: "0 leads",
         openTitleSuffix: " from direct traffic",
         subLine1Prefix: "Drive ",
-        subLine1Suffix: "",
+        subLine1Suffix: " direct bookings",
         subLine2Prefix: "with local search and automated retention campaigns.",
         subLine2Suffix: "",
         uiType: "traffic"
@@ -140,7 +140,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitleAccent: "24/7",
         openTitleSuffix: " อัปเดตระบบด้วยมือ",
         subLine1Prefix: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางใน ",
-        subLine1Suffix: "",
+        subLine1Suffix: " วินาที",
         subLine2Prefix: "ลดความเสี่ยงจากความผิดพลาดของมนุษย์และการจองซ้ำซ้อนให้เหลือศูนย์",
         subLine2Suffix: "",
         uiType: "sync"
@@ -164,7 +164,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitleAccent: "0 ยอดจองตรง",
         openTitleSuffix: " จากช่องทางของคุณเอง",
         subLine1Prefix: "ดึงยอดจองตรงให้เติบโตถึง ",
-        subLine1Suffix: "",
+        subLine1Suffix: " ช่องทางตรง",
         subLine2Prefix: "ด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
         subLine2Suffix: "",
         uiType: "traffic"
