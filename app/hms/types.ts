@@ -1,13 +1,14 @@
-export interface TabItem {
-  closedTitle: string;
-  openTitlePrefix: string;
-  openTitleAccent: string;
-  openTitleSuffix: string;
-  subLine1Prefix: string;
-  subLine1Suffix: string;
-  subLine2Prefix: string;
-  subLine2Suffix: string;
+export interface BentoItem {
+  pain: string;
+  fixAccent: string;
+  fixText: string;
+  subText: string;
   uiType: string;
+}
+
+export interface DeliverableItem {
+  title: string;
+  desc: string;
 }
 
 export interface TranslationContent {
@@ -17,12 +18,20 @@ export interface TranslationContent {
   heroSub2: string;
   btnChat: string;
   btnLine: string;
-  problemTitlePrefix: string;
-  problemTitleAccentRed: string;
-  problemTitleMiddle: string;
-  problemTitleAccentGreen: string;
-  problemTitleSuffix: string;
-  tabs: TabItem[];
+  
+  // Bento Grid Block
+  bentoTitlePrefix: string;
+  bentoTitleAccentRed: string;
+  bentoTitleMiddle: string;
+  bentoTitleAccentGreen: string;
+  bentoTitleSuffix: string;
+  bentoItems: BentoItem[];
+
+  // Offer/Deliverables Block
+  offerTitle: string;
+  offerSub: string;
+  deliverables: DeliverableItem[];
+
   priceTitle: string;
   priceSub: string;
   tier1Title: string;
@@ -60,46 +69,55 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    problemTitlePrefix: "",
-    problemTitleAccentRed: "Margin Leaks",
-    problemTitleMiddle: " / ",
-    problemTitleAccentGreen: "The Fix",
-    problemTitleSuffix: "",
-    tabs: [
+    
+    // Bento
+    bentoTitlePrefix: "",
+    bentoTitleAccentRed: "Margin Leaks",
+    bentoTitleMiddle: " / ",
+    bentoTitleAccentGreen: "The Fix",
+    bentoTitleSuffix: "",
+    bentoItems: [
       {
-        closedTitle: "24/7 manual updates",
-        openTitlePrefix: "",
-        openTitleAccent: "24/7",
-        openTitleSuffix: " manual updates",
-        subLine1Prefix: "Each reservation locks your entire grid in ",
-        subLine1Suffix: " second",
-        subLine2Prefix: "Zero risk of human error and overbooking.",
-        subLine2Suffix: "",
+        pain: "24/7 manual updates",
+        fixAccent: "1 second",
+        fixText: " synchronization",
+        subText: "Each reservation locks your entire grid automatically. Zero risk of human error and overbooking.",
         uiType: "sync"
       },
       {
-        closedTitle: "20% commission",
-        openTitlePrefix: "You are losing up to ",
-        openTitleAccent: "20%",
-        openTitleSuffix: " OTA commission",
-        subLine1Prefix: "Integrate a direct booking engine",
-        subLine1Suffix: "",
-        subLine2Prefix: "Keep ",
-        subLine2Suffix: " of the revenue in-house.",
+        pain: "20% OTA commission",
+        fixAccent: "100%",
+        fixText: " direct revenue",
+        subText: "Integrate a direct booking engine on your custom website. Keep all the revenue in-house.",
         uiType: "revenue"
       },
       {
-        closedTitle: "0 leads",
-        openTitlePrefix: "",
-        openTitleAccent: "0 leads",
-        openTitleSuffix: " from direct traffic",
-        subLine1Prefix: "Drive ",
-        subLine1Suffix: " direct bookings",
-        subLine2Prefix: "with local search and automated retention campaigns.",
-        subLine2Suffix: "",
+        pain: "0 leads from traffic",
+        fixAccent: "10x",
+        fixText: " booking growth",
+        subText: "Drive high-intent local search traffic and launch automated retention campaigns for returning guests.",
         uiType: "traffic"
       }
     ],
+
+    // Offer
+    offerTitle: "Core Deliverables",
+    offerSub: "What is included in the growth architecture workflow",
+    deliverables: [
+      {
+        title: "Infrastructure Integration",
+        desc: "Deployment of a cloud-based PMS system, digitization of your room/villa inventory, and creation of a centralized operational control dashboard."
+      },
+      {
+        title: "Channel Synchronization",
+        desc: "Seamless Channel Manager connection. Real-time calendar syncing across Booking.com, Agoda, and 300+ OTA platforms with 1-second updates."
+      },
+      {
+        title: "Direct Revenue Engine",
+        desc: "Integration of a zero-commission booking engine into your website, payment gateway connection, and local Google Maps SEO optimization."
+      }
+    ],
+
     priceTitle: "Simple Pricing. No Hidden Fees.",
     priceSub: "Fixed setup fee. Zero commission on direct bookings forever.",
     tier1Title: "LITE (1-10 Rooms)",
@@ -135,46 +153,55 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    problemTitlePrefix: "",
-    problemTitleAccentRed: "Margin Leaks",
-    problemTitleMiddle: " / ",
-    problemTitleAccentGreen: "The Fix",
-    problemTitleSuffix: "",
-    tabs: [
+    
+    // Bento
+    bentoTitlePrefix: "",
+    bentoTitleAccentRed: "Margin Leaks",
+    bentoTitleMiddle: " / ",
+    bentoTitleAccentGreen: "The Fix",
+    bentoTitleSuffix: "",
+    bentoItems: [
       {
-        closedTitle: "อัปเดตระบบด้วยมือ 24/7",
-        openTitlePrefix: "",
-        openTitleAccent: "24/7",
-        openTitleSuffix: " อัปเดตระบบด้วยมือ",
-        subLine1Prefix: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางใน ",
-        subLine1Suffix: " วินาที",
-        subLine2Prefix: "ลดความเสี่ยงจากความผิดพลาดของมนุษย์และการจองซ้ำซ้อนให้เหลือศูนย์",
-        subLine2Suffix: "",
+        pain: "อัปเดตระบบด้วยมือ 24/7",
+        fixAccent: "1 วินาที",
+        fixText: " ในการซิงค์ข้อมูล",
+        subText: "ทุกการจองล็อกสถานะห้องพักโดยอัตโนมัติ ลดความเสี่ยงจากการจองซ้ำซ้อนให้เหลือศูนย์",
         uiType: "sync"
       },
       {
-        closedTitle: "เสียค่าคอมมิชชั่น 20%",
-        openTitlePrefix: "คุณกำลังสูญเสียรายได้ไปกับ ",
-        openTitleAccent: "ค่าคอม OTA ถึง 20%",
-        openTitleSuffix: "",
-        subLine1Prefix: "ติดตั้งระบบจองตรงบนเว็บไซต์",
-        subLine1Suffix: "",
-        subLine2Prefix: "และรับรายได้เต็ม ",
-        subLine2Suffix: " เข้าบัญชีคุณโดยตรง",
+        pain: "เสียค่าคอมมิชชั่น OTA 20%",
+        fixAccent: "100%",
+        fixText: " รายได้ตรงเข้าบัญชี",
+        subText: "ติดตั้งระบบจองตรงบนเว็บไซต์ที่ออกแบบมาเพื่อคุณ รับและเก็บรายได้เต็มจำนวนโดยไม่ต้องแบ่งใคร",
         uiType: "revenue"
       },
       {
-        closedTitle: "0 ยอดจองตรง",
-        openTitlePrefix: "",
-        openTitleAccent: "0 ยอดจองตรง",
-        openTitleSuffix: " จากช่องทางของคุณเอง",
-        subLine1Prefix: "ดึงยอดจองตรงให้เติบโตถึง ",
-        subLine1Suffix: " ช่องทางตรง",
-        subLine2Prefix: "ด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
-        subLine2Suffix: "",
+        pain: "0 ยอดจองตรงจากช่องทางออนไลน์",
+        fixAccent: "10 เท่า",
+        fixText: " ของยอดจองตรง",
+        subText: "ดึงลูกค้าเป้าหมายจากการค้นหาในพื้นที่ พร้อมระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำอัตโนมัติ",
         uiType: "traffic"
       }
     ],
+
+    // Offer
+    offerTitle: "สิ่งที่คุณจะได้รับ",
+    offerSub: "กระบวนการวางระบบเทคโนโลยีเพื่อสร้างการเติบโตอย่างเป็นรูปธรรม",
+    deliverables: [
+      {
+        title: "วางโครงสร้างระบบพื้นฐาน (Infrastructure)",
+        desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) ทำข้อมูลห้องพัก/วิลล่าให้อยู่ในระบบดิจิทัล พร้อมแดชบอร์ดควบคุมการทำงานส่วนกลางสำหรับเจ้าของ"
+      },
+      {
+        title: "เชื่อมต่อปฏิทินห้องพัก (Synchronization)",
+        desc: "เชื่อมต่อ Channel Manager ซิงค์ปฏิทินห้องพักระหว่าง Booking.com, Agoda และช่องทาง OTA อื่นๆ กว่า 300+ แห่งแบบเรียลไทม์ใน 1 วินาที"
+      },
+      {
+        title: "ระบบขับเคลื่อนรายได้โดยตรง (Direct Engine)",
+        desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ เชื่อมต่อระบบชำระเงินออนไลน์ และทำสิ่งอำนวยความสะดวกด้าน Local SEO บน Google Maps"
+      }
+    ],
+
     priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
     priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว รับรายได้จากการจองตรงเต็มจำนวนตลอดไป",
     tier1Title: "LITE (1-10 ห้อง)",
@@ -198,7 +225,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
     aboutTitle: "พันธมิตรด้านเทคโนโลยีเพื่อการเติบโต",
-    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงาน in ฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
+    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
     aboutBtn: "ดูประวัติการทำงาน",
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
