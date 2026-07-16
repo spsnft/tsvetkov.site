@@ -41,8 +41,8 @@ export default function Hero({ t }: HeroProps) {
         
         .hero-grid {
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
-          gap: 2.5rem;
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 3rem;
           align-items: center;
           position: relative;
         }
@@ -77,47 +77,53 @@ export default function Hero({ t }: HeroProps) {
           color: ${T.body};
         }
         
-        /* УСИЛЕННОЕ УТП ДЛЯ ПРЯМОЙ ПРИБЫЛИ */
         .utp-highlight {
-          font-size: clamp(1.15rem, 2vw, 1.35rem);
+          font-size: clamp(1.2rem, 2vw, 1.4rem);
           font-weight: 700;
           color: #00E599;
           margin-bottom: 2.5rem;
           letter-spacing: -0.01em;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.6rem;
         }
 
+        /* КНОПКИ В ЕДИНОМ ПРЕМИАЛЬНОМ СТИЛЕ */
         .cta-buttons {
           display: flex;
           gap: 1rem;
           flex-wrap: wrap;
         }
-        .btn-wa, .btn-line {
+        .btn-premium-cta {
           display: flex;
           align-items: center;
-          gap: 0.7rem;
+          gap: 0.8rem;
           color: #fff;
-          padding: 1rem 1.8rem;
+          background-color: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 1.1rem 2rem;
           border-radius: 8px;
           font-weight: 700;
           text-decoration: none;
           font-size: 0.95rem;
-          transition: transform 0.2s ease, filter 0.2s ease;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          backdrop-filter: blur(4px);
         }
-        .btn-wa:hover, .btn-line:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .btn-wa { background-color: #2cb742; }
-        .btn-line { background-color: #06C755; }
+        .btn-premium-cta:hover {
+          transform: translateY(-2px);
+          background-color: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.2);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
         
-        /* Фикс иконок: убрали инверсию, оставили чистый нативный SVG */
+        /* Иконки теперь в своих родных цветах без фильтров инверсии */
         .btn-icon { 
           height: 22px; 
           width: 22px; 
           object-fit: contain;
         }
 
-        /* КОЛОНКА С МОКАПОМ */
+        /* КОЛОНКА С МОКАПОМ (BLEEDING EDGE) */
         .visual-column {
           position: relative;
           width: 100%;
@@ -130,16 +136,16 @@ export default function Hero({ t }: HeroProps) {
           width: 100%;
         }
         .dashboard-mockup {
-          width: 175%; 
+          width: 180%; 
           aspect-ratio: 16 / 9;
-          background-color: rgba(13, 13, 17, 0.75);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.07);
-          border-radius: 12px;
-          transform: rotateX(14deg) rotateY(-16deg) rotateZ(4deg);
+          background-color: rgba(13, 13, 17, 0.8);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 14px;
+          transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg);
           transform-origin: left center;
-          box-shadow: 0 35px 70px rgba(0, 0, 0, 0.7), 0 0 50px rgba(0, 229, 153, 0.02), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-          padding: 1.25rem;
+          box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 229, 153, 0.01), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 1.2rem;
@@ -153,8 +159,8 @@ export default function Hero({ t }: HeroProps) {
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           padding-bottom: 0.8rem;
         }
-        .pms-logo { font-family: monospace; font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; }
-        .sync-status { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #00E599; font-weight: 600; background: rgba(0, 225, 153, 0.06); padding: 0.3rem 0.6rem; border-radius: 20px; border: 1px solid rgba(0, 225, 153, 0.15); }
+        .pms-logo { font-family: monospace; font-size: 0.75rem; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
+        .sync-status { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #00E599; font-weight: 600; background: rgba(0, 225, 153, 0.05); padding: 0.35rem 0.7rem; border-radius: 20px; border: 1px solid rgba(0, 225, 153, 0.12); }
         .pulse-dot { width: 6px; height: 6px; background-color: #00E599; border-radius: 50%; animation: pulse 2s infinite; }
         
         .pms-body {
@@ -164,47 +170,43 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
 
-        /* 1. АНАЛИТИКА: Равномерное распределение по высоте */
+        /* АНАЛИТИКА: Плотная группа без дыр */
         .pms-analytics {
           display: flex;
           flex-direction: column;
-          justify-content: space-between; /* Магия распределения элементов */
-          height: 100%;
-          flex: 0 0 32%;
+          gap: 0.75rem; 
+          flex: 0 0 30%;
         }
         .widget {
-          background: rgba(255, 255, 255, 0.015);
-          border: 1px solid rgba(255, 255, 255, 0.04);
-          padding: 0.85rem 1rem;
+          background: rgba(255, 255, 255, 0.01);
+          border: 1px solid rgba(255, 255, 255, 0.03);
+          padding: 1.1rem 1.2rem; /* Увеличили внутреннее мясо виджетов */
           border-radius: 8px;
         }
-        
-        /* Зеленый акцент только на первом виджете для жесткого фокуса */
         .widget.primary-focus {
           border-left: 3px solid #00E599;
-          background: rgba(20, 20, 25, 0.4);
+          background: rgba(255, 255, 255, 0.015);
         }
-        
-        .widget-label { font-size: 0.65rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-        .widget-value { font-size: 1.45rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1.1; }
-        .widget-sub { font-size: 0.65rem; color: #444; margin-top: 0.3rem; }
+        .widget-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+        .widget-value { font-size: 1.6rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
+        .widget-sub { font-size: 0.65rem; color: #444; margin-top: 0.4rem; }
         .text-green { color: #00E599; }
         
         .mini-chart {
           display: flex;
           align-items: flex-end;
           gap: 4px;
-          height: 28px;
-          margin-top: 0.5rem;
+          height: 32px;
+          margin-top: 0.6rem;
         }
         .bar { width: 12px; border-radius: 2px 2px 0 0; }
-        .bar.ota { background: rgba(255, 255, 255, 0.08); }
-        .bar.direct { background: rgba(0, 229, 153, 0.5); }
+        .bar.ota { background: rgba(255, 255, 255, 0.06); }
+        .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
-        /* 2. ШАХМАТКА */
+        /* ШАХМАТКА БРОНИРОВАНИЙ */
         .pms-matrix {
           flex: 1;
-          background: rgba(0, 0, 0, 0.2);
+          background: rgba(0, 0, 0, 0.15);
           border: 1px solid rgba(255, 255, 255, 0.03);
           border-radius: 8px;
           display: flex;
@@ -213,30 +215,30 @@ export default function Hero({ t }: HeroProps) {
         }
         .matrix-header {
           display: grid;
-          grid-template-columns: 90px repeat(7, 1fr);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          grid-template-columns: 85px repeat(7, 1fr);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
           font-size: 0.65rem;
           color: #555;
           text-align: center;
           background: rgba(255, 255, 255, 0.01);
         }
-        .matrix-header > div { padding: 0.6rem 0; border-right: 1px solid rgba(255, 255, 255, 0.02); }
+        .matrix-header > div { padding: 0.7rem 0; border-right: 1px solid rgba(255, 255, 255, 0.01); }
         
         .matrix-row {
           display: grid;
-          grid-template-columns: 90px repeat(7, 1fr);
+          grid-template-columns: 85px repeat(7, 1fr);
           border-bottom: 1px solid rgba(255, 255, 255, 0.02);
           flex: 1;
           position: relative;
         }
         .matrix-room-name {
           font-size: 0.7rem;
-          color: #777;
+          color: #666;
           padding: 0 0.6rem;
           display: flex;
           align-items: center;
-          border-right: 1px solid rgba(255, 255, 255, 0.05);
-          background: rgba(13, 13, 17, 0.3);
+          border-right: 1px solid rgba(255, 255, 255, 0.04);
+          background: rgba(13, 13, 17, 0.2);
         }
         
         .booking {
@@ -244,20 +246,20 @@ export default function Hero({ t }: HeroProps) {
           top: 6px; bottom: 6px;
           border-radius: 4px;
           font-size: 0.65rem;
-          padding: 0 0.5rem;
+          padding: 0 0.6rem;
           color: #fff;
           display: flex;
           align-items: center;
           overflow: hidden;
           white-space: nowrap;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+          box-shadow: 0 3px 10px rgba(0,0,0,0.4);
         }
         .b-direct { background: linear-gradient(90deg, #00E599 0%, #00b377 100%); color: #000; font-weight: 600; }
         .b-booking { background: linear-gradient(90deg, #003580 0%, #0050c2 100%); }
         .b-agoda { background: linear-gradient(90deg, #873335 0%, #cc474b 100%); }
 
         @keyframes pulse {
-          0% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.7); }
+          0% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
           70% { box-shadow: 0 0 0 6px rgba(0, 225, 153, 0); }
           100% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0); }
         }
@@ -270,7 +272,7 @@ export default function Hero({ t }: HeroProps) {
           .utp-highlight { justify-content: center; }
           .dashboard-mockup { transform: none !important; width: 100% !important; }
           .pms-body { flex-direction: column; }
-          .pms-analytics { flex: none; gap: 1rem; }
+          .pms-analytics { flex: none; gap: 0.75rem; }
           .pms-matrix { display: none; }
         }
       `}</style>
@@ -285,24 +287,25 @@ export default function Hero({ t }: HeroProps) {
             <p>{t.heroSub1}</p>
           </div>
           
-          {/* КРУПНОЕ УТП */}
+          {/* УТП ХАЙЛАЙТ */}
           <div className="utp-highlight">
             <span>→</span> {t.heroSub2}
           </div>
           
+          {/* ОБНОВЛЕННЫЕ КНОПКИ В СТИЛЕ GRAPHITE */}
           <div className="cta-buttons">
-            <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-wa">
-              <img src="/logos/whatsapp.svg" alt="WA" className="btn-icon" /> 
+            <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
+              <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" /> 
               {t.btnChat}
             </a>
-            <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-line">
-              <img src="/logos/line.svg" alt="Line" className="btn-icon" /> 
+            <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
+              <img src="/logos/line.svg" alt="LINE" className="btn-icon" /> 
               {t.btnLine}
             </a>
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА */}
+        {/* ПРАВАЯ КОЛОНКА (ОБНОВЛЕННЫЙ ДАШБОРД) */}
         <div className="visual-column">
           <div className="perspective-wrapper">
             <div className="dashboard-mockup">
@@ -323,7 +326,7 @@ export default function Hero({ t }: HeroProps) {
                   
                   <div className="widget">
                     <div className="widget-label">Occupancy / ADR</div>
-                    <div className="widget-value" style={{ fontSize: '1.2rem' }}>84% <span style={{ color: '#333' }}>|</span> ฿4,250</div>
+                    <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: '#333' }}>|</span> ฿4,250</div>
                     
                     <div className="mini-chart">
                       <div className="bar ota" style={{ height: '40%' }}></div>
@@ -352,25 +355,26 @@ export default function Hero({ t }: HeroProps) {
                   
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 1</div>
-                    <div className="booking b-direct" style={{ left: 'calc(90px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
-                    <div className="booking b-booking" style={{ left: 'calc(90px + 42.8%)', width: 'calc(50% - 4px)' }}>Booking.com • Lee</div>
+                    <div className="booking b-direct" style={{ left: 'calc(85px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
+                    <div className="booking b-booking" style={{ left: 'calc(85px + 35%)', width: 'calc(55% - 4px)' }}>Booking.com • Lee</div>
                   </div>
                   
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 2</div>
-                    <div className="booking b-agoda" style={{ left: 'calc(90px + 14.2%)', width: 'calc(42.8% - 4px)' }}>Agoda • Kumar</div>
-                    <div className="booking b-direct" style={{ left: 'calc(90px + 71.4%)', width: 'calc(28.5% - 4px)' }}>Direct • VIP</div>
+                    <div className="booking b-agoda" style={{ left: 'calc(85px + 10%)', width: 'calc(45% - 4px)' }}>Agoda • Kumar</div>
+                    <div className="booking b-direct" style={{ left: 'calc(85px + 65%)', width: 'calc(30% - 4px)' }}>Direct • VIP</div>
                   </div>
 
                   <div className="matrix-row">
                     <div className="matrix-room-name">Room 101</div>
-                    <div className="booking b-direct" style={{ left: 'calc(90px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
+                    <div className="booking b-direct" style={{ left: 'calc(85px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
+                    <div className="booking b-booking" style={{ left: 'calc(85px + 60%)', width: 'calc(40% - 4px)' }}>Booking.com • Davis</div>
                   </div>
 
                   <div className="matrix-row">
                     <div className="matrix-room-name">Room 102</div>
-                    <div className="booking b-booking" style={{ left: 'calc(90px + 0%)', width: 'calc(25% - 4px)' }}>Booking.com</div>
-                    <div className="booking b-direct" style={{ left: 'calc(90px + 28.5%)', width: 'calc(71.4% - 4px)' }}>Direct • Website</div>
+                    <div className="booking b-booking" style={{ left: 'calc(85px + 0%)', width: 'calc(35% - 4px)' }}>Booking.com • Brown</div>
+                    <div className="booking b-direct" style={{ left: 'calc(85px + 38%)', width: 'calc(62% - 4px)' }}>Direct • Website</div>
                   </div>
                 </div>
 
