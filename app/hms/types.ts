@@ -1,6 +1,6 @@
 export interface BentoItem {
   pain: string;
-  fixAccent: string;
+  counterSuffix: string;
   fixText: string;
   subText: string;
   uiType: string;
@@ -18,20 +18,15 @@ export interface TranslationContent {
   heroSub2: string;
   btnChat: string;
   btnLine: string;
-  
-  // Bento Grid Block
   bentoTitlePrefix: string;
   bentoTitleAccentRed: string;
   bentoTitleMiddle: string;
   bentoTitleAccentGreen: string;
   bentoTitleSuffix: string;
   bentoItems: BentoItem[];
-
-  // Offer/Deliverables Block
   offerTitle: string;
   offerSub: string;
   deliverables: DeliverableItem[];
-
   priceTitle: string;
   priceSub: string;
   tier1Title: string;
@@ -69,8 +64,6 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    
-    // Bento
     bentoTitlePrefix: "",
     bentoTitleAccentRed: "Margin Leaks",
     bentoTitleMiddle: " / ",
@@ -79,28 +72,26 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     bentoItems: [
       {
         pain: "24/7 manual updates",
-        fixAccent: "1 second",
+        counterSuffix: " second",
         fixText: " synchronization",
         subText: "Each reservation locks your entire grid automatically. Zero risk of human error and overbooking.",
         uiType: "sync"
       },
       {
         pain: "20% OTA commission",
-        fixAccent: "100%",
+        counterSuffix: "%",
         fixText: " direct revenue",
         subText: "Integrate a direct booking engine on your custom website. Keep all the revenue in-house.",
         uiType: "revenue"
       },
       {
         pain: "0 leads from traffic",
-        fixAccent: "10x",
+        counterSuffix: "x",
         fixText: " booking growth",
         subText: "Drive high-intent local search traffic and launch automated retention campaigns for returning guests.",
         uiType: "traffic"
       }
     ],
-
-    // Offer
     offerTitle: "Core Deliverables",
     offerSub: "What is included in the growth architecture workflow",
     deliverables: [
@@ -117,7 +108,6 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         desc: "Integration of a zero-commission booking engine into your website, payment gateway connection, and local Google Maps SEO optimization."
       }
     ],
-
     priceTitle: "Simple Pricing. No Hidden Fees.",
     priceSub: "Fixed setup fee. Zero commission on direct bookings forever.",
     tier1Title: "LITE (1-10 Rooms)",
@@ -153,8 +143,6 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    
-    // Bento
     bentoTitlePrefix: "",
     bentoTitleAccentRed: "Margin Leaks",
     bentoTitleMiddle: " / ",
@@ -163,28 +151,26 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     bentoItems: [
       {
         pain: "อัปเดตระบบด้วยมือ 24/7",
-        fixAccent: "1 วินาที",
+        counterSuffix: " วินาที",
         fixText: " ในการซิงค์ข้อมูล",
         subText: "ทุกการจองล็อกสถานะห้องพักโดยอัตโนมัติ ลดความเสี่ยงจากการจองซ้ำซ้อนให้เหลือศูนย์",
         uiType: "sync"
       },
       {
         pain: "เสียค่าคอมมิชชั่น OTA 20%",
-        fixAccent: "100%",
+        counterSuffix: "%",
         fixText: " รายได้ตรงเข้าบัญชี",
         subText: "ติดตั้งระบบจองตรงบนเว็บไซต์ที่ออกแบบมาเพื่อคุณ รับและเก็บรายได้เต็มจำนวนโดยไม่ต้องแบ่งใคร",
         uiType: "revenue"
       },
       {
         pain: "0 ยอดจองตรงจากช่องทางออนไลน์",
-        fixAccent: "10 เท่า",
+        counterSuffix: " เท่า",
         fixText: " ของยอดจองตรง",
         subText: "ดึงลูกค้าเป้าหมายจากการค้นหาในพื้นที่ พร้อมระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำอัตโนมัติ",
         uiType: "traffic"
       }
     ],
-
-    // Offer
     offerTitle: "สิ่งที่คุณจะได้รับ",
     offerSub: "กระบวนการวางระบบเทคโนโลยีเพื่อสร้างการเติบโตอย่างเป็นรูปธรรม",
     deliverables: [
@@ -201,7 +187,6 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ เชื่อมต่อระบบชำระเงินออนไลน์ และทำสิ่งอำนวยความสะดวกด้าน Local SEO บน Google Maps"
       }
     ],
-
     priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
     priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว รับรายได้จากการจองตรงเต็มจำนวนตลอดไป",
     tier1Title: "LITE (1-10 ห้อง)",
