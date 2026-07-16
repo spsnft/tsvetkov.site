@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { T } from '../../../src/theme/tokens';
 
-// Вспомогательный компонент для плакающих цифр (эффект счетчика)
 function RollingCounter({ start, end, duration, decimals = 0, suffix = '', isVisible }: { 
   start: number; 
   end: number; 
@@ -97,10 +96,43 @@ export default function BentoGrid({ t }: BentoGridProps) {
     }
   };
 
+  // Метод, возвращающий кастомную абстрактную графику для каждой карточки боли
+  const renderBentoVisual = (uiType: string) => {
+    switch (uiType) {
+      case 'sync':
+        return (
+          <svg viewBox="0 0 100 40" style={{ width: '100%', height: '40px', color: '#00E599', opacity: 0.25 }}>
+            <rect x="0" y="5" width="20" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="1" />
+            <rect x="28" y="5" width="20" height="12" rx="2" fill="currentColor" stroke="currentColor" strokeWidth="1" />
+            <rect x="56" y="5" width="20" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="1" />
+            <rect x="84" y="5" width="16" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="1" />
+            <path d="M10 24 L90 24" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+            <circle cx="38" cy="11" r="1.5" fill="#0b0b0d" />
+          </svg>
+        );
+      case 'revenue':
+        return (
+          <svg viewBox="0 0 100 40" style={{ width: '100%', height: '40px', color: '#00E599', opacity: 0.25 }}>
+            <path d="M5 20 Q 25 5, 50 20 T 95 20" fill="none" stroke="currentColor" strokeWidth="1" />
+            <circle cx="50" cy="20" r="3" fill="currentColor" />
+            <line x1="50" y1="20" x2="50" y2="38" stroke="currentColor" strokeWidth="0.75" strokeDasharray="1 2" />
+          </svg>
+        );
+      case 'traffic':
+        return (
+          <svg viewBox="0 0 100 40" style={{ width: '100%', height: '40px', color: '#00E599', opacity: 0.25 }}>
+            <path d="M5 35 L 25 30 L 45 20 L 65 25 L 95 5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <circle cx="95" cy="5" r="2.5" fill="currentColor" />
+            <path d="M5 35 L 25 30 L 45 20 L 65 25 L 95 5 L 95 35 Z" fill="cyan" opacity="0.05" />
+          </svg>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <section ref={sectionRef} style={{ padding: '3rem 0', position: 'relative' }}>
-      
-      {/* Стили для адаптивности сеток на мобильных устройствах */}
       <style jsx>{`
         @media (max-width: 992px) {
           .bento-grid-container {
@@ -112,7 +144,6 @@ export default function BentoGrid({ t }: BentoGridProps) {
         }
       `}</style>
 
-      {/* ЗАГОЛОВОК СЕКЦИИ БОЛЕЙ */}
       <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '3rem', textAlign: 'center', letterSpacing: '-0.02em', lineHeight: 1.3, color: '#fff' }}>
         {t.bentoTitlePrefix}
         <span style={{ color: '#FF6B6B' }}>{t.bentoTitleAccentRed}</span>
@@ -121,7 +152,6 @@ export default function BentoGrid({ t }: BentoGridProps) {
         {t.bentoTitleSuffix}
       </h2>
       
-      {/* СЕТКА BENTO (БОЛЬ -> РЕШЕНИЕ) */}
       <div className="bento-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', position: 'relative', zIndex: 1 }}>
         {t.bentoItems.map((tab, idx) => {
           const limits = getCounterLimits(tab.uiType);
@@ -135,23 +165,27 @@ export default function BentoGrid({ t }: BentoGridProps) {
                 border: `1px solid ${T.border}`,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1.5rem',
-                minHeight: '260px',
-                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.2)'
+                gap: '1.25rem',
+                minHeight: '310px',
+                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.2)',
+                position: 'relative',
+                overflow: 'hidden'
               }}
             >
-              {/* Боль (зачеркнутая) */}
               <div style={{ fontSize: '1.1rem', fontWeight: 600, color: '#888888', textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.4)' }}>
                 {tab.pain}
               </div>
 
-              {/* Стрелка перехода */}
-              <div style={{ color: '#00E599', fontSize: '1.6rem', fontWeight: 800, lineHeight: 1 }}>
+              <div style={{ color: '#00E599', fontSize: '1.4rem', fontWeight: 800, lineHeight: 1 }}>
                 ↓
               </div>
 
-              {/* Решение и счетчик */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: 'auto' }}>
+              {/* Блок абстрактной визуализации */}
+              <div style={{ marginTop: 'auto', marginBottom: '0.5rem' }}>
+                {renderBentoVisual(tab.uiType)}
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>
                   <span style={{ color: '#00E599', marginRight: '0.3rem' }}>
                     <RollingCounter 
@@ -175,13 +209,11 @@ export default function BentoGrid({ t }: BentoGridProps) {
         })}
       </div>
 
-      {/* ЗАГОЛОВОК СЕКЦИИ ЭТАПОВ */}
       <div style={{ margin: '7rem 0 3.5rem 0', textAlign: 'center' }}>
         <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '-0.02em', color: '#fff' }}>{t.offerTitle}</h2>
         <p style={{ color: T.sub, margin: 0, fontSize: '1.1rem' }}>{t.offerSub}</p>
       </div>
 
-      {/* СЕТКА ЭТАПОВ (DELIVERABLES) */}
       <div className="deliverables-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', zIndex: 1, position: 'relative' }}>
         {t.deliverables.map((item, idx) => (
           <div 
