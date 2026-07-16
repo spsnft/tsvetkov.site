@@ -15,7 +15,10 @@ function RollingCounter({ start, end, duration, decimals = 0, suffix = '', isVis
   const [count, setCount] = useState<string>(start.toFixed(decimals));
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible) {
+      setCount(start.toFixed(decimals));
+      return;
+    }
 
     let startTime: number | null = null;
     const animate = (timestamp: number) => {
@@ -66,7 +69,9 @@ export default function B2BAccordion({
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
       },
       { threshold: 0.1 }
     );
@@ -111,7 +116,7 @@ export default function B2BAccordion({
         }
       `}</style>
 
-      <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2.5rem', textAlign: 'center', letterSpacing: '-0.02em', lineHeight: 1.3 }}>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '3rem', textAlign: 'center', letterSpacing: '-0.02em', lineHeight: 1.3 }}>
         {titlePrefix}
         <span style={{ color: '#FF6B6B' }}>{titleAccentRed}</span>
         {titleMiddle}
@@ -124,59 +129,46 @@ export default function B2BAccordion({
           <div 
             key={idx}
             style={{ 
-              padding: '2.2rem 1.8rem',
+              padding: '2.5rem 2rem',
               borderRadius: '16px',
               backgroundColor: T.bg1,
-              border: `1px solid ${T.border}`,
+              border: \`1px solid \${T.border}\`,
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.2rem',
-              minHeight: '230px',
+              gap: '1.5rem',
+              minHeight: '260px',
               boxShadow: '0 4px 30px rgba(0, 0, 0, 0.2)'
             }}
           >
-            <div style={{ fontSize: '1.05rem', fontWeight: 600, color: '#888888', textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.4)' }}>
+            <div style={{ fontSize: '1.1rem', fontWeight: 600, color: '#888888', textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.4)' }}>
               {tab.pain}
             </div>
 
-            <div style={{ color: '#00E599', fontSize: '1.6rem', fontWeight: 800, lineHeight: 1.2 }}>
+            <div style={{ color: '#00E599', fontSize: '1.6rem', fontWeight: 800, lineHeight: 1 }}>
               ↓
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: 'auto' }}>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>
-                {tab.uiType === 'sync' && (
-                  <>
-                    {tab.subLine1Prefix}
-                    <RollingCounter start={24} end={1} duration={1400} decimals={2} suffix={tab.subLine1Suffix} isVisible={isVisible} />
-                  </>
-                )}
-                {tab.uiType === 'revenue' && (
-                  <>
-                    {tab.subLine1Prefix}
-                    <RollingCounter start={20} end={100} duration={1200} suffix="%" isVisible={isVisible} />
-                    {tab.subLine2Suffix}
-                  </>
-                )}
-                {tab.uiType === 'traffic' && (
-                  <>
-                    {tab.subLine1Prefix}
-                    <RollingCounter start={0} end={10} duration={1200} suffix={tab.subLine1Suffix} isVisible={isVisible} />
-                  </>
-                )}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: 'auto' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>
+                <span style={{ color: '#00E599', marginRight: '0.3rem' }}>
+                  {tab.uiType === 'sync' && <RollingCounter start={24} end={1} duration={1400} decimals={0} suffix={tab.counterSuffix} isVisible={isVisible} />}
+                  {tab.uiType === 'revenue' && <RollingCounter start={20} end={100} duration={1200} decimals={0} suffix={tab.counterSuffix} isVisible={isVisible} />}
+                  {tab.uiType === 'traffic' && <RollingCounter start={0} end={10} duration={1200} decimals={0} suffix={tab.counterSuffix} isVisible={isVisible} />}
+                </span>
+                {tab.fixText}
               </h3>
               
-              <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.5, margin: 0, fontWeight: 500 }}>
-                {tab.uiType === 'revenue' ? tab.subLine1Prefix : tab.subText}
+              <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
+                {tab.subText}
               </p>
             </div>
           </div>
         ))}
       </div>
 
-      <div style={{ margin: '6rem 0 3rem 0', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>{offerTitle}</h2>
-        <p style={{ color: T.sub, margin: 0 }}>{offerSub}</p>
+      <div style={{ margin: '7rem 0 3.5rem 0', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>{offerTitle}</h2>
+        <p style={{ color: T.sub, margin: 0, fontSize: '1.1rem' }}>{offerSub}</p>
       </div>
 
       <div className="deliverables-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', zIndex: 1, position: 'relative' }}>
@@ -187,7 +179,7 @@ export default function B2BAccordion({
               padding: '2.5rem 2rem',
               borderRadius: '12px',
               backgroundColor: 'rgba(255, 255, 255, 0.01)',
-              border: `1px solid ${T.border}`,
+              border: \`1px solid \${T.border}\`,
               display: 'flex',
               flexDirection: 'column',
               gap: '1rem'
