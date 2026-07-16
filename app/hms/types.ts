@@ -1,5 +1,4 @@
 export interface TabItem {
-  num: string;
   closedTitle: string;
   openTitlePrefix: string;
   openTitleAccent: string;
@@ -18,7 +17,11 @@ export interface TranslationContent {
   heroSub2: string;
   btnChat: string;
   btnLine: string;
-  problemTitle: string;
+  problemTitlePrefix: string;
+  problemTitleAccentRed: string;
+  problemTitleMiddle: string;
+  problemTitleAccentGreen: string;
+  problemTitleSuffix: string;
   tabs: TabItem[];
   priceTitle: string;
   priceSub: string;
@@ -57,10 +60,13 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    problemTitle: "Direct Revenue Infrastructure",
+    problemTitlePrefix: "Why You Are ",
+    problemTitleAccentRed: "Losing Margin",
+    problemTitleMiddle: " (And ",
+    problemTitleAccentGreen: "How We Fix It",
+    problemTitleSuffix: ")",
     tabs: [
       {
-        num: "01",
         closedTitle: "24/7 manual updates",
         openTitlePrefix: "",
         openTitleAccent: "24/7",
@@ -72,7 +78,6 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         uiType: "sync"
       },
       {
-        num: "02",
         closedTitle: "20% commission",
         openTitlePrefix: "You are losing up to ",
         openTitleAccent: "20%",
@@ -84,7 +89,6 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         uiType: "revenue"
       },
       {
-        num: "03",
         closedTitle: "0 leads",
         openTitlePrefix: "",
         openTitleAccent: "0 leads",
@@ -131,10 +135,13 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    problemTitle: "โครงสร้างพื้นฐานเพื่อรายได้โดยตรง",
+    problemTitlePrefix: "ทำไมคุณถึง ",
+    problemTitleAccentRed: "สูญเสียผลกำไร",
+    problemTitleMiddle: " (และ ",
+    problemTitleAccentGreen: "วิธีที่เราแก้ไขให้คุณ",
+    problemTitleSuffix: ")",
     tabs: [
       {
-        num: "01",
         closedTitle: "อัปเดตระบบด้วยมือ 24/7",
         openTitlePrefix: "",
         openTitleAccent: "24/7",
@@ -146,7 +153,6 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         uiType: "sync"
       },
       {
-        num: "02",
         closedTitle: "เสียค่าคอมมิชชั่น 20%",
         openTitlePrefix: "คุณกำลังสูญเสียรายได้ไปกับ ",
         openTitleAccent: "ค่าคอม OTA ถึง 20%",
@@ -158,7 +164,6 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         uiType: "revenue"
       },
       {
-        num: "03",
         closedTitle: "0 ยอดจองตรง",
         openTitlePrefix: "",
         openTitleAccent: "0 ยอดจองตรง",
