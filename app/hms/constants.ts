@@ -1,8 +1,8 @@
 export const contentData = {
   en: {
     badge: "Hospitality Growth Solutions",
-    heroTitle: "Stop Paying 15-20% Commission to Booking.com & Agoda",
-    heroSub1: "Connect your hotel directly to guests and stop double-bookings",
+    heroTitle: "Stop Paying 15-20% commissions to Booking.com & Agoda",
+    heroSub1: "Connect your property directly to guests and stop double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
     btnLine: "Line",
@@ -81,7 +81,7 @@ export const contentData = {
   th: {
     badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
     heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
-    heroSub1: "เชื่อมต่อโรงแรมของคุณกับลูกค้าโดยตรงและหยุดปัญหาการจองซ้ำซ้อน",
+    heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรงและหยุดปัญหาการจองซ้ำซ้อน",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnChat: "WhatsApp",
     btnLine: "Line",
@@ -126,7 +126,7 @@ export const contentData = {
       },
       {
         title: "ระบบขับเคลื่อนรายได้โดยตรง (Direct Engine)",
-        desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ เชื่อมต่อระบบชำระเงินออนไลน์ และทำสิ่งอำนวยความสะดวกด้าน Local SEO บน Google Maps"
+        desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ เชื่อมต่อระบบชำระเงินออนไลน์ และทำสิ่งอำнวยความสะดวกด้าน Local SEO บน Google Maps"
       }
     ],
     priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
