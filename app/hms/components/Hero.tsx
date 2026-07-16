@@ -21,31 +21,33 @@ interface LogEntry {
 
 export default function Hero({ t }: HeroProps) {
   const [liveAmount, setLiveAmount] = useState(148250);
+  
+  // Инициализируем сразу 4 строки, чтобы на старте не было пустоты
   const [logs, setLogs] = useState<LogEntry[]>([
-    { time: '22:23:41', text: 'Booking.com inventory synced' },
-    { time: '22:23:10', text: 'Agoda rate parity verified' }
+    { time: '22:26:54', text: 'Traveloka inventory synced' },
+    { time: '22:25:12', text: 'Booking.com room inventory locked' },
+    { time: '22:23:41', text: 'Agoda rate parity verified' },
+    { time: '22:21:05', text: 'Direct Booking • Villa 1 secured' }
   ]);
 
-  // Микро-анимация счетчика маржи и системных логов
+  // Быстрая анимация: обновление каждые 2.5 секунды для демонстрации "живости"
   useEffect(() => {
     const interval = setInterval(() => {
-      // 1. Обновляем деньги
       setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
       
-      // 2. Генерируем новый лог работы
       const now = new Date();
       const timeStr = now.toTimeString().split(' ')[0];
       const channels = ['Booking.com', 'Agoda', 'Traveloka', 'Trip.com'];
-      const actions = ['calendar updated', 'inventory synced', 'rate parity checked'];
+      const actions = ['calendar updated', 'inventory synced', 'rate parity checked', 'room status locked'];
       
       const randomChannel = channels[Math.floor(Math.random() * channels.length)];
       const randomAction = actions[Math.floor(Math.random() * actions.length)];
       
       setLogs(prev => [
         { time: timeStr, text: `${randomChannel} ${randomAction}` },
-        prev[0] // Оставляем только два последних лога, чтобы не переполнять виджет
+        ...prev.slice(0, 3) // Удерживаем ровно 4 строки в консоли
       ]);
-    }, 7000);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, []);
@@ -58,7 +60,7 @@ export default function Hero({ t }: HeroProps) {
     <section className="hero-section">
       <style jsx>{`
         .hero-section {
-          padding: 6rem 0 4rem 0;
+          padding: 3.5rem 0 4rem 0; /* Ужали верхний отступ, убирая дыру над заголовком */
           position: relative;
           z-index: 10;
           overflow: hidden;
@@ -113,7 +115,6 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.6rem;
         }
 
-        /* МОНОХРОМНЫЕ КНОПКИ С ЦВЕТНЫМИ ИКОНКАМИ */
         .cta-buttons {
           display: flex;
           gap: 1rem;
@@ -149,10 +150,15 @@ export default function Hero({ t }: HeroProps) {
         
         /* Фикс размера LINE: компенсируем внутренние пустые поля SVG файла */
         .line-icon {
-          transform: scale(1.35);
+          height: 34px !important;
+          width: 34px !important;
+          margin-top: -6px;
+          margin-bottom: -6px;
+          margin-left: -5px;
+          margin-right: -5px;
         }
 
-        /* КОЛОНКА С МОКАПОМ (BLEEDING EDGE) */
+        /* КОЛОНКА С МОКАПОМ */
         .visual-column {
           position: relative;
           width: 100%;
@@ -199,7 +205,7 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
 
-        /* АНАЛИТИКА: Монолитная плотная группа */
+        /* АНАЛИТИКА */
         .pms-analytics {
           display: flex;
           flex-direction: column;
@@ -232,18 +238,23 @@ export default function Hero({ t }: HeroProps) {
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
-        /* ВИДЖЕТ ЖИВЫХ СИСТЕМНЫХ ЛОГОВ (Закрывает черную дыру) */
+        /* ЖИВЫЕ ЛОГИ (Заполнение пространства на 4 строки) */
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.02);
+          flex: 1; /* Позволяет виджету занять всё оставшееся до низа пространство */
+          display: flex;
+          flex-direction: column;
         }
         .logs-container {
           display: flex;
           flex-direction: column;
-          gap: 0.4rem;
+          gap: 0.45rem;
           margin-top: 0.4rem;
           font-family: 'SF Mono', monospace;
           font-size: 0.62rem;
+          flex: 1;
+          justify-content: flex-start;
         }
         .log-line {
           color: rgba(255, 255, 255, 0.35);
@@ -318,7 +329,7 @@ export default function Hero({ t }: HeroProps) {
         }
 
         @media (max-width: 992px) {
-          .hero-section { padding: 4rem 0 2rem 0; }
+          .hero-section { padding: 3.5rem 0 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; }
           .cta-buttons { justify-content: center; }
@@ -396,7 +407,7 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
 
-                  {/* СИСТЕМНЫЙ ЛОГ (Закрываем черную дыру) */}
+                  {/* РАСШИРЕННЫЙ СИСТЕМНЫЙ ЛОГ */}
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
