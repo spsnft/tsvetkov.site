@@ -4,9 +4,10 @@ export interface TabItem {
   openTitlePrefix: string;
   openTitleAccent: string;
   openTitleSuffix: string;
-  subLine1?: string;
-  subPrefix: string;
-  subSuffix: string;
+  subLine1Prefix: string;
+  subLine1Suffix: string;
+  subLine2Prefix: string;
+  subLine2Suffix: string;
   uiType: string;
 }
 
@@ -64,8 +65,10 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitlePrefix: "",
         openTitleAccent: "24/7",
         openTitleSuffix: " manual updates",
-        subPrefix: "Each reservation locks your entire grid in ",
-        subSuffix: "",
+        subLine1Prefix: "Each reservation locks your entire grid in ",
+        subLine1Suffix: "",
+        subLine2Prefix: "Zero risk of human error and overbooking.",
+        subLine2Suffix: "",
         uiType: "sync"
       },
       {
@@ -74,9 +77,10 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitlePrefix: "You are losing up to ",
         openTitleAccent: "20%",
         openTitleSuffix: " OTA commission",
-        subLine1: "Integrate a direct booking engine",
-        subPrefix: "Keep ",
-        subSuffix: " of the revenue in-house.",
+        subLine1Prefix: "Integrate a direct booking engine",
+        subLine1Suffix: "",
+        subLine2Prefix: "Keep ",
+        subLine2Suffix: " of the revenue in-house.",
         uiType: "revenue"
       },
       {
@@ -85,8 +89,10 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitlePrefix: "",
         openTitleAccent: "0 leads",
         openTitleSuffix: " from direct traffic",
-        subPrefix: "Drive ",
-        subSuffix: " with local search and automated retention campaigns.",
+        subLine1Prefix: "Drive ",
+        subLine1Suffix: "",
+        subLine2Prefix: "with local search and automated retention campaigns.",
+        subLine2Suffix: "",
         uiType: "traffic"
       }
     ],
@@ -133,8 +139,10 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitlePrefix: "",
         openTitleAccent: "24/7",
         openTitleSuffix: " อัปเดตระบบด้วยมือ",
-        subPrefix: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางใน ",
-        subSuffix: "",
+        subLine1Prefix: "ทุกการจองจะล็อกสถานะห้องพักในทุกช่องทางใน ",
+        subLine1Suffix: "",
+        subLine2Prefix: "ลดความเสี่ยงจากความผิดพลาดของมนุษย์และการจองซ้ำซ้อนให้เหลือศูนย์",
+        subLine2Suffix: "",
         uiType: "sync"
       },
       {
@@ -143,9 +151,10 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitlePrefix: "คุณกำลังสูญเสียรายได้ไปกับ ",
         openTitleAccent: "ค่าคอม OTA ถึง 20%",
         openTitleSuffix: "",
-        subLine1: "ติดตั้งระบบจองตรงบนเว็บไซต์",
-        subPrefix: "และรับรายได้เต็ม ",
-        subSuffix: " เข้าบัญชีคุณโดยตรง",
+        subLine1Prefix: "ติดตั้งระบบจองตรงบนเว็บไซต์",
+        subLine1Suffix: "",
+        subLine2Prefix: "และรับรายได้เต็ม ",
+        subLine2Suffix: " เข้าบัญชีคุณโดยตรง",
         uiType: "revenue"
       },
       {
@@ -154,8 +163,10 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
         openTitlePrefix: "",
         openTitleAccent: "0 ยอดจองตรง",
         openTitleSuffix: " จากช่องทางของคุณเอง",
-        subPrefix: "ดึง ",
-        subSuffix: " ด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้า",
+        subLine1Prefix: "ดึงยอดจองตรงให้เติบโตถึง ",
+        subLine1Suffix: "",
+        subLine2Prefix: "ด้วยการค้นหาในพื้นที่และแคมเปญรักษาฐานลูกค้าอัตโนมัติ",
+        subLine2Suffix: "",
         uiType: "traffic"
       }
     ],
