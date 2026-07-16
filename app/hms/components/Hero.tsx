@@ -14,14 +14,39 @@ interface HeroProps {
   };
 }
 
+interface LogEntry {
+  time: string;
+  text: string;
+}
+
 export default function Hero({ t }: HeroProps) {
   const [liveAmount, setLiveAmount] = useState(148250);
+  const [logs, setLogs] = useState<LogEntry[]>([
+    { time: '22:23:41', text: 'Booking.com inventory synced' },
+    { time: '22:23:10', text: 'Agoda rate parity verified' }
+  ]);
 
-  // Имитация тикающих прямых бронирований
+  // Микро-анимация счетчика маржи и системных логов
   useEffect(() => {
     const interval = setInterval(() => {
+      // 1. Обновляем деньги
       setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
-    }, 8000);
+      
+      // 2. Генерируем новый лог работы
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      const channels = ['Booking.com', 'Agoda', 'Traveloka', 'Trip.com'];
+      const actions = ['calendar updated', 'inventory synced', 'rate parity checked'];
+      
+      const randomChannel = channels[Math.floor(Math.random() * channels.length)];
+      const randomAction = actions[Math.floor(Math.random() * actions.length)];
+      
+      setLogs(prev => [
+        { time: timeStr, text: `${randomChannel} ${randomAction}` },
+        prev[0] // Оставляем только два последних лога, чтобы не переполнять виджет
+      ]);
+    }, 7000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -88,7 +113,7 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.6rem;
         }
 
-        /* КНОПКИ В ЕДИНОМ ПРЕМИАЛЬНОМ СТИЛЕ */
+        /* МОНОХРОМНЫЕ КНОПКИ С ЦВЕТНЫМИ ИКОНКАМИ */
         .cta-buttons {
           display: flex;
           gap: 1rem;
@@ -116,11 +141,15 @@ export default function Hero({ t }: HeroProps) {
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
         }
         
-        /* Иконки теперь в своих родных цветах без фильтров инверсии */
         .btn-icon { 
           height: 22px; 
           width: 22px; 
           object-fit: contain;
+        }
+        
+        /* Фикс размера LINE: компенсируем внутренние пустые поля SVG файла */
+        .line-icon {
+          transform: scale(1.35);
         }
 
         /* КОЛОНКА С МОКАПОМ (BLEEDING EDGE) */
@@ -145,10 +174,10 @@ export default function Hero({ t }: HeroProps) {
           transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg);
           transform-origin: left center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 229, 153, 0.01), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-          padding: 1.5rem;
+          padding: 1.4rem;
           display: flex;
           flex-direction: column;
-          gap: 1.2rem;
+          gap: 1rem;
           position: relative;
         }
         
@@ -170,17 +199,17 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
 
-        /* АНАЛИТИКА: Плотная группа без дыр */
+        /* АНАЛИТИКА: Монолитная плотная группа */
         .pms-analytics {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem; 
+          gap: 0.6rem; 
           flex: 0 0 30%;
         }
         .widget {
           background: rgba(255, 255, 255, 0.01);
           border: 1px solid rgba(255, 255, 255, 0.03);
-          padding: 1.1rem 1.2rem; /* Увеличили внутреннее мясо виджетов */
+          padding: 0.95rem 1.1rem;
           border-radius: 8px;
         }
         .widget.primary-focus {
@@ -188,7 +217,7 @@ export default function Hero({ t }: HeroProps) {
           background: rgba(255, 255, 255, 0.015);
         }
         .widget-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
-        .widget-value { font-size: 1.6rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
+        .widget-value { font-size: 1.55rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
         .widget-sub { font-size: 0.65rem; color: #444; margin-top: 0.4rem; }
         .text-green { color: #00E599; }
         
@@ -196,12 +225,36 @@ export default function Hero({ t }: HeroProps) {
           display: flex;
           align-items: flex-end;
           gap: 4px;
-          height: 32px;
-          margin-top: 0.6rem;
+          height: 28px;
+          margin-top: 0.5rem;
         }
         .bar { width: 12px; border-radius: 2px 2px 0 0; }
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
+
+        /* ВИДЖЕТ ЖИВЫХ СИСТЕМНЫХ ЛОГОВ (Закрывает черную дыру) */
+        .logs-widget {
+          background: rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        .logs-container {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+          margin-top: 0.4rem;
+          font-family: 'SF Mono', monospace;
+          font-size: 0.62rem;
+        }
+        .log-line {
+          color: rgba(255, 255, 255, 0.35);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .log-time {
+          color: rgba(255, 255, 255, 0.15);
+          margin-right: 0.4rem;
+        }
 
         /* ШАХМАТКА БРОНИРОВАНИЙ */
         .pms-matrix {
@@ -272,7 +325,7 @@ export default function Hero({ t }: HeroProps) {
           .utp-highlight { justify-content: center; }
           .dashboard-mockup { transform: none !important; width: 100% !important; }
           .pms-body { flex-direction: column; }
-          .pms-analytics { flex: none; gap: 0.75rem; }
+          .pms-analytics { flex: none; gap: 0.6rem; }
           .pms-matrix { display: none; }
         }
       `}</style>
@@ -287,25 +340,23 @@ export default function Hero({ t }: HeroProps) {
             <p>{t.heroSub1}</p>
           </div>
           
-          {/* УТП ХАЙЛАЙТ */}
           <div className="utp-highlight">
             <span>→</span> {t.heroSub2}
           </div>
           
-          {/* ОБНОВЛЕННЫЕ КНОПКИ В СТИЛЕ GRAPHITE */}
           <div className="cta-buttons">
             <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
               <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" /> 
               {t.btnChat}
             </a>
             <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
-              <img src="/logos/line.svg" alt="LINE" className="btn-icon" /> 
+              <img src="/logos/line.svg" alt="LINE" className="btn-icon line-icon" /> 
               {t.btnLine}
             </a>
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА (ОБНОВЛЕННЫЙ ДАШБОРД) */}
+        {/* ПРАВАЯ КОЛОНКА */}
         <div className="visual-column">
           <div className="perspective-wrapper">
             <div className="dashboard-mockup">
@@ -343,6 +394,19 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-label">RevPAR</div>
                     <div className="widget-value">฿3,570</div>
                     <div className="widget-sub">Per Available Room</div>
+                  </div>
+
+                  {/* СИСТЕМНЫЙ ЛОГ (Закрываем черную дыру) */}
+                  <div className="widget logs-widget">
+                    <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
+                    <div className="logs-container">
+                      {logs.map((log, i) => (
+                        <div key={i} className="log-line">
+                          <span className="log-time">[{log.time}]</span>
+                          {log.text}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
