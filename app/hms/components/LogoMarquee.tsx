@@ -3,8 +3,6 @@
 import React from 'react';
 
 export default function LogoMarquee() {
-  // Пути к файлам (Next.js автоматически берет их из корневой папки public)
-  // Имена файлов точно соответствуют твоему скриншоту
   const logoSrcs = [
     '/logos/Booking.svg',
     '/logos/Agoda.svg',
@@ -36,25 +34,23 @@ export default function LogoMarquee() {
         .marquee-track {
           display: flex;
           width: max-content;
-          animation: scroll 35s linear infinite; /* Чуть замедлили, так как логотипов стало больше */
-     .logo-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  /* Убрали фильтр инверсии. Оставляем родные цвета, но деликатно гасим их */
-  opacity: 0.35; 
-}
-.logo-item:hover {
-  transform: scale(1.03);
-  opacity: 0.9; /* При наведении логотип плавно загорается своим родным цветом */
-}
-: brightness(0) invert(1);
-          opacity: 0.3;
+          animation: scroll 35s linear infinite; 
+          gap: 5rem;
+          align-items: center;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+        .logo-item {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          opacity: 0.35; 
         }
         .logo-item:hover {
-          transform: scale(1.05);
-          opacity: 0.6;
+          transform: scale(1.03);
+          opacity: 0.9; 
         }
         .marquee-img {
           height: 24px;
@@ -67,7 +63,6 @@ export default function LogoMarquee() {
         }
       `}</style>
 
-      {/* Троекратное дублирование массива для идеального зацикливания */}
       <div className="marquee-track">
         {[...logoSrcs, ...logoSrcs, ...logoSrcs].map((src, index) => (
           <div key={index} className="logo-item">
