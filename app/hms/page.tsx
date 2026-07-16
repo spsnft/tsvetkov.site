@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { T } from '../../src/theme/tokens';
 import { Logo } from '../../src/ui/Logo';
-import NetworkBackground from '../../src/components/NetworkBackground';
+import { NetworkBackground } from '../../src/components/NetworkBackground';
 
 // Импорт констант и словарей перевода
 import { contentData } from './constants';
