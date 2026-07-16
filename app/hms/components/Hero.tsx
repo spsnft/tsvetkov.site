@@ -346,20 +346,31 @@ export default function Hero({ t }: HeroProps) {
             <span>→</span> {t.heroSub2}
           </div>
           
-          <div className="cta-buttons">
-            <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
-              {/* Инлайн стили для обертки резервируют точное место до загрузки SVG, убирая микро-скачки */}
-              <div style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" style={{ width: '22px', height: '22px', objectFit: 'contain', display: 'block' }} />
+                    <div className="cta-buttons">
+            <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-premium-cta" style={{ minWidth: '155px' }}>
+              <div style={{ width: '22px', height: '22px', minWidth: '22px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img 
+                  src="/logos/whatsapp.svg" 
+                  alt="WhatsApp" 
+                  width="22" 
+                  height="22" 
+                  style={{ width: '22px', height: '22px', objectFit: 'contain', display: 'block' }} 
+                />
               </div>
-              <span>{t.btnChat}</span>
+              <span style={{ whiteSpace: 'nowrap' }}>{t.btnChat}</span>
             </a>
             
-            <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-premium-cta">
-              <div style={{ width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, overflow: 'hidden' }}>
-                <img src="/logos/line.svg" alt="LINE" className="btn-icon" style={{ width: '32px', height: '32px', objectFit: 'contain', flexShrink: 0, transform: 'scale(1.35)', display: 'block' }} />
+            <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-premium-cta" style={{ minWidth: '130px' }}>
+              <div style={{ width: '22px', height: '22px', minWidth: '22px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img 
+                  src="/logos/line.svg" 
+                  alt="LINE" 
+                  width="32" 
+                  height="32" 
+                  style={{ width: '32px', height: '32px', minWidth: '32px', objectFit: 'contain', transform: 'scale(1.35)', display: 'block' }} 
+                />
               </div>
-              <span>{t.btnLine}</span>
+              <span style={{ whiteSpace: 'nowrap' }}>{t.btnLine}</span>
             </a>
           </div>
         </div>
