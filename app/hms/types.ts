@@ -60,11 +60,11 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    problemTitlePrefix: "Why You Are ",
-    problemTitleAccentRed: "Losing Margin",
-    problemTitleMiddle: " (And ",
-    problemTitleAccentGreen: "How We Fix It",
-    problemTitleSuffix: ")",
+    problemTitlePrefix: "",
+    problemTitleAccentRed: "Margin Leaks",
+    problemTitleMiddle: " / ",
+    problemTitleAccentGreen: "The Fix",
+    problemTitleSuffix: "",
     tabs: [
       {
         closedTitle: "24/7 manual updates",
@@ -135,11 +135,11 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    problemTitlePrefix: "ทำไมคุณถึง ",
-    problemTitleAccentRed: "สูญเสียผลกำไร",
-    problemTitleMiddle: " (และ ",
-    problemTitleAccentGreen: "วิธีที่เราแก้ไขให้คุณ",
-    problemTitleSuffix: ")",
+    problemTitlePrefix: "",
+    problemTitleAccentRed: "Margin Leaks",
+    problemTitleMiddle: " / ",
+    problemTitleAccentGreen: "The Fix",
+    problemTitleSuffix: "",
     tabs: [
       {
         closedTitle: "อัปเดตระบบด้วยมือ 24/7",
@@ -198,7 +198,7 @@ export const contentData: Record<'en' | 'th', TranslationContent> = {
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
     aboutTitle: "พันธมิตรด้านเทคโนโลยีเพื่อการเติบโต",
-    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
+    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงาน in ฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
     aboutBtn: "ดูประวัติการทำงาน",
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
