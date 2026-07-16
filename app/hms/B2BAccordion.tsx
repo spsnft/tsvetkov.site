@@ -83,6 +83,15 @@ export default function B2BAccordion({
     return () => observer.disconnect();
   }, []);
 
+  const getCounterLimits = (uiType: string) => {
+    switch (uiType) {
+      case 'sync': return { start: 24, end: 1 };
+      case 'revenue': return { start: 20, end: 100 };
+      case 'traffic': return { start: 0, end: 10 };
+      default: return { start: 0, end: 0 };
+    }
+  };
+
   return (
     <section ref={sectionRef} style={{ padding: '3rem 0', position: 'relative' }}>
       <style jsx global>{`
@@ -125,45 +134,53 @@ export default function B2BAccordion({
       </h2>
       
       <div className="bento-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', position: 'relative', zIndex: 1 }}>
-        {tabs.map((tab, idx) => (
-          <div 
-            key={idx}
-            style={{ 
-              padding: '2.5rem 2rem',
-              borderRadius: '16px',
-              backgroundColor: T.bg1,
-              border: \`1px solid \${T.border}\`,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1.5rem',
-              minHeight: '260px',
-              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.2)'
-            }}
-          >
-            <div style={{ fontSize: '1.1rem', fontWeight: 600, color: '#888888', textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.4)' }}>
-              {tab.pain}
-            </div>
+        {tabs.map((tab, idx) => {
+          const limits = getCounterLimits(tab.uiType);
+          return (
+            <div 
+              key={idx}
+              style={{ 
+                padding: '2.5rem 2rem',
+                borderRadius: '16px',
+                backgroundColor: T.bg1,
+                border: `1px solid ${T.border}`,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.5rem',
+                minHeight: '260px',
+                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.2)'
+              }}
+            >
+              <div style={{ fontSize: '1.1rem', fontWeight: 600, color: '#888888', textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.4)' }}>
+                {tab.pain}
+              </div>
 
-            <div style={{ color: '#00E599', fontSize: '1.6rem', fontWeight: 800, lineHeight: 1 }}>
-              ↓
-            </div>
+              <div style={{ color: '#00E599', fontSize: '1.6rem', fontWeight: 800, lineHeight: 1 }}>
+                ↓
+              </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: 'auto' }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>
-                <span style={{ color: '#00E599', marginRight: '0.3rem' }}>
-                  {tab.uiType === 'sync' && <RollingCounter start={24} end={1} duration={1400} decimals={0} suffix={tab.counterSuffix} isVisible={isVisible} />}
-                  {tab.uiType === 'revenue' && <RollingCounter start={20} end={100} duration={1200} decimals={0} suffix={tab.counterSuffix} isVisible={isVisible} />}
-                  {tab.uiType === 'traffic' && <RollingCounter start={0} end={10} duration={1200} decimals={0} suffix={tab.counterSuffix} isVisible={isVisible} />}
-                </span>
-                {tab.fixText}
-              </h3>
-              
-              <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
-                {tab.subText}
-              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: 'auto' }}>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>
+                  <span style={{ color: '#00E599', marginRight: '0.3rem' }}>
+                    <RollingCounter 
+                      start={limits.start} 
+                      end={limits.end} 
+                      duration={1300} 
+                      decimals={0} 
+                      suffix={tab.counterSuffix} 
+                      isVisible={isVisible} 
+                    />
+                  </span>
+                  {tab.fixText}
+                </h3>
+                
+                <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
+                  {tab.subText}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div style={{ margin: '7rem 0 3.5rem 0', textAlign: 'center' }}>
@@ -179,7 +196,7 @@ export default function B2BAccordion({
               padding: '2.5rem 2rem',
               borderRadius: '12px',
               backgroundColor: 'rgba(255, 255, 255, 0.01)',
-              border: \`1px solid \${T.border}\`,
+              border: `1px solid ${T.border}`,
               display: 'flex',
               flexDirection: 'column',
               gap: '1rem'
