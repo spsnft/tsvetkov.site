@@ -54,14 +54,17 @@ export default function HospitalityB2B() {
           </div>
         </section>
 
-        {/* DECOUPLED CORE ACCORDION MODULE WITH MULTI-COLOR ACCENTS */}
+        {/* BENTO GRID MODULE & CORE DELIVERABLES */}
         <B2BAccordion 
-          tabs={t.tabs} 
-          titlePrefix={t.problemTitlePrefix}
-          titleAccentRed={t.problemTitleAccentRed}
-          titleMiddle={t.problemTitleMiddle}
-          titleAccentGreen={t.problemTitleAccentGreen}
-          titleSuffix={t.problemTitleSuffix}
+          tabs={t.bentoItems} 
+          titlePrefix={t.bentoTitlePrefix}
+          titleAccentRed={t.bentoTitleAccentRed}
+          titleMiddle={t.bentoTitleMiddle}
+          titleAccentGreen={t.bentoTitleAccentGreen}
+          titleSuffix={t.bentoTitleSuffix}
+          offerTitle={t.offerTitle}
+          offerSub={t.offerSub}
+          deliverables={t.deliverables}
         />
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
