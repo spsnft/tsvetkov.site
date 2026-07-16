@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { T } from '../../src/theme/tokens';
 import { Logo } from '../../src/ui/Logo';
 import { contentData } from './types';
-import B2BAccordion from './B2BAccordion'; // Исправленный путь импорта: файл лежит в той же папке
+import B2BAccordion from './B2BAccordion';
 
 export default function HospitalityB2B() {
   const [lang, setLang] = useState<'en' | 'th'>('en');
@@ -54,8 +54,15 @@ export default function HospitalityB2B() {
           </div>
         </section>
 
-        {/* DECOUPLED CORE ACCORDION MODULE */}
-        <B2BAccordion tabs={t.tabs} title={t.problemTitle} />
+        {/* DECOUPLED CORE ACCORDION MODULE WITH MULTI-COLOR ACCENTS */}
+        <B2BAccordion 
+          tabs={t.tabs} 
+          titlePrefix={t.problemTitlePrefix}
+          titleAccentRed={t.problemTitleAccentRed}
+          titleMiddle={t.problemTitleMiddle}
+          titleAccentGreen={t.problemTitleAccentGreen}
+          titleSuffix={t.problemTitleSuffix}
+        />
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
@@ -114,7 +121,6 @@ export default function HospitalityB2B() {
 
       </main>
 
-      {/* Global CSS Compatibility layer */}
       <style jsx global>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(6px); }
