@@ -16,7 +16,71 @@ interface HeroProps {
 
 export default function Hero({ t }: HeroProps) {
   return (
-    <section style={{ padding: '8rem 0 5rem 0', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+    <section style={{ padding: '8rem 0 3rem 0', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+      <style jsx>{`
+        .perspective-container {
+          perspective: 1200px;
+          margin-top: 5rem;
+          display: flex;
+          justify-content: center;
+          padding: 0 1rem;
+        }
+        .dashboard-mockup {
+          width: 100%;
+          max-width: 950px;
+          height: auto;
+          aspect-ratio: 16 / 10;
+          background-color: rgba(20, 20, 25, 0.6);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          transform: rotateX(16deg) rotateY(-6deg) rotateZ(4deg);
+          box-shadow: 
+            0 30px 60px rgba(0, 0, 0, 0.6), 
+            0 0 40px rgba(0, 229, 153, 0.05),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+          overflow: hidden;
+          position: relative;
+        }
+        .dashboard-mockup:hover {
+          transform: rotateX(10deg) rotateY(-3deg) rotateZ(2deg) translateY(-8px);
+          box-shadow: 
+            0 40px 80px rgba(0, 0, 0, 0.8), 
+            0 0 60px rgba(0, 229, 153, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        /* Внутренний блик на стекле */
+        .dashboard-mockup::after {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 50%);
+          pointer-events: none;
+        }
+        /* Текстовая заглушка внутри мокапа, пока нет картинки */
+        .mockup-placeholder {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          color: rgba(255, 255, 255, 0.15);
+          font-weight: 600;
+          font-size: 1.1rem;
+          letter-spacing: 0.05em;
+        }
+        /* На мобильных устройствах отключаем 3D-эффект, чтобы не ломать читаемость */
+        @media (max-width: 768px) {
+          .perspective-container {
+            margin-top: 3.5rem;
+          }
+          .dashboard-mockup {
+            transform: none !important;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            aspect-ratio: 16 / 10;
+          }
+        }
+      `}</style>
+
       {/* BADGE */}
       <span style={{ 
         color: T.acc2, 
@@ -66,7 +130,7 @@ export default function Hero({ t }: HeroProps) {
             fontSize: '1rem' 
           }}
         >
-          <i className="fab fa-whatsapp" style={{ fontSize: '1.4rem' }} /> {t.btnChat}
+          <img src="/logos/whatsapp.svg" alt="WA" style={{ height: '1.4rem', width: 'auto', filter: 'brightness(0) invert(1)' }} /> {t.btnChat}
         </a>
         <a 
           href="https://line.me/ti/p/~fedor_tsvetkov" 
@@ -85,8 +149,19 @@ export default function Hero({ t }: HeroProps) {
             fontSize: '1rem' 
           }}
         >
-          <i className="fab fa-line" style={{ fontSize: '1.4rem' }} /> {t.btnLine}
+          <img src="/logos/line.svg" alt="Line" style={{ height: '1.4rem', width: 'auto', filter: 'brightness(0) invert(1)' }} /> {t.btnLine}
         </a>
+      </div>
+
+      {/* 3D DASHBOARD MOCKUP CONTAINER */}
+      <div className="perspective-container">
+        <div className="dashboard-mockup">
+          {/* Когда сделаешь ассет, просто замени этот div на тег <img> */}
+          {/* <img src="/logos/dashboard-mockup.webp" alt="PREMIUM HMS DASHBOARD" style={{ width: '100%', height: 'auto', display: 'block' }} /> */}
+          <div className="mockup-placeholder">
+            [ PREMIUM HMS ECOSYSTEM DASHBOARD MOCKUP ]
+          </div>
+        </div>
       </div>
     </section>
   );
