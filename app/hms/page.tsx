@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import { T } from '../../src/theme/tokens';
 import { Logo } from '../../src/ui/Logo';
-import { NetworkBackground } from '../../src/components/NetworkBackground';
+import NetworkBackground from '../../src/components/NetworkBackground';
 
 // Импорт констант и словарей перевода
 import { contentData } from './constants';
 
 // Импорт изолированных компонентов секций
 import Hero from './components/Hero';
+import LogoMarquee from './components/LogoMarquee'; // <-- Добавлен импорт строки
 import BentoGrid from './components/BentoGrid';
 import Pricing from './components/Pricing';
 import About from './components/About';
@@ -87,6 +88,9 @@ export default function HospitalityB2B() {
         
         {/* БЛОК 1: ПЕРВЫЙ ЭКРАН */}
         <Hero t={t} />
+
+        {/* БЛОК 1.5: БЕГУЩАЯ СТРОКА ЛОГОТИПОВ (МЕЖДУ HERO И BENTO) */}
+        <LogoMarquee />
 
         {/* БЛОК 2: БОЛИ + РЕШЕНИЯ + ФАЗЫ ПРОЕКТА */}
         <BentoGrid t={t} />
