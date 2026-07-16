@@ -102,7 +102,6 @@ export default function B2BAccordion({
         }
       `}</style>
 
-      {/* Двухцветный смысловой заголовок секции */}
       <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2.5rem', textAlign: 'center', letterSpacing: '-0.02em', lineHeight: 1.3 }}>
         {titlePrefix}
         <span style={{ color: '#FF4D4D' }}>{titleAccentRed}</span>
@@ -111,7 +110,6 @@ export default function B2BAccordion({
         {titleSuffix}
       </h2>
       
-      {/* Desktop Layout - Фиксированная плотная высота 240px с центрированием */}
       <div className="desktop-only" style={{ display: 'flex', border: `1px solid ${T.border}`, borderRadius: '16px', backgroundColor: T.bg1, overflow: 'hidden', height: '240px', position: 'relative', alignItems: 'stretch' }}>
         
         <div style={{
@@ -135,13 +133,12 @@ export default function B2BAccordion({
                 backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center', // Идеальный вертикальный баланс без пустот снизу
+                justifyContent: 'center',
                 position: 'relative',
                 zIndex: 1,
                 overflow: 'hidden'
               }}
             >
-              {/* Переключение заголовков внутри фиксированных границ */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr', alignItems: 'start' }}>
                 <h3 style={{ 
                   gridArea: '1/1/2/2',
@@ -167,7 +164,6 @@ export default function B2BAccordion({
                 </h3>
               </div>
 
-              {/* Зона решения: Blur-in + Slide-up с четким ограничением высоты во избежание дерганья */}
               <div style={{ 
                 opacity: isActive ? 1 : 0, 
                 filter: isActive ? 'blur(0)' : 'blur(4px)',
