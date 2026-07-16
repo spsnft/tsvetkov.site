@@ -20,6 +20,7 @@ interface LogEntry {
 }
 
 export default function Hero({ t }: HeroProps) {
+  const [isMounted, setIsMounted] = useState(false);
   const [liveAmount, setLiveAmount] = useState(148250);
   
   const [logs, setLogs] = useState<LogEntry[]>([
@@ -31,6 +32,9 @@ export default function Hero({ t }: HeroProps) {
   ]);
 
   useEffect(() => {
+    // Сигнал, что компонент готов и стили загружены
+    setIsMounted(true);
+
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
       
@@ -56,7 +60,13 @@ export default function Hero({ t }: HeroProps) {
   };
 
   return (
-    <section className="hero-section">
+    <section 
+      className="hero-section"
+      style={{ 
+        opacity: isMounted ? 1 : 0, 
+        transition: 'opacity 0.4s ease-out' 
+      }}
+    >
       <style jsx>{`
         .hero-section {
           padding: 2rem 0 4rem 0;
@@ -73,7 +83,6 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
         }
 
-        /* ТЕКСТОВАЯ КОЛОНКА */
         .text-column {
           text-align: left;
           position: relative;
@@ -143,7 +152,6 @@ export default function Hero({ t }: HeroProps) {
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
         }
 
-        /* КОЛОНКА С МОКАПОМ */
         .visual-column {
           position: relative;
           width: 100%;
@@ -190,12 +198,11 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
 
-        /* АНАЛИТИКА: Абсолютная фиксация в пикселях лечит баг с дерганьем колонок */
         .pms-analytics {
           display: flex;
           flex-direction: column;
           gap: 0.6rem; 
-          flex: 0 0 190px; /* Жесткая неизменяемая ширина */
+          flex: 0 0 190px;
           min-width: 0;
           overflow: hidden;
         }
@@ -227,7 +234,6 @@ export default function Hero({ t }: HeroProps) {
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
-        /* ЖИВЫЕ ЛОГИ */
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.02);
@@ -257,10 +263,9 @@ export default function Hero({ t }: HeroProps) {
           margin-right: 0.4rem;
         }
 
-        /* ШАХМАТКА БРОНИРОВАНИЙ */
         .pms-matrix {
           flex: 1;
-          min-width: 0; /* Важно для предотвращения распирания флексбокса */
+          min-width: 0;
           background: rgba(0, 0, 0, 0.15);
           border: 1px solid rgba(255, 255, 255, 0.03);
           border-radius: 8px;
@@ -333,7 +338,6 @@ export default function Hero({ t }: HeroProps) {
       `}</style>
 
       <div className="hero-grid">
-        {/* ЛЕВАЯ КОЛОНКА */}
         <div className="text-column">
           <span className="badge">{t.badge}</span>
           <h1 className="title">{t.heroTitle}</h1>
@@ -346,7 +350,7 @@ export default function Hero({ t }: HeroProps) {
             <span>→</span> {t.heroSub2}
           </div>
           
-                    <div className="cta-buttons">
+          <div className="cta-buttons">
             <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-premium-cta" style={{ minWidth: '155px' }}>
               <div style={{ width: '22px', height: '22px', minWidth: '22px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <img 
@@ -375,7 +379,6 @@ export default function Hero({ t }: HeroProps) {
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА */}
         <div className="visual-column">
           <div className="perspective-wrapper">
             <div className="dashboard-mockup">
@@ -386,7 +389,6 @@ export default function Hero({ t }: HeroProps) {
               </div>
               
               <div className="pms-body">
-                {/* 1. АНАЛИТИКА */}
                 <div className="pms-analytics">
                   <div className="widget primary-focus">
                     <div className="widget-label">OTA Margin Saved</div>
@@ -415,7 +417,6 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
 
-                  {/* СИСТЕМНЫЕ ЛОГИ */}
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
@@ -429,7 +430,6 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                 </div>
 
-                {/* 2. ШАХМАТКА БРОНИРОВАНИЙ */}
                 <div className="pms-matrix">
                   <div className="matrix-header">
                     <div>ROOM</div>
