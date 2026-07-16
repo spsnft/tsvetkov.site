@@ -2,24 +2,20 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { T } from '../../src/theme/tokens';
-import { TabItem } from './types';
+import { BentoItem, DeliverableItem } from './types';
 
-function RollingCounter({ start, end, duration, decimals = 0, padStart = 0, suffix = '', isVisible }: { 
+function RollingCounter({ start, end, duration, decimals = 0, suffix = '', isVisible }: { 
   start: number; 
   end: number; 
   duration: number; 
   decimals?: number;
-  padStart?: number;
   suffix?: string;
   isVisible: boolean;
 }) {
-  const [count, setCount] = useState<string>(start.toFixed(decimals).padStart(padStart, '0'));
+  const [count, setCount] = useState<string>(start.toFixed(decimals));
 
   useEffect(() => {
-    if (!isVisible) {
-      setCount(start.toFixed(decimals).padStart(padStart, '0'));
-      return;
-    }
+    if (!isVisible) return;
 
     let startTime: number | null = null;
     const animate = (timestamp: number) => {
@@ -28,7 +24,7 @@ function RollingCounter({ start, end, duration, decimals = 0, padStart = 0, suff
       const easeProgress = progress * (2 - progress);
       
       const current = start + easeProgress * (end - start);
-      setCount(current.toFixed(decimals).padStart(padStart, '0'));
+      setCount(current.toFixed(decimals));
 
       if (progress < 1) {
         requestAnimationFrame(animate);
@@ -36,18 +32,21 @@ function RollingCounter({ start, end, duration, decimals = 0, padStart = 0, suff
     };
 
     requestAnimationFrame(animate);
-  }, [isVisible, start, end, duration, decimals, padStart]);
+  }, [isVisible, start, end, duration, decimals]);
 
   return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>{count}{suffix}</span>;
 }
 
 interface B2BAccordionProps {
-  tabs: TabItem[];
+  tabs: BentoItem[];
   titlePrefix: string;
   titleAccentRed: string;
   titleMiddle: string;
   titleAccentGreen: string;
   titleSuffix: string;
+  offerTitle: string;
+  offerSub: string;
+  deliverables: DeliverableItem[];
 }
 
 export default function B2BAccordion({ 
@@ -56,9 +55,11 @@ export default function B2BAccordion({
   titleAccentRed, 
   titleMiddle, 
   titleAccentGreen, 
-  titleSuffix 
+  titleSuffix,
+  offerTitle,
+  offerSub,
+  deliverables
 }: B2BAccordionProps) {
-  const [activeTab, setActiveTab] = useState<number | null>(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -76,14 +77,6 @@ export default function B2BAccordion({
 
     return () => observer.disconnect();
   }, []);
-
-  const toggleTab = (idx: number) => {
-    if (activeTab === idx) {
-      setActiveTab(null);
-    } else {
-      setActiveTab(idx);
-    }
-  };
 
   return (
     <section ref={sectionRef} style={{ padding: '3rem 0', position: 'relative' }}>
@@ -108,6 +101,14 @@ export default function B2BAccordion({
           z-index: 9999;
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
+        @media (max-width: 992px) {
+          .bento-grid-container {
+            grid-template-columns: 1fr !important;
+          }
+          .deliverables-grid-container {
+            grid-template-columns: 1fr !important;
+          }
+        }
       `}</style>
 
       <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2.5rem', textAlign: 'center', letterSpacing: '-0.02em', lineHeight: 1.3 }}>
@@ -118,159 +119,91 @@ export default function B2BAccordion({
         {titleSuffix}
       </h2>
       
-      <div className="desktop-only" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', backgroundColor: T.border, borderRadius: '16px', overflow: 'hidden', position: 'relative', transition: 'max-height 0.4s ease' }}>
-        
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px', pointerEvents: 'none', zIndex: 0
-        }} />
-
-        {tabs.map((tab, idx) => {
-          const isActive = activeTab === idx;
-          return (
-            <div 
-              key={idx}
-              onClick={() => toggleTab(idx)}
-              style={{ 
-                padding: '2.5rem 2rem',
-                cursor: 'pointer',
-                backgroundColor: T.bg1,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-start',
-                position: 'relative',
-                zIndex: 1,
-                transition: 'background-color 0.3s ease'
-              }}
-            >
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', alignItems: 'start' }}>
-                <h3 style={{ 
-                  gridArea: '1/1/2/2',
-                  fontSize: '1.3rem', fontWeight: 700, color: T.sub, margin: 0, lineHeight: 1.4,
-                  opacity: isActive ? 0 : 1,
-                  transform: isActive ? 'translateY(-4px)' : 'translateY(0)',
-                  transition: 'all 0.3s cubic-bezier(0.25, 1, 0.5, 1)'
-                }}>
-                  {tab.closedTitle}
-                </h3>
-
-                <h3 style={{ 
-                  gridArea: '1/1/2/2',
-                  fontSize: '1.3rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.4,
-                  opacity: isActive ? 1 : 0,
-                  transform: isActive ? 'translateY(0)' : 'translateY(4px)',
-                  transition: 'all 0.3s cubic-bezier(0.25, 1, 0.5, 1) 0.05s'
-                }}>
-                  {tab.openTitlePrefix && <span>{tab.openTitlePrefix}</span>}
-                  <span style={{ color: tab.uiType === 'traffic' ? '#888888' : '#FF6B6B', fontWeight: 800 }}>{tab.openTitleAccent}</span>
-                  <span>{tab.openTitleSuffix}</span>
-                </h3>
-              </div>
-
-              <div style={{ 
-                opacity: isActive ? 1 : 0, 
-                filter: isActive ? 'blur(0)' : 'blur(4px)',
-                transform: isActive ? 'translateY(0)' : 'translateY(10px)', 
-                transition: 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.08s',
-                maxHeight: isActive ? '120px' : 0,
-                overflow: 'hidden',
-                marginTop: isActive ? '1.25rem' : 0
-              }}>
-                <div style={{ 
-                  fontSize: '1.25rem', 
-                  fontWeight: 700, 
-                  color: '#fff', 
-                  lineHeight: 1.5,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.4rem'
-                }}>
-                  <span>
-                    {tab.subLine1Prefix}
-                    {tab.uiType === 'sync' && (
-                      <span style={{ color: '#00E599' }}>
-                        <RollingCounter start={24} end={1} duration={1400} decimals={2} padStart={5} suffix=" second" isVisible={isVisible && isActive} />
-                        {tab.subLine1Suffix}
-                      </span>
-                    )}
-                    {tab.uiType === 'revenue' && <span>{tab.subLine1Suffix}</span>}
-                    {tab.uiType === 'traffic' && (
-                      <span style={{ color: '#00E599' }}>
-                        <RollingCounter start={0} end={10} duration={1200} suffix="x direct bookings" isVisible={isVisible && isActive} />
-                      </span>
-                    )}
-                  </span>
-
-                  <span style={{ color: T.body, fontWeight: 600 }}>
-                    {tab.subLine2Prefix}
-                    {tab.uiType === 'revenue' && (
-                      <RollingCounter start={20} end={100} duration={1200} suffix="%" isVisible={isVisible && isActive} />
-                    )}
-                    {tab.subLine2Suffix}
-                  </span>
-                </div>
-              </div>
+      <div className="bento-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', position: 'relative', zIndex: 1 }}>
+        {tabs.map((tab, idx) => (
+          <div 
+            key={idx}
+            style={{ 
+              padding: '2.2rem 1.8rem',
+              borderRadius: '16px',
+              backgroundColor: T.bg1,
+              border: `1px solid ${T.border}`,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.2rem',
+              minHeight: '230px',
+              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.2)'
+            }}
+          >
+            <div style={{ fontSize: '1.05rem', fontWeight: 600, color: '#888888', textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.4)' }}>
+              {tab.pain}
             </div>
-          );
-        })}
+
+            <div style={{ color: '#00E599', fontSize: '1.6rem', fontWeight: 800, lineHeight: 1.2 }}>
+              ↓
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: 'auto' }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>
+                {tab.uiType === 'sync' && (
+                  <>
+                    {tab.subLine1Prefix}
+                    <RollingCounter start={24} end={1} duration={1400} decimals={2} suffix={tab.subLine1Suffix} isVisible={isVisible} />
+                  </>
+                )}
+                {tab.uiType === 'revenue' && (
+                  <>
+                    {tab.subLine1Prefix}
+                    <RollingCounter start={20} end={100} duration={1200} suffix="%" isVisible={isVisible} />
+                    {tab.subLine2Suffix}
+                  </>
+                )}
+                {tab.uiType === 'traffic' && (
+                  <>
+                    {tab.subLine1Prefix}
+                    <RollingCounter start={0} end={10} duration={1200} suffix={tab.subLine1Suffix} isVisible={isVisible} />
+                  </>
+                )}
+              </h3>
+              
+              <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.5, margin: 0, fontWeight: 500 }}>
+                {tab.uiType === 'revenue' ? tab.subLine1Prefix : tab.subText}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="mobile-only" style={{ display: 'flex', flexDirection: 'column', border: `1px solid ${T.border}`, borderRadius: '12px', backgroundColor: T.bg1, overflow: 'hidden', position: 'relative' }}>
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px', pointerEvents: 'none', zIndex: 0
-        }} />
+      <div style={{ margin: '6rem 0 3rem 0', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>{offerTitle}</h2>
+        <p style={{ color: T.sub, margin: 0 }}>{offerSub}</p>
+      </div>
 
-        {tabs.map((tab, idx) => {
-          const isActive = activeTab === idx;
-          return (
-            <div key={idx} style={{ borderBottom: idx !== tabs.length - 1 ? `1px solid ${T.border}` : 'none', position: 'relative', zIndex: 1 }}>
-              <div 
-                onClick={() => toggleTab(idx)}
-                style={{ padding: '1.5rem 1.2rem', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: '0.5rem', backgroundColor: isActive ? 'rgba(255, 255, 255, 0.01)' : 'transparent', position: 'relative' }}
-              >
-                <span style={{ position: 'absolute', top: '1.6rem', right: '1.2rem', fontSize: '0.85rem', color: T.sub, transform: isActive ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.3s' }}>▼</span>
-
-                <div style={{ position: 'relative', minHeight: '2rem', paddingRight: '2rem' }}>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: T.sub, margin: 0, lineHeight: 1.4, position: 'absolute', top: 0, left: 0, opacity: isActive ? 0 : 1, transition: 'all 0.3s' }}>
-                    {tab.closedTitle}
-                  </h3>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.4, opacity: isActive ? 1 : 0, transition: 'all 0.3s' }}>
-                    {tab.openTitlePrefix && <span>{tab.openTitlePrefix}</span>}
-                    <span style={{ color: tab.uiType === 'traffic' ? '#888888' : '#FF6B6B', fontWeight: 800 }}>{tab.openTitleAccent}</span>
-                    <span>{tab.openTitleSuffix}</span>
-                  </h3>
-                </div>
-              </div>
-              
-              <div style={{ height: isActive ? 'auto' : 0, overflow: 'hidden', transition: 'all 0.4s ease' }}>
-                <div style={{ padding: '0 1.2rem 1.5rem 1.2rem' }}>
-                  {isActive && (
-                    <div style={{ 
-                      fontSize: '1.05rem', fontWeight: 700, color: '#fff', lineHeight: 1.5,
-                      display: 'flex', flexDirection: 'column', gap: '0.3rem',
-                      animation: 'fadeInBlurAhead 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards'
-                    }}>
-                      <span>
-                        {tab.subLine1Prefix}
-                        {tab.uiType === 'sync' && <span style={{ color: '#00E599' }}><RollingCounter start={24} end={1} duration={1400} decimals={2} padStart={5} suffix=" second" isVisible={isVisible && isActive} /></span>}
-                        {tab.uiType === 'revenue' && <span>{tab.subLine1Suffix}</span>}
-                        {tab.uiType === 'traffic' && <span style={{ color: '#00E599' }}><RollingCounter start={0} end={10} duration={1200} suffix="x direct bookings" isVisible={isVisible && isActive} /></span>}
-                      </span>
-                      <span style={{ color: T.body, fontWeight: 600 }}>
-                        {tab.subLine2Prefix}
-                        {tab.uiType === 'revenue' && <RollingCounter start={20} end={100} duration={1200} suffix="%" isVisible={isVisible && isActive} />}
-                        {tab.subLine2Suffix}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
+      <div className="deliverables-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', zIndex: 1, position: 'relative' }}>
+        {deliverables.map((item, idx) => (
+          <div 
+            key={idx}
+            style={{
+              padding: '2.5rem 2rem',
+              borderRadius: '12px',
+              backgroundColor: 'rgba(255, 255, 255, 0.01)',
+              border: `1px solid ${T.border}`,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem'
+            }}
+          >
+            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: T.accent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              0{idx + 1} / Phase
             </div>
-          );
-        })}
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', margin: 0 }}>
+              {item.title}
+            </h3>
+            <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+              {item.desc}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );
