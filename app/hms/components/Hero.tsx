@@ -17,7 +17,7 @@ interface HeroProps {
 export default function Hero({ t }: HeroProps) {
   const [liveAmount, setLiveAmount] = useState(148250);
 
-  // Микро-анимация счетчика
+  // Микро-анимация счетчика сэкономленной комиссии
   useEffect(() => {
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
@@ -110,7 +110,7 @@ export default function Hero({ t }: HeroProps) {
           width: 100%;
         }
         .dashboard-mockup {
-          width: 170%; /* Еще шире, чтобы вместить шахматку */
+          width: 175%; 
           aspect-ratio: 16 / 9;
           background-color: rgba(13, 13, 17, 0.75);
           backdrop-filter: blur(8px);
@@ -122,7 +122,7 @@ export default function Hero({ t }: HeroProps) {
           padding: 1.25rem;
           display: flex;
           flex-direction: column;
-          gap: 1.2rem;
+          gap: 1rem;
           position: relative;
         }
         
@@ -138,44 +138,45 @@ export default function Hero({ t }: HeroProps) {
         .sync-status { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #00E599; font-weight: 600; background: rgba(0, 225, 153, 0.06); padding: 0.3rem 0.6rem; border-radius: 20px; border: 1px solid rgba(0, 225, 153, 0.15); }
         .pulse-dot { width: 6px; height: 6px; background-color: #00E599; border-radius: 50%; animation: pulse 2s infinite; }
         
-        /* ОСНОВНОЙ КОНТЕНТ: СЕТКА НА 2 КОЛОНКИ (Аналитика + Шахматка) */
+        /* ОСНОВНОЙ КОНТЕНТ */
         .pms-body {
           display: flex;
           gap: 1.5rem;
           flex: 1;
+          overflow: hidden;
         }
 
-        /* 1. ЛЕВАЯ ЧАСТЬ: ВИДЖЕТЫ */
+        /* 1. ЛЕВАЯ ЧАСТЬ: АНАЛИТИКА */
         .pms-analytics {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.75rem;
           flex: 0 0 32%;
         }
         .widget {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.04);
-          padding: 1rem;
+          padding: 0.9rem 1rem;
           border-radius: 8px;
         }
-        .widget-label { font-size: 0.7rem; color: #777; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
-        .widget-value { font-size: 1.6rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
-        .widget-sub { font-size: 0.75rem; color: #555; margin-top: 0.4rem; }
+        .widget-label { font-size: 0.65rem; color: #777; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+        .widget-value { font-size: 1.5rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1.1; }
+        .widget-sub { font-size: 0.7rem; color: #555; margin-top: 0.3rem; }
         .text-green { color: #00E599; }
         
-        /* CSS-Гистограмма (Mini Chart) */
+        /* CSS mini chart */
         .mini-chart {
           display: flex;
           align-items: flex-end;
           gap: 4px;
-          height: 35px;
-          margin-top: 0.8rem;
+          height: 30px;
+          margin-top: 0.6rem;
         }
         .bar { width: 12px; border-radius: 2px 2px 0 0; }
         .bar.ota { background: rgba(255, 255, 255, 0.1); }
         .bar.direct { background: rgba(0, 229, 153, 0.6); }
 
-        /* 2. ПРАВАЯ ЧАСТЬ: ШАХМАТКА (ROOM MATRIX) */
+        /* 2. ПРАВАЯ ЧАСТЬ: ШАХМАТКА */
         .pms-matrix {
           flex: 1;
           background: rgba(0, 0, 0, 0.2);
@@ -187,17 +188,18 @@ export default function Hero({ t }: HeroProps) {
         }
         .matrix-header {
           display: grid;
-          grid-template-columns: 80px repeat(7, 1fr);
+          grid-template-columns: 90px repeat(7, 1fr);
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           font-size: 0.65rem;
           color: #666;
           text-align: center;
+          background: rgba(255, 255, 255, 0.01);
         }
-        .matrix-header > div { padding: 0.5rem 0; border-right: 1px solid rgba(255, 255, 255, 0.02); }
+        .matrix-header > div { padding: 0.6rem 0; border-right: 1px solid rgba(255, 255, 255, 0.02); }
         
         .matrix-row {
           display: grid;
-          grid-template-columns: 80px repeat(7, 1fr);
+          grid-template-columns: 90px repeat(7, 1fr);
           border-bottom: 1px solid rgba(255, 255, 255, 0.02);
           flex: 1;
           position: relative;
@@ -205,25 +207,27 @@ export default function Hero({ t }: HeroProps) {
         .matrix-room-name {
           font-size: 0.7rem;
           color: #888;
-          padding: 0.5rem;
+          padding: 0 0.6rem;
           display: flex;
           align-items: center;
           border-right: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(13, 13, 17, 0.3);
+          font-weight: 500;
         }
         
-        /* Цветные плашки бронирований */
+        /* Бронирования */
         .booking {
           position: absolute;
-          top: 4px; bottom: 4px;
+          top: 5px; bottom: 5px;
           border-radius: 4px;
-          font-size: 0.6rem;
-          padding: 0.2rem 0.4rem;
+          font-size: 0.65rem;
+          padding: 0 0.5rem;
           color: #fff;
           display: flex;
           align-items: center;
           overflow: hidden;
           white-space: nowrap;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .b-direct { background: linear-gradient(90deg, #00E599 0%, #00b377 100%); color: #000; font-weight: 600; }
         .b-booking { background: linear-gradient(90deg, #003580 0%, #0050c2 100%); }
@@ -243,7 +247,7 @@ export default function Hero({ t }: HeroProps) {
           .dashboard-mockup { transform: none !important; width: 100% !important; }
           .pms-body { flex-direction: column; }
           .pms-analytics { flex: none; }
-          .pms-matrix { display: none; /* Прячем шахматку на мобилках, чтобы не мельтешила */ }
+          .pms-matrix { display: none; }
         }
       `}</style>
 
@@ -287,9 +291,8 @@ export default function Hero({ t }: HeroProps) {
                   
                   <div className="widget">
                     <div className="widget-label">Occupancy / ADR</div>
-                    <div className="widget-value" style={{ fontSize: '1.2rem' }}>84% <span style={{ color: '#444' }}>|</span> ฿4,250</div>
+                    <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: '#333' }}>|</span> ฿4,250</div>
                     
-                    {/* Мини-график (визуализация роста direct bookings) */}
                     <div className="mini-chart">
                       <div className="bar ota" style={{ height: '40%' }}></div>
                       <div className="bar direct" style={{ height: '30%' }}></div>
@@ -300,40 +303,47 @@ export default function Hero({ t }: HeroProps) {
                       <div className="bar direct" style={{ height: '100%' }}></div>
                     </div>
                   </div>
+
+                  {/* ВАРИАНТ А: RevPAR виджет */}
+                  <div className="widget">
+                    <div className="widget-label">RevPAR</div>
+                    <div className="widget-value">฿3,570</div>
+                    <div className="widget-sub">Per Available Room</div>
+                  </div>
                 </div>
 
                 {/* 2. ШАХМАТКА БРОНИРОВАНИЙ */}
                 <div className="pms-matrix">
                   <div className="matrix-header">
                     <div>ROOM</div>
-                    <div>16 Jul</div><div>17 Jul</div><div>18 Jul</div><div>19 Jul</div><div>20 Jul</div><div>21 Jul</div><div>22 Jul</div>
+                    <div>16 Dec</div><div>17 Dec</div><div>18 Dec</div><div>19 Dec</div><div>20 Dec</div><div>21 Dec</div><div>22 Dec</div>
                   </div>
                   
                   {/* Строка 1 */}
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 1</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
-                    <div className="booking b-booking" style={{ left: 'calc(80px + 42.8%)', width: 'calc(42.8% - 4px)' }}>B.com • Lee</div>
+                    <div className="booking b-direct" style={{ left: 'calc(90px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
+                    <div className="booking b-booking" style={{ left: 'calc(90px + 42.8%)', width: 'calc(50% - 4px)' }}>Booking.com • Lee</div>
                   </div>
                   
                   {/* Строка 2 */}
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 2</div>
-                    <div className="booking b-agoda" style={{ left: 'calc(80px + 14.2%)', width: 'calc(42.8% - 4px)' }}>Agoda • Kumar</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 71.4%)', width: 'calc(28.5% - 4px)' }}>Direct • VIP</div>
+                    <div className="booking b-agoda" style={{ left: 'calc(90px + 14.2%)', width: 'calc(42.8% - 4px)' }}>Agoda • Kumar</div>
+                    <div className="booking b-direct" style={{ left: 'calc(90px + 71.4%)', width: 'calc(28.5% - 4px)' }}>Direct • VIP</div>
                   </div>
 
                   {/* Строка 3 */}
                   <div className="matrix-row">
-                    <div className="matrix-room-name">Suite A</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
+                    <div className="matrix-room-name">Room 101</div>
+                    <div className="booking b-direct" style={{ left: 'calc(90px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
                   </div>
 
                   {/* Строка 4 */}
                   <div className="matrix-row">
-                    <div className="matrix-room-name">Suite B</div>
-                    <div className="booking b-booking" style={{ left: 'calc(80px + 0%)', width: 'calc(14.2% - 4px)' }}>B.com</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 28.5%)', width: 'calc(71.4% - 4px)' }}>Direct • Website</div>
+                    <div className="matrix-room-name">Room 102</div>
+                    <div className="booking b-booking" style={{ left: 'calc(90px + 0%)', width: 'calc(25% - 4px)' }}>Booking.com</div>
+                    <div className="booking b-direct" style={{ left: 'calc(90px + 28.5%)', width: 'calc(71.4% - 4px)' }}>Direct • Website</div>
                   </div>
                 </div>
 
