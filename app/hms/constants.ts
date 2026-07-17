@@ -2,14 +2,14 @@ export const contentData = {
   en: {
     badge: "Hospitality Growth Solutions",
     heroTitle: "Stop Paying 15-20% commissions to Booking.com & Agoda",
-    heroSub1: "Connect your property directly to guests. Zero risk of human error and double-bookings.",
+    heroSub1: "Connect your property directly to guests. Zero risk of human error and double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
     btnLine: "Line",
     
     // --- ГИБРИДНЫЙ БЛОК PAIN + VALUE + DELIVERABLES ---
     scaleTitle: "Scale your property bookings",
-    scaleSub: "Automate repetitive backend workflows so your team can focus on guest experience.",
+    scaleSub: "Automate repetitive backend workflows so your team can focus on guest experience",
     scaleItems: [
       {
         pain: "24/7 manual updates",
@@ -17,7 +17,7 @@ export const contentData = {
         endValue: 1,
         suffix: " second",
         fixText: " synchronization",
-        desc: "Deployment of a cloud-based PMS and Channel Manager. Each reservation locks your entire grid automatically across Booking.com, Agoda, and 300+ OTAs."
+        desc: "Deployment of a cloud-based PMS and Channel Manager. Each reservation **locks your entire grid automatically** across Booking.com, Agoda, and 300+ OTAs"
       },
       {
         pain: "20% OTA commission",
@@ -25,7 +25,7 @@ export const contentData = {
         endValue: 100,
         suffix: "%",
         fixText: " direct revenue",
-        desc: "Integration of a zero-commission booking engine into your website with a secure payment gateway connection. Keep all the revenue in-house."
+        desc: "Integration of a zero-commission booking engine into your website with a secure payment gateway connection. **Keep all the revenue in-house**"
       },
       {
         pain: "0 leads from traffic",
@@ -33,7 +33,7 @@ export const contentData = {
         endValue: 10,
         suffix: "x",
         fixText: " booking growth",
-        desc: "Local SEO optimization to drive high-intent search traffic, combined with automated retention campaigns for returning guests."
+        desc: "Local SEO optimization to drive high-intent search traffic, combined with **automated retention campaigns** for returning guests"
       }
     ],
 
@@ -46,7 +46,7 @@ export const contentData = {
     ],
 
     // --- ПРЕМИАЛЬНЫЙ БЛОК PRICING ---
-    priceTitle: "Transparent Integration. Permanent Independence.",
+    priceTitle: "Transparent Integration. Permanent Independence",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever.",
     tier1Title: "LITE (1-10 Rooms)",
     tier1Desc: "For small villas & guesthouses",
@@ -73,7 +73,7 @@ export const contentData = {
 
     // --- ОБНОВЛЕННЫЙ БЛОК ABOUT ---
     aboutTitle: "Systems, Optimization & Scale",
-    aboutDesc: "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
+    aboutDesc: "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
     aboutBtn: "View Professional Profile",
     
     // --- ФУТЕР CTA ---
@@ -97,7 +97,7 @@ export const contentData = {
         endValue: 1,
         suffix: " วินาที",
         fixText: " ในการซิงค์ข้อมูล",
-        desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) และ Channel Manager ทุกการจองล็อกสถานะห้องพักโดยอัตโนมัติบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
+        desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) และ Channel Manager ทุกการจอง **ล็อกสถานะห้องพักโดยอัตโนมัติ** บน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
         pain: "เสียค่าคอมมิชชั่น OTA 20%",
@@ -105,7 +105,7 @@ export const contentData = {
         endValue: 100,
         suffix: "%",
         fixText: " รายได้ตรงเข้าบัญชี",
-        desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ พร้อมเชื่อมต่อระบบชำระเงินออนไลน์ที่ปลอดภัย รับและเก็บรายได้เต็มจำนวนโดยไม่ต้องแบ่งใคร"
+        desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ พร้อมเชื่อมต่อระบบชำระเงินออนไลน์ที่ปลอดภัย **รับและเก็บรายได้เต็มจำนวน** โดยไม่ต้องแบ่งใคร"
       },
       {
         pain: "0 ยอดจองตรงจากช่องทางออนไลน์",
@@ -113,7 +113,7 @@ export const contentData = {
         endValue: 10,
         suffix: " เท่า",
         fixText: " ของยอดจองตรง",
-        desc: "ทำสิ่งอำนวยความสะดวกด้าน Local SEO เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำของลูกค้าโดยอัตโนมัติ"
+        desc: "ทำสิ่งอำนวยความสะดวกด้าน Local SEO เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่ง **แคมเปญกระตุ้นการกลับมาจองซ้ำ** ของลูกค้าโดยอัตโนมัติ"
       }
     ],
 
