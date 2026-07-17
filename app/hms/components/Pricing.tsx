@@ -31,7 +31,6 @@ interface PricingProps {
 }
 
 export default function Pricing({ t }: PricingProps) {
-  // Наш чистый хелпер для красивого выравнивания галочек
   const renderLi = (text: string, badge?: React.ReactNode) => {
     if (!text) return null;
     const cleanText = text.replace(/^✓\s*/, '');
@@ -41,7 +40,7 @@ export default function Pricing({ t }: PricingProps) {
         <span style={{ color: T.accent, opacity: 0.4, marginRight: '0.8rem', fontSize: '1.05rem', lineHeight: 1, flexShrink: 0, marginTop: '0.15rem', userSelect: 'none' }}>
           ✓
         </span>
-        <span style={{ color: T.body, fontWeight: 500 }}>
+        <span style={{ color: T.body, fontWeight: 500, textWrap: 'pretty' }}>
           {cleanText}
           {badge}
         </span>
@@ -50,14 +49,14 @@ export default function Pricing({ t }: PricingProps) {
   };
 
   return (
-    <section style={{ width: '100%', borderBottom: `1px solid ${T.border}`, backgroundColor: 'transparent', marginTop: '2rem' }}>
+    <section style={{ width: '100%', borderBottom: `1px solid ${T.border}`, backgroundColor: 'transparent', margin: '0' }}>
       <style jsx>{`
         .pricing-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
         }
         .pricing-col {
-          padding: 4rem 3rem;
+          padding: 4.5rem 3rem;
           display: flex;
           flex-direction: column;
           position: relative;
@@ -65,49 +64,48 @@ export default function Pricing({ t }: PricingProps) {
         .pricing-col:not(:last-child) {
           border-right: 1px solid ${T.border};
         }
-        /* Утонченное выделение популярного тарифа за счет легкого изменения бэкграунда */
         .pricing-col.popular {
-          background-color: rgba(255, 255, 255, 0.015);
+          background-color: rgba(255, 255, 255, 0.012);
         }
         @media (max-width: 992px) {
           .pricing-grid {
             grid-template-columns: 1fr !important;
           }
           .pricing-col {
-            padding: 3rem 2rem !important;
+            padding: 3rem 1.5rem !important;
           }
           .pricing-col:not(:last-child) {
             border-right: none !important;
             border-bottom: 1px solid ${T.border};
           }
           .pricing-col.popular {
-            background-color: rgba(0, 229, 153, 0.01) !important;
+            background-color: rgba(0, 255, 179, 0.01) !important;
           }
         }
       `}</style>
 
-      {/* ШАПКА БЛОКА — Сливается в единую структуру */}
-      <div style={{ padding: '4rem 1.5rem 3.5rem 1.5rem', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, marginBottom: '0.75rem', color: '#fff', letterSpacing: '-0.02em' }}>
+      {/* ШАПКА БЛОКА — Выровнена по Книге Шрифтов */}
+      <div style={{ padding: '5rem 1.5rem 4rem 1.5rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
           {t.priceTitle}
         </h2>
-        <p style={{ color: T.sub, fontSize: '1.05rem', margin: 0 }}>
+        <p style={{ color: T.sub, fontSize: '1.05rem', margin: 0, lineHeight: 1.5 }}>
           {t.priceSub}
         </p>
       </div>
 
-      {/* МОНОЛИТНАЯ СЕТКА ТАРИФОВ В СТИЛЕ CLARION */}
+      {/* МОНОЛИТНАЯ СЕТКА ТАРИФОВ */}
       <div className="pricing-grid" style={{ borderTop: `1px solid ${T.border}` }}>
         
         {/* LITE */}
         <div className="pricing-col">
-          <span style={{ color: T.muted, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          <span style={{ color: T.muted, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>
             {t.tier1Title}
           </span>
           <h3 style={{ fontSize: '2.6rem', fontWeight: 700, marginTop: '0.75rem', marginBottom: 0, color: '#fff', letterSpacing: '-0.02em' }}>
             $500
           </h3>
-          <p style={{ color: T.sub, fontSize: '0.95rem', margin: '1rem 0 3rem 0', lineHeight: 1.4, minHeight: '40px' }}>
+          <p style={{ color: T.sub, fontSize: '0.95rem', margin: '1rem 0 3rem 0', lineHeight: 1.4, minHeight: '40px', textWrap: 'pretty' }}>
             {t.tier1Desc}
           </p>
           <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
@@ -120,30 +118,30 @@ export default function Pricing({ t }: PricingProps) {
 
         {/* STANDARD (POPULAR) */}
         <div className="pricing-col popular">
-          {/* Аккуратный минималистичный бейдж ровно по центру */}
+          {/* Премиальный кибер-минималистичный бейдж */}
           <div style={{ 
             position: 'absolute', 
             top: '1.5rem', 
             right: '3rem', 
-            backgroundColor: 'rgba(0, 229, 153, 0.1)', 
-            border: `1px solid ${T.accent}`, 
+            backgroundColor: 'rgba(0, 255, 179, 0.05)', 
+            border: `1px solid ${T.accent}30`, 
             color: T.accent, 
-            padding: '3px 12px', 
-            borderRadius: '20px', 
+            padding: '4px 14px', 
+            borderRadius: '999px', 
             fontSize: '0.65rem', 
             fontWeight: 800, 
-            letterSpacing: '0.05em' 
+            letterSpacing: '0.15em' 
           }}>
             POPULAR
           </div>
 
-          <span style={{ color: T.accent, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          <span style={{ color: T.accent, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>
             {t.tier2Title}
           </span>
           <h3 style={{ fontSize: '2.6rem', fontWeight: 700, marginTop: '0.75rem', marginBottom: 0, color: '#fff', letterSpacing: '-0.02em' }}>
             $1,200
           </h3>
-          <p style={{ color: T.sub, fontSize: '0.95rem', margin: '1rem 0 3rem 0', lineHeight: 1.4, minHeight: '40px' }}>
+          <p style={{ color: T.sub, fontSize: '0.95rem', margin: '1rem 0 3rem 0', lineHeight: 1.4, minHeight: '40px', textWrap: 'pretty' }}>
             {t.tier2Desc}
           </p>
           <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
@@ -156,14 +154,13 @@ export default function Pricing({ t }: PricingProps) {
 
         {/* ENTERPRISE */}
         <div className="pricing-col">
-          <span style={{ color: T.muted, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          <span style={{ color: T.muted, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>
             {t.tier3Title}
           </span>
-          {/* Слово Custom теперь такое же монументальное, как и цифры */}
           <h3 style={{ fontSize: '2.6rem', fontWeight: 700, marginTop: '0.75rem', marginBottom: 0, color: '#fff', letterSpacing: '-0.02em' }}>
             Custom
           </h3>
-          <p style={{ color: T.sub, fontSize: '0.95rem', margin: '1rem 0 3rem 0', lineHeight: 1.4, minHeight: '40px' }}>
+          <p style={{ color: T.sub, fontSize: '0.95rem', margin: '1rem 0 3rem 0', lineHeight: 1.4, minHeight: '40px', textWrap: 'pretty' }}>
             {t.tier3Desc}
           </p>
           <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
