@@ -74,8 +74,10 @@ export const contentData = {
     aboutTitle: "Growth Architect & Tech Partner",
     aboutDesc: "International software integration and growth architecture provider. Operating as an offshore tech partner to maximize direct revenue and eliminate operational chaos for hospitality businesses globally.",
     aboutBtn: "View Professional Profile",
+    
+    // ИСПРАВЛЕНО: Универсальный B2B-призыв без жесткой привязки к отелям
     footerTitle: "Ready to make more money?",
-    footerBtn: "Book a Free Hotel Audit"
+    footerBtn: "Book a Free Audit"
   },
   th: {
     badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
@@ -150,7 +152,7 @@ export const contentData = {
     tier3F4: "✓ แแดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
 
     aboutTitle: "พันธมิตรด้านเทคโนโลยีเพื่อการเติบโต",
-    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากл ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
+    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
     aboutBtn: "ดูประวัติการทำงาน",
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
