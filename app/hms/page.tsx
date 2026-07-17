@@ -13,6 +13,7 @@ import Hero from './components/Hero';
 import LogoMarquee from './components/LogoMarquee';
 import BentoGrid from './components/BentoGrid';
 import ScalePractice from './components/ScalePractice';
+import IndustryProof from './components/IndustryProof';
 import Pricing from './components/Pricing';
 import About from './components/About';
 import FooterCTA from './components/FooterCTA';
@@ -98,6 +99,9 @@ export default function HospitalityB2B() {
 
         {/* БЛОК 3: НАШИ ИНТЕГРАЦИИ В СТИЛЕ CLARION */}
         <ScalePractice t={t} />
+
+        {/* БЛОК 3.5: ОТРАСЛЕВЫЕ МЕТРИКИ И ДОКАЗАТЕЛЬСТВА */}
+        <IndustryProof t={t} />
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
