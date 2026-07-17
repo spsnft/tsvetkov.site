@@ -20,7 +20,7 @@ interface ScalePracticeProps {
   };
 }
 
-// Хелпер для подсветки слов, обернутых в ** в файле constants.ts
+// Хелпер для подсветки слов, обернутых в **. Подсвечивает чистым белым цветом
 function formatDescription(text: string) {
   if (!text) return '';
   const parts = text.split(/(\*\*.*?\*\*)/g);
@@ -94,10 +94,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
   if (!t?.scaleItems) return null;
 
-  // Абстрактная кибер-телеметрия вместо старых плоских картинок
   const renderVisual = (index: number) => {
     switch (index) {
-      case 0: // Индикатор синхронизации (Импульсы данных)
+      case 0:
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', width: '75%', justifyContent: 'space-between' }}>
@@ -115,7 +114,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             </div>
           </div>
         );
-      case 1: // Матрица роста (Плотный технологичный график)
+      case 1:
         return (
           <div style={{ width: '100%', height: '100%', padding: '2rem 2.5rem 0 2.5rem', display: 'flex', alignItems: 'flex-end' }}>
             <svg width="100%" height="80%" viewBox="0 0 200 100" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
@@ -125,12 +124,12 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             </svg>
           </div>
         );
-      case 2: // Цифровая сетка распределения (Телеметрия трафика)
+      case 2:
         return (
           <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', padding: '12px', border: `1px solid ${T.border}`, borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.01)' }}>
               {[...Array(8)].map((_, i) => (
-                <div key={i} style={{ width: '24px', height: '16px', borderRadius: '3px', border: `1px solid ${i === 2 || i === 5 ? T.accent : T.border}`, backgroundColor: i === 2 || i === 5 ? 'rgba(0, 255, 179, 0.05)' : 'transparent', transition: 'all 0.3s' }} />
+                <div key={i} style={{ width: '24px', height: '16px', borderRadius: '3px', border: `1px solid ${i === 2 || i === 5 ? T.accent : T.border}`, backgroundColor: i === 2 || i === 5 ? 'rgba(0, 255, 179, 0.05)' : 'transparent' }} />
               ))}
             </div>
           </div>
@@ -170,7 +169,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
       `}</style>
 
-      {/* Шапка блока — Выровнена по Книге Шрифтов */}
       <div style={{ padding: '5rem 1.5rem 4rem 1.5rem', textAlign: 'center', borderBottom: `1px solid ${T.border}` }}>
         <h2 style={{ fontSize: '2.4rem', fontWeight: 700, marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>
           {t.scaleTitle}
@@ -180,23 +178,19 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         </p>
       </div>
 
-      {/* Гибридная интерактивная сетка */}
       <div className="scale-grid">
         {t.scaleItems.map((item, idx) => (
           <div key={idx} className="scale-col">
             
-            {/* Премиальный абстрактный визуал */}
             <div style={{ width: '100%', height: '140px', backgroundColor: 'rgba(0, 0, 0, 0.12)', border: `1px solid ${T.border}`, borderRadius: '8px', overflow: 'hidden' }}>
               {renderVisual(idx)}
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.25rem' }}>
-              {/* Прошлая боль */}
               <div style={{ fontSize: '1.05rem', fontWeight: 600, color: T.muted, textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.25)', marginBottom: '0.1rem' }}>
                 {item.pain}
               </div>
 
-              {/* Заголовок-решение с анимированным счетчиком */}
               <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3, letterSpacing: '-0.01em' }}>
                 <span style={{ color: T.accent, marginRight: '0.3rem' }}>
                   <RollingCounter 
@@ -210,8 +204,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                 {item.fixText}
               </h3>
               
-              {/* Глубокое описание технических фаз с поддержкой разметки акцентов */}
-              <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
+              {/* textWrap: 'pretty' защищает от одиноких висящих слов */}
+              <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0, fontWeight: 500, textWrap: 'pretty' }}>
                 {formatDescription(item.desc)}
               </p>
             </div>
