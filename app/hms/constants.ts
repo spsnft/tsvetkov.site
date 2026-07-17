@@ -50,6 +50,13 @@ export const contentData = {
         desc: "Integration of a zero-commission booking engine into your website, payment gateway connection, and local Google Maps SEO optimization."
       }
     ],
+    proofTitle: "Empowering properties to maximize direct revenue",
+    proofMetrics: [
+      { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue Growth Potential" },
+      { endValue: 70, prefix: "60-", suffix: "%", label: "Margin Boost per Every Guest" },
+      { endValue: 3, prefix: "", suffix: "x", label: "Local Search Visibility Increase" },
+      { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Guest Bookings Rate" }
+    ],
     priceTitle: "Simple Pricing. No Hidden Fees.",
     priceSub: "Fixed setup fee. Zero commission on direct bookings forever.",
     tier1Title: "LITE (1-10 Rooms)",
@@ -128,6 +135,13 @@ export const contentData = {
         title: "ระบบขับเคลื่อนรายได้โดยตรง (Direct Engine)",
         desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ เชื่อมต่อระบบชำระเงินออนไลน์ และทำสิ่งอำนวยความสะดวกด้าน Local SEO บน Google Maps"
       }
+    ],
+    proofTitle: "เพิ่มศักยภาพให้ที่พักของคุณ สร้างรายได้ตรงสู่บัญชีสูงสุด",
+    proofMetrics: [
+      { endValue: 40, prefix: "+", suffix: "%", label: "ศักยภาพการเติบโตของรายได้ตรง" },
+      { endValue: 70, prefix: "60-", suffix: "%", label: "มาร์จิ้นที่เพิ่มขึ้นต่อผู้เข้าพัก" },
+      { endValue: 3, prefix: "", suffix: "x", label: "การมองเห็นบน Google Maps ที่เพิ่มขึ้น" },
+      { endValue: 35, prefix: "+", suffix: "%", label: "อัตราการกลับมาจองซ้ำของลูกค้า" }
     ],
     priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
     priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว รับรายได้จากการจองตรงเต็มจำนวนตลอดไป",
