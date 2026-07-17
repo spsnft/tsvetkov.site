@@ -6,50 +6,37 @@ export const contentData = {
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    bentoTitlePrefix: "",
-    bentoTitleAccentRed: "Margin Leaks",
-    bentoTitleMiddle: " / ",
-    bentoTitleAccentGreen: "The Fix",
-    bentoTitleSuffix: "",
-    bentoItems: [
+    
+    // --- НАШ ОБЪЕДИНЕННЫЙ ГИБРИДНЫЙ БЛОК PAIN + VALUE + DELIVERABLES ---
+    scaleTitle: "Scale your property bookings",
+    scaleSub: "Automate repetitive backend workflows so your team can focus on guest hospitality.",
+    scaleItems: [
       {
         pain: "24/7 manual updates",
-        counterSuffix: " second",
+        startValue: 24,
+        endValue: 1,
+        suffix: " second",
         fixText: " synchronization",
-        subText: "Each reservation locks your entire grid automatically. Zero risk of human error and overbooking.",
-        uiType: "sync"
+        desc: "Deployment of a cloud-based PMS and Channel Manager. Each reservation locks your entire grid automatically across Booking.com, Agoda, and 300+ OTAs. Zero risk of human error."
       },
       {
         pain: "20% OTA commission",
-        counterSuffix: "%",
+        startValue: 20,
+        endValue: 100,
+        suffix: "%",
         fixText: " direct revenue",
-        subText: "Integrate a direct booking engine on your custom website. Keep all the revenue in-house.",
-        uiType: "revenue"
+        desc: "Integration of a zero-commission booking engine into your website with a secure payment gateway connection. Keep all the revenue in-house."
       },
       {
         pain: "0 leads from traffic",
-        counterSuffix: "x",
+        startValue: 0,
+        endValue: 10,
+        suffix: "x",
         fixText: " booking growth",
-        subText: "Drive high-intent local search traffic and launch automated retention campaigns for returning guests.",
-        uiType: "traffic"
+        desc: "Local Google Maps SEO optimization to drive high-intent search traffic, combined with automated WhatsApp/Line retention campaigns for returning guests."
       }
     ],
-    offerTitle: "Core Deliverables",
-    offerSub: "What is included in the growth architecture workflow",
-    deliverables: [
-      {
-        title: "Infrastructure Integration",
-        desc: "Deployment of a cloud-based PMS system, digitization of your room/villa inventory, and creation of a centralized operational control dashboard."
-      },
-      {
-        title: "Channel Synchronization",
-        desc: "Seamless Channel Manager connection. Real-time calendar syncing across Booking.com, Agoda, and 300+ OTA platforms with 1-second updates."
-      },
-      {
-        title: "Direct Revenue Engine",
-        desc: "Integration of a zero-commission booking engine into your website, payment gateway connection, and local Google Maps SEO optimization."
-      }
-    ],
+
     proofTitle: "Empowering properties to maximize direct revenue",
     proofMetrics: [
       { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue Growth Potential" },
@@ -92,50 +79,37 @@ export const contentData = {
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnChat: "WhatsApp",
     btnLine: "Line",
-    bentoTitlePrefix: "",
-    bentoTitleAccentRed: "Margin Leaks",
-    bentoTitleMiddle: " / ",
-    bentoTitleAccentGreen: "The Fix",
-    bentoTitleSuffix: "",
-    bentoItems: [
+    
+    // --- ТАЙСКИЙ ПЕРЕВОД ГИБРИДНОГО БЛОКА ---
+    scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
+    scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
+    scaleItems: [
       {
         pain: "อัปเดตระบบด้วยมือ 24/7",
-        counterSuffix: " วินาที",
+        startValue: 24,
+        endValue: 1,
+        suffix: " วินาที",
         fixText: " ในการซิงค์ข้อมูล",
-        subText: "ทุกการจองล็อกสถานะห้องพักโดยอัตโนมัติ ลดความเสี่ยงจากการจองซ้ำซ้อนให้เหลือศูนย์",
-        uiType: "sync"
+        desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) และ Channel Manager ทุกการจองล็อกสถานะห้องพักโดยอัตโนมัติบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง ไร้ความเสี่ยงจากความผิดพลาดของคน"
       },
       {
         pain: "เสียค่าคอมมิชชั่น OTA 20%",
-        counterSuffix: "%",
+        startValue: 20,
+        endValue: 100,
+        suffix: "%",
         fixText: " รายได้ตรงเข้าบัญชี",
-        subText: "ติดตั้งระบบจองตรงบนเว็บไซต์ที่ออกแบบมาเพื่อคุณ รับและเก็บรายได้เต็มจำนวนโดยไม่ต้องแบ่งใคร",
-        uiType: "revenue"
+        desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ พร้อมเชื่อมต่อระบบชำระเงินออนไลน์ที่ปลอดภัย รับและเก็บรายได้เต็มจำนวนโดยไม่ต้องแบ่งใคร"
       },
       {
         pain: "0 ยอดจองตรงจากช่องทางออนไลน์",
-        counterSuffix: " เท่า",
+        startValue: 0,
+        endValue: 10,
+        suffix: " เท่า",
         fixText: " ของยอดจองตรง",
-        subText: "ดึงลูกค้าเป้าหมายจากการค้นหาในพื้นที่ พร้อมระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำอัตโนมัติ",
-        uiType: "traffic"
+        desc: "ทำสิ่งอำนวยความสะดวกด้าน Local SEO บน Google Maps เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำผ่าน WhatsApp/Line โดยอัตโนมัติ"
       }
     ],
-    offerTitle: "สิ่งที่คุณจะได้รับ",
-    offerSub: "กระบวนการวางระบบเทคโนโลยีเพื่อสร้างการเติบโตอย่างเป็นรูปธรรม",
-    deliverables: [
-      {
-        title: "วางโครงสร้างระบบพื้นฐาน (Infrastructure)",
-        desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) ทำข้อมูลห้องพัก/วิลล่าให้อยู่ในระบบดิจิทัล พร้อมแดชบอร์ดควบคุมการทำงานส่วนกลางสำหรับเจ้าของ"
-      },
-      {
-        title: "เชื่อมต่อปฏิทินห้องพัก (Synchronization)",
-        desc: "เชื่อมต่อ Channel Manager ซิงค์ปฏิทินห้องพักระหว่าง Booking.com, Agoda และช่องทาง OTA อื่นๆ กว่า 300+ แห่งแบบเรียลไทม์ใน 1 วินาที"
-      },
-      {
-        title: "ระบบขับเคลื่อนรายได้โดยตรง (Direct Engine)",
-        desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ เชื่อมต่อระบบชำระเงินออนไลน์ และทำสิ่งอำนวยความสะดวกด้าน Local SEO บน Google Maps"
-      }
-    ],
+
     proofTitle: "เพิ่มศักยภาพให้ที่พักของคุณ สร้างรายได้ตรงสู่บัญชีสูงสุด",
     proofMetrics: [
       { endValue: 40, prefix: "+", suffix: "%", label: "ศักยภาพการเติบโตของรายได้ตรง" },
