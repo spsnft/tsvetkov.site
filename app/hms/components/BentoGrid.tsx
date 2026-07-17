@@ -47,11 +47,6 @@ interface BentoItem {
   uiType: string;
 }
 
-interface DeliverableItem {
-  title: string;
-  desc: string;
-}
-
 interface BentoGridProps {
   t: {
     bentoTitlePrefix: string;
@@ -60,9 +55,6 @@ interface BentoGridProps {
     bentoTitleAccentGreen: string;
     bentoTitleSuffix: string;
     bentoItems: BentoItem[];
-    offerTitle: string;
-    offerSub: string;
-    deliverables: DeliverableItem[];
   };
 }
 
@@ -96,7 +88,6 @@ export default function BentoGrid({ t }: BentoGridProps) {
     }
   };
 
-  // Метод, возвращающий кастомную абстрактную графику для каждой карточки боли
   const renderBentoVisual = (uiType: string) => {
     switch (uiType) {
       case 'sync':
@@ -138,9 +129,6 @@ export default function BentoGrid({ t }: BentoGridProps) {
           .bento-grid-container {
             grid-template-columns: 1fr !important;
           }
-          .deliverables-grid-container {
-            grid-template-columns: 1fr !important;
-          }
         }
       `}</style>
 
@@ -180,7 +168,6 @@ export default function BentoGrid({ t }: BentoGridProps) {
                 ↓
               </div>
 
-              {/* Блок абстрактной визуализации */}
               <div style={{ marginTop: 'auto', marginBottom: '0.5rem' }}>
                 {renderBentoVisual(tab.uiType)}
               </div>
@@ -207,38 +194,6 @@ export default function BentoGrid({ t }: BentoGridProps) {
             </div>
           );
         })}
-      </div>
-
-      <div style={{ margin: '7rem 0 3.5rem 0', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2.2rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '-0.02em', color: '#fff' }}>{t.offerTitle}</h2>
-        <p style={{ color: T.sub, margin: 0, fontSize: '1.1rem' }}>{t.offerSub}</p>
-      </div>
-
-      <div className="deliverables-grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', zIndex: 1, position: 'relative' }}>
-        {t.deliverables.map((item, idx) => (
-          <div 
-            key={idx}
-            style={{
-              padding: '2.5rem 2rem',
-              borderRadius: '12px',
-              backgroundColor: 'rgba(255, 255, 255, 0.01)',
-              border: `1px solid ${T.border}`,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem'
-            }}
-          >
-            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: T.accent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              0{idx + 1} / Phase
-            </div>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', margin: 0 }}>
-              {item.title}
-            </h3>
-            <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
-              {item.desc}
-            </p>
-          </div>
-        ))}
       </div>
     </section>
   );
