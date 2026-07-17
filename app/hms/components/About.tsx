@@ -51,19 +51,26 @@ export default function About({ t }: AboutProps) {
 
       <div className="about-grid">
         
-        {/* ЛЕВАЯ КОЛОНКА (1/3) — Анкор роли */}
+        {/* ЛЕВАЯ КОЛОНКА (1/3) — Теперь с фирменным градиентом */}
         <div className="about-left">
           <span style={{ color: T.accent, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>
             GROWTH ARCHITECTURE
           </span>
-          <h2 style={{ fontSize: '2rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.25, letterSpacing: '-0.02em' }}>
+          <h2 style={{ 
+            fontSize: '2.4rem', 
+            fontWeight: 800, 
+            margin: 0, 
+            lineHeight: 1.2, 
+            letterSpacing: '-0.02em',
+            ...T.textGradientStyles 
+          }}>
             {t.aboutTitle}
           </h2>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА (2/3) — Контентная часть и кнопка */}
+        {/* ПРАВАЯ КОЛОНКА (2/3) — Идеальная базовая линия */}
         <div className="about-right">
-          <p style={{ color: T.body, lineHeight: 1.65, fontSize: '1.05rem', margin: 0, fontWeight: 500 }}>
+          <p style={{ color: T.body, lineHeight: 1.65, fontSize: '1.05rem', margin: 0, fontWeight: 500, textWrap: 'pretty' }}>
             {t.aboutDesc}
           </p>
           
