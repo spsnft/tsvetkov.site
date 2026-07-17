@@ -58,7 +58,7 @@ export default function Hero({ t }: HeroProps) {
     return '฿' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  // Изолированное разделение на две строки по точке
+  // Разделение строк по первой точке
   const dotIndex = t.heroSub1.indexOf('. ');
   let line1 = t.heroSub1;
   let line2 = '';
@@ -84,10 +84,11 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
         
+        /* Сетка 60/40 делает левую часть доминирующей */
         .hero-grid {
           display: grid;
-          grid-template-columns: 54% 46%;
-          gap: 3rem;
+          grid-template-columns: 60% 40%;
+          gap: 3.5rem;
           align-items: center;
           position: relative;
         }
@@ -106,8 +107,10 @@ export default function Hero({ t }: HeroProps) {
           display: inline-block;
           margin-bottom: 1rem;
         }
+        
+        /* Слегка увеличили шрифты для массивности левой колонки */
         .title {
-          font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+          font-size: clamp(2.4rem, 4.2vw, 3.8rem);
           font-weight: 700;
           line-height: 1.1;
           letter-spacing: -0.03em;
@@ -121,7 +124,7 @@ export default function Hero({ t }: HeroProps) {
         }
         .sub-line-1, .sub-line-2 {
           display: block !important;
-          font-size: clamp(1rem, 1.6vw, 1.15rem);
+          font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.5;
           margin: 0;
         }
@@ -132,11 +135,11 @@ export default function Hero({ t }: HeroProps) {
           color: #fff;
           font-weight: 500;
           opacity: 0.9;
-          margin-top: 0.4rem;
+          margin-top: 0.5rem;
         }
         
         .utp-highlight {
-          font-size: clamp(1.2rem, 2vw, 1.4rem);
+          font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
           color: #00E599;
           margin-bottom: 2.5rem;
@@ -146,35 +149,67 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.6rem;
         }
 
-        .cta-buttons {
+        /* ИЕРАРХИЯ CTA КНОПОК */
+        .cta-container {
           display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
+          flex-direction: column;
+          gap: 1.2rem;
         }
-        .btn-premium-cta {
+        
+        .btn-primary-main {
           display: inline-flex;
           align-items: center;
-          gap: 0.8rem;
-          color: #fff;
-          background-color: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          padding: 1.1rem 2rem;
+          justify-content: center;
+          color: #000;
+          background-color: #00E599;
+          padding: 1.1rem 2.5rem;
           border-radius: 8px;
           font-weight: 700;
           text-decoration: none;
-          font-size: 0.95rem;
+          font-size: 1rem;
+          align-self: flex-start;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          backdrop-filter: blur(4px);
-          height: 54px;
-          box-sizing: border-box;
+          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.15);
         }
-        .btn-premium-cta:hover {
+        .btn-primary-main:hover {
           transform: translateY(-2px);
-          background-color: rgba(255, 255, 255, 0.05);
-          border-color: rgba(255, 255, 255, 0.2);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.35);
+          filter: brightness(1.05);
         }
 
+        .secondary-chats {
+          display: flex;
+          align-items: center;
+          gap: 1.2rem;
+          margin-top: 0.2rem;
+        }
+        .chat-label {
+          font-size: 0.85rem;
+          color: rgba(255, 255, 255, 0.3);
+          font-weight: 500;
+        }
+        .btn-secondary-chat {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: rgba(255, 255, 255, 0.6);
+          text-decoration: none;
+          font-size: 0.88rem;
+          font-weight: 600;
+          transition: all 0.2s ease;
+        }
+        .btn-secondary-chat:hover {
+          color: #fff;
+          transform: translateY(-1px);
+        }
+        
+        .btn-icon { 
+          height: 18px; 
+          width: 18px; 
+          object-fit: contain;
+        }
+
+        /* КОЛОНКА С МОКАПОМ */
         .visual-column {
           position: relative;
           width: 100%;
@@ -183,11 +218,13 @@ export default function Hero({ t }: HeroProps) {
           align-items: center;
         }
         .perspective-wrapper {
-          perspective: 1400px;
           width: 100%;
+          perspective: 1400px;
         }
+        
+        /* Увеличили общий масштаб вылета мокапа, так как колонка сетки сузилась */
         .dashboard-mockup {
-          width: 180%; 
+          width: 195%; 
           aspect-ratio: 16 / 9;
           background-color: rgba(13, 13, 17, 0.8);
           backdrop-filter: blur(12px);
@@ -221,11 +258,12 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
 
+        /* АНАЛИТИКА: Расширили до 250px. Больше читаемости, мощнее сдвиг шахматки */
         .pms-analytics {
           display: flex;
           flex-direction: column;
           gap: 0.6rem; 
-          flex: 0 0 190px;
+          flex: 0 0 250px;
           min-width: 0;
           overflow: hidden;
         }
@@ -286,6 +324,7 @@ export default function Hero({ t }: HeroProps) {
           margin-right: 0.4rem;
         }
 
+        /* ШАХМАТКА БРОНИРОВАНИЙ */
         .pms-matrix {
           flex: 1;
           min-width: 0;
@@ -351,7 +390,8 @@ export default function Hero({ t }: HeroProps) {
           .hero-section { padding: 2rem 0 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; }
-          .cta-buttons { justify-content: center; }
+          .btn-primary-main { align-self: center; }
+          .secondary-chats { justify-content: center; }
           .utp-highlight { justify-content: center; }
           .dashboard-mockup { transform: none !important; width: 100% !important; }
           .pms-body { flex-direction: column; }
@@ -361,6 +401,7 @@ export default function Hero({ t }: HeroProps) {
       `}</style>
 
       <div className="hero-grid">
+        {/* ЛЕВАЯ КОЛОНКА (60%) */}
         <div className="text-column">
           <span className="badge">{t.badge}</span>
           <h1 className="title">{t.heroTitle}</h1>
@@ -374,35 +415,29 @@ export default function Hero({ t }: HeroProps) {
             <span>→</span> {t.heroSub2}
           </div>
           
-          <div className="cta-buttons">
-            <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-premium-cta" style={{ minWidth: '155px' }}>
-              <div style={{ width: '22px', height: '22px', minWidth: '22px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img 
-                  src="/logos/whatsapp.svg" 
-                  alt="WhatsApp" 
-                  width="22" 
-                  height="22" 
-                  style={{ width: '22px', height: '22px', objectFit: 'contain', display: 'block' }} 
-                />
-              </div>
-              <span style={{ whiteSpace: 'nowrap' }}>{t.btnChat}</span>
+          {/* ОБНОВЛЕННАЯ СТРУКТУРА КОНВЕРСИИ */}
+          <div className="cta-container">
+            <a href="https://calendly.com/fediatsvetkov/15min" target="_blank" rel="noopener noreferrer" className="btn-primary-main">
+              Book a Free Audit
             </a>
             
-            <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-premium-cta" style={{ minWidth: '130px' }}>
-              <div style={{ width: '22px', height: '22px', minWidth: '22px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img 
-                  src="/logos/line.svg" 
-                  alt="LINE" 
-                  width="32" 
-                  height="32" 
-                  style={{ width: '32px', height: '32px', minWidth: '32px', objectFit: 'contain', transform: 'scale(1.35)', display: 'block' }} 
-                />
-              </div>
-              <span style={{ whiteSpace: 'nowrap' }}>{t.btnLine}</span>
-            </a>
+            <div className="secondary-chats">
+              <span className="chat-label">Or chat directly:</span>
+              
+              <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
+                <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" style={{ width: '18px', height: '18px', objectFit: 'contain' }} />
+                {t.btnChat}
+              </a>
+              
+              <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
+                <img src="/logos/line.svg" alt="LINE" className="btn-icon" style={{ width: '24px', height: '24px', objectFit: 'contain', transform: 'scale(1.35)' }} />
+                {t.btnLine}
+              </a>
+            </div>
           </div>
         </div>
 
+        {/* ПРАВАЯ КОЛОНКА (40% + CINEMATIC CROP) */}
         <div className="visual-column">
           <div className="perspective-wrapper">
             <div className="dashboard-mockup">
@@ -413,6 +448,7 @@ export default function Hero({ t }: HeroProps) {
               </div>
               
               <div className="pms-body">
+                {/* 1. АНАЛИТИКА (УВЕЛИЧЕННАЯ ШИРИНА) */}
                 <div className="pms-analytics">
                   <div className="widget primary-focus">
                     <div className="widget-label">OTA Margin Saved</div>
@@ -454,6 +490,7 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                 </div>
 
+                {/* 2. ШАХМАТКА БРОНИРОВАНИЙ */}
                 <div className="pms-matrix">
                   <div className="matrix-header">
                     <div>ROOM</div>
