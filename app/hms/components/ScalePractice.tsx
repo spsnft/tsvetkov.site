@@ -3,58 +3,36 @@
 import React from 'react';
 import { T } from '../../../src/theme/tokens';
 
-interface ScaleItem {
+interface DeliverableItem {
   title: string;
   desc: string;
-  uiType: 'capture' | 'convert' | 'recover';
 }
 
 interface ScalePracticeProps {
-  t?: {
-    scaleTitle?: string;
-    scaleSub?: string;
-    scaleItems?: ScaleItem[];
+  t: {
+    offerTitle: string;
+    offerSub: string;
+    deliverables: DeliverableItem[];
   };
 }
 
 export default function ScalePractice({ t }: ScalePracticeProps) {
-  // Дефолтный контент, если данные не переданы из i18n / конфигуратора
-  const title = t?.scaleTitle || 'Scale your practice';
-  const sub = t?.scaleSub || 'Simplify everyday tasks so your team can focus on what matters most.';
-  
-  const items: ScaleItem[] = t?.scaleItems || [
-    {
-      title: 'Capture',
-      desc: 'Answer every call, text, and message 24/7. No patients lost to hold music or after-hours gaps.',
-      uiType: 'capture'
-    },
-    {
-      title: 'Convert',
-      desc: 'Turn referrals into booked appointments in hours, not weeks, and double your conversion rate.',
-      uiType: 'convert'
-    },
-    {
-      title: 'Recover',
-      desc: 'Cut no-shows in half and automatically backfill cancelled slots to keep your schedule full.',
-      uiType: 'recover'
-    }
-  ];
+  // Защита на случай, если данные еще не прогрузились
+  if (!t?.deliverables || t.deliverables.length < 3) return null;
 
-  // Рендеринг кастомной премиальной графики из скриншота донора
-  const renderVisual = (type: 'capture' | 'convert' | 'recover') => {
+  // Рендеринг кастомной графики Clarion в зависимости от колонки
+  const renderVisual = (index: number) => {
     const avatarPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>";
 
-    switch (type) {
-      case 'capture':
+    switch (index) {
+      case 0: // Схема Capture (для Infrastructure)
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {/* Центральная линия с иконками */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '80%', justifyContent: 'space-between', zIndex: 1 }}>
               <div style={{ width: '28px', height: '28px', borderRadius: '50%', border: `1px solid ${T.border}`, backgroundColor: 'rgba(255,255,255,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span style={{ color: T.accent, fontSize: '0.8rem' }}>📞</span>
               </div>
               <div style={{ flex: 1, height: '1px', borderTop: `1px dashed ${T.border}` }}></div>
-              {/* Логотип-нода ИИ */}
               <div style={{ width: '42px', height: '42px', borderRadius: '12px', backgroundColor: T.bg1, border: `1px solid ${T.accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 0 15px rgba(0, 229, 153, 0.15)` }}>
                 <div style={{ width: '16px', height: '16px', borderRadius: '50%', backgroundColor: T.accent, opacity: 0.8 }}></div>
               </div>
@@ -63,7 +41,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                 <span style={{ color: '#00E599', fontSize: '0.75rem' }}>✓</span>
               </div>
             </div>
-            {/* Всплывающая карточка доктора */}
             <div style={{ position: 'absolute', bottom: '15px', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'rgba(255,255,255,0.03)', border: `1px solid ${T.border}`, borderRadius: '10px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '10px', width: '75%', boxShadow: '0 4px 20px rgba(0,0,0,0.3)' }}>
               <img src={avatarPlaceholder} alt="Avatar" style={{ width: '26px', height: '26px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.05)' }} />
               <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -74,22 +51,19 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           </div>
         );
 
-      case 'convert':
+      case 1: // Схема Convert (для Channel Synchronization)
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', padding: '0 20px' }}>
-            {/* Левый документ */}
             <div style={{ width: '40%', height: '75%', border: `1px solid ${T.border}`, borderRadius: '6px', padding: '6px', opacity: 0.4, display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <div style={{ width: '40%', height: '4px', backgroundColor: T.border }} />
               <div style={{ width: '100%', height: '2px', backgroundColor: T.border, opacity: 0.5 }} />
               <div style={{ width: '80%', height: '2px', backgroundColor: T.border, opacity: 0.5 }} />
             </div>
-            {/* Центральный разделитель с ИИ нодой */}
             <div style={{ position: 'absolute', height: '80%', width: '1px', backgroundColor: 'rgba(0, 229, 153, 0.3)', left: '48%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ width: '20px', height: '20px', borderRadius: '6px', backgroundColor: T.bg1, border: `1px solid ${T.accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'translateX(-50%)' }}>
                 <span style={{ fontSize: '0.6rem', color: T.accent }}>⇄</span>
               </div>
             </div>
-            {/* Правый интерфейс заметок */}
             <div style={{ width: '45%', height: '75%', border: `1px solid ${T.border}`, borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.02)', padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px', marginLeft: 'auto' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <img src={avatarPlaceholder} alt="Avatar" style={{ width: '14px', height: '14px', borderRadius: '50%' }} />
@@ -104,10 +78,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           </div>
         );
 
-      case 'recover':
+      case 2: // Схема Recover (для Direct Revenue Engine)
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 15px' }}>
-            {/* Сетка календаря */}
             <div style={{ width: '65px', height: '65px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3px', padding: '4px', border: `1px solid ${T.border}`, borderRadius: '6px', opacity: 0.5 }}>
               {[...Array(9)].map((_, i) => (
                 <div key={i} style={{ backgroundColor: i === 4 ? 'rgba(255, 107, 107, 0.2)' : 'rgba(255,255,255,0.03)', border: `1px solid ${i === 4 ? '#FF6B6B' : T.border}`, borderRadius: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -115,11 +88,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                 </div>
               ))}
             </div>
-            
-            {/* Стрелочка-коннектор посередине */}
             <div style={{ margin: '0 8px', color: T.accent, opacity: 0.6, fontSize: '0.9rem' }}>→</div>
-
-            {/* Заполненный слот */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 8px', border: `1px solid ${T.border}`, borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.02)' }}>
               <img src={avatarPlaceholder} alt="Avatar" style={{ width: '16px', height: '16px', borderRadius: '50%' }} />
               <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -132,11 +101,13 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             </div>
           </div>
         );
+      default:
+        return null;
     }
   };
 
   return (
-    <section style={{ width: '100%', borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, backgroundColor: 'rgba(255, 255, 255, 0.005)' }}>
+    <section style={{ width: '100%', borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, backgroundColor: 'rgba(255, 255, 255, 0.005)', margin: '5rem 0 3rem 0' }}>
       <style jsx>{`
         .scale-grid {
           display: grid;
@@ -165,28 +136,32 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
       `}</style>
 
-      {/* Шапка блока */}
+      {/* Шапка блока берет данные из твоего offerTitle/offerSub */}
       <div style={{ padding: '4rem 1.5rem 3.5rem 1.5rem', textAlign: 'center', borderBottom: `1px solid ${T.border}` }}>
+        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: T.accent, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.8rem' }}>
+          WORKFLOW ARCHITECTURE
+        </div>
         <h2 style={{ fontSize: '2.4rem', fontWeight: 700, marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>
-          {title}
+          {t.offerTitle}
         </h2>
         <p style={{ color: T.sub, maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.5 }}>
-          {sub}
+          {t.offerSub}
         </p>
       </div>
 
-      {/* Интерактивная сетка */}
+      {/* Интерактивная сетка рендерит твои deliverables */}
       <div className="scale-grid">
-        {items.map((item, idx) => (
+        {t.deliverables.map((item, idx) => (
           <div key={idx} className="scale-col">
-            {/* Контейнер для визуальной схемы */}
             <div style={{ width: '100%', height: '160px', backgroundColor: 'rgba(0, 0, 0, 0.15)', borderRadius: '12px', border: `1px solid ${T.border}`, overflow: 'hidden' }}>
-              {renderVisual(item.uiType)}
+              {renderVisual(idx)}
             </div>
             
-            {/* Текстовое описание */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.5rem' }}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 600, color: '#fff', margin: 0 }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 600, color: T.accent, opacity: 0.7 }}>
+                PHASE 0{idx + 1}
+              </div>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: '#fff', margin: 0 }}>
                 {item.title}
               </h3>
               <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
