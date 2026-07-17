@@ -83,7 +83,6 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
         
-        /* Сетка 57/43 и минимальный gap полностью убрали зеленый пустырь */
         .hero-grid {
           display: grid;
           grid-template-columns: 57% 43%;
@@ -132,7 +131,7 @@ export default function Hero({ t }: HeroProps) {
           color: #fff;
           font-weight: 500;
           opacity: 0.9;
-          margin-top: 0.5rem;
+          margin-top: 0.4rem;
         }
         
         .utp-highlight {
@@ -146,7 +145,6 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.6rem;
         }
 
-        /* ВАРИАНТ А: Ликвидация красного пустыря через горизонтальный флекс */
         .cta-container {
           display: flex;
           align-items: center;
@@ -215,15 +213,15 @@ export default function Hero({ t }: HeroProps) {
           perspective: 1400px;
         }
         
-        /* Смена aspect-ratio на 16/10.5 вылечила сплющенность логов */
+        /* Увеличен масштаб (195%) + сдвиг вправо (translateX) для глубокого кропа */
         .dashboard-mockup {
-          width: 172%; 
+          width: 195%; 
           aspect-ratio: 16 / 10.5; 
           background-color: rgba(13, 13, 17, 0.8);
           backdrop-filter: blur(12px);
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 14px;
-          transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg);
+          transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg) translateX(30px);
           transform-origin: left center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 229, 153, 0.01), inset 0 1px 1px rgba(255, 255, 255, 0.08);
           padding: 1.2rem;
@@ -233,15 +231,26 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
         }
         
+        /* Тонкий сжатый хедер без лишнего текста */
         .pms-header {
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-start;
           align-items: center;
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          padding-bottom: 0.7rem;
+          padding-bottom: 0.4rem;
         }
-        .pms-logo { font-family: monospace; font-size: 0.75rem; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
-        .sync-status { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #00E599; font-weight: 600; background: rgba(0, 225, 153, 0.05); padding: 0.3rem 0.6rem; border-radius: 20px; border: 1px solid rgba(0, 225, 153, 0.12); }
+        .sync-status { 
+          display: flex; 
+          align-items: center; 
+          gap: 0.5rem; 
+          font-size: 0.72rem; 
+          color: #00E599; 
+          font-weight: 600; 
+          background: rgba(0, 225, 153, 0.05); 
+          padding: 0.25rem 0.6rem; 
+          border-radius: 20px; 
+          border: 1px solid rgba(0, 225, 153, 0.12); 
+        }
         .pulse-dot { width: 6px; height: 6px; background-color: #00E599; border-radius: 50%; animation: pulse 2s infinite; }
         
         .pms-body {
@@ -251,7 +260,6 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
 
-        /* АНАЛИТИКА: 215px — идеальный баланс между читаемостью текста и вылетом шахматки */
         .pms-analytics {
           display: flex;
           flex-direction: column;
@@ -263,7 +271,7 @@ export default function Hero({ t }: HeroProps) {
         .widget {
           background: rgba(255, 255, 255, 0.01);
           border: 1px solid rgba(255, 255, 255, 0.03);
-          padding: 0.75rem 0.95rem; /* Слегка поджали внутреннее мясо для экономии высоты */
+          padding: 0.75rem 0.95rem;
           border-radius: 8px;
           min-width: 0;
           overflow: hidden;
@@ -288,7 +296,6 @@ export default function Hero({ t }: HeroProps) {
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
-        /* ЛОГИ: Полноценное окно, вмещающее все 5 строк */
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.02);
@@ -318,7 +325,6 @@ export default function Hero({ t }: HeroProps) {
           margin-right: 0.4rem;
         }
 
-        /* ШАХМАТКА БРОНИРОВАНИЙ: Выдвинулась левее и теперь отлично читается */
         .pms-matrix {
           flex: 1;
           min-width: 0;
@@ -409,7 +415,7 @@ export default function Hero({ t }: HeroProps) {
             <span>→</span> {t.heroSub2}
           </div>
           
-          {/* ГОРИЗОНТАЛЬНЫЙ БЛОК КОНВЕРСИИ */}
+          {/* КОНВЕРСИЯ */}
           <div className="cta-container">
             <a href="https://calendly.com/fediatsvetkov/15min" target="_blank" rel="noopener noreferrer" className="btn-primary-main">
               Book a Free Audit
@@ -435,13 +441,12 @@ export default function Hero({ t }: HeroProps) {
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА (ОБНОВЛЕННЫЕ ПРОПОРЦИИ) */}
+        {/* ПРАВАЯ КОЛОНКА */}
         <div className="visual-column">
           <div className="perspective-wrapper">
             <div className="dashboard-mockup">
               
               <div className="pms-header">
-                <div className="pms-logo">HMS_CORE_v2.6</div>
                 <div className="sync-status"><div className="pulse-dot"></div>1s OTA Sync Active</div>
               </div>
               
@@ -475,7 +480,6 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
 
-                  {/* ПОЛНОРАЗМЕРНОЕ ОКНО ЛОГОВ */}
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
@@ -489,7 +493,7 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                 </div>
 
-                {/* 2. ШАХМАТКА (ВЫРАВНЕННАЯ СЕТКА) */}
+                {/* 2. ШАХМАТКА */}
                 <div className="pms-matrix">
                   <div className="matrix-header">
                     <div>ROOM</div>
