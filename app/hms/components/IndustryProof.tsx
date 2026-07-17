@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { T } from '../../src/theme/tokens';
+import { T } from '../../../src/theme/tokens'; // <-- Было два ../, стало три
 
 interface MetricItem {
   endValue: number;
