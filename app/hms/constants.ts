@@ -7,7 +7,7 @@ export const contentData = {
     btnChat: "WhatsApp",
     btnLine: "Line",
     
-    // --- НАШ ОБЪЕДИНЕННЫЙ ГИБРИДНЫЙ БЛОК PAIN + VALUE + DELIVERABLES ---
+    // --- ГИБРИДНЫЙ БЛОК PAIN + VALUE + DELIVERABLES ---
     scaleTitle: "Scale your property bookings",
     scaleSub: "Automate repetitive backend workflows so your team can focus on guest hospitality.",
     scaleItems: [
@@ -45,7 +45,7 @@ export const contentData = {
       { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Guest Bookings Rate" }
     ],
 
-    // --- ОБНОВЛЕННЫЙ ПРЕМИАЛЬНЫЙ БЛОК PRICING ---
+    // --- ПРЕМИАЛЬНЫЙ БЛОК PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence.",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever.",
     tier1Title: "LITE (1-10 Rooms)",
@@ -71,11 +71,12 @@ export const contentData = {
     tier3F3: "✓ Multichannel Ads Setup",
     tier3F4: "✓ Analytics Dashboard",
 
-    aboutTitle: "Growth Architect & Tech Partner",
-    aboutDesc: "International software integration and growth architecture provider. Operating as an offshore tech partner to maximize direct revenue and eliminate operational chaos for hospitality businesses globally.",
+    // --- ОБНОВЛЕННЫЙ БЛОК ABOUT (Позиционирование системы и оптимизации) ---
+    aboutTitle: "Systems, Optimization & Scale",
+    aboutDesc: "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
     aboutBtn: "View Professional Profile",
     
-    // ИСПРАВЛЕНО: Универсальный B2B-призыв без жесткой привязки к отелям
+    // --- ФУТЕР CTA (Универсальный B2B призыв) ---
     footerTitle: "Ready to make more money?",
     footerBtn: "Book a Free Audit"
   },
@@ -125,7 +126,7 @@ export const contentData = {
       { endValue: 35, prefix: "+", suffix: "%", label: "อัตราการกลับมาจองซ้ำของลูกค้า" }
     ],
 
-    // --- ОБНОВЛЕННЫЙ ТАЙСКИЙ ПЕРЕВОД PRICING ---
+    // --- ТАЙСКИЙ ПЕРЕВОД PRICING ---
     priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
     priceSub: "จ่ายค่าติดตั้งครั้งเดียว ไม่มีค่าคอมมิชชั่นจากการจองตรงตลอดไป",
     tier1Title: "LITE (1-10 ห้อง)",
@@ -151,9 +152,11 @@ export const contentData = {
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แแดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
 
-    aboutTitle: "พันธมิตรด้านเทคโนโลยีเพื่อการเติบโต",
-    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
+    // --- ТАЙСКИЙ ПЕРЕВОД БЛОКА ABOUT ---
+    aboutTitle: "ระบบ การเพิ่มประสิทธิภาพ และการขยายขนาด",
+    aboutDesc: "พันธมิตรด้านโครงสร้างพื้นฐานที่มุ่งเน้นผลลัพธ์ ออกแบบมาเพื่อเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
     aboutBtn: "ดูประวัติการทำงาน",
+    
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
   }
