@@ -9,7 +9,7 @@ export const contentData = {
     
     // --- ГИБРИДНЫЙ БЛОК PAIN + VALUE + DELIVERABLES ---
     scaleTitle: "Scale your property bookings",
-    scaleSub: "Automate repetitive backend workflows so your team can focus on guest hospitality.",
+    scaleSub: "Automate repetitive backend workflows so your team can focus on guest experience.",
     scaleItems: [
       {
         pain: "24/7 manual updates",
@@ -17,7 +17,7 @@ export const contentData = {
         endValue: 1,
         suffix: " second",
         fixText: " synchronization",
-        desc: "Deployment of a cloud-based PMS and Channel Manager. Each reservation locks your entire grid automatically across Booking.com, Agoda, and 300+ OTAs. Zero risk of human error."
+        desc: "Deployment of a cloud-based PMS and Channel Manager. Each reservation locks your entire grid automatically across Booking.com, Agoda, and 300+ OTAs."
       },
       {
         pain: "20% OTA commission",
@@ -33,13 +33,13 @@ export const contentData = {
         endValue: 10,
         suffix: "x",
         fixText: " booking growth",
-        desc: "Local Google Maps SEO optimization to drive high-intent search traffic, combined with automated WhatsApp/Line retention campaigns for returning guests."
+        desc: "Local SEO optimization to drive high-intent search traffic, combined with automated retention campaigns for returning guests."
       }
     ],
 
     proofTitle: "Empowering properties to maximize direct revenue",
     proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue Growth Potential" },
+      { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue Growth" },
       { endValue: 70, prefix: "60-", suffix: "%", label: "Margin Boost per Every Guest" },
       { endValue: 3, prefix: "", suffix: "x", label: "Local Search Visibility Increase" },
       { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Guest Bookings Rate" }
@@ -49,14 +49,14 @@ export const contentData = {
     priceTitle: "Transparent Integration. Permanent Independence.",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever.",
     tier1Title: "LITE (1-10 Rooms)",
-    tier1Desc: "For small villas and guesthouses",
+    tier1Desc: "For small villas & guesthouses",
     tier1F1: "✓ Cloud PMS & Dashboard",
     tier1F2: "✓ Direct Website Booking button",
     tier1F3: "✓ Booking & Agoda Synchronization",
     tier1F4: "✓ Google Maps Setup",
     
     tier2Title: "STANDARD (10-30 Rooms)",
-    tier2Desc: "For boutique hotels and resorts",
+    tier2Desc: "For boutique hotels & resorts",
     tier2F1: "✓ Everything in ",
     tier2F1Badge: "LITE",
     tier2F2: "✓ Connect 300+ OTA Channels",
@@ -64,19 +64,19 @@ export const contentData = {
     tier2F4: "✓ Guides for your Staff (Visual SOPs)",
     
     tier3Title: "ENTERPRISE (30+ Rooms)",
-    tier3Desc: "For hotel chains and management firms",
+    tier3Desc: "For hotel chains & management firms",
     tier3F1: "✓ Everything in ",
     tier3F1Badge: "STANDARD",
     tier3F2: "✓ Anti-Theft Logs",
     tier3F3: "✓ Multichannel Ads Setup",
     tier3F4: "✓ Analytics Dashboard",
 
-    // --- ОБНОВЛЕННЫЙ БЛОК ABOUT (Позиционирование системы и оптимизации) ---
+    // --- ОБНОВЛЕННЫЙ БЛОК ABOUT ---
     aboutTitle: "Systems, Optimization & Scale",
     aboutDesc: "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
     aboutBtn: "View Professional Profile",
     
-    // --- ФУТЕР CTA (Универсальный B2B призыв) ---
+    // --- ФУТЕР CTA ---
     footerTitle: "Ready to make more money?",
     footerBtn: "Book a Free Audit"
   },
@@ -88,7 +88,6 @@ export const contentData = {
     btnChat: "WhatsApp",
     btnLine: "Line",
     
-    // --- ТАЙСКИЙ ПЕРЕВОД ГИБРИДНОГО БЛОКА ---
     scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
     scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
     scaleItems: [
@@ -98,7 +97,7 @@ export const contentData = {
         endValue: 1,
         suffix: " วินาที",
         fixText: " ในการซิงค์ข้อมูล",
-        desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) และ Channel Manager ทุกการจองล็อกสถานะห้องพักโดยอัตโนมัติบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง ไร้ความเสี่ยงจากความผิดพลาดของคน"
+        desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) และ Channel Manager ทุกการจองล็อกสถานะห้องพักโดยอัตโนมัติบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
         pain: "เสียค่าคอมมิชชั่น OTA 20%",
@@ -114,19 +113,18 @@ export const contentData = {
         endValue: 10,
         suffix: " เท่า",
         fixText: " ของยอดจองตรง",
-        desc: "ทำสิ่งอำนวยความสะดวกด้าน Local SEO บน Google Maps เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำผ่าน WhatsApp/Line โดยอัตโนมัติ"
+        desc: "ทำสิ่งอำนวยความสะดวกด้าน Local SEO เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำของลูกค้าโดยอัตโนมัติ"
       }
     ],
 
     proofTitle: "เพิ่มศักยภาพให้ที่พักของคุณ สร้างรายได้ตรงสู่บัญชีสูงสุด",
     proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "ศักยภาพการเติบโตของรายได้ตรง" },
+      { endValue: 40, prefix: "+", suffix: "%", label: "การเติบโตของรายได้ตรง" },
       { endValue: 70, prefix: "60-", suffix: "%", label: "มาร์จิ้นที่เพิ่มขึ้นต่อผู้เข้าพัก" },
       { endValue: 3, prefix: "", suffix: "x", label: "การมองเห็นบน Google Maps ที่เพิ่มขึ้น" },
       { endValue: 35, prefix: "+", suffix: "%", label: "อัตราการกลับมาจองซ้ำของลูกค้า" }
     ],
 
-    // --- ТАЙСКИЙ ПЕРЕВОД PRICING ---
     priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
     priceSub: "จ่ายค่าติดตั้งครั้งเดียว ไม่มีค่าคอมมิชชั่นจากการจองตรงตลอดไป",
     tier1Title: "LITE (1-10 ห้อง)",
@@ -152,7 +150,6 @@ export const contentData = {
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แแดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
 
-    // --- ТАЙСКИЙ ПЕРЕВОД БЛОКА ABOUT ---
     aboutTitle: "ระบบ การเพิ่มประสิทธิภาพ และการขยายขนาด",
     aboutDesc: "พันธมิตรด้านโครงสร้างพื้นฐานที่มุ่งเน้นผลลัพธ์ ออกแบบมาเพื่อเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
     aboutBtn: "ดูประวัติการทำงาน",
