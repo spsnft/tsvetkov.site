@@ -1,31 +1,88 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { T } from '../../../src/theme/tokens';
 
-interface DeliverableItem {
-  title: string;
+interface ScaleItem {
+  pain: string;
+  startValue: number;
+  endValue: number;
+  suffix: string;
+  fixText: string;
   desc: string;
 }
 
 interface ScalePracticeProps {
   t: {
-    offerTitle: string;
-    offerSub: string;
-    deliverables: DeliverableItem[];
+    scaleTitle: string;
+    scaleSub: string;
+    scaleItems: ScaleItem[];
   };
 }
 
-export default function ScalePractice({ t }: ScalePracticeProps) {
-  // Защита на случай, если данные еще не прогрузились
-  if (!t?.deliverables || t.deliverables.length < 3) return null;
+function RollingCounter({ start, end, duration, suffix, isVisible }: { 
+  start: number; 
+  end: number; 
+  duration: number; 
+  suffix: string; 
+  isVisible: boolean;
+}) {
+  const [count, setCount] = useState<string>(start.toString());
 
-  // Рендеринг кастомной графики Clarion в зависимости от колонки
+  useEffect(() => {
+    if (!isVisible) {
+      setCount(start.toString());
+      return;
+    }
+
+    let startTime: number | null = null;
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const easeProgress = progress * (2 - progress);
+      
+      const current = start + easeProgress * (end - start);
+      setCount(Math.round(current).toString());
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isVisible, start, end, duration]);
+
+  return <span style={{ fontFamily: 'SF Mono, Monaco, Menlo, Consolas, monospace' }}>{count}{suffix}</span>;
+}
+
+export default function ScalePractice({ t }: ScalePracticeProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  if (!t?.scaleItems) return null;
+
   const renderVisual = (index: number) => {
     const avatarPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>";
 
     switch (index) {
-      case 0: // Схема Capture (для Infrastructure)
+      case 0:
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '80%', justifyContent: 'space-between', zIndex: 1 }}>
@@ -50,8 +107,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             </div>
           </div>
         );
-
-      case 1: // Схема Convert (для Channel Synchronization)
+      case 1:
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', padding: '0 20px' }}>
             <div style={{ width: '40%', height: '75%', border: `1px solid ${T.border}`, borderRadius: '6px', padding: '6px', opacity: 0.4, display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -77,8 +133,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             </div>
           </div>
         );
-
-      case 2: // Схема Recover (для Direct Revenue Engine)
+      case 2:
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 15px' }}>
             <div style={{ width: '65px', height: '65px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3px', padding: '4px', border: `1px solid ${T.border}`, borderRadius: '6px', opacity: 0.5 }}>
@@ -107,7 +162,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
   };
 
   return (
-    <section style={{ width: '100%', borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, backgroundColor: 'rgba(255, 255, 255, 0.005)', margin: '5rem 0 3rem 0' }}>
+    <section ref={sectionRef} style={{ width: '100%', borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, backgroundColor: 'rgba(255, 255, 255, 0.005)', margin: '5rem 0 3rem 0' }}>
       <style jsx>{`
         .scale-grid {
           display: grid;
@@ -136,35 +191,47 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
       `}</style>
 
-      {/* Шапка блока берет данные из твоего offerTitle/offerSub */}
+      {/* Шапка блока */}
       <div style={{ padding: '4rem 1.5rem 3.5rem 1.5rem', textAlign: 'center', borderBottom: `1px solid ${T.border}` }}>
-        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: T.accent, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.8rem' }}>
-          WORKFLOW ARCHITECTURE
-        </div>
         <h2 style={{ fontSize: '2.4rem', fontWeight: 700, marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>
-          {t.offerTitle}
+          {t.scaleTitle}
         </h2>
         <p style={{ color: T.sub, maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.5 }}>
-          {t.offerSub}
+          {t.scaleSub}
         </p>
       </div>
 
-      {/* Интерактивная сетка рендерит твои deliverables */}
+      {/* Гибридная интерактивная сетка */}
       <div className="scale-grid">
-        {t.deliverables.map((item, idx) => (
+        {t.scaleItems.map((item, idx) => (
           <div key={idx} className="scale-col">
+            {/* 1. Премиальный визуал Clarion */}
             <div style={{ width: '100%', height: '160px', backgroundColor: 'rgba(0, 0, 0, 0.15)', borderRadius: '12px', border: `1px solid ${T.border}`, overflow: 'hidden' }}>
               {renderVisual(idx)}
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.5rem' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: 600, color: T.accent, opacity: 0.7 }}>
-                PHASE 0{idx + 1}
+              {/* 2. Зачеркнутая прошлая боль из Bento */}
+              <div style={{ fontSize: '1.05rem', fontWeight: 600, color: '#888888', textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.4)', marginBottom: '0.2rem' }}>
+                {item.pain}
               </div>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: '#fff', margin: 0 }}>
-                {item.title}
+
+              {/* 3. Заголовок-решение с анимированным счетчиком */}
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>
+                <span style={{ color: '#00E599', marginRight: '0.3rem' }}>
+                  <RollingCounter 
+                    start={item.startValue} 
+                    end={item.endValue} 
+                    duration={1300} 
+                    suffix={item.suffix} 
+                    isVisible={isVisible} 
+                  />
+                </span>
+                {item.fixText}
               </h3>
-              <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+              
+              {/* 4. Глубокое описание технических фаз (Deliverables) */}
+              <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
                 {item.desc}
               </p>
             </div>
