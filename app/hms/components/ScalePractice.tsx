@@ -20,6 +20,22 @@ interface ScalePracticeProps {
   };
 }
 
+// Хелпер для подсветки слов, обернутых в ** в файле constants.ts
+function formatDescription(text: string) {
+  if (!text) return '';
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={i} style={{ color: '#fff', fontWeight: 600 }}>
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return part;
+  });
+}
+
 function RollingCounter({ start, end, duration, suffix, isVisible }: { 
   start: number; 
   end: number; 
@@ -78,81 +94,44 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
   if (!t?.scaleItems) return null;
 
+  // Абстрактная кибер-телеметрия вместо старых плоских картинок
   const renderVisual = (index: number) => {
-    const avatarPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>";
-
     switch (index) {
-      case 0:
+      case 0: // Индикатор синхронизации (Импульсы данных)
         return (
           <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '80%', justifyContent: 'space-between', zIndex: 1 }}>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', border: `1px solid ${T.border}`, backgroundColor: 'rgba(255,255,255,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: T.accent, fontSize: '0.8rem' }}>📞</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', width: '75%', justifyContent: 'space-between' }}>
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: T.border }} />
+              <div style={{ flex: 1, height: '1px', backgroundColor: T.border, position: 'relative' }}>
+                <div style={{ position: 'absolute', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: T.accent, top: '-2px', left: '30%', filter: `drop-shadow(0 0 4px ${T.accent})` }} />
               </div>
-              <div style={{ flex: 1, height: '1px', borderTop: `1px dashed ${T.border}` }}></div>
-              <div style={{ width: '42px', height: '42px', borderRadius: '12px', backgroundColor: T.bg1, border: `1px solid ${T.accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 0 15px rgba(0, 229, 153, 0.15)` }}>
-                <div style={{ width: '16px', height: '16px', borderRadius: '50%', backgroundColor: T.accent, opacity: 0.8 }}></div>
+              <div style={{ width: '32px', height: '32px', borderRadius: '8px', border: `1px solid ${T.accent}`, backgroundColor: 'rgba(0, 255, 179, 0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 0 20px ${T.glow}` }}>
+                <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: T.accent }} />
               </div>
-              <div style={{ flex: 1, height: '1px', borderTop: `1px dashed ${T.border}` }}></div>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: 'rgba(0, 225, 153, 0.1)', border: '1px solid #00E599', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: '#00E599', fontSize: '0.75rem' }}>✓</span>
+              <div style={{ flex: 1, height: '1px', backgroundColor: T.border, position: 'relative' }}>
+                <div style={{ position: 'absolute', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: T.acc2, top: '-2px', right: '40%', filter: `drop-shadow(0 0 4px ${T.acc2})` }} />
               </div>
-            </div>
-            <div style={{ position: 'absolute', bottom: '15px', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'rgba(255,255,255,0.03)', border: `1px solid ${T.border}`, borderRadius: '10px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '10px', width: '75%', boxShadow: '0 4px 20px rgba(0,0,0,0.3)' }}>
-              <img src={avatarPlaceholder} alt="Avatar" style={{ width: '26px', height: '26px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.05)' }} />
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#fff' }}>Dr. Marcus Breyer</span>
-                <span style={{ fontSize: '0.6rem', color: '#888' }}>Mon 24, 9:40 AM</span>
-              </div>
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: T.border }} />
             </div>
           </div>
         );
-      case 1:
+      case 1: // Матрица роста (Плотный технологичный график)
         return (
-          <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', padding: '0 20px' }}>
-            <div style={{ width: '40%', height: '75%', border: `1px solid ${T.border}`, borderRadius: '6px', padding: '6px', opacity: 0.4, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              <div style={{ width: '40%', height: '4px', backgroundColor: T.border }} />
-              <div style={{ width: '100%', height: '2px', backgroundColor: T.border, opacity: 0.5 }} />
-              <div style={{ width: '80%', height: '2px', backgroundColor: T.border, opacity: 0.5 }} />
-            </div>
-            <div style={{ position: 'absolute', height: '80%', width: '1px', backgroundColor: 'rgba(0, 229, 153, 0.3)', left: '48%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ width: '20px', height: '20px', borderRadius: '6px', backgroundColor: T.bg1, border: `1px solid ${T.accent}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'translateX(-50%)' }}>
-                <span style={{ fontSize: '0.6rem', color: T.accent }}>⇄</span>
-              </div>
-            </div>
-            <div style={{ width: '45%', height: '75%', border: `1px solid ${T.border}`, borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.02)', padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px', marginLeft: 'auto' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <img src={avatarPlaceholder} alt="Avatar" style={{ width: '14px', height: '14px', borderRadius: '50%' }} />
-                <span style={{ fontSize: '0.55rem', color: '#fff', fontWeight: 500 }}>Dr. Mira Solano</span>
-              </div>
-              <div style={{ width: '100%', height: '30px', borderRadius: '4px', border: `1px solid ${T.border}`, backgroundColor: 'rgba(0,0,0,0.2)', padding: '4px', display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                <div style={{ width: '30%', height: '3px', backgroundColor: T.accent, opacity: 0.5 }} />
-                <div style={{ width: '85%', height: '2px', backgroundColor: T.border }} />
-                <div style={{ width: '60%', height: '2px', backgroundColor: T.border }} />
-              </div>
-            </div>
+          <div style={{ width: '100%', height: '100%', padding: '2rem 2.5rem 0 2.5rem', display: 'flex', alignItems: 'flex-end' }}>
+            <svg width="100%" height="80%" viewBox="0 0 200 100" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+              <path d="M 0 95 Q 40 90 80 60 T 150 40 T 200 5" fill="none" stroke={T.accent} strokeWidth="1.5" style={{ filter: `drop-shadow(0 0 4px ${T.accent})` }} />
+              <line x1="0" y1="50" x2="200" y2="50" stroke={T.border} strokeWidth="1" strokeDasharray="4,4" />
+              <circle cx="200" cy="5" r="2.5" fill="#fff" />
+            </svg>
           </div>
         );
-      case 2:
+      case 2: // Цифровая сетка распределения (Телеметрия трафика)
         return (
-          <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 15px' }}>
-            <div style={{ width: '65px', height: '65px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '3px', padding: '4px', border: `1px solid ${T.border}`, borderRadius: '6px', opacity: 0.5 }}>
-              {[...Array(9)].map((_, i) => (
-                <div key={i} style={{ backgroundColor: i === 4 ? 'rgba(255, 107, 107, 0.2)' : 'rgba(255,255,255,0.03)', border: `1px solid ${i === 4 ? '#FF6B6B' : T.border}`, borderRadius: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  {i === 4 && <span style={{ color: '#FF6B6B', fontSize: '0.5rem' }}>✕</span>}
-                </div>
+          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', padding: '12px', border: `1px solid ${T.border}`, borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.01)' }}>
+              {[...Array(8)].map((_, i) => (
+                <div key={i} style={{ width: '24px', height: '16px', borderRadius: '3px', border: `1px solid ${i === 2 || i === 5 ? T.accent : T.border}`, backgroundColor: i === 2 || i === 5 ? 'rgba(0, 255, 179, 0.05)' : 'transparent', transition: 'all 0.3s' }} />
               ))}
-            </div>
-            <div style={{ margin: '0 8px', color: T.accent, opacity: 0.6, fontSize: '0.9rem' }}>→</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 8px', border: `1px solid ${T.border}`, borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.02)' }}>
-              <img src={avatarPlaceholder} alt="Avatar" style={{ width: '16px', height: '16px', borderRadius: '50%' }} />
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontSize: '0.55rem', color: '#fff', fontWeight: 500 }}>Dr. Sophia Kellen</span>
-                <span style={{ fontSize: '0.45rem', color: '#666' }}>Fri 21, 8:50 AM</span>
-              </div>
-              <div style={{ marginLeft: '4px', width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(0, 229, 153, 0.1)', border: '1px solid #00E599', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#00E599', fontSize: '0.55rem', fontWeight: 'bold' }}>
-                +$
-              </div>
             </div>
           </div>
         );
@@ -162,14 +141,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
   };
 
   return (
-    <section ref={sectionRef} style={{ width: '100%', borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, backgroundColor: 'rgba(255, 255, 255, 0.005)', margin: '5rem 0 3rem 0' }}>
+    <section ref={sectionRef} style={{ width: '100%', borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, backgroundColor: 'transparent', margin: '0' }}>
       <style jsx>{`
         .scale-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
         }
         .scale-col {
-          padding: 3.5rem 2.5rem;
+          padding: 4.5rem 3rem;
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
@@ -182,7 +161,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             grid-template-columns: 1fr !important;
           }
           .scale-col {
-            padding: 2.5rem 1.5rem !important;
+            padding: 3rem 1.5rem !important;
           }
           .scale-col:not(:last-child) {
             border-right: none !important;
@@ -191,12 +170,12 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
       `}</style>
 
-      {/* Шапка блока */}
-      <div style={{ padding: '4rem 1.5rem 3.5rem 1.5rem', textAlign: 'center', borderBottom: `1px solid ${T.border}` }}>
+      {/* Шапка блока — Выровнена по Книге Шрифтов */}
+      <div style={{ padding: '5rem 1.5rem 4rem 1.5rem', textAlign: 'center', borderBottom: `1px solid ${T.border}` }}>
         <h2 style={{ fontSize: '2.4rem', fontWeight: 700, marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>
           {t.scaleTitle}
         </h2>
-        <p style={{ color: T.sub, maxWidth: '600px', margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.5 }}>
+        <p style={{ color: T.sub, maxWidth: '720px', margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.5 }}>
           {t.scaleSub}
         </p>
       </div>
@@ -205,20 +184,21 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <div className="scale-grid">
         {t.scaleItems.map((item, idx) => (
           <div key={idx} className="scale-col">
-            {/* 1. Премиальный визуал Clarion */}
-            <div style={{ width: '100%', height: '160px', backgroundColor: 'rgba(0, 0, 0, 0.15)', borderRadius: '12px', border: `1px solid ${T.border}`, overflow: 'hidden' }}>
+            
+            {/* Премиальный абстрактный визуал */}
+            <div style={{ width: '100%', height: '140px', backgroundColor: 'rgba(0, 0, 0, 0.12)', border: `1px solid ${T.border}`, borderRadius: '8px', overflow: 'hidden' }}>
               {renderVisual(idx)}
             </div>
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.5rem' }}>
-              {/* 2. Зачеркнутая прошлая боль из Bento */}
-              <div style={{ fontSize: '1.05rem', fontWeight: 600, color: '#888888', textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.4)', marginBottom: '0.2rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.25rem' }}>
+              {/* Прошлая боль */}
+              <div style={{ fontSize: '1.05rem', fontWeight: 600, color: T.muted, textDecoration: 'line-through', textDecorationColor: 'rgba(255, 107, 107, 0.25)', marginBottom: '0.1rem' }}>
                 {item.pain}
               </div>
 
-              {/* 3. Заголовок-решение с анимированным счетчиком */}
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3 }}>
-                <span style={{ color: '#00E599', marginRight: '0.3rem' }}>
+              {/* Заголовок-решение с анимированным счетчиком */}
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.3, letterSpacing: '-0.01em' }}>
+                <span style={{ color: T.accent, marginRight: '0.3rem' }}>
                   <RollingCounter 
                     start={item.startValue} 
                     end={item.endValue} 
@@ -230,9 +210,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                 {item.fixText}
               </h3>
               
-              {/* 4. Глубокое описание технических фаз (Deliverables) */}
+              {/* Глубокое описание технических фаз с поддержкой разметки акцентов */}
               <p style={{ color: T.body, fontSize: '0.95rem', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
-                {item.desc}
+                {formatDescription(item.desc)}
               </p>
             </div>
           </div>
