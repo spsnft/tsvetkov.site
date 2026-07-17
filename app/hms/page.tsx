@@ -99,8 +99,6 @@ export default function HospitalityB2B() {
         {/* БЛОК 3: ОТРАСЛЕВЫЕ МЕТРИКИ И ДОКАЗАТЕЛЬСТВА */}
         <IndustryProof t={t} />
 
-        <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
-
         {/* БЛОК 4: ТАРИФНЫЕ ПЛАНЫ */}
         <Pricing t={t} />
 
