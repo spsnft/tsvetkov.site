@@ -86,7 +86,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           grid-template-columns: repeat(4, 1fr);
         }
         .proof-col {
-          padding: 3rem 2rem;
+          padding: 4.5rem 3rem;
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
@@ -100,7 +100,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
             grid-template-columns: repeat(2, 1fr) !important;
           }
           .proof-col {
-            padding: 2rem 1.5rem !important;
+            padding: 3rem 1.5rem !important;
           }
           .proof-col:nth-child(odd) {
             border-right: 1px solid ${T.border} !important;
@@ -123,8 +123,9 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         }
       `}</style>
 
-      <div style={{ padding: '3.5rem 1.5rem 2.5rem 1.5rem', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '1.75rem', fontWeight: 500, color: '#fff', letterSpacing: '-0.01em', margin: 0, opacity: 0.9 }}>
+      {/* Шапка блока — Выровнена по Книге Шрифтов */}
+      <div style={{ padding: '5rem 1.5rem 4rem 1.5rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.2 }}>
           {t.proofTitle}
         </h2>
       </div>
@@ -141,7 +142,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
                 isVisible={isVisible} 
               />
             </div>
-            <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.4, margin: 0, fontWeight: 400 }}>
+            <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.4, margin: 0, fontWeight: 500 }}>
               {item.label}
             </p>
           </div>
