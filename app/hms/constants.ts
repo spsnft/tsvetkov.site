@@ -17,7 +17,7 @@ export const contentData = {
         endValue: 1,
         suffix: " second",
         fixText: " synchronization",
-        desc: "Deployment of a cloud-based PMS and Channel Manager. Each reservation **locks your entire grid automatically** across Booking.com, Agoda, and 300+ OTAs"
+        desc: "Cloud PMS & Channel Manager integration. Every reservation **locks your entire grid automatically** across Booking.com, Agoda & 300+ OTAs"
       },
       {
         pain: "20% OTA commission",
@@ -25,7 +25,7 @@ export const contentData = {
         endValue: 100,
         suffix: "%",
         fixText: " direct revenue",
-        desc: "Integration of a zero-commission booking engine into your website with a secure payment gateway connection. **Keep all the revenue in-house**"
+        desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and **keep all revenue in-house**"
       },
       {
         pain: "0 leads from traffic",
@@ -33,7 +33,7 @@ export const contentData = {
         endValue: 10,
         suffix: "x",
         fixText: " booking growth",
-        desc: "Local SEO optimization to drive high-intent search traffic, combined with **automated retention campaigns** for returning guests"
+        desc: "Local SEO optimization to capture high-intent search traffic, paired with **automated messenger retention loops** for returning guests"
       }
     ],
 
@@ -47,7 +47,7 @@ export const contentData = {
 
     // --- ПРЕМИАЛЬНЫЙ БЛОК PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence",
-    priceSub: "One-time setup fee. Zero commission on direct bookings forever.",
+    priceSub: "One-time setup fee. Zero commission on direct bookings forever",
     tier1Title: "LITE (1-10 Rooms)",
     tier1Desc: "For small villas & guesthouses",
     tier1F1: "✓ Cloud PMS & Dashboard",
