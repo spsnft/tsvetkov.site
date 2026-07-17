@@ -200,7 +200,6 @@ export default function Hero({ t }: HeroProps) {
           transform: translateY(-1px);
         }
 
-        /* КОЛОНКА С МОКАПОМ */
         .visual-column {
           position: relative;
           width: 100%;
@@ -213,10 +212,10 @@ export default function Hero({ t }: HeroProps) {
           perspective: 1400px;
         }
         
-        /* Увеличен масштаб (195%) + сдвиг вправо (translateX) для глубокого кропа */
+        /* Сжали пропорцию до 16/10 — мокап стал чуть ниже, идеально встав по осям с кнопками */
         .dashboard-mockup {
           width: 195%; 
-          aspect-ratio: 16 / 10.5; 
+          aspect-ratio: 16 / 10; 
           background-color: rgba(13, 13, 17, 0.8);
           backdrop-filter: blur(12px);
           border: 1px solid rgba(255, 255, 255, 0.06);
@@ -227,11 +226,10 @@ export default function Hero({ t }: HeroProps) {
           padding: 1.2rem;
           display: flex;
           flex-direction: column;
-          gap: 0.9rem;
+          gap: 0.8rem;
           position: relative;
         }
         
-        /* Тонкий сжатый хедер без лишнего текста */
         .pms-header {
           display: flex;
           justify-content: flex-start;
@@ -263,7 +261,7 @@ export default function Hero({ t }: HeroProps) {
         .pms-analytics {
           display: flex;
           flex-direction: column;
-          gap: 0.55rem; 
+          gap: 0.5rem; 
           flex: 0 0 215px;
           min-width: 0;
           overflow: hidden;
@@ -296,18 +294,21 @@ export default function Hero({ t }: HeroProps) {
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
+        /* Убрали жесткий height. Контейнер теперь идеально подстраивается под высоту 16/10 мокапа */
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.02);
           flex: 1;
           display: flex;
           flex-direction: column;
-          height: 145px; 
         }
+        
+        /* Распределяем логи равномерно по всей высоте (убираем пустоту снизу) */
         .logs-container {
           display: flex;
           flex-direction: column;
-          gap: 0.45rem;
+          justify-content: space-between; 
+          height: 100%;
           margin-top: 0.4rem;
           font-family: 'SF Mono', monospace;
           font-size: 0.62rem;
@@ -415,7 +416,6 @@ export default function Hero({ t }: HeroProps) {
             <span>→</span> {t.heroSub2}
           </div>
           
-          {/* КОНВЕРСИЯ */}
           <div className="cta-container">
             <a href="https://calendly.com/fediatsvetkov/15min" target="_blank" rel="noopener noreferrer" className="btn-primary-main">
               Book a Free Audit
@@ -480,6 +480,7 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
 
+                  {/* ОКНО ЛОГОВ БЕЗ ПУСТОТЫ */}
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
