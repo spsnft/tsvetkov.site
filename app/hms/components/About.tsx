@@ -31,7 +31,7 @@ export default function About({ t }: AboutProps) {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          justify-content: center;
+          justify-content: flex-start;
           gap: 2rem;
         }
         @media (max-width: 992px) {
@@ -53,8 +53,8 @@ export default function About({ t }: AboutProps) {
         
         {/* ЛЕВАЯ КОЛОНКА (1/3) — Анкор роли */}
         <div className="about-left">
-          <span style={{ color: T.accent, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
-            The Partner
+          <span style={{ color: T.accent, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>
+            GROWTH ARCHITECTURE
           </span>
           <h2 style={{ fontSize: '2rem', fontWeight: 700, color: '#fff', margin: 0, lineHeight: 1.25, letterSpacing: '-0.02em' }}>
             {t.aboutTitle}
