@@ -32,7 +32,6 @@ export default function Hero({ t }: HeroProps) {
   ]);
 
   useEffect(() => {
-    // Сигнал, что компонент готов и стили загружены
     setIsMounted(true);
 
     const interval = setInterval(() => {
@@ -59,6 +58,16 @@ export default function Hero({ t }: HeroProps) {
     return '฿' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  // Изолированное разделение на две строки по точке
+  const dotIndex = t.heroSub1.indexOf('. ');
+  let line1 = t.heroSub1;
+  let line2 = '';
+
+  if (dotIndex !== -1) {
+    line1 = t.heroSub1.substring(0, dotIndex + 1);
+    line2 = t.heroSub1.substring(dotIndex + 2);
+  }
+
   return (
     <section 
       className="hero-section"
@@ -69,7 +78,7 @@ export default function Hero({ t }: HeroProps) {
     >
       <style jsx>{`
         .hero-section {
-          padding: 2rem 0 4rem 0;
+          padding: 2.5rem 0 4rem 0;
           position: relative;
           z-index: 10;
           overflow: hidden;
@@ -105,11 +114,25 @@ export default function Hero({ t }: HeroProps) {
           margin: 0 0 1.5rem 0;
           color: #fff;
         }
-        .subtitles {
+        
+        .subtitles-block {
+          margin-bottom: 1.8rem;
+          display: block !important;
+        }
+        .sub-line-1, .sub-line-2 {
+          display: block !important;
           font-size: clamp(1rem, 1.6vw, 1.15rem);
           line-height: 1.5;
-          margin-bottom: 1.5rem;
+          margin: 0;
+        }
+        .sub-line-1 {
           color: ${T.body};
+        }
+        .sub-line-2 {
+          color: #fff;
+          font-weight: 500;
+          opacity: 0.9;
+          margin-top: 0.4rem;
         }
         
         .utp-highlight {
@@ -342,8 +365,9 @@ export default function Hero({ t }: HeroProps) {
           <span className="badge">{t.badge}</span>
           <h1 className="title">{t.heroTitle}</h1>
           
-          <div className="subtitles">
-            <p>{t.heroSub1}</p>
+          <div className="subtitles-block">
+            <div className="sub-line-1">{line1}</div>
+            {line2 && <div className="sub-line-2">{line2}</div>}
           </div>
           
           <div className="utp-highlight">
