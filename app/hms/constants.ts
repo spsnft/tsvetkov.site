@@ -44,14 +44,17 @@ export const contentData = {
       { endValue: 3, prefix: "", suffix: "x", label: "Local Search Visibility Increase" },
       { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Guest Bookings Rate" }
     ],
-    priceTitle: "Simple Pricing. No Hidden Fees.",
-    priceSub: "Fixed setup fee. Zero commission on direct bookings forever.",
+
+    // --- ОБНОВЛЕННЫЙ ПРЕМИАЛЬНЫЙ БЛОК PRICING ---
+    priceTitle: "Transparent Integration. Permanent Independence.",
+    priceSub: "One-time setup fee. Zero commission on direct bookings forever.",
     tier1Title: "LITE (1-10 Rooms)",
-    tier1Desc: "For independent villas and small guesthouses",
-    tier1F1: "✓ Core System Setup (PMS/Dashboard)",
+    tier1Desc: "For small villas and guesthouses",
+    tier1F1: "✓ Cloud PMS & Dashboard",
     tier1F2: "✓ Direct Website Booking button",
     tier1F3: "✓ Booking & Agoda Synchronization",
     tier1F4: "✓ Google Maps Setup",
+    
     tier2Title: "STANDARD (10-30 Rooms)",
     tier2Desc: "For boutique hotels and resorts",
     tier2F1: "✓ Everything in ",
@@ -59,6 +62,7 @@ export const contentData = {
     tier2F2: "✓ Connect 300+ OTA Channels",
     tier2F3: "✓ Guest Return System",
     tier2F4: "✓ Guides for your Staff (Visual SOPs)",
+    
     tier3Title: "ENTERPRISE (30+ Rooms)",
     tier3Desc: "For hotel chains and management firms",
     tier3F1: "✓ Everything in ",
@@ -66,6 +70,7 @@ export const contentData = {
     tier3F2: "✓ Anti-Theft Logs",
     tier3F3: "✓ Multichannel Ads Setup",
     tier3F4: "✓ Analytics Dashboard",
+
     aboutTitle: "Growth Architect & Tech Partner",
     aboutDesc: "International software integration and growth architecture provider. Operating as an offshore tech partner to maximize direct revenue and eliminate operational chaos for hospitality businesses globally.",
     aboutBtn: "View Professional Profile",
@@ -117,14 +122,17 @@ export const contentData = {
       { endValue: 3, prefix: "", suffix: "x", label: "การมองเห็นบน Google Maps ที่เพิ่มขึ้น" },
       { endValue: 35, prefix: "+", suffix: "%", label: "อัตราการกลับมาจองซ้ำของลูกค้า" }
     ],
-    priceTitle: "ราคาชัดเจน ไม่มีค่าใช้จ่ายแอบแฝง",
-    priceSub: "จ่ายค่าติดตั้งเพียงครั้งเดียว รับรายได้จากการจองตรงเต็มจำนวนตลอดไป",
+
+    // --- ОБНОВЛЕННЫЙ ТАЙСКИЙ ПЕРЕВОД PRICING ---
+    priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
+    priceSub: "จ่ายค่าติดตั้งครั้งเดียว ไม่มีค่าคอมมิชชั่นจากการจองตรงตลอดไป",
     tier1Title: "LITE (1-10 ห้อง)",
-    tier1Desc: "สำหรับวิลล่าส่วนตัวและเกสต์เฮาส์ขนาดเล็ก",
-    tier1F1: "✓ ติดตั้งระบบจัดการที่พัก (PMS)",
+    tier1Desc: "สำหรับวิลล่าและเกสต์เฮาส์ขนาดเล็ก",
+    tier1F1: "✓ ระบบ Cloud PMS & Dashboard",
     tier1F2: "✓ ปุ่ม 'จองเลย' บนเว็บไซต์ของคุณ",
     tier1F3: "✓ ซิงค์ปฏิทิน Booking & Agoda",
     tier1F4: "✓ ตั้งค่าโปรไฟล์ Google Maps",
+    
     tier2Title: "STANDARD (10-30 ห้อง)",
     tier2Desc: "สำหรับบูติกโฮเทลและรีสอร์ท",
     tier2F1: "✓ รวมทุกอย่างในแพ็กเกจ ",
@@ -132,6 +140,7 @@ export const contentData = {
     tier2F2: "✓ เชื่อมต่อช่องทางจองกว่า 300+ แห่ง",
     tier2F3: "✓ ระบบดึงลูกค้าเก่ากลับมาจองซ้ำ",
     tier2F4: "✓ คู่มือการใช้งานสำหรับพนักงาน (SOPs)",
+    
     tier3Title: "ENTERPRISE (30+ ห้อง)",
     tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
     tier3F1: "✓ รวมทุกอย่างในแพ็กเกจ ",
@@ -139,8 +148,9 @@ export const contentData = {
     tier3F2: "✓ ระบบตรวจสอบการทำงานพนักงาน (Anti-Theft)",
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แแดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
+
     aboutTitle: "พันธมิตรด้านเทคโนโลยีเพื่อการเติบโต",
-    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากล ทำงาน in ฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
+    aboutDesc: "ผู้เชี่ยวชาญด้านการวางระบบซอฟต์แวร์และการเติบโตในระดับสากл ทำงานในฐานะพันธมิตรเทคโนโลยีจากภายนอก (Offshore Partner) เพื่อเพิ่มรายได้จากการจองตรงและลดความวุ่นวายในการบริหารจัดการโรงแรมทั่วโลก",
     aboutBtn: "ดูประวัติการทำงาน",
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
