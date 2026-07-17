@@ -58,7 +58,6 @@ export default function Hero({ t }: HeroProps) {
     return '฿' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  // Разделение строк по первой точке
   const dotIndex = t.heroSub1.indexOf('. ');
   let line1 = t.heroSub1;
   let line2 = '';
@@ -84,11 +83,11 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
         
-        /* Сетка 60/40 делает левую часть доминирующей */
+        /* Сетка 57/43 и минимальный gap полностью убрали зеленый пустырь */
         .hero-grid {
           display: grid;
-          grid-template-columns: 60% 40%;
-          gap: 3.5rem;
+          grid-template-columns: 57% 43%;
+          gap: 1.5rem;
           align-items: center;
           position: relative;
         }
@@ -107,8 +106,6 @@ export default function Hero({ t }: HeroProps) {
           display: inline-block;
           margin-bottom: 1rem;
         }
-        
-        /* Слегка увеличили шрифты для массивности левой колонки */
         .title {
           font-size: clamp(2.4rem, 4.2vw, 3.8rem);
           font-weight: 700;
@@ -149,11 +146,12 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.6rem;
         }
 
-        /* ИЕРАРХИЯ CTA КНОПОК */
+        /* ВАРИАНТ А: Ликвидация красного пустыря через горизонтальный флекс */
         .cta-container {
           display: flex;
-          flex-direction: column;
-          gap: 1.2rem;
+          align-items: center;
+          gap: 2rem;
+          flex-wrap: wrap;
         }
         
         .btn-primary-main {
@@ -167,7 +165,7 @@ export default function Hero({ t }: HeroProps) {
           font-weight: 700;
           text-decoration: none;
           font-size: 1rem;
-          align-self: flex-start;
+          flex-shrink: 0;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           box-shadow: 0 10px 30px rgba(0, 229, 153, 0.15);
         }
@@ -181,12 +179,12 @@ export default function Hero({ t }: HeroProps) {
           display: flex;
           align-items: center;
           gap: 1.2rem;
-          margin-top: 0.2rem;
         }
         .chat-label {
           font-size: 0.85rem;
-          color: rgba(255, 255, 255, 0.3);
+          color: rgba(255, 255, 255, 0.25);
           font-weight: 500;
+          white-space: nowrap;
         }
         .btn-secondary-chat {
           display: inline-flex;
@@ -197,16 +195,11 @@ export default function Hero({ t }: HeroProps) {
           font-size: 0.88rem;
           font-weight: 600;
           transition: all 0.2s ease;
+          white-space: nowrap;
         }
         .btn-secondary-chat:hover {
           color: #fff;
           transform: translateY(-1px);
-        }
-        
-        .btn-icon { 
-          height: 18px; 
-          width: 18px; 
-          object-fit: contain;
         }
 
         /* КОЛОНКА С МОКАПОМ */
@@ -222,10 +215,10 @@ export default function Hero({ t }: HeroProps) {
           perspective: 1400px;
         }
         
-        /* Увеличили общий масштаб вылета мокапа, так как колонка сетки сузилась */
+        /* Смена aspect-ratio на 16/10.5 вылечила сплющенность логов */
         .dashboard-mockup {
-          width: 195%; 
-          aspect-ratio: 16 / 9;
+          width: 172%; 
+          aspect-ratio: 16 / 10.5; 
           background-color: rgba(13, 13, 17, 0.8);
           backdrop-filter: blur(12px);
           border: 1px solid rgba(255, 255, 255, 0.06);
@@ -233,10 +226,10 @@ export default function Hero({ t }: HeroProps) {
           transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg);
           transform-origin: left center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 229, 153, 0.01), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-          padding: 1.4rem;
+          padding: 1.2rem;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.9rem;
           position: relative;
         }
         
@@ -245,32 +238,32 @@ export default function Hero({ t }: HeroProps) {
           justify-content: space-between;
           align-items: center;
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          padding-bottom: 0.8rem;
+          padding-bottom: 0.7rem;
         }
         .pms-logo { font-family: monospace; font-size: 0.75rem; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
-        .sync-status { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #00E599; font-weight: 600; background: rgba(0, 225, 153, 0.05); padding: 0.35rem 0.7rem; border-radius: 20px; border: 1px solid rgba(0, 225, 153, 0.12); }
+        .sync-status { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #00E599; font-weight: 600; background: rgba(0, 225, 153, 0.05); padding: 0.3rem 0.6rem; border-radius: 20px; border: 1px solid rgba(0, 225, 153, 0.12); }
         .pulse-dot { width: 6px; height: 6px; background-color: #00E599; border-radius: 50%; animation: pulse 2s infinite; }
         
         .pms-body {
           display: flex;
-          gap: 1.5rem;
+          gap: 1.2rem;
           flex: 1;
           overflow: hidden;
         }
 
-        /* АНАЛИТИКА: Расширили до 250px. Больше читаемости, мощнее сдвиг шахматки */
+        /* АНАЛИТИКА: 215px — идеальный баланс между читаемостью текста и вылетом шахматки */
         .pms-analytics {
           display: flex;
           flex-direction: column;
-          gap: 0.6rem; 
-          flex: 0 0 250px;
+          gap: 0.55rem; 
+          flex: 0 0 215px;
           min-width: 0;
           overflow: hidden;
         }
         .widget {
           background: rgba(255, 255, 255, 0.01);
           border: 1px solid rgba(255, 255, 255, 0.03);
-          padding: 0.85rem 1rem;
+          padding: 0.75rem 0.95rem; /* Слегка поджали внутреннее мясо для экономии высоты */
           border-radius: 8px;
           min-width: 0;
           overflow: hidden;
@@ -279,29 +272,30 @@ export default function Hero({ t }: HeroProps) {
           border-left: 3px solid #00E599;
           background: rgba(255, 255, 255, 0.015);
         }
-        .widget-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
-        .widget-value { font-size: 1.55rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
-        .widget-sub { font-size: 0.65rem; color: #444; margin-top: 0.4rem; }
+        .widget-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+        .widget-value { font-size: 1.45rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
+        .widget-sub { font-size: 0.65rem; color: #444; margin-top: 0.3rem; }
         .text-green { color: #00E599; }
         
         .mini-chart {
           display: flex;
           align-items: flex-end;
           gap: 4px;
-          height: 28px;
-          margin-top: 0.5rem;
+          height: 24px;
+          margin-top: 0.4rem;
         }
         .bar { width: 12px; border-radius: 2px 2px 0 0; }
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
+        /* ЛОГИ: Полноценное окно, вмещающее все 5 строк */
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.02);
           flex: 1;
           display: flex;
           flex-direction: column;
-          height: 135px;
+          height: 145px; 
         }
         .logs-container {
           display: flex;
@@ -324,7 +318,7 @@ export default function Hero({ t }: HeroProps) {
           margin-right: 0.4rem;
         }
 
-        /* ШАХМАТКА БРОНИРОВАНИЙ */
+        /* ШАХМАТКА БРОНИРОВАНИЙ: Выдвинулась левее и теперь отлично читается */
         .pms-matrix {
           flex: 1;
           min-width: 0;
@@ -337,18 +331,18 @@ export default function Hero({ t }: HeroProps) {
         }
         .matrix-header {
           display: grid;
-          grid-template-columns: 85px repeat(7, 1fr);
+          grid-template-columns: 80px repeat(7, 1fr);
           border-bottom: 1px solid rgba(255, 255, 255, 0.04);
           font-size: 0.65rem;
           color: #555;
           text-align: center;
           background: rgba(255, 255, 255, 0.01);
         }
-        .matrix-header > div { padding: 0.7rem 0; border-right: 1px solid rgba(255, 255, 255, 0.01); }
+        .matrix-header > div { padding: 0.6rem 0; border-right: 1px solid rgba(255, 255, 255, 0.01); }
         
         .matrix-row {
           display: grid;
-          grid-template-columns: 85px repeat(7, 1fr);
+          grid-template-columns: 80px repeat(7, 1fr);
           border-bottom: 1px solid rgba(255, 255, 255, 0.02);
           flex: 1;
           position: relative;
@@ -356,7 +350,7 @@ export default function Hero({ t }: HeroProps) {
         .matrix-room-name {
           font-size: 0.7rem;
           color: #666;
-          padding: 0 0.6rem;
+          padding: 0 0.5rem;
           display: flex;
           align-items: center;
           border-right: 1px solid rgba(255, 255, 255, 0.04);
@@ -368,7 +362,7 @@ export default function Hero({ t }: HeroProps) {
           top: 6px; bottom: 6px;
           border-radius: 4px;
           font-size: 0.65rem;
-          padding: 0 0.6rem;
+          padding: 0 0.5rem;
           color: #fff;
           display: flex;
           align-items: center;
@@ -390,7 +384,7 @@ export default function Hero({ t }: HeroProps) {
           .hero-section { padding: 2rem 0 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; }
-          .btn-primary-main { align-self: center; }
+          .cta-container { flex-direction: column; align-items: center; }
           .secondary-chats { justify-content: center; }
           .utp-highlight { justify-content: center; }
           .dashboard-mockup { transform: none !important; width: 100% !important; }
@@ -401,7 +395,7 @@ export default function Hero({ t }: HeroProps) {
       `}</style>
 
       <div className="hero-grid">
-        {/* ЛЕВАЯ КОЛОНКА (60%) */}
+        {/* ЛЕВАЯ КОЛОНКА */}
         <div className="text-column">
           <span className="badge">{t.badge}</span>
           <h1 className="title">{t.heroTitle}</h1>
@@ -415,7 +409,7 @@ export default function Hero({ t }: HeroProps) {
             <span>→</span> {t.heroSub2}
           </div>
           
-          {/* ОБНОВЛЕННАЯ СТРУКТУРА КОНВЕРСИИ */}
+          {/* ГОРИЗОНТАЛЬНЫЙ БЛОК КОНВЕРСИИ */}
           <div className="cta-container">
             <a href="https://calendly.com/fediatsvetkov/15min" target="_blank" rel="noopener noreferrer" className="btn-primary-main">
               Book a Free Audit
@@ -425,19 +419,23 @@ export default function Hero({ t }: HeroProps) {
               <span className="chat-label">Or chat directly:</span>
               
               <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
-                <img src="/logos/whatsapp.svg" alt="WhatsApp" className="btn-icon" style={{ width: '18px', height: '18px', objectFit: 'contain' }} />
-                {t.btnChat}
+                <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                  <img src="/logos/whatsapp.svg" alt="WhatsApp" width="18" height="18" style={{ width: '18px', height: '18px', objectFit: 'contain', display: 'block' }} />
+                </div>
+                <span>{t.btnChat}</span>
               </a>
               
               <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
-                <img src="/logos/line.svg" alt="LINE" className="btn-icon" style={{ width: '24px', height: '24px', objectFit: 'contain', transform: 'scale(1.35)' }} />
-                {t.btnLine}
+                <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                  <img src="/logos/line.svg" alt="LINE" width="24" height="24" style={{ width: '24px', height: '24px', objectFit: 'contain', transform: 'scale(1.35)', display: 'block' }} />
+                </div>
+                <span>{t.btnLine}</span>
               </a>
             </div>
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА (40% + CINEMATIC CROP) */}
+        {/* ПРАВАЯ КОЛОНКА (ОБНОВЛЕННЫЕ ПРОПОРЦИИ) */}
         <div className="visual-column">
           <div className="perspective-wrapper">
             <div className="dashboard-mockup">
@@ -448,7 +446,7 @@ export default function Hero({ t }: HeroProps) {
               </div>
               
               <div className="pms-body">
-                {/* 1. АНАЛИТИКА (УВЕЛИЧЕННАЯ ШИРИНА) */}
+                {/* 1. АНАЛИТИКА */}
                 <div className="pms-analytics">
                   <div className="widget primary-focus">
                     <div className="widget-label">OTA Margin Saved</div>
@@ -477,6 +475,7 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
 
+                  {/* ПОЛНОРАЗМЕРНОЕ ОКНО ЛОГОВ */}
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
@@ -490,7 +489,7 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                 </div>
 
-                {/* 2. ШАХМАТКА БРОНИРОВАНИЙ */}
+                {/* 2. ШАХМАТКА (ВЫРАВНЕННАЯ СЕТКА) */}
                 <div className="pms-matrix">
                   <div className="matrix-header">
                     <div>ROOM</div>
@@ -499,26 +498,26 @@ export default function Hero({ t }: HeroProps) {
                   
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 1</div>
-                    <div className="booking b-direct" style={{ left: 'calc(85px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
-                    <div className="booking b-booking" style={{ left: 'calc(85px + 35%)', width: 'calc(55% - 4px)' }}>Booking.com • Lee</div>
+                    <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
+                    <div className="booking b-booking" style={{ left: 'calc(80px + 35%)', width: 'calc(55% - 4px)' }}>Booking.com • Lee</div>
                   </div>
                   
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 2</div>
-                    <div className="booking b-agoda" style={{ left: 'calc(85px + 10%)', width: 'calc(45% - 4px)' }}>Agoda • Kumar</div>
-                    <div className="booking b-direct" style={{ left: 'calc(85px + 65%)', width: 'calc(30% - 4px)' }}>Direct • VIP</div>
+                    <div className="booking b-agoda" style={{ left: 'calc(80px + 10%)', width: 'calc(45% - 4px)' }}>Agoda • Kumar</div>
+                    <div className="booking b-direct" style={{ left: 'calc(80px + 65%)', width: 'calc(30% - 4px)' }}>Direct • VIP</div>
                   </div>
 
                   <div className="matrix-row">
                     <div className="matrix-room-name">Room 101</div>
-                    <div className="booking b-direct" style={{ left: 'calc(85px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
-                    <div className="booking b-booking" style={{ left: 'calc(85px + 60%)', width: 'calc(40% - 4px)' }}>Booking.com • Davis</div>
+                    <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
+                    <div className="booking b-booking" style={{ left: 'calc(80px + 60%)', width: 'calc(40% - 4px)' }}>Booking.com • Davis</div>
                   </div>
 
                   <div className="matrix-row">
                     <div className="matrix-room-name">Room 102</div>
-                    <div className="booking b-booking" style={{ left: 'calc(85px + 0%)', width: 'calc(35% - 4px)' }}>Booking.com • Brown</div>
-                    <div className="booking b-direct" style={{ left: 'calc(85px + 38%)', width: 'calc(62% - 4px)' }}>Direct • Website</div>
+                    <div className="booking b-booking" style={{ left: 'calc(80px + 0%)', width: 'calc(35% - 4px)' }}>Booking.com • Brown</div>
+                    <div className="booking b-direct" style={{ left: 'calc(80px + 38%)', width: 'calc(62% - 4px)' }}>Direct • Website</div>
                   </div>
                 </div>
 
