@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { T } from '../../src/theme/tokens';
-import { T } from '../../../src/theme/tokens'; // <-- Было два ../, стало три
+import { T } from '../../../src/theme/tokens';
 
 interface MetricItem {
   endValue: number;
@@ -24,7 +23,7 @@ function ProofCounter({ end, duration, prefix, suffix, isVisible }: {
   prefix: string; 
   suffix: string; 
   isVisible: boolean; 
-}) {
+ }) {
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
