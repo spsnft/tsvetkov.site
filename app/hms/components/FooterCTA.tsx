@@ -21,7 +21,7 @@ export default function FooterCTA({ t }: FooterCTAProps) {
       position: 'relative'
     }}>
       
-      {/* Деликатный фоновый блик, дублирующий атмосферу главного экрана */}
+      {/* Фоновый деликатный блик */}
       <div style={{ 
         position: 'absolute', 
         top: '0', 
@@ -37,7 +37,6 @@ export default function FooterCTA({ t }: FooterCTAProps) {
       }} />
 
       <div style={{ position: 'relative', zIndex: 2 }}>
-        {/* Мощный заголовок-триггер */}
         <h2 style={{ 
           fontSize: '2.6rem', 
           fontWeight: 700, 
@@ -49,23 +48,23 @@ export default function FooterCTA({ t }: FooterCTAProps) {
           {t.footerTitle}
         </h2>
 
-        {/* Высококонверсионная премиальная кнопка */}
+        {/* Плотная, тяжелая B2B кнопка с идеальным балансом градиента и текста */}
         <a 
           href="https://calendly.com/fedor_tsvetkov/30min" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="cta-gradient-btn"
           style={{ 
             background: T.linearGradient, 
             color: '#0A0A0C', 
-            padding: '1.1rem 3.5rem', 
+            padding: '1rem 2.8rem', // Сжатые отступы для плотности
             borderRadius: '8px', 
-            fontWeight: 700, 
-            fontSize: '1.05rem',
+            fontWeight: 800,        // Максимальная жирность для читаемости на градиенте
+            fontSize: '1.1rem',      // Крупный акцентный размер шрифта
             textDecoration: 'none', 
             display: 'inline-block', 
             boxShadow: '0 10px 30px -10px rgba(0, 255, 179, 0.3)',
-            transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            letterSpacing: '-0.01em'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
