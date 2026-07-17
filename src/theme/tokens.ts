@@ -11,4 +11,12 @@ export const T = {
   acc2:   '#00C6FF',
   glow:   'rgba(0,255,179,0.08)',
   glow2:  'rgba(0,198,255,0.05)',
+
+  // ФИРМЕННЫЕ ГРАДИЕНТЫ ДЛЯ ПОВТОРНОГО ИСПОЛЬЗОВАНИЯ
+  linearGradient: 'linear-gradient(135deg, #00FFB3 0%, #00C6FF 100%)',
+  textGradientStyles: {
+    background: 'linear-gradient(135deg, #00FFB3 0%, #00C6FF 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  },
 } as const;
