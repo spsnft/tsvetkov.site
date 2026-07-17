@@ -10,8 +10,10 @@ import { contentData } from './constants';
 
 // Импорт изолированных компонентов секций
 import Hero from './components/Hero';
-import LogoMarquee from './components/LogoMarquee'; // <-- Добавлен импорт строки
+import LogoMarquee from './components/LogoMarquee';
 import BentoGrid from './components/BentoGrid';
+import ScalePractice from './components/ScalePractice'; // <-- Добавлен новый блок
+import Deliverables from './components/Deliverables';   // <-- Добавлен новый блок
 import Pricing from './components/Pricing';
 import About from './components/About';
 import FooterCTA from './components/FooterCTA';
@@ -89,11 +91,17 @@ export default function HospitalityB2B() {
         {/* БЛОК 1: ПЕРВЫЙ ЭКРАН */}
         <Hero t={t} />
 
-        {/* БЛОК 1.5: БЕГУЩАЯ СТРОКА ЛОГОТИПОВ (МЕЖДУ HERO И BENTO) */}
+        {/* БЛОК 1.5: БЕГУЩАЯ СТРОКА ЛОГОТИПОВ */}
         <LogoMarquee />
 
-        {/* БЛОК 2: БОЛИ + РЕШЕНИЯ + ФАЗЫ ПРОЕКТА */}
+        {/* БЛОК 2: БОЛИ + РЕШЕНИЯ */}
         <BentoGrid t={t} />
+
+        {/* НОВЫЙ БЛОК 2.3: ОПТИМИЗАЦИЯ ПРОЦЕССОВ (КЛОН CLARION ПОД ТВОЮ НИШУ) */}
+        <ScalePractice t={t} />
+
+        {/* НОВЫЙ БЛОК 2.6: ФАЗЫ ПРОЕКТА */}
+        <Deliverables t={t} />
 
         <hr style={{ border: 0, borderTop: `1px solid ${T.border}`, margin: '4rem 0' }} />
 
