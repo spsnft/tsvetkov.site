@@ -96,9 +96,9 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           border-right: 1px solid ${T.border};
         }
         
-        /* Крупные цифры пруфов теперь переливаются фирменным градиентом */
+        /* Исправлено: корректный CSS-синтаксис. Теперь цифры огромные и читаемые */
         .metric-number {
-          fontSize: 3rem; 
+          font-size: clamp(3rem, 4.5vw, 3.8rem);
           font-weight: 700; 
           line-height: 1; 
           letter-spacing: -0.03em;
