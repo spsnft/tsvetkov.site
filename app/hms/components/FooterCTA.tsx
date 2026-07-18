@@ -1,82 +1,138 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { T } from '../../../src/theme/tokens';
 
 interface FooterCTAProps {
   t: {
-    footerTitle: string;
-    footerBtn: string;
+    footerTitle?: string;
+    footerSub?: string;
+    btnAudit?: string;
+    [key: string]: any;
   };
 }
 
 export default function FooterCTA({ t }: FooterCTAProps) {
+  const titleText = t?.footerTitle || "Ready to Eliminate Commission Leakage?";
+  const subText = t?.footerSub || "Stop leaving 15-20% on the table. Let's build your high-converting direct booking engine.";
+  const btnText = t?.btnAudit || "Book a Free Audit";
+
+  useEffect(() => {
+    // Дефенсивно подтягиваем стили и скрипты Calendly на случай, если юзер обновился внизу страницы
+    if (!document.getElementById('calendly-w-css')) {
+      const link = document.createElement('link');
+      link.id = 'calendly-w-css';
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+
+    if (!document.getElementById('calendly-w-js')) {
+      const script = document.createElement('script');
+      script.id = 'calendly-w-js';
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  const handleCalendlyPopup = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // @ts-ignore
+    if (window.Calendly) {
+      // @ts-ignore
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/fediatsvetkov/15min',
+        // Тонкая настройка глубокой темной темы виджета
+        pageSettings: {
+          backgroundColor: '0d0d11', // Угольный фон под цвет секций сайта
+          textColor: 'ffffff',       // Белый текст
+          primaryColor: '00e599',    // Фирменный неоновый изумруд для кнопок и дат
+          hideGdprBanner: true
+        }
+      });
+    } else {
+      window.open('https://calendly.com/fediatsvetkov/15min?background_color=0d0d11&text_color=ffffff&primary_color=00e599', '_blank');
+    }
+  };
+
   return (
-    <section style={{ 
-      width: '100%', 
-      borderTop: `1px solid ${T.border}`, 
-      backgroundColor: 'transparent', 
-      textAlign: 'center', 
-      padding: '6rem 1.5rem 8rem 1.5rem',
-      position: 'relative'
-    }}>
-      
-      {/* Фоновый деликатный блик */}
-      <div style={{ 
-        position: 'absolute', 
-        top: '0', 
-        left: '50%', 
-        transform: 'translateX(-50%)', 
-        width: '400px', 
-        height: '400px', 
-        borderRadius: '50%', 
-        background: `radial-gradient(circle, ${T.glow2} 0%, transparent 70%)`, 
-        opacity: 0.6, 
-        pointerEvents: 'none',
-        zIndex: 1 
-      }} />
+    <section className="footer-cta-section">
+      <style jsx>{`
+        .footer-cta-section {
+          width: 100%;
+          padding: 7rem 1.5rem;
+          text-align: center;
+          position: relative;
+          background: transparent;
+        }
+        
+        .cta-box {
+          max-width: 800px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1.5rem;
+        }
+        
+        .main-title {
+          font-size: clamp(2.2rem, 4vw, 3.4rem);
+          font-weight: 700;
+          line-height: 1.1;
+          letter-spacing: -0.03em;
+          margin: 0;
+          color: #ffffff;
+          text-wrap: pretty;
+        }
+        
+        .subtitle {
+          color: ${T.sub};
+          font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+          line-height: 1.5;
+          max-width: 580px;
+          margin: 0 0 1.5rem 0;
+          text-wrap: pretty;
+        }
+        
+        .btn-gradient-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #000000 !important;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          padding: 1.2rem 3rem;
+          border-radius: 8px;
+          font-weight: 700;
+          font-size: 1.05rem;
+          text-decoration: none;
+          border: none;
+          cursor: pointer;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.25), 0 10px 30px rgba(0, 163, 255, 0.15);
+        }
+        
+        .btn-gradient-cta:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.4), 0 15px 40px rgba(0, 163, 255, 0.25);
+          filter: brightness(1.08);
+        }
+        
+        @media (max-width: 768px) {
+          .footer-cta-section {
+            padding: 5rem 1rem;
+          }
+        }
+      `}</style>
 
-      <div style={{ position: 'relative', zIndex: 2 }}>
-        <h2 style={{ 
-          fontSize: '2.6rem', 
-          fontWeight: 700, 
-          marginBottom: '2.5rem', 
-          letterSpacing: '-0.02em', 
-          color: '#fff',
-          lineHeight: 1.2
-        }}>
-          {t.footerTitle}
-        </h2>
-
-        {/* Плотная, тяжелая B2B кнопка с идеальным балансом градиента и текста */}
-        <a 
-          href="https://calendly.com/fedor_tsvetkov/30min" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          style={{ 
-            background: T.linearGradient, 
-            color: '#0A0A0C', 
-            padding: '1rem 2.8rem', // Сжатые отступы для плотности
-            borderRadius: '8px', 
-            fontWeight: 800,        // Максимальная жирность для читаемости на градиенте
-            fontSize: '1.1rem',      // Крупный акцентный размер шрифта
-            textDecoration: 'none', 
-            display: 'inline-block', 
-            boxShadow: '0 10px 30px -10px rgba(0, 255, 179, 0.3)',
-            transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            letterSpacing: '-0.01em'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 15px 40px -8px rgba(0, 255, 179, 0.45)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0, 255, 179, 0.3)';
-          }}
-        >
-          {t.footerBtn}
-        </a>
+      <div className="cta-box">
+        <h2 className="main-title">{titleText}</h2>
+        <p className="subtitle">{subText}</p>
+        
+        <button onClick={handleCalendlyPopup} className="btn-gradient-cta">
+          {btnText}
+        </button>
       </div>
     </section>
   );
