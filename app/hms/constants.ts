@@ -9,14 +9,14 @@ export const contentData = {
     
     // --- ГИБРИДНЫЙ БЛОК PAIN + VALUE + DELIVERABLES ---
     scaleTitle: "Scale your property bookings",
-    scaleSub: "Automate repetitive backend workflows so your team can focus on guest experience",
+    scaleSub: "Automate workflows so your team can focus on guest experience",
     scaleItems: [
       {
         pain: "24/7 manual updates",
         startValue: 24,
         endValue: 1,
         suffix: " second",
-        fixText: " synchronization",
+        fixText: " sync",
         desc: "Cloud PMS & Channel Manager integration. Every reservation **locks your entire grid automatically** across Booking.com, Agoda & 300+ OTAs"
       },
       {
@@ -37,7 +37,8 @@ export const contentData = {
       }
     ],
 
-    proofTitle: "Empowering properties to maximize direct revenue",
+    // Утверждено: Сильная связка заголовка и первой метрики
+    proofTitle: "Maximize Direct Booking Revenue",
     proofMetrics: [
       { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue Growth" },
       { endValue: 70, prefix: "60-", suffix: "%", label: "Margin Boost per Every Guest" },
@@ -61,7 +62,7 @@ export const contentData = {
     tier2F1Badge: "LITE",
     tier2F2: "✓ Connect 300+ OTA Channels",
     tier2F3: "✓ Guest Return System",
-    tier2F4: "✓ Guides for your Staff (Visual SOPs)",
+    tier2F4: "✓ Guides for your Staff", // Убрали скобки (Visual SOPs)
     
     tier3Title: "ENTERPRISE (30+ Rooms)",
     tier3Desc: "For hotel chains & management firms",
@@ -96,7 +97,7 @@ export const contentData = {
         startValue: 24,
         endValue: 1,
         suffix: " วินาที",
-        fixText: " ในการซิงค์ข้อมูล",
+        fixText: " ซิงค์ระบบ",
         desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) และ Channel Manager ทุกการจอง **ล็อกสถานะห้องพักโดยอัตโนมัติ** บน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
@@ -113,7 +114,7 @@ export const contentData = {
         endValue: 10,
         suffix: " เท่า",
         fixText: " ของยอดจองตรง",
-        desc: "ทำสิ่งอำนวยความสะดวกด้าน Local SEO เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่ง **แคมเปญกระตุ้นการกลับมาจองซ้ำ** ของลูกค้าโดยอัตโนมัติ"
+        desc: "ทำสิ่งอำнวยความสะดวกด้าน Local SEO เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่ง **แคมเปญกระตุ้นการกลับมาจองซ้ำ** ของลูกค้าโดยอัตโนมัติ"
       }
     ],
 
@@ -140,7 +141,7 @@ export const contentData = {
     tier2F1Badge: "LITE",
     tier2F2: "✓ เชื่อมต่อช่องทางจองกว่า 300+ แห่ง",
     tier2F3: "✓ ระบบดึงลูกค้าเก่ากลับมาจองซ้ำ",
-    tier2F4: "✓ คู่มือการใช้งานสำหรับพนักงาน (SOPs)",
+    tier2F4: "✓ คู่มือการใช้งานสำหรับพนักงาน",
     
     tier3Title: "ENTERPRISE (30+ ห้อง)",
     tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
@@ -151,7 +152,7 @@ export const contentData = {
     tier3F4: "✓ แแดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
 
     aboutTitle: "ระบบ การเพิ่มประสิทธิภาพ และการขยายขนาด",
-    aboutDesc: "พันธมิตรด้านโครงสร้างพื้นฐานที่มุ่งเน้นผลลัพธ์ ออกแบบมาเพื่อเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
+    aboutDesc: "พันธมิตรด้านโครงสร้างพื้นฐานที่มุ่งเน้นผลลัพธ์ ออกแบบมาเพื่อเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไкаเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
     aboutBtn: "ดูประวัติการทำงาน",
     
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
