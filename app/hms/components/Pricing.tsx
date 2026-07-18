@@ -2,7 +2,12 @@
 
 import React from 'react';
 
-export default function Pricing() {
+// Описываем интерфейс входящих пропсов для тарифов
+interface PricingProps {
+  t?: any;
+}
+
+export default function Pricing({ t }: PricingProps) {
   return (
     <section className="pricing-section">
       <style jsx>{`
@@ -26,7 +31,7 @@ export default function Pricing() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 2rem;
-          align-items: stretch; /* Заставляет гриды тянуть карточки на одну высоту */
+          align-items: stretch;
         }
 
         .pricing-card {
@@ -36,7 +41,7 @@ export default function Pricing() {
           padding: 3rem 2rem 2.5rem 2rem;
           text-align: left;
           display: flex;
-          flex-direction: column; /* Включаем флекс-контейнер для внутренних элементов */
+          flex-direction: column;
           position: relative;
         }
 
@@ -110,7 +115,7 @@ export default function Pricing() {
         }
 
         .btn-pricing {
-          margin-top: auto; /* Главный трюк: выталкивает кнопку к самому низу карточки */
+          margin-top: auto;
           width: 100%;
           padding: 1.1rem;
           border-radius: 8px;
