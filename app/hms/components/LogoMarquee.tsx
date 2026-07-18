@@ -23,7 +23,7 @@ export default function LogoMarquee() {
         .marquee-wrapper {
           width: 100%;
           overflow: hidden;
-          padding: 2.5rem 0;
+          padding: 3rem 0;
           position: relative;
           background: linear-gradient(90deg, rgba(10,10,12,0) 0%, rgba(255,255,255,0.02) 50%, rgba(10,10,12,0) 100%);
           border-top: 1px solid rgba(255, 255, 255, 0.03);
@@ -35,19 +35,18 @@ export default function LogoMarquee() {
           display: flex;
           width: max-content;
           animation: scroll 35s linear infinite; 
-          gap: 5rem;
+          gap: 5.5rem;
           align-items: center;
         }
         .marquee-track:hover {
           animation-play-state: paused;
         }
         
-        /* Жесткий контейнер-фрейм для идеального выравнивания по осям */
         .logo-item {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 35px; 
+          height: 48px; 
           transition: all 0.3s ease;
           opacity: 0.35; 
         }
@@ -56,23 +55,22 @@ export default function LogoMarquee() {
           opacity: 0.9; 
         }
         
-        /* Базовый размер для стандартных пропорций */
         .marquee-img {
-          height: 22px;
+          height: 28px; 
           width: auto;
-          max-width: 130px;
+          max-width: 150px;
           object-fit: contain;
           display: block;
         }
 
-        /* Оптическая калибровка веса (фиксируем разницу размеров без изменения файлов) */
-        .marquee-img[src*="Booking"] { height: 27px; }
-        .marquee-img[src*="Hostelworld"] { height: 15px; }
-        .marquee-img[src*="Hotelbeds"] { height: 15px; }
-        .marquee-img[src*="tripadvisor"] { height: 25px; }
-        .marquee-img[src*="Agoda"] { height: 20px; }
-        .marquee-img[src*="AirBNB"] { height: 20px; }
-        .marquee-img[src*="Traveloka"] { height: 20px; }
+        /* Оптическая калибровка под увеличенный формат */
+        .marquee-img[src*="Booking"] { height: 36px; }
+        .marquee-img[src*="Hostelworld"] { height: 19px; }
+        .marquee-img[src*="Hotelbeds"] { height: 19px; }
+        .marquee-img[src*="tripadvisor"] { height: 33px; }
+        .marquee-img[src*="Agoda"] { height: 26px; }
+        .marquee-img[src*="AirBNB"] { height: 26px; }
+        .marquee-img[src*="Traveloka"] { height: 26px; }
 
         @keyframes scroll {
           0% { transform: translateX(0); }
