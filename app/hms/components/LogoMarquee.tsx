@@ -41,10 +41,13 @@ export default function LogoMarquee() {
         .marquee-track:hover {
           animation-play-state: paused;
         }
+        
+        /* Жесткий контейнер-фрейм для идеального выравнивания по осям */
         .logo-item {
           display: flex;
           align-items: center;
           justify-content: center;
+          height: 35px; 
           transition: all 0.3s ease;
           opacity: 0.35; 
         }
@@ -52,11 +55,25 @@ export default function LogoMarquee() {
           transform: scale(1.03);
           opacity: 0.9; 
         }
+        
+        /* Базовый размер для стандартных пропорций */
         .marquee-img {
-          height: 24px;
+          height: 22px;
           width: auto;
+          max-width: 130px;
+          object-fit: contain;
           display: block;
         }
+
+        /* Оптическая калибровка веса (фиксируем разницу размеров без изменения файлов) */
+        .marquee-img[src*="Booking"] { height: 27px; }
+        .marquee-img[src*="Hostelworld"] { height: 15px; }
+        .marquee-img[src*="Hotelbeds"] { height: 15px; }
+        .marquee-img[src*="tripadvisor"] { height: 25px; }
+        .marquee-img[src*="Agoda"] { height: 20px; }
+        .marquee-img[src*="AirBNB"] { height: 20px; }
+        .marquee-img[src*="Traveloka"] { height: 20px; }
+
         @keyframes scroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-33.333%); }
