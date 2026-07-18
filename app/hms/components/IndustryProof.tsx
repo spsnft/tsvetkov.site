@@ -86,7 +86,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           grid-template-columns: repeat(4, 1fr);
         }
         .proof-col {
-          padding: 4.5rem 3rem;
+          padding: 4.5rem 2rem; 
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
@@ -96,9 +96,9 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           border-right: 1px solid ${T.border};
         }
         
-        /* Исправлено: корректный CSS-синтаксис. Теперь цифры огромные и читаемые */
+        /* Исправлено: зажали в nowrap и сделали шаг шрифта адаптивным, чтобы 60-70% не ломалось */
         .metric-number {
-          font-size: clamp(3rem, 4.5vw, 3.8rem);
+          font-size: clamp(2.2rem, 3.6vw, 3.6rem);
           font-weight: 700; 
           line-height: 1; 
           letter-spacing: -0.03em;
@@ -106,6 +106,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           display: inline-block;
+          white-space: nowrap; 
         }
 
         .metric-label {
