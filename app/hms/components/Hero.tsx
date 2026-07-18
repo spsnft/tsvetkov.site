@@ -96,15 +96,18 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
           z-index: 2;
         }
+        
+        /* Исправлено: Дорогой серебристый монохром вместо кричащего зеленого */
         .badge {
-          color: #00E599;
+          color: rgba(255, 255, 255, 0.45);
           text-transform: uppercase;
-          letter-spacing: 0.2em;
-          font-size: 0.75rem;
+          letter-spacing: 0.25em;
+          font-size: 0.72rem;
           font-weight: 700;
           display: inline-block;
-          margin-bottom: 1rem;
+          margin-bottom: 1.2rem;
         }
+        
         .title {
           font-size: clamp(2.4rem, 4.2vw, 3.8rem);
           font-weight: 700;
@@ -131,7 +134,6 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 0.4rem;
         }
         
-        /* УТП с акцентным фирменным стилем */
         .utp-highlight {
           font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
@@ -157,7 +159,6 @@ export default function Hero({ t }: HeroProps) {
           flex-wrap: wrap;
         }
         
-        /* Фирменная литая градиентная кнопка по твоему скриншоту */
         .btn-primary-main {
           display: inline-flex;
           align-items: center;
@@ -231,7 +232,7 @@ export default function Hero({ t }: HeroProps) {
           border-radius: 14px;
           transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg) translateX(0px); 
           transform-origin: left center;
-          box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 229, 153, 0.01), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+          box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.08);
           padding: 1.2rem;
           display: flex;
           flex-direction: column;
@@ -246,19 +247,28 @@ export default function Hero({ t }: HeroProps) {
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           padding-bottom: 0.4rem;
         }
+        
+        /* Исправлено: Элегантная темная капсула статуса вместо яркой зеленой плашки */
         .sync-status { 
           display: flex; 
           align-items: center; 
           gap: 0.5rem; 
           font-size: 0.72rem; 
-          color: #00E599; 
+          color: rgba(255, 255, 255, 0.8); 
           font-weight: 600; 
-          background: rgba(0, 225, 153, 0.05); 
-          padding: 0.25rem 0.6rem; 
+          background: rgba(255, 255, 255, 0.03); 
+          padding: 0.25rem 0.65rem; 
           border-radius: 20px; 
-          border: 1px solid rgba(0, 225, 153, 0.12); 
+          border: 1px solid rgba(255, 255, 255, 0.06); 
         }
-        .pulse-dot { width: 6px; height: 6px; background-color: #00E599; border-radius: 50%; animation: pulse 2s infinite; }
+        .pulse-dot { 
+          width: 6px; 
+          height: 6px; 
+          background-color: #00E599; 
+          border-radius: 50%; 
+          box-shadow: 0 0 8px #00E599;
+          animation: pulse 2s infinite; 
+        }
         
         .pms-body {
           display: flex;
@@ -284,7 +294,6 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
         
-        /* Виджет маржи с фирменной градиентной полосой слева */
         .widget.primary-focus {
           position: relative;
           background: rgba(255, 255, 255, 0.015);
@@ -401,7 +410,6 @@ export default function Hero({ t }: HeroProps) {
           white-space: nowrap;
           box-shadow: 0 3px 10px rgba(0,0,0,0.4);
         }
-        /* Direct плашки переведены на фирменный градиент */
         .b-direct { background: linear-gradient(90deg, #00E599 0%, #00A3FF 100%); color: #000; font-weight: 600; }
         .b-booking { background: linear-gradient(90deg, #003580 0%, #0050c2 100%); }
         .b-agoda { background: linear-gradient(90deg, #873335 0%, #cc474b 100%); }
@@ -426,6 +434,7 @@ export default function Hero({ t }: HeroProps) {
         }
       `}</style>
 
+      {/* Оставшаяся верстка структуры идентична предыдущей */}
       <div className="hero-grid">
         <div className="text-column">
           <span className="badge">{t.badge}</span>
