@@ -3,7 +3,24 @@
 import React from 'react';
 import { T } from '../../../src/theme/tokens';
 
-export default function About() {
+// Описываем интерфейс, чтобы TypeScript больше не ругался при сборке
+interface AboutProps {
+  t: {
+    aboutLabel?: string;
+    aboutTitle?: string;
+    aboutDesc?: string;
+    aboutBtn?: string;
+    [key: string]: any;
+  };
+}
+
+export default function About({ t }: AboutProps) {
+  // Вытягиваем данные из конфига с безопасным фолбеком на случай несовпадения ключей
+  const labelText = t?.aboutLabel || "Growth Architecture";
+  const titleText = t?.aboutTitle || "Systems, Optimization & Scale";
+  const descText = t?.aboutDesc || t?.aboutDescription || "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
+  const btnText = t?.aboutBtn || t?.aboutButton || "View Professional Profile";
+
   return (
     <section className="about-section">
       <style jsx>{`
@@ -20,7 +37,7 @@ export default function About() {
           gap: 4rem;
           max-width: 1200px;
           margin: 0 auto;
-          align-items: transform;
+          align-items: start;
         }
         
         .left-col {
@@ -29,7 +46,6 @@ export default function About() {
           gap: 0.6rem;
         }
         
-        /* П.7 — Благородный приглушенный монохром вместо грязного зеленого */
         .sub-label {
           color: rgba(255, 255, 255, 0.4);
           font-size: 0.75rem;
@@ -39,6 +55,7 @@ export default function About() {
           margin: 0;
         }
         
+        /* Заголовок с фирменным градиентом */
         .main-title {
           font-size: clamp(2rem, 3.5vw, 2.8rem);
           font-weight: 700;
@@ -66,15 +83,14 @@ export default function About() {
           text-wrap: pretty;
         }
         
-        /* П.8 — Премиальный Dark Glassmorphism для кнопки */
+        /* Кнопка в фирменном B2B стиле: аккуратный изумрудный контур с подсветкой */
         .view-profile-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: rgba(255, 255, 255, 0.85);
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          backdrop-filter: blur(8px);
+          color: #00E599;
+          background: rgba(0, 229, 153, 0.02);
+          border: 1px solid rgba(0, 229, 153, 0.3);
           padding: 0.9rem 2.2rem;
           border-radius: 8px;
           font-weight: 600;
@@ -85,9 +101,9 @@ export default function About() {
         
         .view-profile-btn:hover {
           color: #fff;
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(255, 255, 255, 0.3);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          background: rgba(0, 229, 153, 0.08);
+          border-color: #00E599;
+          box-shadow: 0 0 25px rgba(0, 229, 153, 0.15);
           transform: translateY(-1px);
         }
         
@@ -107,17 +123,15 @@ export default function About() {
 
       <div className="about-grid">
         <div className="left-col">
-          <p className="sub-label">Growth Architecture</p>
-          <h2 className="main-title">Systems, Optimization & Scale</h2>
+          <p className="sub-label">{labelText}</p>
+          <h2 className="main-title">{titleText}</h2>
         </div>
         
         <div className="right-col">
-          <p className="description">
-            A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue
-          </p>
+          <p className="description">{descText}</p>
           
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="view-profile-btn">
-            View Professional Profile
+            {btnText}
           </a>
         </div>
       </div>
