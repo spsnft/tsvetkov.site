@@ -3,104 +3,123 @@
 import React from 'react';
 import { T } from '../../../src/theme/tokens';
 
-interface AboutProps {
-  t: {
-    aboutTitle: string;
-    aboutDesc: string;
-    aboutBtn: string;
-  };
-}
-
-export default function About({ t }: AboutProps) {
+export default function About() {
   return (
-    <section style={{ width: '100%', borderBottom: `1px solid ${T.border}`, backgroundColor: 'transparent' }}>
+    <section className="about-section">
       <style jsx>{`
+        .about-section {
+          width: 100%;
+          padding: 6rem 2rem;
+          border-bottom: 1px solid ${T.border};
+          background: transparent;
+        }
+        
         .about-grid {
           display: grid;
-          grid-template-columns: 1fr 2fr;
+          grid-template-columns: 38% 62%;
+          gap: 4rem;
+          max-width: 1200px;
+          margin: 0 auto;
+          align-items: transform;
         }
-        .about-left {
-          padding: 4.5rem 3rem;
-          border-right: 1px solid ${T.border};
+        
+        .left-col {
           display: flex;
           flex-direction: column;
-          justify-content: flex-start;
+          gap: 0.6rem;
         }
-        .about-right {
-          padding: 4.5rem 3rem;
+        
+        /* П.7 — Благородный приглушенный монохром вместо грязного зеленого */
+        .sub-label {
+          color: rgba(255, 255, 255, 0.4);
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          margin: 0;
+        }
+        
+        .main-title {
+          font-size: clamp(2rem, 3.5vw, 2.8rem);
+          font-weight: 700;
+          line-height: 1.15;
+          letter-spacing: -0.02em;
+          margin: 0;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-wrap: pretty;
+        }
+        
+        .right-col {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          justify-content: flex-start;
-          gap: 2rem;
+          gap: 2.2rem;
         }
+        
+        .description {
+          color: ${T.sub};
+          font-size: 1.05rem;
+          line-height: 1.6;
+          margin: 0;
+          text-wrap: pretty;
+        }
+        
+        /* П.8 — Премиальный Dark Glassmorphism для кнопки */
+        .view-profile-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(255, 255, 255, 0.85);
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          backdrop-filter: blur(8px);
+          padding: 0.9rem 2.2rem;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          text-decoration: none;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .view-profile-btn:hover {
+          color: #fff;
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(255, 255, 255, 0.3);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          transform: translateY(-1px);
+        }
+        
         @media (max-width: 992px) {
+          .about-section {
+            padding: 4rem 1.5rem;
+          }
           .about-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
+            gap: 2rem;
           }
-          .about-left {
-            border-right: none !important;
-            border-bottom: 1px solid ${T.border};
-            padding: 3rem 1.5rem !important;
-          }
-          .about-right {
-            padding: 3rem 1.5rem !important;
+          .right-col {
+            gap: 1.8rem;
           }
         }
       `}</style>
 
       <div className="about-grid">
-        
-        {/* ЛЕВАЯ КОЛОНКА (1/3) — Теперь с фирменным градиентом */}
-        <div className="about-left">
-          <span style={{ color: T.accent, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>
-            GROWTH ARCHITECTURE
-          </span>
-          <h2 style={{ 
-            fontSize: '2.4rem', 
-            fontWeight: 800, 
-            margin: 0, 
-            lineHeight: 1.2, 
-            letterSpacing: '-0.02em',
-            ...T.textGradientStyles 
-          }}>
-            {t.aboutTitle}
-          </h2>
+        <div className="left-col">
+          <p className="sub-label">Growth Architecture</p>
+          <h2 className="main-title">Systems, Optimization & Scale</h2>
         </div>
-
-        {/* ПРАВАЯ КОЛОНКА (2/3) — Идеальная базовая линия */}
-        <div className="about-right">
-          <p style={{ color: T.body, lineHeight: 1.65, fontSize: '1.05rem', margin: 0, fontWeight: 500, textWrap: 'pretty' }}>
-            {t.aboutDesc}
+        
+        <div className="right-col">
+          <p className="description">
+            A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue
           </p>
           
-          <a 
-            href="/" 
-            style={{ 
-              border: `1px solid ${T.border}`, 
-              backgroundColor: 'rgba(255,255,255,0.015)',
-              color: '#fff', 
-              padding: '0.8rem 2.2rem', 
-              borderRadius: '6px', 
-              textDecoration: 'none', 
-              fontWeight: 600, 
-              fontSize: '0.95rem',
-              transition: 'all 0.2s ease',
-              display: 'inline-block'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
-              e.currentTarget.style.borderColor = '#fff';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.015)';
-              e.currentTarget.style.borderColor = T.border;
-            }}
-          >
-            {t.aboutBtn}
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="view-profile-btn">
+            View Professional Profile
           </a>
         </div>
-
       </div>
     </section>
   );
