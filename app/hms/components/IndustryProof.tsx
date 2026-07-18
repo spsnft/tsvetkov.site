@@ -1,90 +1,182 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { T } from '../../../src/theme/tokens';
 
-// Описываем интерфейс входящих пропсов
+interface MetricItem {
+  endValue: number;
+  prefix: string;
+  suffix: string;
+  label: string;
+}
+
 interface IndustryProofProps {
-  t?: any;
+  t: {
+    proofTitle: string;
+    proofMetrics: MetricItem[];
+  };
+}
+
+function ProofCounter({ end, duration, prefix, suffix, isVisible }: { 
+  end: number; 
+  duration: number; 
+  prefix: string; 
+  suffix: string; 
+  isVisible: boolean; 
+}) {
+  const [count, setCount] = useState<number>(0);
+
+  useEffect(() => {
+    if (!isVisible) {
+      setCount(0);
+      return;
+    }
+
+    let startTime: number | null = null;
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const easeProgress = progress * (2 - progress);
+      
+      setCount(Math.floor(easeProgress * end));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isVisible, end, duration]);
+
+  return (
+    <span style={{ fontFamily: 'SF Pro Display, -apple-system, sans-serif', fontWeight: 700 }}>
+      {prefix}{count}{suffix}
+    </span>
+  );
 }
 
 export default function IndustryProof({ t }: IndustryProofProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  if (!t?.proofMetrics) return null;
+
   return (
-    <section className="proof-section">
+    <section ref={sectionRef} style={{ width: '100%', borderBottom: `1px solid ${T.border}`, backgroundColor: 'transparent' }}>
       <style jsx>{`
-        .proof-section {
-          width: 100%;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 4rem 1.5rem;
+        .proof-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 2rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        .proof-item {
+        
+        /* Исправлено: Идеальный баланс осей — перешли на центрирование контента */
+        .proof-col {
+          padding: 4.5rem 2rem;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          gap: 0.75rem;
           text-align: center;
-          padding: 0.5rem;
+          align-items: center;
+        }
+        .proof-col:not(:last-child) {
+          border-right: 1px solid ${T.border};
+        }
+        
+        /* Исправлено: Защита от переноса "60-70%" + Адаптивный clamp под центрирование */
+        .metric-number {
+          font-size: clamp(2.2rem, 3.6vw, 3.6rem);
+          font-weight: 700; 
+          line-height: 1; 
+          letter-spacing: -0.03em;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: inline-block;
+          white-space: nowrap;
         }
 
-        .proof-number {
-          font-size: clamp(2.2rem, 3.8vw, 3.4rem);
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          margin-bottom: 0.5rem;
-          line-height: 1.1;
-        }
-
-        .proof-item:nth-child(1) .proof-number { color: #00E599; }
-        .proof-item:nth-child(2) .proof-number { color: #00A3FF; }
-        .proof-item:nth-child(3) .proof-number { color: #ffffff; }
-        .proof-item:nth-child(4) .proof-number { color: #00E599; }
-
-        .proof-label {
-          color: rgba(255, 255, 255, 0.65);
-          font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+        /* Исправлено: подпись центрируется и имеет красивую максимальную ширину */
+        .metric-label {
+          color: ${T.sub};
+          font-size: 0.9rem;
           line-height: 1.4;
+          margin: 0 auto;
           font-weight: 500;
-          max-width: 240px;
           text-wrap: pretty;
+          max-width: 240px;
         }
 
-        @media (max-width: 968px) {
-          .proof-section {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem 1.5rem;
+        @media (max-width: 1150px) {
+          .proof-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .proof-col {
+            padding: 3.5rem 2.5rem !important;
+          }
+          .proof-col:nth-child(odd) {
+            border-right: 1px solid ${T.border} !important;
+          }
+          .proof-col:nth-child(even) {
+            border-right: none !important;
+          }
+          .proof-col:nth-child(1), .proof-col:nth-child(2) {
+            border-bottom: 1px solid ${T.border};
           }
         }
-
-        @media (max-width: 480px) {
-          .proof-section {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
+        @media (max-width: 576px) {
+          .proof-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .proof-col:not(:last-child) {
+            border-right: none !important;
+            border-bottom: 1px solid ${T.border} !important;
+          }
+          .proof-col {
+            padding: 2.5rem 1.5rem !important;
           }
         }
       `}</style>
 
-      <div className="proof-item">
-        <div className="proof-number">+40%</div>
-        <div className="proof-label">Direct Revenue Growth</div>
+      <div style={{ padding: '5rem 1.5rem 4rem 1.5rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.2 }}>
+          {t.proofTitle}
+        </h2>
       </div>
-      
-      <div className="proof-item">
-        <div className="proof-number">60-70%</div>
-        <div className="proof-label">Margin Boost per Every Guest</div>
-      </div>
-      
-      <div className="proof-item">
-        <div className="proof-number">3x</div>
-        <div className="proof-label">Local Search Visibility Increase</div>
-      </div>
-      
-      <div className="proof-item">
-        <div className="proof-number">+35%</div>
-        <div className="proof-label">Repeat Guest Bookings Rate</div>
+
+      <div className="proof-grid" style={{ borderTop: `1px solid ${T.border}` }}>
+        {t.proofMetrics.map((item, idx) => (
+          <div key={idx} className="proof-col">
+            <div className="metric-number">
+              <ProofCounter 
+                end={item.endValue} 
+                duration={1400} 
+                prefix={item.prefix} 
+                suffix={item.suffix} 
+                isVisible={isVisible} 
+              />
+            </div>
+            <p className="metric-label">
+              {item.label}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );
