@@ -49,18 +49,29 @@ export default function HospitalityB2B() {
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <a href="/" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>About</a>
             
-            {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ */}
-            <div style={{ display: 'flex', backgroundColor: T.bg1, border: `1px solid ${T.border}`, borderRadius: '4px', overflow: 'hidden' }}>
+            {/* ИСПРАВЛЕНО: ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ В СТИЛЕ DARK GLASS CAPSULE */}
+            <div style={{ 
+              display: 'flex', 
+              backgroundColor: 'rgba(255, 255, 255, 0.02)', 
+              border: '1px solid rgba(255, 255, 255, 0.05)', 
+              borderRadius: '30px', 
+              padding: '2px',
+              backdropFilter: 'blur(8px)',
+              gap: '2px'
+            }}>
               <button 
                 onClick={() => setLang('en')} 
                 style={{ 
-                  padding: '0.4rem 0.8rem', 
-                  backgroundColor: lang === 'en' ? T.accent : 'transparent', 
-                  color: lang === 'en' ? T.bg0 : T.sub, 
-                  border: 'none', 
+                  padding: '0.35rem 0.85rem', 
+                  backgroundColor: lang === 'en' ? 'rgba(255, 255, 255, 0.08)' : 'transparent', 
+                  color: lang === 'en' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)', 
+                  border: lang === 'en' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid transparent',
+                  borderRadius: '26px',
+                  boxShadow: lang === 'en' ? '0 2px 8px rgba(0, 0, 0, 0.4)' : 'none',
                   cursor: 'pointer', 
                   fontWeight: 700, 
-                  fontSize: '0.75rem' 
+                  fontSize: '0.75rem',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 EN
@@ -68,13 +79,16 @@ export default function HospitalityB2B() {
               <button 
                 onClick={() => setLang('th')} 
                 style={{ 
-                  padding: '0.4rem 0.8rem', 
-                  backgroundColor: lang === 'th' ? T.accent : 'transparent', 
-                  color: lang === 'th' ? T.bg0 : T.sub, 
-                  border: 'none', 
+                  padding: '0.35rem 0.85rem', 
+                  backgroundColor: lang === 'th' ? 'rgba(255, 255, 255, 0.08)' : 'transparent', 
+                  color: lang === 'th' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)', 
+                  border: lang === 'th' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid transparent',
+                  borderRadius: '26px',
+                  boxShadow: lang === 'th' ? '0 2px 8px rgba(0, 0, 0, 0.4)' : 'none',
                   cursor: 'pointer', 
                   fontWeight: 700, 
-                  fontSize: '0.75rem' 
+                  fontSize: '0.75rem',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 TH
@@ -93,7 +107,7 @@ export default function HospitalityB2B() {
         {/* БЛОК 1.5: БЕГУЩАЯ СТРОКА ЛОГОТИПОВ */}
         <LogoMarquee />
 
-        {/* БЛОК 2: НАШ ОБЪЕДИНЕННЫЙ ГИБРИДНЫЙ БЛОК (PAIN + VALUE + DELIVERABLES В СТИЛЕ CLARION) */}
+        {/* БЛОК 2: НАШ ОБЪЕДИНЕННЫЙ ГИБРИДНЫЙ БЛОК */}
         <ScalePractice t={t} />
 
         {/* БЛОК 3: ОТРАСЛЕВЫЕ МЕТРИКИ И ДОКАЗАТЕЛЬСТВА */}
