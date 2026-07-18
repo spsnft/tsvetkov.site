@@ -80,7 +80,7 @@ export default function About({ t }: AboutProps) {
           text-wrap: pretty;
         }
         
-        /* Привели к единому сквозному стандарту: литой градиент + черный текст */
+        /* Исправлено: ссылка теперь ведет на внутренний корень сайта (/) */
         .view-profile-btn {
           display: inline-flex;
           align-items: center;
@@ -125,7 +125,7 @@ export default function About({ t }: AboutProps) {
         <div className="right-col">
           <p className="description">{descText}</p>
           
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="view-profile-btn">
+          <a href="/" className="view-profile-btn">
             {btnText}
           </a>
         </div>
