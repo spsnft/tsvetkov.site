@@ -2,7 +2,12 @@
 
 import React from 'react';
 
-export default function IndustryProof() {
+// Описываем интерфейс входящих пропсов
+interface IndustryProofProps {
+  t?: any;
+}
+
+export default function IndustryProof({ t }: IndustryProofProps) {
   return (
     <section className="proof-section">
       <style jsx>{`
@@ -20,8 +25,8 @@ export default function IndustryProof() {
         .proof-item {
           display: flex;
           flex-direction: column;
-          align-items: center; /* Центрирует внутренние боксы */
-          text-align: center;  /* Центрирует сам текст */
+          align-items: center;
+          text-align: center;
           padding: 0.5rem;
         }
 
@@ -33,11 +38,10 @@ export default function IndustryProof() {
           line-height: 1.1;
         }
 
-        /* Точечное восстановление оригинальной покраски со скриншота */
-        .proof-item:nth-child(1) .proof-number { color: #00E599; } /* Изумруд */
-        .proof-item:nth-child(2) .proof-number { color: #00A3FF; } /* Синий */
-        .proof-item:nth-child(3) .proof-number { color: #ffffff; } /* Белый */
-        .proof-item:nth-child(4) .proof-number { color: #00E599; } /* Изумруд */
+        .proof-item:nth-child(1) .proof-number { color: #00E599; }
+        .proof-item:nth-child(2) .proof-number { color: #00A3FF; }
+        .proof-item:nth-child(3) .proof-number { color: #ffffff; }
+        .proof-item:nth-child(4) .proof-number { color: #00E599; }
 
         .proof-label {
           color: rgba(255, 255, 255, 0.65);
