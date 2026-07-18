@@ -95,6 +95,17 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         .proof-col:not(:last-child) {
           border-right: 1px solid ${T.border};
         }
+        
+        /* Страховка от рваных строк и одиноких слов на второй строчке */
+        .metric-label {
+          color: ${T.sub};
+          font-size: 0.9rem;
+          line-height: 1.4;
+          margin: 0;
+          font-weight: 500;
+          text-wrap: pretty;
+        }
+
         @media (max-width: 992px) {
           .proof-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -142,7 +153,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
                 isVisible={isVisible} 
               />
             </div>
-            <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.4, margin: 0, fontWeight: 500 }}>
+            <p className="metric-label">
               {item.label}
             </p>
           </div>
