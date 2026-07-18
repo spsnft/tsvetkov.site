@@ -23,7 +23,7 @@ function ProofCounter({ end, duration, prefix, suffix, isVisible }: {
   prefix: string; 
   suffix: string; 
   isVisible: boolean; 
- }) {
+}) {
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
@@ -96,6 +96,18 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           border-right: 1px solid ${T.border};
         }
         
+        /* Крупные цифры пруфов теперь переливаются фирменным градиентом */
+        .metric-number {
+          fontSize: 3rem; 
+          font-weight: 700; 
+          line-height: 1; 
+          letter-spacing: -0.03em;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: inline-block;
+        }
+
         .metric-label {
           color: ${T.sub};
           font-size: 0.9rem;
@@ -145,7 +157,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
       <div className="proof-grid" style={{ borderTop: `1px solid ${T.border}` }}>
         {t.proofMetrics.map((item, idx) => (
           <div key={idx} className="proof-col">
-            <div style={{ fontSize: '3rem', fontWeight: 700, color: '#fff', lineHeight: 1, letterSpacing: '-0.03em' }}>
+            <div className="metric-number">
               <ProofCounter 
                 end={item.endValue} 
                 duration={1400} 
