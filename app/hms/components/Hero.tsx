@@ -63,7 +63,7 @@ export default function Hero({ t }: HeroProps) {
   let line2 = '';
 
   if (dotIndex !== -1) {
-    line1 = t.heroSub1.substring(0, dotIndex); // Пункт 2: Убрали точку на стыке строк
+    line1 = t.heroSub1.substring(0, dotIndex);
     line2 = t.heroSub1.substring(dotIndex + 2);
   }
 
@@ -97,7 +97,7 @@ export default function Hero({ t }: HeroProps) {
           z-index: 2;
         }
         .badge {
-          color: ${T.acc2};
+          color: #00E599;
           text-transform: uppercase;
           letter-spacing: 0.2em;
           font-size: 0.75rem;
@@ -131,15 +131,23 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 0.4rem;
         }
         
+        /* УТП с акцентным фирменным стилем */
         .utp-highlight {
           font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
-          color: #00E599;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
           margin-bottom: 2.5rem;
           letter-spacing: -0.01em;
           display: flex;
           align-items: center;
           gap: 0.6rem;
+        }
+        .utp-arrow {
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .cta-container {
@@ -149,12 +157,13 @@ export default function Hero({ t }: HeroProps) {
           flex-wrap: wrap;
         }
         
+        /* Фирменная литая градиентная кнопка по твоему скриншоту */
         .btn-primary-main {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: #000;
-          background-color: #00E599;
+          color: #000000 !important;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           padding: 1.1rem 2.5rem;
           border-radius: 8px;
           font-weight: 700;
@@ -162,12 +171,12 @@ export default function Hero({ t }: HeroProps) {
           font-size: 1rem;
           flex-shrink: 0;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.15);
+          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.2), 0 10px 30px rgba(0, 163, 255, 0.1);
         }
         .btn-primary-main:hover {
           transform: translateY(-2px);
-          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.35);
-          filter: brightness(1.05);
+          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.35), 0 15px 40px rgba(0, 163, 255, 0.2);
+          filter: brightness(1.08);
         }
 
         .secondary-chats {
@@ -191,7 +200,6 @@ export default function Hero({ t }: HeroProps) {
           transform: translateY(-1px);
         }
 
-        /* Пункт 3: Оптическая балансировка веса иконок мессенджеров */
         .btn-secondary-chat img {
           width: 100%;
           height: 100%;
@@ -199,12 +207,8 @@ export default function Hero({ t }: HeroProps) {
           display: block;
           transition: transform 0.2s ease;
         }
-        .btn-secondary-chat img[src*="whatsapp"] {
-          transform: scale(1.15); 
-        }
-        .btn-secondary-chat img[src*="line"] {
-          transform: scale(1.45); 
-        }
+        .btn-secondary-chat img[src*="whatsapp"] { transform: scale(1.15); }
+        .btn-secondary-chat img[src*="line"] { transform: scale(1.45); }
 
         .visual-column {
           position: relative;
@@ -218,7 +222,6 @@ export default function Hero({ t }: HeroProps) {
           perspective: 1400px;
         }
         
-        /* Пункт 1: Скорректировали ширину и убрали сдвиг вправо */
         .dashboard-mockup {
           width: 190%; 
           aspect-ratio: 16 / 10; 
@@ -280,14 +283,31 @@ export default function Hero({ t }: HeroProps) {
           min-width: 0;
           overflow: hidden;
         }
+        
+        /* Виджет маржи с фирменной градиентной полосой слева */
         .widget.primary-focus {
-          border-left: 3px solid #00E599;
+          position: relative;
           background: rgba(255, 255, 255, 0.015);
+          border-left: none;
         }
+        .widget.primary-focus::before {
+          content: '';
+          position: absolute;
+          left: 0; top: 0; bottom: 0;
+          width: 3px;
+          background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%);
+        }
+
         .widget-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
         .widget-value { font-size: 1.45rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
+        
+        .text-brand-gradient { 
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
         .widget-sub { font-size: 0.65rem; color: #444; margin-top: 0.3rem; }
-        .text-green { color: #00E599; }
         
         .mini-chart {
           display: flex;
@@ -298,7 +318,7 @@ export default function Hero({ t }: HeroProps) {
         }
         .bar { width: 12px; border-radius: 2px 2px 0 0; }
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
-        .bar.direct { background: rgba(0, 229, 153, 0.45); }
+        .bar.direct { background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%); opacity: 0.7; }
 
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
@@ -381,7 +401,8 @@ export default function Hero({ t }: HeroProps) {
           white-space: nowrap;
           box-shadow: 0 3px 10px rgba(0,0,0,0.4);
         }
-        .b-direct { background: linear-gradient(90deg, #00E599 0%, #00b377 100%); color: #000; font-weight: 600; }
+        /* Direct плашки переведены на фирменный градиент */
+        .b-direct { background: linear-gradient(90deg, #00E599 0%, #00A3FF 100%); color: #000; font-weight: 600; }
         .b-booking { background: linear-gradient(90deg, #003580 0%, #0050c2 100%); }
         .b-agoda { background: linear-gradient(90deg, #873335 0%, #cc474b 100%); }
 
@@ -416,7 +437,7 @@ export default function Hero({ t }: HeroProps) {
           </div>
           
           <div className="utp-highlight">
-            <span>→</span> {t.heroSub2}
+            <span className="utp-arrow">→</span>&nbsp;{t.heroSub2}
           </div>
           
           <div className="cta-container">
@@ -452,7 +473,7 @@ export default function Hero({ t }: HeroProps) {
                 <div className="pms-analytics">
                   <div className="widget primary-focus">
                     <div className="widget-label">OTA Margin Saved</div>
-                    <div className="widget-value text-green">{formatCurrency(liveAmount)}</div>
+                    <div className="widget-value text-brand-gradient">{formatCurrency(liveAmount)}</div>
                     <div className="widget-sub">Current Month</div>
                   </div>
                   <div className="widget">
