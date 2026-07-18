@@ -43,17 +43,15 @@ export default function Pricing({ t }: PricingProps) {
           position: relative;
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1.8rem;
         }
         
-        /* Выделение центральной рекомендуемой карточки тонким неоновым контуром */
         .card.featured {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(0, 229, 153, 0.25);
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
         
-        /* Фирменный градиентный бейдж POPULAR с черным текстом по твоему стандарту */
         .popular-badge {
           position: absolute;
           top: -12px;
@@ -78,7 +76,6 @@ export default function Pricing({ t }: PricingProps) {
           margin: 0;
         }
         
-        /* Применение градиента к названию премиального тарифа */
         .card.featured .package-title {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
@@ -89,6 +86,8 @@ export default function Pricing({ t }: PricingProps) {
           display: flex;
           flex-direction: column;
           gap: 0.4rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+          padding-bottom: 1.5rem;
         }
         
         .price {
@@ -110,7 +109,7 @@ export default function Pricing({ t }: PricingProps) {
           margin: 0;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.1rem;
         }
         
         .feature-item {
@@ -122,7 +121,6 @@ export default function Pricing({ t }: PricingProps) {
           line-height: 1.4;
         }
         
-        /* Градиентные маркеры-галочки для премиального стиля */
         .check-icon {
           color: #00E599;
           font-weight: bold;
@@ -133,43 +131,6 @@ export default function Pricing({ t }: PricingProps) {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-        }
-        
-        /* Сквозная интеграция нашей главной градиентной кнопки */
-        .pricing-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: #000000 !important;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          padding: 1rem;
-          border-radius: 8px;
-          font-weight: 700;
-          font-size: 0.95rem;
-          text-decoration: none;
-          text-align: center;
-          margin-top: auto;
-          transition: all 0.25s ease;
-          box-shadow: 0 10px 25px rgba(0, 229, 153, 0.15);
-        }
-        
-        .pricing-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 15px 35px rgba(0, 229, 153, 0.3);
-          filter: brightness(1.08);
-        }
-        
-        .card:not(.featured) .pricing-btn {
-          color: rgba(255, 255, 255, 0.85) !important;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          box-shadow: none;
-        }
-        
-        .card:not(.featured) .pricing-btn:hover {
-          color: #fff !important;
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(255, 255, 255, 0.3);
         }
         
         @media (max-width: 992px) {
@@ -203,9 +164,6 @@ export default function Pricing({ t }: PricingProps) {
             <li className="feature-item"><span className="check-icon">✓</span> Booking & Agoda Synchronization</li>
             <li className="feature-item"><span className="check-icon">✓</span> Google Maps Setup</li>
           </ul>
-          <a href="https://calendly.com/fediatsvetkov/15min" target="_blank" rel="noopener noreferrer" className="pricing-btn">
-            Get Started
-          </a>
         </div>
 
         {/* STANDARD */}
@@ -222,9 +180,6 @@ export default function Pricing({ t }: PricingProps) {
             <li className="feature-item"><span className="check-icon">✓</span> Guest Return System</li>
             <li className="feature-item"><span className="check-icon">✓</span> Guides for your Staff</li>
           </ul>
-          <a href="https://calendly.com/fediatsvetkov/15min" target="_blank" rel="noopener noreferrer" className="pricing-btn">
-            Get Started
-          </a>
         </div>
 
         {/* ENTERPRISE */}
@@ -240,9 +195,6 @@ export default function Pricing({ t }: PricingProps) {
             <li className="feature-item"><span className="check-icon">✓</span> Multichannel Ads Setup</li>
             <li className="feature-item"><span className="check-icon">✓</span> Analytics Dashboard</li>
           </ul>
-          <a href="https://calendly.com/fediatsvetkov/15min" target="_blank" rel="noopener noreferrer" className="pricing-btn">
-            Contact Sales
-          </a>
         </div>
       </div>
     </section>
