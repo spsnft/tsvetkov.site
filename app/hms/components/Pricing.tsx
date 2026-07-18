@@ -1,10 +1,14 @@
 'use client';
 
 import React from 'react';
+import { T } from '../../../src/theme/tokens';
 
-// Описываем интерфейс входящих пропсов для тарифов
 interface PricingProps {
-  t?: any;
+  t: {
+    pricingTitle?: string;
+    pricingSub?: string;
+    [key: string]: any;
+  };
 }
 
 export default function Pricing({ t }: PricingProps) {
@@ -13,197 +17,186 @@ export default function Pricing({ t }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 6rem 1.5rem;
+          padding: 6rem 2rem;
+          border-bottom: 1px solid ${T.border};
+          background: transparent;
+        }
+        
+        .pricing-header {
           text-align: center;
-        }
-
-        .section-title {
-          font-size: clamp(2.2rem, 4vw, 3.4rem);
-          font-weight: 700;
-          color: #ffffff;
           margin-bottom: 4rem;
-          letter-spacing: -0.02em;
         }
-
+        
         .pricing-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 2rem;
+          max-width: 1200px;
+          margin: 0 auto;
           align-items: stretch;
         }
-
-        .pricing-card {
-          background: #0d0d11;
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 16px;
-          padding: 3rem 2rem 2.5rem 2rem;
-          text-align: left;
+        
+        .card {
+          background: rgba(255, 255, 255, 0.01);
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          border-radius: 12px;
+          padding: 3rem 2.5rem;
+          position: relative;
           display: flex;
           flex-direction: column;
-          position: relative;
+          gap: 1.8rem;
         }
-
-        .pricing-card.popular {
-          border-color: rgba(0, 229, 153, 0.3);
-          box-shadow: 0 20px 40px rgba(0, 229, 153, 0.02);
+        
+        .card.featured {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(0, 229, 153, 0.25);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
-
+        
         .popular-badge {
           position: absolute;
           top: -12px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: #00e599;
+          right: 24px;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           color: #000000;
-          font-size: 0.75rem;
-          font-weight: 800;
-          padding: 0.35rem 1rem;
-          border-radius: 20px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .card-tier {
-          font-size: 0.85rem;
+          font-size: 0.68rem;
           font-weight: 700;
-          color: rgba(255, 255, 255, 0.4);
-          letter-spacing: 0.05em;
-          margin-bottom: 1.5rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          padding: 0.35rem 0.9rem;
+          border-radius: 20px;
+          box-shadow: 0 5px 15px rgba(0, 229, 153, 0.2);
         }
         
-        .pricing-card.popular .card-tier {
-          color: #00A3FF;
-        }
-
-        .card-price {
-          font-size: clamp(2.6rem, 4vw, 3.5rem);
+        .package-title {
+          font-size: 0.85rem;
           font-weight: 700;
-          color: #ffffff;
-          line-height: 1;
-          margin-bottom: 0.5rem;
-        }
-
-        .card-desc {
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
           color: rgba(255, 255, 255, 0.4);
-          font-size: 0.95rem;
-          margin-bottom: 2.5rem;
+          margin: 0;
         }
-
+        
+        .card.featured .package-title {
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        
+        .price-block {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+          padding-bottom: 1.5rem;
+        }
+        
+        .price {
+          font-size: 3.2rem;
+          font-weight: 700;
+          color: #fff;
+          line-height: 1;
+          letter-spacing: -0.02em;
+        }
+        
+        .price-desc {
+          font-size: 0.9rem;
+          color: ${T.sub};
+        }
+        
         .features-list {
           list-style: none;
           padding: 0;
-          margin: 0 0 3rem 0;
+          margin: 0;
           display: flex;
           flex-direction: column;
           gap: 1.1rem;
         }
-
+        
         .feature-item {
           display: flex;
           align-items: flex-start;
-          gap: 0.75rem;
-          color: rgba(255, 255, 255, 0.85);
+          gap: 0.8rem;
           font-size: 0.95rem;
+          color: rgba(255, 255, 255, 0.75);
           line-height: 1.4;
         }
-
-        .feature-icon {
+        
+        .check-icon {
           color: #00E599;
+          font-weight: bold;
           flex-shrink: 0;
         }
-
-        .btn-pricing {
-          margin-top: auto;
-          width: 100%;
-          padding: 1.1rem;
-          border-radius: 8px;
-          font-weight: 700;
-          font-size: 1rem;
-          cursor: pointer;
-          text-align: center;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          background: transparent;
-          color: #ffffff;
-          transition: all 0.2s ease;
-        }
-
-        .pricing-card.popular .btn-pricing {
+        
+        .card.featured .check-icon {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          color: #000000;
-          border: none;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
-
-        .btn-pricing:hover {
-          background: rgba(255, 255, 255, 0.05);
-        }
-
-        .pricing-card.popular .btn-pricing:hover {
-          filter: brightness(1.08);
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-        }
-
-        @media (max-width: 968px) {
+        
+        @media (max-width: 992px) {
           .pricing-grid {
             grid-template-columns: 1fr;
-            gap: 3rem;
-            max-width: 450px;
-            margin: 0 auto;
+            gap: 2.5rem;
+          }
+          .card {
+            padding: 2.5rem 2rem;
           }
         }
       `}</style>
 
-      <h2 className="section-title">Scale Your Practice</h2>
+      <div className="pricing-header">
+        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 1rem 0' }}>
+          {t?.pricingTitle || "Scale Your Practice"}
+        </h2>
+      </div>
 
       <div className="pricing-grid">
         {/* LITE */}
-        <div className="pricing-card">
-          <div className="card-tier">LITE (1-10 ROOMS)</div>
-          <div className="card-price">$500</div>
-          <div className="card-desc">For small villas & guesthouses</div>
-          
+        <div className="card">
+          <p className="package-title">Lite (1-10 Rooms)</p>
+          <div className="price-block">
+            <span className="price">$500</span>
+            <span className="price-desc">For small villas & guesthouses</span>
+          </div>
           <ul className="features-list">
-            <li className="feature-item"><span className="feature-icon">✓</span> Cloud PMS & Dashboard</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Direct Website Booking button</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Booking & Agoda Sync</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Google Maps Setup</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Cloud PMS & Dashboard</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Direct Website Booking button</li>
+            {/* Исправлено: Хлесткое "Sync" вместо ломающего верстку "Synchronization" */}
+            <li className="feature-item"><span className="check-icon">✓</span> Booking & Agoda Sync</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Google Maps Setup</li>
           </ul>
-          
-          <button className="btn-pricing">Get Started</button>
         </div>
 
         {/* STANDARD */}
-        <div className="pricing-card popular">
-          <div className="popular-badge">Popular</div>
-          <div className="card-tier">STANDARD (10-30 ROOMS)</div>
-          <div className="card-price">$1,200</div>
-          <div className="card-desc">For boutique hotels & resorts</div>
-          
+        <div className="card featured">
+          <span className="popular-badge">Popular</span>
+          <p className="package-title">Standard (10-30 Rooms)</p>
+          <div className="price-block">
+            <span className="price">$1,200</span>
+            <span className="price-desc">For boutique hotels & resorts</span>
+          </div>
           <ul className="features-list">
-            <li className="feature-item"><span className="feature-icon">✓</span> Everything in LITE</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Connect 300+ OTA Channels</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Guest Return System</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Guides for your Staff</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Everything in LITE</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Connect 300+ OTA Channels</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Guest Return System</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Guides for your Staff</li>
           </ul>
-          
-          <button className="btn-pricing">Get Started</button>
         </div>
 
         {/* ENTERPRISE */}
-        <div className="pricing-card">
-          <div className="card-tier">ENTERPRISE (30+ ROOMS)</div>
-          <div className="card-price">Custom</div>
-          <div className="card-desc">For hotel chains & management firms</div>
-          
+        <div className="card">
+          <p className="package-title">Enterprise (30+ Rooms)</p>
+          <div className="price-block">
+            <span className="price">Custom</span>
+            <span className="price-desc">For hotel chains & management firms</span>
+          </div>
           <ul className="features-list">
-            <li className="feature-item"><span className="feature-icon">✓</span> Everything in STANDARD</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Anti-Thief Logs</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Multichannel Ads Setup</li>
-            <li className="feature-item"><span className="feature-icon">✓</span> Analytics Dashboard</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Everything in STANDARD</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Anti-Theft Logs</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Multichannel Ads Setup</li>
+            <li className="feature-item"><span className="check-icon">✓</span> Analytics Dashboard</li>
           </ul>
-          
-          <button className="btn-pricing">Contact Us</button>
         </div>
       </div>
     </section>
