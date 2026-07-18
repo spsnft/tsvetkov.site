@@ -96,7 +96,6 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           border-right: 1px solid ${T.border};
         }
         
-        /* Страховка от рваных строк и одиноких слов на второй строчке */
         .metric-label {
           color: ${T.sub};
           font-size: 0.9rem;
@@ -106,12 +105,12 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           text-wrap: pretty;
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1150px) {
           .proof-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
           .proof-col {
-            padding: 3rem 1.5rem !important;
+            padding: 3.5rem 2.5rem !important;
           }
           .proof-col:nth-child(odd) {
             border-right: 1px solid ${T.border} !important;
@@ -131,10 +130,12 @@ export default function IndustryProof({ t }: IndustryProofProps) {
             border-right: none !important;
             border-bottom: 1px solid ${T.border} !important;
           }
+          .proof-col {
+            padding: 2.5rem 1.5rem !important;
+          }
         }
       `}</style>
 
-      {/* Шапка блока — Выровнена по Книге Шрифтов */}
       <div style={{ padding: '5rem 1.5rem 4rem 1.5rem', textAlign: 'center' }}>
         <h2 style={{ fontSize: '2.4rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.2 }}>
           {t.proofTitle}
