@@ -3,7 +3,6 @@
 import React from 'react';
 import { T } from '../../../src/theme/tokens';
 
-// Описываем интерфейс, чтобы TypeScript больше не ругался при сборке
 interface AboutProps {
   t: {
     aboutLabel?: string;
@@ -15,7 +14,6 @@ interface AboutProps {
 }
 
 export default function About({ t }: AboutProps) {
-  // Вытягиваем данные из конфига с безопасным фолбеком на случай несовпадения ключей
   const labelText = t?.aboutLabel || "Growth Architecture";
   const titleText = t?.aboutTitle || "Systems, Optimization & Scale";
   const descText = t?.aboutDesc || t?.aboutDescription || "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
@@ -55,7 +53,6 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
         
-        /* Заголовок с фирменным градиентом */
         .main-title {
           font-size: clamp(2rem, 3.5vw, 2.8rem);
           font-weight: 700;
@@ -83,28 +80,26 @@ export default function About({ t }: AboutProps) {
           text-wrap: pretty;
         }
         
-        /* Кнопка в фирменном B2B стиле: аккуратный изумрудный контур с подсветкой */
+        /* Привели к единому сквозному стандарту: литой градиент + черный текст */
         .view-profile-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: #00E599;
-          background: rgba(0, 229, 153, 0.02);
-          border: 1px solid rgba(0, 229, 153, 0.3);
+          color: #000000 !important;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           padding: 0.9rem 2.2rem;
           border-radius: 8px;
-          font-weight: 600;
+          font-weight: 700;
           font-size: 0.95rem;
           text-decoration: none;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.2), 0 10px 30px rgba(0, 163, 255, 0.1);
         }
         
         .view-profile-btn:hover {
-          color: #fff;
-          background: rgba(0, 229, 153, 0.08);
-          border-color: #00E599;
-          box-shadow: 0 0 25px rgba(0, 229, 153, 0.15);
-          transform: translateY(-1px);
+          transform: translateY(-2px);
+          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.35), 0 15px 40px rgba(0, 163, 255, 0.2);
+          filter: brightness(1.08);
         }
         
         @media (max-width: 992px) {
