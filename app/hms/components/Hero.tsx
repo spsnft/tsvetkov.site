@@ -85,7 +85,7 @@ export default function Hero({ t }: HeroProps) {
         
         .hero-grid {
           display: grid;
-          grid-template-columns: 57% 43%;
+          grid-template-columns: 62% 38%;
           gap: 1.5rem;
           align-items: center;
           position: relative;
@@ -112,6 +112,7 @@ export default function Hero({ t }: HeroProps) {
           letter-spacing: -0.03em;
           margin: 0 0 1.5rem 0;
           color: #fff;
+          text-wrap: pretty;
         }
         
         .subtitles-block {
@@ -123,14 +124,10 @@ export default function Hero({ t }: HeroProps) {
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.5;
           margin: 0;
-        }
-        .sub-line-1 {
-          color: ${T.body};
+          color: ${T.sub};
+          text-wrap: pretty;
         }
         .sub-line-2 {
-          color: #fff;
-          font-weight: 500;
-          opacity: 0.9;
           margin-top: 0.4rem;
         }
         
@@ -176,13 +173,7 @@ export default function Hero({ t }: HeroProps) {
         .secondary-chats {
           display: flex;
           align-items: center;
-          gap: 1.2rem;
-        }
-        .chat-label {
-          font-size: 0.85rem;
-          color: rgba(255, 255, 255, 0.25);
-          font-weight: 500;
-          white-space: nowrap;
+          gap: 1.5rem;
         }
         .btn-secondary-chat {
           display: inline-flex;
@@ -212,9 +203,8 @@ export default function Hero({ t }: HeroProps) {
           perspective: 1400px;
         }
         
-        /* Сжали пропорцию до 16/10 — мокап стал чуть ниже, идеально встав по осям с кнопками */
         .dashboard-mockup {
-          width: 195%; 
+          width: 220%; 
           aspect-ratio: 16 / 10; 
           background-color: rgba(13, 13, 17, 0.8);
           backdrop-filter: blur(12px);
@@ -294,7 +284,6 @@ export default function Hero({ t }: HeroProps) {
         .bar.ota { background: rgba(255, 255, 255, 0.06); }
         .bar.direct { background: rgba(0, 229, 153, 0.45); }
 
-        /* Убрали жесткий height. Контейнер теперь идеально подстраивается под высоту 16/10 мокапа */
         .logs-widget {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.02);
@@ -303,7 +292,6 @@ export default function Hero({ t }: HeroProps) {
           flex-direction: column;
         }
         
-        /* Распределяем логи равномерно по всей высоте (убираем пустоту снизу) */
         .logs-container {
           display: flex;
           flex-direction: column;
@@ -422,8 +410,6 @@ export default function Hero({ t }: HeroProps) {
             </a>
             
             <div className="secondary-chats">
-              <span className="chat-label">Or chat directly:</span>
-              
               <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
                 <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                   <img src="/logos/whatsapp.svg" alt="WhatsApp" width="18" height="18" style={{ width: '18px', height: '18px', objectFit: 'contain', display: 'block' }} />
@@ -433,7 +419,7 @@ export default function Hero({ t }: HeroProps) {
               
               <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
                 <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                  <img src="/logos/line.svg" alt="LINE" width="24" height="24" style={{ width: '24px', height: '24px', objectFit: 'contain', transform: 'scale(1.35)', display: 'block' }} />
+                  <img src="/logos/line.svg" alt="LINE" width="18" height="18" style={{ width: '18px', height: '18px', objectFit: 'contain', display: 'block' }} />
                 </div>
                 <span>{t.btnLine}</span>
               </a>
@@ -480,7 +466,6 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
 
-                  {/* ОКНО ЛОГОВ БЕЗ ПУСТОТЫ */}
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
