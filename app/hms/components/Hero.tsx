@@ -63,7 +63,7 @@ export default function Hero({ t }: HeroProps) {
   let line2 = '';
 
   if (dotIndex !== -1) {
-    line1 = t.heroSub1.substring(0, dotIndex + 1);
+    line1 = t.heroSub1.substring(0, dotIndex); // Пункт 2: Убрали точку на стыке строк
     line2 = t.heroSub1.substring(dotIndex + 2);
   }
 
@@ -191,6 +191,21 @@ export default function Hero({ t }: HeroProps) {
           transform: translateY(-1px);
         }
 
+        /* Пункт 3: Оптическая балансировка веса иконок мессенджеров */
+        .btn-secondary-chat img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+          transition: transform 0.2s ease;
+        }
+        .btn-secondary-chat img[src*="whatsapp"] {
+          transform: scale(1.15); 
+        }
+        .btn-secondary-chat img[src*="line"] {
+          transform: scale(1.45); 
+        }
+
         .visual-column {
           position: relative;
           width: 100%;
@@ -203,14 +218,15 @@ export default function Hero({ t }: HeroProps) {
           perspective: 1400px;
         }
         
+        /* Пункт 1: Скорректировали ширину и убрали сдвиг вправо */
         .dashboard-mockup {
-          width: 220%; 
+          width: 190%; 
           aspect-ratio: 16 / 10; 
           background-color: rgba(13, 13, 17, 0.8);
           backdrop-filter: blur(12px);
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 14px;
-          transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg) translateX(30px);
+          transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg) translateX(0px); 
           transform-origin: left center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(0, 229, 153, 0.01), inset 0 1px 1px rgba(255, 255, 255, 0.08);
           padding: 1.2rem;
@@ -390,7 +406,6 @@ export default function Hero({ t }: HeroProps) {
       `}</style>
 
       <div className="hero-grid">
-        {/* ЛЕВАЯ КОЛОНКА */}
         <div className="text-column">
           <span className="badge">{t.badge}</span>
           <h1 className="title">{t.heroTitle}</h1>
@@ -411,15 +426,15 @@ export default function Hero({ t }: HeroProps) {
             
             <div className="secondary-chats">
               <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
-                <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                  <img src="/logos/whatsapp.svg" alt="WhatsApp" width="18" height="18" style={{ width: '18px', height: '18px', objectFit: 'contain', display: 'block' }} />
+                <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0 }}>
+                  <img src="/logos/whatsapp.svg" alt="WhatsApp" />
                 </div>
                 <span>{t.btnChat}</span>
               </a>
               
               <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
-                <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                  <img src="/logos/line.svg" alt="LINE" width="18" height="18" style={{ width: '18px', height: '18px', objectFit: 'contain', display: 'block' }} />
+                <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0 }}>
+                  <img src="/logos/line.svg" alt="LINE" />
                 </div>
                 <span>{t.btnLine}</span>
               </a>
@@ -427,28 +442,22 @@ export default function Hero({ t }: HeroProps) {
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА */}
         <div className="visual-column">
           <div className="perspective-wrapper">
             <div className="dashboard-mockup">
-              
               <div className="pms-header">
                 <div className="sync-status"><div className="pulse-dot"></div>1s OTA Sync Active</div>
               </div>
-              
               <div className="pms-body">
-                {/* 1. АНАЛИТИКА */}
                 <div className="pms-analytics">
                   <div className="widget primary-focus">
                     <div className="widget-label">OTA Margin Saved</div>
                     <div className="widget-value text-green">{formatCurrency(liveAmount)}</div>
                     <div className="widget-sub">Current Month</div>
                   </div>
-                  
                   <div className="widget">
                     <div className="widget-label">Occupancy / ADR</div>
                     <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: '#333' }}>|</span> ฿4,250</div>
-                    
                     <div className="mini-chart">
                       <div className="bar ota" style={{ height: '40%' }}></div>
                       <div className="bar direct" style={{ height: '30%' }}></div>
@@ -459,13 +468,11 @@ export default function Hero({ t }: HeroProps) {
                       <div className="bar direct" style={{ height: '100%' }}></div>
                     </div>
                   </div>
-
                   <div className="widget">
                     <div className="widget-label">RevPAR</div>
                     <div className="widget-value">฿3,570</div>
                     <div className="widget-sub">Per Available Room</div>
                   </div>
-
                   <div className="widget logs-widget">
                     <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
                     <div className="logs-container">
@@ -478,39 +485,32 @@ export default function Hero({ t }: HeroProps) {
                     </div>
                   </div>
                 </div>
-
-                {/* 2. ШАХМАТКА */}
                 <div className="pms-matrix">
                   <div className="matrix-header">
                     <div>ROOM</div>
                     <div>16 Dec</div><div>17 Dec</div><div>18 Dec</div><div>19 Dec</div><div>20 Dec</div><div>21 Dec</div><div>22 Dec</div>
                   </div>
-                  
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 1</div>
                     <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
                     <div className="booking b-booking" style={{ left: 'calc(80px + 35%)', width: 'calc(55% - 4px)' }}>Booking.com • Lee</div>
                   </div>
-                  
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 2</div>
                     <div className="booking b-agoda" style={{ left: 'calc(80px + 10%)', width: 'calc(45% - 4px)' }}>Agoda • Kumar</div>
                     <div className="booking b-direct" style={{ left: 'calc(80px + 65%)', width: 'calc(30% - 4px)' }}>Direct • VIP</div>
                   </div>
-
                   <div className="matrix-row">
                     <div className="matrix-room-name">Room 101</div>
                     <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
                     <div className="booking b-booking" style={{ left: 'calc(80px + 60%)', width: 'calc(40% - 4px)' }}>Booking.com • Davis</div>
                   </div>
-
                   <div className="matrix-row">
                     <div className="matrix-room-name">Room 102</div>
                     <div className="booking b-booking" style={{ left: 'calc(80px + 0%)', width: 'calc(35% - 4px)' }}>Booking.com • Brown</div>
                     <div className="booking b-direct" style={{ left: 'calc(80px + 38%)', width: 'calc(62% - 4px)' }}>Direct • Website</div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
