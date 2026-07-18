@@ -34,6 +34,17 @@ export default function Hero({ t }: HeroProps) {
   useEffect(() => {
     setIsMounted(true);
 
+    // Безопасно подтягиваем официальные стили и скрипты Calendly для поп-апа
+    const link = document.createElement('link');
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
       
@@ -51,8 +62,24 @@ export default function Hero({ t }: HeroProps) {
       ]);
     }, 2000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      document.head.removeChild(link);
+      document.head.removeChild(script);
+    };
   }, []);
+
+  // Вызов окна Calendly поверх интерфейса
+  const handleCalendlyPopup = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // @ts-ignore
+    if (window.Calendly) {
+      // @ts-ignore
+      window.Calendly.initPopupWidget({ url: 'https://calendly.com/fediatsvetkov/15min' });
+    } else {
+      window.open('https://calendly.com/fediatsvetkov/15min', '_blank');
+    }
+  };
 
   const formatCurrency = (num: number) => {
     return '฿' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -97,7 +124,6 @@ export default function Hero({ t }: HeroProps) {
           z-index: 2;
         }
         
-        /* Исправлено: Дорогой серебристый монохром вместо кричащего зеленого */
         .badge {
           color: rgba(255, 255, 255, 0.45);
           text-transform: uppercase;
@@ -146,10 +172,11 @@ export default function Hero({ t }: HeroProps) {
           align-items: center;
           gap: 0.6rem;
         }
+        
+        /* Бритвоострая изумрудная стрелка без синевы */
         .utp-arrow {
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          color: #00E599 !important;
+          -webkit-text-fill-color: #00E599 !important;
         }
 
         .cta-container {
@@ -173,6 +200,7 @@ export default function Hero({ t }: HeroProps) {
           flex-shrink: 0;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           box-shadow: 0 10px 30px rgba(0, 229, 153, 0.2), 0 10px 30px rgba(0, 163, 255, 0.1);
+          cursor: pointer;
         }
         .btn-primary-main:hover {
           transform: translateY(-2px);
@@ -248,7 +276,6 @@ export default function Hero({ t }: HeroProps) {
           padding-bottom: 0.4rem;
         }
         
-        /* Исправлено: Элегантная темная капсула статуса вместо яркой зеленой плашки */
         .sync-status { 
           display: flex; 
           align-items: center; 
@@ -434,7 +461,6 @@ export default function Hero({ t }: HeroProps) {
         }
       `}</style>
 
-      {/* Оставшаяся верстка структуры идентична предыдущей */}
       <div className="hero-grid">
         <div className="text-column">
           <span className="badge">{t.badge}</span>
@@ -450,9 +476,9 @@ export default function Hero({ t }: HeroProps) {
           </div>
           
           <div className="cta-container">
-            <a href="https://calendly.com/fediatsvetkov/15min" target="_blank" rel="noopener noreferrer" className="btn-primary-main">
+            <button onClick={handleCalendlyPopup} className="btn-primary-main" style={{ border: 'none' }}>
               Book a Free Audit
-            </a>
+            </button>
             
             <div className="secondary-chats">
               <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
