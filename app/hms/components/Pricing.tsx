@@ -4,12 +4,14 @@ import React from 'react';
 import { T } from '../../../src/theme/tokens';
 
 interface PricingProps {
-  t: {
-    pricingTitle?: string;
-    pricingSub?: string;
-    [key: string]: any;
-  };
+  t?: any;
 }
+
+// Хелпер для очистки текста от случайных символов '✓'
+const cleanText = (str?: string) => {
+  if (!str) return '';
+  return str.replace(/^✓\s*/, '');
+};
 
 export default function Pricing({ t }: PricingProps) {
   return (
@@ -133,6 +135,15 @@ export default function Pricing({ t }: PricingProps) {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
+
+        .tier-badge {
+          background: rgba(255, 255, 255, 0.1);
+          padding: 0.15rem 0.4rem;
+          border-radius: 4px;
+          font-weight: 600;
+          font-size: 0.85rem;
+          color: #fff;
+        }
         
         @media (max-width: 992px) {
           .pricing-grid {
@@ -146,56 +157,72 @@ export default function Pricing({ t }: PricingProps) {
       `}</style>
 
       <div className="pricing-header">
-        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 1rem 0' }}>
-          {t?.pricingTitle || "Scale Your Practice"}
+        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 0.75rem 0' }}>
+          {t?.priceTitle || "Transparent Integration. Permanent Independence"}
         </h2>
+        {t?.priceSub && (
+          <p style={{ color: T.sub, fontSize: '1.1rem', margin: 0 }}>
+            {t.priceSub}
+          </p>
+        )}
       </div>
 
       <div className="pricing-grid">
         {/* LITE */}
         <div className="card">
-          <p className="package-title">Lite (1-10 Rooms)</p>
+          <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
           <div className="price-block">
-            <span className="price">$500</span>
-            <span className="price-desc">For small villas & guesthouses</span>
+            <span className="price">{t?.tier1Price || "$500"}</span>
+            <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
           </div>
           <ul className="features-list">
-            <li className="feature-item"><span className="check-icon">✓</span> Cloud PMS & Dashboard</li>
-            <li className="feature-item"><span className="check-icon">✓</span> Direct Website Booking button</li>
-            {/* Исправлено: Хлесткое "Sync" вместо ломающего верстку "Synchronization" */}
-            <li className="feature-item"><span className="check-icon">✓</span> Booking & Agoda Sync</li>
-            <li className="feature-item"><span className="check-icon">✓</span> Google Maps Setup</li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F1)}</li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F2)}</li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F3)}</li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F4)}</li>
           </ul>
         </div>
 
         {/* STANDARD */}
         <div className="card featured">
-          <span className="popular-badge">Popular</span>
-          <p className="package-title">Standard (10-30 Rooms)</p>
+          <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
+          <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
           <div className="price-block">
-            <span className="price">$1,200</span>
-            <span className="price-desc">For boutique hotels & resorts</span>
+            <span className="price">{t?.tier2Price || "$1,200"}</span>
+            <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
           </div>
           <ul className="features-list">
-            <li className="feature-item"><span className="check-icon">✓</span> Everything in LITE</li>
-            <li className="feature-item"><span className="check-icon">✓</span> Connect 300+ OTA Channels</li>
-            <li className="feature-item"><span className="check-icon">✓</span> Guest Return System</li>
-            <li className="feature-item"><span className="check-icon">✓</span> Guides for your Staff</li>
+            <li className="feature-item">
+              <span className="check-icon">✓</span> 
+              <span>
+                {cleanText(t?.tier2F1)}
+                {t?.tier2F1Badge && <span className="tier-badge">{t.tier2F1Badge}</span>}
+              </span>
+            </li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F2)}</li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F3)}</li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F4)}</li>
           </ul>
         </div>
 
         {/* ENTERPRISE */}
         <div className="card">
-          <p className="package-title">Enterprise (30+ Rooms)</p>
+          <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
           <div className="price-block">
-            <span className="price">Custom</span>
-            <span className="price-desc">For hotel chains & management firms</span>
+            <span className="price">{t?.tier3Price || "Custom"}</span>
+            <span className="price-desc">{t?.tier3Desc || "For hotel chains & management firms"}</span>
           </div>
           <ul className="features-list">
-            <li className="feature-item"><span className="check-icon">✓</span> Everything in STANDARD</li>
-            <li className="feature-item"><span className="check-icon">✓</span> Anti-Theft Logs</li>
-            <li className="feature-item"><span className="check-icon">✓</span> Multichannel Ads Setup</li>
-            <li className="feature-item"><span className="check-icon">✓</span> Analytics Dashboard</li>
+            <li className="feature-item">
+              <span className="check-icon">✓</span> 
+              <span>
+                {cleanText(t?.tier3F1)}
+                {t?.tier3F1Badge && <span className="tier-badge">{t.tier3F1Badge}</span>}
+              </span>
+            </li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F2)}</li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F3)}</li>
+            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F4)}</li>
           </ul>
         </div>
       </div>
