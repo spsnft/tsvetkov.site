@@ -28,7 +28,7 @@ export const contentData = {
         desc: "**Zero-commission booking engine** with a secure payment gateway. Process bookings on your own terms and **keep all revenue in-house**"
       },
       {
-        pain: "0 leads from traffic",
+        pain: "100% OTA dependency",
         startValue: 0,
         endValue: 10,
         suffix: "x",
@@ -37,11 +37,11 @@ export const contentData = {
       }
     ],
 
-    // --- PROOF METRICS (ОБНОВЛЕНО) ---
+    // --- PROOF METRICS ---
     proofTitle: "Maximize Direct Booking Revenue",
     proofMetrics: [
       { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue Growth" },
-      { endValue: 20, prefix: "+", suffix: "%", label: "Net Profit per Booking" },
+      { endValue: 70, prefix: "60-", suffix: "%", label: "Margin Boost per Every Guest" },
       { endValue: 3, prefix: "", suffix: "x", label: "More Google Maps Traffic" },
       { endValue: 35, prefix: "+", suffix: "%", label: "More Repeat Bookings" }
     ],
@@ -117,7 +117,7 @@ export const contentData = {
         desc: "ติดตั้ง **ระบบจองตรงแบบไม่เสียค่าคอมมิชชั่น** พร้อมระบบชำระเงินที่ปลอดภัย **รับและเก็บรายได้เต็มจำนวน** โดยไม่ต้องแบ่งใคร"
       },
       {
-        pain: "0 ยอดจองตรงจากช่องทางออนไลน์",
+        pain: "พึ่งพา OTA 100%",
         startValue: 0,
         endValue: 10,
         suffix: " เท่า",
@@ -126,11 +126,11 @@ export const contentData = {
       }
     ],
 
-    // --- PROOF METRICS (ОБНОВЛЕНО TH) ---
+    // --- PROOF METRICS ---
     proofTitle: "เพิ่มศักยภาพให้ที่พักของคุณ สร้างรายได้ตรงสู่บัญชีสูงสุด",
     proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "รายได้จากการจองตรงเพิ่มขึ้น" },
-      { endValue: 20, prefix: "+", suffix: "%", label: "กำไรสุทธิต่อการจองเพิ่มขึ้น" },
+      { endValue: 40, prefix: "+", suffix: "%", label: "การเติบโตของรายได้ตรง" },
+      { endValue: 70, prefix: "60-", suffix: "%", label: "มาร์จิ้นที่เพิ่มขึ้นต่อผู้เข้าพัก" },
       { endValue: 3, prefix: "", suffix: "x", label: "ยอดเข้าชมบน Google Maps เพิ่มขึ้น" },
       { endValue: 35, prefix: "+", suffix: "%", label: "ลูกค้าเก่ากลับมาจองซ้ำมากขึ้น" }
     ],
