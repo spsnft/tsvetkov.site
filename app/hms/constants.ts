@@ -55,7 +55,7 @@ export const contentData = {
     tier1Price: "$900",
     tier1Desc: "For small villas & guesthouses",
     tier1F1: "Cloud PMS Setup",
-    tier1F2: "Zero-Commission Booking Engine",
+    tier1F2: "0% Commission Engine",
     tier1F3: "Booking & Agoda Sync",
     tier1F4: "Google Maps Setup",
     
@@ -73,7 +73,7 @@ export const contentData = {
     tier3Desc: "For hotel chains & management firms",
     tier3F1: "Everything in ",
     tier3F1Badge: "STANDARD",
-    tier3F2: "Staff Activity & Permissions Control",
+    tier3F2: "Staff Roles & Permissions",
     tier3F3: "Marketing Analytics Setup",
     tier3F4: "Custom Revenue Reports",
 
@@ -144,7 +144,7 @@ export const contentData = {
     tier1Price: "$900",
     tier1Desc: "สำหรับวิลล่าและเกสต์เฮาส์ขนาดเล็ก",
     tier1F1: "ระบบ Cloud PMS Setup",
-    tier1F2: "ระบบจองตรงแบบไม่เสียค่าคอมมิชชั่น",
+    tier1F2: "ระบบจองตรงไม่เสียค่าคอม",
     tier1F3: "ซิงค์ปฏิทิน Booking & Agoda",
     tier1F4: "ตั้งค่าโปรไฟล์ Google Maps",
     
@@ -162,7 +162,7 @@ export const contentData = {
     tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
     tier3F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier3F1Badge: "STANDARD",
-    tier3F2: "ระบบควบคุมสิทธิ์และการทำงานพนักงาน",
+    tier3F2: "ระบบควบคุมสิทธิ์พนักงาน",
     tier3F3: "ตั้งค่าระบบวิเคราะห์การตลาด",
     tier3F4: "รายงานรายได้แบบกำหนดเอง",
 
