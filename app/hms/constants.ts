@@ -71,12 +71,12 @@ export const contentData = {
     tier3F3: "✓ Multichannel Ads Setup",
     tier3F4: "✓ Analytics Dashboard",
 
-    // --- ABOUT ---
+    // --- ABOUT (อัปเดตเป็นเวอร์ชัน We step into... ที่กระชับและทรงพลัง) ---
     aboutTitle: "Systems, Optimization & Scale",
-    aboutDesc: "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
+    aboutDesc: "We step into complex business ecosystems to optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
     aboutBtn: "View Professional Profile",
     
-    // --- FOOTER CTA (Вариант 2, двухстрочный, без точек) ---
+    // --- FOOTER CTA (เวอร์ชันสองบรรทัด ไม่มีจุดท้ายประโยค) ---
     footerTitle: "Ready to make more money?",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Build your high-converting direct booking engine",
@@ -152,10 +152,12 @@ export const contentData = {
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
 
+    // --- ABOUT (ปรับภาษาไทยให้ขึ้นต้นด้วยการกระทำ "เราเข้าจัดการ..." สอดคล้องกับอังกฤษ) ---
     aboutTitle: "ระบบ การเพิ่มประสิทธิภาพ และการขยายขนาด",
-    aboutDesc: "พันธมิตรด้านโครงสร้างพื้นฐานที่มุ่งเน้นผลลัพธ์ ออกแบบมาเพื่อเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
+    aboutDesc: "เราเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
     aboutBtn: "ดูประวัติการทำงาน",
     
+    // --- FOOTER CTA ---
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerSub1: "เลิกเสียรายได้ 15–20% ไปกับค่าคอมมิชชั่น",
     footerSub2: "สร้างระบบจองตรงที่ทำกำไรสูงสุดให้ที่พักของคุณ",
