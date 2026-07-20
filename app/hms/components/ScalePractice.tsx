@@ -62,7 +62,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           transform: translateY(-2px);
         }
 
-        /* Контейнер для сгенерированных в Banana премиальных 3D-картинок */
+        /* Контейнер для сгенерированных 3D-картинок */
         .image-wrapper {
           width: 100%;
           aspect-ratio: 16 / 9;
@@ -95,7 +95,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           margin: 0;
         }
 
-        /* Метрики переведены на наш сочный фирменный градиент */
+        /* Метрики на фирменном градиенте */
         .focus-metric {
           font-size: clamp(1.4rem, 2vw, 1.8rem);
           font-weight: 700;
@@ -137,7 +137,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         {/* КАРТОЧКА 1: SYNC */}
         <div className="scale-card">
           <div className="image-wrapper">
-            <img src="/assets/sync.png" alt="1 second sync visual" className="visual-asset" />
+            <img src="/assets/sync.webp" alt="1 second sync visual" className="visual-asset" />
           </div>
           <div className="card-content">
             <p className="context-label">24/7 manual updates</p>
@@ -151,7 +151,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         {/* КАРТОЧКА 2: REVENUE */}
         <div className="scale-card">
           <div className="image-wrapper">
-            <img src="/assets/revenue.png" alt="100% direct revenue visual" className="visual-asset" />
+            <img src="/assets/revenue.webp" alt="100% direct revenue visual" className="visual-asset" />
           </div>
           <div className="card-content">
             <p className="context-label">20% OTA commission</p>
@@ -165,10 +165,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         {/* КАРТОЧКА 3: GROWTH */}
         <div className="scale-card">
           <div className="image-wrapper">
-            <img src="/assets/growth.png" alt="10x booking growth visual" className="visual-asset" />
+            <img src="/assets/growth.webp" alt="10x booking growth visual" className="visual-asset" />
           </div>
           <div className="card-content">
-            {/* Исправлено по твоему запросу: Четкий фокус на direct-источники */}
             <p className="context-label">0 leads from direct traffic</p>
             <h3 className="focus-metric">10x booking growth</h3>
             <p className="card-description">
