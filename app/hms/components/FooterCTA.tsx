@@ -16,13 +16,12 @@ interface FooterCTAProps {
 }
 
 export default function FooterCTA({ t }: FooterCTAProps) {
-  const titleText = t?.footerTitle || "Ready to make more money?";
+  const titleText = t?.footerTitle || "Ready to maximize your revenue?";
   const sub1Text = t?.footerSub1 || "Stop leaving 15–20% on the table";
   const sub2Text = t?.footerSub2 || "Build your high-converting direct booking engine";
   const btnText = t?.footerBtn || t?.btnAudit || "Book a Free Audit";
 
   useEffect(() => {
-    // Дефенсивно подтягиваем стили и скрипты Calendly
     if (!document.getElementById('calendly-w-css')) {
       const link = document.createElement('link');
       link.id = 'calendly-w-css';
@@ -92,9 +91,9 @@ export default function FooterCTA({ t }: FooterCTAProps) {
         }
 
         .subtitle {
-          color: ${T.sub};
+          color: rgba(255, 255, 255, 0.8); /* Высокая читаемость и контраст */
           font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-          line-height: 1.4;
+          line-height: 1.45;
           margin: 0;
           text-wrap: pretty;
         }
