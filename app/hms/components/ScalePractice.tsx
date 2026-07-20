@@ -63,24 +63,21 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           box-shadow: 0 10px 30px -10px rgba(0, 229, 153, 0.08);
         }
 
-        /* Объемный контейнер с неоновым подтекстом */
+        /* Бесшовная область для 3D иконки */
         .image-wrapper {
           width: 100%;
           aspect-ratio: 16 / 9;
-          /* Глубокое мягкое свечение по центру */
-          background: radial-gradient(
-            circle at center,
-            rgba(0, 229, 153, 0.12) 0%,
-            rgba(0, 163, 255, 0.04) 45%,
-            transparent 70%
-          );
-          border-radius: 12px;
-          border: 1px solid rgba(255, 255, 255, 0.04);
-          overflow: hidden;
           position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
+          /* Мягкий неон рассеивается прямо по карточке без жестких рамок */
+          background: radial-gradient(
+            circle at center,
+            rgba(0, 229, 153, 0.12) 0%,
+            rgba(0, 163, 255, 0.03) 45%,
+            transparent 75%
+          );
         }
 
         .visual-asset {
@@ -88,16 +85,18 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           height: 100%;
           object-fit: contain;
           display: block;
-          /* Растворяет черный фон иконки */
           mix-blend-mode: screen; 
-          /* Дополнительная тень вокруг самих 3D деталей */
+
+          /* 🪄 РАДИАЛЬНАЯ МАСКА: убирает прямоугольные границы картинки, сводя края в 0 */
+          -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 75%);
+          mask-image: radial-gradient(circle at center, black 40%, transparent 75%);
+
           filter: drop-shadow(0 8px 16px rgba(0, 229, 153, 0.15));
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
-        /* Оживляем иконку при наведении на карточку */
         .scale-card:hover .visual-asset {
-          transform: scale(1.05);
+          transform: scale(1.08);
           filter: drop-shadow(0 12px 24px rgba(0, 229, 153, 0.3));
         }
 
