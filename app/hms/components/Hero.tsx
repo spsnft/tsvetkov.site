@@ -69,7 +69,6 @@ export default function Hero({ t }: HeroProps) {
     };
   }, []);
 
-  // Вызов окна Calendly поверх интерфейса
   const handleCalendlyPopup = (e: React.MouseEvent) => {
     e.preventDefault();
     // @ts-ignore
@@ -110,21 +109,22 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
         
+        /* Исправленная сетка: 52/48 дает дашборду место, не образуя дыру */
         .hero-grid {
           display: grid;
-          grid-template-columns: 60% 40%;
-          gap: 2rem;
-          align-items: center;
+          grid-template-columns: 52% 48%;
+          gap: 1rem;
+          align-items: center; /* Центрируем контент по вертикали */
           position: relative;
         }
 
         .text-column {
           text-align: left;
           position: relative;
-          z-index: 2;
+          z-index: 10; /* Важно: текст теперь всегда поверх прозрачных краев дашборда */
+          padding-right: 1rem;
         }
         
-        /* 💎 Премиальная капсула надзаголовка */
         .badge {
           color: rgba(255, 255, 255, 0.85);
           text-transform: uppercase;
@@ -144,11 +144,12 @@ export default function Hero({ t }: HeroProps) {
         .title {
           font-size: clamp(2.4rem, 4.2vw, 3.8rem);
           font-weight: 700;
-          line-height: 1.1;
+          line-height: 1.15; /* Чуть больше воздуха для читаемости крупных слов */
           letter-spacing: -0.03em;
           margin: 0 0 1.5rem 0;
           color: #fff;
-          text-wrap: pretty;
+          text-wrap: balance; /* Браузер сам перенесет Booking & Agoda логично */
+          max-width: 650px;
         }
         
         .subtitles-block {
@@ -160,14 +161,13 @@ export default function Hero({ t }: HeroProps) {
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.55;
           margin: 0;
-          color: rgba(255, 255, 255, 0.78); /* Высокий контраст для отличной читаемости */
+          color: rgba(255, 255, 255, 0.78);
           text-wrap: pretty;
         }
         .sub-line-2 {
           margin-top: 0.4rem;
         }
         
-        /* 🎯 УТП Оффер — Убрана стрелка, чистый градиентный заголовок */
         .utp-highlight {
           font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
@@ -214,7 +214,6 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.75rem;
         }
 
-        /* 💬 Стильные квадратные кнопки-иконки для мессенджеров */
         .btn-secondary-chat {
           display: inline-flex;
           align-items: center;
@@ -228,22 +227,13 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
           backdrop-filter: blur(8px);
         }
-
         .btn-secondary-chat:hover {
           transform: translateY(-2px);
           background: rgba(255, 255, 255, 0.07);
           border-color: rgba(255, 255, 255, 0.2);
         }
-
-        .btn-secondary-chat.wa:hover {
-          box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
-          border-color: rgba(37, 211, 102, 0.4);
-        }
-
-        .btn-secondary-chat.line:hover {
-          box-shadow: 0 8px 20px rgba(6, 199, 85, 0.25);
-          border-color: rgba(6, 199, 85, 0.4);
-        }
+        .btn-secondary-chat.wa:hover { box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); border-color: rgba(37, 211, 102, 0.4); }
+        .btn-secondary-chat.line:hover { box-shadow: 0 8px 20px rgba(6, 199, 85, 0.25); border-color: rgba(6, 199, 85, 0.4); }
 
         .btn-secondary-chat img {
           width: 22px;
@@ -252,10 +242,7 @@ export default function Hero({ t }: HeroProps) {
           display: block;
           transition: transform 0.2s ease;
         }
-        
-        .btn-secondary-chat:hover img {
-          transform: scale(1.1);
-        }
+        .btn-secondary-chat:hover img { transform: scale(1.1); }
 
         .visual-column {
           position: relative;
@@ -269,16 +256,16 @@ export default function Hero({ t }: HeroProps) {
           perspective: 1400px;
         }
         
-        /* 📱 Дашборд: Стекло и объём */
+        /* Исправленный дашборд: Ширина 150%, ось по центру, сдвинут влево (translateX) */
         .dashboard-mockup {
-          width: 190%; 
+          width: 150%; 
           aspect-ratio: 16 / 10; 
           background-color: rgba(10, 10, 14, 0.82);
           backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg) translateX(0px); 
-          transform-origin: left center;
+          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(-60px); 
+          transform-origin: center center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12);
           padding: 1.2rem;
           display: flex;
@@ -444,6 +431,7 @@ export default function Hero({ t }: HeroProps) {
           background: rgba(13, 13, 17, 0.3);
         }
         
+        /* Добавил внутреннее свечение для объема плашек (textured 3d эффект) */
         .booking {
           position: absolute;
           top: 6px; bottom: 6px;
@@ -455,7 +443,7 @@ export default function Hero({ t }: HeroProps) {
           align-items: center;
           overflow: hidden;
           white-space: nowrap;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+          box-shadow: 0 3px 10px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255, 255, 255, 0.25);
         }
         .b-direct { background: linear-gradient(90deg, #00E599 0%, #00A3FF 100%); color: #000; font-weight: 600; }
         .b-booking { background: linear-gradient(90deg, #003580 0%, #0050c2 100%); }
@@ -470,7 +458,7 @@ export default function Hero({ t }: HeroProps) {
         @media (max-width: 992px) {
           .hero-section { padding: 2rem 0 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
-          .text-column { text-align: center; }
+          .text-column { text-align: center; padding-right: 0; }
           .cta-container { flex-direction: column; align-items: center; }
           .secondary-chats { justify-content: center; }
           .dashboard-mockup { transform: none !important; width: 100% !important; }
