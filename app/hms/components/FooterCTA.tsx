@@ -6,19 +6,23 @@ import { T } from '../../../src/theme/tokens';
 interface FooterCTAProps {
   t: {
     footerTitle?: string;
+    footerSub1?: string;
+    footerSub2?: string;
     footerSub?: string;
+    footerBtn?: string;
     btnAudit?: string;
     [key: string]: any;
   };
 }
 
 export default function FooterCTA({ t }: FooterCTAProps) {
-  const titleText = t?.footerTitle || "Ready to Eliminate Commission Leakage?";
-  const subText = t?.footerSub || "Stop leaving 15-20% on the table. Let's build your high-converting direct booking engine.";
-  const btnText = t?.btnAudit || "Book a Free Audit";
+  const titleText = t?.footerTitle || "Ready to make more money?";
+  const sub1Text = t?.footerSub1 || "Stop leaving 15–20% on the table";
+  const sub2Text = t?.footerSub2 || "Build your high-converting direct booking engine";
+  const btnText = t?.footerBtn || t?.btnAudit || "Book a Free Audit";
 
   useEffect(() => {
-    // Дефенсивно подтягиваем стили и скрипты Calendly на случай, если юзер обновился внизу страницы
+    // Дефенсивно подтягиваем стили и скрипты Calendly
     if (!document.getElementById('calendly-w-css')) {
       const link = document.createElement('link');
       link.id = 'calendly-w-css';
@@ -39,21 +43,22 @@ export default function FooterCTA({ t }: FooterCTAProps) {
   const handleCalendlyPopup = (e: React.MouseEvent) => {
     e.preventDefault();
     
+    const calendlyUrl = 'https://calendly.com/fediatsvetkov/15min?background_color=0a0a0a&text_color=ffffff&primary_color=00e599';
+
     // @ts-ignore
     if (window.Calendly) {
       // @ts-ignore
       window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/fediatsvetkov/15min',
-        // Тонкая настройка глубокой темной темы виджета
+        url: calendlyUrl,
         pageSettings: {
-          backgroundColor: '0d0d11', // Угольный фон под цвет секций сайта
-          textColor: 'ffffff',       // Белый текст
-          primaryColor: '00e599',    // Фирменный неоновый изумруд для кнопок и дат
+          backgroundColor: '0a0a0a',
+          textColor: 'ffffff',
+          primaryColor: '00e599',
           hideGdprBanner: true
         }
       });
     } else {
-      window.open('https://calendly.com/fediatsvetkov/15min?background_color=0d0d11&text_color=ffffff&primary_color=00e599', '_blank');
+      window.open(calendlyUrl, '_blank');
     }
   };
 
@@ -87,12 +92,18 @@ export default function FooterCTA({ t }: FooterCTAProps) {
           text-wrap: pretty;
         }
         
+        .subtitle-box {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+          margin-bottom: 1.5rem;
+        }
+
         .subtitle {
           color: ${T.sub};
           font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-          line-height: 1.5;
-          max-width: 580px;
-          margin: 0 0 1.5rem 0;
+          line-height: 1.4;
+          margin: 0;
           text-wrap: pretty;
         }
         
@@ -128,7 +139,11 @@ export default function FooterCTA({ t }: FooterCTAProps) {
 
       <div className="cta-box">
         <h2 className="main-title">{titleText}</h2>
-        <p className="subtitle">{subText}</p>
+        
+        <div className="subtitle-box">
+          <p className="subtitle">{sub1Text}</p>
+          <p className="subtitle">{sub2Text}</p>
+        </div>
         
         <button onClick={handleCalendlyPopup} className="btn-gradient-cta">
           {btnText}
