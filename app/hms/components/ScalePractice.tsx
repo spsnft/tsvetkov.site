@@ -135,15 +135,25 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           display: flex;
           flex-direction: column;
           gap: 0.6rem;
+          align-items: flex-start;
         }
 
-        .context-label {
-          font-size: 0.78rem;
+        /* 🪄 Плашка устранённой боли (Variant B) */
+        .pain-badge {
+          display: inline-flex;
+          align-items: center;
+          font-size: 0.72rem;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: rgba(255, 255, 255, 0.35);
-          margin: 0;
+          color: #FF6B6B;
+          background: rgba(255, 107, 107, 0.08);
+          border: 1px solid rgba(255, 107, 107, 0.2);
+          padding: 0.25rem 0.65rem;
+          border-radius: 6px;
+          text-decoration: line-through;
+          text-decoration-color: rgba(255, 107, 107, 0.7);
+          margin-bottom: 0.2rem;
         }
 
         .focus-metric {
@@ -197,7 +207,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                 />
               </div>
               <div className="card-content">
-                <p className="context-label">{item.pain}</p>
+                <span className="pain-badge">{item.pain}</span>
                 <h3 className="focus-metric">{metricTitle}</h3>
                 <p className="card-description">
                   {renderFormattedText(item.desc)}
