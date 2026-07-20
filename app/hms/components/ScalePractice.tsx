@@ -54,30 +54,51 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
-          transition: transform 0.3s ease, border-color 0.3s ease;
+          transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .scale-card:hover {
-          border-color: rgba(0, 229, 153, 0.15);
-          transform: translateY(-2px);
+          border-color: rgba(0, 229, 153, 0.2);
+          transform: translateY(-3px);
+          box-shadow: 0 10px 30px -10px rgba(0, 229, 153, 0.08);
         }
 
-        /* Контейнер для сгенерированных 3D-картинок */
+        /* Объемный контейнер с неоновым подтекстом */
         .image-wrapper {
           width: 100%;
           aspect-ratio: 16 / 9;
-          background: #000000;
-          border-radius: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.03);
+          /* Глубокое мягкое свечение по центру */
+          background: radial-gradient(
+            circle at center,
+            rgba(0, 229, 153, 0.12) 0%,
+            rgba(0, 163, 255, 0.04) 45%,
+            transparent 70%
+          );
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.04);
           overflow: hidden;
           position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .visual-asset {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           display: block;
+          /* Растворяет черный фон иконки */
+          mix-blend-mode: screen; 
+          /* Дополнительная тень вокруг самих 3D деталей */
+          filter: drop-shadow(0 8px 16px rgba(0, 229, 153, 0.15));
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+        }
+
+        /* Оживляем иконку при наведении на карточку */
+        .scale-card:hover .visual-asset {
+          transform: scale(1.05);
+          filter: drop-shadow(0 12px 24px rgba(0, 229, 153, 0.3));
         }
 
         .card-content {
@@ -95,7 +116,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           margin: 0;
         }
 
-        /* Метрики на фирменном градиенте */
         .focus-metric {
           font-size: clamp(1.4rem, 2vw, 1.8rem);
           font-weight: 700;
