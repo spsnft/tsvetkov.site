@@ -17,7 +17,7 @@ export const contentData = {
         endValue: 1,
         suffix: " second",
         fixText: " sync",
-        desc: "Cloud PMS & Channel Manager integration. Every reservation **locks your entire grid automatically** across Booking.com, Agoda & 300+ OTAs"
+        desc: "**Cloud PMS & Channel Manager** integration. Every reservation **locks your entire grid automatically** across Booking.com, Agoda & 300+ OTAs"
       },
       {
         pain: "20% OTA commission",
@@ -25,7 +25,7 @@ export const contentData = {
         endValue: 100,
         suffix: "%",
         fixText: " direct revenue",
-        desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and **keep all revenue in-house**"
+        desc: "**Zero-commission booking engine** with a secure payment gateway. Process bookings on your own terms and **keep all revenue in-house**"
       },
       {
         pain: "0 leads from traffic",
@@ -33,7 +33,7 @@ export const contentData = {
         endValue: 10,
         suffix: "x",
         fixText: " booking growth",
-        desc: "Local SEO optimization to capture high-intent search traffic, paired with **automated messenger retention loops** for returning guests"
+        desc: "**Local SEO optimization** to capture high-intent search traffic, paired with **automated messenger retention loops** for returning guests"
       }
     ],
 
@@ -104,7 +104,7 @@ export const contentData = {
         endValue: 1,
         suffix: " วินาที",
         fixText: " ซิงค์ระบบ",
-        desc: "ติดตั้งระบบจัดการที่พักระบบคลาวด์ (PMS) และ Channel Manager ทุกการจอง **ล็อกสถานะห้องพักโดยอัตโนมัติ** บน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
+        desc: "ติดตั้งระบบ **Cloud PMS & Channel Manager** ทุกการจอง **ล็อกสถานะห้องพักโดยอัตโนมัติ** บน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
         pain: "เสียค่าคอมมิชชั่น OTA 20%",
@@ -112,7 +112,7 @@ export const contentData = {
         endValue: 100,
         suffix: "%",
         fixText: " รายได้ตรงเข้าบัญชี",
-        desc: "ติดตั้งระบบจองตรงแบบไม่เสียค่าคอมมิชชั่นบนเว็บไซต์ของคุณ พร้อมเชื่อมต่อระบบชำระเงินออนไลน์ที่ปลอดภัย **รับและเก็บรายได้เต็มจำนวน** โดยไม่ต้องแบ่งใคร"
+        desc: "ติดตั้ง **ระบบจองตรงแบบไม่เสียค่าคอมมิชชั่น** พร้อมระบบชำระเงินที่ปลอดภัย **รับและเก็บรายได้เต็มจำนวน** โดยไม่ต้องแบ่งใคร"
       },
       {
         pain: "0 ยอดจองตรงจากช่องทางออนไลน์",
@@ -120,7 +120,7 @@ export const contentData = {
         endValue: 10,
         suffix: " เท่า",
         fixText: " ของยอดจองตรง",
-        desc: "ทำสิ่งอำนวยความสะดวกด้าน Local SEO เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่ง **แคมเปญกระตุ้นการกลับมาจองซ้ำ** ของลูกค้าโดยอัตโนมัติ"
+        desc: "ทำ **Local SEO** เพื่อดึงลูกค้าเป้าหมาย พร้อม **ระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำ** โดยอัตโนมัติ"
       }
     ],
 
