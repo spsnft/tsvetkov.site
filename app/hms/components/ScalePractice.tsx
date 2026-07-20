@@ -7,7 +7,32 @@ interface ScalePracticeProps {
   t?: any;
 }
 
+// Картинки для карточек по порядку
+const CARD_ASSETS = [
+  '/assets/sync.webp',
+  '/assets/revenue.webp',
+  '/assets/growth.webp'
+];
+
+// Хелпер для парсинга **bold** в HTML-теги <strong>
+const renderFormattedText = (text: string) => {
+  if (!text) return null;
+  const parts = text.split(/\*\*(.*?)\*\*/g);
+  return parts.map((part, index) =>
+    index % 2 === 1 ? (
+      <strong key={index} style={{ color: '#ffffff', fontWeight: 600 }}>
+        {part}
+      </strong>
+    ) : (
+      part
+    )
+  );
+};
+
 export default function ScalePractice({ t }: ScalePracticeProps) {
+  // Фоллбек на случай, если scaleItems еще не переданы
+  const items = t?.scaleItems || [];
+
   return (
     <section className="scale-section">
       <style jsx>{`
@@ -46,9 +71,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           align-items: stretch;
         }
 
-        /* Карточка с четкой изоляцией контекста наложения */
         .scale-card {
-          isolation: isolate; /* 🪄 Чинит баг слияния слоев в WebKit */
+          isolation: isolate;
           -webkit-tap-highlight-color: transparent;
           background: 
             radial-gradient(
@@ -94,14 +118,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           object-fit: contain;
           display: block;
           mix-blend-mode: screen; 
-
-          /* 🪄 Форсируем GPU-слой Safari прямо при загрузке страницы */
           transform: translateZ(0);
           will-change: transform, filter;
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-
-          /* Контраст и свечение */
           filter: contrast(1.18) brightness(1.08) drop-shadow(0 0 20px rgba(0, 229, 153, 0.22));
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
@@ -164,47 +184,28 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       </div>
 
       <div className="scale-grid">
-        {/* КАРТОЧКА 1: SYNC */}
-        <div className="scale-card">
-          <div className="image-wrapper">
-            <img src="/assets/sync.webp" alt="1 second sync visual" className="visual-asset" />
-          </div>
-          <div className="card-content">
-            <p className="context-label">24/7 manual updates</p>
-            <h3 className="focus-metric">1 second sync</h3>
-            <p className="card-description">
-              Cloud PMS & Channel Manager integration. Every reservation locks your entire grid automatically across Booking.com, Agoda & 300+ OTAs.
-            </p>
-          </div>
-        </div>
-
-        {/* КАРТОЧКА 2: REVENUE */}
-        <div className="scale-card">
-          <div className="image-wrapper">
-            <img src="/assets/revenue.webp" alt="100% direct revenue visual" className="visual-asset" />
-          </div>
-          <div className="card-content">
-            <p className="context-label">20% OTA commission</p>
-            <h3 className="focus-metric">100% direct revenue</h3>
-            <p className="card-description">
-              Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house.
-            </p>
-          </div>
-        </div>
-
-        {/* КАРТОЧКА 3: GROWTH */}
-        <div className="scale-card">
-          <div className="image-wrapper">
-            <img src="/assets/growth.webp" alt="10x booking growth visual" className="visual-asset" />
-          </div>
-          <div className="card-content">
-            <p className="context-label">0 leads from direct traffic</p>
-            <h3 className="focus-metric">10x booking growth</h3>
-            <p className="card-description">
-              Local SEO optimization to capture high-intent direct search traffic, paired with automated messenger retention loops for returning guests.
-            </p>
-          </div>
-        </div>
+        {items.map((item: any, idx: number) => {
+          const metricTitle = `${item.endValue}${item.suffix || ''}${item.fixText || ''}`;
+          
+          return (
+            <div className="scale-card" key={idx}>
+              <div className="image-wrapper">
+                <img 
+                  src={CARD_ASSETS[idx] || CARD_ASSETS[0]} 
+                  alt={`${metricTitle} visual`} 
+                  className="visual-asset" 
+                />
+              </div>
+              <div className="card-content">
+                <p className="context-label">{item.pain}</p>
+                <h3 className="focus-metric">{metricTitle}</h3>
+                <p className="card-description">
+                  {renderFormattedText(item.desc)}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
