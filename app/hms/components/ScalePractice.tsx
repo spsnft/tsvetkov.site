@@ -46,8 +46,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           align-items: stretch;
         }
 
-        /* 🪄 Единый холст: фон и подсветка заданы прямо на карточке */
+        /* Карточка с четкой изоляцией контекста наложения */
         .scale-card {
+          isolation: isolate; /* 🪄 Чинит баг слияния слоев в WebKit */
+          -webkit-tap-highlight-color: transparent;
           background: 
             radial-gradient(
               circle at 50% 120px,
@@ -76,7 +78,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             );
         }
 
-        /* Прозрачный оберточный блок без собственных фонов и рамок */
         .image-wrapper {
           width: 100%;
           height: 180px;
@@ -94,13 +95,19 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           display: block;
           mix-blend-mode: screen; 
 
-          /* Контраст и свечение иконки */
+          /* 🪄 Форсируем GPU-слой Safari прямо при загрузке страницы */
+          transform: translateZ(0);
+          will-change: transform, filter;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+
+          /* Контраст и свечение */
           filter: contrast(1.18) brightness(1.08) drop-shadow(0 0 20px rgba(0, 229, 153, 0.22));
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
         .scale-card:hover .visual-asset {
-          transform: scale(1.06);
+          transform: scale(1.06) translateZ(0);
           filter: contrast(1.2) brightness(1.12) drop-shadow(0 0 30px rgba(0, 229, 153, 0.4));
         }
 
