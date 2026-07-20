@@ -7,6 +7,8 @@ interface AboutProps {
   t: {
     aboutLabel?: string;
     aboutTitle?: string;
+    aboutDescFirst?: string;
+    aboutDescRest?: string;
     aboutDesc?: string;
     aboutBtn?: string;
     [key: string]: any;
@@ -16,7 +18,11 @@ interface AboutProps {
 export default function About({ t }: AboutProps) {
   const labelText = t?.aboutLabel || "Growth Architecture";
   const titleText = t?.aboutTitle || "Systems, Optimization & Scale";
-  const descText = t?.aboutDesc || t?.aboutDescription || "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
+  
+  // Фолбэки с разделенным текстом для акцентирования первой фразы
+  const firstSentence = t?.aboutDescFirst || "We step into business ecosystems to optimize them for maximum efficiency.";
+  const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
+  
   const btnText = t?.aboutBtn || t?.aboutButton || "View Professional Profile";
 
   return (
@@ -73,33 +79,44 @@ export default function About({ t }: AboutProps) {
         }
         
         .description {
-          color: ${T.sub};
-          font-size: 1.05rem;
-          line-height: 1.6;
+          font-size: 1.08rem;
+          line-height: 1.65;
           margin: 0;
           text-wrap: pretty;
         }
+
+        .highlight-sentence {
+          color: #ffffff;
+          font-weight: 600;
+        }
+
+        .dimmed-text {
+          color: ${T.sub};
+        }
         
-        /* Исправлено: ссылка теперь ведет на внутренний корень сайта (/) */
+        /* Ghost Button для профиля */
         .view-profile-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: #000000 !important;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          padding: 0.9rem 2.2rem;
+          color: rgba(255, 255, 255, 0.9) !important;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          padding: 0.85rem 2.2rem;
           border-radius: 8px;
-          font-weight: 700;
+          font-weight: 600;
           font-size: 0.95rem;
           text-decoration: none;
+          backdrop-filter: blur(8px);
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.2), 0 10px 30px rgba(0, 163, 255, 0.1);
         }
         
         .view-profile-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.35), 0 15px 40px rgba(0, 163, 255, 0.2);
-          filter: brightness(1.08);
+          background: rgba(255, 255, 255, 0.07);
+          border-color: rgba(0, 229, 153, 0.5);
+          color: #ffffff !important;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
         
         @media (max-width: 992px) {
@@ -123,7 +140,10 @@ export default function About({ t }: AboutProps) {
         </div>
         
         <div className="right-col">
-          <p className="description">{descText}</p>
+          <p className="description">
+            <span className="highlight-sentence">{firstSentence}</span>{' '}
+            <span className="dimmed-text">{restText}</span>
+          </p>
           
           <a href="/" className="view-profile-btn">
             {btnText}
