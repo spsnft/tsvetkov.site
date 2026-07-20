@@ -49,10 +49,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .scale-card {
           background: rgba(255, 255, 255, 0.01);
           border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 14px;
+          border-radius: 16px;
           display: flex;
           flex-direction: column;
-          overflow: hidden; /* Обрезает картинку ровно по скруглениям карточки */
+          overflow: hidden;
           transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -62,43 +62,43 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           box-shadow: 0 12px 35px -10px rgba(0, 229, 153, 0.12);
         }
 
-        /* 🪄 Верхняя зона В СТЫК к краям карточки */
+        /* 🪄 Бесшовная верхняя зона — свет мягко утекает вниз к тексту */
         .image-wrapper {
           width: 100%;
-          height: 230px;
+          height: 220px;
           position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
           background: radial-gradient(
-            circle at center,
-            rgba(0, 229, 153, 0.16) 0%,
-            rgba(0, 163, 255, 0.04) 50%,
-            transparent 80%
+            ellipse 80% 70% at 50% 45%,
+            rgba(0, 229, 153, 0.15) 0%,
+            rgba(0, 163, 255, 0.03) 55%,
+            transparent 100%
           );
-          border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Мягкое разделение с текстом */
         }
 
         .visual-asset {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          padding: 1.5rem; /* Безопасный отступ от границ плашки */
+          padding: 1.2rem 1.5rem 0.5rem 1.5rem;
           display: block;
           mix-blend-mode: screen; 
 
-          /* Усиливаем контраст (выжигает микро-серый шум в 100% черный) и подтягиваем сочность */
-          filter: contrast(1.18) brightness(1.08) drop-shadow(0 0 25px rgba(0, 229, 153, 0.25));
+          /* Сочная фильтрация для OLED без серого шума */
+          filter: contrast(1.18) brightness(1.08) drop-shadow(0 0 25px rgba(0, 229, 153, 0.22));
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
         .scale-card:hover .visual-asset {
           transform: scale(1.06);
-          filter: contrast(1.2) brightness(1.12) drop-shadow(0 0 35px rgba(0, 229, 153, 0.45));
+          filter: contrast(1.2) brightness(1.12) drop-shadow(0 0 35px rgba(0, 229, 153, 0.4));
         }
 
+        /* Контент плавно продолжается под свечением */
         .card-content {
-          padding: 2rem;
+          padding: 0.8rem 2rem 2rem 2rem;
           display: flex;
           flex-direction: column;
           gap: 0.6rem;
@@ -140,7 +140,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             margin: 0 auto;
           }
           .card-content {
-            padding: 1.5rem;
+            padding: 0.8rem 1.5rem 1.5rem 1.5rem;
           }
         }
       `}</style>
