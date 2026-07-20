@@ -7,7 +7,7 @@ export const contentData = {
     btnChat: "WhatsApp",
     btnLine: "Line",
     
-    // --- ГИБРИДНЫЙ БЛОК PAIN + VALUE + DELIVERABLES ---
+    // --- PAIN + VALUE + DELIVERABLES ---
     scaleTitle: "Scale your property bookings",
     scaleSub: "Automate workflows so your team can focus on guest experience",
     scaleItems: [
@@ -37,7 +37,6 @@ export const contentData = {
       }
     ],
 
-    // Утверждено: Сильная связка заголовка и первой метрики
     proofTitle: "Maximize Direct Booking Revenue",
     proofMetrics: [
       { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue Growth" },
@@ -46,7 +45,7 @@ export const contentData = {
       { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Guest Bookings Rate" }
     ],
 
-    // --- ПРЕМИАЛЬНЫЙ БЛОК PRICING ---
+    // --- PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever",
     tier1Title: "LITE (1-10 Rooms)",
@@ -62,7 +61,7 @@ export const contentData = {
     tier2F1Badge: "LITE",
     tier2F2: "✓ Connect 300+ OTA Channels",
     tier2F3: "✓ Guest Return System",
-    tier2F4: "✓ Guides for your Staff", // Убрали скобки (Visual SOPs)
+    tier2F4: "✓ Guides for your Staff",
     
     tier3Title: "ENTERPRISE (30+ Rooms)",
     tier3Desc: "For hotel chains & management firms",
@@ -72,13 +71,15 @@ export const contentData = {
     tier3F3: "✓ Multichannel Ads Setup",
     tier3F4: "✓ Analytics Dashboard",
 
-    // --- ОБНОВЛЕННЫЙ БЛОК ABOUT ---
+    // --- ABOUT ---
     aboutTitle: "Systems, Optimization & Scale",
     aboutDesc: "A performance-driven infrastructure partner engineered to step into complex business ecosystems and optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
     aboutBtn: "View Professional Profile",
     
-    // --- ФУТЕР CTA ---
+    // --- FOOTER CTA (Вариант 2, двухстрочный, без точек) ---
     footerTitle: "Ready to make more money?",
+    footerSub1: "Stop leaving 15–20% on the table",
+    footerSub2: "Build your high-converting direct booking engine",
     footerBtn: "Book a Free Audit"
   },
   th: {
@@ -114,7 +115,7 @@ export const contentData = {
         endValue: 10,
         suffix: " เท่า",
         fixText: " ของยอดจองตรง",
-        desc: "ทำสิ่งอำнวยความสะดวกด้าน Local SEO เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่ง **แคมเปญกระตุ้นการกลับมาจองซ้ำ** ของลูกค้าโดยอัตโนมัติ"
+        desc: "ทำสิ่งอำนวยความสะดวกด้าน Local SEO เพื่อดึงลูกค้าเป้าหมาย พร้อมระบบส่ง **แคมเปญกระตุ้นการกลับมาจองซ้ำ** ของลูกค้าโดยอัตโนมัติ"
       }
     ],
 
@@ -149,13 +150,15 @@ export const contentData = {
     tier3F1Badge: "STANDARD",
     tier3F2: "✓ ระบบตรวจสอบการทำงานพนักงาน (Anti-Theft)",
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
-    tier3F4: "✓ แแดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
+    tier3F4: "✓ แดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
 
     aboutTitle: "ระบบ การเพิ่มประสิทธิภาพ และการขยายขนาด",
-    aboutDesc: "พันธมิตรด้านโครงสร้างพื้นฐานที่มุ่งเน้นผลลัพธ์ ออกแบบมาเพื่อเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไкаเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
+    aboutDesc: "พันธมิตรด้านโครงสร้างพื้นฐานที่มุ่งเน้นผลลัพธ์ ออกแบบมาเพื่อเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
     aboutBtn: "ดูประวัติการทำงาน",
     
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
+    footerSub1: "เลิกเสียรายได้ 15–20% ไปกับค่าคอมมิชชั่น",
+    footerSub2: "สร้างระบบจองตรงที่ทำกำไรสูงสุดให้ที่พักของคุณ",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
   }
 };
