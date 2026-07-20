@@ -43,19 +43,14 @@ export default function FooterCTA({ t }: FooterCTAProps) {
   const handleCalendlyPopup = (e: React.MouseEvent) => {
     e.preventDefault();
     
-    const calendlyUrl = 'https://calendly.com/fediatsvetkov/15min?background_color=0a0a0a&text_color=ffffff&primary_color=00e599';
+    // Параметры цвета прямо в URL (без #, 6-значный HEX)
+    const calendlyUrl = 'https://calendly.com/fediatsvetkov/15min?background_color=0a0a0a&text_color=ffffff&primary_color=00e599&hide_gdpr_banner=1';
 
     // @ts-ignore
     if (window.Calendly) {
       // @ts-ignore
       window.Calendly.initPopupWidget({
-        url: calendlyUrl,
-        pageSettings: {
-          backgroundColor: '0a0a0a',
-          textColor: 'ffffff',
-          primaryColor: '00e599',
-          hideGdprBanner: true
-        }
+        url: calendlyUrl
       });
     } else {
       window.open(calendlyUrl, '_blank');
@@ -64,6 +59,40 @@ export default function FooterCTA({ t }: FooterCTAProps) {
 
   return (
     <section className="footer-cta-section">
+      {/* 🔮 Глобальный перехват стилей поп-апа Calendly */}
+      <style jsx global>{`
+        .calendly-overlay {
+          background-color: rgba(0, 0, 0, 0.75) !important;
+          backdrop-filter: blur(8px) !important;
+          -webkit-backdrop-filter: blur(8px) !important;
+        }
+        .calendly-popup {
+          background-color: #0a0a0a !important;
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          border-radius: 16px !important;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
+        }
+        .calendly-popup-content {
+          background-color: #0a0a0a !important;
+          border-radius: 16px !important;
+        }
+        .calendly-popup-close {
+          color: #ffffff !important;
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          border-radius: 50% !important;
+          width: 32px !important;
+          height: 32px !important;
+          top: 15px !important;
+          right: 15px !important;
+        }
+        .calendly-popup-close:hover {
+          background-color: rgba(255, 255, 255, 0.25) !important;
+        }
+        .calendly-spinner {
+          background-color: #0a0a0a !important;
+        }
+      `}</style>
+
       <style jsx>{`
         .footer-cta-section {
           width: 100%;
