@@ -78,11 +78,12 @@ export const contentData = {
 
     // --- ABOUT ---
     aboutTitle: "Systems, Optimization & Scale",
-    aboutDesc: "We step into business ecosystems to optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable\u00A0revenue",
+    aboutDescFirst: "We step into business ecosystems to optimize them for maximum efficiency.",
+    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
     aboutBtn: "View Professional Profile",
     
     // --- FOOTER CTA ---
-    footerTitle: "Ready to make more money?",
+    footerTitle: "Ready to maximize your revenue?",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Build your high-converting direct booking engine",
     footerBtn: "Book a Free Audit"
@@ -165,7 +166,8 @@ export const contentData = {
 
     // --- ABOUT ---
     aboutTitle: "ระบบ การเพิ่มประสิทธิภาพ และการขยายขนาด",
-    aboutDesc: "เราเข้าจัดการและเพิ่มประสิทธิภาพระบบธุรกิจเพื่อสร้างประสิทธิภาพสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
+    aboutDescFirst: "เราเข้าจัดการและเพิ่มประสิทธิภาพระบบธุรกิจเพื่อสร้างประสิทธิภาพสูงสุด",
+    aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
     aboutBtn: "ดูประวัติการทำงาน",
     
     // --- FOOTER CTA ---
