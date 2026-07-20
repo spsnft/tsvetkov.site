@@ -63,7 +63,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           box-shadow: 0 10px 30px -10px rgba(0, 229, 153, 0.08);
         }
 
-        /* Бесшовная область для 3D иконки */
+        /* Абсолютно бесшовная область без жестких границ */
         .image-wrapper {
           width: 100%;
           aspect-ratio: 16 / 9;
@@ -71,33 +71,34 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           display: flex;
           align-items: center;
           justify-content: center;
-          /* Мягкий неон рассеивается прямо по карточке без жестких рамок */
+          /* Эллиптическое рассеивание под формат 16:9 */
           background: radial-gradient(
-            circle at center,
-            rgba(0, 229, 153, 0.12) 0%,
+            ellipse 70% 60% at center,
+            rgba(0, 229, 153, 0.14) 0%,
             rgba(0, 163, 255, 0.03) 45%,
-            transparent 75%
+            transparent 100%
           );
         }
 
         .visual-asset {
-          width: 100%;
-          height: 100%;
+          /* Оставляем 85% размера, чтобы у иконки и света было место раствориться */
+          width: 85%;
+          height: 85%;
           object-fit: contain;
           display: block;
           mix-blend-mode: screen; 
 
-          /* 🪄 РАДИАЛЬНАЯ МАСКА: убирает прямоугольные границы картинки, сводя края в 0 */
-          -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 75%);
-          mask-image: radial-gradient(circle at center, black 40%, transparent 75%);
+          /* 🪄 Мягкий эллипс: кратно аккуратнее сводит в 0 верх и низ */
+          -webkit-mask-image: radial-gradient(ellipse 65% 65% at center, black 20%, transparent 80%);
+          mask-image: radial-gradient(ellipse 65% 65% at center, black 20%, transparent 80%);
 
-          filter: drop-shadow(0 8px 16px rgba(0, 229, 153, 0.15));
+          filter: drop-shadow(0 6px 14px rgba(0, 229, 153, 0.15));
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
         .scale-card:hover .visual-asset {
-          transform: scale(1.08);
-          filter: drop-shadow(0 12px 24px rgba(0, 229, 153, 0.3));
+          transform: scale(1.06);
+          filter: drop-shadow(0 10px 20px rgba(0, 229, 153, 0.28));
         }
 
         .card-content {
