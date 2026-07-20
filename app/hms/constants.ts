@@ -71,12 +71,12 @@ export const contentData = {
     tier3F3: "✓ Multichannel Ads Setup",
     tier3F4: "✓ Analytics Dashboard",
 
-    // --- ABOUT (อัปเดตเป็นเวอร์ชัน We step into... ที่กระชับและทรงพลัง) ---
+    // --- ABOUT (Сокращенная активная версия + защищенный перенос) ---
     aboutTitle: "Systems, Optimization & Scale",
-    aboutDesc: "We step into complex business ecosystems to optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single cohesive engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
+    aboutDesc: "We step into business ecosystems to optimize them for maximum efficiency. By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable\u00A0revenue",
     aboutBtn: "View Professional Profile",
     
-    // --- FOOTER CTA (เวอร์ชันสองบรรทัด ไม่มีจุดท้ายประโยค) ---
+    // --- FOOTER CTA ---
     footerTitle: "Ready to make more money?",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Build your high-converting direct booking engine",
@@ -152,9 +152,9 @@ export const contentData = {
     tier3F3: "✓ ตั้งค่าโฆษณาหลายช่องทาง",
     tier3F4: "✓ แดชบอร์ดวิเคราะห์ข้อมูลสำหรับเจ้าของ",
 
-    // --- ABOUT (ปรับภาษาไทยให้ขึ้นต้นด้วยการกระทำ "เราเข้าจัดการ..." สอดคล้องกับอังกฤษ) ---
+    // --- ABOUT ---
     aboutTitle: "ระบบ การเพิ่มประสิทธิภาพ และการขยายขนาด",
-    aboutDesc: "เราเข้าจัดการและเพิ่มประสิทธิภาพให้กับระบบธุรกิจที่ซับซ้อนอย่างสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติ (Automation) เข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนต้นทุนการดำเนินงานให้เป็นรายได้ที่มั่นคงและขยายตัวได้อย่างยั่งยืน",
+    aboutDesc: "เราเข้าจัดการและเพิ่มประสิทธิภาพระบบธุรกิจเพื่อสร้างประสิทธิภาพสูงสุด ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
     aboutBtn: "ดูประวัติการทำงาน",
     
     // --- FOOTER CTA ---
