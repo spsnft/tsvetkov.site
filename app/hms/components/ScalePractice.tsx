@@ -46,59 +46,65 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           align-items: stretch;
         }
 
+        /* 🪄 Единый холст: фон и подсветка заданы прямо на карточке */
         .scale-card {
-          background: rgba(255, 255, 255, 0.01);
+          background: 
+            radial-gradient(
+              circle at 50% 120px,
+              rgba(0, 229, 153, 0.14) 0%,
+              rgba(0, 163, 255, 0.03) 45%,
+              rgba(255, 255, 255, 0.01) 75%
+            );
           border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 16px;
           display: flex;
           flex-direction: column;
-          overflow: hidden;
-          transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+          padding: 2rem;
+          transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
 
         .scale-card:hover {
           border-color: rgba(0, 229, 153, 0.25);
           transform: translateY(-3px);
           box-shadow: 0 12px 35px -10px rgba(0, 229, 153, 0.12);
+          background: 
+            radial-gradient(
+              circle at 50% 120px,
+              rgba(0, 229, 153, 0.18) 0%,
+              rgba(0, 163, 255, 0.05) 50%,
+              rgba(255, 255, 255, 0.015) 80%
+            );
         }
 
-        /* 🪄 Бесшовная верхняя зона — свет мягко утекает вниз к тексту */
+        /* Прозрачный оберточный блок без собственных фонов и рамок */
         .image-wrapper {
           width: 100%;
-          height: 220px;
-          position: relative;
+          height: 180px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: radial-gradient(
-            ellipse 80% 70% at 50% 45%,
-            rgba(0, 229, 153, 0.15) 0%,
-            rgba(0, 163, 255, 0.03) 55%,
-            transparent 100%
-          );
+          background: transparent;
+          margin-bottom: 1rem;
         }
 
         .visual-asset {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          padding: 1.2rem 1.5rem 0.5rem 1.5rem;
           display: block;
           mix-blend-mode: screen; 
 
-          /* Сочная фильтрация для OLED без серого шума */
-          filter: contrast(1.18) brightness(1.08) drop-shadow(0 0 25px rgba(0, 229, 153, 0.22));
+          /* Контраст и свечение иконки */
+          filter: contrast(1.18) brightness(1.08) drop-shadow(0 0 20px rgba(0, 229, 153, 0.22));
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
         .scale-card:hover .visual-asset {
           transform: scale(1.06);
-          filter: contrast(1.2) brightness(1.12) drop-shadow(0 0 35px rgba(0, 229, 153, 0.4));
+          filter: contrast(1.2) brightness(1.12) drop-shadow(0 0 30px rgba(0, 229, 153, 0.4));
         }
 
-        /* Контент плавно продолжается под свечением */
         .card-content {
-          padding: 0.8rem 2rem 2rem 2rem;
           display: flex;
           flex-direction: column;
           gap: 0.6rem;
@@ -139,8 +145,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             max-width: 500px;
             margin: 0 auto;
           }
-          .card-content {
-            padding: 0.8rem 1.5rem 1.5rem 1.5rem;
+          .scale-card {
+            padding: 1.75rem;
           }
         }
       `}</style>
