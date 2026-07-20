@@ -104,12 +104,12 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         .image-wrapper {
           width: 100%;
-          height: 180px;
+          height: 140px;
           display: flex;
           align-items: center;
           justify-content: center;
           background: transparent;
-          margin-bottom: 1rem;
+          margin-bottom: 0.5rem;
         }
 
         .visual-asset {
@@ -134,14 +134,16 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .card-content {
           display: flex;
           flex-direction: column;
-          gap: 0.6rem;
-          align-items: flex-start;
+          gap: 0.8rem;
+          align-items: center;
+          text-align: center;
         }
 
         /* 🪄 Плашка устранённой боли (Variant B) */
         .pain-badge {
           display: inline-flex;
           align-items: center;
+          justify-content: center;
           font-size: 0.72rem;
           font-weight: 600;
           text-transform: uppercase;
@@ -153,7 +155,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           border-radius: 6px;
           text-decoration: line-through;
           text-decoration-color: rgba(255, 107, 107, 0.7);
-          margin-bottom: 0.2rem;
+          margin-bottom: 0.1rem;
         }
 
         .focus-metric {
