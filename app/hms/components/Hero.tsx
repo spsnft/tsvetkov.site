@@ -112,8 +112,8 @@ export default function Hero({ t }: HeroProps) {
         
         .hero-grid {
           display: grid;
-          grid-template-columns: 62% 38%;
-          gap: 1.5rem;
+          grid-template-columns: 60% 40%;
+          gap: 2rem;
           align-items: center;
           position: relative;
         }
@@ -124,14 +124,21 @@ export default function Hero({ t }: HeroProps) {
           z-index: 2;
         }
         
+        /* 💎 Премиальная капсула надзаголовка */
         .badge {
-          color: rgba(255, 255, 255, 0.45);
+          color: rgba(255, 255, 255, 0.85);
           text-transform: uppercase;
-          letter-spacing: 0.25em;
-          font-size: 0.72rem;
-          font-weight: 700;
-          display: inline-block;
-          margin-bottom: 1.2rem;
+          letter-spacing: 0.15em;
+          font-size: 0.7rem;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          padding: 0.35rem 0.85rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          backdrop-filter: blur(8px);
+          margin-bottom: 1.5rem;
         }
         
         .title {
@@ -151,15 +158,16 @@ export default function Hero({ t }: HeroProps) {
         .sub-line-1, .sub-line-2 {
           display: block !important;
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
-          line-height: 1.5;
+          line-height: 1.55;
           margin: 0;
-          color: ${T.sub};
+          color: rgba(255, 255, 255, 0.78); /* Высокий контраст для отличной читаемости */
           text-wrap: pretty;
         }
         .sub-line-2 {
           margin-top: 0.4rem;
         }
         
+        /* 🎯 УТП Оффер — Убрана стрелка, чистый градиентный заголовок */
         .utp-highlight {
           font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
@@ -168,21 +176,13 @@ export default function Hero({ t }: HeroProps) {
           -webkit-text-fill-color: transparent;
           margin-bottom: 2.5rem;
           letter-spacing: -0.01em;
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-        }
-        
-        /* Бритвоострая изумрудная стрелка без синевы */
-        .utp-arrow {
-          color: #00E599 !important;
-          -webkit-text-fill-color: #00E599 !important;
+          display: block;
         }
 
         .cta-container {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 1.2rem;
           flex-wrap: wrap;
         }
         
@@ -199,45 +199,63 @@ export default function Hero({ t }: HeroProps) {
           font-size: 1rem;
           flex-shrink: 0;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.2), 0 10px 30px rgba(0, 163, 255, 0.1);
+          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
           cursor: pointer;
         }
         .btn-primary-main:hover {
           transform: translateY(-2px);
-          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.35), 0 15px 40px rgba(0, 163, 255, 0.2);
-          filter: brightness(1.08);
+          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+          filter: brightness(1.06);
         }
 
         .secondary-chats {
           display: flex;
           align-items: center;
-          gap: 1.5rem;
+          gap: 0.75rem;
         }
+
+        /* 💬 Стильные квадратные кнопки-иконки для мессенджеров */
         .btn-secondary-chat {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
-          color: rgba(255, 255, 255, 0.6);
-          text-decoration: none;
-          font-size: 0.88rem;
-          font-weight: 600;
-          transition: all 0.2s ease;
-          white-space: nowrap;
+          justify-content: center;
+          width: 48px;
+          height: 48px;
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          transition: all 0.25s ease;
+          position: relative;
+          backdrop-filter: blur(8px);
         }
+
         .btn-secondary-chat:hover {
-          color: #fff;
-          transform: translateY(-1px);
+          transform: translateY(-2px);
+          background: rgba(255, 255, 255, 0.07);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary-chat.wa:hover {
+          box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+          border-color: rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-secondary-chat.line:hover {
+          box-shadow: 0 8px 20px rgba(6, 199, 85, 0.25);
+          border-color: rgba(6, 199, 85, 0.4);
         }
 
         .btn-secondary-chat img {
-          width: 100%;
-          height: 100%;
+          width: 22px;
+          height: 22px;
           object-fit: contain;
           display: block;
           transition: transform 0.2s ease;
         }
-        .btn-secondary-chat img[src*="whatsapp"] { transform: scale(1.15); }
-        .btn-secondary-chat img[src*="line"] { transform: scale(1.45); }
+        
+        .btn-secondary-chat:hover img {
+          transform: scale(1.1);
+        }
 
         .visual-column {
           position: relative;
@@ -251,16 +269,17 @@ export default function Hero({ t }: HeroProps) {
           perspective: 1400px;
         }
         
+        /* 📱 Дашборд: Стекло и объём */
         .dashboard-mockup {
           width: 190%; 
           aspect-ratio: 16 / 10; 
-          background-color: rgba(13, 13, 17, 0.8);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background-color: rgba(10, 10, 14, 0.82);
+          backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
           transform: rotateX(13deg) rotateY(-15deg) rotateZ(3deg) translateX(0px); 
           transform-origin: left center;
-          box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+          box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12);
           padding: 1.2rem;
           display: flex;
           flex-direction: column;
@@ -272,8 +291,8 @@ export default function Hero({ t }: HeroProps) {
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          padding-bottom: 0.4rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          padding-bottom: 0.5rem;
         }
         
         .sync-status { 
@@ -281,12 +300,12 @@ export default function Hero({ t }: HeroProps) {
           align-items: center; 
           gap: 0.5rem; 
           font-size: 0.72rem; 
-          color: rgba(255, 255, 255, 0.8); 
+          color: rgba(255, 255, 255, 0.85); 
           font-weight: 600; 
-          background: rgba(255, 255, 255, 0.03); 
+          background: rgba(255, 255, 255, 0.04); 
           padding: 0.25rem 0.65rem; 
           border-radius: 20px; 
-          border: 1px solid rgba(255, 255, 255, 0.06); 
+          border: 1px solid rgba(255, 255, 255, 0.08); 
         }
         .pulse-dot { 
           width: 6px; 
@@ -312,9 +331,10 @@ export default function Hero({ t }: HeroProps) {
           min-width: 0;
           overflow: hidden;
         }
+        
         .widget {
-          background: rgba(255, 255, 255, 0.01);
-          border: 1px solid rgba(255, 255, 255, 0.03);
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           padding: 0.75rem 0.95rem;
           border-radius: 8px;
           min-width: 0;
@@ -323,7 +343,7 @@ export default function Hero({ t }: HeroProps) {
         
         .widget.primary-focus {
           position: relative;
-          background: rgba(255, 255, 255, 0.015);
+          background: rgba(255, 255, 255, 0.03);
           border-left: none;
         }
         .widget.primary-focus::before {
@@ -334,7 +354,7 @@ export default function Hero({ t }: HeroProps) {
           background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%);
         }
 
-        .widget-label { font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+        .widget-label { font-size: 0.65rem; color: rgba(255, 255, 255, 0.45); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
         .widget-value { font-size: 1.45rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
         
         .text-brand-gradient { 
@@ -343,7 +363,7 @@ export default function Hero({ t }: HeroProps) {
           -webkit-text-fill-color: transparent;
         }
 
-        .widget-sub { font-size: 0.65rem; color: #444; margin-top: 0.3rem; }
+        .widget-sub { font-size: 0.65rem; color: rgba(255, 255, 255, 0.35); margin-top: 0.3rem; }
         
         .mini-chart {
           display: flex;
@@ -353,12 +373,12 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 0.4rem;
         }
         .bar { width: 12px; border-radius: 2px 2px 0 0; }
-        .bar.ota { background: rgba(255, 255, 255, 0.06); }
-        .bar.direct { background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%); opacity: 0.7; }
+        .bar.ota { background: rgba(255, 255, 255, 0.08); }
+        .bar.direct { background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%); opacity: 0.85; }
 
         .logs-widget {
-          background: rgba(0, 0, 0, 0.2);
-          border: 1px solid rgba(255, 255, 255, 0.02);
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.04);
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -374,7 +394,7 @@ export default function Hero({ t }: HeroProps) {
           font-size: 0.62rem;
         }
         .log-line {
-          color: rgba(255, 255, 255, 0.35);
+          color: rgba(255, 255, 255, 0.55);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -382,15 +402,15 @@ export default function Hero({ t }: HeroProps) {
           display: block;
         }
         .log-time {
-          color: rgba(255, 255, 255, 0.15);
+          color: rgba(255, 255, 255, 0.25);
           margin-right: 0.4rem;
         }
 
         .pms-matrix {
           flex: 1;
           min-width: 0;
-          background: rgba(0, 0, 0, 0.15);
-          border: 1px solid rgba(255, 255, 255, 0.03);
+          background: rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.04);
           border-radius: 8px;
           display: flex;
           flex-direction: column;
@@ -399,29 +419,29 @@ export default function Hero({ t }: HeroProps) {
         .matrix-header {
           display: grid;
           grid-template-columns: 80px repeat(7, 1fr);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           font-size: 0.65rem;
-          color: #555;
+          color: rgba(255, 255, 255, 0.4);
           text-align: center;
-          background: rgba(255, 255, 255, 0.01);
+          background: rgba(255, 255, 255, 0.015);
         }
-        .matrix-header > div { padding: 0.6rem 0; border-right: 1px solid rgba(255, 255, 255, 0.01); }
+        .matrix-header > div { padding: 0.6rem 0; border-right: 1px solid rgba(255, 255, 255, 0.02); }
         
         .matrix-row {
           display: grid;
           grid-template-columns: 80px repeat(7, 1fr);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
           flex: 1;
           position: relative;
         }
         .matrix-room-name {
           font-size: 0.7rem;
-          color: #666;
+          color: rgba(255, 255, 255, 0.5);
           padding: 0 0.5rem;
           display: flex;
           align-items: center;
-          border-right: 1px solid rgba(255, 255, 255, 0.04);
-          background: rgba(13, 13, 17, 0.2);
+          border-right: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(13, 13, 17, 0.3);
         }
         
         .booking {
@@ -435,7 +455,7 @@ export default function Hero({ t }: HeroProps) {
           align-items: center;
           overflow: hidden;
           white-space: nowrap;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+          box-shadow: 0 3px 10px rgba(0,0,0,0.5);
         }
         .b-direct { background: linear-gradient(90deg, #00E599 0%, #00A3FF 100%); color: #000; font-weight: 600; }
         .b-booking { background: linear-gradient(90deg, #003580 0%, #0050c2 100%); }
@@ -453,7 +473,6 @@ export default function Hero({ t }: HeroProps) {
           .text-column { text-align: center; }
           .cta-container { flex-direction: column; align-items: center; }
           .secondary-chats { justify-content: center; }
-          .utp-highlight { justify-content: center; }
           .dashboard-mockup { transform: none !important; width: 100% !important; }
           .pms-body { flex-direction: column; }
           .pms-analytics { flex: none; gap: 0.6rem; width: 100%; }
@@ -472,7 +491,7 @@ export default function Hero({ t }: HeroProps) {
           </div>
           
           <div className="utp-highlight">
-            <span className="utp-arrow">→</span>&nbsp;{t.heroSub2}
+            {t.heroSub2}
           </div>
           
           <div className="cta-container">
@@ -481,18 +500,24 @@ export default function Hero({ t }: HeroProps) {
             </button>
             
             <div className="secondary-chats">
-              <a href="https://wa.me/66955183783" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
-                <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0 }}>
-                  <img src="/logos/whatsapp.svg" alt="WhatsApp" />
-                </div>
-                <span>{t.btnChat}</span>
+              <a 
+                href="https://wa.me/66955183783" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-secondary-chat wa"
+                title="WhatsApp"
+              >
+                <img src="/logos/whatsapp.svg" alt="WhatsApp" />
               </a>
               
-              <a href="https://line.me/ti/p/~fedor_tsvetkov" target="_blank" rel="noopener noreferrer" className="btn-secondary-chat">
-                <div style={{ width: '18px', height: '18px', minWidth: '18px', flexShrink: 0 }}>
-                  <img src="/logos/line.svg" alt="LINE" />
-                </div>
-                <span>{t.btnLine}</span>
+              <a 
+                href="https://line.me/ti/p/~fedor_tsvetkov" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-secondary-chat line"
+                title="LINE"
+              >
+                <img src="/logos/line.svg" alt="LINE" />
               </a>
             </div>
           </div>
@@ -513,7 +538,7 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                   <div className="widget">
                     <div className="widget-label">Occupancy / ADR</div>
-                    <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: '#333' }}>|</span> ฿4,250</div>
+                    <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span> ฿4,250</div>
                     <div className="mini-chart">
                       <div className="bar ota" style={{ height: '40%' }}></div>
                       <div className="bar direct" style={{ height: '30%' }}></div>
@@ -530,7 +555,7 @@ export default function Hero({ t }: HeroProps) {
                     <div className="widget-sub">Per Available Room</div>
                   </div>
                   <div className="widget logs-widget">
-                    <div className="widget-label" style={{ color: '#444' }}>Live Activity Log</div>
+                    <div className="widget-label">Live Activity Log</div>
                     <div className="logs-container">
                       {logs.map((log, i) => (
                         <div key={i} className="log-line">
