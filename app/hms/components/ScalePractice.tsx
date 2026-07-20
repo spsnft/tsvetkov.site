@@ -48,60 +48,57 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         .scale-card {
           background: rgba(255, 255, 255, 0.01);
-          border: 1px solid rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 14px;
-          padding: 2.5rem 2rem;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          overflow: hidden; /* Обрезает картинку ровно по скруглениям карточки */
           transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .scale-card:hover {
-          border-color: rgba(0, 229, 153, 0.2);
+          border-color: rgba(0, 229, 153, 0.25);
           transform: translateY(-3px);
-          box-shadow: 0 10px 30px -10px rgba(0, 229, 153, 0.08);
+          box-shadow: 0 12px 35px -10px rgba(0, 229, 153, 0.12);
         }
 
-        /* Абсолютно бесшовная область без жестких границ */
+        /* 🪄 Верхняя зона В СТЫК к краям карточки */
         .image-wrapper {
           width: 100%;
-          aspect-ratio: 16 / 9;
+          height: 230px;
           position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
-          /* Эллиптическое рассеивание под формат 16:9 */
           background: radial-gradient(
-            ellipse 70% 60% at center,
-            rgba(0, 229, 153, 0.14) 0%,
-            rgba(0, 163, 255, 0.03) 45%,
-            transparent 100%
+            circle at center,
+            rgba(0, 229, 153, 0.16) 0%,
+            rgba(0, 163, 255, 0.04) 50%,
+            transparent 80%
           );
+          border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Мягкое разделение с текстом */
         }
 
         .visual-asset {
-          /* Оставляем 85% размера, чтобы у иконки и света было место раствориться */
-          width: 85%;
-          height: 85%;
+          width: 100%;
+          height: 100%;
           object-fit: contain;
+          padding: 1.5rem; /* Безопасный отступ от границ плашки */
           display: block;
           mix-blend-mode: screen; 
 
-          /* 🪄 Мягкий эллипс: кратно аккуратнее сводит в 0 верх и низ */
-          -webkit-mask-image: radial-gradient(ellipse 65% 65% at center, black 20%, transparent 80%);
-          mask-image: radial-gradient(ellipse 65% 65% at center, black 20%, transparent 80%);
-
-          filter: drop-shadow(0 6px 14px rgba(0, 229, 153, 0.15));
+          /* Усиливаем контраст (выжигает микро-серый шум в 100% черный) и подтягиваем сочность */
+          filter: contrast(1.18) brightness(1.08) drop-shadow(0 0 25px rgba(0, 229, 153, 0.25));
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
         .scale-card:hover .visual-asset {
           transform: scale(1.06);
-          filter: drop-shadow(0 10px 20px rgba(0, 229, 153, 0.28));
+          filter: contrast(1.2) brightness(1.12) drop-shadow(0 0 35px rgba(0, 229, 153, 0.45));
         }
 
         .card-content {
+          padding: 2rem;
           display: flex;
           flex-direction: column;
           gap: 0.6rem;
@@ -142,8 +139,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             max-width: 500px;
             margin: 0 auto;
           }
-          .scale-card {
-            padding: 2rem 1.5rem;
+          .card-content {
+            padding: 1.5rem;
           }
         }
       `}</style>
