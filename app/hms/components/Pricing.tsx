@@ -19,14 +19,33 @@ export default function Pricing({ t }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          padding: 6rem 2rem;
-          border-bottom: 1px solid ${T.border};
+          max-width: 1280px;
+          margin: 0 auto;
+          /* Верх: 0 (отступ дает предыдущий блок) | Низ: 80px (5rem) */
+          padding: 0 1.5rem 5rem 1.5rem; 
           background: transparent;
         }
         
         .pricing-header {
           text-align: center;
-          margin-bottom: 4rem;
+          /* Стандартный воздух от заголовка к карточкам (56px / 3.5rem) */
+          margin-bottom: 3.5rem;
+        }
+
+        .pricing-title {
+          font-size: 2.4rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.02em;
+          line-height: 1.2;
+        }
+
+        .pricing-subtitle {
+          color: ${T.sub};
+          font-size: 1.05rem;
+          line-height: 1.5;
+          margin: 0;
         }
         
         .pricing-grid {
@@ -47,12 +66,24 @@ export default function Pricing({ t }: PricingProps) {
           display: flex;
           flex-direction: column;
           gap: 1.8rem;
+          transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .card:not(.featured):hover {
+          border-color: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.02);
+          transform: translateY(-2px);
         }
         
         .card.featured {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(0, 229, 153, 0.25);
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .card.featured:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 25px 60px rgba(0, 229, 153, 0.15);
         }
         
         .popular-badge {
@@ -146,22 +177,38 @@ export default function Pricing({ t }: PricingProps) {
         }
         
         @media (max-width: 992px) {
+          .pricing-section {
+            padding: 0 1.25rem 3.5rem 1.25rem;
+          }
+          .pricing-header {
+            margin-bottom: 2.5rem;
+          }
+          .pricing-title {
+            font-size: 1.8rem;
+          }
           .pricing-grid {
             grid-template-columns: 1fr;
-            gap: 2.5rem;
+            gap: 1.5rem;
+            max-width: 500px;
           }
           .card {
             padding: 2.5rem 2rem;
           }
         }
+
+        @media (max-width: 576px) {
+          .card {
+            padding: 2rem 1.5rem;
+          }
+        }
       `}</style>
 
       <div className="pricing-header">
-        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', margin: '0 0 0.75rem 0' }}>
+        <h2 className="pricing-title">
           {t?.priceTitle || "Transparent Integration. Permanent Independence"}
         </h2>
         {t?.priceSub && (
-          <p style={{ color: T.sub, fontSize: '1.1rem', margin: 0 }}>
+          <p className="pricing-subtitle">
             {t.priceSub}
           </p>
         )}
