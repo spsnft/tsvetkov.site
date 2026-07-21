@@ -19,10 +19,8 @@ export default function Pricing({ t }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          max-width: 1200px; /* Приведено к эталонной ширине 1200px */
-          margin: 0 auto;
           /* Верх: 0 (отступ дает предыдущий блок) | Низ: 80px (5rem) */
-          padding: 0 1.5rem 5rem 1.5rem; 
+          padding: 0 0 5rem 0; 
           background: transparent;
         }
         
@@ -177,7 +175,7 @@ export default function Pricing({ t }: PricingProps) {
         
         @media (max-width: 992px) {
           .pricing-section {
-            padding: 0 1.25rem 3.5rem 1.25rem;
+            padding: 0 0 3.5rem 0;
           }
           .pricing-header {
             margin-bottom: 2.5rem;
@@ -203,74 +201,76 @@ export default function Pricing({ t }: PricingProps) {
         }
       `}</style>
 
-      <div className="pricing-header">
-        <h2 className="pricing-title">
-          {t?.priceTitle || "Transparent Integration. Permanent Independence"}
-        </h2>
-        {t?.priceSub && (
-          <p className="pricing-subtitle">
-            {t.priceSub}
-          </p>
-        )}
-      </div>
-
-      <div className="pricing-grid">
-        {/* LITE */}
-        <div className="card">
-          <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
-          <div className="price-block">
-            <span className="price">{t?.tier1Price || "$500"}</span>
-            <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
-          </div>
-          <ul className="features-list">
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F1)}</li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F2)}</li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F3)}</li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F4)}</li>
-          </ul>
+      <div className="container">
+        <div className="pricing-header">
+          <h2 className="pricing-title">
+            {t?.priceTitle || "Transparent Integration. Permanent Independence"}
+          </h2>
+          {t?.priceSub && (
+            <p className="pricing-subtitle">
+              {t.priceSub}
+            </p>
+          )}
         </div>
 
-        {/* STANDARD */}
-        <div className="card featured">
-          <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
-          <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
-          <div className="price-block">
-            <span className="price">{t?.tier2Price || "$1,200"}</span>
-            <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
+        <div className="pricing-grid">
+          {/* LITE */}
+          <div className="card">
+            <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
+            <div className="price-block">
+              <span className="price">{t?.tier1Price || "$500"}</span>
+              <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
+            </div>
+            <ul className="features-list">
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F1)}</li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F2)}</li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F3)}</li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F4)}</li>
+            </ul>
           </div>
-          <ul className="features-list">
-            <li className="feature-item">
-              <span className="check-icon">✓</span> 
-              <span>
-                {cleanText(t?.tier2F1)}
-                {t?.tier2F1Badge && <span className="tier-badge">{t.tier2F1Badge}</span>}
-              </span>
-            </li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F2)}</li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F3)}</li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F4)}</li>
-          </ul>
-        </div>
 
-        {/* ENTERPRISE */}
-        <div className="card">
-          <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
-          <div className="price-block">
-            <span className="price">{t?.tier3Price || "Custom"}</span>
-            <span className="price-desc">{t?.tier3Desc || "For hotel chains & management firms"}</span>
+          {/* STANDARD */}
+          <div className="card featured">
+            <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
+            <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
+            <div className="price-block">
+              <span className="price">{t?.tier2Price || "$1,200"}</span>
+              <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
+            </div>
+            <ul className="features-list">
+              <li className="feature-item">
+                <span className="check-icon">✓</span> 
+                <span>
+                  {cleanText(t?.tier2F1)}
+                  {t?.tier2F1Badge && <span className="tier-badge">{t.tier2F1Badge}</span>}
+                </span>
+              </li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F2)}</li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F3)}</li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F4)}</li>
+            </ul>
           </div>
-          <ul className="features-list">
-            <li className="feature-item">
-              <span className="check-icon">✓</span> 
-              <span>
-                {cleanText(t?.tier3F1)}
-                {t?.tier3F1Badge && <span className="tier-badge">{t.tier3F1Badge}</span>}
-              </span>
-            </li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F2)}</li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F3)}</li>
-            <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F4)}</li>
-          </ul>
+
+          {/* ENTERPRISE */}
+          <div className="card">
+            <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
+            <div className="price-block">
+              <span className="price">{t?.tier3Price || "Custom"}</span>
+              <span className="price-desc">{t?.tier3Desc || "For hotel chains & management firms"}</span>
+            </div>
+            <ul className="features-list">
+              <li className="feature-item">
+                <span className="check-icon">✓</span> 
+                <span>
+                  {cleanText(t?.tier3F1)}
+                  {t?.tier3F1Badge && <span className="tier-badge">{t.tier3F1Badge}</span>}
+                </span>
+              </li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F2)}</li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F3)}</li>
+              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F4)}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
