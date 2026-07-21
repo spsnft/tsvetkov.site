@@ -102,17 +102,15 @@ export default function Hero({ t }: HeroProps) {
       <style jsx>{`
         .hero-section {
           width: 100%;
-          max-width: 1200px; /* Фиксация блока в единой сетке 1200px */
-          margin: 0 auto;
-          padding: 2.5rem 1.5rem 4rem 1.5rem;
+          padding: 2.5rem 0 4rem 0;
           position: relative;
           z-index: 10;
-          overflow: hidden; /* Обрезает все, что вылетает за 1200px */
+          overflow: hidden; /* Обрезает все, что вылетает за 100vw */
         }
         
         .hero-grid {
           display: grid;
-          grid-template-columns: 52% 48%; /* РОДНЫЕ пропорции сохранены */
+          grid-template-columns: 52% 48%;
           gap: 1rem;
           align-items: center;
           position: relative;
@@ -142,7 +140,7 @@ export default function Hero({ t }: HeroProps) {
         }
         
         .title {
-          font-size: clamp(2.4rem, 4.2vw, 3.8rem); /* РОДНОЙ размер */
+          font-size: clamp(2.4rem, 4.2vw, 3.8rem);
           font-weight: 700;
           line-height: 1.15;
           letter-spacing: -0.03em;
@@ -268,13 +266,12 @@ export default function Hero({ t }: HeroProps) {
         }
         
         .dashboard-mockup {
-          width: 160%; /* РОДНОЙ масштаб 160% */
+          width: 160%;
           aspect-ratio: 16 / 10; 
           background-color: rgba(10, 10, 14, 0.85);
           backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          /* Сдвигаем влево translateX(-10px), чтобы макет растворялся аккурат у границы 1200px */
           transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(-10px); 
           transform-origin: center center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12);
@@ -283,7 +280,6 @@ export default function Hero({ t }: HeroProps) {
           flex-direction: column;
           gap: 0.8rem;
           position: relative;
-          /* РОДНАЯ маска растворения */
           -webkit-mask-image: linear-gradient(to right, black 60%, transparent 95%);
           mask-image: linear-gradient(to right, black 60%, transparent 95%);
         }
@@ -491,7 +487,7 @@ export default function Hero({ t }: HeroProps) {
         }
 
         @media (max-width: 992px) {
-          .hero-section { padding: 2rem 1.25rem 2rem 1.25rem; }
+          .hero-section { padding: 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; padding-right: 0; }
           .cta-container { flex-direction: column; align-items: center; }
@@ -507,104 +503,106 @@ export default function Hero({ t }: HeroProps) {
         }
       `}</style>
 
-      <div className="hero-grid">
-        <div className="text-column">
-          <span className="badge">{t.badge}</span>
-          <h1 className="title">{t.heroTitle}</h1>
-          
-          <div className="subtitles-block">
-            <div className="sub-line-1">{line1}</div>
-            {line2 && <div className="sub-line-2">{line2}</div>}
-          </div>
-          
-          <div className="utp-highlight">
-            {t.heroSub2}
-          </div>
-          
-          <div className="cta-container">
-            <button onClick={handleCalendlyPopup} className="btn-primary-main">
-              Book a Free Audit
-            </button>
+      <div className="container">
+        <div className="hero-grid">
+          <div className="text-column">
+            <span className="badge">{t.badge}</span>
+            <h1 className="title">{t.heroTitle}</h1>
             
-            <a 
-              href="https://wa.me/66955183783" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn-secondary-chat"
-              title="WhatsApp"
-            >
-              <img src="/logos/whatsapp.svg" alt="WhatsApp" />
-            </a>
+            <div className="subtitles-block">
+              <div className="sub-line-1">{line1}</div>
+              {line2 && <div className="sub-line-2">{line2}</div>}
+            </div>
+            
+            <div className="utp-highlight">
+              {t.heroSub2}
+            </div>
+            
+            <div className="cta-container">
+              <button onClick={handleCalendlyPopup} className="btn-primary-main">
+                Book a Free Audit
+              </button>
+              
+              <a 
+                href="https://wa.me/66955183783" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-secondary-chat"
+                title="WhatsApp"
+              >
+                <img src="/logos/whatsapp.svg" alt="WhatsApp" />
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div className="visual-column">
-          <div className="perspective-wrapper">
-            <div className="dashboard-mockup">
-              <div className="pms-header">
-                <div className="sync-status"><div className="pulse-dot"></div>1s OTA Sync Active</div>
-              </div>
-              <div className="pms-body">
-                <div className="pms-analytics">
-                  <div className="widget primary-focus">
-                    <div className="widget-label">OTA Margin Saved</div>
-                    <div className="widget-value text-brand-gradient">{formatCurrency(liveAmount)}</div>
-                    <div className="widget-sub">Current Month</div>
-                  </div>
-                  <div className="widget">
-                    <div className="widget-label">Occupancy / ADR</div>
-                    <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span> ฿4,250</div>
-                    <div className="mini-chart">
-                      <div className="bar ota" style={{ height: '40%' }}></div>
-                      <div className="bar direct" style={{ height: '30%' }}></div>
-                      <div className="bar ota" style={{ height: '60%' }}></div>
-                      <div className="bar direct" style={{ height: '50%' }}></div>
-                      <div className="bar direct" style={{ height: '70%' }}></div>
-                      <div className="bar direct" style={{ height: '85%' }}></div>
-                      <div className="bar direct" style={{ height: '100%' }}></div>
-                    </div>
-                  </div>
-                  <div className="widget">
-                    <div className="widget-label">RevPAR</div>
-                    <div className="widget-value">฿3,570</div>
-                    <div className="widget-sub">Per Available Room</div>
-                  </div>
-                  <div className="widget logs-widget">
-                    <div className="widget-label">Live Activity Log</div>
-                    <div className="logs-container">
-                      {logs.map((log, i) => (
-                        <div key={i} className="log-line">
-                          <span className="log-time">[{log.time}]</span>
-                          {log.text}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+          <div className="visual-column">
+            <div className="perspective-wrapper">
+              <div className="dashboard-mockup">
+                <div className="pms-header">
+                  <div className="sync-status"><div className="pulse-dot"></div>1s OTA Sync Active</div>
                 </div>
-                <div className="pms-matrix">
-                  <div className="matrix-header">
-                    <div>ROOM</div>
-                    <div>16 Dec</div><div>17 Dec</div><div>18 Dec</div><div>19 Dec</div><div>20 Dec</div><div>21 Dec</div><div>22 Dec</div>
+                <div className="pms-body">
+                  <div className="pms-analytics">
+                    <div className="widget primary-focus">
+                      <div className="widget-label">OTA Margin Saved</div>
+                      <div className="widget-value text-brand-gradient">{formatCurrency(liveAmount)}</div>
+                      <div className="widget-sub">Current Month</div>
+                    </div>
+                    <div className="widget">
+                      <div className="widget-label">Occupancy / ADR</div>
+                      <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span> ฿4,250</div>
+                      <div className="mini-chart">
+                        <div className="bar ota" style={{ height: '40%' }}></div>
+                        <div className="bar direct" style={{ height: '30%' }}></div>
+                        <div className="bar ota" style={{ height: '60%' }}></div>
+                        <div className="bar direct" style={{ height: '50%' }}></div>
+                        <div className="bar direct" style={{ height: '70%' }}></div>
+                        <div className="bar direct" style={{ height: '85%' }}></div>
+                        <div className="bar direct" style={{ height: '100%' }}></div>
+                      </div>
+                    </div>
+                    <div className="widget">
+                      <div className="widget-label">RevPAR</div>
+                      <div className="widget-value">฿3,570</div>
+                      <div className="widget-sub">Per Available Room</div>
+                    </div>
+                    <div className="widget logs-widget">
+                      <div className="widget-label">Live Activity Log</div>
+                      <div className="logs-container">
+                        {logs.map((log, i) => (
+                          <div key={i} className="log-line">
+                            <span className="log-time">[{log.time}]</span>
+                            {log.text}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div className="matrix-row">
-                    <div className="matrix-room-name">Villa 1</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
-                    <div className="booking b-booking" style={{ left: 'calc(80px + 35%)', width: 'calc(55% - 4px)' }}>Booking.com • Lee</div>
-                  </div>
-                  <div className="matrix-row">
-                    <div className="matrix-room-name">Villa 2</div>
-                    <div className="booking b-agoda" style={{ left: 'calc(80px + 10%)', width: 'calc(45% - 4px)' }}>Agoda • Kumar</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 65%)', width: 'calc(30% - 4px)' }}>Direct • VIP</div>
-                  </div>
-                  <div className="matrix-row">
-                    <div className="matrix-room-name">Room 101</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
-                    <div className="booking b-booking" style={{ left: 'calc(80px + 60%)', width: 'calc(40% - 4px)' }}>Booking.com • Davis</div>
-                  </div>
-                  <div className="matrix-row">
-                    <div className="matrix-room-name">Room 102</div>
-                    <div className="booking b-booking" style={{ left: 'calc(80px + 0%)', width: 'calc(35% - 4px)' }}>Booking.com • Brown</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 38%)', width: 'calc(62% - 4px)' }}>Direct • Website</div>
+                  <div className="pms-matrix">
+                    <div className="matrix-header">
+                      <div>ROOM</div>
+                      <div>16 Dec</div><div>17 Dec</div><div>18 Dec</div><div>19 Dec</div><div>20 Dec</div><div>21 Dec</div><div>22 Dec</div>
+                    </div>
+                    <div className="matrix-row">
+                      <div className="matrix-room-name">Villa 1</div>
+                      <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
+                      <div className="booking b-booking" style={{ left: 'calc(80px + 35%)', width: 'calc(55% - 4px)' }}>Booking.com • Lee</div>
+                    </div>
+                    <div className="matrix-row">
+                      <div className="matrix-room-name">Villa 2</div>
+                      <div className="booking b-agoda" style={{ left: 'calc(80px + 10%)', width: 'calc(45% - 4px)' }}>Agoda • Kumar</div>
+                      <div className="booking b-direct" style={{ left: 'calc(80px + 65%)', width: 'calc(30% - 4px)' }}>Direct • VIP</div>
+                    </div>
+                    <div className="matrix-row">
+                      <div className="matrix-room-name">Room 101</div>
+                      <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
+                      <div className="booking b-booking" style={{ left: 'calc(80px + 60%)', width: 'calc(40% - 4px)' }}>Booking.com • Davis</div>
+                    </div>
+                    <div className="matrix-row">
+                      <div className="matrix-room-name">Room 102</div>
+                      <div className="booking b-booking" style={{ left: 'calc(80px + 0%)', width: 'calc(35% - 4px)' }}>Booking.com • Brown</div>
+                      <div className="booking b-direct" style={{ left: 'calc(80px + 38%)', width: 'calc(62% - 4px)' }}>Direct • Website</div>
+                    </div>
                   </div>
                 </div>
               </div>
