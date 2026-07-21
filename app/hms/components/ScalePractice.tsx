@@ -38,10 +38,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <style jsx>{`
         .scale-section {
           width: 100%;
-          max-width: 1280px;
-          margin: 0 auto;
           /* Верх: 48px (3rem) от бегущей строки | Низ: 56px (3.5rem) до следующего заголовка */
-          padding: 3rem 1.5rem 3.5rem 1.5rem; 
+          padding: 3rem 0 3.5rem 0; 
           background: transparent;
         }
 
@@ -71,8 +69,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
-          max-width: 1200px;
-          margin: 0 auto;
           align-items: stretch;
         }
 
@@ -189,7 +185,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         @media (max-width: 992px) {
           .scale-section {
-            padding: 2.5rem 1.25rem 2.5rem 1.25rem;
+            padding: 2.5rem 0;
           }
           .scale-header {
             margin-bottom: 2.5rem;
@@ -201,6 +197,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             grid-template-columns: 1fr;
             gap: 1.5rem;
             max-width: 500px;
+            margin: 0 auto;
           }
           .scale-card {
             padding: 1.75rem;
@@ -208,40 +205,42 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
       `}</style>
 
-      <div className="scale-header">
-        <h2 className="scale-title">{t?.scaleTitle || "Scale your property bookings"}</h2>
-        <p className="scale-subtitle">{t?.scaleSub || "Automate workflows so your team can focus on guest experience"}</p>
-      </div>
+      <div className="container">
+        <div className="scale-header">
+          <h2 className="scale-title">{t?.scaleTitle || "Scale your property bookings"}</h2>
+          <p className="scale-subtitle">{t?.scaleSub || "Automate workflows so your team can focus on guest experience"}</p>
+        </div>
 
-      <div className="scale-grid">
-        {items.map((item: any, idx: number) => {
-          const metricTitle = `${item.endValue}${item.suffix || ''}${item.fixText || ''}`;
-          
-          return (
-            <div className="scale-card" key={idx}>
-              {item.pain && (
-                <div className="pain-wrapper">
-                  <span className="pain-badge">{item.pain}</span>
+        <div className="scale-grid">
+          {items.map((item: any, idx: number) => {
+            const metricTitle = `${item.endValue}${item.suffix || ''}${item.fixText || ''}`;
+            
+            return (
+              <div className="scale-card" key={idx}>
+                {item.pain && (
+                  <div className="pain-wrapper">
+                    <span className="pain-badge">{item.pain}</span>
+                  </div>
+                )}
+
+                <div className="image-wrapper">
+                  <img 
+                    src={CARD_ASSETS[idx] || CARD_ASSETS[0]} 
+                    alt={`${metricTitle} visual`} 
+                    className="visual-asset" 
+                  />
                 </div>
-              )}
 
-              <div className="image-wrapper">
-                <img 
-                  src={CARD_ASSETS[idx] || CARD_ASSETS[0]} 
-                  alt={`${metricTitle} visual`} 
-                  className="visual-asset" 
-                />
+                <div className="card-content">
+                  <h3 className="focus-metric">{metricTitle}</h3>
+                  <p className="card-description">
+                    {renderFormattedText(item.desc)}
+                  </p>
+                </div>
               </div>
-
-              <div className="card-content">
-                <h3 className="focus-metric">{metricTitle}</h3>
-                <p className="card-description">
-                  {renderFormattedText(item.desc)}
-                </p>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
   );
