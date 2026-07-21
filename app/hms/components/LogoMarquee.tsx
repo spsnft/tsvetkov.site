@@ -4,13 +4,13 @@ import React from 'react';
 
 export default function LogoMarquee() {
   const logoSrcs = [
-    // 1. Первые 4 согласно вашему указанию:
+    // 1. Первые 4:
     '/logos/booking.svg',
     '/logos/airbnb.svg',
     '/logos/tripadvisor.svg',
     '/logos/agoda.svg',
 
-    // 2. Все остальные логотипы:
+    // 2. Все остальные:
     '/logos/expedia.svg',
     '/logos/makemytrip.svg',
     '/logos/traveloka.svg',
@@ -26,11 +26,11 @@ export default function LogoMarquee() {
         .marquee-wrapper {
           width: 100%;
           overflow: hidden;
-          padding: 3rem 0;
+          padding: 3.5rem 0;
           position: relative;
-          background: linear-gradient(90deg, rgba(10,10,12,0) 0%, rgba(255,255,255,0.02) 50%, rgba(10,10,12,0) 100%);
-          border-top: 1px solid rgba(255, 255, 255, 0.03);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+          background: linear-gradient(90deg, rgba(10,10,12,0) 0%, rgba(255,255,255,0.03) 50%, rgba(10,10,12,0) 100%);
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           margin-bottom: 2rem;
           z-index: 20;
         }
@@ -38,7 +38,7 @@ export default function LogoMarquee() {
           display: flex;
           width: max-content;
           animation: scroll 35s linear infinite; 
-          gap: 5.5rem;
+          gap: 6rem;
           align-items: center;
         }
         .marquee-track:hover {
@@ -49,31 +49,31 @@ export default function LogoMarquee() {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 48px; 
+          height: 64px; /* Увеличено с 48px */
           transition: all 0.3s ease;
-          opacity: 0.35; 
+          opacity: 0.75; /* Увеличено с 0.35 для хорошей читаемости */
         }
         .logo-item:hover {
-          transform: scale(1.03);
-          opacity: 0.9; 
+          transform: scale(1.05);
+          opacity: 1; 
         }
         
         .marquee-img {
-          height: 28px; 
+          height: 40px; /* Базовая высота увеличена с 28px до 40px */
           width: auto;
-          max-width: 150px;
+          max-width: 200px;
           object-fit: contain;
           display: block;
         }
 
-        /* Оптическая калибровка под увеличенный формат */
-        .marquee-img[src*="booking"] { height: 36px; }
-        .marquee-img[src*="hostelworld"] { height: 19px; }
-        .marquee-img[src*="hotelbeds"] { height: 19px; }
-        .marquee-img[src*="tripadvisor"] { height: 33px; }
-        .marquee-img[src*="agoda"] { height: 26px; }
-        .marquee-img[src*="airbnb"] { height: 26px; }
-        .marquee-img[src*="traveloka"] { height: 26px; }
+        /* Оптическая калибровка (пропорционально увеличена) */
+        .marquee-img[src*="booking"] { height: 52px; }
+        .marquee-img[src*="hostelworld"] { height: 28px; }
+        .marquee-img[src*="hotelbeds"] { height: 28px; }
+        .marquee-img[src*="tripadvisor"] { height: 46px; }
+        .marquee-img[src*="agoda"] { height: 36px; }
+        .marquee-img[src*="airbnb"] { height: 36px; }
+        .marquee-img[src*="traveloka"] { height: 36px; }
 
         @keyframes scroll {
           0% { transform: translateX(0); }
