@@ -84,8 +84,8 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         .proof-section {
           width: 100%;
           background-color: transparent;
-          /* Верх: 0 (получаем ровно 56px от карточек ScalePractice) | Низ: 80px (5rem) до следующего блока */
-          padding: 0 1.5rem 5rem 1.5rem; 
+          /* Верх: 0 (ровно 56px от карточек ScalePractice) | Низ: 80px (5rem) до следующего блока */
+          padding: 0 0 5rem 0; 
         }
 
         .proof-header {
@@ -106,8 +106,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         .proof-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          max-width: 1280px;
-          margin: 0 auto;
+          width: 100%;
           border-top: 1px solid ${T.border};
         }
         
@@ -184,29 +183,31 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         }
       `}</style>
 
-      <div className="proof-header">
-        <h2 className="proof-title">
-          {t.proofTitle}
-        </h2>
-      </div>
+      <div className="container">
+        <div className="proof-header">
+          <h2 className="proof-title">
+            {t.proofTitle}
+          </h2>
+        </div>
 
-      <div className="proof-grid">
-        {t.proofMetrics.map((item, idx) => (
-          <div key={idx} className="proof-col">
-            <div className="metric-number">
-              <ProofCounter 
-                end={item.endValue} 
-                duration={1400} 
-                prefix={item.prefix} 
-                suffix={item.suffix} 
-                isVisible={isVisible} 
-              />
+        <div className="proof-grid">
+          {t.proofMetrics.map((item, idx) => (
+            <div key={idx} className="proof-col">
+              <div className="metric-number">
+                <ProofCounter 
+                  end={item.endValue} 
+                  duration={1400} 
+                  prefix={item.prefix} 
+                  suffix={item.suffix} 
+                  isVisible={isVisible} 
+                />
+              </div>
+              <p className="metric-label">
+                {item.label}
+              </p>
             </div>
-            <p className="metric-label">
-              {item.label}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
