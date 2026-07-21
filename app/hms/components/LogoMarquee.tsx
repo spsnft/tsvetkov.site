@@ -18,23 +18,21 @@ export default function LogoMarquee() {
   ];
 
   return (
-    <div className="marquee-wrapper">
+    <section className="marquee-wrapper">
       <style jsx>{`
         .marquee-wrapper {
-          width: 100%;
-          max-width: 1200px; /* Строго выравниваем по каноничной сетке 1200px */
-          margin: 0 auto;
+          width: 100%; /* Растягиваем во всю ширину экрана */
           overflow: hidden;
-          padding: 1rem 1.5rem;
+          padding: 1.25rem 0;
           position: relative;
           background: linear-gradient(90deg, rgba(10,10,12,0) 0%, rgba(255,255,255,0.02) 50%, rgba(10,10,12,0) 100%);
           border-top: 1px solid rgba(255, 255, 255, 0.05);
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           z-index: 20;
 
-          /* Премиальный эффект мягкого растворения логотипов по краям сетки */
-          -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+          /* Мягкое растворение логотипов по самым краям экрана (100vw) */
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
         }
         
         .marquee-track {
@@ -52,6 +50,7 @@ export default function LogoMarquee() {
           justify-content: center;
           height: 72px;
           opacity: 0.85;
+          flex-shrink: 0;
         }
         
         .marquee-img {
@@ -78,7 +77,10 @@ export default function LogoMarquee() {
 
         @media (max-width: 768px) {
           .marquee-wrapper {
-            padding: 0.75rem 1rem;
+            padding: 0.85rem 0;
+          }
+          .marquee-track {
+            gap: 3.5rem;
           }
         }
       `}</style>
@@ -95,6 +97,6 @@ export default function LogoMarquee() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
