@@ -159,7 +159,7 @@ export default function Hero({ t }: HeroProps) {
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.55;
           margin: 0;
-          color: #94A3B8; 
+          color: #CBD5E1; /* Пункт 2: Улучшен контраст для идеальной читаемости */
           font-weight: 400;
           text-wrap: pretty;
         }
@@ -207,39 +207,34 @@ export default function Hero({ t }: HeroProps) {
           box-shadow: 0 8px 30px rgba(0, 229, 153, 0.45);
         }
 
-        /* Единственная чистая кнопка WhatsApp */
+        /* Пункт 3: Обновленная кнопка WhatsApp с мягким подсвечиванием */
         .btn-secondary-chat {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 48px;
-          height: 48px;
-          padding: 0;
-          border-radius: 8px;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          transition: all 0.25s ease;
+          width: 52px;
+          height: 52px;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
           backdrop-filter: blur(8px);
           box-sizing: border-box;
           cursor: pointer;
         }
+
         .btn-secondary-chat:hover {
           transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(255, 255, 255, 0.25);
-          box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2);
+          background: rgba(37, 211, 102, 0.12);
+          border-color: rgba(37, 211, 102, 0.4);
+          box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
         }
 
         .btn-secondary-chat img {
-          width: 26px;
-          height: 26px;
-          min-width: 26px;
-          min-height: 26px;
+          width: 28px;
+          height: 28px;
           object-fit: contain;
           display: block;
-          margin: 0;
-          padding: 0;
-          border: none;
         }
 
         .visual-column {
