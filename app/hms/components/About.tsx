@@ -45,9 +45,11 @@ export default function About({ t }: AboutProps) {
         
         .about-grid {
           display: grid;
-          grid-template-columns: 38% 62%;
+          /* FIX: Использование fr вместо % автоматически учитывает gap: 4rem и не распирает 1200px контейнер */
+          grid-template-columns: 38fr 62fr;
           gap: 4rem;
           align-items: start;
+          box-sizing: border-box;
         }
         
         .left-col {
@@ -114,6 +116,7 @@ export default function About({ t }: AboutProps) {
           backdrop-filter: blur(10px);
           position: relative;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          box-sizing: border-box;
         }
 
         .case-header {
