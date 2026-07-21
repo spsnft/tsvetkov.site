@@ -38,34 +38,38 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <style jsx>{`
         .scale-section {
           width: 100%;
-          padding: 6rem 0;
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 5rem 1.5rem; /* SECTION_GAP: 80px */
           border-bottom: 1px solid ${T.border};
           background: transparent;
         }
 
         .scale-header {
           text-align: center;
-          margin-bottom: 4.5rem;
+          margin-bottom: 2.5rem; /* 40px от подзаголовка к карточкам */
         }
 
         .scale-title {
-          font-size: clamp(2.2rem, 4vw, 3.4rem);
+          font-size: 2.4rem; /* Точно по бренд-буку */
           font-weight: 700;
           color: #ffffff;
-          margin: 0 0 1rem 0;
+          margin: 0 0 0.75rem 0; /* 12px до подзаголовка */
           letter-spacing: -0.02em;
+          line-height: 1.2;
         }
 
         .scale-subtitle {
           color: ${T.sub};
-          font-size: clamp(1rem, 1.5vw, 1.2rem);
+          font-size: 1.05rem; /* Точно по бренд-буку */
+          line-height: 1.5;
           margin: 0;
         }
 
         .scale-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
+          gap: 1.5rem; /* 24px зазор */
           max-width: 1200px;
           margin: 0 auto;
           align-items: stretch;
@@ -85,7 +89,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           border-radius: 16px;
           display: flex;
           flex-direction: column;
-          padding: 2rem;
+          align-items: center;
+          text-align: center;
+          padding: 2rem; /* 32px внутренний отступ */
           transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
 
@@ -102,6 +108,28 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             );
         }
 
+        /* 🪄 Плашка устранённой боли (Вариант А: над 3D) */
+        .pain-wrapper {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 1.25rem; /* 20px отступ до 3D-арта */
+        }
+
+        .pain-badge {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: #FF6B6B;
+          background: rgba(255, 107, 107, 0.08);
+          border: 1px solid rgba(255, 107, 107, 0.2);
+          padding: 0.25rem 0.75rem;
+          border-radius: 9999px;
+        }
+
         .image-wrapper {
           width: 100%;
           height: 140px;
@@ -109,7 +137,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           align-items: center;
           justify-content: center;
           background: transparent;
-          margin-bottom: 0.5rem;
+          margin-bottom: 1.25rem; /* 20px отступ до заголовка h3 */
         }
 
         .visual-asset {
@@ -134,32 +162,13 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .card-content {
           display: flex;
           flex-direction: column;
-          gap: 0.8rem;
+          gap: 0.75rem; /* 12px между заголовком h3 и текстом p */
           align-items: center;
           text-align: center;
         }
 
-        /* 🪄 Плашка устранённой боли (Variant B) */
-        .pain-badge {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 0.72rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: #FF6B6B;
-          background: rgba(255, 107, 107, 0.08);
-          border: 1px solid rgba(255, 107, 107, 0.2);
-          padding: 0.25rem 0.65rem;
-          border-radius: 6px;
-          text-decoration: line-through;
-          text-decoration-color: rgba(255, 107, 107, 0.7);
-          margin-bottom: 0.1rem;
-        }
-
         .focus-metric {
-          font-size: clamp(1.4rem, 2vw, 1.8rem);
+          font-size: 1.4rem; /* По стандарту h3 из бренд-бука */
           font-weight: 700;
           letter-spacing: -0.02em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
@@ -167,22 +176,28 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           -webkit-text-fill-color: transparent;
           margin: 0;
           display: inline-block;
+          line-height: 1.3;
         }
 
         .card-description {
           color: ${T.sub};
-          font-size: 0.95rem;
-          line-height: 1.5;
+          font-size: 0.95rem; /* По стандарту p из бренд-бука */
+          line-height: 1.6;
           margin: 0;
           text-wrap: pretty;
         }
 
         @media (max-width: 992px) {
+          .scale-section {
+            padding: 3.5rem 1.25rem;
+          }
+          .scale-title {
+            font-size: 1.8rem;
+          }
           .scale-grid {
             grid-template-columns: 1fr;
-            gap: 2.5rem;
+            gap: 1.5rem;
             max-width: 500px;
-            margin: 0 auto;
           }
           .scale-card {
             padding: 1.75rem;
@@ -201,6 +216,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           
           return (
             <div className="scale-card" key={idx}>
+              {/* 1. Плашка проблемы (В самом верху) */}
+              {item.pain && (
+                <div className="pain-wrapper">
+                  <span className="pain-badge">{item.pain}</span>
+                </div>
+              )}
+
+              {/* 2. 3D Визуал */}
               <div className="image-wrapper">
                 <img 
                   src={CARD_ASSETS[idx] || CARD_ASSETS[0]} 
@@ -208,8 +231,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                   className="visual-asset" 
                 />
               </div>
+
+              {/* 3. Решение (Заголовок + Описание) */}
               <div className="card-content">
-                <span className="pain-badge">{item.pain}</span>
                 <h3 className="focus-metric">{metricTitle}</h3>
                 <p className="card-description">
                   {renderFormattedText(item.desc)}
