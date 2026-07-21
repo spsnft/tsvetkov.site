@@ -43,13 +43,13 @@ export default function HospitalityB2B() {
         zIndex: 100, 
         backgroundColor: 'rgba(10, 10, 12, 0.7)' 
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1rem', paddingBottom: '1rem' }}>
           <a href="/" style={{ textDecoration: 'none' }}><Logo /></a>
           
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
             <a href="/" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>About</a>
             
-            {/* ИСПРАВЛЕНО: ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ В СТИЛЕ DARK GLASS CAPSULE */}
+            {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ В СТИЛЕ DARK GLASS CAPSULE */}
             <div style={{ 
               display: 'flex', 
               backgroundColor: 'rgba(255, 255, 255, 0.02)', 
@@ -98,8 +98,8 @@ export default function HospitalityB2B() {
         </div>
       </header>
 
-      {/* ОСНОВНОЙ КОНТЕНТ ЛЕНДИНГА */}
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 10 }}>
+      {/* ОСНОВНОЙ КОНТЕНТ ЛЕНДИНГА (Теперь без сжимающего maxWidth) */}
+      <main style={{ width: '100%', position: 'relative', zIndex: 10 }}>
         
         {/* БЛОК 1: ПЕРВЫЙ ЭКРАН */}
         <Hero t={t} />
