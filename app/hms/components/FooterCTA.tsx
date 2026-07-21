@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { T } from '../../../src/theme/tokens';
 
 interface FooterCTAProps {
-  t: {
+  t?: {
     footerTitle?: string;
     footerSub1?: string;
     footerSub2?: string;
@@ -18,7 +18,7 @@ interface FooterCTAProps {
 export default function FooterCTA({ t }: FooterCTAProps) {
   const titleText = t?.footerTitle || "Ready to maximize your revenue?";
   const sub1Text = t?.footerSub1 || "Stop leaving 15–20% on the table";
-  const sub2Text = t?.footerSub2 || "Build your high-converting direct booking engine";
+  const sub2Text = t?.footerSub2 || "Take full control of your direct bookings";
   const btnText = t?.footerBtn || t?.btnAudit || "Book a Free Audit";
 
   useEffect(() => {
@@ -58,9 +58,9 @@ export default function FooterCTA({ t }: FooterCTAProps) {
       <style jsx>{`
         .footer-cta-section {
           width: 100%;
-          max-width: 1200px; /* Приведено к эталонной ширине 1200px */
+          max-width: 1200px;
           margin: 0 auto;
-          /* Верх: 0 (80px дает предыдущий блок) | Низ: 112px (7rem) финальный воздух */
+          /* Верх: 0 | Низ: 112px (7rem) воздуха до подвала */
           padding: 0 1.5rem 7rem 1.5rem;
           text-align: center;
           position: relative;
