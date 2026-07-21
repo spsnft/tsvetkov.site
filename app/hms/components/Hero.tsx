@@ -105,15 +105,17 @@ export default function Hero({ t }: HeroProps) {
           padding: 2.5rem 0 4rem 0;
           position: relative;
           z-index: 10;
-          overflow: hidden; /* Обрезает все, что вылетает за 100vw */
+          overflow: hidden; /* Обрезает все, что вылетает за границы блока */
         }
         
         .hero-grid {
           display: grid;
-          grid-template-columns: 52% 48%;
+          /* FIX: Использование fr заставляет сетку идеально вычислять ширину в пределах container */
+          grid-template-columns: 52fr 48fr;
           gap: 1rem;
           align-items: center;
           position: relative;
+          box-sizing: border-box;
         }
 
         .text-column {
@@ -121,6 +123,7 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
           z-index: 10;
           padding-right: 1rem;
+          min-width: 0;
         }
         
         .badge {
@@ -243,6 +246,7 @@ export default function Hero({ t }: HeroProps) {
           height: 100%;
           display: flex;
           align-items: center;
+          min-width: 0; /* Не дает 3D-графике распирать ширину колонки */
         }
 
         .perspective-wrapper {
@@ -256,8 +260,8 @@ export default function Hero({ t }: HeroProps) {
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 120%;
-          height: 120%;
+          width: 100%;
+          height: 100%;
           background: radial-gradient(circle, rgba(0, 163, 255, 0.12) 0%, rgba(0, 229, 153, 0.04) 40%, transparent 70%);
           transform: translate(-50%, -50%);
           z-index: -1;
@@ -266,7 +270,7 @@ export default function Hero({ t }: HeroProps) {
         }
         
         .dashboard-mockup {
-          width: 160%;
+          width: 140%;
           aspect-ratio: 16 / 10; 
           background-color: rgba(10, 10, 14, 0.85);
           backdrop-filter: blur(16px);
@@ -280,8 +284,8 @@ export default function Hero({ t }: HeroProps) {
           flex-direction: column;
           gap: 0.8rem;
           position: relative;
-          -webkit-mask-image: linear-gradient(to right, black 60%, transparent 95%);
-          mask-image: linear-gradient(to right, black 60%, transparent 95%);
+          -webkit-mask-image: linear-gradient(to right, black 65%, transparent 98%);
+          mask-image: linear-gradient(to right, black 65%, transparent 98%);
         }
         
         .pms-header {
