@@ -91,9 +91,6 @@ export default function Hero({ t }: HeroProps) {
     line2 = t.heroSub1.substring(dotIndex + 2);
   }
 
-  // Защита от разрыва "15-20%" на разных экранах
-  const formattedTitle = (t.heroTitle || "").replace('15-20%', '15‑20%');
-
   return (
     <section 
       className="hero-section"
@@ -105,16 +102,17 @@ export default function Hero({ t }: HeroProps) {
       <style jsx>{`
         .hero-section {
           width: 100%;
-          max-width: 1200px;
+          max-width: 1200px; /* Фиксация блока в единой сетке 1200px */
           margin: 0 auto;
           padding: 2.5rem 1.5rem 4rem 1.5rem;
           position: relative;
           z-index: 10;
+          overflow: hidden; /* Обрезает все, что вылетает за 1200px */
         }
         
         .hero-grid {
           display: grid;
-          grid-template-columns: 52% 48%;
+          grid-template-columns: 52% 48%; /* РОДНЫЕ пропорции сохранены */
           gap: 1rem;
           align-items: center;
           position: relative;
@@ -144,7 +142,7 @@ export default function Hero({ t }: HeroProps) {
         }
         
         .title {
-          font-size: clamp(2.3rem, 4.1vw, 3.8rem);
+          font-size: clamp(2.4rem, 4.2vw, 3.8rem); /* РОДНОЙ размер */
           font-weight: 700;
           line-height: 1.15;
           letter-spacing: -0.03em;
@@ -270,14 +268,14 @@ export default function Hero({ t }: HeroProps) {
         }
         
         .dashboard-mockup {
-          width: 160%; 
+          width: 160%; /* РОДНОЙ масштаб 160% */
           aspect-ratio: 16 / 10; 
           background-color: rgba(10, 10, 14, 0.85);
           backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          /* Единственное изменение: translateX(15px) вместо 40px — сдвиг чуть влево без ломания масштабa */
-          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(15px); 
+          /* Сдвигаем влево translateX(-10px), чтобы макет растворялся аккурат у границы 1200px */
+          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(-10px); 
           transform-origin: center center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12);
           padding: 1.2rem;
@@ -285,8 +283,9 @@ export default function Hero({ t }: HeroProps) {
           flex-direction: column;
           gap: 0.8rem;
           position: relative;
-          -webkit-mask-image: linear-gradient(to right, black 65%, transparent 100%);
-          mask-image: linear-gradient(to right, black 65%, transparent 100%);
+          /* РОДНАЯ маска растворения */
+          -webkit-mask-image: linear-gradient(to right, black 60%, transparent 95%);
+          mask-image: linear-gradient(to right, black 60%, transparent 95%);
         }
         
         .pms-header {
@@ -511,7 +510,7 @@ export default function Hero({ t }: HeroProps) {
       <div className="hero-grid">
         <div className="text-column">
           <span className="badge">{t.badge}</span>
-          <h1 className="title">{formattedTitle}</h1>
+          <h1 className="title">{t.heroTitle}</h1>
           
           <div className="subtitles-block">
             <div className="sub-line-1">{line1}</div>
