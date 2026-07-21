@@ -58,10 +58,8 @@ export default function FooterCTA({ t }: FooterCTAProps) {
       <style jsx>{`
         .footer-cta-section {
           width: 100%;
-          max-width: 1200px;
-          margin: 0 auto;
           /* Верх: 0 | Низ: 112px (7rem) воздуха до подвала */
-          padding: 0 1.5rem 7rem 1.5rem;
+          padding: 0 0 7rem 0;
           text-align: center;
           position: relative;
           background: transparent;
@@ -130,7 +128,7 @@ export default function FooterCTA({ t }: FooterCTAProps) {
         
         @media (max-width: 768px) {
           .footer-cta-section {
-            padding: 0 1.25rem 4.5rem 1.25rem;
+            padding: 0 0 4.5rem 0;
           }
           .btn-gradient-cta {
             width: 100%;
@@ -139,17 +137,19 @@ export default function FooterCTA({ t }: FooterCTAProps) {
         }
       `}</style>
 
-      <div className="cta-box">
-        <h2 className="main-title">{titleText}</h2>
-        
-        <div className="subtitle-box">
-          <p className="subtitle">{sub1Text}</p>
-          <p className="subtitle">{sub2Text}</p>
+      <div className="container">
+        <div className="cta-box">
+          <h2 className="main-title">{titleText}</h2>
+          
+          <div className="subtitle-box">
+            <p className="subtitle">{sub1Text}</p>
+            <p className="subtitle">{sub2Text}</p>
+          </div>
+          
+          <button onClick={handleCalendlyPopup} className="btn-gradient-cta">
+            {btnText}
+          </button>
         </div>
-        
-        <button onClick={handleCalendlyPopup} className="btn-gradient-cta">
-          {btnText}
-        </button>
       </div>
     </section>
   );
