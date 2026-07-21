@@ -167,7 +167,6 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 0.4rem;
         }
         
-        /* Четкий, резкий UTP без мыльного свечения */
         .utp-highlight {
           font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
@@ -184,7 +183,6 @@ export default function Hero({ t }: HeroProps) {
           flex-wrap: wrap;
         }
         
-        /* Мощная главная кнопка с жирным контрастным текстом */
         .btn-primary-main {
           display: inline-flex;
           align-items: center;
@@ -209,13 +207,7 @@ export default function Hero({ t }: HeroProps) {
           box-shadow: 0 8px 30px rgba(0, 229, 153, 0.45);
         }
 
-        .secondary-chats {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-        }
-
-        /* Чистый стандарт для кнопок соцсетей без костылей */
+        /* Единственная чистая кнопка WhatsApp */
         .btn-secondary-chat {
           display: flex;
           align-items: center;
@@ -235,9 +227,8 @@ export default function Hero({ t }: HeroProps) {
           transform: translateY(-2px);
           background: rgba(255, 255, 255, 0.08);
           border-color: rgba(255, 255, 255, 0.25);
+          box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2);
         }
-        .btn-secondary-chat.wa:hover { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2); }
-        .btn-secondary-chat.line:hover { box-shadow: 0 6px 20px rgba(6, 199, 85, 0.2); }
 
         .btn-secondary-chat img {
           width: 26px;
@@ -251,7 +242,6 @@ export default function Hero({ t }: HeroProps) {
           border: none;
         }
 
-        /* Визуальная колонка и Дашборд */
         .visual-column {
           position: relative;
           width: 100%;
@@ -454,7 +444,6 @@ export default function Hero({ t }: HeroProps) {
           background: rgba(13, 13, 17, 0.3);
         }
         
-        /* Glassmorphic Плитки Бронирований */
         .booking {
           position: absolute;
           top: 6px; bottom: 6px;
@@ -504,7 +493,6 @@ export default function Hero({ t }: HeroProps) {
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; padding-right: 0; }
           .cta-container { flex-direction: column; align-items: center; }
-          .secondary-chats { justify-content: center; }
           .dashboard-mockup { 
             transform: none !important; 
             width: 100% !important; 
@@ -536,27 +524,15 @@ export default function Hero({ t }: HeroProps) {
               Book a Free Audit
             </button>
             
-            <div className="secondary-chats">
-              <a 
-                href="https://wa.me/66955183783" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn-secondary-chat wa"
-                title="WhatsApp"
-              >
-                <img src="/logos/whatsapp.svg" alt="WhatsApp" />
-              </a>
-              
-              <a 
-                href="https://line.me/ti/p/~fedor_tsvetkov" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn-secondary-chat line"
-                title="LINE"
-              >
-                <img src="/logos/line.svg" alt="LINE" />
-              </a>
-            </div>
+            <a 
+              href="https://wa.me/66955183783" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-secondary-chat"
+              title="WhatsApp"
+            >
+              <img src="/logos/whatsapp.svg" alt="WhatsApp" />
+            </a>
           </div>
         </div>
 
