@@ -19,7 +19,7 @@ export default function Pricing({ t }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          max-width: 1280px;
+          max-width: 1200px; /* Приведено к эталонной ширине 1200px */
           margin: 0 auto;
           /* Верх: 0 (отступ дает предыдущий блок) | Низ: 80px (5rem) */
           padding: 0 1.5rem 5rem 1.5rem; 
@@ -49,11 +49,10 @@ export default function Pricing({ t }: PricingProps) {
         }
         
         .pricing-grid {
+          width: 100%;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 2rem;
-          max-width: 1200px;
-          margin: 0 auto;
           align-items: stretch;
         }
         
@@ -190,6 +189,7 @@ export default function Pricing({ t }: PricingProps) {
             grid-template-columns: 1fr;
             gap: 1.5rem;
             max-width: 500px;
+            margin: 0 auto;
           }
           .card {
             padding: 2.5rem 2rem;
