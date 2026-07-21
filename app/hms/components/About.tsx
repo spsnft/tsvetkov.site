@@ -4,13 +4,16 @@ import React from 'react';
 import { T } from '../../../src/theme/tokens';
 
 interface AboutProps {
-  t: {
+  t?: {
     aboutLabel?: string;
     aboutTitle?: string;
     aboutDescFirst?: string;
     aboutDescRest?: string;
-    aboutDesc?: string;
     aboutBtn?: string;
+    caseBadge?: string;
+    caseTitle?: string;
+    caseMetrics?: string;
+    caseDesc?: string;
     [key: string]: any;
   };
 }
@@ -19,20 +22,24 @@ export default function About({ t }: AboutProps) {
   const labelText = t?.aboutLabel || "Growth Architecture";
   const titleText = t?.aboutTitle || "Systems, Optimization & Scale";
   
-  // Фолбэки с разделенным текстом для акцентирования первой фразы
   const firstSentence = t?.aboutDescFirst || "We step into business ecosystems to optimize them for maximum efficiency.";
   const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
   
-  const btnText = t?.aboutBtn || t?.aboutButton || "View Professional Profile";
+  const btnText = t?.aboutBtn || t?.aboutButton || "View Agency Profile";
+
+  // Данные обезличенного кейса
+  const caseBadge = t?.caseBadge || "Featured Case Proof";
+  const caseTitle = t?.caseTitle || "Phuket Luxury Villa Resort (24 Keys)";
+  const caseMetrics = t?.caseMetrics || "+$2,800/mo saved in OTA fees • +42% Direct Bookings";
+  const caseDesc = t?.caseDesc || "Replaced manual channel management with an automated direct booking pipeline in 60 days.";
 
   return (
     <section className="about-section">
       <style jsx>{`
         .about-section {
           width: 100%;
-          max-width: 1200px; /* Приведено к эталонной ширине 1200px */
+          max-width: 1200px;
           margin: 0 auto;
-          /* Верх: 0 (отступ дает предыдущий блок) | Низ: 80px (5rem) */
           padding: 0 1.5rem 5rem 1.5rem;
           background: transparent;
         }
@@ -94,8 +101,68 @@ export default function About({ t }: AboutProps) {
         .dimmed-text {
           color: ${T.sub};
         }
+
+        /* Карточка кейса (Вариант В) */
+        .case-card {
+          width: 100%;
+          background: rgba(255, 255, 255, 0.015);
+          border: 1px solid rgba(0, 229, 153, 0.2);
+          border-radius: 12px;
+          padding: 1.4rem 1.6rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.6rem;
+          backdrop-filter: blur(10px);
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .case-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
+
+        .case-badge {
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #00E599;
+          background: rgba(0, 229, 153, 0.1);
+          padding: 0.25rem 0.6rem;
+          border-radius: 4px;
+        }
+
+        .case-title {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+        }
+
+        .case-metrics {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #00E599;
+          margin: 0;
+        }
+
+        .case-desc {
+          font-size: 0.88rem;
+          color: ${T.sub};
+          line-height: 1.5;
+          margin: 0;
+        }
+
+        .actions-row {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          flex-wrap: wrap;
+        }
         
-        /* Ghost Button для профиля */
         .view-profile-btn {
           display: inline-flex;
           align-items: center;
@@ -138,6 +205,14 @@ export default function About({ t }: AboutProps) {
             font-size: 1rem;
             line-height: 1.6;
           }
+          .case-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.4rem;
+          }
+          .actions-row {
+            width: 100%;
+          }
           .view-profile-btn {
             width: 100%;
           }
@@ -155,10 +230,22 @@ export default function About({ t }: AboutProps) {
             <span className="highlight-sentence">{firstSentence}</span>{' '}
             <span className="dimmed-text">{restText}</span>
           </p>
+
+          {/* Мини-кейс / Пруф */}
+          <div className="case-card">
+            <div className="case-header">
+              <span className="case-title">{caseTitle}</span>
+              <span className="case-badge">{caseBadge}</span>
+            </div>
+            <p className="case-metrics">{caseMetrics}</p>
+            <p className="case-desc">{caseDesc}</p>
+          </div>
           
-          <a href="/" className="view-profile-btn">
-            {btnText}
-          </a>
+          <div className="actions-row">
+            <a href="/" className="view-profile-btn">
+              {btnText}
+            </a>
+          </div>
         </div>
       </div>
     </section>
