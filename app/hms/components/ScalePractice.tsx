@@ -40,28 +40,30 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           width: 100%;
           max-width: 1280px;
           margin: 0 auto;
-          padding: 5rem 1.5rem; /* SECTION_GAP: 80px */
+          /* Сбалансированный верхний отступ (3rem / 48px от бегущей строки) */
+          padding: 3rem 1.5rem 5rem 1.5rem; 
           border-bottom: 1px solid ${T.border};
           background: transparent;
         }
 
         .scale-header {
           text-align: center;
-          margin-bottom: 2.5rem; /* 40px от подзаголовка к карточкам */
+          /* Увеличенный воздух от подзаголовка к карточкам (3.5rem / 56px) */
+          margin-bottom: 3.5rem; 
         }
 
         .scale-title {
-          font-size: 2.4rem; /* Точно по бренд-буку */
+          font-size: 2.4rem;
           font-weight: 700;
           color: #ffffff;
-          margin: 0 0 0.75rem 0; /* 12px до подзаголовка */
+          margin: 0 0 0.75rem 0;
           letter-spacing: -0.02em;
           line-height: 1.2;
         }
 
         .scale-subtitle {
           color: ${T.sub};
-          font-size: 1.05rem; /* Точно по бренд-буку */
+          font-size: 1.05rem;
           line-height: 1.5;
           margin: 0;
         }
@@ -69,7 +71,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .scale-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem; /* 24px зазор */
+          gap: 1.5rem;
           max-width: 1200px;
           margin: 0 auto;
           align-items: stretch;
@@ -91,7 +93,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          padding: 2rem; /* 32px внутренний отступ */
+          padding: 2rem;
           transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
 
@@ -108,11 +110,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             );
         }
 
-        /* 🪄 Плашка устранённой боли (Вариант А: над 3D) */
         .pain-wrapper {
           display: flex;
           justify-content: center;
-          margin-bottom: 1.25rem; /* 20px отступ до 3D-арта */
+          margin-bottom: 1.25rem;
         }
 
         .pain-badge {
@@ -137,7 +138,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           align-items: center;
           justify-content: center;
           background: transparent;
-          margin-bottom: 1.25rem; /* 20px отступ до заголовка h3 */
+          margin-bottom: 1.25rem;
         }
 
         .visual-asset {
@@ -162,13 +163,13 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .card-content {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem; /* 12px между заголовком h3 и текстом p */
+          gap: 0.75rem;
           align-items: center;
           text-align: center;
         }
 
         .focus-metric {
-          font-size: 1.4rem; /* По стандарту h3 из бренд-бука */
+          font-size: 1.4rem;
           font-weight: 700;
           letter-spacing: -0.02em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
@@ -181,7 +182,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         .card-description {
           color: ${T.sub};
-          font-size: 0.95rem; /* По стандарту p из бренд-бука */
+          font-size: 0.95rem;
           line-height: 1.6;
           margin: 0;
           text-wrap: pretty;
@@ -189,7 +190,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         @media (max-width: 992px) {
           .scale-section {
-            padding: 3.5rem 1.25rem;
+            padding: 2.5rem 1.25rem 3.5rem 1.25rem;
+          }
+          .scale-header {
+            margin-bottom: 2.5rem;
           }
           .scale-title {
             font-size: 1.8rem;
@@ -216,14 +220,12 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           
           return (
             <div className="scale-card" key={idx}>
-              {/* 1. Плашка проблемы (В самом верху) */}
               {item.pain && (
                 <div className="pain-wrapper">
                   <span className="pain-badge">{item.pain}</span>
                 </div>
               )}
 
-              {/* 2. 3D Визуал */}
               <div className="image-wrapper">
                 <img 
                   src={CARD_ASSETS[idx] || CARD_ASSETS[0]} 
@@ -232,7 +234,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                 />
               </div>
 
-              {/* 3. Решение (Заголовок + Описание) */}
               <div className="card-content">
                 <h3 className="focus-metric">{metricTitle}</h3>
                 <p className="card-description">
