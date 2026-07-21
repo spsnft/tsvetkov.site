@@ -101,10 +101,12 @@ export default function Hero({ t }: HeroProps) {
     >
       <style jsx>{`
         .hero-section {
-          padding: 2.5rem 0 4rem 0;
+          width: 100%;
+          max-width: 1200px; /* Строгое выравнивание под эталонные 1200px */
+          margin: 0 auto;
+          padding: 2.5rem 1.5rem 4rem 1.5rem;
           position: relative;
           z-index: 10;
-          overflow: hidden;
         }
         
         .hero-grid {
@@ -159,7 +161,7 @@ export default function Hero({ t }: HeroProps) {
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.55;
           margin: 0;
-          color: #CBD5E1; /* Пункт 2: Улучшен контраст для идеальной читаемости */
+          color: #CBD5E1;
           font-weight: 400;
           text-wrap: pretty;
         }
@@ -207,7 +209,6 @@ export default function Hero({ t }: HeroProps) {
           box-shadow: 0 8px 30px rgba(0, 229, 153, 0.45);
         }
 
-        /* Пункт 3: Обновленная кнопка WhatsApp с мягким подсвечиванием */
         .btn-secondary-chat {
           display: flex;
           align-items: center;
@@ -244,6 +245,7 @@ export default function Hero({ t }: HeroProps) {
           display: flex;
           align-items: center;
         }
+
         .perspective-wrapper {
           width: 100%;
           perspective: 1400px;
@@ -303,6 +305,7 @@ export default function Hero({ t }: HeroProps) {
           border-radius: 20px; 
           border: 1px solid rgba(255, 255, 255, 0.08); 
         }
+
         .pulse-dot { 
           width: 6px; 
           height: 6px; 
@@ -341,6 +344,7 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
           background: rgba(255, 255, 255, 0.03);
         }
+
         .widget.primary-focus::before {
           content: '';
           position: absolute;
@@ -484,7 +488,7 @@ export default function Hero({ t }: HeroProps) {
         }
 
         @media (max-width: 992px) {
-          .hero-section { padding: 2rem 0 2rem 0; }
+          .hero-section { padding: 2rem 1.25rem 2rem 1.25rem; }
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; padding-right: 0; }
           .cta-container { flex-direction: column; align-items: center; }
