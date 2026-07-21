@@ -20,7 +20,7 @@ interface LogEntry {
 
 export default function Hero({ t }: HeroProps) {
   const [isMounted, setIsMounted] = useState(false);
-  const [liveAmount, setLiveAmount] = useState(148250);
+  const [liveAmount, setLiveAmount] = useState(148335);
   
   const [logs, setLogs] = useState<LogEntry[]>([
     { time: '22:46:12', text: 'Booking.com room status locked' },
@@ -150,11 +150,10 @@ export default function Hero({ t }: HeroProps) {
         }
         
         .subtitles-block {
-          margin-bottom: 1.8rem;
+          margin-bottom: 1.5rem;
           display: block !important;
         }
         
-        /* ПРАВКА: Улучшен контраст сабтитров */
         .sub-line-1, .sub-line-2 {
           display: block !important;
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
@@ -168,13 +167,13 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 0.4rem;
         }
         
+        /* Сочный, четкий UTP */
         .utp-highlight {
           font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          margin-bottom: 2.5rem;
+          color: #00E599;
+          text-shadow: 0 0 20px rgba(0, 229, 153, 0.35);
+          margin-bottom: 2.2rem;
           letter-spacing: -0.01em;
           display: block;
         }
@@ -182,60 +181,32 @@ export default function Hero({ t }: HeroProps) {
         .cta-container {
           display: flex;
           align-items: center;
-          gap: 1.2rem;
+          gap: 1rem;
           flex-wrap: wrap;
         }
         
-        /* ПРАВКА: Новый премиальный стиль кнопки (Ghost Gradient) */
+        /* Контрастная главная кнопка */
         .btn-primary-main {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          position: relative;
-          background: #050505;
-          padding: 1.1rem 2.5rem;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          color: #0A0A0E;
+          padding: 1.1rem 2.2rem;
           border-radius: 8px;
-          font-weight: 600;
+          font-weight: 700;
           text-decoration: none;
           font-size: 1rem;
           flex-shrink: 0;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.25s ease;
           border: none;
-          z-index: 1;
-        }
-        
-        .btn-primary-main::before {
-          content: '';
-          position: absolute;
-          inset: -1px;
-          border-radius: 9px;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          z-index: -1;
-          transition: all 0.3s ease;
-        }
-
-        .btn-text-gradient {
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(0, 229, 153, 0.25);
         }
 
         .btn-primary-main:hover {
           transform: translateY(-2px);
-          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.15);
-        }
-        
-        /* При наведении заливаем кнопку градиентом, текст делаем черным */
-        .btn-primary-main:hover::before {
-          inset: 0;
-          border-radius: 8px;
-        }
-        .btn-primary-main:hover .btn-text-gradient {
-          background: none;
-          -webkit-text-fill-color: #000;
-          color: #000;
+          box-shadow: 0 8px 30px rgba(0, 229, 153, 0.45);
         }
 
         .secondary-chats {
@@ -244,7 +215,7 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.75rem;
         }
 
-        /* ПРАВКА: Жесткие размеры и центровка иконок мессенджеров */
+        /* Единый стандарт для кнопок соцсетей */
         .btn-secondary-chat {
           display: flex;
           align-items: center;
@@ -253,29 +224,27 @@ export default function Hero({ t }: HeroProps) {
           height: 48px;
           padding: 0;
           border-radius: 8px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           transition: all 0.25s ease;
-          position: relative;
           backdrop-filter: blur(8px);
         }
         .btn-secondary-chat:hover {
           transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.07);
-          border-color: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.25);
         }
-        .btn-secondary-chat.wa:hover { box-shadow: 0 8px 20px rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.3); }
-        .btn-secondary-chat.line:hover { box-shadow: 0 8px 20px rgba(6, 199, 85, 0.15); border-color: rgba(6, 199, 85, 0.3); }
+        .btn-secondary-chat.wa:hover { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2); }
+        .btn-secondary-chat.line:hover { box-shadow: 0 6px 20px rgba(6, 199, 85, 0.2); }
 
         .btn-secondary-chat img {
-          width: 24px;
-          height: 24px;
+          width: 26px;
+          height: 26px;
           object-fit: contain;
           display: block;
-          transition: transform 0.2s ease;
         }
-        .btn-secondary-chat:hover img { transform: scale(1.1); }
 
+        /* Визуальная колонка и Дашборд */
         .visual-column {
           position: relative;
           width: 100%;
@@ -289,7 +258,6 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
         }
 
-        /* ПРАВКА: Свечение за дашбордом */
         .perspective-wrapper::before {
           content: '';
           position: absolute;
@@ -297,18 +265,17 @@ export default function Hero({ t }: HeroProps) {
           left: 50%;
           width: 120%;
           height: 120%;
-          background: radial-gradient(circle, rgba(0, 163, 255, 0.15) 0%, rgba(0, 229, 153, 0.05) 40%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 163, 255, 0.12) 0%, rgba(0, 229, 153, 0.04) 40%, transparent 70%);
           transform: translate(-50%, -50%);
           z-index: -1;
           filter: blur(40px);
           pointer-events: none;
         }
         
-        /* ПРАВКА: Увод вправо и маска растворения */
         .dashboard-mockup {
           width: 160%; 
           aspect-ratio: 16 / 10; 
-          background-color: rgba(10, 10, 14, 0.82);
+          background-color: rgba(10, 10, 14, 0.85);
           backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
@@ -320,8 +287,8 @@ export default function Hero({ t }: HeroProps) {
           flex-direction: column;
           gap: 0.8rem;
           position: relative;
-          -webkit-mask-image: linear-gradient(to right, black 60%, transparent 100%);
-          mask-image: linear-gradient(to right, black 60%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, black 65%, transparent 100%);
+          mask-image: linear-gradient(to right, black 65%, transparent 100%);
         }
         
         .pms-header {
@@ -381,7 +348,6 @@ export default function Hero({ t }: HeroProps) {
         .widget.primary-focus {
           position: relative;
           background: rgba(255, 255, 255, 0.03);
-          border-left: none;
         }
         .widget.primary-focus::before {
           content: '';
@@ -481,22 +447,44 @@ export default function Hero({ t }: HeroProps) {
           background: rgba(13, 13, 17, 0.3);
         }
         
+        /* Glassmorphic Плитки Бронирований */
         .booking {
           position: absolute;
           top: 6px; bottom: 6px;
-          border-radius: 4px;
+          border-radius: 6px;
           font-size: 0.65rem;
-          padding: 0 0.5rem;
-          color: #fff;
+          padding: 0 0.6rem;
           display: flex;
           align-items: center;
           overflow: hidden;
           white-space: nowrap;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255, 255, 255, 0.25);
+          backdrop-filter: blur(6px);
+          transition: all 0.3s ease;
         }
-        .b-direct { background: linear-gradient(90deg, #00E599 0%, #00A3FF 100%); color: #000; font-weight: 600; }
-        .b-booking { background: linear-gradient(90deg, #003580 0%, #0050c2 100%); }
-        .b-agoda { background: linear-gradient(90deg, #873335 0%, #cc474b 100%); }
+
+        .b-direct { 
+          background: rgba(0, 229, 153, 0.12);
+          border: 1px solid rgba(0, 229, 153, 0.5);
+          color: #00E599;
+          font-weight: 600;
+          box-shadow: inset 0 0 10px rgba(0, 229, 153, 0.12), 0 2px 8px rgba(0, 229, 153, 0.1);
+        }
+
+        .b-booking { 
+          background: rgba(0, 163, 255, 0.12);
+          border: 1px solid rgba(0, 163, 255, 0.5);
+          color: #38BDF8;
+          font-weight: 600;
+          box-shadow: inset 0 0 10px rgba(0, 163, 255, 0.12), 0 2px 8px rgba(0, 163, 255, 0.1);
+        }
+
+        .b-agoda { 
+          background: rgba(244, 63, 94, 0.12);
+          border: 1px solid rgba(244, 63, 94, 0.5);
+          color: #FB7185;
+          font-weight: 600;
+          box-shadow: inset 0 0 10px rgba(244, 63, 94, 0.12), 0 2px 8px rgba(244, 63, 94, 0.1);
+        }
 
         @keyframes pulse {
           0% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
@@ -538,7 +526,7 @@ export default function Hero({ t }: HeroProps) {
           
           <div className="cta-container">
             <button onClick={handleCalendlyPopup} className="btn-primary-main">
-              <span className="btn-text-gradient">Book a Free Audit</span>
+              Book a Free Audit
             </button>
             
             <div className="secondary-chats">
