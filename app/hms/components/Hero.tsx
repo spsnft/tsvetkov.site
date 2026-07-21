@@ -167,12 +167,11 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 0.4rem;
         }
         
-        /* Сочный, четкий UTP */
+        /* Четкий, резкий UTP без мыльного свечения */
         .utp-highlight {
           font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
           color: #00E599;
-          text-shadow: 0 0 20px rgba(0, 229, 153, 0.35);
           margin-bottom: 2.2rem;
           letter-spacing: -0.01em;
           display: block;
@@ -185,7 +184,7 @@ export default function Hero({ t }: HeroProps) {
           flex-wrap: wrap;
         }
         
-        /* Контрастная главная кнопка */
+        /* Мощная главная кнопка с жирным контрастным текстом */
         .btn-primary-main {
           display: inline-flex;
           align-items: center;
@@ -194,9 +193,10 @@ export default function Hero({ t }: HeroProps) {
           color: #0A0A0E;
           padding: 1.1rem 2.2rem;
           border-radius: 8px;
-          font-weight: 700;
+          font-weight: 800;
+          letter-spacing: 0.01em;
           text-decoration: none;
-          font-size: 1rem;
+          font-size: 1.05rem;
           flex-shrink: 0;
           cursor: pointer;
           transition: all 0.25s ease;
@@ -215,7 +215,7 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.75rem;
         }
 
-        /* Единый стандарт для кнопок соцсетей */
+        /* Чистый стандарт для кнопок соцсетей без костылей */
         .btn-secondary-chat {
           display: flex;
           align-items: center;
@@ -228,6 +228,8 @@ export default function Hero({ t }: HeroProps) {
           border: 1px solid rgba(255, 255, 255, 0.1);
           transition: all 0.25s ease;
           backdrop-filter: blur(8px);
+          box-sizing: border-box;
+          cursor: pointer;
         }
         .btn-secondary-chat:hover {
           transform: translateY(-2px);
@@ -240,8 +242,13 @@ export default function Hero({ t }: HeroProps) {
         .btn-secondary-chat img {
           width: 26px;
           height: 26px;
+          min-width: 26px;
+          min-height: 26px;
           object-fit: contain;
           display: block;
+          margin: 0;
+          padding: 0;
+          border: none;
         }
 
         /* Визуальная колонка и Дашборд */
