@@ -21,8 +21,9 @@ export default function LogoMarquee() {
     <section className="marquee-wrapper">
       <style jsx>{`
         .marquee-wrapper {
-          width: 100%; /* Растягиваем во всю ширину экрана */
-          overflow: hidden;
+          width: 100%;
+          max-width: 100%; /* Запрещает обертке быть шире экрана */
+          overflow: hidden; /* Жестко отсекает длинную ленту логотипов */
           padding: 1.25rem 0;
           position: relative;
           background: linear-gradient(90deg, rgba(10,10,12,0) 0%, rgba(255,255,255,0.02) 50%, rgba(10,10,12,0) 100%);
@@ -30,14 +31,15 @@ export default function LogoMarquee() {
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           z-index: 20;
 
-          /* Мягкое растворение логотипов по самым краям экрана (100vw) */
+          /* Мягкое растворение логотипов по краям вьюпорта */
           -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
           mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
         }
         
         .marquee-track {
           display: flex;
-          width: max-content;
+          /* FIX: Замена max-content на fit-content не дает браузеру распирать body сайта */
+          width: fit-content;
           animation: scroll 35s linear infinite; 
           gap: 5rem;
           align-items: center;
@@ -61,7 +63,7 @@ export default function LogoMarquee() {
           display: block;
         }
 
-        /* Индивидуальная подгонка пропорций под крупный формат */
+        /* Индивидуальная подгонка пропорций */
         .marquee-img[src*="booking"] { height: 75px; }
         .marquee-img[src*="hostelworld"] { height: 42px; }
         .marquee-img[src*="hotelbeds"] { height: 42px; }
