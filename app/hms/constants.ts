@@ -1,7 +1,7 @@
 export const contentData = {
   en: {
     badge: "Hospitality Growth Solutions",
-    heroTitle: "Stop Paying 15-20% commissions to Booking.com & Agoda",
+    heroTitle: "Stop Paying 15-20% Сommissions to Booking.com & Agoda",
     heroSub1: "Connect your property directly to guests. Zero risk of human error and double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
     btnChat: "WhatsApp",
