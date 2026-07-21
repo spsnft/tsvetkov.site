@@ -81,7 +81,7 @@ export const contentData = {
     aboutTitle: "Systems, Optimization & Scale",
     aboutDescFirst: "We step into business ecosystems to optimize them for maximum efficiency.",
     aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
-    aboutBtn: "View Professional Profile",
+    aboutBtn: "View Agency Profile",
     
     // --- FOOTER CTA ---
     footerTitle: "Ready to maximize your revenue?",
