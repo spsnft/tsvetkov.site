@@ -23,12 +23,12 @@ export default function LogoMarquee() {
         .marquee-wrapper {
           width: 100%;
           overflow: hidden;
-          padding: 1rem 0; /* Держим блок узким */
+          padding: 1rem 0; /* Твой оригинальный узкий размер */
           position: relative;
           background: linear-gradient(90deg, rgba(10,10,12,0) 0%, rgba(255,255,255,0.03) 50%, rgba(10,10,12,0) 100%);
           border-top: 1px solid rgba(255, 255, 255, 0.05);
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          margin-bottom: 2rem;
+          margin: 0; /* Убраны все внешние отступы */
           z-index: 20;
         }
         
