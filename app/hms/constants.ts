@@ -40,10 +40,10 @@ export const contentData = {
     // --- PROOF METRICS ---
     proofTitle: "Maximize Direct Booking Revenue",
     proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue Growth" },
-      { endValue: 70, prefix: "60-", suffix: "%", label: "Margin Boost per Every Guest" },
-      { endValue: 3, prefix: "", suffix: "x", label: "More Google Maps Traffic" },
-      { endValue: 35, prefix: "+", suffix: "%", label: "More Repeat Bookings" }
+      { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue" },
+      { endValue: 60, prefix: "+", suffix: "%", label: "Margin per Guest" },
+      { endValue: 300, prefix: "+", suffix: "%", label: "Google Maps Traffic" },
+      { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Bookings" }
     ],
 
     // --- PRICING ---
@@ -129,10 +129,10 @@ export const contentData = {
     // --- PROOF METRICS ---
     proofTitle: "เพิ่มศักยภาพให้ที่พักของคุณ สร้างรายได้ตรงสู่บัญชีสูงสุด",
     proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "การเติบโตของรายได้ตรง" },
-      { endValue: 70, prefix: "60-", suffix: "%", label: "มาร์จิ้นที่เพิ่มขึ้นต่อผู้เข้าพัก" },
-      { endValue: 3, prefix: "", suffix: "x", label: "ยอดเข้าชมบน Google Maps เพิ่มขึ้น" },
-      { endValue: 35, prefix: "+", suffix: "%", label: "ลูกค้าเก่ากลับมาจองซ้ำมากขึ้น" }
+      { endValue: 40, prefix: "+", suffix: "%", label: "รายได้ตรง" },
+      { endValue: 60, prefix: "+", suffix: "%", label: "มาร์จิ้นต่อผู้เข้าพัก" },
+      { endValue: 300, prefix: "+", suffix: "%", label: "ยอดเข้าชม Google Maps" },
+      { endValue: 35, prefix: "+", suffix: "%", label: "ลูกค้าเก่ากลับมาจองซ้ำ" }
     ],
 
     // --- PRICING ---
