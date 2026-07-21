@@ -2,7 +2,11 @@
    TSVETKOV.SITE — Global CSS (Dark Premium)
    ============================================================ */
 
-*,*::before,*::after { margin:0;padding:0;box-sizing:border-box; }
+*, *::before, *::after { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
 
 /* Железобетонная фиксация вьюпорта от боковых сдвигов и багов Safari */
 html, body {
@@ -12,74 +16,137 @@ html, body {
   position: relative;
 }
 
-html { scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale; }
-
-body {
-  background:#0A0A0C;
-  color:#fff;
-  font-family:'Space Grotesk',system-ui,sans-serif;
+html { 
+  scroll-behavior: smooth; 
+  -webkit-font-smoothing: antialiased; 
+  -moz-osx-font-smoothing: grayscale; 
 }
 
-::selection { background:rgba(0,255,179,.18);color:#fff; }
-::placeholder { color:rgba(255,255,255,.22); }
-::-webkit-scrollbar { width:4px; }
-::-webkit-scrollbar-track { background:#0A0A0C; }
-::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1);border-radius:2px; }
+body {
+  background: #0A0A0C;
+  color: #fff;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+
+::selection { 
+  background: rgba(0, 255, 179, .18); 
+  color: #fff; 
+}
+
+::placeholder { 
+  color: rgba(255, 255, 255, .22); 
+}
+
+::-webkit-scrollbar { 
+  width: 4px; 
+}
+
+::-webkit-scrollbar-track { 
+  background: #0A0A0C; 
+}
+
+::-webkit-scrollbar-thumb { 
+  background: rgba(255, 255, 255, .1); 
+  border-radius: 2px; 
+}
+
+/* ── Единая сетка сайта (Unified Container System) ──────────── */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1.5rem;  /* 24px отступ слева */
+  padding-right: 1.5rem; /* 24px отступ справа */
+}
 
 /* ── Layout classes (grid/flex controlled by media queries) ──── */
 
 /* Nav links strip */
-.nav-links { display:flex;gap:2rem;align-items:center; }
+.nav-links { 
+  display: flex; 
+  gap: 2rem; 
+  align-items: center; 
+}
 
 /* Bento grid — asymmetric 3-col */
 .bento {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  grid-template-areas:"g1 g1 g2" "g3 g3 g3";
-  gap:1.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "g1 g1 g2" "g3 g3 g3";
+  gap: 1.25rem;
 }
-.bento-g1 { grid-area:g1; }
-.bento-g2 { grid-area:g2; }
-.bento-g3 { grid-area:g3; }
+.bento-g1 { grid-area: g1; }
+.bento-g2 { grid-area: g2; }
+.bento-g3 { grid-area: g3; }
 
 /* Case studies — 3-col equal */
-.cases-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem; }
+.cases-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem; 
+}
 
 /* Service card inner — number | text | arrow */
 .svc-inner {
-  display:grid;
-  grid-template-columns:72px 1fr 44px;
-  gap:clamp(1rem,2.5vw,2rem);
-  align-items:start;
+  display: grid;
+  grid-template-columns: 72px 1fr 44px;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: start;
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
-@media(max-width:960px) {
-  .bento { grid-template-columns:1fr 1fr;grid-template-areas:"g1 g2""g3 g3"; }
-  .cases-grid { grid-template-columns:1fr 1fr; }
+
+@media (max-width: 960px) {
+  .bento { 
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: "g1 g2" "g3 g3"; 
+  }
+  .cases-grid { 
+    grid-template-columns: 1fr 1fr; 
+  }
 }
 
-@media(max-width:640px) {
-  .bento { grid-template-columns:1fr;grid-template-areas:"g1""g2""g3"; }
-  .cases-grid { grid-template-columns:1fr; }
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1.25rem;  /* 20px отступы на мобильных устройствах */
+    padding-right: 1.25rem;
+  }
+  .bento { 
+    grid-template-columns: 1fr; 
+    grid-template-areas: "g1" "g2" "g3"; 
+  }
+  .cases-grid { 
+    grid-template-columns: 1fr; 
+  }
   /* Service rows: hide decorative number, keep text + arrow */
-  .svc-inner { grid-template-columns:1fr 44px;gap:1rem; }
-  .svc-num { display:none!important; }
+  .svc-inner { 
+    grid-template-columns: 1fr 44px; 
+    gap: 1rem; 
+  }
+  .svc-num { 
+    display: none !important; 
+  }
   /* Nav: hide text links on mobile, show only logo + CTA */
-  .nav-links { display:none; }
+  .nav-links { 
+    display: none; 
+  }
 }
 
 /* ── Keyframes ───────────────────────────────────────────────── */
+
 @keyframes pdot {
-  0%,100% { opacity:1;transform:scale(1); }
-  50%     { opacity:.4;transform:scale(.7); }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .4; transform: scale(.7); }
 }
+
 @keyframes float-a {
-  0%,100% { transform:translateY(0) translateX(0); }
-  33%     { transform:translateY(-28px) translateX(14px); }
-  66%     { transform:translateY(14px) translateX(-14px); }
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33%      { transform: translateY(-28px) translateX(14px); }
+  66%      { transform: translateY(14px) translateX(-14px); }
 }
+
 @keyframes float-b {
-  0%,100% { transform:translateY(0) translateX(0); }
-  50%     { transform:translateY(22px) translateX(-20px); }
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50%      { transform: translateY(22px) translateX(-20px); }
 }
