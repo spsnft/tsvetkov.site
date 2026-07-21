@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { T } from '../../../src/theme/tokens';
 
 interface HeroProps {
   t: {
@@ -34,7 +33,6 @@ export default function Hero({ t }: HeroProps) {
   useEffect(() => {
     setIsMounted(true);
 
-    // Безопасно подтягиваем официальные стили и скрипты Calendly для поп-апа
     const link = document.createElement('link');
     link.href = 'https://assets.calendly.com/assets/external/widget.css';
     link.rel = 'stylesheet';
@@ -109,24 +107,23 @@ export default function Hero({ t }: HeroProps) {
           overflow: hidden;
         }
         
-        /* Исправленная сетка: 52/48 дает дашборду место, не образуя дыру */
         .hero-grid {
           display: grid;
           grid-template-columns: 52% 48%;
           gap: 1rem;
-          align-items: center; /* Центрируем контент по вертикали */
+          align-items: center;
           position: relative;
         }
 
         .text-column {
           text-align: left;
           position: relative;
-          z-index: 10; /* Важно: текст теперь всегда поверх прозрачных краев дашборда */
+          z-index: 10;
           padding-right: 1rem;
         }
         
         .badge {
-          color: rgba(255, 255, 255, 0.85);
+          color: #00E599;
           text-transform: uppercase;
           letter-spacing: 0.15em;
           font-size: 0.7rem;
@@ -134,8 +131,8 @@ export default function Hero({ t }: HeroProps) {
           display: inline-flex;
           align-items: center;
           padding: 0.35rem 0.85rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(0, 229, 153, 0.05);
+          border: 1px solid rgba(0, 229, 153, 0.2);
           border-radius: 20px;
           backdrop-filter: blur(8px);
           margin-bottom: 1.5rem;
@@ -144,11 +141,11 @@ export default function Hero({ t }: HeroProps) {
         .title {
           font-size: clamp(2.4rem, 4.2vw, 3.8rem);
           font-weight: 700;
-          line-height: 1.15; /* Чуть больше воздуха для читаемости крупных слов */
+          line-height: 1.15;
           letter-spacing: -0.03em;
           margin: 0 0 1.5rem 0;
           color: #fff;
-          text-wrap: balance; /* Браузер сам перенесет Booking & Agoda логично */
+          text-wrap: balance;
           max-width: 650px;
         }
         
@@ -156,12 +153,15 @@ export default function Hero({ t }: HeroProps) {
           margin-bottom: 1.8rem;
           display: block !important;
         }
+        
+        /* ПРАВКА: Улучшен контраст сабтитров */
         .sub-line-1, .sub-line-2 {
           display: block !important;
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.55;
           margin: 0;
-          color: rgba(255, 255, 255, 0.78);
+          color: #94A3B8; 
+          font-weight: 400;
           text-wrap: pretty;
         }
         .sub-line-2 {
@@ -186,26 +186,56 @@ export default function Hero({ t }: HeroProps) {
           flex-wrap: wrap;
         }
         
+        /* ПРАВКА: Новый премиальный стиль кнопки (Ghost Gradient) */
         .btn-primary-main {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: #000000 !important;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          position: relative;
+          background: #050505;
           padding: 1.1rem 2.5rem;
           border-radius: 8px;
-          font-weight: 700;
+          font-weight: 600;
           text-decoration: none;
           font-size: 1rem;
           flex-shrink: 0;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
           cursor: pointer;
+          transition: all 0.3s ease;
+          border: none;
+          z-index: 1;
         }
+        
+        .btn-primary-main::before {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: 9px;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          z-index: -1;
+          transition: all 0.3s ease;
+        }
+
+        .btn-text-gradient {
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: all 0.3s ease;
+        }
+
         .btn-primary-main:hover {
           transform: translateY(-2px);
-          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-          filter: brightness(1.06);
+          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.15);
+        }
+        
+        /* При наведении заливаем кнопку градиентом, текст делаем черным */
+        .btn-primary-main:hover::before {
+          inset: 0;
+          border-radius: 8px;
+        }
+        .btn-primary-main:hover .btn-text-gradient {
+          background: none;
+          -webkit-text-fill-color: #000;
+          color: #000;
         }
 
         .secondary-chats {
@@ -214,12 +244,14 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.75rem;
         }
 
+        /* ПРАВКА: Жесткие размеры и центровка иконок мессенджеров */
         .btn-secondary-chat {
-          display: inline-flex;
+          display: flex;
           align-items: center;
           justify-content: center;
           width: 48px;
           height: 48px;
+          padding: 0;
           border-radius: 8px;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
@@ -232,12 +264,12 @@ export default function Hero({ t }: HeroProps) {
           background: rgba(255, 255, 255, 0.07);
           border-color: rgba(255, 255, 255, 0.2);
         }
-        .btn-secondary-chat.wa:hover { box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25); border-color: rgba(37, 211, 102, 0.4); }
-        .btn-secondary-chat.line:hover { box-shadow: 0 8px 20px rgba(6, 199, 85, 0.25); border-color: rgba(6, 199, 85, 0.4); }
+        .btn-secondary-chat.wa:hover { box-shadow: 0 8px 20px rgba(37, 211, 102, 0.15); border-color: rgba(37, 211, 102, 0.3); }
+        .btn-secondary-chat.line:hover { box-shadow: 0 8px 20px rgba(6, 199, 85, 0.15); border-color: rgba(6, 199, 85, 0.3); }
 
         .btn-secondary-chat img {
-          width: 22px;
-          height: 22px;
+          width: 24px;
+          height: 24px;
           object-fit: contain;
           display: block;
           transition: transform 0.2s ease;
@@ -254,17 +286,33 @@ export default function Hero({ t }: HeroProps) {
         .perspective-wrapper {
           width: 100%;
           perspective: 1400px;
+          position: relative;
+        }
+
+        /* ПРАВКА: Свечение за дашбордом */
+        .perspective-wrapper::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 120%;
+          height: 120%;
+          background: radial-gradient(circle, rgba(0, 163, 255, 0.15) 0%, rgba(0, 229, 153, 0.05) 40%, transparent 70%);
+          transform: translate(-50%, -50%);
+          z-index: -1;
+          filter: blur(40px);
+          pointer-events: none;
         }
         
-        /* Исправленный дашборд: Ширина 150%, ось по центру, сдвинут влево (translateX) */
+        /* ПРАВКА: Увод вправо и маска растворения */
         .dashboard-mockup {
-          width: 150%; 
+          width: 160%; 
           aspect-ratio: 16 / 10; 
           background-color: rgba(10, 10, 14, 0.82);
           backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(-60px); 
+          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(40px); 
           transform-origin: center center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12);
           padding: 1.2rem;
@@ -272,6 +320,8 @@ export default function Hero({ t }: HeroProps) {
           flex-direction: column;
           gap: 0.8rem;
           position: relative;
+          -webkit-mask-image: linear-gradient(to right, black 60%, transparent 100%);
+          mask-image: linear-gradient(to right, black 60%, transparent 100%);
         }
         
         .pms-header {
@@ -431,7 +481,6 @@ export default function Hero({ t }: HeroProps) {
           background: rgba(13, 13, 17, 0.3);
         }
         
-        /* Добавил внутреннее свечение для объема плашек (textured 3d эффект) */
         .booking {
           position: absolute;
           top: 6px; bottom: 6px;
@@ -461,7 +510,12 @@ export default function Hero({ t }: HeroProps) {
           .text-column { text-align: center; padding-right: 0; }
           .cta-container { flex-direction: column; align-items: center; }
           .secondary-chats { justify-content: center; }
-          .dashboard-mockup { transform: none !important; width: 100% !important; }
+          .dashboard-mockup { 
+            transform: none !important; 
+            width: 100% !important; 
+            -webkit-mask-image: none;
+            mask-image: none;
+          }
           .pms-body { flex-direction: column; }
           .pms-analytics { flex: none; gap: 0.6rem; width: 100%; }
           .pms-matrix { display: none; }
@@ -483,8 +537,8 @@ export default function Hero({ t }: HeroProps) {
           </div>
           
           <div className="cta-container">
-            <button onClick={handleCalendlyPopup} className="btn-primary-main" style={{ border: 'none' }}>
-              Book a Free Audit
+            <button onClick={handleCalendlyPopup} className="btn-primary-main">
+              <span className="btn-text-gradient">Book a Free Audit</span>
             </button>
             
             <div className="secondary-chats">
