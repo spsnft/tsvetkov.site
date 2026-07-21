@@ -4,17 +4,20 @@ import React from 'react';
 
 export default function LogoMarquee() {
   const logoSrcs = [
-    '/logos/Booking.svg',
-    '/logos/Agoda.svg',
-    '/logos/AirBNB.svg',
-    '/logos/Expedia.svg',
+    // 1. Первые 4 согласно вашему указанию:
+    '/logos/booking.svg',
+    '/logos/airbnb.svg',
     '/logos/tripadvisor.svg',
-    '/logos/Traveloka.svg',
-    '/logos/Trip.com_logo.svg',
-    '/logos/Makemytrip.svg',
-    '/logos/Klook.svg',
-    '/logos/Hotelbeds.svg',
-    '/logos/Hostelworld.svg'
+    '/logos/agoda.svg',
+
+    // 2. Все остальные логотипы:
+    '/logos/expedia.svg',
+    '/logos/makemytrip.svg',
+    '/logos/traveloka.svg',
+    '/logos/hotelbeds.svg',
+    '/logos/klook.svg',
+    '/logos/trip.svg',
+    '/logos/hostelworld.svg'
   ];
 
   return (
@@ -64,13 +67,13 @@ export default function LogoMarquee() {
         }
 
         /* Оптическая калибровка под увеличенный формат */
-        .marquee-img[src*="Booking"] { height: 36px; }
-        .marquee-img[src*="Hostelworld"] { height: 19px; }
-        .marquee-img[src*="Hotelbeds"] { height: 19px; }
+        .marquee-img[src*="booking"] { height: 36px; }
+        .marquee-img[src*="hostelworld"] { height: 19px; }
+        .marquee-img[src*="hotelbeds"] { height: 19px; }
         .marquee-img[src*="tripadvisor"] { height: 33px; }
-        .marquee-img[src*="Agoda"] { height: 26px; }
-        .marquee-img[src*="AirBNB"] { height: 26px; }
-        .marquee-img[src*="Traveloka"] { height: 26px; }
+        .marquee-img[src*="agoda"] { height: 26px; }
+        .marquee-img[src*="airbnb"] { height: 26px; }
+        .marquee-img[src*="traveloka"] { height: 26px; }
 
         @keyframes scroll {
           0% { transform: translateX(0); }
