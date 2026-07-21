@@ -58,7 +58,7 @@ export default function FooterCTA({ t }: FooterCTAProps) {
       <style jsx>{`
         .footer-cta-section {
           width: 100%;
-          max-width: 1280px;
+          max-width: 1200px; /* Приведено к эталонной ширине 1200px */
           margin: 0 auto;
           /* Верх: 0 (80px дает предыдущий блок) | Низ: 112px (7rem) финальный воздух */
           padding: 0 1.5rem 7rem 1.5rem;
