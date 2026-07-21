@@ -40,15 +40,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           width: 100%;
           max-width: 1280px;
           margin: 0 auto;
-          /* Сбалансированный верхний отступ (3rem / 48px от бегущей строки) */
-          padding: 3rem 1.5rem 5rem 1.5rem; 
-          border-bottom: 1px solid ${T.border};
+          /* Верх: 48px (3rem) от бегущей строки | Низ: 56px (3.5rem) до следующего заголовка */
+          padding: 3rem 1.5rem 3.5rem 1.5rem; 
           background: transparent;
         }
 
         .scale-header {
           text-align: center;
-          /* Увеличенный воздух от подзаголовка к карточкам (3.5rem / 56px) */
+          /* Стандартный воздух от подзаголовка к карточкам (56px / 3.5rem) */
           margin-bottom: 3.5rem; 
         }
 
@@ -190,7 +189,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         @media (max-width: 992px) {
           .scale-section {
-            padding: 2.5rem 1.25rem 3.5rem 1.25rem;
+            padding: 2.5rem 1.25rem 2.5rem 1.25rem;
           }
           .scale-header {
             margin-bottom: 2.5rem;
