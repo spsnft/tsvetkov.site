@@ -58,7 +58,10 @@ export default function FooterCTA({ t }: FooterCTAProps) {
       <style jsx>{`
         .footer-cta-section {
           width: 100%;
-          padding: 7rem 1.5rem;
+          max-width: 1280px;
+          margin: 0 auto;
+          /* Верх: 0 (80px дает предыдущий блок) | Низ: 112px (7rem) финальный воздух */
+          padding: 0 1.5rem 7rem 1.5rem;
           text-align: center;
           position: relative;
           background: transparent;
@@ -74,10 +77,10 @@ export default function FooterCTA({ t }: FooterCTAProps) {
         }
         
         .main-title {
-          font-size: clamp(2.2rem, 4vw, 3.4rem);
+          font-size: clamp(2.2rem, 3.8vw, 3rem);
           font-weight: 700;
-          line-height: 1.1;
-          letter-spacing: -0.03em;
+          line-height: 1.15;
+          letter-spacing: -0.02em;
           margin: 0;
           color: #ffffff;
           text-wrap: pretty;
@@ -87,13 +90,13 @@ export default function FooterCTA({ t }: FooterCTAProps) {
           display: flex;
           flex-direction: column;
           gap: 0.3rem;
-          margin-bottom: 1.5rem;
+          margin-bottom: 0.8rem;
         }
 
         .subtitle {
-          color: rgba(255, 255, 255, 0.8); /* Высокая читаемость и контраст */
-          font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-          line-height: 1.45;
+          color: ${T.sub};
+          font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+          line-height: 1.5;
           margin: 0;
           text-wrap: pretty;
         }
@@ -104,7 +107,7 @@ export default function FooterCTA({ t }: FooterCTAProps) {
           justify-content: center;
           color: #000000 !important;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          padding: 1.2rem 3rem;
+          padding: 1.1rem 2.8rem;
           border-radius: 8px;
           font-weight: 700;
           font-size: 1.05rem;
@@ -120,10 +123,18 @@ export default function FooterCTA({ t }: FooterCTAProps) {
           box-shadow: 0 15px 40px rgba(0, 229, 153, 0.4), 0 15px 40px rgba(0, 163, 255, 0.25);
           filter: brightness(1.08);
         }
+
+        .btn-gradient-cta:active {
+          transform: translateY(0);
+        }
         
         @media (max-width: 768px) {
           .footer-cta-section {
-            padding: 5rem 1rem;
+            padding: 0 1.25rem 4.5rem 1.25rem;
+          }
+          .btn-gradient-cta {
+            width: 100%;
+            padding: 1.1rem 1.5rem;
           }
         }
       `}</style>
