@@ -30,8 +30,10 @@ export default function About({ t }: AboutProps) {
       <style jsx>{`
         .about-section {
           width: 100%;
-          padding: 6rem 2rem;
-          border-bottom: 1px solid ${T.border};
+          max-width: 1280px;
+          margin: 0 auto;
+          /* Верх: 0 (отступ дает предыдущий блок) | Низ: 80px (5rem) */
+          padding: 0 1.5rem 5rem 1.5rem;
           background: transparent;
         }
         
@@ -39,28 +41,27 @@ export default function About({ t }: AboutProps) {
           display: grid;
           grid-template-columns: 38% 62%;
           gap: 4rem;
-          max-width: 1200px;
-          margin: 0 auto;
           align-items: start;
         }
         
         .left-col {
           display: flex;
           flex-direction: column;
-          gap: 0.6rem;
+          gap: 0.75rem;
         }
         
         .sub-label {
-          color: rgba(255, 255, 255, 0.4);
+          color: ${T.sub};
           font-size: 0.75rem;
           font-weight: 700;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.15em;
           text-transform: uppercase;
           margin: 0;
+          opacity: 0.8;
         }
         
         .main-title {
-          font-size: clamp(2rem, 3.5vw, 2.8rem);
+          font-size: clamp(2rem, 3.2vw, 2.6rem);
           font-weight: 700;
           line-height: 1.15;
           letter-spacing: -0.02em;
@@ -75,12 +76,12 @@ export default function About({ t }: AboutProps) {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          gap: 2.2rem;
+          gap: 2rem;
         }
         
         .description {
-          font-size: 1.08rem;
-          line-height: 1.65;
+          font-size: 1.1rem;
+          line-height: 1.7;
           margin: 0;
           text-wrap: pretty;
         }
@@ -101,7 +102,7 @@ export default function About({ t }: AboutProps) {
           justify-content: center;
           color: rgba(255, 255, 255, 0.9) !important;
           background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.18);
+          border: 1px solid rgba(255, 255, 255, 0.15);
           padding: 0.85rem 2.2rem;
           border-radius: 8px;
           font-weight: 600;
@@ -113,15 +114,15 @@ export default function About({ t }: AboutProps) {
         
         .view-profile-btn:hover {
           transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.07);
+          background: rgba(255, 255, 255, 0.06);
           border-color: rgba(0, 229, 153, 0.5);
           color: #ffffff !important;
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.12);
         }
         
         @media (max-width: 992px) {
           .about-section {
-            padding: 4rem 1.5rem;
+            padding: 0 1.25rem 3.5rem 1.25rem;
           }
           .about-grid {
             grid-template-columns: 1fr;
@@ -129,6 +130,16 @@ export default function About({ t }: AboutProps) {
           }
           .right-col {
             gap: 1.8rem;
+          }
+        }
+
+        @media (max-width: 576px) {
+          .description {
+            font-size: 1rem;
+            line-height: 1.6;
+          }
+          .view-profile-btn {
+            width: 100%;
           }
         }
       `}</style>
