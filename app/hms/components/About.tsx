@@ -38,9 +38,8 @@ export default function About({ t }: AboutProps) {
       <style jsx>{`
         .about-section {
           width: 100%;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 1.5rem 5rem 1.5rem;
+          /* Верх: 0 | Низ: 80px (5rem) */
+          padding: 0 0 5rem 0;
           background: transparent;
         }
         
@@ -189,7 +188,7 @@ export default function About({ t }: AboutProps) {
         
         @media (max-width: 992px) {
           .about-section {
-            padding: 0 1.25rem 3.5rem 1.25rem;
+            padding: 0 0 3.5rem 0;
           }
           .about-grid {
             grid-template-columns: 1fr;
@@ -219,32 +218,34 @@ export default function About({ t }: AboutProps) {
         }
       `}</style>
 
-      <div className="about-grid">
-        <div className="left-col">
-          <p className="sub-label">{labelText}</p>
-          <h2 className="main-title">{titleText}</h2>
-        </div>
-        
-        <div className="right-col">
-          <p className="description">
-            <span className="highlight-sentence">{firstSentence}</span>{' '}
-            <span className="dimmed-text">{restText}</span>
-          </p>
-
-          {/* Мини-кейс / Пруф */}
-          <div className="case-card">
-            <div className="case-header">
-              <span className="case-title">{caseTitle}</span>
-              <span className="case-badge">{caseBadge}</span>
-            </div>
-            <p className="case-metrics">{caseMetrics}</p>
-            <p className="case-desc">{caseDesc}</p>
+      <div className="container">
+        <div className="about-grid">
+          <div className="left-col">
+            <p className="sub-label">{labelText}</p>
+            <h2 className="main-title">{titleText}</h2>
           </div>
           
-          <div className="actions-row">
-            <a href="/" className="view-profile-btn">
-              {btnText}
-            </a>
+          <div className="right-col">
+            <p className="description">
+              <span className="highlight-sentence">{firstSentence}</span>{' '}
+              <span className="dimmed-text">{restText}</span>
+            </p>
+
+            {/* Мини-кейс / Пруф */}
+            <div className="case-card">
+              <div className="case-header">
+                <span className="case-title">{caseTitle}</span>
+                <span className="case-badge">{caseBadge}</span>
+              </div>
+              <p className="case-metrics">{caseMetrics}</p>
+              <p className="case-desc">{caseDesc}</p>
+            </div>
+            
+            <div className="actions-row">
+              <a href="/" className="view-profile-btn">
+                {btnText}
+              </a>
+            </div>
           </div>
         </div>
       </div>
