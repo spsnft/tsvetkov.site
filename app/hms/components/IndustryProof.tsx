@@ -49,7 +49,7 @@ function ProofCounter({ end, duration, prefix, suffix, isVisible }: {
   }, [isVisible, end, duration]);
 
   return (
-    <span style={{ fontFamily: 'SF Pro Display, -apple-system, sans-serif', fontWeight: 700 }}>
+    <span>
       {prefix}{count}{suffix}
     </span>
   );
@@ -79,31 +79,53 @@ export default function IndustryProof({ t }: IndustryProofProps) {
   if (!t?.proofMetrics) return null;
 
   return (
-    <section ref={sectionRef} style={{ width: '100%', borderBottom: `1px solid ${T.border}`, backgroundColor: 'transparent' }}>
+    <section ref={sectionRef} className="proof-section">
       <style jsx>{`
+        .proof-section {
+          width: 100%;
+          background-color: transparent;
+          padding: 5rem 1.5rem 0 1.5rem; /* 80px сверху до заголовка */
+        }
+
+        .proof-header {
+          text-align: center;
+          margin-bottom: 3rem; /* 48px до сетки плашек */
+        }
+
+        .proof-title {
+          font-size: 2.4rem;
+          font-weight: 700;
+          color: #ffffff;
+          letter-spacing: -0.02em;
+          line-height: 1.2;
+          margin: 0;
+        }
+
         .proof-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
+          max-width: 1280px;
+          margin: 0 auto;
+          border-top: 1px solid ${T.border};
         }
         
-        /* Исправлено: Идеальный баланс осей — перешли на центрирование контента */
         .proof-col {
-          padding: 4.5rem 2rem;
+          padding: 3.5rem 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
           text-align: center;
           align-items: center;
         }
+
         .proof-col:not(:last-child) {
           border-right: 1px solid ${T.border};
         }
         
-        /* Исправлено: Защита от переноса "60-70%" + Адаптивный clamp под центрирование */
         .metric-number {
-          font-size: clamp(2.2rem, 3.6vw, 3.6rem);
+          font-size: clamp(2.4rem, 3.5vw, 3.2rem);
           font-weight: 700; 
-          line-height: 1; 
+          line-height: 1.1; 
           letter-spacing: -0.03em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
@@ -112,55 +134,55 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           white-space: nowrap;
         }
 
-        /* Исправлено: подпись центрируется и имеет красивую максимальную ширину */
         .metric-label {
           color: ${T.sub};
-          font-size: 0.9rem;
+          font-size: 0.95rem;
           line-height: 1.4;
           margin: 0 auto;
           font-weight: 500;
           text-wrap: pretty;
-          max-width: 240px;
+          max-width: 220px;
         }
 
         @media (max-width: 1150px) {
           .proof-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-columns: repeat(2, 1fr);
           }
           .proof-col {
-            padding: 3.5rem 2.5rem !important;
+            padding: 3rem 1.5rem;
           }
           .proof-col:nth-child(odd) {
-            border-right: 1px solid ${T.border} !important;
+            border-right: 1px solid ${T.border};
           }
           .proof-col:nth-child(even) {
-            border-right: none !important;
+            border-right: none;
           }
           .proof-col:nth-child(1), .proof-col:nth-child(2) {
             border-bottom: 1px solid ${T.border};
           }
         }
+
         @media (max-width: 576px) {
           .proof-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
           }
           .proof-col:not(:last-child) {
-            border-right: none !important;
-            border-bottom: 1px solid ${T.border} !important;
+            border-right: none;
+            border-bottom: 1px solid ${T.border};
           }
           .proof-col {
-            padding: 2.5rem 1.5rem !important;
+            padding: 2.5rem 1rem;
           }
         }
       `}</style>
 
-      <div style={{ padding: '5rem 1.5rem 4rem 1.5rem', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2.4rem', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.2 }}>
+      <div className="proof-header">
+        <h2 className="proof-title">
           {t.proofTitle}
         </h2>
       </div>
 
-      <div className="proof-grid" style={{ borderTop: `1px solid ${T.border}` }}>
+      <div className="proof-grid">
         {t.proofMetrics.map((item, idx) => (
           <div key={idx} className="proof-col">
             <div className="metric-number">
