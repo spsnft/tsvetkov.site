@@ -82,11 +82,15 @@ export const contentData = {
     aboutDescFirst: "We step into business ecosystems to optimize them for maximum efficiency.",
     aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
     aboutBtn: "View Agency Profile",
+    caseBadge: "Featured Case Proof",
+    caseTitle: "Phuket Luxury Villa Resort (24 Keys)",
+    caseMetrics: "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
+    caseDesc: "Replaced manual channel management with an automated direct booking pipeline in 60 days.",
     
     // --- FOOTER CTA ---
     footerTitle: "Ready to maximize your revenue?",
     footerSub1: "Stop leaving 15–20% on the table",
-    footerSub2: "Build your high-converting direct booking engine",
+    footerSub2: "Take full control of your direct bookings",
     footerBtn: "Book a Free Audit"
   },
   th: {
@@ -171,11 +175,15 @@ export const contentData = {
     aboutDescFirst: "เราเข้าจัดการและเพิ่มประสิทธิภาพระบบธุรกิจเพื่อสร้างประสิทธิภาพสูงสุด",
     aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
     aboutBtn: "ดูประวัติการทำงาน",
+    caseBadge: "ผลลัพธ์จากเคสจริง",
+    caseTitle: "พูลวิลล่าหรู ภูเก็ต (24 ห้อง)",
+    caseMetrics: "ประหยัดค่า OTA +$2,800/เดือน • ยอดจองตรง +42%",
+    caseDesc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบรับจองตรงอัตโนมัติสำเร็จภายใน 60 วัน",
     
     // --- FOOTER CTA ---
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerSub1: "เลิกเสียรายได้ 15–20% ไปกับค่าคอมมิชชั่น",
-    footerSub2: "สร้างระบบจองตรงที่ทำกำไรสูงสุดให้ที่พักของคุณ",
+    footerSub2: "ควบคุมยอดจองตรงของคุณได้อย่างสมบูรณ์",
     footerBtn: "นัดหมายตรวจสอบระบบฟรี"
   }
 };
