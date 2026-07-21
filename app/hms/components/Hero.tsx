@@ -102,17 +102,18 @@ export default function Hero({ t }: HeroProps) {
       <style jsx>{`
         .hero-section {
           width: 100%;
-          max-width: 1200px; /* Строгое выравнивание под эталонные 1200px */
+          max-width: 1200px; /* Жесткий каноничный контейнер 1200px */
           margin: 0 auto;
-          padding: 2.5rem 1.5rem 4rem 1.5rem;
+          padding: 2.5rem 1.5rem 3.5rem 1.5rem;
           position: relative;
           z-index: 10;
+          overflow: hidden;
         }
         
         .hero-grid {
           display: grid;
-          grid-template-columns: 52% 48%;
-          gap: 1rem;
+          grid-template-columns: 56% 44%; /* Больше места тексту, меньше агрессии макету */
+          gap: 2rem;
           align-items: center;
           position: relative;
         }
@@ -121,7 +122,6 @@ export default function Hero({ t }: HeroProps) {
           text-align: left;
           position: relative;
           z-index: 10;
-          padding-right: 1rem;
         }
         
         .badge {
@@ -137,28 +137,28 @@ export default function Hero({ t }: HeroProps) {
           border: 1px solid rgba(0, 229, 153, 0.2);
           border-radius: 20px;
           backdrop-filter: blur(8px);
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
         }
         
         .title {
-          font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+          font-size: clamp(2.1rem, 3.4vw, 3.1rem);
           font-weight: 700;
-          line-height: 1.15;
+          line-height: 1.18;
           letter-spacing: -0.03em;
-          margin: 0 0 1.5rem 0;
+          margin: 0 0 1.25rem 0;
           color: #fff;
           text-wrap: balance;
-          max-width: 650px;
+          word-break: normal;
         }
         
         .subtitles-block {
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
           display: block !important;
         }
         
         .sub-line-1, .sub-line-2 {
           display: block !important;
-          font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+          font-size: clamp(1rem, 1.4vw, 1.15rem);
           line-height: 1.55;
           margin: 0;
           color: #CBD5E1;
@@ -166,14 +166,14 @@ export default function Hero({ t }: HeroProps) {
           text-wrap: pretty;
         }
         .sub-line-2 {
-          margin-top: 0.4rem;
+          margin-top: 0.35rem;
         }
         
         .utp-highlight {
-          font-size: clamp(1.25rem, 2.1vw, 1.45rem);
+          font-size: clamp(1.15rem, 1.8vw, 1.35rem);
           font-weight: 700;
           color: #00E599;
-          margin-bottom: 2.2rem;
+          margin-bottom: 2rem;
           letter-spacing: -0.01em;
           display: block;
         }
@@ -191,7 +191,7 @@ export default function Hero({ t }: HeroProps) {
           justify-content: center;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           color: #0A0A0E;
-          padding: 1.1rem 2.2rem;
+          padding: 1rem 2rem;
           border-radius: 8px;
           font-weight: 800;
           letter-spacing: 0.01em;
@@ -213,8 +213,8 @@ export default function Hero({ t }: HeroProps) {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 52px;
-          height: 52px;
+          width: 50px;
+          height: 50px;
           border-radius: 10px;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
@@ -232,8 +232,8 @@ export default function Hero({ t }: HeroProps) {
         }
 
         .btn-secondary-chat img {
-          width: 28px;
-          height: 28px;
+          width: 26px;
+          height: 26px;
           object-fit: contain;
           display: block;
         }
@@ -241,14 +241,14 @@ export default function Hero({ t }: HeroProps) {
         .visual-column {
           position: relative;
           width: 100%;
-          height: 100%;
           display: flex;
           align-items: center;
+          justify-content: center;
         }
 
         .perspective-wrapper {
           width: 100%;
-          perspective: 1400px;
+          perspective: 1200px;
           position: relative;
         }
 
@@ -257,32 +257,31 @@ export default function Hero({ t }: HeroProps) {
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 120%;
-          height: 120%;
+          width: 100%;
+          height: 100%;
           background: radial-gradient(circle, rgba(0, 163, 255, 0.12) 0%, rgba(0, 229, 153, 0.04) 40%, transparent 70%);
           transform: translate(-50%, -50%);
           z-index: -1;
-          filter: blur(40px);
+          filter: blur(30px);
           pointer-events: none;
         }
         
+        /* Фикс: Ровно 100% ширины от своей колонки, никаких раздуваний */
         .dashboard-mockup {
-          width: 160%; 
-          aspect-ratio: 16 / 10; 
+          width: 100%;
+          max-width: 100%;
           background-color: rgba(10, 10, 14, 0.85);
           backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 14px;
-          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(40px); 
+          border-radius: 12px;
+          transform: rotateX(6deg) rotateY(-10deg) rotateZ(1deg);
           transform-origin: center center;
-          box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12);
-          padding: 1.2rem;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+          padding: 1rem;
           display: flex;
           flex-direction: column;
-          gap: 0.8rem;
+          gap: 0.75rem;
           position: relative;
-          -webkit-mask-image: linear-gradient(to right, black 65%, transparent 100%);
-          mask-image: linear-gradient(to right, black 65%, transparent 100%);
         }
         
         .pms-header {
@@ -290,18 +289,18 @@ export default function Hero({ t }: HeroProps) {
           justify-content: flex-start;
           align-items: center;
           border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          padding-bottom: 0.5rem;
+          padding-bottom: 0.4rem;
         }
         
         .sync-status { 
           display: flex; 
           align-items: center; 
-          gap: 0.5rem; 
-          font-size: 0.72rem; 
+          gap: 0.4rem; 
+          font-size: 0.68rem; 
           color: rgba(255, 255, 255, 0.85); 
           font-weight: 600; 
           background: rgba(255, 255, 255, 0.04); 
-          padding: 0.25rem 0.65rem; 
+          padding: 0.2rem 0.55rem; 
           border-radius: 20px; 
           border: 1px solid rgba(255, 255, 255, 0.08); 
         }
@@ -317,7 +316,7 @@ export default function Hero({ t }: HeroProps) {
         
         .pms-body {
           display: flex;
-          gap: 1.2rem;
+          gap: 0.75rem;
           flex: 1;
           overflow: hidden;
         }
@@ -325,8 +324,8 @@ export default function Hero({ t }: HeroProps) {
         .pms-analytics {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem; 
-          flex: 0 0 215px;
+          gap: 0.4rem; 
+          flex: 0 0 175px;
           min-width: 0;
           overflow: hidden;
         }
@@ -334,8 +333,8 @@ export default function Hero({ t }: HeroProps) {
         .widget {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 0.75rem 0.95rem;
-          border-radius: 8px;
+          padding: 0.6rem 0.75rem;
+          border-radius: 6px;
           min-width: 0;
           overflow: hidden;
         }
@@ -353,8 +352,8 @@ export default function Hero({ t }: HeroProps) {
           background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%);
         }
 
-        .widget-label { font-size: 0.65rem; color: rgba(255, 255, 255, 0.45); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-        .widget-value { font-size: 1.45rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
+        .widget-label { font-size: 0.6rem; color: rgba(255, 255, 255, 0.45); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+        .widget-value { font-size: 1.25rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
         
         .text-brand-gradient { 
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
@@ -362,16 +361,16 @@ export default function Hero({ t }: HeroProps) {
           -webkit-text-fill-color: transparent;
         }
 
-        .widget-sub { font-size: 0.65rem; color: rgba(255, 255, 255, 0.35); margin-top: 0.3rem; }
+        .widget-sub { font-size: 0.6rem; color: rgba(255, 255, 255, 0.35); margin-top: 0.2rem; }
         
         .mini-chart {
           display: flex;
           align-items: flex-end;
-          gap: 4px;
-          height: 24px;
-          margin-top: 0.4rem;
+          gap: 3px;
+          height: 20px;
+          margin-top: 0.3rem;
         }
-        .bar { width: 12px; border-radius: 2px 2px 0 0; }
+        .bar { width: 10px; border-radius: 2px 2px 0 0; }
         .bar.ota { background: rgba(255, 255, 255, 0.08); }
         .bar.direct { background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%); opacity: 0.85; }
 
@@ -388,9 +387,9 @@ export default function Hero({ t }: HeroProps) {
           flex-direction: column;
           justify-content: space-between; 
           height: 100%;
-          margin-top: 0.4rem;
+          margin-top: 0.3rem;
           font-family: 'SF Mono', monospace;
-          font-size: 0.62rem;
+          font-size: 0.58rem;
         }
         .log-line {
           color: rgba(255, 255, 255, 0.55);
@@ -402,7 +401,7 @@ export default function Hero({ t }: HeroProps) {
         }
         .log-time {
           color: rgba(255, 255, 255, 0.25);
-          margin-right: 0.4rem;
+          margin-right: 0.3rem;
         }
 
         .pms-matrix {
@@ -410,33 +409,33 @@ export default function Hero({ t }: HeroProps) {
           min-width: 0;
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.04);
-          border-radius: 8px;
+          border-radius: 6px;
           display: flex;
           flex-direction: column;
           overflow: hidden;
         }
         .matrix-header {
           display: grid;
-          grid-template-columns: 80px repeat(7, 1fr);
+          grid-template-columns: 60px repeat(7, 1fr);
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          font-size: 0.65rem;
+          font-size: 0.58rem;
           color: rgba(255, 255, 255, 0.4);
           text-align: center;
           background: rgba(255, 255, 255, 0.015);
         }
-        .matrix-header > div { padding: 0.6rem 0; border-right: 1px solid rgba(255, 255, 255, 0.02); }
+        .matrix-header > div { padding: 0.4rem 0; border-right: 1px solid rgba(255, 255, 255, 0.02); }
         
         .matrix-row {
           display: grid;
-          grid-template-columns: 80px repeat(7, 1fr);
+          grid-template-columns: 60px repeat(7, 1fr);
           border-bottom: 1px solid rgba(255, 255, 255, 0.03);
           flex: 1;
           position: relative;
         }
         .matrix-room-name {
-          font-size: 0.7rem;
+          font-size: 0.62rem;
           color: rgba(255, 255, 255, 0.5);
-          padding: 0 0.5rem;
+          padding: 0 0.3rem;
           display: flex;
           align-items: center;
           border-right: 1px solid rgba(255, 255, 255, 0.05);
@@ -445,16 +444,15 @@ export default function Hero({ t }: HeroProps) {
         
         .booking {
           position: absolute;
-          top: 6px; bottom: 6px;
-          border-radius: 6px;
-          font-size: 0.65rem;
-          padding: 0 0.6rem;
+          top: 4px; bottom: 4px;
+          border-radius: 4px;
+          font-size: 0.58rem;
+          padding: 0 0.4rem;
           display: flex;
           align-items: center;
           overflow: hidden;
           white-space: nowrap;
           backdrop-filter: blur(6px);
-          transition: all 0.3s ease;
         }
 
         .b-direct { 
@@ -462,7 +460,6 @@ export default function Hero({ t }: HeroProps) {
           border: 1px solid rgba(0, 229, 153, 0.5);
           color: #00E599;
           font-weight: 600;
-          box-shadow: inset 0 0 10px rgba(0, 229, 153, 0.12), 0 2px 8px rgba(0, 229, 153, 0.1);
         }
 
         .b-booking { 
@@ -470,7 +467,6 @@ export default function Hero({ t }: HeroProps) {
           border: 1px solid rgba(0, 163, 255, 0.5);
           color: #38BDF8;
           font-weight: 600;
-          box-shadow: inset 0 0 10px rgba(0, 163, 255, 0.12), 0 2px 8px rgba(0, 163, 255, 0.1);
         }
 
         .b-agoda { 
@@ -478,7 +474,6 @@ export default function Hero({ t }: HeroProps) {
           border: 1px solid rgba(244, 63, 94, 0.5);
           color: #FB7185;
           font-weight: 600;
-          box-shadow: inset 0 0 10px rgba(244, 63, 94, 0.12), 0 2px 8px rgba(244, 63, 94, 0.1);
         }
 
         @keyframes pulse {
@@ -489,17 +484,14 @@ export default function Hero({ t }: HeroProps) {
 
         @media (max-width: 992px) {
           .hero-section { padding: 2rem 1.25rem 2rem 1.25rem; }
-          .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
-          .text-column { text-align: center; padding-right: 0; }
+          .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+          .text-column { text-align: center; }
           .cta-container { flex-direction: column; align-items: center; }
           .dashboard-mockup { 
             transform: none !important; 
-            width: 100% !important; 
-            -webkit-mask-image: none;
-            mask-image: none;
           }
           .pms-body { flex-direction: column; }
-          .pms-analytics { flex: none; gap: 0.6rem; width: 100%; }
+          .pms-analytics { flex: none; gap: 0.5rem; width: 100%; }
           .pms-matrix { display: none; }
         }
       `}</style>
@@ -550,7 +542,7 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                   <div className="widget">
                     <div className="widget-label">Occupancy / ADR</div>
-                    <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span> ฿4,250</div>
+                    <div className="widget-value" style={{ fontSize: '1.1rem' }}>84% <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span> ฿4,250</div>
                     <div className="mini-chart">
                       <div className="bar ota" style={{ height: '40%' }}></div>
                       <div className="bar direct" style={{ height: '30%' }}></div>
@@ -585,23 +577,23 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 1</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
-                    <div className="booking b-booking" style={{ left: 'calc(80px + 35%)', width: 'calc(55% - 4px)' }}>Booking.com • Lee</div>
+                    <div className="booking b-direct" style={{ left: 'calc(60px + 0%)', width: 'calc(28.5% - 2px)' }}>Direct • Smith</div>
+                    <div className="booking b-booking" style={{ left: 'calc(60px + 35%)', width: 'calc(55% - 2px)' }}>Booking.com • Lee</div>
                   </div>
                   <div className="matrix-row">
                     <div className="matrix-room-name">Villa 2</div>
-                    <div className="booking b-agoda" style={{ left: 'calc(80px + 10%)', width: 'calc(45% - 4px)' }}>Agoda • Kumar</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 65%)', width: 'calc(30% - 4px)' }}>Direct • VIP</div>
+                    <div className="booking b-agoda" style={{ left: 'calc(60px + 10%)', width: 'calc(45% - 2px)' }}>Agoda • Kumar</div>
+                    <div className="booking b-direct" style={{ left: 'calc(60px + 65%)', width: 'calc(30% - 2px)' }}>Direct • VIP</div>
                   </div>
                   <div className="matrix-row">
                     <div className="matrix-room-name">Room 101</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
-                    <div className="booking b-booking" style={{ left: 'calc(80px + 60%)', width: 'calc(40% - 4px)' }}>Booking.com • Davis</div>
+                    <div className="booking b-direct" style={{ left: 'calc(60px + 0%)', width: 'calc(57.1% - 2px)' }}>Direct • Johnson</div>
+                    <div className="booking b-booking" style={{ left: 'calc(60px + 60%)', width: 'calc(40% - 2px)' }}>Booking.com • Davis</div>
                   </div>
                   <div className="matrix-row">
                     <div className="matrix-room-name">Room 102</div>
-                    <div className="booking b-booking" style={{ left: 'calc(80px + 0%)', width: 'calc(35% - 4px)' }}>Booking.com • Brown</div>
-                    <div className="booking b-direct" style={{ left: 'calc(80px + 38%)', width: 'calc(62% - 4px)' }}>Direct • Website</div>
+                    <div className="booking b-booking" style={{ left: 'calc(60px + 0%)', width: 'calc(35% - 2px)' }}>Booking.com • Brown</div>
+                    <div className="booking b-direct" style={{ left: 'calc(60px + 38%)', width: 'calc(62% - 2px)' }}>Direct • Website</div>
                   </div>
                 </div>
               </div>
