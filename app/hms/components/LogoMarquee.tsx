@@ -23,7 +23,7 @@ export default function LogoMarquee() {
         .marquee-wrapper {
           width: 100%;
           overflow: hidden;
-          padding: 1.5rem 0; /* Вернул узкую полосу, убрал лишний воздух */
+          padding: 1rem 0; /* Держим блок узким */
           position: relative;
           background: linear-gradient(90deg, rgba(10,10,12,0) 0%, rgba(255,255,255,0.03) 50%, rgba(10,10,12,0) 100%);
           border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -36,7 +36,7 @@ export default function LogoMarquee() {
           display: flex;
           width: max-content;
           animation: scroll 35s linear infinite; 
-          gap: 6rem;
+          gap: 5rem;
           align-items: center;
         }
         
@@ -44,28 +44,26 @@ export default function LogoMarquee() {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 80px; /* Фиксированная высота для контейнера логотипа */
-          opacity: 0.6; /* Статичная прозрачность, чтобы не отвлекали от главного экрана */
+          height: 72px; /* Контейнер под крупный размер */
+          opacity: 0.85; /* Естественный цвет логотипов, слегка органично вписанный в темную тему */
         }
         
         .marquee-img {
-          height: 50px; /* Радикально увеличен базовый размер */
+          height: 58px; /* Сильно увеличенный базовый размер */
           width: auto;
-          max-width: 250px;
+          max-width: 280px;
           object-fit: contain;
           display: block;
-          /* Делает логотипы белыми, чтобы они не сливались с темным фоном */
-          filter: brightness(0) invert(1); 
         }
 
-        /* Индивидуальная калибровка размеров под новые габариты */
-        .marquee-img[src*="booking"] { height: 65px; }
-        .marquee-img[src*="hostelworld"] { height: 35px; }
-        .marquee-img[src*="hotelbeds"] { height: 35px; }
-        .marquee-img[src*="tripadvisor"] { height: 55px; }
-        .marquee-img[src*="agoda"] { height: 45px; }
-        .marquee-img[src*="airbnb"] { height: 45px; }
-        .marquee-img[src*="traveloka"] { height: 45px; }
+        /* Индивидуальная подгонка пропорций под крупный формат */
+        .marquee-img[src*="booking"] { height: 75px; }
+        .marquee-img[src*="hostelworld"] { height: 42px; }
+        .marquee-img[src*="hotelbeds"] { height: 42px; }
+        .marquee-img[src*="tripadvisor"] { height: 68px; }
+        .marquee-img[src*="agoda"] { height: 55px; }
+        .marquee-img[src*="airbnb"] { height: 55px; }
+        .marquee-img[src*="traveloka"] { height: 55px; }
 
         @keyframes scroll {
           0% { transform: translateX(0); }
