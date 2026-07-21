@@ -101,12 +101,10 @@ export default function Hero({ t }: HeroProps) {
     >
       <style jsx>{`
         .hero-section {
-          width: 100%;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 2.5rem 1.5rem 4rem 1.5rem;
+          padding: 2.5rem 0 4rem 0;
           position: relative;
           z-index: 10;
+          overflow: hidden;
         }
         
         .hero-grid {
@@ -273,8 +271,7 @@ export default function Hero({ t }: HeroProps) {
           backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          /* Сдвинут влево (-30px) вместо перекоса вправо (+40px) */
-          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(-30px); 
+          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(40px); 
           transform-origin: center center;
           box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12);
           padding: 1.2rem;
@@ -487,7 +484,7 @@ export default function Hero({ t }: HeroProps) {
         }
 
         @media (max-width: 992px) {
-          .hero-section { padding: 2rem 1.25rem 2rem 1.25rem; }
+          .hero-section { padding: 2rem 0 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; padding-right: 0; }
           .cta-container { flex-direction: column; align-items: center; }
