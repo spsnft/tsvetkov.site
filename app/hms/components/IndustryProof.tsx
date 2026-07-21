@@ -84,12 +84,14 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         .proof-section {
           width: 100%;
           background-color: transparent;
-          padding: 5rem 1.5rem 0 1.5rem; /* 80px сверху до заголовка */
+          /* Верх: 0 (получаем ровно 56px от карточек ScalePractice) | Низ: 80px (5rem) до следующего блока */
+          padding: 0 1.5rem 5rem 1.5rem; 
         }
 
         .proof-header {
           text-align: center;
-          margin-bottom: 3rem; /* 48px до сетки плашек */
+          /* Зафиксированный стандарт воздуха от заголовка к контенту (56px / 3.5rem) */
+          margin-bottom: 3.5rem; 
         }
 
         .proof-title {
@@ -163,6 +165,12 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         }
 
         @media (max-width: 576px) {
+          .proof-section {
+            padding-bottom: 3.5rem;
+          }
+          .proof-header {
+            margin-bottom: 2.5rem;
+          }
           .proof-grid {
             grid-template-columns: 1fr;
           }
