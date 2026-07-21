@@ -105,12 +105,16 @@ export default function Hero({ t }: HeroProps) {
           padding: 2.5rem 0 4rem 0;
           position: relative;
           z-index: 10;
-          overflow: hidden; /* Обрезает все, что вылетает за границы блока */
+        }
+
+        /* FIX: Зажимаем контейнер и обрезаем макет СТРОГО по его правой границе 1200px */
+        .hero-section :global(.container) {
+          overflow: hidden;
+          position: relative;
         }
         
         .hero-grid {
           display: grid;
-          /* FIX: Использование fr заставляет сетку идеально вычислять ширину в пределах container */
           grid-template-columns: 52fr 48fr;
           gap: 1rem;
           align-items: center;
@@ -246,7 +250,7 @@ export default function Hero({ t }: HeroProps) {
           height: 100%;
           display: flex;
           align-items: center;
-          min-width: 0; /* Не дает 3D-графике распирать ширину колонки */
+          min-width: 0;
         }
 
         .perspective-wrapper {
