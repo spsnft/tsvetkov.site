@@ -30,7 +30,7 @@ export default function About({ t }: AboutProps) {
       <style jsx>{`
         .about-section {
           width: 100%;
-          max-width: 1280px;
+          max-width: 1200px; /* Приведено к эталонной ширине 1200px */
           margin: 0 auto;
           /* Верх: 0 (отступ дает предыдущий блок) | Низ: 80px (5rem) */
           padding: 0 1.5rem 5rem 1.5rem;
