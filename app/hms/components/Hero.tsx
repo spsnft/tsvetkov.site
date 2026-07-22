@@ -193,6 +193,7 @@ export default function Hero({ t }: HeroProps) {
           box-shadow: 0 8px 30px rgba(0, 229, 153, 0.45);
         }
 
+        /* ЕДИНЫЙ ФИРМЕННЫЙ СТИЛЬ КНОПКИ WHATSAPP ДЛЯ ВСЕХ ВЕРСИЙ */
         .btn-secondary-chat {
           display: flex;
           align-items: center;
@@ -200,27 +201,37 @@ export default function Hero({ t }: HeroProps) {
           width: 54px;
           height: 54px;
           border-radius: 10px;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+          background: rgba(0, 229, 153, 0.06);
+          border: 1px solid rgba(0, 229, 153, 0.25);
           backdrop-filter: blur(8px);
+          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 15px rgba(0, 229, 153, 0.1);
           box-sizing: border-box;
           cursor: pointer;
           flex-shrink: 0;
+          text-decoration: none;
+          padding: 0;
         }
 
         .btn-secondary-chat:hover {
           transform: translateY(-2px);
-          background: rgba(37, 211, 102, 0.12);
-          border-color: rgba(37, 211, 102, 0.4);
-          box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+          background: rgba(0, 229, 153, 0.15);
+          border-color: rgba(0, 229, 153, 0.5);
+          box-shadow: 0 6px 25px rgba(0, 229, 153, 0.3);
         }
 
+        /* Картинка 64х64 с отступом 8px заполняет контейнер 54х54px 1:1 без сжатия */
         .btn-secondary-chat img {
-          width: 26px;
-          height: 26px;
+          width: 54px;
+          height: 54px;
           object-fit: contain;
           display: block;
+          filter: hue-rotate(18deg) brightness(1.1);
+          transition: transform 0.25s ease;
+        }
+
+        .btn-secondary-chat:hover img {
+          transform: scale(1.05);
         }
 
         /* --- BENTO PROOF CARD VISUAL --- */
