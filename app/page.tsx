@@ -17,7 +17,6 @@ import Pricing from './components/Pricing';
 import FooterCTA from './components/FooterCTA';
 
 export default function HospitalityB2B() {
-  // Исправлено: строго 'en' | 'th' без 'ru'
   const [lang, setLang] = useState<'en' | 'th'>('en');
   const t = contentData[lang];
 
