@@ -16,22 +16,25 @@ interface AboutProps {
 
 export default function About({ t }: AboutProps) {
   const labelText = t?.aboutLabel || "Growth Architecture";
-  const titleText = t?.aboutTitle || "Systems, Optimization & Scale";
+  
+  // Заголовок со слешами для идеальной посадки в одну строку
+  const titleText = t?.aboutTitle || "Systems / Optimization / Scale";
   
   const firstSentence = t?.aboutDescFirst || "We step into business ecosystems to optimize them for maximum efficiency.";
   const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
   
   const btnText = t?.aboutBtn || t?.aboutButton || "View Agency Profile";
 
+  // Деанонимизированные кейсы без привязки к локациям
   const cases = [
     {
-      title: "Phuket Luxury Villa Resort (24 Keys)",
+      title: "Luxury Villa Resort (24 Keys)",
       badge: "Featured Proof",
       metrics: "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
       desc: "Replaced manual channel management with an automated direct booking pipeline in 60 days."
     },
     {
-      title: "Bangtao Boutique Hotel (18 Keys)",
+      title: "Boutique Hotel (18 Keys)",
       badge: "Direct Engine",
       metrics: "+310% Google Traffic • 0% Overbooking Risk",
       desc: "Integrated Google Hotel Ads & direct engine, cutting Agoda dependence by half."
@@ -49,7 +52,7 @@ export default function About({ t }: AboutProps) {
         
         .about-grid {
           display: grid;
-          grid-template-columns: 50fr 50fr;
+          grid-template-columns: 48fr 52fr;
           gap: 3.5rem;
           align-items: start;
           box-sizing: border-box;
@@ -72,16 +75,17 @@ export default function About({ t }: AboutProps) {
           opacity: 0.8;
         }
         
+        /* Фикс заголовка в одну строку */
         .main-title {
-          font-size: clamp(2rem, 3.2vw, 2.6rem);
+          font-size: clamp(1.5rem, 2.3vw, 2.2rem);
           font-weight: 700;
-          line-height: 1.15;
+          line-height: 1.2;
           letter-spacing: -0.02em;
           margin: 0;
+          white-space: nowrap;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          text-wrap: pretty;
         }
         
         .description {
@@ -140,46 +144,7 @@ export default function About({ t }: AboutProps) {
           line-height: 1.3;
         }
 
-        .actions-row {
-          margin-top: 0.5rem;
-        }
-        
-        .view-profile-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.6rem;
-          color: rgba(255, 255, 255, 0.9) !important;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          padding: 0.85rem 2rem;
-          border-radius: 8px;
-          font-weight: 600;
-          font-size: 0.95rem;
-          text-decoration: none;
-          backdrop-filter: blur(8px);
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .view-profile-btn:hover {
-          transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(0, 229, 153, 0.5);
-          color: #ffffff !important;
-          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.12);
-        }
-
-        .view-profile-btn svg {
-          width: 16px;
-          height: 16px;
-          transition: transform 0.2s ease;
-        }
-
-        .view-profile-btn:hover svg {
-          transform: translateX(3px);
-        }
-
-        /* --- RIGHT COLUMN: PROOF & CASES --- */
+        /* --- RIGHT COLUMN: PROOF, CASES & CTA --- */
         .right-col {
           display: flex;
           flex-direction: column;
@@ -190,7 +155,7 @@ export default function About({ t }: AboutProps) {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding-bottom: 0.4rem;
+          padding-bottom: 0.2rem;
         }
 
         .proof-label {
@@ -268,6 +233,49 @@ export default function About({ t }: AboutProps) {
           line-height: 1.45;
           margin: 0;
         }
+
+        /* Перенесенная кнопка под кейсы */
+        .actions-row {
+          margin-top: 0.4rem;
+          display: flex;
+          justify-content: flex-start;
+        }
+        
+        .view-profile-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.6rem;
+          color: rgba(255, 255, 255, 0.9) !important;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          padding: 0.85rem 2rem;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          text-decoration: none;
+          backdrop-filter: blur(8px);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          width: 100%;
+        }
+        
+        .view-profile-btn:hover {
+          transform: translateY(-2px);
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(0, 229, 153, 0.5);
+          color: #ffffff !important;
+          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.12);
+        }
+
+        .view-profile-btn svg {
+          width: 16px;
+          height: 16px;
+          transition: transform 0.2s ease;
+        }
+
+        .view-profile-btn:hover svg {
+          transform: translateX(3px);
+        }
         
         @media (max-width: 992px) {
           .about-section {
@@ -276,6 +284,9 @@ export default function About({ t }: AboutProps) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 2.5rem;
+          }
+          .main-title {
+            white-space: normal;
           }
           .right-col {
             gap: 1.2rem;
@@ -294,9 +305,6 @@ export default function About({ t }: AboutProps) {
             flex-direction: column;
             align-items: flex-start;
             gap: 0.4rem;
-          }
-          .actions-row {
-            width: 100%;
           }
           .view-profile-btn {
             width: 100%;
@@ -339,27 +347,12 @@ export default function About({ t }: AboutProps) {
                 <span className="stat-sub">In OTA commissions</span>
               </div>
             </div>
-
-            <div className="actions-row">
-              <a 
-                href="https://tsvetkov.site" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="view-profile-btn"
-              >
-                <span>{btnText}</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
           </div>
           
-          {/* RIGHT COLUMN: PROOF & CASES */}
+          {/* RIGHT COLUMN: PROOF, CASES & CTA */}
           <div className="right-col">
             <div className="proof-header">
-              <span className="proof-label">Proven Local Results</span>
+              <span className="proof-label">Proven Results</span>
             </div>
 
             <div className="cases-wrapper">
@@ -373,6 +366,22 @@ export default function About({ t }: AboutProps) {
                   <p className="case-desc">{c.desc}</p>
                 </div>
               ))}
+            </div>
+
+            {/* Кнопка перехода на агентство под кейсами */}
+            <div className="actions-row">
+              <a 
+                href="https://tsvetkov.site" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="view-profile-btn"
+              >
+                <span>{btnText}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
             </div>
           </div>
 
