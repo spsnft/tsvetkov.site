@@ -163,7 +163,7 @@ export default function Hero({ t }: HeroProps) {
           display: flex;
           align-items: center;
           gap: 0.85rem;
-          flex-wrap: wrap;
+          flex-wrap: nowrap;
         }
         
         .btn-primary-main {
@@ -185,6 +185,7 @@ export default function Hero({ t }: HeroProps) {
           border: none;
           box-shadow: 0 4px 20px rgba(0, 229, 153, 0.25);
           box-sizing: border-box;
+          white-space: nowrap;
         }
 
         .btn-primary-main:hover {
@@ -396,16 +397,33 @@ export default function Hero({ t }: HeroProps) {
           100% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
         }
 
-        @media (max-width: 992px) {
-          .hero-section { padding: 2rem 0; }
-          .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-          .text-column { text-align: center; align-items: center; }
-          .badge { margin-left: auto; margin-right: auto; }
-          .cta-container { flex-direction: column; align-items: center; }
-          .visual-column { height: auto; }
-          .bento-card-wrapper { max-width: 480px; margin: 0 auto; height: auto; }
-          .bento-card { height: auto; }
-          .bento-grid { grid-template-rows: auto auto; }
+        /* ПЛАНШЕТНАЯ И МОБИЛЬНАЯ АДАПТАЦИЯ (<= 1024px) */
+        @media (max-width: 1024px) {
+          .hero-section { 
+            padding: 2rem 0; 
+          }
+          .hero-grid { 
+            grid-template-columns: 1fr; 
+            gap: 0; 
+          }
+          .text-column { 
+            text-align: center; 
+            align-items: center; 
+          }
+          .badge { 
+            margin-left: auto; 
+            margin-right: auto; 
+          }
+          .cta-container { 
+            flex-direction: row !important; 
+            justify-content: center; 
+            align-items: center;
+            gap: 0.85rem;
+            width: 100%;
+          }
+          .visual-column { 
+            display: none !important; /* Убираем бенто-карту */
+          }
         }
       `}</style>
 
