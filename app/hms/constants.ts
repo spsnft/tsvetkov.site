@@ -22,28 +22,19 @@ export const contentData = {
     scaleSub: "Automate workflows so your team can focus on guest experience",
     scaleItems: [
       {
-        pain: "24/7 manual updates",
-        startValue: 24,
-        endValue: 1,
-        suffix: " second",
-        fixText: " sync",
-        desc: "**Cloud PMS & Channel Manager** integration. Every reservation **locks your entire grid automatically** across Booking.com, Agoda & 300+ OTAs"
+        pain: "24/7 MANUAL UPDATES",
+        endValue: "Instant Sync",
+        desc: "**Cloud PMS & Channel Manager** integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
       },
       {
-        pain: "20% OTA commission",
-        startValue: 20,
-        endValue: 100,
-        suffix: "%",
-        fixText: " direct revenue",
-        desc: "**Zero-commission booking engine** with a secure payment gateway. Process bookings on your own terms and **keep all revenue in-house**"
+        pain: "15–20% OTA COMMISSIONS",
+        endValue: "100% Direct Revenue",
+        desc: "**Zero-commission booking engine** with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
       },
       {
-        pain: "100% OTA dependency",
-        startValue: 0,
-        endValue: 10,
-        suffix: "x",
-        fixText: " booking growth",
-        desc: "**Local SEO optimization** to capture high-intent search traffic, paired with **automated messenger retention loops** for returning guests"
+        pain: "FULL OTA DEPENDENCY",
+        endValue: "Predictable Scale",
+        desc: "**Local SEO optimization** to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
       }
     ],
 
@@ -167,8 +158,8 @@ export const contentData = {
   th: {
     // --- HERO SECTION ---
     badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
-    heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20%&nbsp;ให้ Booking.com และ Agoda",
-    heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง ไร้ความเสี่ยงจากความผิดพลาดของคนและการจองซ้ำซ้อน",
+    heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
+    heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง • ไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnAudit: "นัดหมายตรวจสอบระบบฟรี",
     btnChat: "WhatsApp",
@@ -188,27 +179,18 @@ export const contentData = {
     scaleItems: [
       {
         pain: "อัปเดตระบบด้วยมือ 24/7",
-        startValue: 24,
-        endValue: 1,
-        suffix: " วินาที",
-        fixText: " ซิงค์ระบบ",
-        desc: "ติดตั้งระบบ **Cloud PMS & Channel Manager (ระบบจัดการโรงแรมและช่องทางขาย)** ทุกการจอง **ล็อกสถานะห้องพักโดยอัตโนมัติ** บน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
+        endValue: "ซิงค์ระบบทันที",
+        desc: "**ระบบ Cloud PMS & Channel Manager** อัปเดตการจองแบบเรียลไทม์ ล็อกห้องพักทันทีบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
-        pain: "เสียค่าคอมมิชชั่น OTA 20%",
-        startValue: 20,
-        endValue: 100,
-        suffix: "%",
-        fixText: " รายได้ตรงเข้าบัญชี",
-        desc: "ติดตั้ง **ระบบจองตรงแบบไม่เสียค่าคอมมิชชั่น** พร้อมระบบชำระเงินที่ปลอดภัย **รับและเก็บรายได้เต็มจำนวน** โดยไม่ต้องแบ่งใคร"
+        pain: "ค่าคอมมิชชั่น OTA 15–20%",
+        endValue: "รายได้ตรง 100%",
+        desc: "**ระบบจองตรง 0% ค่าคอมมิชชั่น** พร้อมช่องทางชำระเงินที่ปลอดภัย รับและเก็บรายได้ทั้งหมดไว้กับคุณโดยไม่ต้องแบ่งใคร"
       },
       {
         pain: "พึ่งพา OTA 100%",
-        startValue: 0,
-        endValue: 10,
-        suffix: " เท่า",
-        fixText: " ของยอดจองตรง",
-        desc: "ทำ **Local SEO (การทำ SEO ท้องถิ่น)** เพื่อดึงลูกค้าเป้าหมาย พร้อม **ระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำ** โดยอัตโนมัติ"
+        endValue: "เติบโตอย่างมั่นคง",
+        desc: "**การทำ Local SEO** เพื่อดึงดูดลูกค้าที่มีความต้องการจองสูง พร้อมระบบดึงดูดลูกค้าเก่าให้กลับมาจองซ้ำเพื่อเพิ่มรายได้ระยะยาว"
       }
     ],
 
@@ -244,22 +226,22 @@ export const contentData = {
     proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
     case1Title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
     case1Badge: "พูลวิลล่ารีสอร์ท",
-    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ",
+    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ",
 
     case2Title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
     case2Badge: "บูติกโฮเทล",
-    case2Desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com",
+    case2Desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com",
 
     aboutCases: [
       {
         badge: "พูลวิลล่ารีสอร์ท",
         title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
-        desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ"
+        desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ"
       },
       {
         badge: "บูติกโฮเทล",
         title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
-        desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com"
+        desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com"
       }
     ],
 
@@ -280,12 +262,12 @@ export const contentData = {
         {
           badge: "พูลวิลล่ารีสอร์ท",
           title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
-          desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ"
+          desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ"
         },
         {
           badge: "บูติกโฮเทล",
           title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
-          desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com"
+          desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com"
         }
       ],
       ctaText: "ดูประวัติการทำงาน"
