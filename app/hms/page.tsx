@@ -8,7 +8,7 @@ import { NetworkBackground } from '../../src/components/NetworkBackground';
 // Импорт констант и словарей перевода
 import { contentData } from './constants';
 
-// Импорт изолированных компонентов секций (без удаленного IndustryProof)
+// Импорт изолированных компонентов секций
 import Hero from './components/Hero';
 import LogoMarquee from './components/LogoMarquee';
 import ScalePractice from './components/ScalePractice';
@@ -17,7 +17,7 @@ import Pricing from './components/Pricing';
 import FooterCTA from './components/FooterCTA';
 
 export default function HospitalityB2B() {
-  const [lang, setLang] = useState<'en' | 'th'>('en');
+  const [lang, setLang] = useState<'en' | 'th' | 'ru'>('en');
   const t = contentData[lang];
 
   return (
@@ -45,7 +45,7 @@ export default function HospitalityB2B() {
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1rem', paddingBottom: '1rem' }}>
           <a href="/" style={{ textDecoration: 'none' }}><Logo /></a>
           
-          <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
             <a href="/" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>About</a>
             
             {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ В СТИЛЕ DARK GLASS CAPSULE */}
@@ -61,7 +61,7 @@ export default function HospitalityB2B() {
               <button 
                 onClick={() => setLang('en')} 
                 style={{ 
-                  padding: '0.35rem 0.85rem', 
+                  padding: '0.35rem 0.75rem', 
                   backgroundColor: lang === 'en' ? 'rgba(255, 255, 255, 0.08)' : 'transparent', 
                   color: lang === 'en' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)', 
                   border: lang === 'en' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid transparent',
@@ -78,7 +78,7 @@ export default function HospitalityB2B() {
               <button 
                 onClick={() => setLang('th')} 
                 style={{ 
-                  padding: '0.35rem 0.85rem', 
+                  padding: '0.35rem 0.75rem', 
                   backgroundColor: lang === 'th' ? 'rgba(255, 255, 255, 0.08)' : 'transparent', 
                   color: lang === 'th' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)', 
                   border: lang === 'th' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid transparent',
@@ -91,6 +91,23 @@ export default function HospitalityB2B() {
                 }}
               >
                 TH
+              </button>
+              <button 
+                onClick={() => setLang('ru')} 
+                style={{ 
+                  padding: '0.35rem 0.75rem', 
+                  backgroundColor: lang === 'ru' ? 'rgba(255, 255, 255, 0.08)' : 'transparent', 
+                  color: lang === 'ru' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)', 
+                  border: lang === 'ru' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid transparent',
+                  borderRadius: '26px',
+                  boxShadow: lang === 'ru' ? '0 2px 8px rgba(0, 0, 0, 0.4)' : 'none',
+                  cursor: 'pointer', 
+                  fontWeight: 700, 
+                  fontSize: '0.75rem',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                RU
               </button>
             </div>
           </div>
@@ -109,13 +126,13 @@ export default function HospitalityB2B() {
         {/* БЛОК 3: БОЛЬ ➔ РЕШЕНИЕ (3D КАРТОЧКИ) */}
         <ScalePractice t={t} />
 
-        {/* БЛОК 4: ЭКСПЕРТНОСТЬ, СТАТИСТИКА И КЕЙСЫ (ПРОГРЕВ ПЕРЕД ЦЕНОЙ) */}
+        {/* БЛОК 4: ЭКСПЕРТНОСТЬ, СТАТИСТИКА И КЕЙСЫ */}
         <About t={t} />
 
         {/* БЛОК 5: ТАРИФНЫЕ ПЛАНЫ */}
         <Pricing t={t} />
 
-        {/* БЛОК 6: ПРИЗЫВ К ДЕЙСТВИЮ (CALENDLY) */}
+        {/* БЛОК 6: ПРИЗЫВ К ДЕЙСТВИЮ */}
         <FooterCTA t={t} />
 
       </main>
