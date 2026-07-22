@@ -32,7 +32,7 @@ interface AboutProps {
 
 export default function About({ t }: AboutProps) {
   const labelText = t?.aboutLabel || "Growth Architecture";
-  const titleText = t?.aboutTitle || "Systems / Optimization / Scale";
+  const titleText = t?.aboutTitle || "Systems | Optimization | Scale";
   
   const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
   const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
@@ -40,19 +40,19 @@ export default function About({ t }: AboutProps) {
   const btnText = t?.aboutBtn || t?.aboutButton || "View Agency Profile";
 
   const trustStats = [
-    { num: t?.stat1Num || "$2M+", name: t?.stat1Name || "Saved Fees", sub: t?.stat1Sub || "In OTA commissions" },
-    { num: t?.stat2Num || "30+", name: t?.stat2Name || "Brands Scaled", sub: t?.stat2Sub || "B2B & Direct models" },
-    { num: t?.stat3Num || "10+", name: t?.stat3Name || "Years Exp.", sub: t?.stat3Sub || "Growth & systems" }
+    { num: t?.stat1Num || "$1M+", name: t?.stat1Name || "Saved Fees", sub: t?.stat1Sub || "In OTA commissions" },
+    { num: t?.stat2Num || "20+", name: t?.stat2Name || "Brands Scaled", sub: t?.stat2Sub || "B2B & Direct models" },
+    { num: t?.stat3Num || "10+", name: t?.stat3Name || "Years Experience", sub: t?.stat3Sub || "Growth & systems" }
   ];
 
   const cases = [
     {
-      title: t?.case1Title || "+$2,800/mo saved in OTA fees / +42% Direct Bookings",
+      title: t?.case1Title || "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
       badge: t?.case1Badge || "Villa Resort",
       desc: t?.case1Desc || "Replaced manual management with an automated Direct Engine"
     },
     {
-      title: t?.case2Title || "+310% Google Traffic / Zero Double-Bookings",
+      title: t?.case2Title || "+310% Google Traffic | Zero Double-Bookings",
       badge: t?.case2Badge || "Boutique Hotel",
       desc: t?.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking dependence"
     }
@@ -69,11 +69,12 @@ export default function About({ t }: AboutProps) {
           background: transparent;
         }
         
+        /* Сетка stretch гарантирует одинаковую высоту колонок */
         .about-grid {
           display: grid;
           grid-template-columns: 48fr 52fr;
           gap: 3.5rem;
-          align-items: start;
+          align-items: stretch;
           box-sizing: border-box;
         }
         
@@ -81,6 +82,7 @@ export default function About({ t }: AboutProps) {
         .left-col {
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
           gap: 1.5rem;
         }
 
@@ -179,8 +181,16 @@ export default function About({ t }: AboutProps) {
           line-height: 1.3;
         }
 
-        /* --- RIGHT COLUMN --- */
+        /* --- RIGHT COLUMN (STRETCHED) --- */
         .right-col {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 1.2rem;
+          height: 100%;
+        }
+
+        .right-top-content {
           display: flex;
           flex-direction: column;
           gap: 1.2rem;
@@ -204,7 +214,7 @@ export default function About({ t }: AboutProps) {
         .cases-wrapper {
           display: flex;
           flex-direction: column;
-          gap: 0.9rem;
+          gap: 1.1rem;
           width: 100%;
         }
 
@@ -213,10 +223,10 @@ export default function About({ t }: AboutProps) {
           background: rgba(12, 14, 20, 0.65);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          padding: 1.2rem 1.4rem;
+          padding: 1.35rem 1.4rem;
           display: flex;
           flex-direction: column;
-          gap: 0.45rem;
+          gap: 0.5rem;
           backdrop-filter: blur(12px);
           box-sizing: border-box;
           transition: all 0.25s ease;
@@ -264,7 +274,7 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* CTA-КНОПКА */
+        /* CTA-КНОПКА (Опускается строго вровень с низом буллетов слева) */
         .actions-row {
           display: flex;
           justify-content: flex-start;
@@ -314,6 +324,11 @@ export default function About({ t }: AboutProps) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 2.5rem;
+            align-items: start;
+          }
+          .left-col, .right-col {
+            justify-content: start;
+            gap: 1.5rem;
           }
           .main-title {
             white-space: normal;
@@ -370,20 +385,22 @@ export default function About({ t }: AboutProps) {
           
           {/* RIGHT COLUMN: PROOF, CASES & CTA */}
           <div className="right-col">
-            <div className="proof-header">
-              <span className="proof-label">{proofLabel}</span>
-            </div>
+            <div className="right-top-content">
+              <div className="proof-header">
+                <span className="proof-label">{proofLabel}</span>
+              </div>
 
-            <div className="cases-wrapper">
-              {cases.map((c, i) => (
-                <div className="case-card" key={i}>
-                  <div className="case-header">
-                    <span className="case-title">{c.title}</span>
-                    <span className="case-badge">{c.badge}</span>
+              <div className="cases-wrapper">
+                {cases.map((c, i) => (
+                  <div className="case-card" key={i}>
+                    <div className="case-header">
+                      <span className="case-title">{c.title}</span>
+                      <span className="case-badge">{c.badge}</span>
+                    </div>
+                    <p className="case-desc">{c.desc}</p>
                   </div>
-                  <p className="case-desc">{c.desc}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* CTA BUTTON */}
