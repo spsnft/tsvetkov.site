@@ -33,25 +33,21 @@ const DEFAULT_ITEMS = [
   }
 ];
 
-// Хелпер для парсинга **bold** и неразрывных связок на мобилке
+// Хелпер для парсинга **bold** и неразрывных связок
 const renderFormattedText = (text: string) => {
   if (!text) return null;
 
-  // 1. Склеиваем проблемные места через неразрывные пробелы/контейнеры
   let processed = text
     .replace(/Agoda & 300\+ OTAs/g, 'Agoda <span class="nobr">& 300+ OTAs</span>')
     .replace(/keep all revenue in-house/g, '<span class="nobr">keep all revenue in-house</span>')
     .replace(/past stays into lifetime revenue/g, '<span class="nobr">past stays into lifetime revenue</span>')
-    .replace(/guest retention loops/g, '<span class="nobr">guest retention loops</span>')
-    .replace(/returning guests/g, '<span class="nobr">returning guests</span>');
+    .replace(/guest retention loops/g, '<span class="nobr">guest retention loops</span>');
 
-  // 2. Разбиваем по тегам **bold**
   const parts = processed.split(/\*\*(.*?)\*\*/g);
 
   return parts.map((part, index) => {
     const isBold = index % 2 === 1;
     
-    // Если фрагмент содержит HTML-вставки <span class="nobr">
     if (part.includes('<span class="nobr">')) {
       const subParts = part.split(/<span class="nobr">(.*?)<\/span>/g);
       return (
@@ -90,7 +86,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
   const items = t?.scaleItems || DEFAULT_ITEMS;
   const subtitleText = t?.scaleSub || "Automate workflows so your team can focus on guest experience";
 
-  // Разрываем подзаголовок после "your team" на мобилке
+  // Разрываем подзаголовок только на мобилке
   const renderSubtitle = (sub: string) => {
     const target = "so your team";
     if (sub.includes(target)) {
@@ -133,7 +129,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           color: ${T.sub};
           font-size: 1.05rem;
           line-height: 1.5;
-          margin: 0;
+          margin: 0 auto;
+          max-width: 600px;
           text-wrap: balance;
         }
 
@@ -274,6 +271,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .scale-title {
             font-size: 2rem;
           }
+          .scale-subtitle {
+            font-size: 0.95rem;
+            max-width: 520px;
+          }
           .scale-grid {
             grid-template-columns: repeat(3, 1fr);
             gap: 0.85rem;
@@ -314,6 +315,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
           .scale-subtitle {
             font-size: 0.95rem;
+            max-width: 100%;
           }
           .mobile-br {
             display: inline;
