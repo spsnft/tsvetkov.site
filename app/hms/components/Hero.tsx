@@ -81,10 +81,11 @@ export default function Hero({ t }: HeroProps) {
           z-index: 10;
         }
 
+        /* Распределяем пропорцию: 58% под текст, 42% под правый блок */
         .hero-grid {
           display: grid;
-          grid-template-columns: 52fr 48fr;
-          gap: 2rem;
+          grid-template-columns: 58fr 42fr;
+          gap: 2.5rem;
           align-items: center;
           position: relative;
           box-sizing: border-box;
@@ -94,7 +95,6 @@ export default function Hero({ t }: HeroProps) {
           text-align: left;
           position: relative;
           z-index: 10;
-          padding-right: 1rem;
           min-width: 0;
         }
         
@@ -115,14 +115,14 @@ export default function Hero({ t }: HeroProps) {
         }
         
         .title {
-          font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+          font-size: clamp(2.4rem, 4.4vw, 3.9rem);
           font-weight: 700;
-          line-height: 1.15;
+          line-height: 1.12;
           letter-spacing: -0.03em;
           margin: 0 0 1.5rem 0;
           color: #fff;
           text-wrap: balance;
-          max-width: 650px;
+          width: 100%;
         }
         
         .subtitles-block {
@@ -218,14 +218,13 @@ export default function Hero({ t }: HeroProps) {
           width: 100%;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           min-width: 0;
         }
 
         .bento-card-wrapper {
           position: relative;
           width: 100%;
-          max-width: 480px;
         }
 
         .bento-glow {
@@ -233,10 +232,10 @@ export default function Hero({ t }: HeroProps) {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 90%;
-          height: 90%;
-          background: radial-gradient(circle, rgba(0, 229, 153, 0.15) 0%, rgba(0, 163, 255, 0.08) 50%, transparent 75%);
-          filter: blur(45px);
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle, rgba(0, 229, 153, 0.14) 0%, rgba(0, 163, 255, 0.08) 55%, transparent 80%);
+          filter: blur(50px);
           pointer-events: none;
           z-index: 1;
         }
@@ -244,24 +243,26 @@ export default function Hero({ t }: HeroProps) {
         .bento-card {
           position: relative;
           z-index: 2;
+          width: 100%;
           background: rgba(12, 14, 20, 0.85);
           backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 20px;
-          padding: 1.5rem;
+          padding: 1.8rem;
           box-shadow: 
             0 30px 60px rgba(0, 0, 0, 0.6),
             inset 0 1px 1px rgba(255, 255, 255, 0.12);
           display: flex;
           flex-direction: column;
-          gap: 1.2rem;
+          gap: 1.4rem;
+          box-sizing: border-box;
         }
 
         .bento-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding-bottom: 0.9rem;
+          padding-bottom: 1.1rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           gap: 0.5rem;
         }
@@ -269,14 +270,14 @@ export default function Hero({ t }: HeroProps) {
         .sync-badge {
           display: inline-flex;
           align-items: center;
-          gap: 0.4rem;
-          font-size: 0.7rem;
+          gap: 0.45rem;
+          font-size: 0.72rem;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: #00E599;
           background: rgba(0, 229, 153, 0.08);
-          padding: 0.3rem 0.65rem;
+          padding: 0.35rem 0.75rem;
           border-radius: 20px;
           border: 1px solid rgba(0, 229, 153, 0.2);
         }
@@ -295,33 +296,36 @@ export default function Hero({ t }: HeroProps) {
         }
 
         .ota-saved-label {
-          font-size: 0.62rem;
-          color: rgba(255, 255, 255, 0.4);
+          font-size: 0.65rem;
+          color: rgba(255, 255, 255, 0.45);
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
 
         .ota-saved-value {
           font-family: 'SF Mono', monospace;
-          font-size: 0.95rem;
+          font-size: 1.1rem;
           font-weight: 700;
           color: #38BDF8;
+          margin-top: 0.1rem;
         }
 
         .bento-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 0.85rem;
+          gap: 1rem;
         }
 
         .bento-item {
           background: rgba(255, 255, 255, 0.025);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 12px;
-          padding: 1.1rem 1rem;
+          border-radius: 14px;
+          padding: 1.3rem 1.1rem;
           display: flex;
           flex-direction: column;
-          gap: 0.3rem;
+          justify-content: space-between;
+          gap: 0.5rem;
+          min-height: 100px;
           transition: all 0.25s ease;
         }
 
@@ -332,7 +336,7 @@ export default function Hero({ t }: HeroProps) {
         }
 
         .stat-value {
-          font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+          font-size: clamp(2rem, 3.2vw, 2.7rem);
           font-weight: 800;
           line-height: 1;
           letter-spacing: -0.02em;
@@ -341,10 +345,23 @@ export default function Hero({ t }: HeroProps) {
           -webkit-text-fill-color: transparent;
         }
 
+        .stat-label-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.4rem;
+        }
+
         .stat-label {
-          font-size: 0.78rem;
+          font-size: 0.82rem;
           color: #CBD5E1;
           font-weight: 500;
+        }
+
+        .stat-trend {
+          font-size: 0.7rem;
+          color: #00E599;
+          font-weight: 700;
         }
 
         @keyframes pulse {
@@ -356,9 +373,9 @@ export default function Hero({ t }: HeroProps) {
         @media (max-width: 992px) {
           .hero-section { padding: 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-          .text-column { text-align: center; padding-right: 0; }
+          .text-column { text-align: center; }
           .cta-container { flex-direction: column; align-items: center; }
-          .bento-card-wrapper { max-width: 380px; margin: 0 auto; }
+          .bento-card-wrapper { max-width: 480px; margin: 0 auto; }
         }
       `}</style>
 
@@ -412,22 +429,34 @@ export default function Hero({ t }: HeroProps) {
                 <div className="bento-grid">
                   <div className="bento-item">
                     <div className="stat-value">+40%</div>
-                    <div className="stat-label">Direct Revenue</div>
+                    <div className="stat-label-row">
+                      <span className="stat-label">Direct Revenue</span>
+                      <span className="stat-trend">↑</span>
+                    </div>
                   </div>
 
                   <div className="bento-item">
                     <div className="stat-value">+60%</div>
-                    <div className="stat-label">Margin per Guest</div>
+                    <div className="stat-label-row">
+                      <span className="stat-label">Margin per Guest</span>
+                      <span className="stat-trend">↑</span>
+                    </div>
                   </div>
 
                   <div className="bento-item">
                     <div className="stat-value">+300%</div>
-                    <div className="stat-label">Google Traffic</div>
+                    <div className="stat-label-row">
+                      <span className="stat-label">Google Traffic</span>
+                      <span className="stat-trend">↑</span>
+                    </div>
                   </div>
 
                   <div className="bento-item">
                     <div className="stat-value">+35%</div>
-                    <div className="stat-label">Repeat Bookings</div>
+                    <div className="stat-label-row">
+                      <span className="stat-label">Repeat Bookings</span>
+                      <span className="stat-trend">↑</span>
+                    </div>
                   </div>
                 </div>
               </div>
