@@ -17,7 +17,7 @@ interface FooterCTAProps {
 
 export default function FooterCTA({ t }: FooterCTAProps) {
   const titleText = t?.footerTitle || "Ready to maximize your revenue?";
-  const sub1Text = t?.footerSub1 || "Stop leaving 15–20% on the table";
+  const sub1Text = t?.footerSub1 || t?.footerSub || "Stop leaving 15–20% on the table";
   const sub2Text = t?.footerSub2 || "Take full control of your direct bookings";
   const btnText = t?.footerBtn || t?.btnAudit || "Book a Free Audit";
 
@@ -42,10 +42,9 @@ export default function FooterCTA({ t }: FooterCTAProps) {
   const handleCalendlyPopup = (e: React.MouseEvent) => {
     e.preventDefault();
     
-    // @ts-ignore
-    if (window.Calendly) {
-      // @ts-ignore
-      window.Calendly.initPopupWidget({
+    const calendly = (window as any).Calendly;
+    if (calendly) {
+      calendly.initPopupWidget({
         url: 'https://calendly.com/fediatsvetkov/15min'
       });
     } else {
@@ -143,10 +142,10 @@ export default function FooterCTA({ t }: FooterCTAProps) {
           
           <div className="subtitle-box">
             <p className="subtitle">{sub1Text}</p>
-            <p className="subtitle">{sub2Text}</p>
+            {sub2Text && <p className="subtitle">{sub2Text}</p>}
           </div>
           
-          <button onClick={handleCalendlyPopup} className="btn-gradient-cta">
+          <button type="button" onClick={handleCalendlyPopup} className="btn-gradient-cta">
             {btnText}
           </button>
         </div>
