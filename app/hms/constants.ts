@@ -97,15 +97,15 @@ export const contentData = {
 
     // Proof & Cases
     proofLabel: "Proven Results",
-    case1Title: "Luxury Villa Resort (24 Keys)",
-    case1Badge: "Featured Proof",
+    case1Title: "Luxury Villa Resort",
+    case1Badge: "CASE 01",
     case1Metrics: "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
-    case1Desc: "Replaced manual channel management with an automated direct booking pipeline in 60 days.",
+    case1Desc: "Replaced manual management with an automated Direct Engine.",
 
-    case2Title: "Boutique Hotel (18 Keys)",
-    case2Badge: "Direct Engine",
+    case2Title: "Boutique Hotel",
+    case2Badge: "CASE 02",
     case2Metrics: "+310% Google Traffic • 0% Overbooking Risk",
-    case2Desc: "Integrated Google Hotel Ads & direct engine, cutting Agoda dependence by half.",
+    case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence.",
     
     // --- FOOTER CTA ---
     footerTitle: "Ready to maximize your revenue?",
@@ -210,15 +210,15 @@ export const contentData = {
 
     // Proof & Cases
     proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
-    case1Title: "พูลวิลล่าหรู (24 ห้อง)",
-    case1Badge: "ผลลัพธ์เด่น",
+    case1Title: "พูลวิลล่าหรู",
+    case1Badge: "เคสที่ 01",
     case1Metrics: "ประหยัดค่า OTA +$2,800/เดือน • ยอดจองตรง +42%",
-    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบรับจองตรงอัตโนมัติสำเร็จภายใน 60 วัน",
+    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ",
 
-    case2Title: "บูติกโฮเทล (18 ห้อง)",
-    case2Badge: "ระบบจองตรง",
+    case2Title: "บูติกโฮเทล",
+    case2Badge: "เคสที่ 02",
     case2Metrics: "ทราฟฟิก Google +310% • ความเสี่ยงจองซ้ำ 0%",
-    case2Desc: "เชื่อมต่อ Google Hotel Ads และระบบจองตรง ลดการพึ่งพา Agoda ลงครึ่งหนึ่ง",
+    case2Desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com",
     
     // --- FOOTER CTA ---
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
