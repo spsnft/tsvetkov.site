@@ -10,7 +10,7 @@ export const contentData = {
     btnLine: "Line",
 
     // Hero Bento Widget Text
-    syncBadge: "DIRECT BOOKING SYNC ACTIVE",
+    syncBadge: "DIRECT BOOKING SYNCHRONIZATION",
     otaSavedLabel: "OTA Margin Saved",
     statDirectRevenue: "Direct Revenue",
     statMarginGuest: "Margin per Guest",
@@ -83,7 +83,7 @@ export const contentData = {
 
     case2Title: "+310% Google Traffic | Zero Double-Bookings",
     case2Badge: "Boutique Hotel",
-    case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence",
+    case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence",
 
     aboutCases: [
       {
@@ -94,7 +94,7 @@ export const contentData = {
       {
         badge: "BOUTIQUE HOTEL",
         title: "+310% Google Traffic | Zero Double-Bookings",
-        desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence"
+        desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
       }
     ],
 
@@ -120,7 +120,7 @@ export const contentData = {
         {
           badge: "BOUTIQUE HOTEL",
           title: "+310% Google Traffic | Zero Double-Bookings",
-          desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence"
+          desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
         }
       ],
       ctaText: "View Agency Profile"
@@ -167,7 +167,7 @@ export const contentData = {
   th: {
     // --- HERO SECTION ---
     badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
-    heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
+    heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20%&nbsp;ให้ Booking.com และ Agoda",
     heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง ไร้ความเสี่ยงจากความผิดพลาดของคนและการจองซ้ำซ้อน",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnAudit: "นัดหมายตรวจสอบระบบฟรี",
@@ -175,7 +175,7 @@ export const contentData = {
     btnLine: "Line",
 
     // Hero Bento Widget Text
-    syncBadge: "DIRECT BOOKING SYNC ACTIVE",
+    syncBadge: "การซิงโครไนซ์การจองโดยตรง",
     otaSavedLabel: "ประหยัดค่าธรรมเนียม OTA",
     statDirectRevenue: "รายได้ตรง",
     statMarginGuest: "มาร์จิ้นต่อผู้เข้าพัก",
@@ -192,7 +192,7 @@ export const contentData = {
         endValue: 1,
         suffix: " วินาที",
         fixText: " ซิงค์ระบบ",
-        desc: "ติดตั้งระบบ **Cloud PMS & Channel Manager** ทุกการจอง **ล็อกสถานะห้องพักโดยอัตโนมัติ** บน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
+        desc: "ติดตั้งระบบ **Cloud PMS & Channel Manager (ระบบจัดการโรงแรมและช่องทางขาย)** ทุกการจอง **ล็อกสถานะห้องพักโดยอัตโนมัติ** บน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
         pain: "เสียค่าคอมมิชชั่น OTA 20%",
@@ -208,7 +208,7 @@ export const contentData = {
         endValue: 10,
         suffix: " เท่า",
         fixText: " ของยอดจองตรง",
-        desc: "ทำ **Local SEO** เพื่อดึงลูกค้าเป้าหมาย พร้อม **ระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำ** โดยอัตโนมัติ"
+        desc: "ทำ **Local SEO (การทำ SEO ท้องถิ่น)** เพื่อดึงลูกค้าเป้าหมาย พร้อม **ระบบส่งแคมเปญกระตุ้นการกลับมาจองซ้ำ** โดยอัตโนมัติ"
       }
     ],
 
