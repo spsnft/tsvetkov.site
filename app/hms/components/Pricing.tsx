@@ -36,6 +36,7 @@ export default function Pricing({ t }: PricingProps) {
           margin: 0 0 0.75rem 0;
           letter-spacing: -0.02em;
           line-height: 1.2;
+          text-wrap: balance;
         }
 
         .pricing-subtitle {
@@ -43,6 +44,7 @@ export default function Pricing({ t }: PricingProps) {
           font-size: 1.05rem;
           line-height: 1.5;
           margin: 0;
+          text-wrap: balance;
         }
         
         .pricing-grid {
