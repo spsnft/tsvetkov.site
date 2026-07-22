@@ -212,7 +212,7 @@ export default function Hero({ t }: HeroProps) {
           display: block;
         }
 
-        /* --- HYBRID 3D HUB VISUAL --- */
+        /* --- BENTO PROOF CARD VISUAL --- */
         .visual-column {
           position: relative;
           width: 100%;
@@ -222,87 +222,66 @@ export default function Hero({ t }: HeroProps) {
           min-width: 0;
         }
 
-        .hybrid-hub-wrapper {
+        .bento-card-wrapper {
           position: relative;
           width: 100%;
           max-width: 480px;
-          aspect-ratio: 1 / 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          perspective: 1000px;
         }
 
-        .hub-glow-bg {
+        .bento-glow {
           position: absolute;
-          width: 70%;
-          height: 70%;
-          background: radial-gradient(circle, rgba(0, 229, 153, 0.18) 0%, rgba(0, 163, 255, 0.12) 50%, transparent 75%);
-          filter: blur(50px);
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 90%;
+          height: 90%;
+          background: radial-gradient(circle, rgba(0, 229, 153, 0.15) 0%, rgba(0, 163, 255, 0.08) 50%, transparent 75%);
+          filter: blur(45px);
+          pointer-events: none;
           z-index: 1;
-          pointer-events: none;
         }
 
-        .svg-connections {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 2;
-          pointer-events: none;
-        }
-
-        .pulse-line {
-          stroke-dasharray: 8 12;
-          animation: dashMove 12s linear infinite;
-        }
-
-        @keyframes dashMove {
-          to { stroke-dashoffset: -200; }
-        }
-
-        .hero-hub-card {
+        .bento-card {
           position: relative;
-          z-index: 10;
-          width: 78%;
+          z-index: 2;
           background: rgba(12, 14, 20, 0.85);
           backdrop-filter: blur(20px);
-          border: 1px solid rgba(0, 229, 153, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 20px;
-          padding: 1.8rem 1.5rem;
+          padding: 1.5rem;
           box-shadow: 
-            0 30px 60px rgba(0, 0, 0, 0.7),
-            inset 0 1px 1px rgba(255, 255, 255, 0.15),
-            0 0 30px rgba(0, 229, 153, 0.1);
+            0 30px 60px rgba(0, 0, 0, 0.6),
+            inset 0 1px 1px rgba(255, 255, 255, 0.12);
           display: flex;
           flex-direction: column;
           gap: 1.2rem;
-          transform: rotateX(4deg) rotateY(-6deg);
-          transition: transform 0.4s ease;
         }
 
-        .hero-hub-card:hover {
-          transform: rotateX(0deg) rotateY(0deg) translateY(-4px);
+        .bento-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-bottom: 0.9rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          gap: 0.5rem;
         }
 
-        .hub-header-badge {
+        .sync-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.4rem;
-          font-size: 0.68rem;
+          font-size: 0.7rem;
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.06em;
           color: #00E599;
           background: rgba(0, 229, 153, 0.08);
-          padding: 0.3rem 0.7rem;
+          padding: 0.3rem 0.65rem;
           border-radius: 20px;
-          border: 1px solid rgba(0, 229, 153, 0.25);
-          width: fit-content;
+          border: 1px solid rgba(0, 229, 153, 0.2);
         }
 
-        .pulse-dot-small {
+        .pulse-dot {
           width: 6px;
           height: 6px;
           background-color: #00E599;
@@ -311,118 +290,61 @@ export default function Hero({ t }: HeroProps) {
           animation: pulse 2s infinite;
         }
 
-        .hub-main-stat {
-          display: flex;
-          flex-direction: column;
-          gap: 0.2rem;
+        .ota-saved-block {
+          text-align: right;
         }
 
-        .stat-big {
-          font-size: clamp(2.4rem, 4vw, 3.2rem);
+        .ota-saved-label {
+          font-size: 0.62rem;
+          color: rgba(255, 255, 255, 0.4);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .ota-saved-value {
+          font-family: 'SF Mono', monospace;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #38BDF8;
+        }
+
+        .bento-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.85rem;
+        }
+
+        .bento-item {
+          background: rgba(255, 255, 255, 0.025);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 12px;
+          padding: 1.1rem 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+          transition: all 0.25s ease;
+        }
+
+        .bento-item:hover {
+          background: rgba(255, 255, 255, 0.04);
+          border-color: rgba(0, 229, 153, 0.3);
+          transform: translateY(-2px);
+        }
+
+        .stat-value {
+          font-size: clamp(1.8rem, 2.8vw, 2.3rem);
           font-weight: 800;
           line-height: 1;
-          letter-spacing: -0.03em;
+          letter-spacing: -0.02em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
 
         .stat-label {
-          font-size: 0.85rem;
+          font-size: 0.78rem;
           color: #CBD5E1;
           font-weight: 500;
-        }
-
-        .hub-divider {
-          height: 1px;
-          background: rgba(255, 255, 255, 0.08);
-          width: 100%;
-        }
-
-        .hub-sub-stat {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-        }
-
-        .sub-stat-title {
-          font-size: 0.68rem;
-          color: rgba(255, 255, 255, 0.45);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .sub-stat-value {
-          font-family: 'SF Mono', monospace;
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: #FFF;
-          margin-top: 0.2rem;
-        }
-
-        .hub-status-tag {
-          font-size: 0.7rem;
-          color: #38BDF8;
-          font-weight: 600;
-          background: rgba(0, 163, 255, 0.1);
-          padding: 0.25rem 0.5rem;
-          border-radius: 6px;
-          border: 1px solid rgba(0, 163, 255, 0.25);
-        }
-
-        /* Orbiting Node Badges */
-        .node-badge {
-          position: absolute;
-          z-index: 12;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.5rem 0.85rem;
-          background: rgba(18, 22, 31, 0.9);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          border-radius: 12px;
-          backdrop-filter: blur(12px);
-          box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
-          font-size: 0.72rem;
-          font-weight: 600;
-          color: #FFF;
-          animation: float 5s ease-in-out infinite;
-          transition: all 0.3s ease;
-        }
-
-        .node-badge:hover {
-          border-color: #00E599;
-          transform: scale(1.05) !important;
-          box-shadow: 0 0 20px rgba(0, 229, 153, 0.3);
-        }
-
-        .node-top-left {
-          top: 4%;
-          left: 2%;
-          animation-delay: 0s;
-        }
-
-        .node-top-right {
-          top: 8%;
-          right: 0%;
-          animation-delay: 1.2s;
-        }
-
-        .node-bottom-left {
-          bottom: 6%;
-          left: 0%;
-          animation-delay: 2.5s;
-        }
-
-        .node-bottom-right {
-          bottom: 4%;
-          right: 2%;
-          animation-delay: 3.7s;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
         }
 
         @keyframes pulse {
@@ -433,11 +355,10 @@ export default function Hero({ t }: HeroProps) {
 
         @media (max-width: 992px) {
           .hero-section { padding: 2rem 0; }
-          .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+          .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
           .text-column { text-align: center; padding-right: 0; }
           .cta-container { flex-direction: column; align-items: center; }
-          .hybrid-hub-wrapper { max-width: 380px; margin: 0 auto; }
-          .hero-hub-card { transform: none !important; width: 85%; }
+          .bento-card-wrapper { max-width: 380px; margin: 0 auto; }
         }
       `}</style>
 
@@ -474,53 +395,40 @@ export default function Hero({ t }: HeroProps) {
           </div>
 
           <div className="visual-column">
-            <div className="hybrid-hub-wrapper">
-              <div className="hub-glow-bg"></div>
+            <div className="bento-card-wrapper">
+              <div className="bento-glow"></div>
 
-              {/* Connecting Lines SVG */}
-              <svg className="svg-connections" viewBox="0 0 400 400">
-                <line x1="80" y1="60" x2="200" y2="200" stroke="rgba(0, 229, 153, 0.25)" strokeWidth="1.5" className="pulse-line" />
-                <line x1="320" y1="70" x2="200" y2="200" stroke="rgba(0, 163, 255, 0.25)" strokeWidth="1.5" className="pulse-line" />
-                <line x1="70" y1="330" x2="200" y2="200" stroke="rgba(0, 163, 255, 0.25)" strokeWidth="1.5" className="pulse-line" />
-                <line x1="330" y1="320" x2="200" y2="200" stroke="rgba(0, 229, 153, 0.25)" strokeWidth="1.5" className="pulse-line" />
-              </svg>
-
-              {/* Orbiting Nodes */}
-              <div className="node-badge node-top-left">
-                <span style={{ color: '#003580', fontWeight: '800' }}>B.</span> Booking.com
-              </div>
-
-              <div className="node-badge node-top-right">
-                <span style={{ color: '#F43F5E', fontWeight: '800' }}>a.</span> Agoda
-              </div>
-
-              <div className="node-badge node-bottom-left">
-                <span style={{ color: '#FF5A5F', fontWeight: '800' }}>★</span> Airbnb
-              </div>
-
-              <div className="node-badge node-bottom-right">
-                <span style={{ color: '#25D366', fontWeight: '800' }}>⚡</span> Direct Sync
-              </div>
-
-              {/* Central Card */}
-              <div className="hero-hub-card">
-                <div className="hub-header-badge">
-                  <div className="pulse-dot-small"></div> Direct System Active
-                </div>
-
-                <div className="hub-main-stat">
-                  <div className="stat-big">+34%</div>
-                  <div className="stat-label">Direct Revenue Growth</div>
-                </div>
-
-                <div className="hub-divider"></div>
-
-                <div className="hub-sub-stat">
-                  <div>
-                    <div className="sub-stat-title">OTA Margin Saved</div>
-                    <div className="sub-stat-value">{formatCurrency(liveAmount)}</div>
+              <div className="bento-card">
+                <div className="bento-header">
+                  <div className="sync-badge">
+                    <div className="pulse-dot"></div> 1s Sync Active
                   </div>
-                  <div className="hub-status-tag">0% Commission</div>
+                  <div className="ota-saved-block">
+                    <div className="ota-saved-label">OTA Margin Saved</div>
+                    <div className="ota-saved-value">{formatCurrency(liveAmount)}</div>
+                  </div>
+                </div>
+
+                <div className="bento-grid">
+                  <div className="bento-item">
+                    <div className="stat-value">+40%</div>
+                    <div className="stat-label">Direct Revenue</div>
+                  </div>
+
+                  <div className="bento-item">
+                    <div className="stat-value">+60%</div>
+                    <div className="stat-label">Margin per Guest</div>
+                  </div>
+
+                  <div className="bento-item">
+                    <div className="stat-value">+300%</div>
+                    <div className="stat-label">Google Traffic</div>
+                  </div>
+
+                  <div className="bento-item">
+                    <div className="stat-value">+35%</div>
+                    <div className="stat-label">Repeat Bookings</div>
+                  </div>
                 </div>
               </div>
 
