@@ -19,14 +19,13 @@ export default function Pricing({ t }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          /* Верх: 0 (отступ дает предыдущий блок) | Низ: 80px (5rem) */
+          /* Верх: 0 | Низ: 80px (5rem) */
           padding: 0 0 5rem 0; 
           background: transparent;
         }
         
         .pricing-header {
           text-align: center;
-          /* Стандартный воздух от заголовка к карточкам (56px / 3.5rem) */
           margin-bottom: 3.5rem;
         }
 
@@ -172,8 +171,9 @@ export default function Pricing({ t }: PricingProps) {
           font-size: 0.85rem;
           color: #fff;
         }
-        
-        @media (max-width: 992px) {
+
+        /* --- ПЛАНШЕТЫ (768px - 1024px): 3 В РЯД, КОМПАКТНО --- */
+        @media (min-width: 768px) and (max-width: 1024px) {
           .pricing-section {
             padding: 0 0 3.5rem 0;
           }
@@ -181,22 +181,75 @@ export default function Pricing({ t }: PricingProps) {
             margin-bottom: 2.5rem;
           }
           .pricing-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
+          }
+          .pricing-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.85rem;
+          }
+          .card {
+            padding: 1.5rem 1rem;
+            gap: 1.25rem;
+          }
+          .popular-badge {
+            top: -10px;
+            right: 12px;
+            font-size: 0.6rem;
+            padding: 0.25rem 0.65rem;
+          }
+          .package-title {
+            font-size: 0.75rem;
+          }
+          .price {
+            font-size: 2.2rem;
+          }
+          .price-desc {
+            font-size: 0.8rem;
+          }
+          .price-block {
+            padding-bottom: 1rem;
+          }
+          .features-list {
+            gap: 0.85rem;
+          }
+          .feature-item {
+            font-size: 0.82rem;
+            gap: 0.5rem;
+          }
+        }
+
+        /* --- МОБИЛЬНЫЕ (ДО 767px): 1 В РЯД ПО ЦЕНТРУ --- */
+        @media (max-width: 767px) {
+          .pricing-section {
+            padding: 0 0 3rem 0;
+          }
+          .pricing-header {
+            margin-bottom: 2rem;
+          }
+          .pricing-title {
+            font-size: 1.75rem;
+          }
+          .pricing-subtitle {
+            font-size: 0.95rem;
           }
           .pricing-grid {
             grid-template-columns: 1fr;
             gap: 1.5rem;
-            max-width: 500px;
+            max-width: 480px;
             margin: 0 auto;
           }
           .card {
-            padding: 2.5rem 2rem;
+            padding: 1.75rem 1.25rem;
+            gap: 1.35rem;
           }
-        }
-
-        @media (max-width: 576px) {
-          .card {
-            padding: 2rem 1.5rem;
+          .price {
+            font-size: 2.6rem;
+          }
+          .features-list {
+            gap: 0.85rem;
+          }
+          .feature-item {
+            font-size: 0.9rem;
           }
         }
       `}</style>
