@@ -77,7 +77,7 @@ export default function About({ t }: AboutProps) {
           display: grid;
           grid-template-columns: 48fr 52fr;
           gap: 3.5rem;
-          align-items: stretch;
+          align-items: start;
           box-sizing: border-box;
         }
         
@@ -85,23 +85,23 @@ export default function About({ t }: AboutProps) {
         .left-col {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .left-top-content {
           display: flex;
           flex-direction: column;
-          gap: 1.2rem;
+          gap: 1rem;
         }
         
         .sub-label {
-          color: #00E599;
+          color: ${T.sub};
           font-size: 0.75rem;
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
           margin: 0;
+          opacity: 0.8;
         }
         
         .main-title {
@@ -132,7 +132,7 @@ export default function About({ t }: AboutProps) {
           color: ${T.sub};
         }
 
-        /* 3 TRUST STATS: Увеличенные солидные карточки с неоновым акцентом */
+        /* 3 TRUST STATS */
         .trust-stats-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -141,31 +141,27 @@ export default function About({ t }: AboutProps) {
         }
 
         .trust-stat-card {
-          background: rgba(12, 14, 20, 0.75);
+          background: rgba(12, 14, 20, 0.65);
           border: 1px solid rgba(255, 255, 255, 0.08);
-          border-top: 2px solid #00E599;
           border-radius: 12px;
-          padding: 1.4rem 0.9rem;
+          padding: 1.25rem 0.8rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           text-align: center;
-          gap: 0.3rem;
+          gap: 0.25rem;
           backdrop-filter: blur(12px);
           transition: all 0.25s ease;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
         .trust-stat-card:hover {
-          background: rgba(22, 27, 38, 0.85);
-          border-color: rgba(0, 229, 153, 0.4);
-          transform: translateY(-2px);
-          box-shadow: 0 12px 30px rgba(0, 229, 153, 0.12);
+          background: rgba(22, 27, 38, 0.75);
+          border-color: rgba(255, 255, 255, 0.18);
         }
 
         .stat-num {
-          font-size: 1.75rem;
+          font-size: 1.65rem;
           font-weight: 800;
           letter-spacing: -0.02em;
           line-height: 1;
@@ -191,13 +187,6 @@ export default function About({ t }: AboutProps) {
         .right-col {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          gap: 1.5rem;
-        }
-
-        .right-top-content {
-          display: flex;
-          flex-direction: column;
           gap: 1.2rem;
         }
 
@@ -205,7 +194,6 @@ export default function About({ t }: AboutProps) {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding-bottom: 0.2rem;
         }
 
         .proof-label {
@@ -213,37 +201,35 @@ export default function About({ t }: AboutProps) {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #00E599;
+          color: ${T.sub};
+          opacity: 0.8;
         }
 
         .cases-wrapper {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.9rem;
           width: 100%;
         }
 
-        /* КЕЙСЫ С ФИРМЕННЫМ НЕОНОВЫМ СТИЛЕМ */
+        /* КЕЙСЫ: Строгое темное стекло, никаких зелёных рамок */
         .case-card {
           width: 100%;
-          background: rgba(12, 14, 20, 0.75);
-          border: 1px solid rgba(0, 229, 153, 0.2);
+          background: rgba(12, 14, 20, 0.65);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          padding: 1.4rem 1.5rem;
+          padding: 1.2rem 1.4rem;
           display: flex;
           flex-direction: column;
-          gap: 0.55rem;
+          gap: 0.45rem;
           backdrop-filter: blur(12px);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
           box-sizing: border-box;
           transition: all 0.25s ease;
         }
 
         .case-card:hover {
-          background: rgba(18, 22, 32, 0.9);
-          border-color: rgba(0, 229, 153, 0.45);
-          transform: translateY(-2px);
-          box-shadow: 0 12px 35px rgba(0, 229, 153, 0.15);
+          background: rgba(18, 22, 32, 0.75);
+          border-color: rgba(255, 255, 255, 0.18);
         }
 
         .case-header {
@@ -260,25 +246,29 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
+        /* Бейдж CASE 01 / CASE 02: Нейтральный сдержанный стиль */
         .case-badge {
           font-size: 0.65rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
+          font-weight: 700;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: #00E599;
-          background: rgba(0, 229, 153, 0.08);
-          border: 1px solid rgba(0, 229, 153, 0.25);
-          padding: 0.25rem 0.65rem;
-          border-radius: 6px;
+          color: rgba(255, 255, 255, 0.6);
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 0.2rem 0.55rem;
+          border-radius: 4px;
           white-space: nowrap;
         }
 
+        /* Метрики: фирменный акцентный градиент на тексте */
         .case-metrics {
           font-size: 0.92rem;
           font-weight: 700;
-          color: #00E599;
           margin: 0;
           letter-spacing: -0.01em;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .case-desc {
@@ -288,7 +278,7 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* КНОПКА С ФИРМЕННЫМ ДИЗАЙНОМ */
+        /* CTA-КНОПКА: Тёмное стекло, чистый белый текст */
         .actions-row {
           display: flex;
           justify-content: flex-start;
@@ -302,25 +292,23 @@ export default function About({ t }: AboutProps) {
           gap: 0.6rem;
           color: #ffffff !important;
           background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(0, 229, 153, 0.3);
-          padding: 0.95rem 2rem;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          padding: 0.85rem 2rem;
           border-radius: 10px;
-          font-weight: 700;
+          font-weight: 600;
           font-size: 0.95rem;
           text-decoration: none;
           backdrop-filter: blur(8px);
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           width: 100%;
           box-sizing: border-box;
-          box-shadow: 0 4px 15px rgba(0, 229, 153, 0.08);
         }
         
         .view-profile-btn:hover {
           transform: translateY(-2px);
-          background: rgba(0, 229, 153, 0.1);
-          border-color: rgba(0, 229, 153, 0.6);
-          color: #00E599 !important;
-          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.22);
+          background: rgba(255, 255, 255, 0.07);
+          border-color: rgba(255, 255, 255, 0.25);
+          color: #ffffff !important;
         }
 
         .view-profile-btn svg {
@@ -340,14 +328,9 @@ export default function About({ t }: AboutProps) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 2.5rem;
-            align-items: start;
           }
           .main-title {
             white-space: normal;
-          }
-          .left-col, .right-col {
-            justify-content: start;
-            gap: 1.5rem;
           }
         }
 
@@ -401,23 +384,21 @@ export default function About({ t }: AboutProps) {
           
           {/* RIGHT COLUMN: PROOF, CASES & CTA */}
           <div className="right-col">
-            <div className="right-top-content">
-              <div className="proof-header">
-                <span className="proof-label">{proofLabel}</span>
-              </div>
+            <div className="proof-header">
+              <span className="proof-label">{proofLabel}</span>
+            </div>
 
-              <div className="cases-wrapper">
-                {cases.map((c, i) => (
-                  <div className="case-card" key={i}>
-                    <div className="case-header">
-                      <span className="case-title">{c.title}</span>
-                      <span className="case-badge">{c.badge}</span>
-                    </div>
-                    <p className="case-metrics">{c.metrics}</p>
-                    <p className="case-desc">{c.desc}</p>
+            <div className="cases-wrapper">
+              {cases.map((c, i) => (
+                <div className="case-card" key={i}>
+                  <div className="case-header">
+                    <span className="case-title">{c.title}</span>
+                    <span className="case-badge">{c.badge}</span>
                   </div>
-                ))}
-              </div>
+                  <p className="case-metrics">{c.metrics}</p>
+                  <p className="case-desc">{c.desc}</p>
+                </div>
+              ))}
             </div>
 
             {/* CTA BUTTON */}
