@@ -30,7 +30,7 @@ interface AboutProps {
   };
 }
 
-// Хелпер для умного переноса заголовка кейса по разделителю "|" (Пункт 12)
+// Хелпер для умного переноса заголовка кейса по разделителю "|"
 const renderCaseTitle = (title: string) => {
   if (!title) return null;
   if (title.includes(' | ')) {
@@ -44,6 +44,32 @@ const renderCaseTitle = (title: string) => {
     );
   }
   return title;
+};
+
+// Хелпер для защиты ключевых словосочетаний в описании от уродливых переносов
+const renderFormattedDesc = (desc: string) => {
+  if (!desc) return null;
+
+  const processed = desc
+    .replace(/Google Ads & Direct Engine/g, '<span class="nobr">Google Ads & Direct Engine</span>')
+    .replace(/Booking\.com dependence/g, '<span class="nobr">Booking.com dependence</span>')
+    .replace(/Google Ads และระบบจองตรง/g, '<span class="nobr">Google Ads และระบบจองตรง</span>')
+    .replace(/ลดการพึ่งพา Booking\.com/g, '<span class="nobr">ลดการพึ่งพา Booking.com</span>')
+    .replace(/Google Ads и модуль прямых броней/g, '<span class="nobr">Google Ads и модуль прямых броней</span>')
+    .replace(/зависимость от Booking\.com/g, '<span class="nobr">зависимость от Booking.com</span>');
+
+  const parts = processed.split(/<span class="nobr">(.*?)<\/span>/g);
+
+  return parts.map((part, i) => {
+    if (i % 2 === 1) {
+      return (
+        <span key={i} className="nobr">
+          {part}
+        </span>
+      );
+    }
+    return part;
+  });
 };
 
 export default function About({ t }: AboutProps) {
@@ -279,6 +305,10 @@ export default function About({ t }: AboutProps) {
           opacity: 0.6;
         }
 
+        :global(.nobr) {
+          white-space: nowrap;
+        }
+
         .case-badge {
           font-size: 0.65rem;
           font-weight: 700;
@@ -295,9 +325,9 @@ export default function About({ t }: AboutProps) {
         .case-desc {
           font-size: 0.85rem;
           color: ${T.sub};
-          line-height: 1.45;
+          line-height: 1.48;
           margin: 0;
-          text-wrap: balance;
+          text-wrap: pretty;
         }
 
         .actions-row {
@@ -344,7 +374,6 @@ export default function About({ t }: AboutProps) {
 
         /* --- ПЛАНШЕТЫ И МОБИЛЬНЫЕ (ДО 1024px) --- */
         @media (max-width: 1024px) {
-          /* Помещаем бейдж НАВЕРХ заголовка для освобождения 100% ширины */
           .case-header {
             flex-direction: column-reverse;
             align-items: flex-start;
@@ -371,6 +400,7 @@ export default function About({ t }: AboutProps) {
           .main-title {
             white-space: normal;
             font-size: 1.8rem;
+            text-wrap: balance;
           }
           .description {
             font-size: 0.95rem;
@@ -395,10 +425,13 @@ export default function About({ t }: AboutProps) {
             padding: 1.1rem 1.1rem;
           }
           .case-title {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
+            line-height: 1.35;
           }
           .case-desc {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            text-wrap: pretty;
           }
         }
 
@@ -419,13 +452,13 @@ export default function About({ t }: AboutProps) {
           .main-title {
             white-space: normal;
             font-size: 1.7rem;
+            text-wrap: balance;
           }
           .description {
             font-size: 0.95rem;
             line-height: 1.55;
           }
           
-          /* БУЛЛЕТЫ В 1 РЯД (3 КОЛОНКИ) НА МОБИЛКЕ */
           .trust-stats-grid {
             grid-template-columns: repeat(3, 1fr);
             gap: 0.4rem;
@@ -454,6 +487,10 @@ export default function About({ t }: AboutProps) {
           .case-title {
             font-size: 0.92rem;
             line-height: 1.35;
+          }
+          .case-desc {
+            font-size: 0.82rem;
+            line-height: 1.45;
           }
           
           .view-profile-btn {
@@ -505,7 +542,7 @@ export default function About({ t }: AboutProps) {
                       <h3 className="case-title">{renderCaseTitle(c.title)}</h3>
                       <span className="case-badge">{c.badge}</span>
                     </div>
-                    <p className="case-desc">{c.desc}</p>
+                    <p className="case-desc">{renderFormattedDesc(c.desc)}</p>
                   </div>
                 ))}
               </div>
