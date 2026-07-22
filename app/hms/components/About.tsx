@@ -274,7 +274,7 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* CTA-КНОПКА (Опускается строго вровень с низом буллетов слева) */
+        /* CTA-КНОПКА */
         .actions-row {
           display: flex;
           justify-content: flex-start;
@@ -316,14 +316,58 @@ export default function About({ t }: AboutProps) {
         .view-profile-btn:hover svg {
           transform: translateX(3px);
         }
-        
-        @media (max-width: 992px) {
+
+        /* --- ПЛАНШЕТЫ (768px - 1024px) --- */
+        @media (min-width: 768px) and (max-width: 1024px) {
           .about-section {
-            padding: 0 0 3.5rem 0;
+            padding: 1rem 0 3.5rem 0;
+          }
+          .about-grid {
+            gap: 1.75rem;
+            grid-template-columns: 48fr 52fr;
+          }
+          .main-title {
+            white-space: normal;
+            font-size: 1.8rem;
+          }
+          .description {
+            font-size: 0.95rem;
+            line-height: 1.55;
+          }
+          .trust-stats-grid {
+            gap: 0.5rem;
+          }
+          .trust-stat-card {
+            padding: 0.9rem 0.4rem;
+          }
+          .stat-num {
+            font-size: 1.35rem;
+          }
+          .stat-name {
+            font-size: 0.75rem;
+          }
+          .stat-sub {
+            font-size: 0.65rem;
+          }
+          .case-card {
+            padding: 1.1rem 1.1rem;
+          }
+          .case-title {
+            font-size: 0.9rem;
+          }
+          .case-desc {
+            font-size: 0.8rem;
+          }
+        }
+
+        /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
+        @media (max-width: 767px) {
+          .about-section {
+            padding: 0.5rem 0 3rem 0;
           }
           .about-grid {
             grid-template-columns: 1fr;
-            gap: 2.5rem;
+            gap: 2.25rem;
             align-items: start;
           }
           .left-col, .right-col {
@@ -332,22 +376,42 @@ export default function About({ t }: AboutProps) {
           }
           .main-title {
             white-space: normal;
-          }
-        }
-
-        @media (max-width: 576px) {
-          .trust-stats-grid {
-            grid-template-columns: 1fr;
+            font-size: 1.75rem;
           }
           .description {
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.6;
           }
+          
+          /* Метрики перестраиваем в 1 колонку */
+          .trust-stats-grid {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+          }
+          .trust-stat-card {
+            padding: 1rem 1.25rem;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+          }
+          .stat-num {
+            font-size: 1.5rem;
+          }
+
+          /* Кейсы: Бейдж уходит НАВЕРХ заголовка, освобождая всю ширину */
           .case-header {
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: flex-start;
             gap: 0.4rem;
           }
+          .case-badge {
+            align-self: flex-start;
+          }
+          .case-title {
+            font-size: 0.95rem;
+            line-height: 1.4;
+          }
+          
           .view-profile-btn {
             width: 100%;
           }
@@ -376,8 +440,10 @@ export default function About({ t }: AboutProps) {
               {trustStats.map((stat, i) => (
                 <div className="trust-stat-card" key={i}>
                   <span className="stat-num">{stat.num}</span>
-                  <span className="stat-name">{stat.name}</span>
-                  <span className="stat-sub">{stat.sub}</span>
+                  <div>
+                    <div className="stat-name">{stat.name}</div>
+                    <div className="stat-sub">{stat.sub}</div>
+                  </div>
                 </div>
               ))}
             </div>
