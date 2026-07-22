@@ -8,13 +8,12 @@ import { NetworkBackground } from '../../src/components/NetworkBackground';
 // Импорт констант и словарей перевода
 import { contentData } from './constants';
 
-// Импорт изолированных компонентов секций
+// Импорт изолированных компонентов секций (без удаленного IndustryProof)
 import Hero from './components/Hero';
 import LogoMarquee from './components/LogoMarquee';
 import ScalePractice from './components/ScalePractice';
-import IndustryProof from './components/IndustryProof';
-import Pricing from './components/Pricing';
 import About from './components/About';
+import Pricing from './components/Pricing';
 import FooterCTA from './components/FooterCTA';
 
 export default function HospitalityB2B() {
@@ -98,26 +97,23 @@ export default function HospitalityB2B() {
         </div>
       </header>
 
-      {/* ОСНОВНОЙ КОНТЕНТ ЛЕНДИНГА (Теперь без сжимающего maxWidth) */}
+      {/* ОСНОВНОЙ КОНТЕНТ ЛЕНДИНГА */}
       <main style={{ width: '100%', position: 'relative', zIndex: 10 }}>
         
         {/* БЛОК 1: ПЕРВЫЙ ЭКРАН */}
         <Hero t={t} />
 
-        {/* БЛОК 1.5: БЕГУЩАЯ СТРОКА ЛОГОТИПОВ */}
+        {/* БЛОК 2: БЕГУЩАЯ СТРОКА ЛОГОТИПОВ */}
         <LogoMarquee />
 
-        {/* БЛОК 2: НАШ ОБЪЕДИНЕННЫЙ ГИБРИДНЫЙ БЛОК */}
+        {/* БЛОК 3: БОЛЬ ➔ РЕШЕНИЕ (3D КАРТОЧКИ) */}
         <ScalePractice t={t} />
 
-        {/* БЛОК 3: ОТРАСЛЕВЫЕ МЕТРИКИ И ДОКАЗАТЕЛЬСТВА */}
-        <IndustryProof t={t} />
-
-        {/* БЛОК 4: ТАРИФНЫЕ ПЛАНЫ */}
-        <Pricing t={t} />
-
-        {/* БЛОК 5: О СЕБЕ / ПАРТНЕРЕ */}
+        {/* БЛОК 4: ЭКСПЕРТНОСТЬ, СТАТИСТИКА И КЕЙСЫ (ПРОГРЕВ ПЕРЕД ЦЕНОЙ) */}
         <About t={t} />
+
+        {/* БЛОК 5: ТАРИФНЫЕ ПЛАНЫ */}
+        <Pricing t={t} />
 
         {/* БЛОК 6: ПРИЗЫВ К ДЕЙСТВИЮ (CALENDLY) */}
         <FooterCTA t={t} />
