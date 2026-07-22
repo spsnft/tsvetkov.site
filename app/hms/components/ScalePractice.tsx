@@ -107,7 +107,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <style jsx>{`
         .scale-section {
           width: 100%;
-          padding: 0 0 5rem 0; /* Верхний отступ убран (0), отступ снизу задает ритм */
+          padding: 3rem 0 3.5rem 0; /* Вернули верхний отступ 3rem */
           background: transparent;
         }
 
@@ -130,7 +130,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           font-size: 1.05rem;
           line-height: 1.5;
           margin: 0 auto;
-          max-width: 800px; /* Достаточная ширина, чтобы на ПК текст гарантированно влезал в 1 строку */
+          max-width: 800px;
           text-wrap: balance;
         }
 
@@ -263,7 +263,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         /* --- ПЛАНШЕТЫ (768px – 1024px) --- */
         @media (min-width: 768px) and (max-width: 1024px) {
           .scale-section {
-            padding: 0 0 3.5rem 0;
+            padding: 2.5rem 0 3rem 0; /* Вернули 2.5rem сверху */
           }
           .scale-header {
             margin-bottom: 2.5rem;
@@ -273,7 +273,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
           .scale-subtitle {
             font-size: 0.95rem;
-            max-width: 700px; /* Позволяет убраться в 1 строку на планшете, если ширина позволяет */
+            max-width: 700px;
           }
           .scale-grid {
             grid-template-columns: repeat(3, 1fr);
@@ -305,7 +305,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
         @media (max-width: 767px) {
           .scale-section {
-            padding: 0 0 3rem 0;
+            padding: 2.25rem 0 2.75rem 0; /* Вернули 2.25rem сверху */
           }
           .scale-header {
             margin-bottom: 2.25rem;
