@@ -30,6 +30,31 @@ interface AboutProps {
   };
 }
 
+// Хелпер для подсветки градиентом только ключевого слова "Scale."
+const renderMainTitle = (title: string) => {
+  if (!title) return null;
+  
+  if (title.includes('Systems. Optimization. Scale.')) {
+    return (
+      <>
+        Systems. Optimization. <span className="accent-gradient">Scale.</span>
+      </>
+    );
+  }
+
+  // Если заголовок пришел из переводов старого формата c "|"
+  if (title.includes('|')) {
+    const parts = title.split('|').map(p => p.trim());
+    return (
+      <>
+        {parts[0]}. {parts[1]}. <span className="accent-gradient">{parts[2]}.</span>
+      </>
+    );
+  }
+
+  return title;
+};
+
 // Хелпер для умного переноса заголовка кейса по разделителю "|"
 const renderCaseTitle = (title: string) => {
   if (!title) return null;
@@ -46,7 +71,7 @@ const renderCaseTitle = (title: string) => {
   return title;
 };
 
-// Хелпер для защиты ключевых словосочетаний в описании от уродливых переносов
+// Хелпер для защиты ключевых словосочетаний в описании
 const renderFormattedDesc = (desc: string) => {
   if (!desc) return null;
 
@@ -74,7 +99,7 @@ const renderFormattedDesc = (desc: string) => {
 
 export default function About({ t }: AboutProps) {
   const labelText = t?.aboutLabel || "Growth Architecture";
-  const titleText = t?.aboutTitle || "Systems | Optimization | Scale";
+  const titleText = t?.aboutTitle || "Systems. Optimization. Scale.";
   
   const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
   const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
@@ -139,17 +164,21 @@ export default function About({ t }: AboutProps) {
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          margin: 0;
+          margin: 0 0 0.4rem 0;
           opacity: 0.8;
         }
         
         .main-title {
-          font-size: clamp(1.8rem, 2.7vw, 2.5rem);
+          font-size: clamp(1.8rem, 2.6vw, 2.4rem);
           font-weight: 800;
-          line-height: 1.15;
-          letter-spacing: -0.03em;
+          line-height: 1.18;
+          letter-spacing: -0.02em;
           margin: 0;
-          white-space: nowrap;
+          color: #ffffff;
+          text-wrap: balance;
+        }
+
+        :global(.accent-gradient) {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -398,9 +427,7 @@ export default function About({ t }: AboutProps) {
             gap: 1.75rem;
           }
           .main-title {
-            white-space: normal;
             font-size: 1.8rem;
-            text-wrap: balance;
           }
           .description {
             font-size: 0.95rem;
@@ -450,9 +477,7 @@ export default function About({ t }: AboutProps) {
             gap: 1.25rem;
           }
           .main-title {
-            white-space: normal;
             font-size: 1.7rem;
-            text-wrap: balance;
           }
           .description {
             font-size: 0.95rem;
@@ -507,7 +532,7 @@ export default function About({ t }: AboutProps) {
             <div className="left-top-content">
               <div>
                 <p className="sub-label">{labelText}</p>
-                <h2 className="main-title">{titleText}</h2>
+                <h2 className="main-title">{renderMainTitle(titleText)}</h2>
               </div>
               
               <p className="description">
