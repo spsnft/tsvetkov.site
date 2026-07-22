@@ -37,14 +37,14 @@ export default function About({ t }: AboutProps) {
   const titleText = t?.aboutTitle || "Systems / Optimization / Scale";
   
   const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
-  const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
+  const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
   
   const btnText = t?.aboutBtn || t?.aboutButton || "View Agency Profile";
 
   const trustStats = [
-    { num: t?.stat1Num || "10+", name: t?.stat1Name || "Years Exp.", sub: t?.stat1Sub || "Growth & systems" },
+    { num: t?.stat1Num || "$2M+", name: t?.stat1Name || "Saved Fees", sub: t?.stat1Sub || "In OTA commissions" },
     { num: t?.stat2Num || "30+", name: t?.stat2Name || "Brands Scaled", sub: t?.stat2Sub || "B2B & Direct models" },
-    { num: t?.stat3Num || "$2M+", name: t?.stat3Name || "Saved Fees", sub: t?.stat3Sub || "In OTA commissions" }
+    { num: t?.stat3Num || "10+", name: t?.stat3Name || "Years Exp.", sub: t?.stat3Sub || "Growth & systems" }
   ];
 
   const cases = [
@@ -52,13 +52,13 @@ export default function About({ t }: AboutProps) {
       title: t?.case1Title || "Luxury Villa Resort",
       badge: t?.case1Badge || "CASE 01",
       metrics: t?.case1Metrics || "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
-      desc: t?.case1Desc || "Replaced manual management with an automated Direct Engine."
+      desc: t?.case1Desc || "Replaced manual management with an automated Direct Engine"
     },
     {
       title: t?.case2Title || "Boutique Hotel",
       badge: t?.case2Badge || "CASE 02",
       metrics: t?.case2Metrics || "+310% Google Traffic • 0% Overbooking Risk",
-      desc: t?.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking dependence."
+      desc: t?.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking dependence"
     }
   ];
 
@@ -77,15 +77,22 @@ export default function About({ t }: AboutProps) {
           display: grid;
           grid-template-columns: 48fr 52fr;
           gap: 3.5rem;
-          align-items: start;
+          align-items: stretch;
           box-sizing: border-box;
         }
         
-        /* --- LEFT COLUMN: BRAND & STATS --- */
+        /* --- LEFT COLUMN --- */
         .left-col {
           display: flex;
           flex-direction: column;
+          justify-content: space-between;
           gap: 1.5rem;
+        }
+
+        .left-top-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
         }
         
         .sub-label {
@@ -98,7 +105,6 @@ export default function About({ t }: AboutProps) {
           opacity: 0.8;
         }
         
-        /* Фирменный градиент бренда Mint -> Cyan */
         .main-title {
           font-size: clamp(1.8rem, 2.7vw, 2.5rem);
           font-weight: 800;
@@ -127,22 +133,24 @@ export default function About({ t }: AboutProps) {
           color: ${T.sub};
         }
 
-        /* 3 TRUST STATS: Фирменный цвет #00E599 (как +40%, +60% на скриншоте) */
+        /* 3 TRUST STATS: Выравнивание по центру + фирменный градиент */
         .trust-stats-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 0.85rem;
           width: 100%;
-          margin-top: 0.5rem;
         }
 
         .trust-stat-card {
           background: rgba(12, 14, 20, 0.6);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 12px;
-          padding: 1.1rem 0.9rem;
+          padding: 1.1rem 0.8rem;
           display: flex;
           flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
           gap: 0.2rem;
           backdrop-filter: blur(12px);
           transition: border-color 0.25s ease, background 0.25s ease;
@@ -150,15 +158,17 @@ export default function About({ t }: AboutProps) {
 
         .trust-stat-card:hover {
           background: rgba(255, 255, 255, 0.03);
-          border-color: rgba(0, 229, 153, 0.3);
+          border-color: rgba(0, 229, 153, 0.35);
         }
 
         .stat-num {
           font-size: 1.65rem;
           font-weight: 800;
-          color: #00E599;
           letter-spacing: -0.02em;
           line-height: 1;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .stat-name {
@@ -174,8 +184,15 @@ export default function About({ t }: AboutProps) {
           line-height: 1.3;
         }
 
-        /* --- RIGHT COLUMN: PROOF, CASES & CTA --- */
+        /* --- RIGHT COLUMN --- */
         .right-col {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 1.2rem;
+        }
+
+        .right-top-content {
           display: flex;
           flex-direction: column;
           gap: 1.2rem;
@@ -203,10 +220,11 @@ export default function About({ t }: AboutProps) {
           width: 100%;
         }
 
+        /* Карточка кейсов с мятно-голубой неоновой рамкой */
         .case-card {
           width: 100%;
           background: rgba(12, 14, 20, 0.6);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.2);
           border-radius: 14px;
           padding: 1.35rem 1.5rem;
           display: flex;
@@ -215,13 +233,14 @@ export default function About({ t }: AboutProps) {
           backdrop-filter: blur(12px);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
           box-sizing: border-box;
-          transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+          transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
         }
 
         .case-card:hover {
           background: rgba(22, 27, 38, 0.8);
-          border-color: rgba(0, 229, 153, 0.35);
-          transform: translateY(-1px);
+          border-color: rgba(0, 229, 153, 0.45);
+          transform: translateY(-2px);
+          box-shadow: 0 12px 35px rgba(0, 229, 153, 0.1);
         }
 
         .case-header {
@@ -244,8 +263,8 @@ export default function About({ t }: AboutProps) {
           letter-spacing: 0.1em;
           text-transform: uppercase;
           color: #00E599;
-          background: rgba(0, 229, 153, 0.08);
-          border: 1px solid rgba(0, 229, 153, 0.2);
+          background: rgba(0, 229, 153, 0.1);
+          border: 1px solid rgba(0, 229, 153, 0.25);
           padding: 0.25rem 0.6rem;
           border-radius: 6px;
           white-space: nowrap;
@@ -265,11 +284,11 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* CTA-кнопка */
+        /* Выравнивание кнопки строго по нижней границе левых буллитов */
         .actions-row {
-          margin-top: 0.4rem;
           display: flex;
           justify-content: flex-start;
+          width: 100%;
         }
         
         .view-profile-btn {
@@ -288,14 +307,15 @@ export default function About({ t }: AboutProps) {
           backdrop-filter: blur(8px);
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           width: 100%;
+          box-sizing: border-box;
         }
         
         .view-profile-btn:hover {
           transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(0, 229, 153, 0.4);
-          color: #ffffff !important;
-          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.15);
+          background: rgba(0, 229, 153, 0.08);
+          border-color: rgba(0, 229, 153, 0.5);
+          color: #00E599 !important;
+          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.2);
         }
 
         .view-profile-btn svg {
@@ -315,12 +335,14 @@ export default function About({ t }: AboutProps) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 2.5rem;
+            align-items: start;
           }
           .main-title {
             white-space: normal;
           }
-          .right-col {
-            gap: 1.2rem;
+          .left-col, .right-col {
+            justify-content: start;
+            gap: 1.5rem;
           }
         }
 
@@ -348,15 +370,17 @@ export default function About({ t }: AboutProps) {
           
           {/* LEFT COLUMN: BRAND & STATS */}
           <div className="left-col">
-            <div>
-              <p className="sub-label">{labelText}</p>
-              <h2 className="main-title">{titleText}</h2>
+            <div className="left-top-content">
+              <div>
+                <p className="sub-label">{labelText}</p>
+                <h2 className="main-title">{titleText}</h2>
+              </div>
+              
+              <p className="description">
+                <span className="highlight-sentence">{firstSentence}</span>{' '}
+                <span className="dimmed-text">{restText}</span>
+              </p>
             </div>
-            
-            <p className="description">
-              <span className="highlight-sentence">{firstSentence}</span>{' '}
-              <span className="dimmed-text">{restText}</span>
-            </p>
 
             {/* 3 TRUST STAT BULLETS */}
             <div className="trust-stats-grid">
@@ -372,24 +396,26 @@ export default function About({ t }: AboutProps) {
           
           {/* RIGHT COLUMN: PROOF, CASES & CTA */}
           <div className="right-col">
-            <div className="proof-header">
-              <span className="proof-label">{proofLabel}</span>
-            </div>
+            <div className="right-top-content">
+              <div className="proof-header">
+                <span className="proof-label">{proofLabel}</span>
+              </div>
 
-            <div className="cases-wrapper">
-              {cases.map((c, i) => (
-                <div className="case-card" key={i}>
-                  <div className="case-header">
-                    <span className="case-title">{c.title}</span>
-                    <span className="case-badge">{c.badge}</span>
+              <div className="cases-wrapper">
+                {cases.map((c, i) => (
+                  <div className="case-card" key={i}>
+                    <div className="case-header">
+                      <span className="case-title">{c.title}</span>
+                      <span className="case-badge">{c.badge}</span>
+                    </div>
+                    <p className="case-metrics">{c.metrics}</p>
+                    <p className="case-desc">{c.desc}</p>
                   </div>
-                  <p className="case-metrics">{c.metrics}</p>
-                  <p className="case-desc">{c.desc}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            {/* CTA BUTTON */}
+            {/* CTA BUTTON (target="_blank") */}
             <div className="actions-row">
               <a 
                 href="https://tsvetkov.site" 
