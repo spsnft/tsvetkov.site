@@ -14,31 +14,82 @@ const CARD_ASSETS = [
   '/assets/growth.webp'
 ];
 
-// Хелпер для парсинга **bold** в HTML-теги <strong>
+// Хелпер для парсинга **bold** и неразрывных связок на мобилке (пункты 9, 10, 11)
 const renderFormattedText = (text: string) => {
   if (!text) return null;
-  const parts = text.split(/\*\*(.*?)\*\*/g);
-  return parts.map((part, index) =>
-    index % 2 === 1 ? (
+
+  // 1. Склеиваем проблемные места через неразрывные пробелы/контейнеры
+  let processed = text
+    .replace(/Agoda & 300\+ OTAs/g, 'Agoda <span class="nobr">& 300+ OTAs</span>')
+    .replace(/keep all revenue in-house/g, '<span class="nobr">keep all revenue in-house</span>')
+    .replace(/returning guests/g, '<span class="nobr">returning guests</span>');
+
+  // 2. Разбиваем по тегам **bold**
+  const parts = processed.split(/\*\*(.*?)\*\*/g);
+
+  return parts.map((part, index) => {
+    const isBold = index % 2 === 1;
+    
+    // Если фрагмент содержит HTML-вставки <span class="nobr">
+    if (part.includes('<span class="nobr">')) {
+      const subParts = part.split(/<span class="nobr">(.*?)<\/span>/g);
+      return (
+        <React.Fragment key={index}>
+          {subParts.map((sub, sIdx) => {
+            if (sIdx % 2 === 1) {
+              return (
+                <span key={sIdx} className="nobr" style={isBold ? { color: '#ffffff', fontWeight: 600 } : undefined}>
+                  {sub}
+                </span>
+              );
+            }
+            return isBold ? (
+              <strong key={sIdx} style={{ color: '#ffffff', fontWeight: 600 }}>
+                {sub}
+              </strong>
+            ) : (
+              sub
+            );
+          })}
+        </React.Fragment>
+      );
+    }
+
+    return isBold ? (
       <strong key={index} style={{ color: '#ffffff', fontWeight: 600 }}>
         {part}
       </strong>
     ) : (
       part
-    )
-  );
+    );
+  });
 };
 
 export default function ScalePractice({ t }: ScalePracticeProps) {
-  // Фоллбек на случай, если scaleItems еще не переданы
   const items = t?.scaleItems || [];
+  const subtitleText = t?.scaleSub || "Automate workflows so your team can focus on guest experience";
+
+  // Разрываем подзаголовок после "your team" на мобилке (пункт 8)
+  const renderSubtitle = (sub: string) => {
+    const target = "so your team";
+    if (sub.includes(target)) {
+      const parts = sub.split(target);
+      return (
+        <>
+          {parts[0]}{target}
+          <br className="mobile-br" />
+          {parts[1]}
+        </>
+      );
+    }
+    return sub;
+  };
 
   return (
     <section className="scale-section">
       <style jsx>{`
         .scale-section {
           width: 100%;
-          /* Верх: 48px (3rem) | Низ: 56px (3.5rem) */
           padding: 3rem 0 3.5rem 0; 
           background: transparent;
         }
@@ -62,6 +113,11 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           font-size: 1.05rem;
           line-height: 1.5;
           margin: 0;
+          text-wrap: balance;
+        }
+
+        .mobile-br {
+          display: none;
         }
 
         .scale-grid {
@@ -182,7 +238,11 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           text-wrap: pretty;
         }
 
-        /* --- ПЛАНШЕТЫ (768px – 1024px): 3 В РЯД, КОМПАКТНО --- */
+        :global(.nobr) {
+          white-space: nowrap;
+        }
+
+        /* --- ПЛАНШЕТЫ (768px – 1024px) --- */
         @media (min-width: 768px) and (max-width: 1024px) {
           .scale-section {
             padding: 2.5rem 0 3rem 0;
@@ -220,7 +280,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
         }
 
-        /* --- МОБИЛЬНЫЕ (ДО 767px): 1 В РЯД ПО ЦЕНТРУ --- */
+        /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
         @media (max-width: 767px) {
           .scale-section {
             padding: 2.25rem 0 2.75rem 0;
@@ -233,6 +293,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
           .scale-subtitle {
             font-size: 0.95rem;
+          }
+          .mobile-br {
+            display: inline; /* Включаем перенос после "your team" на мобилке */
           }
           .scale-grid {
             grid-template-columns: 1fr;
@@ -252,7 +315,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <div className="container">
         <div className="scale-header">
           <h2 className="scale-title">{t?.scaleTitle || "Scale your property bookings"}</h2>
-          <p className="scale-subtitle">{t?.scaleSub || "Automate workflows so your team can focus on guest experience"}</p>
+          <p className="scale-subtitle">
+            {renderSubtitle(subtitleText)}
+          </p>
         </div>
 
         <div className="scale-grid">
