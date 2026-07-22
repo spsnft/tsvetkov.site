@@ -39,15 +39,9 @@ export const contentData = {
     ],
 
     // --- ABOUT & EXPERTISE SECTION ---
-    aboutLabel: "Growth Architecture",
-    aboutTitle: "Systems | Optimization | Scale",
-    aboutTitleHighlight: "Systems",
-    aboutTitleRest: "| Optimization | Scale",
+    aboutTitle: "Systems. Optimization. Scale.",
     aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
-    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
-    aboutDescBold: "We step into business to optimize them for maximum efficiency.",
-    aboutDescText: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
-    aboutBtn: "View Agency Profile",
+    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
 
     // Trust Stats
     stat1Num: "$1M+",
@@ -60,12 +54,6 @@ export const contentData = {
     stat3Name: "Years Experience",
     stat3Sub: "Growth & systems",
 
-    aboutMetrics: [
-      { value: "$1M+", label: "Saved Fees", sub: "In OTA commissions" },
-      { value: "20+", label: "Brands Scaled", sub: "B2B & Direct models" },
-      { value: "10+", label: "Years Experience", sub: "Growth & systems" }
-    ],
-
     // Cases & Results
     proofLabel: "Proven Results",
     case1Title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
@@ -75,47 +63,6 @@ export const contentData = {
     case2Title: "+310% Google Traffic | Zero Double-Bookings",
     case2Badge: "Boutique Hotel",
     case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence",
-
-    aboutCases: [
-      {
-        badge: "VILLA RESORT",
-        title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
-        desc: "Replaced manual management with an automated Direct Engine"
-      },
-      {
-        badge: "BOUTIQUE HOTEL",
-        title: "+310% Google Traffic | Zero Double-Bookings",
-        desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
-      }
-    ],
-
-    // Nested object format
-    about: {
-      eyebrow: "GROWTH ARCHITECTURE",
-      titleHighlight: "Systems",
-      titleRest: "| Optimization | Scale",
-      descBold: "We step into business to optimize them for maximum efficiency.",
-      descText: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
-      metrics: [
-        { value: "$1M+", label: "Saved Fees", sub: "In OTA commissions" },
-        { value: "20+", label: "Brands Scaled", sub: "B2B & Direct models" },
-        { value: "10+", label: "Years Experience", sub: "Growth & systems" }
-      ],
-      provenLabel: "PROVEN RESULTS",
-      cases: [
-        {
-          badge: "VILLA RESORT",
-          title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
-          desc: "Replaced manual management with an automated Direct Engine"
-        },
-        {
-          badge: "BOUTIQUE HOTEL",
-          title: "+310% Google Traffic | Zero Double-Bookings",
-          desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
-        }
-      ],
-      ctaText: "View Agency Profile"
-    },
 
     // --- PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence",
@@ -195,15 +142,9 @@ export const contentData = {
     ],
 
     // --- ABOUT & EXPERTISE SECTION ---
-    aboutLabel: "Growth Architecture",
-    aboutTitle: "ระบบ | การเพิ่มประสิทธิภาพ | การขยายขนาด",
-    aboutTitleHighlight: "ระบบ",
-    aboutTitleRest: "| การเพิ่มประสิทธิภาพ | การขยายขนาด",
+    aboutTitle: "ระบบ. การเพิ่มประสิทธิภาพ. การขยายขนาด",
     aboutDescFirst: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
     aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
-    aboutDescBold: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
-    aboutDescText: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
-    aboutBtn: "ดูประวัติการทำงาน",
 
     // Trust Stats
     stat1Num: "$1M+",
@@ -216,12 +157,6 @@ export const contentData = {
     stat3Name: "ประสบการณ์ (ปี)",
     stat3Sub: "การเติบโตและระบบ",
 
-    aboutMetrics: [
-      { value: "$1M+", label: "ประหยัดค่าธรรมเนียม", sub: "จากค่าคอมมิชชั่น OTA" },
-      { value: "20+", label: "แบรนด์ที่ขยาย", sub: "โมเดล B2B & Direct" },
-      { value: "10+", label: "ประสบการณ์ (ปี)", sub: "การเติบโตและระบบ" }
-    ],
-
     // Cases & Results
     proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
     case1Title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
@@ -231,47 +166,6 @@ export const contentData = {
     case2Title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
     case2Badge: "บูติกโฮเทล",
     case2Desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com",
-
-    aboutCases: [
-      {
-        badge: "พูลวิลล่ารีสอร์ท",
-        title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
-        desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ"
-      },
-      {
-        badge: "บูติกโฮเทล",
-        title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
-        desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com"
-      }
-    ],
-
-    // Nested object format
-    about: {
-      eyebrow: "GROWTH ARCHITECTURE",
-      titleHighlight: "ระบบ",
-      titleRest: "| การเพิ่มประสิทธิภาพ | การขยายขนาด",
-      descBold: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
-      descText: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
-      metrics: [
-        { value: "$1M+", label: "ประหยัดค่าธรรมเนียม", sub: "จากค่าคอมมิชชั่น OTA" },
-        { value: "20+", label: "แบรนด์ที่ขยาย", sub: "โมเดล B2B & Direct" },
-        { value: "10+", label: "ประสบการณ์ (ปี)", sub: "การเติบโตและระบบ" }
-      ],
-      provenLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
-      cases: [
-        {
-          badge: "พูลวิลล่ารีสอร์ท",
-          title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
-          desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ"
-        },
-        {
-          badge: "บูติกโฮเทล",
-          title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
-          desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com"
-        }
-      ],
-      ctaText: "ดูประวัติการทำงาน"
-    },
 
     // --- PRICING ---
     priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
