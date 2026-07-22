@@ -15,7 +15,8 @@ interface HeroProps {
 
 export default function Hero({ t }: HeroProps) {
   const [isMounted, setIsMounted] = useState(false);
-  const [liveAmount, setLiveAmount] = useState(148335);
+  // Стартовая сумма за месяц $4,850
+  const [liveAmount, setLiveAmount] = useState(4850);
   const [isTicking, setIsTicking] = useState(false);
 
   useEffect(() => {
@@ -32,10 +33,10 @@ export default function Hero({ t }: HeroProps) {
     document.head.appendChild(script);
 
     const interval = setInterval(() => {
-      setLiveAmount(prev => prev + Math.floor(Math.random() * 35) + 12);
+      setLiveAmount(prev => prev + Math.floor(Math.random() * 3) + 1);
       setIsTicking(true);
       setTimeout(() => setIsTicking(false), 300);
-    }, 1100);
+    }, 1200);
 
     return () => {
       clearInterval(interval);
@@ -56,7 +57,7 @@ export default function Hero({ t }: HeroProps) {
   };
 
   const formatCurrency = (num: number) => {
-    return '฿' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return '$' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
   const dotIndex = t.heroSub1.indexOf('. ');
@@ -278,7 +279,6 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.5rem;
         }
 
-        /* ОБНОВЛЕННЫЙ ТЕКСТ БЕЙДЖА */
         .sync-badge {
           display: inline-flex;
           align-items: center;
@@ -339,7 +339,6 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 1.2rem;
         }
 
-        /* ЦЕНТРИРОВАНИЕ ВНУТРИ КАРТОЧЕК */
         .bento-item {
           background: rgba(255, 255, 255, 0.025);
           border: 1px solid rgba(255, 255, 255, 0.06);
@@ -367,7 +366,6 @@ export default function Hero({ t }: HeroProps) {
           line-height: 1;
         }
 
-        /* СТИЛИЗОВАННЫЙ ЗНАК ПЛЮС */
         .stat-plus {
           font-size: clamp(1.4rem, 2.2vw, 1.9rem);
           font-weight: 700;
