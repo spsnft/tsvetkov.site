@@ -78,14 +78,34 @@ export const contentData = {
     tier3F4: "Custom Revenue Reports",
 
     // --- ABOUT ---
-    aboutTitle: "Systems, Optimization & Scale",
-    aboutDescFirst: "We step into business ecosystems to optimize them for maximum efficiency.",
+    aboutLabel: "Growth Architecture",
+    aboutTitle: "Systems / Optimization / Scale",
+    aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
     aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
     aboutBtn: "View Agency Profile",
-    caseBadge: "Featured Case Proof",
-    caseTitle: "Phuket Luxury Villa Resort (24 Keys)",
-    caseMetrics: "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
-    caseDesc: "Replaced manual channel management with an automated direct booking pipeline in 60 days.",
+
+    // Trust Stats
+    stat1Num: "10+",
+    stat1Name: "Years Exp.",
+    stat1Sub: "Growth & systems",
+    stat2Num: "30+",
+    stat2Name: "Brands Scaled",
+    stat2Sub: "B2B & Direct models",
+    stat3Num: "$2M+",
+    stat3Name: "Saved Fees",
+    stat3Sub: "In OTA commissions",
+
+    // Proof & Cases
+    proofLabel: "Proven Results",
+    case1Title: "Luxury Villa Resort (24 Keys)",
+    case1Badge: "Featured Proof",
+    case1Metrics: "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
+    case1Desc: "Replaced manual channel management with an automated direct booking pipeline in 60 days.",
+
+    case2Title: "Boutique Hotel (18 Keys)",
+    case2Badge: "Direct Engine",
+    case2Metrics: "+310% Google Traffic • 0% Overbooking Risk",
+    case2Desc: "Integrated Google Hotel Ads & direct engine, cutting Agoda dependence by half.",
     
     // --- FOOTER CTA ---
     footerTitle: "Ready to maximize your revenue?",
@@ -171,14 +191,34 @@ export const contentData = {
     tier3F4: "รายงานรายได้แบบกำหนดเอง",
 
     // --- ABOUT ---
-    aboutTitle: "ระบบ การเพิ่มประสิทธิภาพ และการขยายขนาด",
-    aboutDescFirst: "เราเข้าจัดการและเพิ่มประสิทธิภาพระบบธุรกิจเพื่อสร้างประสิทธิภาพสูงสุด",
+    aboutLabel: "Growth Architecture",
+    aboutTitle: "ระบบ / การเพิ่มประสิทธิภาพ / การขยายขนาด",
+    aboutDescFirst: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
     aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
     aboutBtn: "ดูประวัติการทำงาน",
-    caseBadge: "ผลลัพธ์จากเคสจริง",
-    caseTitle: "พูลวิลล่าหรู ภูเก็ต (24 ห้อง)",
-    caseMetrics: "ประหยัดค่า OTA +$2,800/เดือน • ยอดจองตรง +42%",
-    caseDesc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบรับจองตรงอัตโนมัติสำเร็จภายใน 60 วัน",
+
+    // Trust Stats
+    stat1Num: "10+",
+    stat1Name: "ประสบการณ์ (ปี)",
+    stat1Sub: "การเติบโตและระบบ",
+    stat2Num: "30+",
+    stat2Name: "แบรนด์ที่ขยาย",
+    stat2Sub: "โมเดล B2B & Direct",
+    stat3Num: "$2M+",
+    stat3Name: "ประหยัดค่าธรรมเนียม",
+    stat3Sub: "จากค่าคอมมิชชั่น OTA",
+
+    // Proof & Cases
+    proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
+    case1Title: "พูลวิลล่าหรู (24 ห้อง)",
+    case1Badge: "ผลลัพธ์เด่น",
+    case1Metrics: "ประหยัดค่า OTA +$2,800/เดือน • ยอดจองตรง +42%",
+    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบรับจองตรงอัตโนมัติสำเร็จภายใน 60 วัน",
+
+    case2Title: "บูติกโฮเทล (18 ห้อง)",
+    case2Badge: "ระบบจองตรง",
+    case2Metrics: "ทราฟฟิก Google +310% • ความเสี่ยงจองซ้ำ 0%",
+    case2Desc: "เชื่อมต่อ Google Hotel Ads และระบบจองตรง ลดการพึ่งพา Agoda ลงครึ่งหนึ่ง",
     
     // --- FOOTER CTA ---
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
