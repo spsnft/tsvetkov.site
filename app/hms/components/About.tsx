@@ -5,11 +5,9 @@ import { T } from '../../../src/theme/tokens';
 
 interface AboutProps {
   t?: {
-    aboutLabel?: string;
     aboutTitle?: string;
     aboutDescFirst?: string;
     aboutDescRest?: string;
-    aboutBtn?: string;
     stat1Num?: string;
     stat1Name?: string;
     stat1Sub?: string;
@@ -46,7 +44,7 @@ const renderCaseTitle = (title: string) => {
   return title;
 };
 
-// Хелпер для защиты ключевых словосочетаний в описании от уродливых переносов
+// Хелпер для защиты ключевых словосочетаний в описании от переносов
 const renderFormattedDesc = (desc: string) => {
   if (!desc) return null;
 
@@ -73,13 +71,10 @@ const renderFormattedDesc = (desc: string) => {
 };
 
 export default function About({ t }: AboutProps) {
-  const labelText = t?.aboutLabel || "GROWTH ARCHITECTURE";
   const titleText = t?.aboutTitle || "Systems. Optimization. Scale.";
   
   const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
   const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
-  
-  const btnText = t?.aboutBtn || t?.aboutButton || "View Agency Profile";
 
   const trustStats = [
     { num: t?.stat1Num || "$1M+", name: t?.stat1Name || "Saved Fees", sub: t?.stat1Sub || "In OTA commissions" },
@@ -107,24 +102,14 @@ export default function About({ t }: AboutProps) {
       <style jsx>{`
         .about-section {
           width: 100%;
-          padding: 3rem 0 3.5rem 0;
+          padding: 0 0 3.5rem 0; /* Верхний паддинг убран (0), снизу 3.5rem */
           background: transparent;
         }
 
-        /* --- ЕДИНЫЙ ЦЕНТРАЛЬНЫЙ ЗАГОЛОВОК (1-в-1 со ScalePractice) --- */
+        /* --- ЕДИНЫЙ ЦЕНТРАЛЬНЫЙ ЗАГОЛОВОК --- */
         .about-header {
           text-align: center;
           margin-bottom: 3.5rem;
-        }
-
-        .about-eyebrow {
-          color: ${T.sub};
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          margin: 0 0 0.5rem 0;
-          opacity: 0.8;
         }
 
         .about-title {
@@ -140,7 +125,7 @@ export default function About({ t }: AboutProps) {
           display: grid;
           grid-template-columns: 48fr 52fr;
           gap: 3.5rem;
-          align-items: stretch;
+          align-items: start; /* Колонки больше не растягиваются искусственно */
           box-sizing: border-box;
         }
         
@@ -148,8 +133,7 @@ export default function About({ t }: AboutProps) {
         .left-col {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          gap: 1.5rem;
+          gap: 1.75rem;
         }
 
         .description {
@@ -221,14 +205,6 @@ export default function About({ t }: AboutProps) {
 
         /* --- RIGHT COLUMN --- */
         .right-col {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          gap: 1.2rem;
-          height: 100%;
-        }
-
-        .right-top-content {
           display: flex;
           flex-direction: column;
           gap: 1.2rem;
@@ -327,52 +303,10 @@ export default function About({ t }: AboutProps) {
           text-wrap: pretty;
         }
 
-        .actions-row {
-          display: flex;
-          justify-content: flex-start;
-          width: 100%;
-        }
-        
-        .view-profile-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.6rem;
-          color: #ffffff !important;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          padding: 0.85rem 2rem;
-          border-radius: 10px;
-          font-weight: 600;
-          font-size: 0.95rem;
-          text-decoration: none;
-          backdrop-filter: blur(8px);
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          width: 100%;
-          box-sizing: border-box;
-        }
-        
-        .view-profile-btn:hover {
-          transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.07);
-          border-color: rgba(255, 255, 255, 0.25);
-          color: #ffffff !important;
-        }
-
-        .view-profile-btn svg {
-          width: 16px;
-          height: 16px;
-          transition: transform 0.2s ease;
-        }
-
-        .view-profile-btn:hover svg {
-          transform: translateX(3px);
-        }
-
         /* --- ПЛАНШЕТЫ (768px - 1024px) --- */
         @media (min-width: 768px) and (max-width: 1024px) {
           .about-section {
-            padding: 2.5rem 0 3rem 0;
+            padding: 0 0 3rem 0;
           }
           .about-header {
             margin-bottom: 2.5rem;
@@ -385,8 +319,7 @@ export default function About({ t }: AboutProps) {
             grid-template-columns: 48fr 52fr;
           }
           .left-col {
-            justify-content: flex-start;
-            gap: 1.75rem;
+            gap: 1.5rem;
           }
           .description {
             font-size: 0.95rem;
@@ -432,7 +365,7 @@ export default function About({ t }: AboutProps) {
         /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
         @media (max-width: 767px) {
           .about-section {
-            padding: 2.25rem 0 2.75rem 0;
+            padding: 0 0 2.5rem 0;
           }
           .about-header {
             margin-bottom: 2.25rem;
@@ -443,10 +376,8 @@ export default function About({ t }: AboutProps) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 2rem;
-            align-items: start;
           }
           .left-col, .right-col {
-            justify-content: start;
             gap: 1.25rem;
           }
           .description {
@@ -460,9 +391,6 @@ export default function About({ t }: AboutProps) {
           }
           .trust-stat-card {
             padding: 0.75rem 0.3rem;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
             border-radius: 10px;
           }
           .stat-num {
@@ -487,18 +415,13 @@ export default function About({ t }: AboutProps) {
             font-size: 0.82rem;
             line-height: 1.45;
           }
-          
-          .view-profile-btn {
-            width: 100%;
-          }
         }
       `}</style>
 
       <div className="container">
         
-        {/* CENTERED HEADER (Unified across sections) */}
+        {/* CENTERED HEADER */}
         <div className="about-header">
-          <p className="about-eyebrow">{labelText}</p>
           <h2 className="about-title">{titleText}</h2>
         </div>
 
@@ -523,40 +446,22 @@ export default function About({ t }: AboutProps) {
             </div>
           </div>
           
-          {/* RIGHT COLUMN: PROOF, CASES & CTA */}
+          {/* RIGHT COLUMN: PROOF & CASES */}
           <div className="right-col">
-            <div className="right-top-content">
-              <div className="proof-header">
-                <span className="proof-label">{proofLabel}</span>
-              </div>
-
-              <div className="cases-wrapper">
-                {cases.map((c, i) => (
-                  <div className="case-card" key={i}>
-                    <div className="case-header">
-                      <h3 className="case-title">{renderCaseTitle(c.title)}</h3>
-                      <span className="case-badge">{c.badge}</span>
-                    </div>
-                    <p className="case-desc">{renderFormattedDesc(c.desc)}</p>
-                  </div>
-                ))}
-              </div>
+            <div className="proof-header">
+              <span className="proof-label">{proofLabel}</span>
             </div>
 
-            {/* CTA BUTTON */}
-            <div className="actions-row">
-              <a 
-                href="https://tsvetkov.site" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="view-profile-btn"
-              >
-                <span>{btnText}</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
+            <div className="cases-wrapper">
+              {cases.map((c, i) => (
+                <div className="case-card" key={i}>
+                  <div className="case-header">
+                    <h3 className="case-title">{renderCaseTitle(c.title)}</h3>
+                    <span className="case-badge">{c.badge}</span>
+                  </div>
+                  <p className="case-desc">{renderFormattedDesc(c.desc)}</p>
+                </div>
+              ))}
             </div>
           </div>
 
