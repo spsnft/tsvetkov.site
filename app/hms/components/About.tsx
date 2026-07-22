@@ -28,7 +28,6 @@ interface AboutProps {
   };
 }
 
-// Хелпер для умного переноса заголовка кейса по разделителю "|"
 const renderCaseTitle = (title: string) => {
   if (!title) return null;
   if (title.includes(' | ')) {
@@ -44,7 +43,6 @@ const renderCaseTitle = (title: string) => {
   return title;
 };
 
-// Хелпер для защиты ключевых словосочетаний от разрывов
 const renderFormattedDesc = (desc: string) => {
   if (!desc) return null;
 
@@ -71,11 +69,10 @@ const renderFormattedDesc = (desc: string) => {
 };
 
 export default function About({ t }: AboutProps) {
-  // Заголовок с точками вместо палок |
   const titleText = t?.aboutTitle || "Systems. Optimization. Scale.";
   
   const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
-  const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
+  const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
 
   const trustStats = [
     { num: t?.stat1Num || "$1M+", name: t?.stat1Name || "Saved Fees", sub: t?.stat1Sub || "In OTA commissions" },
@@ -125,7 +122,7 @@ export default function About({ t }: AboutProps) {
           display: grid;
           grid-template-columns: 48fr 52fr;
           gap: 3.5rem;
-          align-items: start;
+          align-items: stretch; /* Растягиваем обе колонки на равную высоту */
           box-sizing: border-box;
         }
         
@@ -133,7 +130,24 @@ export default function About({ t }: AboutProps) {
         .left-col {
           display: flex;
           flex-direction: column;
-          gap: 1.75rem;
+          justify-content: space-between; /* Распределяем верх и низ */
+          gap: 1.5rem;
+        }
+
+        .left-top-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+
+        /* Невидимый корректор высоты, чтобы левый текст идеально совпадал по верхней линии с PROVEN RESULTS справа */
+        .col-label-placeholder {
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          visibility: hidden;
+          user-select: none;
         }
 
         .description {
@@ -172,6 +186,7 @@ export default function About({ t }: AboutProps) {
           gap: 0.25rem;
           backdrop-filter: blur(12px);
           transition: all 0.25s ease;
+          box-sizing: border-box;
         }
 
         .trust-stat-card:hover {
@@ -206,7 +221,8 @@ export default function About({ t }: AboutProps) {
         .right-col {
           display: flex;
           flex-direction: column;
-          gap: 1.2rem;
+          justify-content: space-between; /* Распределяем аналогично левой колонке */
+          gap: 1.5rem;
         }
 
         .proof-header {
@@ -227,8 +243,9 @@ export default function About({ t }: AboutProps) {
         .cases-wrapper {
           display: flex;
           flex-direction: column;
-          gap: 1.1rem;
-          width: 100%;
+          justify-content: space-between; /* Кейсы равномерно закладывают высоту */
+          gap: 1rem;
+          height: 100%;
         }
 
         .case-card {
@@ -236,13 +253,15 @@ export default function About({ t }: AboutProps) {
           background: rgba(12, 14, 20, 0.65);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          padding: 1.5rem 1.5rem; /* Чуть увеличили паддинг для идеального визуального баланса высот на ПК */
+          padding: 1.25rem 1.35rem;
           display: flex;
           flex-direction: column;
-          gap: 0.6rem;
+          justify-content: center;
+          gap: 0.5rem;
           backdrop-filter: blur(12px);
           box-sizing: border-box;
           transition: all 0.25s ease;
+          flex: 1; /* Одинаковый размер обеих карточек кейсов */
         }
 
         .case-card:hover {
@@ -292,12 +311,13 @@ export default function About({ t }: AboutProps) {
           padding: 0.2rem 0.55rem;
           border-radius: 4px;
           white-space: nowrap;
+          flex-shrink: 0;
         }
 
         .case-desc {
           font-size: 0.85rem;
           color: ${T.sub};
-          line-height: 1.5;
+          line-height: 1.48;
           margin: 0;
           text-wrap: pretty;
         }
@@ -316,12 +336,6 @@ export default function About({ t }: AboutProps) {
           .about-grid {
             gap: 2rem;
             grid-template-columns: 48fr 52fr;
-          }
-          .left-col {
-            gap: 1.25rem;
-          }
-          .right-col {
-            gap: 1rem;
           }
           .description {
             font-size: 0.95rem;
@@ -342,28 +356,21 @@ export default function About({ t }: AboutProps) {
           .stat-sub {
             font-size: 0.62rem;
           }
-          .cases-wrapper {
-            gap: 0.85rem;
-          }
           .case-header {
-            flex-direction: column-reverse;
-            align-items: flex-start;
-            gap: 0.35rem;
-          }
-          .case-badge {
-            align-self: flex-start;
+            flex-direction: row; /* Фиксируем в одну строку с бейджем, чтобы не ломать высоту */
+            align-items: center;
+            justify-content: space-between;
           }
           .case-card {
-            padding: 1.1rem 1.1rem;
+            padding: 1rem 1rem;
           }
           .case-title {
-            font-size: 0.92rem;
-            line-height: 1.35;
+            font-size: 0.88rem;
+            line-height: 1.3;
           }
           .case-desc {
-            font-size: 0.82rem;
-            line-height: 1.45;
-            text-wrap: pretty;
+            font-size: 0.8rem;
+            line-height: 1.4;
           }
         }
 
@@ -377,6 +384,9 @@ export default function About({ t }: AboutProps) {
           }
           .about-title {
             font-size: 1.75rem;
+          }
+          .col-label-placeholder {
+            display: none;
           }
           .about-grid {
             grid-template-columns: 1fr;
@@ -413,10 +423,10 @@ export default function About({ t }: AboutProps) {
           }
 
           .case-card {
-            padding: 1.25rem 1.25rem;
+            padding: 1.1rem 1.1rem;
           }
           .case-title {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             line-height: 1.35;
           }
           .case-desc {
@@ -427,18 +437,24 @@ export default function About({ t }: AboutProps) {
       `}</style>
 
       <div className="container">
+        
+        {/* CENTERED HEADER */}
         <div className="about-header">
           <h2 className="about-title">{titleText}</h2>
         </div>
 
         <div className="about-grid">
           
-          {/* LEFT COLUMN: BRAND & STATS */}
+          {/* LEFT COLUMN */}
           <div className="left-col">
-            <p className="description">
-              <span className="highlight-sentence">{firstSentence}</span>{' '}
-              <span className="dimmed-text">{restText}</span>
-            </p>
+            <div className="left-top-content">
+              {/* Невидимый выравниватель верхнего уровня */}
+              <span className="col-label-placeholder">ALIGNMENT</span>
+              <p className="description">
+                <span className="highlight-sentence">{firstSentence}</span>{' '}
+                <span className="dimmed-text">{restText}</span>
+              </p>
+            </div>
 
             <div className="trust-stats-grid">
               {trustStats.map((stat, i) => (
@@ -451,7 +467,7 @@ export default function About({ t }: AboutProps) {
             </div>
           </div>
           
-          {/* RIGHT COLUMN: PROOF & CASES */}
+          {/* RIGHT COLUMN */}
           <div className="right-col">
             <div className="proof-header">
               <span className="proof-label">{proofLabel}</span>
