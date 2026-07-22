@@ -13,22 +13,9 @@ interface HeroProps {
   };
 }
 
-interface LogEntry {
-  time: string;
-  text: string;
-}
-
 export default function Hero({ t }: HeroProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [liveAmount, setLiveAmount] = useState(148335);
-  
-  const [logs, setLogs] = useState<LogEntry[]>([
-    { time: '22:46:12', text: 'Booking.com room status locked' },
-    { time: '22:45:54', text: 'Traveloka calendar synced' },
-    { time: '22:44:01', text: 'Direct Booking • Room 101 secured' },
-    { time: '22:43:41', text: 'Agoda rate parity verified' },
-    { time: '22:41:10', text: 'Booking.com channel active' }
-  ]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -45,20 +32,7 @@ export default function Hero({ t }: HeroProps) {
 
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
-      
-      const now = new Date();
-      const timeStr = now.toTimeString().split(' ')[0];
-      const channels = ['Booking.com', 'Agoda', 'Traveloka', 'Trip.com'];
-      const actions = ['calendar updated', 'inventory synced', 'rate parity checked', 'room status locked'];
-      
-      const randomChannel = channels[Math.floor(Math.random() * channels.length)];
-      const randomAction = actions[Math.floor(Math.random() * actions.length)];
-      
-      setLogs(prev => [
-        { time: timeStr, text: `${randomChannel} ${randomAction}` },
-        ...prev.slice(0, 4)
-      ]);
-    }, 2000);
+    }, 2500);
 
     return () => {
       clearInterval(interval);
@@ -107,16 +81,10 @@ export default function Hero({ t }: HeroProps) {
           z-index: 10;
         }
 
-        /* FIX: Зажимаем контейнер и обрезаем макет СТРОГО по его правой границе 1200px */
-        .hero-section :global(.container) {
-          overflow: hidden;
-          position: relative;
-        }
-        
         .hero-grid {
           display: grid;
           grid-template-columns: 52fr 48fr;
-          gap: 1rem;
+          gap: 2rem;
           align-items: center;
           position: relative;
           box-sizing: border-box;
@@ -244,248 +212,217 @@ export default function Hero({ t }: HeroProps) {
           display: block;
         }
 
+        /* --- HYBRID 3D HUB VISUAL --- */
         .visual-column {
           position: relative;
           width: 100%;
-          height: 100%;
           display: flex;
           align-items: center;
+          justify-content: center;
           min-width: 0;
         }
 
-        .perspective-wrapper {
-          width: 100%;
-          perspective: 1400px;
+        .hybrid-hub-wrapper {
           position: relative;
+          width: 100%;
+          max-width: 480px;
+          aspect-ratio: 1 / 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          perspective: 1000px;
         }
 
-        .perspective-wrapper::before {
-          content: '';
+        .hub-glow-bg {
           position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(circle, rgba(0, 163, 255, 0.12) 0%, rgba(0, 229, 153, 0.04) 40%, transparent 70%);
-          transform: translate(-50%, -50%);
-          z-index: -1;
-          filter: blur(40px);
+          width: 70%;
+          height: 70%;
+          background: radial-gradient(circle, rgba(0, 229, 153, 0.18) 0%, rgba(0, 163, 255, 0.12) 50%, transparent 75%);
+          filter: blur(50px);
+          z-index: 1;
           pointer-events: none;
         }
-        
-        .dashboard-mockup {
-          width: 140%;
-          aspect-ratio: 16 / 10; 
-          background-color: rgba(10, 10, 14, 0.85);
-          backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 14px;
-          transform: rotateX(10deg) rotateY(-18deg) rotateZ(2deg) translateX(-10px); 
-          transform-origin: center center;
-          box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.12);
-          padding: 1.2rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.8rem;
-          position: relative;
-          -webkit-mask-image: linear-gradient(to right, black 65%, transparent 98%);
-          mask-image: linear-gradient(to right, black 65%, transparent 98%);
-        }
-        
-        .pms-header {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          padding-bottom: 0.5rem;
-        }
-        
-        .sync-status { 
-          display: flex; 
-          align-items: center; 
-          gap: 0.5rem; 
-          font-size: 0.72rem; 
-          color: rgba(255, 255, 255, 0.85); 
-          font-weight: 600; 
-          background: rgba(255, 255, 255, 0.04); 
-          padding: 0.25rem 0.65rem; 
-          border-radius: 20px; 
-          border: 1px solid rgba(255, 255, 255, 0.08); 
-        }
 
-        .pulse-dot { 
-          width: 6px; 
-          height: 6px; 
-          background-color: #00E599; 
-          border-radius: 50%; 
-          box-shadow: 0 0 8px #00E599;
-          animation: pulse 2s infinite; 
-        }
-        
-        .pms-body {
-          display: flex;
-          gap: 1.2rem;
-          flex: 1;
-          overflow: hidden;
-        }
-
-        .pms-analytics {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem; 
-          flex: 0 0 215px;
-          min-width: 0;
-          overflow: hidden;
-        }
-        
-        .widget {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          padding: 0.75rem 0.95rem;
-          border-radius: 8px;
-          min-width: 0;
-          overflow: hidden;
-        }
-        
-        .widget.primary-focus {
-          position: relative;
-          background: rgba(255, 255, 255, 0.03);
-        }
-
-        .widget.primary-focus::before {
-          content: '';
+        .svg-connections {
           position: absolute;
-          left: 0; top: 0; bottom: 0;
-          width: 3px;
-          background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%);
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 2;
+          pointer-events: none;
         }
 
-        .widget-label { font-size: 0.65rem; color: rgba(255, 255, 255, 0.45); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-        .widget-value { font-size: 1.45rem; font-weight: 700; color: #fff; font-family: 'SF Mono', monospace; line-height: 1; }
-        
-        .text-brand-gradient { 
+        .pulse-line {
+          stroke-dasharray: 8 12;
+          animation: dashMove 12s linear infinite;
+        }
+
+        @keyframes dashMove {
+          to { stroke-dashoffset: -200; }
+        }
+
+        .hero-hub-card {
+          position: relative;
+          z-index: 10;
+          width: 78%;
+          background: rgba(12, 14, 20, 0.85);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(0, 229, 153, 0.3);
+          border-radius: 20px;
+          padding: 1.8rem 1.5rem;
+          box-shadow: 
+            0 30px 60px rgba(0, 0, 0, 0.7),
+            inset 0 1px 1px rgba(255, 255, 255, 0.15),
+            0 0 30px rgba(0, 229, 153, 0.1);
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
+          transform: rotateX(4deg) rotateY(-6deg);
+          transition: transform 0.4s ease;
+        }
+
+        .hero-hub-card:hover {
+          transform: rotateX(0deg) rotateY(0deg) translateY(-4px);
+        }
+
+        .hub-header-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.68rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #00E599;
+          background: rgba(0, 229, 153, 0.08);
+          padding: 0.3rem 0.7rem;
+          border-radius: 20px;
+          border: 1px solid rgba(0, 229, 153, 0.25);
+          width: fit-content;
+        }
+
+        .pulse-dot-small {
+          width: 6px;
+          height: 6px;
+          background-color: #00E599;
+          border-radius: 50%;
+          box-shadow: 0 0 8px #00E599;
+          animation: pulse 2s infinite;
+        }
+
+        .hub-main-stat {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+
+        .stat-big {
+          font-size: clamp(2.4rem, 4vw, 3.2rem);
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.03em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
 
-        .widget-sub { font-size: 0.65rem; color: rgba(255, 255, 255, 0.35); margin-top: 0.3rem; }
-        
-        .mini-chart {
-          display: flex;
-          align-items: flex-end;
-          gap: 4px;
-          height: 24px;
-          margin-top: 0.4rem;
+        .stat-label {
+          font-size: 0.85rem;
+          color: #CBD5E1;
+          font-weight: 500;
         }
-        .bar { width: 12px; border-radius: 2px 2px 0 0; }
-        .bar.ota { background: rgba(255, 255, 255, 0.08); }
-        .bar.direct { background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%); opacity: 0.85; }
 
-        .logs-widget {
-          background: rgba(0, 0, 0, 0.3);
-          border: 1px solid rgba(255, 255, 255, 0.04);
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .logs-container {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between; 
-          height: 100%;
-          margin-top: 0.4rem;
-          font-family: 'SF Mono', monospace;
-          font-size: 0.62rem;
-        }
-        .log-line {
-          color: rgba(255, 255, 255, 0.55);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+        .hub-divider {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.08);
           width: 100%;
-          display: block;
-        }
-        .log-time {
-          color: rgba(255, 255, 255, 0.25);
-          margin-right: 0.4rem;
         }
 
-        .pms-matrix {
-          flex: 1;
-          min-width: 0;
-          background: rgba(0, 0, 0, 0.2);
-          border: 1px solid rgba(255, 255, 255, 0.04);
-          border-radius: 8px;
+        .hub-sub-stat {
           display: flex;
-          flex-direction: column;
-          overflow: hidden;
+          justify-content: space-between;
+          align-items: flex-end;
         }
-        .matrix-header {
-          display: grid;
-          grid-template-columns: 80px repeat(7, 1fr);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-          font-size: 0.65rem;
-          color: rgba(255, 255, 255, 0.4);
-          text-align: center;
-          background: rgba(255, 255, 255, 0.015);
+
+        .sub-stat-title {
+          font-size: 0.68rem;
+          color: rgba(255, 255, 255, 0.45);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
-        .matrix-header > div { padding: 0.6rem 0; border-right: 1px solid rgba(255, 255, 255, 0.02); }
-        
-        .matrix-row {
-          display: grid;
-          grid-template-columns: 80px repeat(7, 1fr);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-          flex: 1;
-          position: relative;
+
+        .sub-stat-value {
+          font-family: 'SF Mono', monospace;
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: #FFF;
+          margin-top: 0.2rem;
         }
-        .matrix-room-name {
+
+        .hub-status-tag {
           font-size: 0.7rem;
-          color: rgba(255, 255, 255, 0.5);
-          padding: 0 0.5rem;
-          display: flex;
-          align-items: center;
-          border-right: 1px solid rgba(255, 255, 255, 0.05);
-          background: rgba(13, 13, 17, 0.3);
-        }
-        
-        .booking {
-          position: absolute;
-          top: 6px; bottom: 6px;
+          color: #38BDF8;
+          font-weight: 600;
+          background: rgba(0, 163, 255, 0.1);
+          padding: 0.25rem 0.5rem;
           border-radius: 6px;
-          font-size: 0.65rem;
-          padding: 0 0.6rem;
+          border: 1px solid rgba(0, 163, 255, 0.25);
+        }
+
+        /* Orbiting Node Badges */
+        .node-badge {
+          position: absolute;
+          z-index: 12;
           display: flex;
           align-items: center;
-          overflow: hidden;
-          white-space: nowrap;
-          backdrop-filter: blur(6px);
+          gap: 0.5rem;
+          padding: 0.5rem 0.85rem;
+          background: rgba(18, 22, 31, 0.9);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 12px;
+          backdrop-filter: blur(12px);
+          box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+          font-size: 0.72rem;
+          font-weight: 600;
+          color: #FFF;
+          animation: float 5s ease-in-out infinite;
           transition: all 0.3s ease;
         }
 
-        .b-direct { 
-          background: rgba(0, 229, 153, 0.12);
-          border: 1px solid rgba(0, 229, 153, 0.5);
-          color: #00E599;
-          font-weight: 600;
-          box-shadow: inset 0 0 10px rgba(0, 229, 153, 0.12), 0 2px 8px rgba(0, 229, 153, 0.1);
+        .node-badge:hover {
+          border-color: #00E599;
+          transform: scale(1.05) !important;
+          box-shadow: 0 0 20px rgba(0, 229, 153, 0.3);
         }
 
-        .b-booking { 
-          background: rgba(0, 163, 255, 0.12);
-          border: 1px solid rgba(0, 163, 255, 0.5);
-          color: #38BDF8;
-          font-weight: 600;
-          box-shadow: inset 0 0 10px rgba(0, 163, 255, 0.12), 0 2px 8px rgba(0, 163, 255, 0.1);
+        .node-top-left {
+          top: 4%;
+          left: 2%;
+          animation-delay: 0s;
         }
 
-        .b-agoda { 
-          background: rgba(244, 63, 94, 0.12);
-          border: 1px solid rgba(244, 63, 94, 0.5);
-          color: #FB7185;
-          font-weight: 600;
-          box-shadow: inset 0 0 10px rgba(244, 63, 94, 0.12), 0 2px 8px rgba(244, 63, 94, 0.1);
+        .node-top-right {
+          top: 8%;
+          right: 0%;
+          animation-delay: 1.2s;
+        }
+
+        .node-bottom-left {
+          bottom: 6%;
+          left: 0%;
+          animation-delay: 2.5s;
+        }
+
+        .node-bottom-right {
+          bottom: 4%;
+          right: 2%;
+          animation-delay: 3.7s;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
         }
 
         @keyframes pulse {
@@ -499,15 +436,8 @@ export default function Hero({ t }: HeroProps) {
           .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
           .text-column { text-align: center; padding-right: 0; }
           .cta-container { flex-direction: column; align-items: center; }
-          .dashboard-mockup { 
-            transform: none !important; 
-            width: 100% !important; 
-            -webkit-mask-image: none;
-            mask-image: none;
-          }
-          .pms-body { flex-direction: column; }
-          .pms-analytics { flex: none; gap: 0.6rem; width: 100%; }
-          .pms-matrix { display: none; }
+          .hybrid-hub-wrapper { max-width: 380px; margin: 0 auto; }
+          .hero-hub-card { transform: none !important; width: 85%; }
         }
       `}</style>
 
@@ -544,76 +474,56 @@ export default function Hero({ t }: HeroProps) {
           </div>
 
           <div className="visual-column">
-            <div className="perspective-wrapper">
-              <div className="dashboard-mockup">
-                <div className="pms-header">
-                  <div className="sync-status"><div className="pulse-dot"></div>1s OTA Sync Active</div>
+            <div className="hybrid-hub-wrapper">
+              <div className="hub-glow-bg"></div>
+
+              {/* Connecting Lines SVG */}
+              <svg className="svg-connections" viewBox="0 0 400 400">
+                <line x1="80" y1="60" x2="200" y2="200" stroke="rgba(0, 229, 153, 0.25)" strokeWidth="1.5" className="pulse-line" />
+                <line x1="320" y1="70" x2="200" y2="200" stroke="rgba(0, 163, 255, 0.25)" strokeWidth="1.5" className="pulse-line" />
+                <line x1="70" y1="330" x2="200" y2="200" stroke="rgba(0, 163, 255, 0.25)" strokeWidth="1.5" className="pulse-line" />
+                <line x1="330" y1="320" x2="200" y2="200" stroke="rgba(0, 229, 153, 0.25)" strokeWidth="1.5" className="pulse-line" />
+              </svg>
+
+              {/* Orbiting Nodes */}
+              <div className="node-badge node-top-left">
+                <span style={{ color: '#003580', fontWeight: '800' }}>B.</span> Booking.com
+              </div>
+
+              <div className="node-badge node-top-right">
+                <span style={{ color: '#F43F5E', fontWeight: '800' }}>a.</span> Agoda
+              </div>
+
+              <div className="node-badge node-bottom-left">
+                <span style={{ color: '#FF5A5F', fontWeight: '800' }}>★</span> Airbnb
+              </div>
+
+              <div className="node-badge node-bottom-right">
+                <span style={{ color: '#25D366', fontWeight: '800' }}>⚡</span> Direct Sync
+              </div>
+
+              {/* Central Card */}
+              <div className="hero-hub-card">
+                <div className="hub-header-badge">
+                  <div className="pulse-dot-small"></div> Direct System Active
                 </div>
-                <div className="pms-body">
-                  <div className="pms-analytics">
-                    <div className="widget primary-focus">
-                      <div className="widget-label">OTA Margin Saved</div>
-                      <div className="widget-value text-brand-gradient">{formatCurrency(liveAmount)}</div>
-                      <div className="widget-sub">Current Month</div>
-                    </div>
-                    <div className="widget">
-                      <div className="widget-label">Occupancy / ADR</div>
-                      <div className="widget-value" style={{ fontSize: '1.25rem' }}>84% <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span> ฿4,250</div>
-                      <div className="mini-chart">
-                        <div className="bar ota" style={{ height: '40%' }}></div>
-                        <div className="bar direct" style={{ height: '30%' }}></div>
-                        <div className="bar ota" style={{ height: '60%' }}></div>
-                        <div className="bar direct" style={{ height: '50%' }}></div>
-                        <div className="bar direct" style={{ height: '70%' }}></div>
-                        <div className="bar direct" style={{ height: '85%' }}></div>
-                        <div className="bar direct" style={{ height: '100%' }}></div>
-                      </div>
-                    </div>
-                    <div className="widget">
-                      <div className="widget-label">RevPAR</div>
-                      <div className="widget-value">฿3,570</div>
-                      <div className="widget-sub">Per Available Room</div>
-                    </div>
-                    <div className="widget logs-widget">
-                      <div className="widget-label">Live Activity Log</div>
-                      <div className="logs-container">
-                        {logs.map((log, i) => (
-                          <div key={i} className="log-line">
-                            <span className="log-time">[{log.time}]</span>
-                            {log.text}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+
+                <div className="hub-main-stat">
+                  <div className="stat-big">+34%</div>
+                  <div className="stat-label">Direct Revenue Growth</div>
+                </div>
+
+                <div className="hub-divider"></div>
+
+                <div className="hub-sub-stat">
+                  <div>
+                    <div className="sub-stat-title">OTA Margin Saved</div>
+                    <div className="sub-stat-value">{formatCurrency(liveAmount)}</div>
                   </div>
-                  <div className="pms-matrix">
-                    <div className="matrix-header">
-                      <div>ROOM</div>
-                      <div>16 Dec</div><div>17 Dec</div><div>18 Dec</div><div>19 Dec</div><div>20 Dec</div><div>21 Dec</div><div>22 Dec</div>
-                    </div>
-                    <div className="matrix-row">
-                      <div className="matrix-room-name">Villa 1</div>
-                      <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(28.5% - 4px)' }}>Direct • Smith</div>
-                      <div className="booking b-booking" style={{ left: 'calc(80px + 35%)', width: 'calc(55% - 4px)' }}>Booking.com • Lee</div>
-                    </div>
-                    <div className="matrix-row">
-                      <div className="matrix-room-name">Villa 2</div>
-                      <div className="booking b-agoda" style={{ left: 'calc(80px + 10%)', width: 'calc(45% - 4px)' }}>Agoda • Kumar</div>
-                      <div className="booking b-direct" style={{ left: 'calc(80px + 65%)', width: 'calc(30% - 4px)' }}>Direct • VIP</div>
-                    </div>
-                    <div className="matrix-row">
-                      <div className="matrix-room-name">Room 101</div>
-                      <div className="booking b-direct" style={{ left: 'calc(80px + 0%)', width: 'calc(57.1% - 4px)' }}>Direct • Johnson</div>
-                      <div className="booking b-booking" style={{ left: 'calc(80px + 60%)', width: 'calc(40% - 4px)' }}>Booking.com • Davis</div>
-                    </div>
-                    <div className="matrix-row">
-                      <div className="matrix-room-name">Room 102</div>
-                      <div className="booking b-booking" style={{ left: 'calc(80px + 0%)', width: 'calc(35% - 4px)' }}>Booking.com • Brown</div>
-                      <div className="booking b-direct" style={{ left: 'calc(80px + 38%)', width: 'calc(62% - 4px)' }}>Direct • Website</div>
-                    </div>
-                  </div>
+                  <div className="hub-status-tag">0% Commission</div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
