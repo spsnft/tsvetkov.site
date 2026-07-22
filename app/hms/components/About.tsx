@@ -86,7 +86,7 @@ export default function About({ t }: AboutProps) {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         .left-top-content {
@@ -96,13 +96,12 @@ export default function About({ t }: AboutProps) {
         }
         
         .sub-label {
-          color: ${T.sub};
+          color: #00E599;
           font-size: 0.75rem;
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
           margin: 0;
-          opacity: 0.8;
         }
         
         .main-title {
@@ -133,7 +132,7 @@ export default function About({ t }: AboutProps) {
           color: ${T.sub};
         }
 
-        /* 3 TRUST STATS: Выравнивание по центру + фирменный градиент */
+        /* 3 TRUST STATS: Увеличенные солидные карточки с неоновым акцентом */
         .trust-stats-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -142,27 +141,31 @@ export default function About({ t }: AboutProps) {
         }
 
         .trust-stat-card {
-          background: rgba(12, 14, 20, 0.6);
+          background: rgba(12, 14, 20, 0.75);
           border: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 2px solid #00E599;
           border-radius: 12px;
-          padding: 1.1rem 0.8rem;
+          padding: 1.4rem 0.9rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           text-align: center;
-          gap: 0.2rem;
+          gap: 0.3rem;
           backdrop-filter: blur(12px);
-          transition: border-color 0.25s ease, background 0.25s ease;
+          transition: all 0.25s ease;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
         .trust-stat-card:hover {
-          background: rgba(255, 255, 255, 0.03);
-          border-color: rgba(0, 229, 153, 0.35);
+          background: rgba(22, 27, 38, 0.85);
+          border-color: rgba(0, 229, 153, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 12px 30px rgba(0, 229, 153, 0.12);
         }
 
         .stat-num {
-          font-size: 1.65rem;
+          font-size: 1.75rem;
           font-weight: 800;
           letter-spacing: -0.02em;
           line-height: 1;
@@ -172,14 +175,14 @@ export default function About({ t }: AboutProps) {
         }
 
         .stat-name {
-          font-size: 0.8rem;
+          font-size: 0.82rem;
           font-weight: 700;
           color: #ffffff;
-          margin-top: 0.3rem;
+          margin-top: 0.2rem;
         }
 
         .stat-sub {
-          font-size: 0.68rem;
+          font-size: 0.7rem;
           color: ${T.sub};
           line-height: 1.3;
         }
@@ -189,7 +192,7 @@ export default function About({ t }: AboutProps) {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          gap: 1.2rem;
+          gap: 1.5rem;
         }
 
         .right-top-content {
@@ -220,27 +223,27 @@ export default function About({ t }: AboutProps) {
           width: 100%;
         }
 
-        /* Карточка кейсов с мятно-голубой неоновой рамкой */
+        /* КЕЙСЫ С ФИРМЕННЫМ НЕОНОВЫМ СТИЛЕМ */
         .case-card {
           width: 100%;
-          background: rgba(12, 14, 20, 0.6);
+          background: rgba(12, 14, 20, 0.75);
           border: 1px solid rgba(0, 229, 153, 0.2);
           border-radius: 14px;
-          padding: 1.35rem 1.5rem;
+          padding: 1.4rem 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.55rem;
           backdrop-filter: blur(12px);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
           box-sizing: border-box;
-          transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+          transition: all 0.25s ease;
         }
 
         .case-card:hover {
-          background: rgba(22, 27, 38, 0.8);
+          background: rgba(18, 22, 32, 0.9);
           border-color: rgba(0, 229, 153, 0.45);
           transform: translateY(-2px);
-          box-shadow: 0 12px 35px rgba(0, 229, 153, 0.1);
+          box-shadow: 0 12px 35px rgba(0, 229, 153, 0.15);
         }
 
         .case-header {
@@ -263,9 +266,9 @@ export default function About({ t }: AboutProps) {
           letter-spacing: 0.1em;
           text-transform: uppercase;
           color: #00E599;
-          background: rgba(0, 229, 153, 0.1);
+          background: rgba(0, 229, 153, 0.08);
           border: 1px solid rgba(0, 229, 153, 0.25);
-          padding: 0.25rem 0.6rem;
+          padding: 0.25rem 0.65rem;
           border-radius: 6px;
           white-space: nowrap;
         }
@@ -275,6 +278,7 @@ export default function About({ t }: AboutProps) {
           font-weight: 700;
           color: #00E599;
           margin: 0;
+          letter-spacing: -0.01em;
         }
 
         .case-desc {
@@ -284,7 +288,7 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* Выравнивание кнопки строго по нижней границе левых буллитов */
+        /* КНОПКА С ФИРМЕННЫМ ДИЗАЙНОМ */
         .actions-row {
           display: flex;
           justify-content: flex-start;
@@ -298,24 +302,25 @@ export default function About({ t }: AboutProps) {
           gap: 0.6rem;
           color: #ffffff !important;
           background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          padding: 0.9rem 2rem;
+          border: 1px solid rgba(0, 229, 153, 0.3);
+          padding: 0.95rem 2rem;
           border-radius: 10px;
-          font-weight: 600;
+          font-weight: 700;
           font-size: 0.95rem;
           text-decoration: none;
           backdrop-filter: blur(8px);
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           width: 100%;
           box-sizing: border-box;
+          box-shadow: 0 4px 15px rgba(0, 229, 153, 0.08);
         }
         
         .view-profile-btn:hover {
           transform: translateY(-2px);
-          background: rgba(0, 229, 153, 0.08);
-          border-color: rgba(0, 229, 153, 0.5);
+          background: rgba(0, 229, 153, 0.1);
+          border-color: rgba(0, 229, 153, 0.6);
           color: #00E599 !important;
-          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.2);
+          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.22);
         }
 
         .view-profile-btn svg {
@@ -415,7 +420,7 @@ export default function About({ t }: AboutProps) {
               </div>
             </div>
 
-            {/* CTA BUTTON (target="_blank") */}
+            {/* CTA BUTTON */}
             <div className="actions-row">
               <a 
                 href="https://tsvetkov.site" 
