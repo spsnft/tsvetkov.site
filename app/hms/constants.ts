@@ -79,29 +79,29 @@ export const contentData = {
 
     // --- ABOUT ---
     aboutLabel: "Growth Architecture",
-    aboutTitle: "Systems / Optimization / Scale",
+    aboutTitle: "Systems | Optimization | Scale",
     aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
     aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
     aboutBtn: "View Agency Profile",
 
-    // Trust Stats
-    stat1Num: "$2M+",
+    // Trust Stats ($1M+ и 20+ обновлены)
+    stat1Num: "$1M+",
     stat1Name: "Saved Fees",
     stat1Sub: "In OTA commissions",
-    stat2Num: "30+",
+    stat2Num: "20+",
     stat2Name: "Brands Scaled",
     stat2Sub: "B2B & Direct models",
     stat3Num: "10+",
-    stat3Name: "Years Exp.",
+    stat3Name: "Years Experience",
     stat3Sub: "Growth & systems",
 
-    // Proof & Cases
+    // Proof & Cases (Разделители "|")
     proofLabel: "Proven Results",
-    case1Title: "+$2,800/mo saved in OTA fees / +42% Direct Bookings",
+    case1Title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
     case1Badge: "Villa Resort",
     case1Desc: "Replaced manual management with an automated Direct Engine",
 
-    case2Title: "+310% Google Traffic / Zero Double-Bookings",
+    case2Title: "+310% Google Traffic | Zero Double-Bookings",
     case2Badge: "Boutique Hotel",
     case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence",
     
@@ -190,16 +190,16 @@ export const contentData = {
 
     // --- ABOUT ---
     aboutLabel: "Growth Architecture",
-    aboutTitle: "ระบบ / การเพิ่มประสิทธิภาพ / การขยายขนาด",
+    aboutTitle: "ระบบ | การเพิ่มประสิทธิภาพ | การขยายขนาด",
     aboutDescFirst: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
     aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
     aboutBtn: "ดูประวัติการทำงาน",
 
     // Trust Stats
-    stat1Num: "$2M+",
+    stat1Num: "$1M+",
     stat1Name: "ประหยัดค่าธรรมเนียม",
     stat1Sub: "จากค่าคอมมิชชั่น OTA",
-    stat2Num: "30+",
+    stat2Num: "20+",
     stat2Name: "แบรนด์ที่ขยาย",
     stat2Sub: "โมเดล B2B & Direct",
     stat3Num: "10+",
@@ -208,11 +208,11 @@ export const contentData = {
 
     // Proof & Cases
     proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
-    case1Title: "ประหยัดค่า OTA +$2,800/เดือน / ยอดจองตรง +42%",
+    case1Title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
     case1Badge: "พูลวิลล่ารีสอร์ท",
     case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ",
 
-    case2Title: "ทราฟฟิก Google +310% / ป้องกันการจองซ้ำซ้อน 100%",
+    case2Title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
     case2Badge: "บูติกโฮเทล",
     case2Desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com",
     
