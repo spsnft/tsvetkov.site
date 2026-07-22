@@ -10,36 +10,61 @@ interface AboutProps {
     aboutDescFirst?: string;
     aboutDescRest?: string;
     aboutBtn?: string;
+    stat1Num?: string;
+    stat1Name?: string;
+    stat1Sub?: string;
+    stat2Num?: string;
+    stat2Name?: string;
+    stat2Sub?: string;
+    stat3Num?: string;
+    stat3Name?: string;
+    stat3Sub?: string;
+    proofLabel?: string;
+    case1Title?: string;
+    case1Badge?: string;
+    case1Metrics?: string;
+    case1Desc?: string;
+    case2Title?: string;
+    case2Badge?: string;
+    case2Metrics?: string;
+    case2Desc?: string;
     [key: string]: any;
   };
 }
 
 export default function About({ t }: AboutProps) {
   const labelText = t?.aboutLabel || "Growth Architecture";
-  
-  // Заголовок со слешами для идеальной посадки в одну строку
   const titleText = t?.aboutTitle || "Systems / Optimization / Scale";
   
-  const firstSentence = t?.aboutDescFirst || "We step into business ecosystems to optimize them for maximum efficiency.";
+  const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
   const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
   
   const btnText = t?.aboutBtn || t?.aboutButton || "View Agency Profile";
 
-  // Деанонимизированные кейсы без привязки к локациям
+  // Trust Stats из constants
+  const trustStats = [
+    { num: t?.stat1Num || "10+", name: t?.stat1Name || "Years Exp.", sub: t?.stat1Sub || "Growth & systems" },
+    { num: t?.stat2Num || "30+", name: t?.stat2Name || "Brands Scaled", sub: t?.stat2Sub || "B2B & Direct models" },
+    { num: t?.stat3Num || "$2M+", name: t?.stat3Name || "Saved Fees", sub: t?.stat3Sub || "In OTA commissions" }
+  ];
+
+  // Кейсы из constants
   const cases = [
     {
-      title: "Luxury Villa Resort (24 Keys)",
-      badge: "Featured Proof",
-      metrics: "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
-      desc: "Replaced manual channel management with an automated direct booking pipeline in 60 days."
+      title: t?.case1Title || "Luxury Villa Resort (24 Keys)",
+      badge: t?.case1Badge || "Featured Proof",
+      metrics: t?.case1Metrics || "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
+      desc: t?.case1Desc || "Replaced manual channel management with an automated direct booking pipeline in 60 days."
     },
     {
-      title: "Boutique Hotel (18 Keys)",
-      badge: "Direct Engine",
-      metrics: "+310% Google Traffic • 0% Overbooking Risk",
-      desc: "Integrated Google Hotel Ads & direct engine, cutting Agoda dependence by half."
+      title: t?.case2Title || "Boutique Hotel (18 Keys)",
+      badge: t?.case2Badge || "Direct Engine",
+      metrics: t?.case2Metrics || "+310% Google Traffic • 0% Overbooking Risk",
+      desc: t?.case2Desc || "Integrated Google Hotel Ads & direct engine, cutting Agoda dependence by half."
     }
   ];
+
+  const proofLabel = t?.proofLabel || "Proven Results";
 
   return (
     <section className="about-section">
@@ -75,15 +100,15 @@ export default function About({ t }: AboutProps) {
           opacity: 0.8;
         }
         
-        /* Фикс заголовка в одну строку */
+        /* Заголовок строго в 1 строку */
         .main-title {
-          font-size: clamp(1.5rem, 2.3vw, 2.2rem);
+          font-size: clamp(1.4rem, 2.2vw, 2.1rem);
           font-weight: 700;
           line-height: 1.2;
           letter-spacing: -0.02em;
           margin: 0;
           white-space: nowrap;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          background: linear-gradient(135deg, #38BDF8 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -104,7 +129,7 @@ export default function About({ t }: AboutProps) {
           color: ${T.sub};
         }
 
-        /* 3 TRUST BULLETS IN LEFT COL */
+        /* 3 TRUST BULLETS IN BRAND CYAN */
         .trust-stats-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -126,7 +151,7 @@ export default function About({ t }: AboutProps) {
         .stat-num {
           font-size: 1.5rem;
           font-weight: 800;
-          color: #00E599;
+          color: #38BDF8;
           letter-spacing: -0.02em;
           line-height: 1;
         }
@@ -176,7 +201,7 @@ export default function About({ t }: AboutProps) {
         .case-card {
           width: 100%;
           background: rgba(12, 14, 20, 0.6);
-          border: 1px solid rgba(0, 229, 153, 0.2);
+          border: 1px solid rgba(56, 189, 248, 0.2);
           border-radius: 14px;
           padding: 1.3rem 1.5rem;
           display: flex;
@@ -190,7 +215,7 @@ export default function About({ t }: AboutProps) {
 
         .case-card:hover {
           background: rgba(255, 255, 255, 0.03);
-          border-color: rgba(0, 229, 153, 0.4);
+          border-color: rgba(56, 189, 248, 0.4);
         }
 
         .case-header {
@@ -212,9 +237,9 @@ export default function About({ t }: AboutProps) {
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: #00E599;
-          background: rgba(0, 229, 153, 0.1);
-          border: 1px solid rgba(0, 229, 153, 0.2);
+          color: #38BDF8;
+          background: rgba(56, 189, 248, 0.1);
+          border: 1px solid rgba(56, 189, 248, 0.2);
           padding: 0.2rem 0.55rem;
           border-radius: 4px;
           white-space: nowrap;
@@ -223,7 +248,7 @@ export default function About({ t }: AboutProps) {
         .case-metrics {
           font-size: 0.92rem;
           font-weight: 700;
-          color: #00E599;
+          color: #38BDF8;
           margin: 0;
         }
 
@@ -234,7 +259,7 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* Перенесенная кнопка под кейсы */
+        /* Кнопка в правой колонке под кейсами */
         .actions-row {
           margin-top: 0.4rem;
           display: flex;
@@ -262,9 +287,9 @@ export default function About({ t }: AboutProps) {
         .view-profile-btn:hover {
           transform: translateY(-2px);
           background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(0, 229, 153, 0.5);
+          border-color: rgba(56, 189, 248, 0.5);
           color: #ffffff !important;
-          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.12);
+          box-shadow: 0 8px 25px rgba(56, 189, 248, 0.12);
         }
 
         .view-profile-btn svg {
@@ -329,30 +354,20 @@ export default function About({ t }: AboutProps) {
 
             {/* 3 TRUST STAT BULLETS */}
             <div className="trust-stats-grid">
-              <div className="trust-stat-card">
-                <span className="stat-num">10+</span>
-                <span className="stat-name">Years Exp.</span>
-                <span className="stat-sub">Growth &amp; systems</span>
-              </div>
-
-              <div className="trust-stat-card">
-                <span className="stat-num">30+</span>
-                <span className="stat-name">Brands Scaled</span>
-                <span className="stat-sub">B2B &amp; Direct models</span>
-              </div>
-
-              <div className="trust-stat-card">
-                <span className="stat-num">$2M+</span>
-                <span className="stat-name">Saved Fees</span>
-                <span className="stat-sub">In OTA commissions</span>
-              </div>
+              {trustStats.map((stat, i) => (
+                <div className="trust-stat-card" key={i}>
+                  <span className="stat-num">{stat.num}</span>
+                  <span className="stat-name">{stat.name}</span>
+                  <span className="stat-sub">{stat.sub}</span>
+                </div>
+              ))}
             </div>
           </div>
           
           {/* RIGHT COLUMN: PROOF, CASES & CTA */}
           <div className="right-col">
             <div className="proof-header">
-              <span className="proof-label">Proven Results</span>
+              <span className="proof-label">{proofLabel}</span>
             </div>
 
             <div className="cases-wrapper">
@@ -368,7 +383,7 @@ export default function About({ t }: AboutProps) {
               ))}
             </div>
 
-            {/* Кнопка перехода на агентство под кейсами */}
+            {/* Кнопка под кейсами */}
             <div className="actions-row">
               <a 
                 href="https://tsvetkov.site" 
