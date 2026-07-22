@@ -84,7 +84,7 @@ export const contentData = {
     aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
     aboutBtn: "View Agency Profile",
 
-    // Trust Stats ($2M+ первым, 10+ лет последним)
+    // Trust Stats
     stat1Num: "$2M+",
     stat1Name: "Saved Fees",
     stat1Sub: "In OTA commissions",
@@ -95,16 +95,14 @@ export const contentData = {
     stat3Name: "Years Exp.",
     stat3Sub: "Growth & systems",
 
-    // Proof & Cases (Без точек в конце)
+    // Proof & Cases
     proofLabel: "Proven Results",
-    case1Title: "Luxury Villa Resort",
-    case1Badge: "CASE 01",
-    case1Metrics: "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
+    case1Title: "+$2,800/mo saved in OTA fees / +42% Direct Bookings",
+    case1Badge: "Villa Resort",
     case1Desc: "Replaced manual management with an automated Direct Engine",
 
-    case2Title: "Boutique Hotel",
-    case2Badge: "CASE 02",
-    case2Metrics: "+310% Google Traffic • 0% Overbooking Risk",
+    case2Title: "+310% Google Traffic / Zero Double-Bookings",
+    case2Badge: "Boutique Hotel",
     case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence",
     
     // --- FOOTER CTA ---
@@ -210,14 +208,12 @@ export const contentData = {
 
     // Proof & Cases
     proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
-    case1Title: "พูลวิลล่าหรู",
-    case1Badge: "เคสที่ 01",
-    case1Metrics: "ประหยัดค่า OTA +$2,800/เดือน • ยอดจองตรง +42%",
+    case1Title: "ประหยัดค่า OTA +$2,800/เดือน / ยอดจองตรง +42%",
+    case1Badge: "พูลวิลล่ารีสอร์ท",
     case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ",
 
-    case2Title: "บูติกโฮเทล",
-    case2Badge: "เคสที่ 02",
-    case2Metrics: "ทราฟฟิก Google +310% • ความเสี่ยงจองซ้ำ 0%",
+    case2Title: "ทราฟฟิก Google +310% / ป้องกันการจองซ้ำซ้อน 100%",
+    case2Badge: "บูติกโฮเทล",
     case2Desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com",
     
     // --- FOOTER CTA ---
