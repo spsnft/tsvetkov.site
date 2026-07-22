@@ -271,7 +271,7 @@ export default function Pricing({ t }: PricingProps) {
           <div className="card">
             <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
             <div className="price-block">
-              <span className="price">{t?.tier1Price || "$500"}</span>
+              <span className="price">{t?.tier1Price || "$900"}</span>
               <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
             </div>
             <ul className="features-list">
@@ -287,7 +287,7 @@ export default function Pricing({ t }: PricingProps) {
             <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
             <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
             <div className="price-block">
-              <span className="price">{t?.tier2Price || "$1,200"}</span>
+              <span className="price">{t?.tier2Price || "$1,500"}</span>
               <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
             </div>
             <ul className="features-list">
