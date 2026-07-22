@@ -14,7 +14,26 @@ const CARD_ASSETS = [
   '/assets/growth.webp'
 ];
 
-// Хелпер для парсинга **bold** и неразрывных связок на мобилке (пункты 9, 10, 11)
+// Дефолтные данные по Варианту А (для корректной работы без t)
+const DEFAULT_ITEMS = [
+  {
+    pain: "24/7 MANUAL UPDATES",
+    endValue: "Instant Sync",
+    desc: "**Cloud PMS & Channel Manager** integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
+  },
+  {
+    pain: "15–20% OTA COMMISSIONS",
+    endValue: "100% Direct Revenue",
+    desc: "**Zero-commission booking engine** with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
+  },
+  {
+    pain: "FULL OTA DEPENDENCY",
+    endValue: "Predictable Scale",
+    desc: "**Local SEO optimization** to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
+  }
+];
+
+// Хелпер для парсинга **bold** и неразрывных связок на мобилке
 const renderFormattedText = (text: string) => {
   if (!text) return null;
 
@@ -22,6 +41,8 @@ const renderFormattedText = (text: string) => {
   let processed = text
     .replace(/Agoda & 300\+ OTAs/g, 'Agoda <span class="nobr">& 300+ OTAs</span>')
     .replace(/keep all revenue in-house/g, '<span class="nobr">keep all revenue in-house</span>')
+    .replace(/past stays into lifetime revenue/g, '<span class="nobr">past stays into lifetime revenue</span>')
+    .replace(/guest retention loops/g, '<span class="nobr">guest retention loops</span>')
     .replace(/returning guests/g, '<span class="nobr">returning guests</span>');
 
   // 2. Разбиваем по тегам **bold**
@@ -66,10 +87,10 @@ const renderFormattedText = (text: string) => {
 };
 
 export default function ScalePractice({ t }: ScalePracticeProps) {
-  const items = t?.scaleItems || [];
+  const items = t?.scaleItems || DEFAULT_ITEMS;
   const subtitleText = t?.scaleSub || "Automate workflows so your team can focus on guest experience";
 
-  // Разрываем подзаголовок после "your team" на мобилке (пункт 8)
+  // Разрываем подзаголовок после "your team" на мобилке
   const renderSubtitle = (sub: string) => {
     const target = "so your team";
     if (sub.includes(target)) {
@@ -295,7 +316,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             font-size: 0.95rem;
           }
           .mobile-br {
-            display: inline; /* Включаем перенос после "your team" на мобилке */
+            display: inline;
           }
           .scale-grid {
             grid-template-columns: 1fr;
@@ -322,7 +343,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         <div className="scale-grid">
           {items.map((item: any, idx: number) => {
-            const metricTitle = `${item.endValue}${item.suffix || ''}${item.fixText || ''}`;
+            const metricTitle = item.endValue
+              ? `${item.endValue}${item.suffix || ''}${item.fixText || ''}`
+              : item.title || "";
             
             return (
               <div className="scale-card" key={idx}>
