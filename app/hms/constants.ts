@@ -2,21 +2,21 @@ export const contentData = {
   en: {
     // --- HERO SECTION ---
     badge: "Hospitality Growth Solutions",
-    heroTitle: "Stop paying 15–20% commission to Booking.com & Agoda",
-    heroSub1: "Connect directly with guests • Zero human error & double-bookings",
-    heroSub2: "Keep 100% of your revenue",
-    btnAudit: "Book Free Audit",
+    heroTitle: "Stop Paying 15-20% Commissions to Booking.com & Agoda",
+    heroSub1: "Connect your property directly to guests. Zero risk of human error and double-bookings",
+    heroSub2: "Keep 100% of the profit in your pocket",
+    btnAudit: "Book a Free Audit",
     btnChat: "WhatsApp",
     btnLine: "Line",
 
     // Hero Bento Widget Text
-    syncBadge: "DIRECT BOOKING SYNC",
-    otaSavedLabel: "OTA Commissions Saved",
+    syncBadge: "DIRECT BOOKING SYNCHRONIZATION",
+    otaSavedLabel: "OTA Margin Saved",
     statDirectRevenue: "Direct Revenue",
     statMarginGuest: "Margin per Guest",
     statGoogleTraffic: "Google Traffic",
-    statRepeatBookings: "Repeat Stays",
-
+    statRepeatBookings: "Repeat Bookings",
+    
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Scale your property bookings",
     scaleSub: "Automate workflows so your team can focus on guest experience",
@@ -41,8 +41,12 @@ export const contentData = {
     // --- ABOUT & EXPERTISE SECTION ---
     aboutLabel: "Growth Architecture",
     aboutTitle: "Systems | Optimization | Scale",
+    aboutTitleHighlight: "Systems",
+    aboutTitleRest: "| Optimization | Scale",
     aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
-    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
+    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
+    aboutDescBold: "We step into business to optimize them for maximum efficiency.",
+    aboutDescText: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
     aboutBtn: "View Agency Profile",
 
     // Trust Stats
@@ -56,6 +60,12 @@ export const contentData = {
     stat3Name: "Years Experience",
     stat3Sub: "Growth & systems",
 
+    aboutMetrics: [
+      { value: "$1M+", label: "Saved Fees", sub: "In OTA commissions" },
+      { value: "20+", label: "Brands Scaled", sub: "B2B & Direct models" },
+      { value: "10+", label: "Years Experience", sub: "Growth & systems" }
+    ],
+
     // Cases & Results
     proofLabel: "Proven Results",
     case1Title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
@@ -66,249 +76,238 @@ export const contentData = {
     case2Badge: "Boutique Hotel",
     case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence",
 
-    // --- PRICING ---
-    priceTitle: "Transparent setup. Total independence",
-    priceSub: "One-time setup fee. 0% commission on direct bookings forever",
-    pricePopular: "Popular",
+    aboutCases: [
+      {
+        badge: "VILLA RESORT",
+        title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
+        desc: "Replaced manual management with an automated Direct Engine"
+      },
+      {
+        badge: "BOUTIQUE HOTEL",
+        title: "+310% Google Traffic | Zero Double-Bookings",
+        desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
+      }
+    ],
 
-    tier1Title: "LITE (1–10 rooms)",
+    // Nested object format
+    about: {
+      eyebrow: "GROWTH ARCHITECTURE",
+      titleHighlight: "Systems",
+      titleRest: "| Optimization | Scale",
+      descBold: "We step into business to optimize them for maximum efficiency.",
+      descText: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
+      metrics: [
+        { value: "$1M+", label: "Saved Fees", sub: "In OTA commissions" },
+        { value: "20+", label: "Brands Scaled", sub: "B2B & Direct models" },
+        { value: "10+", label: "Years Experience", sub: "Growth & systems" }
+      ],
+      provenLabel: "PROVEN RESULTS",
+      cases: [
+        {
+          badge: "VILLA RESORT",
+          title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
+          desc: "Replaced manual management with an automated Direct Engine"
+        },
+        {
+          badge: "BOUTIQUE HOTEL",
+          title: "+310% Google Traffic | Zero Double-Bookings",
+          desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
+        }
+      ],
+      ctaText: "View Agency Profile"
+    },
+
+    // --- PRICING ---
+    priceTitle: "Transparent Integration. Permanent Independence",
+    priceSub: "One-time setup fee. Zero commission on direct bookings forever",
+    pricePopular: "Popular",
+    
+    tier1Title: "LITE (1-10 Rooms)",
     tier1Price: "$900",
     tier1Desc: "For small villas & guesthouses",
-    tier1F1: "Cloud PMS setup",
-    tier1F2: "0% Direct Booking Engine",
-    tier1F3: "Booking & Agoda sync",
-    tier1F4: "Google Maps setup",
-
-    tier2Title: "STANDARD (10–30 rooms)",
+    tier1F1: "Cloud PMS Setup",
+    tier1F2: "0% Commission Engine",
+    tier1F3: "Booking & Agoda Sync",
+    tier1F4: "Google Maps Setup",
+    
+    tier2Title: "STANDARD (10-30 Rooms)",
     tier2Price: "$1,500",
     tier2Desc: "For boutique hotels & resorts",
     tier2F1: "Everything in ",
     tier2F1Badge: "LITE",
-    tier2F2: "300+ OTA channels connected",
-    tier2F3: "Guest retention system",
-    tier2F4: "Staff checklists & guides",
-
-    tier3Title: "ENTERPRISE (30+ rooms)",
+    tier2F2: "Connect 300+ OTA Channels",
+    tier2F3: "Guest Return System",
+    tier2F4: "Staff Guides & Checklists",
+    
+    tier3Title: "ENTERPRISE (30+ Rooms)",
     tier3Price: "Custom",
-    tier3Desc: "For hotel chains & management companies",
+    tier3Desc: "For hotel chains & management firms",
     tier3F1: "Everything in ",
     tier3F1Badge: "STANDARD",
-    tier3F2: "Role-based access control",
-    tier3F3: "Marketing analytics setup",
-    tier3F4: "Custom revenue reports",
+    tier3F2: "Staff Roles & Permissions",
+    tier3F3: "Marketing Analytics Setup",
+    tier3F4: "Custom Revenue Reports",
 
     // --- FOOTER CTA ---
-    footerTitle: "Ready to maximize your direct revenue?",
-    footerSub1: "Stop giving away 15–20% to third parties",
-    footerSub2: "Take full control of your bookings",
-    footerBtn: "Book Free Audit"
+    footerTitle: "Ready to maximize your revenue?",
+    footerSub1: "Stop leaving 15–20% on the table",
+    footerSub2: "Take full control of your direct bookings",
+    footerBtn: "Book a Free Audit"
   },
+
   th: {
     // --- HERO SECTION ---
-    badge: "โซลูชันเพื่อการเติบโตของธุรกิจโรงแรม",
-    heroTitle: "หยุดจ่าย ค่าคอมมิชชั่น 15–20% ให้ Booking.com และ Agoda",
-    heroSub1: "เชื่อมต่อโรงแรมกับผู้เข้าพักโดยตรง • ปราศจากความผิดพลาดของมนุษย์ และการจองซ้ำ",
-    heroSub2: "รับกำไร 100% เต็มเข้าสู่ธุรกิจของคุณ",
-    btnAudit: "จองการรับคำปรึกษาฟรี",
+    badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
+    heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
+    heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง • ไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
+    heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
+    btnAudit: "นัดหมายตรวจสอบระบบฟรี",
     btnChat: "WhatsApp",
     btnLine: "Line",
 
     // Hero Bento Widget Text
-    syncBadge: "การซิงค์ระบบจองตรง",
-    otaSavedLabel: "ประหยัดค่าคอมมิชชั่น OTA",
-    statDirectRevenue: "รายได้จากการจองตรง",
-    statMarginGuest: "กำไรต่อผู้เข้าพัก",
-    statGoogleTraffic: "ทราฟฟิกจาก Google",
+    syncBadge: "การซิงโครไนซ์การจองโดยตรง",
+    otaSavedLabel: "ประหยัดค่าธรรมเนียม OTA",
+    statDirectRevenue: "รายได้ตรง",
+    statMarginGuest: "มาร์จิ้นต่อผู้เข้าพัก",
+    statGoogleTraffic: "ทราฟฟิก Google",
     statRepeatBookings: "การจองซ้ำ",
-
+    
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
-    scaleTitle: "ขยายยอดจองห้องพักของคุณ",
-    scaleSub: "ระบบอัตโนมัติที่ช่วยให้ทีมของคุณโฟกัสกับการบริการผู้เข้าพักได้อย่างเต็มที่",
+    scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
+    scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
     scaleItems: [
       {
-        pain: "อัปเดตข้อมูลด้วยตัวเอง 24/7",
-        endValue: "ซิงค์ข้อมูลทันที",
-        desc: "**เชื่อมต่อ Cloud PMS & Channel Manager**. ทุกการจองจะล็อกห้องพักของคุณในระบบทันที ทั้งบน Booking.com, Agoda และ 300+ OTAs"
+        pain: "อัปเดตระบบด้วยมือ 24/7",
+        endValue: "ซิงค์ระบบทันที",
+        desc: "**ระบบ Cloud PMS & Channel Manager** อัปเดตการจองแบบเรียลไทม์ ล็อกห้องพักทันทีบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
         pain: "ค่าคอมมิชชั่น OTA 15–20%",
         endValue: "รายได้ตรง 100%",
-        desc: "**ระบบจองตรง ค่าคอมมิชชั่น 0%** พร้อมระบบชำระเงินที่ปลอดภัย รับชำระเงินตามเงื่อนไขของคุณและเก็บรายได้ทั้งหมดไว้เอง"
+        desc: "**ระบบจองตรง 0% ค่าคอมมิชชั่น** พร้อมช่องทางชำระเงินที่ปลอดภัย รับและเก็บรายได้ทั้งหมดไว้กับคุณโดยไม่ต้องแบ่งใคร"
       },
       {
-        pain: "พึ่งพา OTA เต็มรูปแบบ",
+        pain: "พึ่งพา OTA 100%",
         endValue: "เติบโตอย่างมั่นคง",
-        desc: "**ทํา SEO ท้องถิ่น** เพื่อดึงทราฟฟิกที่มีความต้องการสูง พร้อมระบบ **ดึงดึงลูกค้าเก่ากลับมาพักซ้ำ** เปลี่ยนการพักครั้งแรกให้เป็นรายได้ระยะยาว"
+        desc: "**การทำ Local SEO** เพื่อดึงดูดลูกค้าที่มีความต้องการจองสูง พร้อมระบบดึงดูดลูกค้าเก่าให้กลับมาจองซ้ำเพื่อเพิ่มรายได้ระยะยาว"
       }
     ],
 
     // --- ABOUT & EXPERTISE SECTION ---
     aboutLabel: "Growth Architecture",
-    aboutTitle: "ระบบ | การปรับปรุง | การขยายผล",
-    aboutDescFirst: "เราเข้าไปปรับปรุงธุรกิจของคุณเพื่อประสิทธิภาพสูงสุด",
-    aboutDescRest: "ผสานช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าด้วยกันเป็นเครื่องยนต์เดียว เราขจัดความวุ่นวายในการทำงานและปลดล็อกการเติบโตอย่างเป็นระบบ เปลี่ยนจุดรั่วไหลให้เป็นรายได้ที่คาดการณ์ได้",
-    aboutBtn: "ดูโปรไฟล์เอเจนซี่",
+    aboutTitle: "ระบบ | การเพิ่มประสิทธิภาพ | การขยายขนาด",
+    aboutTitleHighlight: "ระบบ",
+    aboutTitleRest: "| การเพิ่มประสิทธิภาพ | การขยายขนาด",
+    aboutDescFirst: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
+    aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
+    aboutDescBold: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
+    aboutDescText: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
+    aboutBtn: "ดูประวัติการทำงาน",
 
     // Trust Stats
     stat1Num: "$1M+",
     stat1Name: "ประหยัดค่าธรรมเนียม",
     stat1Sub: "จากค่าคอมมิชชั่น OTA",
     stat2Num: "20+",
-    stat2Name: "แบรนด์ที่เติบโต",
-    stat2Sub: "โมเดล B2B และ Direct",
+    stat2Name: "แบรนด์ที่ขยาย",
+    stat2Sub: "โมเดล B2B & Direct",
     stat3Num: "10+",
-    stat3Name: "ปีประสบการณ์",
+    stat3Name: "ประสบการณ์ (ปี)",
     stat3Sub: "การเติบโตและระบบ",
+
+    aboutMetrics: [
+      { value: "$1M+", label: "ประหยัดค่าธรรมเนียม", sub: "จากค่าคอมมิชชั่น OTA" },
+      { value: "20+", label: "แบรนด์ที่ขยาย", sub: "โมเดล B2B & Direct" },
+      { value: "10+", label: "ประสบการณ์ (ปี)", sub: "การเติบโตและระบบ" }
+    ],
 
     // Cases & Results
     proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
-    case1Title: "ประหยัดค่า OTA +$2,800/เดือน | เพิ่มยอดจองตรง +42%",
-    case1Badge: "วิลล่ารีสอร์ท",
-    case1Desc: "เปลี่ยนการจัดการด้วยมือเป็นการใช้ระบบจองตรงอัตโนมัติ",
+    case1Title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
+    case1Badge: "พูลวิลล่ารีสอร์ท",
+    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ",
 
-    case2Title: "ทราฟฟิก Google +310% | ศูนย์การจองซ้ำ",
-    case2Badge: "บูติคโฮเทล",
-    case2Desc: "รวม Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com",
+    case2Title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
+    case2Badge: "บูติกโฮเทล",
+    case2Desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com",
+
+    aboutCases: [
+      {
+        badge: "พูลวิลล่ารีสอร์ท",
+        title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
+        desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ"
+      },
+      {
+        badge: "บูติกโฮเทล",
+        title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
+        desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com"
+      }
+    ],
+
+    // Nested object format
+    about: {
+      eyebrow: "GROWTH ARCHITECTURE",
+      titleHighlight: "ระบบ",
+      titleRest: "| การเพิ่มประสิทธิภาพ | การขยายขนาด",
+      descBold: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
+      descText: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
+      metrics: [
+        { value: "$1M+", label: "ประหยัดค่าธรรมเนียม", sub: "จากค่าคอมมิชชั่น OTA" },
+        { value: "20+", label: "แบรนด์ที่ขยาย", sub: "โมเดล B2B & Direct" },
+        { value: "10+", label: "ประสบการณ์ (ปี)", sub: "การเติบโตและระบบ" }
+      ],
+      provenLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
+      cases: [
+        {
+          badge: "พูลวิลล่ารีสอร์ท",
+          title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
+          desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ"
+        },
+        {
+          badge: "บูติกโฮเทล",
+          title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
+          desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com"
+        }
+      ],
+      ctaText: "ดูประวัติการทำงาน"
+    },
 
     // --- PRICING ---
-    priceTitle: "ติดตั้งโปร่งใส อิสระเต็มรูปแบบ",
-    priceSub: "ชำระค่าติดตั้งครั้งเดียว ค่าคอมมิชชั่น 0% จากการจองตรงตลอดไป",
+    priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
+    priceSub: "จ่ายค่าติดตั้งครั้งเดียว ไม่มีค่าคอมมิชชั่นจากการจองตรงตลอดไป",
     pricePopular: "ยอดนิยม",
-
-    tier1Title: "LITE (1–10 ห้อง)",
+    
+    tier1Title: "LITE (1-10 ห้อง)",
     tier1Price: "$900",
-    tier1Desc: "สำหรับวิลล่าขนาดเล็กและเกสต์เฮาส์",
-    tier1F1: "ติดตั้ง Cloud PMS",
-    tier1F2: "ระบบจองตรง 0%",
-    tier1F3: "ซิงค์ Booking & Agoda",
-    tier1F4: "ตั้งค่า Google Maps",
-
-    tier2Title: "STANDARD (10–30 ห้อง)",
+    tier1Desc: "สำหรับวิลล่าและเกสต์เฮาส์ขนาดเล็ก",
+    tier1F1: "ระบบ Cloud PMS Setup",
+    tier1F2: "ระบบจองตรงไม่เสียค่าคอม",
+    tier1F3: "ซิงค์ปฏิทิน Booking & Agoda",
+    tier1F4: "ตั้งค่าโปรไฟล์ Google Maps",
+    
+    tier2Title: "STANDARD (10-30 ห้อง)",
     tier2Price: "$1,500",
-    tier2Desc: "สำหรับบูติคโฮเทลและรีสอร์ท",
-    tier2F1: "รวมทุกอย่างใน ",
+    tier2Desc: "สำหรับบูติกโฮเทลและรีสอร์ท",
+    tier2F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier2F1Badge: "LITE",
-    tier2F2: "เชื่อมต่อ 300+ ช่องทาง OTA",
-    tier2F3: "ระบบรักษาฐานลูกค้าเก่า",
-    tier2F4: "คู่มือและเช็กลิสต์สำหรับพนักงาน",
-
+    tier2F2: "เชื่อมต่อช่องทางจองกว่า 300+ แห่ง",
+    tier2F3: "ระบบดึงลูกค้าเก่ากลับมาจองซ้ำ",
+    tier2F4: "คู่มือและเช็คลิสต์สำหรับพนักงาน",
+    
     tier3Title: "ENTERPRISE (30+ ห้อง)",
     tier3Price: "ตามตกลง",
-    tier3Desc: "สำหรับเครือโรงแรมและบริษัทบริหารจัดการ",
-    tier3F1: "รวมทุกอย่างใน ",
+    tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
+    tier3F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier3F1Badge: "STANDARD",
-    tier3F2: "การกำหนดสิทธิ์และบทบาทของพนักงาน",
+    tier3F2: "ระบบควบคุมสิทธิ์พนักงาน",
     tier3F3: "ตั้งค่าระบบวิเคราะห์การตลาด",
     tier3F4: "รายงานรายได้แบบกำหนดเอง",
 
     // --- FOOTER CTA ---
-    footerTitle: "พร้อมขยายรายได้จากการจองตรงหรือยัง?",
-    footerSub1: "เลิกจ่าย 15–20% ให้บุคคลที่สาม",
-    footerSub2: "ควบคุมการจองของคุณอย่างเต็มรูปแบบ",
-    footerBtn: "จองการรับคำปรึกษาฟรี"
-  },
-  ru: {
-    // --- HERO SECTION ---
-    badge: "Решения для роста отельного бизнеса",
-    heroTitle: "Хватит платить 15–20% комиссии Booking.com и Agoda",
-    heroSub1: "Соединяйте отель с гостями напрямую • Без человеческого фактора и овербукинга",
-    heroSub2: "Забирайте 100% прибыли себе",
-    btnAudit: "Записаться на бесплатный аудит",
-    btnChat: "WhatsApp",
-    btnLine: "Line",
-
-    // Hero Bento Widget Text
-    syncBadge: "СИНХРОНИЗАЦИЯ ПРЯМЫХ БРОНИРОВАНИЙ",
-    otaSavedLabel: "Сэкономлено на комиссиях OTA",
-    statDirectRevenue: "Прямая выручка",
-    statMarginGuest: "Маржа с гостя",
-    statGoogleTraffic: "Трафик из Google",
-    statRepeatBookings: "Повторные брони",
-
-    // --- SCALE PRACTICE (PAIN & SOLUTION) ---
-    scaleTitle: "Масштабируйте бронирования вашего отеля",
-    scaleSub: "Автоматизируйте рутину, чтобы команда фокусировалась на заботе о гостях",
-    scaleItems: [
-      {
-        pain: "РУЧНЫЕ ОБНОВЛЕНИЯ 24/7",
-        endValue: "Мгновенная синхронизация",
-        desc: "**Интеграция Облачной PMS и Channel Manager**. Каждая бронь мгновенно блокирует номер на Booking.com, Agoda и 300+ OTA"
-      },
-      {
-        pain: "КОМИССИИ OTA 15–20%",
-        endValue: "100% прямой выручки",
-        desc: "**Модуль прямых бронирований с 0% комиссии** и платежным шлюзом. Принимайте оплаты напрямую и оставляйте всю выручку себе"
-      },
-      {
-        pain: "ПОЛНАЯ ЗАВИСИМОСТЬ ОТ OTA",
-        endValue: "Прогнозируемый рост",
-        desc: "**Локальное SEO-продвижение** для перехвата целевого трафика и автоматические **сценарии возврата гостей** в долгосрочную выручку"
-      }
-    ],
-
-    // --- ABOUT & EXPERTISE SECTION ---
-    aboutLabel: "Growth Architecture",
-    aboutTitle: "Системы | Оптимизация | Масштабирование",
-    aboutDescFirst: "Мы заходим в бизнес, чтобы оптимизировать его для максимальной эффективности.",
-    aboutDescRest: "Объединяя маркетинговые каналы, аналитику и автоматизацию в единый движок, мы устраняем операционный хаос и запускаем системный рост — превращая скрытые утечки в прогнозируемую выручку.",
-    aboutBtn: "Смотреть профиль агентства",
-
-    // Trust Stats
-    stat1Num: "$1M+",
-    stat1Name: "Сэкономлено",
-    stat1Sub: "На комиссиях OTA",
-    stat2Num: "20+",
-    stat2Name: "Брендов выращено",
-    stat2Sub: "Модели B2B и Direct",
-    stat3Num: "10+",
-    stat3Name: "Лет опыта",
-    stat3Sub: "Рост и системы",
-
-    // Cases & Results
-    proofLabel: "Проверенные результаты",
-    case1Title: "+$2,800/мес сэкономлено на OTA | +42% прямых броней",
-    case1Badge: "Вилла-ресорт",
-    case1Desc: "Заменили ручное управление автоматической системой прямых бронирований",
-
-    case2Title: "+310% трафика из Google | 0 овербукингов",
-    case2Badge: "Бутик-отель",
-    case2Desc: "Интегрировали Google Ads и модуль прямых броней, снизив зависимость от Booking.com",
-
-    // --- PRICING ---
-    priceTitle: "Прозрачная интеграция. Полная независимость",
-    priceSub: "Единоразовая оплата настройки. 0% комиссии с прямых бронирований навсегда",
-    pricePopular: "Популярный",
-
-    tier1Title: "LITE (1–10 номеров)",
-    tier1Price: "$900",
-    tier1Desc: "Для небольших вилл и гестхаусов",
-    tier1F1: "Настройка Облачной PMS",
-    tier1F2: "Модуль бронирования 0%",
-    tier1F3: "Синхронизация Booking и Agoda",
-    tier1F4: "Настройка Google Maps",
-
-    tier2Title: "STANDARD (10–30 номеров)",
-    tier2Price: "$1,500",
-    tier2Desc: "Для бутик-отелей и ресортов",
-    tier2F1: "Всё из пакета ",
-    tier2F1Badge: "LITE",
-    tier2F2: "Подключение 300+ каналов OTA",
-    tier2F3: "Система возврата гостей",
-    tier2F4: "Инструкции и чеклисты для персонала",
-
-    tier3Title: "ENTERPRISE (30+ номеров)",
-    tier3Price: "Индивидуально",
-    tier3Desc: "Для сетей отелей и управляющих компаний",
-    tier3F1: "Всё из пакета ",
-    tier3F1Badge: "STANDARD",
-    tier3F2: "Роли и права доступа персонала",
-    tier3F3: "Настройка маркетинговой аналитики",
-    tier3F4: "Кастомные отчеты по выручке",
-
-    // --- FOOTER CTA ---
-    footerTitle: "Готовы максимизировать свою выручку?",
-    footerSub1: "Хватит отдавать 15–20% сторонним сервисам",
-    footerSub2: "Возьмите прямые бронирования под полный контроль",
-    footerBtn: "Записаться на бесплатный аудит"
+    footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
+    footerSub1: "เลิกเสียรายได้ 15–20% ไปกับค่าคอมมิชชั่น",
+    footerSub2: "ควบคุมยอดจองตรงของคุณได้อย่างสมบูรณ์",
+    footerBtn: "นัดหมายตรวจสอบระบบฟรี"
   }
 };
