@@ -30,6 +30,22 @@ interface AboutProps {
   };
 }
 
+// Хелпер для умного переноса заголовка кейса по разделителю "|" (Пункт 12)
+const renderCaseTitle = (title: string) => {
+  if (!title) return null;
+  if (title.includes(' | ')) {
+    const parts = title.split(' | ');
+    return (
+      <>
+        <span className="title-part">{parts[0]}</span>
+        <span className="title-sep"> | </span>
+        <span className="title-part">{parts[1]}</span>
+      </>
+    );
+  }
+  return title;
+};
+
 export default function About({ t }: AboutProps) {
   const labelText = t?.aboutLabel || "Growth Architecture";
   const titleText = t?.aboutTitle || "Systems | Optimization | Scale";
@@ -54,7 +70,7 @@ export default function About({ t }: AboutProps) {
     {
       title: t?.case2Title || "+310% Google Traffic | Zero Double-Bookings",
       badge: t?.case2Badge || "Boutique Hotel",
-      desc: t?.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking dependence"
+      desc: t?.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
     }
   ];
 
@@ -251,6 +267,16 @@ export default function About({ t }: AboutProps) {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          text-wrap: balance;
+        }
+
+        :global(.title-part) {
+          display: inline-block;
+        }
+
+        :global(.title-sep) {
+          display: inline-block;
+          opacity: 0.6;
         }
 
         .case-badge {
@@ -271,6 +297,7 @@ export default function About({ t }: AboutProps) {
           color: ${T.sub};
           line-height: 1.45;
           margin: 0;
+          text-wrap: balance;
         }
 
         .actions-row {
@@ -315,6 +342,19 @@ export default function About({ t }: AboutProps) {
           transform: translateX(3px);
         }
 
+        /* --- ПЛАНШЕТЫ И МОБИЛЬНЫЕ (ДО 1024px) --- */
+        @media (max-width: 1024px) {
+          /* Помещаем бейдж НАВЕРХ заголовка для освобождения 100% ширины */
+          .case-header {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            gap: 0.35rem;
+          }
+          .case-badge {
+            align-self: flex-start;
+          }
+        }
+
         /* --- ПЛАНШЕТЫ (768px - 1024px) --- */
         @media (min-width: 768px) and (max-width: 1024px) {
           .about-section {
@@ -325,7 +365,7 @@ export default function About({ t }: AboutProps) {
             grid-template-columns: 48fr 52fr;
           }
           .left-col {
-            justify-content: flex-start; /* Убираем разорванную гигантскую дырку */
+            justify-content: flex-start;
             gap: 1.75rem;
           }
           .main-title {
@@ -411,15 +451,6 @@ export default function About({ t }: AboutProps) {
             opacity: 0.85;
           }
 
-          /* Кейсы: Бейдж уходит НАВЕРХ заголовка */
-          .case-header {
-            flex-direction: column-reverse;
-            align-items: flex-start;
-            gap: 0.35rem;
-          }
-          .case-badge {
-            align-self: flex-start;
-          }
           .case-title {
             font-size: 0.92rem;
             line-height: 1.35;
@@ -471,7 +502,7 @@ export default function About({ t }: AboutProps) {
                 {cases.map((c, i) => (
                   <div className="case-card" key={i}>
                     <div className="case-header">
-                      <span className="case-title">{c.title}</span>
+                      <h3 className="case-title">{renderCaseTitle(c.title)}</h3>
                       <span className="case-badge">{c.badge}</span>
                     </div>
                     <p className="case-desc">{c.desc}</p>
