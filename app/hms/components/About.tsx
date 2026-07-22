@@ -22,11 +22,9 @@ interface AboutProps {
     proofLabel?: string;
     case1Title?: string;
     case1Badge?: string;
-    case1Metrics?: string;
     case1Desc?: string;
     case2Title?: string;
     case2Badge?: string;
-    case2Metrics?: string;
     case2Desc?: string;
     [key: string]: any;
   };
@@ -49,15 +47,13 @@ export default function About({ t }: AboutProps) {
 
   const cases = [
     {
-      title: t?.case1Title || "Luxury Villa Resort",
-      badge: t?.case1Badge || "CASE 01",
-      metrics: t?.case1Metrics || "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
+      title: t?.case1Title || "+$2,800/mo saved in OTA fees / +42% Direct Bookings",
+      badge: t?.case1Badge || "Villa Resort",
       desc: t?.case1Desc || "Replaced manual management with an automated Direct Engine"
     },
     {
-      title: t?.case2Title || "Boutique Hotel",
-      badge: t?.case2Badge || "CASE 02",
-      metrics: t?.case2Metrics || "+310% Google Traffic • 0% Overbooking Risk",
+      title: t?.case2Title || "+310% Google Traffic / Zero Double-Bookings",
+      badge: t?.case2Badge || "Boutique Hotel",
       desc: t?.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking dependence"
     }
   ];
@@ -212,7 +208,6 @@ export default function About({ t }: AboutProps) {
           width: 100%;
         }
 
-        /* КЕЙСЫ: Строгое темное стекло, никаких зелёных рамок */
         .case-card {
           width: 100%;
           background: rgba(12, 14, 20, 0.65);
@@ -242,33 +237,24 @@ export default function About({ t }: AboutProps) {
         .case-title {
           font-size: 0.98rem;
           font-weight: 700;
-          color: #ffffff;
-          margin: 0;
-        }
-
-        /* Бейдж CASE 01 / CASE 02: Нейтральный сдержанный стиль */
-        .case-badge {
-          font-size: 0.65rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.6);
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          padding: 0.2rem 0.55rem;
-          border-radius: 4px;
-          white-space: nowrap;
-        }
-
-        /* Метрики: фирменный акцентный градиент на тексте */
-        .case-metrics {
-          font-size: 0.92rem;
-          font-weight: 700;
           margin: 0;
           letter-spacing: -0.01em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+        }
+
+        .case-badge {
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.7);
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          padding: 0.2rem 0.55rem;
+          border-radius: 4px;
+          white-space: nowrap;
         }
 
         .case-desc {
@@ -278,7 +264,7 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* CTA-КНОПКА: Тёмное стекло, чистый белый текст */
+        /* CTA-КНОПКА */
         .actions-row {
           display: flex;
           justify-content: flex-start;
@@ -395,7 +381,6 @@ export default function About({ t }: AboutProps) {
                     <span className="case-title">{c.title}</span>
                     <span className="case-badge">{c.badge}</span>
                   </div>
-                  <p className="case-metrics">{c.metrics}</p>
                   <p className="case-desc">{c.desc}</p>
                 </div>
               ))}
