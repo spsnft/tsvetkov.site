@@ -69,7 +69,6 @@ export default function About({ t }: AboutProps) {
           background: transparent;
         }
         
-        /* Сетка stretch гарантирует одинаковую высоту колонок */
         .about-grid {
           display: grid;
           grid-template-columns: 48fr 52fr;
@@ -181,7 +180,7 @@ export default function About({ t }: AboutProps) {
           line-height: 1.3;
         }
 
-        /* --- RIGHT COLUMN (STRETCHED) --- */
+        /* --- RIGHT COLUMN --- */
         .right-col {
           display: flex;
           flex-direction: column;
@@ -274,7 +273,6 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* CTA-КНОПКА */
         .actions-row {
           display: flex;
           justify-content: flex-start;
@@ -323,8 +321,12 @@ export default function About({ t }: AboutProps) {
             padding: 1rem 0 3.5rem 0;
           }
           .about-grid {
-            gap: 1.75rem;
+            gap: 2rem;
             grid-template-columns: 48fr 52fr;
+          }
+          .left-col {
+            justify-content: flex-start; /* Убираем разорванную гигантскую дырку */
+            gap: 1.75rem;
           }
           .main-title {
             white-space: normal;
@@ -335,16 +337,16 @@ export default function About({ t }: AboutProps) {
             line-height: 1.55;
           }
           .trust-stats-grid {
-            gap: 0.5rem;
+            gap: 0.6rem;
           }
           .trust-stat-card {
-            padding: 0.9rem 0.4rem;
+            padding: 1.1rem 0.5rem;
           }
           .stat-num {
-            font-size: 1.35rem;
+            font-size: 1.45rem;
           }
           .stat-name {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
           }
           .stat-sub {
             font-size: 0.65rem;
@@ -367,49 +369,60 @@ export default function About({ t }: AboutProps) {
           }
           .about-grid {
             grid-template-columns: 1fr;
-            gap: 2.25rem;
+            gap: 2rem;
             align-items: start;
           }
           .left-col, .right-col {
             justify-content: start;
-            gap: 1.5rem;
+            gap: 1.25rem;
           }
           .main-title {
             white-space: normal;
-            font-size: 1.75rem;
+            font-size: 1.7rem;
           }
           .description {
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.55;
           }
           
-          /* Метрики перестраиваем в 1 колонку */
+          /* БУЛЛЕТЫ В 1 РЯД (3 КОЛОНКИ) НА МОБИЛКЕ */
           .trust-stats-grid {
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.4rem;
           }
           .trust-stat-card {
-            padding: 1rem 1.25rem;
-            flex-direction: row;
-            justify-content: space-between;
-            text-align: left;
+            padding: 0.75rem 0.3rem;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            border-radius: 10px;
           }
           .stat-num {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+          }
+          .stat-name {
+            font-size: 0.72rem;
+            margin-top: 0.15rem;
+            line-height: 1.15;
+          }
+          .stat-sub {
+            font-size: 0.6rem;
+            line-height: 1.15;
+            opacity: 0.85;
           }
 
-          /* Кейсы: Бейдж уходит НАВЕРХ заголовка, освобождая всю ширину */
+          /* Кейсы: Бейдж уходит НАВЕРХ заголовка */
           .case-header {
             flex-direction: column-reverse;
             align-items: flex-start;
-            gap: 0.4rem;
+            gap: 0.35rem;
           }
           .case-badge {
             align-self: flex-start;
           }
           .case-title {
-            font-size: 0.95rem;
-            line-height: 1.4;
+            font-size: 0.92rem;
+            line-height: 1.35;
           }
           
           .view-profile-btn {
@@ -440,10 +453,8 @@ export default function About({ t }: AboutProps) {
               {trustStats.map((stat, i) => (
                 <div className="trust-stat-card" key={i}>
                   <span className="stat-num">{stat.num}</span>
-                  <div>
-                    <div className="stat-name">{stat.name}</div>
-                    <div className="stat-sub">{stat.sub}</div>
-                  </div>
+                  <span className="stat-name">{stat.name}</span>
+                  <span className="stat-sub">{stat.sub}</span>
                 </div>
               ))}
             </div>
