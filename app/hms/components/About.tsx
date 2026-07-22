@@ -30,31 +30,6 @@ interface AboutProps {
   };
 }
 
-// Хелпер для подсветки градиентом только ключевого слова "Scale."
-const renderMainTitle = (title: string) => {
-  if (!title) return null;
-  
-  if (title.includes('Systems. Optimization. Scale.')) {
-    return (
-      <>
-        Systems. Optimization. <span className="accent-gradient">Scale.</span>
-      </>
-    );
-  }
-
-  // Если заголовок пришел из переводов старого формата c "|"
-  if (title.includes('|')) {
-    const parts = title.split('|').map(p => p.trim());
-    return (
-      <>
-        {parts[0]}. {parts[1]}. <span className="accent-gradient">{parts[2]}.</span>
-      </>
-    );
-  }
-
-  return title;
-};
-
 // Хелпер для умного переноса заголовка кейса по разделителю "|"
 const renderCaseTitle = (title: string) => {
   if (!title) return null;
@@ -71,7 +46,7 @@ const renderCaseTitle = (title: string) => {
   return title;
 };
 
-// Хелпер для защиты ключевых словосочетаний в описании
+// Хелпер для защиты ключевых словосочетаний в описании от уродливых переносов
 const renderFormattedDesc = (desc: string) => {
   if (!desc) return null;
 
@@ -98,7 +73,7 @@ const renderFormattedDesc = (desc: string) => {
 };
 
 export default function About({ t }: AboutProps) {
-  const labelText = t?.aboutLabel || "Growth Architecture";
+  const labelText = t?.aboutLabel || "GROWTH ARCHITECTURE";
   const titleText = t?.aboutTitle || "Systems. Optimization. Scale.";
   
   const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
@@ -132,8 +107,33 @@ export default function About({ t }: AboutProps) {
       <style jsx>{`
         .about-section {
           width: 100%;
-          padding: 1rem 0 5rem 0;
+          padding: 3rem 0 3.5rem 0;
           background: transparent;
+        }
+
+        /* --- ЕДИНЫЙ ЦЕНТРАЛЬНЫЙ ЗАГОЛОВОК (1-в-1 со ScalePractice) --- */
+        .about-header {
+          text-align: center;
+          margin-bottom: 3.5rem;
+        }
+
+        .about-eyebrow {
+          color: ${T.sub};
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          margin: 0 0 0.5rem 0;
+          opacity: 0.8;
+        }
+
+        .about-title {
+          font-size: 2.4rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+          letter-spacing: -0.02em;
+          line-height: 1.2;
         }
         
         .about-grid {
@@ -152,38 +152,6 @@ export default function About({ t }: AboutProps) {
           gap: 1.5rem;
         }
 
-        .left-top-content {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        
-        .sub-label {
-          color: ${T.sub};
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          margin: 0 0 0.4rem 0;
-          opacity: 0.8;
-        }
-        
-        .main-title {
-          font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-          font-weight: 800;
-          line-height: 1.18;
-          letter-spacing: -0.02em;
-          margin: 0;
-          color: #ffffff;
-          text-wrap: balance;
-        }
-
-        :global(.accent-gradient) {
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        
         .description {
           font-size: 1.05rem;
           line-height: 1.65;
@@ -401,22 +369,16 @@ export default function About({ t }: AboutProps) {
           transform: translateX(3px);
         }
 
-        /* --- ПЛАНШЕТЫ И МОБИЛЬНЫЕ (ДО 1024px) --- */
-        @media (max-width: 1024px) {
-          .case-header {
-            flex-direction: column-reverse;
-            align-items: flex-start;
-            gap: 0.35rem;
-          }
-          .case-badge {
-            align-self: flex-start;
-          }
-        }
-
         /* --- ПЛАНШЕТЫ (768px - 1024px) --- */
         @media (min-width: 768px) and (max-width: 1024px) {
           .about-section {
-            padding: 1rem 0 3.5rem 0;
+            padding: 2.5rem 0 3rem 0;
+          }
+          .about-header {
+            margin-bottom: 2.5rem;
+          }
+          .about-title {
+            font-size: 2rem;
           }
           .about-grid {
             gap: 2rem;
@@ -425,9 +387,6 @@ export default function About({ t }: AboutProps) {
           .left-col {
             justify-content: flex-start;
             gap: 1.75rem;
-          }
-          .main-title {
-            font-size: 1.8rem;
           }
           .description {
             font-size: 0.95rem;
@@ -448,6 +407,14 @@ export default function About({ t }: AboutProps) {
           .stat-sub {
             font-size: 0.65rem;
           }
+          .case-header {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            gap: 0.35rem;
+          }
+          .case-badge {
+            align-self: flex-start;
+          }
           .case-card {
             padding: 1.1rem 1.1rem;
           }
@@ -465,7 +432,13 @@ export default function About({ t }: AboutProps) {
         /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
         @media (max-width: 767px) {
           .about-section {
-            padding: 0.5rem 0 3rem 0;
+            padding: 2.25rem 0 2.75rem 0;
+          }
+          .about-header {
+            margin-bottom: 2.25rem;
+          }
+          .about-title {
+            font-size: 1.75rem;
           }
           .about-grid {
             grid-template-columns: 1fr;
@@ -475,9 +448,6 @@ export default function About({ t }: AboutProps) {
           .left-col, .right-col {
             justify-content: start;
             gap: 1.25rem;
-          }
-          .main-title {
-            font-size: 1.7rem;
           }
           .description {
             font-size: 0.95rem;
@@ -525,21 +495,21 @@ export default function About({ t }: AboutProps) {
       `}</style>
 
       <div className="container">
+        
+        {/* CENTERED HEADER (Unified across sections) */}
+        <div className="about-header">
+          <p className="about-eyebrow">{labelText}</p>
+          <h2 className="about-title">{titleText}</h2>
+        </div>
+
         <div className="about-grid">
           
           {/* LEFT COLUMN: BRAND & STATS */}
           <div className="left-col">
-            <div className="left-top-content">
-              <div>
-                <p className="sub-label">{labelText}</p>
-                <h2 className="main-title">{renderMainTitle(titleText)}</h2>
-              </div>
-              
-              <p className="description">
-                <span className="highlight-sentence">{firstSentence}</span>{' '}
-                <span className="dimmed-text">{restText}</span>
-              </p>
-            </div>
+            <p className="description">
+              <span className="highlight-sentence">{firstSentence}</span>{' '}
+              <span className="dimmed-text">{restText}</span>
+            </p>
 
             {/* 3 TRUST STAT BULLETS */}
             <div className="trust-stats-grid">
