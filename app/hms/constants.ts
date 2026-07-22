@@ -81,31 +81,31 @@ export const contentData = {
     aboutLabel: "Growth Architecture",
     aboutTitle: "Systems / Optimization / Scale",
     aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
-    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
+    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
     aboutBtn: "View Agency Profile",
 
-    // Trust Stats
-    stat1Num: "10+",
-    stat1Name: "Years Exp.",
-    stat1Sub: "Growth & systems",
+    // Trust Stats ($2M+ первым, 10+ лет последним)
+    stat1Num: "$2M+",
+    stat1Name: "Saved Fees",
+    stat1Sub: "In OTA commissions",
     stat2Num: "30+",
     stat2Name: "Brands Scaled",
     stat2Sub: "B2B & Direct models",
-    stat3Num: "$2M+",
-    stat3Name: "Saved Fees",
-    stat3Sub: "In OTA commissions",
+    stat3Num: "10+",
+    stat3Name: "Years Exp.",
+    stat3Sub: "Growth & systems",
 
-    // Proof & Cases
+    // Proof & Cases (Без точек в конце)
     proofLabel: "Proven Results",
     case1Title: "Luxury Villa Resort",
     case1Badge: "CASE 01",
     case1Metrics: "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
-    case1Desc: "Replaced manual management with an automated Direct Engine.",
+    case1Desc: "Replaced manual management with an automated Direct Engine",
 
     case2Title: "Boutique Hotel",
     case2Badge: "CASE 02",
     case2Metrics: "+310% Google Traffic • 0% Overbooking Risk",
-    case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence.",
+    case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence",
     
     // --- FOOTER CTA ---
     footerTitle: "Ready to maximize your revenue?",
@@ -198,15 +198,15 @@ export const contentData = {
     aboutBtn: "ดูประวัติการทำงาน",
 
     // Trust Stats
-    stat1Num: "10+",
-    stat1Name: "ประสบการณ์ (ปี)",
-    stat1Sub: "การเติบโตและระบบ",
+    stat1Num: "$2M+",
+    stat1Name: "ประหยัดค่าธรรมเนียม",
+    stat1Sub: "จากค่าคอมมิชชั่น OTA",
     stat2Num: "30+",
     stat2Name: "แบรนด์ที่ขยาย",
     stat2Sub: "โมเดล B2B & Direct",
-    stat3Num: "$2M+",
-    stat3Name: "ประหยัดค่าธรรมเนียม",
-    stat3Sub: "จากค่าคอมมิชชั่น OTA",
+    stat3Num: "10+",
+    stat3Name: "ประสบการณ์ (ปี)",
+    stat3Sub: "การเติบโตและระบบ",
 
     // Proof & Cases
     proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
