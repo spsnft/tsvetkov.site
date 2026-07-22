@@ -38,14 +38,13 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <style jsx>{`
         .scale-section {
           width: 100%;
-          /* Верх: 48px (3rem) от бегущей строки | Низ: 56px (3.5rem) до следующего заголовка */
+          /* Верх: 48px (3rem) | Низ: 56px (3.5rem) */
           padding: 3rem 0 3.5rem 0; 
           background: transparent;
         }
 
         .scale-header {
           text-align: center;
-          /* Стандартный воздух от подзаголовка к карточкам (56px / 3.5rem) */
           margin-bottom: 3.5rem; 
         }
 
@@ -183,24 +182,69 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           text-wrap: pretty;
         }
 
-        @media (max-width: 992px) {
+        /* --- ПЛАНШЕТЫ (768px – 1024px): 3 В РЯД, КОМПАКТНО --- */
+        @media (min-width: 768px) and (max-width: 1024px) {
           .scale-section {
-            padding: 2.5rem 0;
+            padding: 2.5rem 0 3rem 0;
           }
           .scale-header {
             margin-bottom: 2.5rem;
           }
           .scale-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
+          }
+          .scale-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.85rem;
+          }
+          .scale-card {
+            padding: 1.25rem 0.85rem;
+          }
+          .pain-wrapper {
+            margin-bottom: 0.85rem;
+          }
+          .pain-badge {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.55rem;
+          }
+          .image-wrapper {
+            height: 100px;
+            margin-bottom: 0.85rem;
+          }
+          .focus-metric {
+            font-size: 1.15rem;
+          }
+          .card-description {
+            font-size: 0.85rem;
+            line-height: 1.45;
+          }
+        }
+
+        /* --- МОБИЛЬНЫЕ (ДО 767px): 1 В РЯД ПО ЦЕНТРУ --- */
+        @media (max-width: 767px) {
+          .scale-section {
+            padding: 2.25rem 0 2.75rem 0;
+          }
+          .scale-header {
+            margin-bottom: 2.25rem;
+          }
+          .scale-title {
+            font-size: 1.75rem;
+          }
+          .scale-subtitle {
+            font-size: 0.95rem;
           }
           .scale-grid {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
-            max-width: 500px;
+            gap: 1.25rem;
+            max-width: 480px;
             margin: 0 auto;
           }
           .scale-card {
-            padding: 1.75rem;
+            padding: 1.5rem 1.25rem;
+          }
+          .image-wrapper {
+            height: 120px;
           }
         }
       `}</style>
