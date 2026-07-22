@@ -44,7 +44,7 @@ const renderCaseTitle = (title: string) => {
   return title;
 };
 
-// Хелпер для защиты ключевых словосочетаний в описании от переносов
+// Хелпер для защиты ключевых словосочетаний от разрывов
 const renderFormattedDesc = (desc: string) => {
   if (!desc) return null;
 
@@ -71,6 +71,7 @@ const renderFormattedDesc = (desc: string) => {
 };
 
 export default function About({ t }: AboutProps) {
+  // Заголовок с точками вместо палок |
   const titleText = t?.aboutTitle || "Systems. Optimization. Scale.";
   
   const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
@@ -102,11 +103,10 @@ export default function About({ t }: AboutProps) {
       <style jsx>{`
         .about-section {
           width: 100%;
-          padding: 0 0 3.5rem 0; /* Верхний паддинг убран (0), снизу 3.5rem */
+          padding: 0 0 3.5rem 0;
           background: transparent;
         }
 
-        /* --- ЕДИНЫЙ ЦЕНТРАЛЬНЫЙ ЗАГОЛОВОК --- */
         .about-header {
           text-align: center;
           margin-bottom: 3.5rem;
@@ -125,7 +125,7 @@ export default function About({ t }: AboutProps) {
           display: grid;
           grid-template-columns: 48fr 52fr;
           gap: 3.5rem;
-          align-items: start; /* Колонки больше не растягиваются искусственно */
+          align-items: start;
           box-sizing: border-box;
         }
         
@@ -152,7 +152,6 @@ export default function About({ t }: AboutProps) {
           color: ${T.sub};
         }
 
-        /* 3 TRUST STATS */
         .trust-stats-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -237,10 +236,10 @@ export default function About({ t }: AboutProps) {
           background: rgba(12, 14, 20, 0.65);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          padding: 1.35rem 1.4rem;
+          padding: 1.5rem 1.5rem; /* Чуть увеличили паддинг для идеального визуального баланса высот на ПК */
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.6rem;
           backdrop-filter: blur(12px);
           box-sizing: border-box;
           transition: all 0.25s ease;
@@ -298,7 +297,7 @@ export default function About({ t }: AboutProps) {
         .case-desc {
           font-size: 0.85rem;
           color: ${T.sub};
-          line-height: 1.48;
+          line-height: 1.5;
           margin: 0;
           text-wrap: pretty;
         }
@@ -319,26 +318,32 @@ export default function About({ t }: AboutProps) {
             grid-template-columns: 48fr 52fr;
           }
           .left-col {
-            gap: 1.5rem;
+            gap: 1.25rem;
+          }
+          .right-col {
+            gap: 1rem;
           }
           .description {
             font-size: 0.95rem;
             line-height: 1.55;
           }
           .trust-stats-grid {
-            gap: 0.6rem;
+            gap: 0.5rem;
           }
           .trust-stat-card {
-            padding: 1.1rem 0.5rem;
+            padding: 1rem 0.4rem;
           }
           .stat-num {
-            font-size: 1.45rem;
+            font-size: 1.35rem;
           }
           .stat-name {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
           }
           .stat-sub {
-            font-size: 0.65rem;
+            font-size: 0.62rem;
+          }
+          .cases-wrapper {
+            gap: 0.85rem;
           }
           .case-header {
             flex-direction: column-reverse;
@@ -357,7 +362,7 @@ export default function About({ t }: AboutProps) {
           }
           .case-desc {
             font-size: 0.82rem;
-            line-height: 1.5;
+            line-height: 1.45;
             text-wrap: pretty;
           }
         }
@@ -407,6 +412,9 @@ export default function About({ t }: AboutProps) {
             opacity: 0.85;
           }
 
+          .case-card {
+            padding: 1.25rem 1.25rem;
+          }
           .case-title {
             font-size: 0.92rem;
             line-height: 1.35;
@@ -419,8 +427,6 @@ export default function About({ t }: AboutProps) {
       `}</style>
 
       <div className="container">
-        
-        {/* CENTERED HEADER */}
         <div className="about-header">
           <h2 className="about-title">{titleText}</h2>
         </div>
@@ -434,7 +440,6 @@ export default function About({ t }: AboutProps) {
               <span className="dimmed-text">{restText}</span>
             </p>
 
-            {/* 3 TRUST STAT BULLETS */}
             <div className="trust-stats-grid">
               {trustStats.map((stat, i) => (
                 <div className="trust-stat-card" key={i}>
