@@ -16,6 +16,7 @@ interface HeroProps {
 export default function Hero({ t }: HeroProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [liveAmount, setLiveAmount] = useState(148335);
+  const [isTicking, setIsTicking] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -30,9 +31,12 @@ export default function Hero({ t }: HeroProps) {
     script.async = true;
     document.head.appendChild(script);
 
+    // Частый интервал обновления (каждые 1.1 сек) для высокой динамики
     const interval = setInterval(() => {
-      setLiveAmount(prev => prev + Math.floor(Math.random() * 45) + 5);
-    }, 2500);
+      setLiveAmount(prev => prev + Math.floor(Math.random() * 35) + 12);
+      setIsTicking(true);
+      setTimeout(() => setIsTicking(false), 300);
+    }, 1100);
 
     return () => {
       clearInterval(interval);
@@ -81,12 +85,12 @@ export default function Hero({ t }: HeroProps) {
           z-index: 10;
         }
 
-        /* Распределяем пропорцию: 58% под текст, 42% под правый блок */
+        /* Выравнивание левой и правой колонок по ВЫСОТЕ (stretch) */
         .hero-grid {
           display: grid;
           grid-template-columns: 58fr 42fr;
           gap: 2.5rem;
-          align-items: center;
+          align-items: stretch;
           position: relative;
           box-sizing: border-box;
         }
@@ -96,6 +100,9 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
           z-index: 10;
           min-width: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
         
         .badge {
@@ -112,6 +119,7 @@ export default function Hero({ t }: HeroProps) {
           border-radius: 20px;
           backdrop-filter: blur(8px);
           margin-bottom: 1.5rem;
+          width: fit-content;
         }
         
         .title {
@@ -217,14 +225,15 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
           width: 100%;
           display: flex;
-          align-items: center;
-          justify-content: flex-end;
+          height: 100%;
           min-width: 0;
         }
 
         .bento-card-wrapper {
           position: relative;
           width: 100%;
+          height: 100%;
+          display: flex;
         }
 
         .bento-glow {
@@ -244,6 +253,7 @@ export default function Hero({ t }: HeroProps) {
           position: relative;
           z-index: 2;
           width: 100%;
+          height: 100%;
           background: rgba(12, 14, 20, 0.85);
           backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.1);
@@ -254,7 +264,7 @@ export default function Hero({ t }: HeroProps) {
             inset 0 1px 1px rgba(255, 255, 255, 0.12);
           display: flex;
           flex-direction: column;
-          gap: 1.4rem;
+          justify-content: space-between;
           box-sizing: border-box;
         }
 
@@ -262,7 +272,7 @@ export default function Hero({ t }: HeroProps) {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding-bottom: 1.1rem;
+          padding-bottom: 1.2rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           gap: 0.5rem;
         }
@@ -302,37 +312,49 @@ export default function Hero({ t }: HeroProps) {
           letter-spacing: 0.05em;
         }
 
+        /* УВЕЛИЧЕННАЯ ЦИФРА СЭКОНОМЛЕННЫХ БАТ С АНИМАЦИЕЙ ТИКА */
         .ota-saved-value {
-          font-family: 'SF Mono', monospace;
-          font-size: 1.1rem;
-          font-weight: 700;
+          font-family: 'SF Mono', monospace, sans-serif;
+          font-size: clamp(1.25rem, 2vw, 1.55rem);
+          font-weight: 800;
           color: #38BDF8;
-          margin-top: 0.1rem;
+          margin-top: 0.15rem;
+          transition: transform 0.15s ease, color 0.15s ease;
+          display: block;
+          text-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+        }
+
+        .ota-saved-value.ticking {
+          transform: scale(1.04);
+          color: #00E599;
         }
 
         .bento-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1rem;
+          grid-template-rows: 1fr 1fr;
+          gap: 1.1rem;
+          flex: 1;
+          margin-top: 1.2rem;
         }
 
         .bento-item {
           background: rgba(255, 255, 255, 0.025);
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 14px;
-          padding: 1.3rem 1.1rem;
+          padding: 1.3rem 1.2rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          gap: 0.5rem;
-          min-height: 100px;
-          transition: all 0.25s ease;
+          gap: 0.4rem;
+          transition: border-color 0.25s ease, background 0.25s ease;
+          /* Клик убран, чисто информационные карточки */
+          cursor: default;
         }
 
         .bento-item:hover {
           background: rgba(255, 255, 255, 0.04);
           border-color: rgba(0, 229, 153, 0.3);
-          transform: translateY(-2px);
         }
 
         .stat-value {
@@ -353,13 +375,19 @@ export default function Hero({ t }: HeroProps) {
         }
 
         .stat-label {
-          font-size: 0.82rem;
-          color: #CBD5E1;
-          font-weight: 500;
+          font-size: 0.85rem;
+          color: #FFF;
+          font-weight: 600;
+        }
+
+        .stat-subtext {
+          font-size: 0.7rem;
+          color: rgba(255, 255, 255, 0.4);
+          font-weight: 400;
         }
 
         .stat-trend {
-          font-size: 0.7rem;
+          font-size: 0.75rem;
           color: #00E599;
           font-weight: 700;
         }
@@ -373,9 +401,13 @@ export default function Hero({ t }: HeroProps) {
         @media (max-width: 992px) {
           .hero-section { padding: 2rem 0; }
           .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-          .text-column { text-align: center; }
+          .text-column { text-align: center; align-items: center; }
+          .badge { margin-left: auto; margin-right: auto; }
           .cta-container { flex-direction: column; align-items: center; }
-          .bento-card-wrapper { max-width: 480px; margin: 0 auto; }
+          .visual-column { height: auto; }
+          .bento-card-wrapper { max-width: 480px; margin: 0 auto; height: auto; }
+          .bento-card { height: auto; }
+          .bento-grid { grid-template-rows: auto auto; }
         }
       `}</style>
 
@@ -422,40 +454,54 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                   <div className="ota-saved-block">
                     <div className="ota-saved-label">OTA Margin Saved</div>
-                    <div className="ota-saved-value">{formatCurrency(liveAmount)}</div>
+                    <span className={`ota-saved-value ${isTicking ? 'ticking' : ''}`}>
+                      {formatCurrency(liveAmount)}
+                    </span>
                   </div>
                 </div>
 
                 <div className="bento-grid">
                   <div className="bento-item">
                     <div className="stat-value">+40%</div>
-                    <div className="stat-label-row">
-                      <span className="stat-label">Direct Revenue</span>
-                      <span className="stat-trend">↑</span>
+                    <div>
+                      <div className="stat-label-row">
+                        <span className="stat-label">Direct Revenue</span>
+                        <span className="stat-trend">↑</span>
+                      </div>
+                      <div className="stat-subtext">Shifted from OTAs</div>
                     </div>
                   </div>
 
                   <div className="bento-item">
                     <div className="stat-value">+60%</div>
-                    <div className="stat-label-row">
-                      <span className="stat-label">Margin per Guest</span>
-                      <span className="stat-trend">↑</span>
+                    <div>
+                      <div className="stat-label-row">
+                        <span className="stat-label">Margin per Guest</span>
+                        <span className="stat-trend">↑</span>
+                      </div>
+                      <div className="stat-subtext">Zero commission fees</div>
                     </div>
                   </div>
 
                   <div className="bento-item">
                     <div className="stat-value">+300%</div>
-                    <div className="stat-label-row">
-                      <span className="stat-label">Google Traffic</span>
-                      <span className="stat-trend">↑</span>
+                    <div>
+                      <div className="stat-label-row">
+                        <span className="stat-label">Google Traffic</span>
+                        <span className="stat-trend">↑</span>
+                      </div>
+                      <div className="stat-subtext">High-intent search</div>
                     </div>
                   </div>
 
                   <div className="bento-item">
                     <div className="stat-value">+35%</div>
-                    <div className="stat-label-row">
-                      <span className="stat-label">Repeat Bookings</span>
-                      <span className="stat-trend">↑</span>
+                    <div>
+                      <div className="stat-label-row">
+                        <span className="stat-label">Repeat Bookings</span>
+                        <span className="stat-trend">↑</span>
+                      </div>
+                      <div className="stat-subtext">Automated retention</div>
                     </div>
                   </div>
                 </div>
