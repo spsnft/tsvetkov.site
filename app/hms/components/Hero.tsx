@@ -8,14 +8,18 @@ interface HeroProps {
     heroTitle: string;
     heroSub1: string;
     heroSub2: string;
-    btnChat: string;
-    btnLine: string;
+    btnAudit?: string;
+    syncBadge?: string;
+    otaSavedLabel?: string;
+    statDirectRevenue?: string;
+    statMarginGuest?: string;
+    statGoogleTraffic?: string;
+    statRepeatBookings?: string;
   };
 }
 
 export default function Hero({ t }: HeroProps) {
   const [isMounted, setIsMounted] = useState(false);
-  // Стартовая сумма за месяц $4,850
   const [liveAmount, setLiveAmount] = useState(4850);
   const [isTicking, setIsTicking] = useState(false);
 
@@ -193,7 +197,6 @@ export default function Hero({ t }: HeroProps) {
           box-shadow: 0 8px 30px rgba(0, 229, 153, 0.45);
         }
 
-        /* КНОПКА WHATSAPP В ЕДИНОМ СТИЛЕ ДЛЯ ВСЕХ УСТРОЙСТВ */
         .btn-secondary-chat {
           display: inline-flex;
           align-items: center;
@@ -406,23 +409,11 @@ export default function Hero({ t }: HeroProps) {
           100% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
         }
 
-        /* ОРИГИНАЛЬНАЯ АДАПТАЦИЯ (<= 1024px) */
         @media (max-width: 1024px) {
-          .hero-section { 
-            padding: 2rem 0; 
-          }
-          .hero-grid { 
-            grid-template-columns: 1fr; 
-            gap: 0; 
-          }
-          .text-column { 
-            text-align: center; 
-            align-items: center; 
-          }
-          .badge { 
-            margin-left: auto; 
-            margin-right: auto; 
-          }
+          .hero-section { padding: 2rem 0; }
+          .hero-grid { grid-template-columns: 1fr; gap: 0; }
+          .text-column { text-align: center; align-items: center; }
+          .badge { margin-left: auto; margin-right: auto; }
           .cta-container { 
             flex-direction: row !important; 
             justify-content: center; 
@@ -430,9 +421,7 @@ export default function Hero({ t }: HeroProps) {
             gap: 0.85rem;
             width: 100%;
           }
-          .visual-column { 
-            display: none !important; 
-          }
+          .visual-column { display: none !important; }
         }
       `}</style>
 
@@ -453,7 +442,7 @@ export default function Hero({ t }: HeroProps) {
             
             <div className="cta-container">
               <button onClick={handleCalendlyPopup} className="btn-primary-main">
-                Book a Free Audit
+                {t.btnAudit || "Book a Free Audit"}
               </button>
               
               <a 
@@ -478,10 +467,10 @@ export default function Hero({ t }: HeroProps) {
               <div className="bento-card">
                 <div className="bento-header">
                   <div className="sync-badge">
-                    <div className="pulse-dot"></div> DIRECT BOOKING SYNC ACTIVE
+                    <div className="pulse-dot"></div> {t.syncBadge || "DIRECT BOOKING SYNC ACTIVE"}
                   </div>
                   <div className="ota-saved-block">
-                    <div className="ota-saved-label">OTA Margin Saved</div>
+                    <div className="ota-saved-label">{t.otaSavedLabel || "OTA Margin Saved"}</div>
                     <span className={`ota-saved-value ${isTicking ? 'ticking' : ''}`}>
                       {formatCurrency(liveAmount)}
                     </span>
@@ -494,7 +483,7 @@ export default function Hero({ t }: HeroProps) {
                       <span className="stat-plus">+</span>
                       <span className="stat-value">40%</span>
                     </div>
-                    <div className="stat-label">Direct Revenue</div>
+                    <div className="stat-label">{t.statDirectRevenue || "Direct Revenue"}</div>
                   </div>
 
                   <div className="bento-item">
@@ -502,7 +491,7 @@ export default function Hero({ t }: HeroProps) {
                       <span className="stat-plus">+</span>
                       <span className="stat-value">60%</span>
                     </div>
-                    <div className="stat-label">Margin per Guest</div>
+                    <div className="stat-label">{t.statMarginGuest || "Margin per Guest"}</div>
                   </div>
 
                   <div className="bento-item">
@@ -510,7 +499,7 @@ export default function Hero({ t }: HeroProps) {
                       <span className="stat-plus">+</span>
                       <span className="stat-value">300%</span>
                     </div>
-                    <div className="stat-label">Google Traffic</div>
+                    <div className="stat-label">{t.statGoogleTraffic || "Google Traffic"}</div>
                   </div>
 
                   <div className="bento-item">
@@ -518,7 +507,7 @@ export default function Hero({ t }: HeroProps) {
                       <span className="stat-plus">+</span>
                       <span className="stat-value">35%</span>
                     </div>
-                    <div className="stat-label">Repeat Bookings</div>
+                    <div className="stat-label">{t.statRepeatBookings || "Repeat Bookings"}</div>
                   </div>
                 </div>
               </div>
