@@ -1,13 +1,23 @@
 export const contentData = {
   en: {
+    // --- HERO SECTION ---
     badge: "Hospitality Growth Solutions",
-    heroTitle: "Stop Paying 15-20% Сommissions to Booking.com & Agoda",
+    heroTitle: "Stop Paying 15-20% Commissions to Booking.com & Agoda",
     heroSub1: "Connect your property directly to guests. Zero risk of human error and double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
+    btnAudit: "Book a Free Audit",
     btnChat: "WhatsApp",
     btnLine: "Line",
+
+    // Hero Bento Widget Text
+    syncBadge: "DIRECT BOOKING SYNC ACTIVE",
+    otaSavedLabel: "OTA Margin Saved",
+    statDirectRevenue: "Direct Revenue",
+    statMarginGuest: "Margin per Guest",
+    statGoogleTraffic: "Google Traffic",
+    statRepeatBookings: "Repeat Bookings",
     
-    // --- PAIN + VALUE + DELIVERABLES ---
+    // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Scale your property bookings",
     scaleSub: "Automate workflows so your team can focus on guest experience",
     scaleItems: [
@@ -37,14 +47,84 @@ export const contentData = {
       }
     ],
 
-    // --- PROOF METRICS ---
-    proofTitle: "Maximize Direct Booking Revenue",
-    proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue" },
-      { endValue: 60, prefix: "+", suffix: "%", label: "Margin per Guest" },
-      { endValue: 300, prefix: "+", suffix: "%", label: "Google Maps Traffic" },
-      { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Bookings" }
+    // --- ABOUT & EXPERTISE SECTION ---
+    aboutLabel: "Growth Architecture",
+    aboutTitle: "Systems | Optimization | Scale",
+    aboutTitleHighlight: "Systems",
+    aboutTitleRest: "| Optimization | Scale",
+    aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
+    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
+    aboutDescBold: "We step into business to optimize them for maximum efficiency.",
+    aboutDescText: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
+    aboutBtn: "View Agency Profile",
+
+    // Trust Stats
+    stat1Num: "$1M+",
+    stat1Name: "Saved Fees",
+    stat1Sub: "In OTA commissions",
+    stat2Num: "20+",
+    stat2Name: "Brands Scaled",
+    stat2Sub: "B2B & Direct models",
+    stat3Num: "10+",
+    stat3Name: "Years Experience",
+    stat3Sub: "Growth & systems",
+
+    aboutMetrics: [
+      { value: "$1M+", label: "Saved Fees", sub: "In OTA commissions" },
+      { value: "20+", label: "Brands Scaled", sub: "B2B & Direct models" },
+      { value: "10+", label: "Years Experience", sub: "Growth & systems" }
     ],
+
+    // Cases & Results
+    proofLabel: "Proven Results",
+    case1Title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
+    case1Badge: "Villa Resort",
+    case1Desc: "Replaced manual management with an automated Direct Engine",
+
+    case2Title: "+310% Google Traffic | Zero Double-Bookings",
+    case2Badge: "Boutique Hotel",
+    case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence",
+
+    aboutCases: [
+      {
+        badge: "VILLA RESORT",
+        title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
+        desc: "Replaced manual management with an automated Direct Engine"
+      },
+      {
+        badge: "BOUTIQUE HOTEL",
+        title: "+310% Google Traffic | Zero Double-Bookings",
+        desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence"
+      }
+    ],
+
+    // Nested object format
+    about: {
+      eyebrow: "GROWTH ARCHITECTURE",
+      titleHighlight: "Systems",
+      titleRest: "| Optimization | Scale",
+      descBold: "We step into business to optimize them for maximum efficiency.",
+      descText: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
+      metrics: [
+        { value: "$1M+", label: "Saved Fees", sub: "In OTA commissions" },
+        { value: "20+", label: "Brands Scaled", sub: "B2B & Direct models" },
+        { value: "10+", label: "Years Experience", sub: "Growth & systems" }
+      ],
+      provenLabel: "PROVEN RESULTS",
+      cases: [
+        {
+          badge: "VILLA RESORT",
+          title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
+          desc: "Replaced manual management with an automated Direct Engine"
+        },
+        {
+          badge: "BOUTIQUE HOTEL",
+          title: "+310% Google Traffic | Zero Double-Bookings",
+          desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence"
+        }
+      ],
+      ctaText: "View Agency Profile"
+    },
 
     // --- PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence",
@@ -77,48 +157,32 @@ export const contentData = {
     tier3F3: "Marketing Analytics Setup",
     tier3F4: "Custom Revenue Reports",
 
-    // --- ABOUT ---
-    aboutLabel: "Growth Architecture",
-    aboutTitle: "Systems | Optimization | Scale",
-    aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
-    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
-    aboutBtn: "View Agency Profile",
-
-    // Trust Stats ($1M+ и 20+ обновлены)
-    stat1Num: "$1M+",
-    stat1Name: "Saved Fees",
-    stat1Sub: "In OTA commissions",
-    stat2Num: "20+",
-    stat2Name: "Brands Scaled",
-    stat2Sub: "B2B & Direct models",
-    stat3Num: "10+",
-    stat3Name: "Years Experience",
-    stat3Sub: "Growth & systems",
-
-    // Proof & Cases (Разделители "|")
-    proofLabel: "Proven Results",
-    case1Title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
-    case1Badge: "Villa Resort",
-    case1Desc: "Replaced manual management with an automated Direct Engine",
-
-    case2Title: "+310% Google Traffic | Zero Double-Bookings",
-    case2Badge: "Boutique Hotel",
-    case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking dependence",
-    
     // --- FOOTER CTA ---
     footerTitle: "Ready to maximize your revenue?",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Take full control of your direct bookings",
     footerBtn: "Book a Free Audit"
   },
+
   th: {
+    // --- HERO SECTION ---
     badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
     heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
     heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง ไร้ความเสี่ยงจากความผิดพลาดของคนและการจองซ้ำซ้อน",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
+    btnAudit: "นัดหมายตรวจสอบระบบฟรี",
     btnChat: "WhatsApp",
     btnLine: "Line",
+
+    // Hero Bento Widget Text
+    syncBadge: "DIRECT BOOKING SYNC ACTIVE",
+    otaSavedLabel: "ประหยัดค่าธรรมเนียม OTA",
+    statDirectRevenue: "รายได้ตรง",
+    statMarginGuest: "มาร์จิ้นต่อผู้เข้าพัก",
+    statGoogleTraffic: "ทราฟฟิก Google",
+    statRepeatBookings: "การจองซ้ำ",
     
+    // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
     scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
     scaleItems: [
@@ -148,14 +212,84 @@ export const contentData = {
       }
     ],
 
-    // --- PROOF METRICS ---
-    proofTitle: "เพิ่มศักยภาพให้ที่พักของคุณ สร้างรายได้ตรงสู่บัญชีสูงสุด",
-    proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "รายได้ตรง" },
-      { endValue: 60, prefix: "+", suffix: "%", label: "มาร์จิ้นต่อผู้เข้าพัก" },
-      { endValue: 300, prefix: "+", suffix: "%", label: "ยอดเข้าชม Google Maps" },
-      { endValue: 35, prefix: "+", suffix: "%", label: "ลูกค้าเก่ากลับมาจองซ้ำ" }
+    // --- ABOUT & EXPERTISE SECTION ---
+    aboutLabel: "Growth Architecture",
+    aboutTitle: "ระบบ | การเพิ่มประสิทธิภาพ | การขยายขนาด",
+    aboutTitleHighlight: "ระบบ",
+    aboutTitleRest: "| การเพิ่มประสิทธิภาพ | การขยายขนาด",
+    aboutDescFirst: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
+    aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
+    aboutDescBold: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
+    aboutDescText: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
+    aboutBtn: "ดูประวัติการทำงาน",
+
+    // Trust Stats
+    stat1Num: "$1M+",
+    stat1Name: "ประหยัดค่าธรรมเนียม",
+    stat1Sub: "จากค่าคอมมิชชั่น OTA",
+    stat2Num: "20+",
+    stat2Name: "แบรนด์ที่ขยาย",
+    stat2Sub: "โมเดล B2B & Direct",
+    stat3Num: "10+",
+    stat3Name: "ประสบการณ์ (ปี)",
+    stat3Sub: "การเติบโตและระบบ",
+
+    aboutMetrics: [
+      { value: "$1M+", label: "ประหยัดค่าธรรมเนียม", sub: "จากค่าคอมมิชชั่น OTA" },
+      { value: "20+", label: "แบรนด์ที่ขยาย", sub: "โมเดล B2B & Direct" },
+      { value: "10+", label: "ประสบการณ์ (ปี)", sub: "การเติบโตและระบบ" }
     ],
+
+    // Cases & Results
+    proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
+    case1Title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
+    case1Badge: "พูลวิลล่ารีสอร์ท",
+    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ",
+
+    case2Title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
+    case2Badge: "บูติกโฮเทล",
+    case2Desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com",
+
+    aboutCases: [
+      {
+        badge: "พูลวิลล่ารีสอร์ท",
+        title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
+        desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ"
+      },
+      {
+        badge: "บูติกโฮเทล",
+        title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
+        desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com"
+      }
+    ],
+
+    // Nested object format
+    about: {
+      eyebrow: "GROWTH ARCHITECTURE",
+      titleHighlight: "ระบบ",
+      titleRest: "| การเพิ่มประสิทธิภาพ | การขยายขนาด",
+      descBold: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
+      descText: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
+      metrics: [
+        { value: "$1M+", label: "ประหยัดค่าธรรมเนียม", sub: "จากค่าคอมมิชชั่น OTA" },
+        { value: "20+", label: "แบรนด์ที่ขยาย", sub: "โมเดล B2B & Direct" },
+        { value: "10+", label: "ประสบการณ์ (ปี)", sub: "การเติบโตและระบบ" }
+      ],
+      provenLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
+      cases: [
+        {
+          badge: "พูลวิลล่ารีสอร์ท",
+          title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
+          desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ"
+        },
+        {
+          badge: "บูติกโฮเทล",
+          title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
+          desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com"
+        }
+      ],
+      ctaText: "ดูประวัติการทำงาน"
+    },
 
     // --- PRICING ---
     priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
@@ -188,34 +322,6 @@ export const contentData = {
     tier3F3: "ตั้งค่าระบบวิเคราะห์การตลาด",
     tier3F4: "รายงานรายได้แบบกำหนดเอง",
 
-    // --- ABOUT ---
-    aboutLabel: "Growth Architecture",
-    aboutTitle: "ระบบ | การเพิ่มประสิทธิภาพ | การขยายขนาด",
-    aboutDescFirst: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
-    aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
-    aboutBtn: "ดูประวัติการทำงาน",
-
-    // Trust Stats
-    stat1Num: "$1M+",
-    stat1Name: "ประหยัดค่าธรรมเนียม",
-    stat1Sub: "จากค่าคอมมิชชั่น OTA",
-    stat2Num: "20+",
-    stat2Name: "แบรนด์ที่ขยาย",
-    stat2Sub: "โมเดล B2B & Direct",
-    stat3Num: "10+",
-    stat3Name: "ประสบการณ์ (ปี)",
-    stat3Sub: "การเติบโตและระบบ",
-
-    // Proof & Cases
-    proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
-    case1Title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
-    case1Badge: "พูลวิลล่ารีสอร์ท",
-    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบ Direct Engine อัตโนมัติ",
-
-    case2Title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
-    case2Badge: "บูติกโฮเทล",
-    case2Desc: "เชื่อมต่อ Google Ads และ Direct Engine ลดการพึ่งพา Booking.com",
-    
     // --- FOOTER CTA ---
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerSub1: "เลิกเสียรายได้ 15–20% ไปกับค่าคอมมิชชั่น",
