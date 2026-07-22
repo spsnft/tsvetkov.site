@@ -23,7 +23,6 @@ export default function About({ t }: AboutProps) {
   
   const btnText = t?.aboutBtn || t?.aboutButton || "View Agency Profile";
 
-  // Данные двух реальных локальных кейсов
   const cases = [
     {
       title: "Phuket Luxury Villa Resort (24 Keys)",
@@ -44,24 +43,23 @@ export default function About({ t }: AboutProps) {
       <style jsx>{`
         .about-section {
           width: 100%;
-          padding: 0 0 5rem 0;
+          padding: 1rem 0 5rem 0;
           background: transparent;
         }
         
         .about-grid {
           display: grid;
-          grid-template-columns: 38fr 62fr;
-          gap: 4rem;
+          grid-template-columns: 50fr 50fr;
+          gap: 3.5rem;
           align-items: start;
           box-sizing: border-box;
         }
         
+        /* --- LEFT COLUMN: BRAND & STATS --- */
         .left-col {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
-          position: sticky;
-          top: 2rem;
+          gap: 1.5rem;
         }
         
         .sub-label {
@@ -86,16 +84,9 @@ export default function About({ t }: AboutProps) {
           text-wrap: pretty;
         }
         
-        .right-col {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 1.8rem;
-        }
-        
         .description {
-          font-size: 1.1rem;
-          line-height: 1.7;
+          font-size: 1.05rem;
+          line-height: 1.65;
           margin: 0;
           text-wrap: pretty;
         }
@@ -109,18 +100,19 @@ export default function About({ t }: AboutProps) {
           color: ${T.sub};
         }
 
-        /* --- 3 TRUST STATS BULLETS --- */
+        /* 3 TRUST BULLETS IN LEFT COL */
         .trust-stats-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 0.85rem;
           width: 100%;
+          margin-top: 0.5rem;
         }
 
         .trust-stat-card {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.07);
-          border-radius: 10px;
+          border-radius: 12px;
           padding: 1rem 0.85rem;
           display: flex;
           flex-direction: column;
@@ -136,19 +128,79 @@ export default function About({ t }: AboutProps) {
         }
 
         .stat-name {
-          font-size: 0.82rem;
+          font-size: 0.8rem;
           font-weight: 700;
           color: #ffffff;
-          margin-top: 0.2rem;
+          margin-top: 0.25rem;
         }
 
         .stat-sub {
-          font-size: 0.7rem;
+          font-size: 0.68rem;
           color: ${T.sub};
           line-height: 1.3;
         }
 
-        /* --- CASES GRID (2 Cards) --- */
+        .actions-row {
+          margin-top: 0.5rem;
+        }
+        
+        .view-profile-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.6rem;
+          color: rgba(255, 255, 255, 0.9) !important;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          padding: 0.85rem 2rem;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          text-decoration: none;
+          backdrop-filter: blur(8px);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .view-profile-btn:hover {
+          transform: translateY(-2px);
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(0, 229, 153, 0.5);
+          color: #ffffff !important;
+          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.12);
+        }
+
+        .view-profile-btn svg {
+          width: 16px;
+          height: 16px;
+          transition: transform 0.2s ease;
+        }
+
+        .view-profile-btn:hover svg {
+          transform: translateX(3px);
+        }
+
+        /* --- RIGHT COLUMN: PROOF & CASES --- */
+        .right-col {
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
+        }
+
+        .proof-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-bottom: 0.4rem;
+        }
+
+        .proof-label {
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #38BDF8;
+        }
+
         .cases-wrapper {
           display: flex;
           flex-direction: column;
@@ -158,16 +210,15 @@ export default function About({ t }: AboutProps) {
 
         .case-card {
           width: 100%;
-          background: rgba(255, 255, 255, 0.015);
+          background: rgba(12, 14, 20, 0.6);
           border: 1px solid rgba(0, 229, 153, 0.2);
-          border-radius: 12px;
-          padding: 1.2rem 1.4rem;
+          border-radius: 14px;
+          padding: 1.3rem 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 0.5rem;
-          backdrop-filter: blur(10px);
-          position: relative;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          backdrop-filter: blur(12px);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
           box-sizing: border-box;
           transition: border-color 0.25s ease, background 0.25s ease;
         }
@@ -205,7 +256,7 @@ export default function About({ t }: AboutProps) {
         }
 
         .case-metrics {
-          font-size: 0.9rem;
+          font-size: 0.92rem;
           font-weight: 700;
           color: #00E599;
           margin: 0;
@@ -217,50 +268,6 @@ export default function About({ t }: AboutProps) {
           line-height: 1.45;
           margin: 0;
         }
-
-        /* --- ACTION ROW --- */
-        .actions-row {
-          display: flex;
-          align-items: center;
-          gap: 1.5rem;
-          flex-wrap: wrap;
-          margin-top: 0.5rem;
-        }
-        
-        .view-profile-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          color: rgba(255, 255, 255, 0.9) !important;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          padding: 0.85rem 2.2rem;
-          border-radius: 8px;
-          font-weight: 600;
-          font-size: 0.95rem;
-          text-decoration: none;
-          backdrop-filter: blur(8px);
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        .view-profile-btn:hover {
-          transform: translateY(-2px);
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(0, 229, 153, 0.5);
-          color: #ffffff !important;
-          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.12);
-        }
-
-        .view-profile-btn svg {
-          width: 16px;
-          height: 16px;
-          transition: transform 0.2s ease;
-        }
-
-        .view-profile-btn:hover svg {
-          transform: translateX(3px);
-        }
         
         @media (max-width: 992px) {
           .about-section {
@@ -268,14 +275,10 @@ export default function About({ t }: AboutProps) {
           }
           .about-grid {
             grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-          .left-col {
-            position: relative;
-            top: 0;
+            gap: 2.5rem;
           }
           .right-col {
-            gap: 1.6rem;
+            gap: 1.2rem;
           }
         }
 
@@ -304,55 +307,39 @@ export default function About({ t }: AboutProps) {
       <div className="container">
         <div className="about-grid">
           
-          {/* LEFT COLUMN */}
+          {/* LEFT COLUMN: BRAND & STATS */}
           <div className="left-col">
-            <p className="sub-label">{labelText}</p>
-            <h2 className="main-title">{titleText}</h2>
-          </div>
-          
-          {/* RIGHT COLUMN */}
-          <div className="right-col">
+            <div>
+              <p className="sub-label">{labelText}</p>
+              <h2 className="main-title">{titleText}</h2>
+            </div>
             
-            {/* Intro text */}
             <p className="description">
               <span className="highlight-sentence">{firstSentence}</span>{' '}
               <span className="dimmed-text">{restText}</span>
             </p>
 
-            {/* 3 Trust Stat Bullets */}
+            {/* 3 TRUST STAT BULLETS */}
             <div className="trust-stats-grid">
               <div className="trust-stat-card">
                 <span className="stat-num">10+</span>
                 <span className="stat-name">Years Exp.</span>
                 <span className="stat-sub">Growth &amp; systems</span>
               </div>
+
               <div className="trust-stat-card">
                 <span className="stat-num">30+</span>
                 <span className="stat-name">Brands Scaled</span>
                 <span className="stat-sub">B2B &amp; Direct models</span>
               </div>
+
               <div className="trust-stat-card">
-                <span className="stat-num">0%</span>
-                <span className="stat-name">Overbooking</span>
-                <span className="stat-sub">Sync risk-free setup</span>
+                <span className="stat-num">$2M+</span>
+                <span className="stat-name">Saved Fees</span>
+                <span className="stat-sub">In OTA commissions</span>
               </div>
             </div>
 
-            {/* 2 Local Case Proofs */}
-            <div className="cases-wrapper">
-              {cases.map((c, i) => (
-                <div className="case-card" key={i}>
-                  <div className="case-header">
-                    <span className="case-title">{c.title}</span>
-                    <span className="case-badge">{c.badge}</span>
-                  </div>
-                  <p className="case-metrics">{c.metrics}</p>
-                  <p className="case-desc">{c.desc}</p>
-                </div>
-              ))}
-            </div>
-            
-            {/* Main Agency Profile Link */}
             <div className="actions-row">
               <a 
                 href="https://tsvetkov.site" 
@@ -367,8 +354,28 @@ export default function About({ t }: AboutProps) {
                 </svg>
               </a>
             </div>
-
           </div>
+          
+          {/* RIGHT COLUMN: PROOF & CASES */}
+          <div className="right-col">
+            <div className="proof-header">
+              <span className="proof-label">Proven Local Results</span>
+            </div>
+
+            <div className="cases-wrapper">
+              {cases.map((c, i) => (
+                <div className="case-card" key={i}>
+                  <div className="case-header">
+                    <span className="case-title">{c.title}</span>
+                    <span className="case-badge">{c.badge}</span>
+                  </div>
+                  <p className="case-metrics">{c.metrics}</p>
+                  <p className="case-desc">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
