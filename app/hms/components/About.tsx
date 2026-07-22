@@ -41,26 +41,24 @@ export default function About({ t }: AboutProps) {
   
   const btnText = t?.aboutBtn || t?.aboutButton || "View Agency Profile";
 
-  // Trust Stats из constants
   const trustStats = [
     { num: t?.stat1Num || "10+", name: t?.stat1Name || "Years Exp.", sub: t?.stat1Sub || "Growth & systems" },
     { num: t?.stat2Num || "30+", name: t?.stat2Name || "Brands Scaled", sub: t?.stat2Sub || "B2B & Direct models" },
     { num: t?.stat3Num || "$2M+", name: t?.stat3Name || "Saved Fees", sub: t?.stat3Sub || "In OTA commissions" }
   ];
 
-  // Кейсы из constants
   const cases = [
     {
-      title: t?.case1Title || "Luxury Villa Resort (24 Keys)",
-      badge: t?.case1Badge || "Featured Proof",
+      title: t?.case1Title || "Luxury Villa Resort",
+      badge: t?.case1Badge || "CASE 01",
       metrics: t?.case1Metrics || "+$2,800/mo saved in OTA fees • +42% Direct Bookings",
-      desc: t?.case1Desc || "Replaced manual channel management with an automated direct booking pipeline in 60 days."
+      desc: t?.case1Desc || "Replaced manual management with an automated Direct Engine."
     },
     {
-      title: t?.case2Title || "Boutique Hotel (18 Keys)",
-      badge: t?.case2Badge || "Direct Engine",
+      title: t?.case2Title || "Boutique Hotel",
+      badge: t?.case2Badge || "CASE 02",
       metrics: t?.case2Metrics || "+310% Google Traffic • 0% Overbooking Risk",
-      desc: t?.case2Desc || "Integrated Google Hotel Ads & direct engine, cutting Agoda dependence by half."
+      desc: t?.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking dependence."
     }
   ];
 
@@ -100,15 +98,15 @@ export default function About({ t }: AboutProps) {
           opacity: 0.8;
         }
         
-        /* Заголовок строго в 1 строку */
+        /* Фирменный градиент бренда Mint -> Cyan */
         .main-title {
-          font-size: clamp(1.4rem, 2.2vw, 2.1rem);
-          font-weight: 700;
-          line-height: 1.2;
-          letter-spacing: -0.02em;
+          font-size: clamp(1.8rem, 2.7vw, 2.5rem);
+          font-weight: 800;
+          line-height: 1.15;
+          letter-spacing: -0.03em;
           margin: 0;
           white-space: nowrap;
-          background: linear-gradient(135deg, #38BDF8 0%, #00A3FF 100%);
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -129,7 +127,7 @@ export default function About({ t }: AboutProps) {
           color: ${T.sub};
         }
 
-        /* 3 TRUST BULLETS IN BRAND CYAN */
+        /* 3 TRUST STATS: Фирменный цвет #00E599 (как +40%, +60% на скриншоте) */
         .trust-stats-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -139,19 +137,26 @@ export default function About({ t }: AboutProps) {
         }
 
         .trust-stat-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          background: rgba(12, 14, 20, 0.6);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 12px;
-          padding: 1rem 0.85rem;
+          padding: 1.1rem 0.9rem;
           display: flex;
           flex-direction: column;
           gap: 0.2rem;
+          backdrop-filter: blur(12px);
+          transition: border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .trust-stat-card:hover {
+          background: rgba(255, 255, 255, 0.03);
+          border-color: rgba(0, 229, 153, 0.3);
         }
 
         .stat-num {
-          font-size: 1.5rem;
+          font-size: 1.65rem;
           font-weight: 800;
-          color: #38BDF8;
+          color: #00E599;
           letter-spacing: -0.02em;
           line-height: 1;
         }
@@ -160,7 +165,7 @@ export default function About({ t }: AboutProps) {
           font-size: 0.8rem;
           font-weight: 700;
           color: #ffffff;
-          margin-top: 0.25rem;
+          margin-top: 0.3rem;
         }
 
         .stat-sub {
@@ -188,7 +193,7 @@ export default function About({ t }: AboutProps) {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #38BDF8;
+          color: #00E599;
         }
 
         .cases-wrapper {
@@ -201,21 +206,22 @@ export default function About({ t }: AboutProps) {
         .case-card {
           width: 100%;
           background: rgba(12, 14, 20, 0.6);
-          border: 1px solid rgba(56, 189, 248, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 14px;
-          padding: 1.3rem 1.5rem;
+          padding: 1.35rem 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 0.5rem;
           backdrop-filter: blur(12px);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
           box-sizing: border-box;
-          transition: border-color 0.25s ease, background 0.25s ease;
+          transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
         }
 
         .case-card:hover {
-          background: rgba(255, 255, 255, 0.03);
-          border-color: rgba(56, 189, 248, 0.4);
+          background: rgba(22, 27, 38, 0.8);
+          border-color: rgba(0, 229, 153, 0.35);
+          transform: translateY(-1px);
         }
 
         .case-header {
@@ -226,29 +232,29 @@ export default function About({ t }: AboutProps) {
         }
 
         .case-title {
-          font-size: 0.95rem;
+          font-size: 0.98rem;
           font-weight: 700;
           color: #ffffff;
           margin: 0;
         }
 
         .case-badge {
-          font-size: 0.62rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
+          font-size: 0.65rem;
+          font-weight: 800;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: #38BDF8;
-          background: rgba(56, 189, 248, 0.1);
-          border: 1px solid rgba(56, 189, 248, 0.2);
-          padding: 0.2rem 0.55rem;
-          border-radius: 4px;
+          color: #00E599;
+          background: rgba(0, 229, 153, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.2);
+          padding: 0.25rem 0.6rem;
+          border-radius: 6px;
           white-space: nowrap;
         }
 
         .case-metrics {
           font-size: 0.92rem;
           font-weight: 700;
-          color: #38BDF8;
+          color: #00E599;
           margin: 0;
         }
 
@@ -259,7 +265,7 @@ export default function About({ t }: AboutProps) {
           margin: 0;
         }
 
-        /* Кнопка в правой колонке под кейсами */
+        /* CTA-кнопка */
         .actions-row {
           margin-top: 0.4rem;
           display: flex;
@@ -271,11 +277,11 @@ export default function About({ t }: AboutProps) {
           align-items: center;
           justify-content: center;
           gap: 0.6rem;
-          color: rgba(255, 255, 255, 0.9) !important;
+          color: #ffffff !important;
           background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          padding: 0.85rem 2rem;
-          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          padding: 0.9rem 2rem;
+          border-radius: 10px;
           font-weight: 600;
           font-size: 0.95rem;
           text-decoration: none;
@@ -287,9 +293,9 @@ export default function About({ t }: AboutProps) {
         .view-profile-btn:hover {
           transform: translateY(-2px);
           background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(56, 189, 248, 0.5);
+          border-color: rgba(0, 229, 153, 0.4);
           color: #ffffff !important;
-          box-shadow: 0 8px 25px rgba(56, 189, 248, 0.12);
+          box-shadow: 0 8px 25px rgba(0, 229, 153, 0.15);
         }
 
         .view-profile-btn svg {
@@ -383,7 +389,7 @@ export default function About({ t }: AboutProps) {
               ))}
             </div>
 
-            {/* Кнопка под кейсами */}
+            {/* CTA BUTTON */}
             <div className="actions-row">
               <a 
                 href="https://tsvetkov.site" 
