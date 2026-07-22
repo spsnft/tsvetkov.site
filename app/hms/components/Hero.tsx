@@ -158,7 +158,6 @@ export default function Hero({ t }: HeroProps) {
           display: block;
         }
 
-        /* --- CTA BUTTONS (Идеально одинаковая высота 54px) --- */
         .cta-container {
           display: flex;
           align-items: center;
@@ -222,7 +221,7 @@ export default function Hero({ t }: HeroProps) {
           display: block;
         }
 
-        /* --- BENTO PROOF CARD VISUAL (Внешний каркас не тронут) --- */
+        /* --- BENTO PROOF CARD VISUAL --- */
         .visual-column {
           position: relative;
           width: 100%;
@@ -279,14 +278,15 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.5rem;
         }
 
+        /* ОБНОВЛЕННЫЙ ТЕКСТ БЕЙДЖА */
         .sync-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.45rem;
-          font-size: 0.72rem;
+          font-size: 0.68rem;
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.05em;
           color: #00E599;
           background: rgba(0, 229, 153, 0.08);
           padding: 0.35rem 0.75rem;
@@ -339,16 +339,18 @@ export default function Hero({ t }: HeroProps) {
           margin-top: 1.2rem;
         }
 
-        /* --- ОБНОВЛЕННАЯ СБИТАЯ ВНУТРЯНКА КАРТОЧЕК --- */
+        /* ЦЕНТРИРОВАНИЕ ВНУТРИ КАРТОЧЕК */
         .bento-item {
           background: rgba(255, 255, 255, 0.025);
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 14px;
-          padding: 1.2rem 1.2rem;
+          padding: 1.2rem 0.8rem;
           display: flex;
           flex-direction: column;
+          align-items: center;
           justify-content: center;
-          gap: 0.4rem;
+          text-align: center;
+          gap: 0.35rem;
           transition: border-color 0.25s ease, background 0.25s ease;
           cursor: default;
         }
@@ -358,10 +360,25 @@ export default function Hero({ t }: HeroProps) {
           border-color: rgba(0, 229, 153, 0.3);
         }
 
-        .stat-value {
-          font-size: clamp(2.2rem, 3.4vw, 2.9rem);
-          font-weight: 800;
+        .stat-value-container {
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
           line-height: 1;
+        }
+
+        /* СТИЛИЗОВАННЫЙ ЗНАК ПЛЮС */
+        .stat-plus {
+          font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+          font-weight: 700;
+          color: #00E599;
+          margin-right: 2px;
+          opacity: 0.9;
+        }
+
+        .stat-value {
+          font-size: clamp(2.1rem, 3.2vw, 2.7rem);
+          font-weight: 800;
           letter-spacing: -0.03em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
@@ -369,7 +386,7 @@ export default function Hero({ t }: HeroProps) {
         }
 
         .stat-label {
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           color: #94A3B8;
           font-weight: 600;
           letter-spacing: 0.01em;
@@ -433,7 +450,7 @@ export default function Hero({ t }: HeroProps) {
               <div className="bento-card">
                 <div className="bento-header">
                   <div className="sync-badge">
-                    <div className="pulse-dot"></div> 1s Sync Active
+                    <div className="pulse-dot"></div> DIRECT BOOKING SYNC ACTIVE
                   </div>
                   <div className="ota-saved-block">
                     <div className="ota-saved-label">OTA Margin Saved</div>
@@ -445,22 +462,34 @@ export default function Hero({ t }: HeroProps) {
 
                 <div className="bento-grid">
                   <div className="bento-item">
-                    <div className="stat-value">+40%</div>
+                    <div className="stat-value-container">
+                      <span className="stat-plus">+</span>
+                      <span className="stat-value">40%</span>
+                    </div>
                     <div className="stat-label">Direct Revenue</div>
                   </div>
 
                   <div className="bento-item">
-                    <div className="stat-value">+60%</div>
+                    <div className="stat-value-container">
+                      <span className="stat-plus">+</span>
+                      <span className="stat-value">60%</span>
+                    </div>
                     <div className="stat-label">Margin per Guest</div>
                   </div>
 
                   <div className="bento-item">
-                    <div className="stat-value">+300%</div>
+                    <div className="stat-value-container">
+                      <span className="stat-plus">+</span>
+                      <span className="stat-value">300%</span>
+                    </div>
                     <div className="stat-label">Google Traffic</div>
                   </div>
 
                   <div className="bento-item">
-                    <div className="stat-value">+35%</div>
+                    <div className="stat-value-container">
+                      <span className="stat-plus">+</span>
+                      <span className="stat-value">35%</span>
+                    </div>
                     <div className="stat-label">Repeat Bookings</div>
                   </div>
                 </div>
