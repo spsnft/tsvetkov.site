@@ -1,95 +1,224 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
-const offers = [
+const cases = [
   {
-    num: '01', color: T.accent,
-    title: 'Upgraded Sales Engine',
-    copy: "Fix the leaks in your sales process and connect everything into one system. Your team gets to focus on closing deals, not copy-pasting data",
-    tags: ['CRM Integration', 'Pipeline Auto', 'Lead Routing', 'Analytics Sync'],
+    category: 'HIGH-TICKET B2B',
+    title: 'Scaling Qualified Lead Velocity & GTM Architecture',
+    challenge: 'High cost per lead with low sales conversion due to manual handoffs and poor traffic filtering.',
+    solution: 'Rebuilt acquisition funnels, implemented high-intent lead filtering, and integrated automated instant routing into CRM.',
+    metrics: [
+      { value: '+340%', label: 'Qualified Leads' },
+      { value: '-42%', label: 'Customer Acquisition Cost' },
+      { value: '$1.4M', label: 'Net New Pipeline ARR' },
+    ],
+    tags: ['GTM Strategy', 'CRM Routing', 'High-Intent Funnels', 'CAC Optimization'],
   },
   {
-    num: '02', color: T.acc2,
-    title: 'Precision Ad Scaling',
-    copy: "We manage ad campaigns where every single dollar is tracked — stopping budget leaks, cutting waste, and scaling the exact channels that bring paying clients",
-    tags: ['Paid Media', 'ROAS Opt', 'Multi-channel', 'Funnel Tracking'],
+    category: 'E-COMMERCE & REAL ESTATE',
+    title: 'P&L Attribution & Omnichannel Scale',
+    challenge: 'Marketing spend was spread across 5 channels with zero visibility into true net profit or cohort retention.',
+    solution: 'Architected end-to-end data pipelines connecting ad platform metrics directly to net P&L and CRM deal stages.',
+    metrics: [
+      { value: '5.2x', label: 'Average Blended ROAS' },
+      { value: '100%', label: 'P&L Data Transparency' },
+      { value: '+$520k', label: 'Net Margin Growth' },
+    ],
+    tags: ['Revenue Attribution', 'Unit Economics', 'BI Dashboards', 'Paid Media'],
   },
   {
-    num: '03', color: '#C084FC',
-    title: 'Practical AI Integration',
-    copy: "We implement simple, affordable AI tools that actually work for your daily tasks. Automate the boring routine, speed up your team, and keep your business ahead of the trends without the headache",
-    tags: ['AI Automation', 'Workflow Design', 'Tool Deploy', 'Routine Cuts'],
+    category: 'OPERATIONAL EFFICIENCY',
+    title: 'Zero-Leakage AI Sales Automation',
+    challenge: 'Leads sat untouched for up to 6 hours. Sales managers spent 40% of their day copy-pasting data across sheets.',
+    solution: 'Deployed custom AI parsing for inbound inquiries and auto-assignment protocols within 90 seconds of lead creation.',
+    metrics: [
+      { value: '< 90s', label: 'Lead Response Time' },
+      { value: '80%', label: 'Manual Tasks Automated' },
+      { value: '2.3x', label: 'Close Rate Improvement' },
+    ],
+    tags: ['AI Automation', 'Process Redesign', 'CRM Workflows', 'Retention Loops'],
   },
 ];
 
-export const Services = () => (
-  <section id="services" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}` }}>
-    <style>{`
-      .services-tag-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
-        max-width: 360px;
-      }
-      @media (min-width: 768px) {
-        .services-tag-container {
-          display: flex !important;
-          flex-wrap: wrap !important;
-          max-width: 100% !important;
-        }
-      }
-    `}</style>
-
+export const CaseStudies = () => (
+  <section
+    id="cases"
+    style={{
+      width: '100%',
+      position: 'relative',
+      paddingTop: 0,
+      paddingBottom: 'clamp(3rem, 6vw, 6rem)',
+      paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
+      paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
+      background: 'transparent',
+    }}
+  >
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-
-      <motion.div 
-        initial={{ opacity: 0, y: 16 }} 
-        whileInView={{ opacity: 1, y: 0 }} 
+      
+      {/* Centered Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        style={{ textAlign: 'center', marginBottom: '4rem' }}
+        style={{ textAlign: 'center', marginBottom: '3.5rem' }}
       >
-        <span style={{ 
-          display: 'inline-block', padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1rem', 
-          fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase' as const, 
-          background: 'rgba(0, 229, 153, 0.05)', border: '1px solid rgba(0, 229, 153, 0.2)', color: T.accent 
-        }}>
-          SERVICES & SOLUTIONS
+        <span
+          style={{
+            display: 'inline-block',
+            padding: '0.35rem 0.85rem',
+            borderRadius: 20,
+            marginBottom: '1rem',
+            fontSize: '0.7rem',
+            fontWeight: 700,
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            background: 'rgba(0, 229, 153, 0.05)',
+            border: '1px solid rgba(0, 229, 153, 0.2)',
+            color: T.accent,
+          }}
+        >
+          PROOF OF EXECUTION
         </span>
-        
-        <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
-          Three execution protocols<br />Measurable business outcomes
+
+        <h2
+          style={{
+            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+            fontWeight: 800,
+            lineHeight: 1.1,
+            letterSpacing: '-0.03em',
+            color: '#fff',
+            margin: 0,
+          }}
+        >
+          Proven Growth Architectures
         </h2>
       </motion.div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        {offers.map((offer, i) => (
+      {/* Case Cards List */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+        {cases.map((item, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            style={{
+              background: 'linear-gradient(135deg, rgba(14, 14, 18, 0.8) 0%, rgba(0, 229, 153, 0.02) 100%)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: 20,
+              padding: 'clamp(1.5rem, 3vw, 2.5rem)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+              position: 'relative',
+            }}
           >
-            <div style={{ 
-              background: `linear-gradient(135deg, rgba(10, 10, 12, 0.75) 0%, ${offer.color}04 100%)`, 
-              border: `1px solid ${offer.color}15`, 
-              borderRadius: 20, padding: '2rem', position: 'relative',
-              backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-              boxShadow: `0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(255,255,255,0.03)`,
-            }}>
-              {/* Left accent stripe */}
-              <div style={{ position: 'absolute', left: 0, top: '15%', bottom: '15%', width: 2.5, borderRadius: 2, background: `linear-gradient(to bottom,${offer.color},${offer.color}44)` }} />
+            {/* Top Tag */}
+            <div style={{ marginBottom: '1.25rem' }}>
+              <span
+                style={{
+                  fontSize: '0.65rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.12em',
+                  color: T.accent,
+                  textTransform: 'uppercase',
+                  background: 'rgba(0, 229, 153, 0.08)',
+                  padding: '4px 10px',
+                  borderRadius: 6,
+                  border: '1px solid rgba(0, 229, 153, 0.2)',
+                }}
+              >
+                {item.category}
+              </span>
+            </div>
 
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: offer.color }}>{offer.num}</span>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginTop: '0.5rem', marginBottom: '0.75rem' }}>{offer.title}</h3>
-              <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 750, marginBottom: '1.5rem' }}>{offer.copy}</p>
+            {/* Grid for Content + Metrics */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '2rem',
+                alignItems: 'start',
+              }}
+            >
+              {/* Left Column: Challenge & Solution */}
+              <div>
+                <h3
+                  style={{
+                    fontSize: 'clamp(1.25rem, 2vw, 1.6rem)',
+                    fontWeight: 700,
+                    color: '#fff',
+                    marginBottom: '1rem',
+                    lineHeight: 1.25,
+                  }}
+                >
+                  {item.title}
+                </h3>
 
-              {/* Symmetrical grid converting to a row line on desktop */}
-              <div className="services-tag-container">
-                {offer.tags.map((tag, ti) => (
-                  <span key={ti} style={{ padding: '6px 12px', borderRadius: 6, fontSize: '0.75rem', background: `${offer.color}08`, border: `1px solid ${offer.color}15`, color: offer.color, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {tag}
-                  </span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: T.sub, lineHeight: 1.6 }}>
+                    <strong style={{ color: 'rgba(255,255,255,0.9)' }}>Bottleneck:</strong> {item.challenge}
+                  </p>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: T.sub, lineHeight: 1.6 }}>
+                    <strong style={{ color: T.accent }}>Architected Solution:</strong> {item.solution}
+                  </p>
+                </div>
+
+                {/* Tags */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  {item.tags.map((tag, ti) => (
+                    <span
+                      key={ti}
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: 6,
+                        fontSize: '0.725rem',
+                        fontWeight: 500,
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        color: T.sub,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Key Metrics */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
+                  gap: '1rem',
+                  background: 'rgba(0, 0, 0, 0.25)',
+                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  borderRadius: 16,
+                  padding: '1.25rem',
+                }}
+              >
+                {item.metrics.map((m, mi) => (
+                  <div key={mi} style={{ textAlign: 'center' }}>
+                    <div
+                      style={{
+                        fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
+                        fontWeight: 800,
+                        color: T.accent,
+                        lineHeight: 1.1,
+                        marginBottom: '0.35rem',
+                        letterSpacing: '-0.02em',
+                      }}
+                    >
+                      {m.value}
+                    </div>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 500, color: T.muted, lineHeight: 1.3 }}>
+                      {m.label}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -100,3 +229,5 @@ export const Services = () => (
     </div>
   </section>
 );
+
+export default CaseStudies;
