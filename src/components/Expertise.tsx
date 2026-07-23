@@ -47,7 +47,18 @@ const cards = [
 ];
 
 export const Expertise = () => (
-  <section id="expertise" style={{ padding: 'clamp(5rem,10vw,8rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent' }}>
+  <section 
+    id="expertise" 
+    style={{ 
+      width: '100%',
+      position: 'relative',
+      paddingTop: 0,
+      paddingBottom: 'clamp(3rem, 6vw, 6rem)',
+      paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
+      paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
+      background: 'transparent' 
+    }}
+  >
     <style jsx>{`
       .expertise-grid {
         display: grid;
@@ -110,7 +121,7 @@ export const Expertise = () => (
 
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
-      <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3.5rem' }}>
+      <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3rem' }}>
         <span style={{ 
           display: 'inline-block', padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1rem', 
           fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', 
@@ -119,7 +130,7 @@ export const Expertise = () => (
           SYSTEM ARCHITECTURE
         </span>
         
-        <h2 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
+        <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3.2rem)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
           Three pillars<br />One growth machine
         </h2>
       </motion.div>
