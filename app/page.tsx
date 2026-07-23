@@ -1,5 +1,6 @@
-import TsvetkovB2C from './components/TsvetkovB2C';
+import TsvetkovB2C from '@/src/components/TsvetkovB2C';
 import type { Metadata } from 'next';
+
 
 export const metadata: Metadata = {
   title: 'Fedor Tsvetkov — Growth Architect & Performance Marketer',
