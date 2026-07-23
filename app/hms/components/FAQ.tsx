@@ -20,9 +20,8 @@ export default function FAQ({ t }: FAQProps) {
       <style jsx>{`
         .faq-section {
           width: 100%;
-          padding: 5rem 0;
+          padding: 0 0 5rem 0;
           background: transparent;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .faq-container {
@@ -131,7 +130,18 @@ export default function FAQ({ t }: FAQProps) {
           padding-top: 1rem;
         }
 
-        @media (max-width: 768px) {
+        /* --- ПЛАНШЕТЫ (768px - 1024px) --- */
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .faq-section {
+            padding: 0 0 3.5rem 0;
+          }
+        }
+
+        /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
+        @media (max-width: 767px) {
+          .faq-section {
+            padding: 0 0 3rem 0;
+          }
           .faq-title { font-size: 1.8rem; }
           .faq-button { font-size: 1rem; padding: 1.2rem; }
           .faq-answer-text { padding: 0 1.2rem 1.2rem 1.2rem; font-size: 0.9rem; }
