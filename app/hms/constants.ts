@@ -3,7 +3,7 @@ export const contentData = {
     // --- HERO SECTION ---
     badge: "Hospitality Growth Solutions",
     heroTitle: "Stop Paying 15-20% Commissions to Booking.com & Agoda",
-    heroSub1: "Connect your property directly to guests. Zero risk of human error and double-bookings",
+    heroSub1: "Connect your property directly to guests\nZero risk of human error and double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
     btnAudit: "Book a Free Audit",
     btnChat: "WhatsApp",
@@ -141,7 +141,7 @@ export const contentData = {
     // --- HERO SECTION ---
     badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
     heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
-    heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง • ไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
+    heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง\nไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnAudit: "นัดหมายตรวจสอบระบบฟรี",
     btnChat: "WhatsApp",
@@ -222,7 +222,7 @@ export const contentData = {
     tier1F1: "ระบบ Cloud PMS Setup",
     tier1F2: "ระบบจองตรงไม่เสียค่าคอม",
     tier1F3: "ซิงค์ปฏิทิน Booking & Agoda",
-    tier1F4: "ระบบชำระเงินตรง (Payment Integration)",
+    tier1F4: "ระบบชำระเงินตรง",
     
     tier2Title: "STANDARD (10-30 ห้อง)",
     tier2Price: "$1,500",
@@ -230,7 +230,7 @@ export const contentData = {
     tier2F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier2F1Badge: "LITE",
     tier2F2: "เชื่อมต่อช่องทางจองกว่า 300+ แห่ง",
-    tier2F3: "ระบบโปรโมชั่นจองตรง (Direct Promo Engine)",
+    tier2F3: "ระบบโปรโมชั่นจองตรง",
     tier2F4: "ตั้งค่าระบบวิเคราะห์การตลาด",
     
     tier3Title: "ENTERPRISE (30+ ห้อง)",
@@ -238,7 +238,7 @@ export const contentData = {
     tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
     tier3F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier3F1Badge: "STANDARD",
-    tier3F2: "ระบบ CRM แบบกำหนดเอง (Custom CRM Setup)",
+    tier3F2: "ระบบ CRM แบบกำหนดเอง",
     tier3F3: "รายงานรายได้แบบกำหนดเอง",
     tier3F4: "คู่มือและเช็คลิสต์สำหรับพนักงาน",
 
