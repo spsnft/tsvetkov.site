@@ -3,30 +3,29 @@
 import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
+const RED_ACCENT = '#FF5555';
+
 const bottlenecks = [
   {
     num: '01',
     tag: 'EMPTY TRAFFIC',
     title: 'Traffic Without Profit',
-    description: 'Agencies report clicks and leads, but your sales team gets poor-quality inquiries. Ad budgets keep growing, but net profit stays flat',
+    description: 'Agencies report clicks and leads, but your sales team gets poor-quality inquiries. Ad budgets keep growing, but net profit stays flat.',
     impact: 'Uncontrolled CAC Inflation',
-    color: '#FF5555',
   },
   {
     num: '02',
     tag: 'UNRELIABLE TRACKING',
     title: 'Broken Data & Unclear Numbers',
-    description: 'Ad platforms, CRM, and actual revenue live in separate places. You end up guessing what works instead of seeing real ROI and true net profit',
+    description: 'Ad platforms, CRM, and actual revenue live in separate places. You end up guessing what works instead of seeing real ROI and true net profit.',
     impact: 'Wasted Marketing Capital',
-    color: '#FFB800',
   },
   {
     num: '03',
     tag: 'MANUAL ROUTINES',
     title: 'Manual Work & Slow Lead Response',
-    description: 'Leads sit untouched for hours due to manual handoffs. Your team wastes time copy-pasting data across tables instead of closing deals',
+    description: 'Leads sit untouched for hours due to manual handoffs. Your team wastes time copy-pasting data across tables instead of closing deals.',
     impact: 'Revenue Leakage & High Overhead',
-    color: '#C084FC',
   },
 ];
 
@@ -64,7 +63,7 @@ export const Bottleneck = () => (
           textTransform: 'uppercase' as const, 
           background: 'rgba(255, 85, 85, 0.08)', 
           border: '1px solid rgba(255, 85, 85, 0.25)', 
-          color: '#FF5555' 
+          color: RED_ACCENT 
         }}>
           GROWTH BARRIERS
         </span>
@@ -95,8 +94,8 @@ export const Bottleneck = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             style={{
-              background: `linear-gradient(135deg, rgba(14, 14, 18, 0.75) 0%, ${item.color}03 100%)`,
-              border: `1px solid ${item.color}20`,
+              background: 'linear-gradient(135deg, rgba(14, 14, 18, 0.75) 0%, rgba(255, 85, 85, 0.03) 100%)',
+              border: '1px solid rgba(255, 85, 85, 0.18)',
               borderRadius: 20,
               padding: '2rem',
               display: 'flex',
@@ -116,12 +115,12 @@ export const Bottleneck = () => (
                   fontSize: '0.65rem', 
                   fontWeight: 800, 
                   letterSpacing: '0.1em', 
-                  color: item.color, 
+                  color: RED_ACCENT, 
                   textTransform: 'uppercase' as const, 
-                  background: `${item.color}10`, 
+                  background: 'rgba(255, 85, 85, 0.1)', 
                   padding: '4px 10px', 
                   borderRadius: 6, 
-                  border: `1px solid ${item.color}25` 
+                  border: '1px solid rgba(255, 85, 85, 0.25)' 
                 }}>
                   {item.tag}
                 </span>
@@ -147,9 +146,9 @@ export const Bottleneck = () => (
               alignItems: 'center', 
               gap: '0.5rem' 
             }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: item.color, display: 'inline-block' }} />
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: RED_ACCENT, display: 'inline-block' }} />
               <span style={{ fontSize: '0.75rem', fontWeight: 600, color: T.muted }}>
-                Impact: <span style={{ color: '#fff' }}>{item.impact}</span>
+                Impact: <span style={{ color: RED_ACCENT }}>{item.impact}</span>
               </span>
             </div>
           </motion.div>
