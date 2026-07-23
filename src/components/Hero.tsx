@@ -18,9 +18,9 @@ export const Hero = () => {
         width: '100%',
         position: 'relative',
         overflow: 'hidden',
-        // ЧЁТКИЙ РАСЧЕТ: 64px (высота шапки) + 2.5rem (аккуратный отступ от шапки)
-        paddingTop: 'calc(64px + clamp(1.5rem, 3vw, 2.5rem))',
-        paddingBottom: 'clamp(3rem, 6vw, 5rem)',
+        // Отступ от шапки (64px) без гигантских дыр
+        paddingTop: 'calc(64px + clamp(1rem, 2.5vw, 2rem))',
+        paddingBottom: 'clamp(3rem, 6vw, 6rem)',
         paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
         paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
       }}
