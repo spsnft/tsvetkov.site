@@ -17,6 +17,15 @@ export const contentData = {
     statGoogleTraffic: "Google Traffic",
     statRepeatBookings: "Repeat Bookings",
     
+    // --- INDUSTRY PROOF (Mobile/Tablet) ---
+    proofTitle: "System Impact",
+    proofMetrics: [
+      { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue" },
+      { endValue: 60, prefix: "+", suffix: "%", label: "Margin per Guest" },
+      { endValue: 300, prefix: "+", suffix: "%", label: "Google Traffic" },
+      { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Bookings" }
+    ],
+    
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Scale your property bookings",
     scaleSub: "Automate workflows so your team can focus on guest experience",
@@ -146,6 +155,15 @@ export const contentData = {
     statGoogleTraffic: "ทราฟฟิก Google",
     statRepeatBookings: "การจองซ้ำ",
     
+    // --- INDUSTRY PROOF (Mobile/Tablet) ---
+    proofTitle: "ผลลัพธ์ของระบบ",
+    proofMetrics: [
+      { endValue: 40, prefix: "+", suffix: "%", label: "รายได้ตรง" },
+      { endValue: 60, prefix: "+", suffix: "%", label: "มาร์จิ้นต่อผู้เข้าพัก" },
+      { endValue: 300, prefix: "+", suffix: "%", label: "ทราฟฟิก Google" },
+      { endValue: 35, prefix: "+", suffix: "%", label: "การจองซ้ำ" }
+    ],
+
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
     scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
