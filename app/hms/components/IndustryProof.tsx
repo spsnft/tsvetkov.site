@@ -117,11 +117,13 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           margin: 0;
         }
 
+        /* --- ПЛАНШЕТЫ (по умолчанию для видимого блока) - Сетка 4x1 --- */
         .proof-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           width: 100%;
           border-top: 1px solid ${T.border};
+          border-bottom: 1px solid ${T.border};
         }
         
         .proof-col {
@@ -131,18 +133,15 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           gap: 0.5rem;
           text-align: center;
           align-items: center;
-        }
-
-        .proof-col:nth-child(odd) {
           border-right: 1px solid ${T.border};
         }
 
-        .proof-col:nth-child(1), .proof-col:nth-child(2) {
-          border-bottom: 1px solid ${T.border};
+        .proof-col:last-child {
+          border-right: none;
         }
         
         .metric-number {
-          font-size: clamp(2rem, 5vw, 2.8rem);
+          font-size: clamp(2rem, 4vw, 2.8rem);
           font-weight: 700; 
           line-height: 1.1; 
           letter-spacing: -0.03em;
@@ -163,7 +162,8 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           max-width: 180px;
         }
 
-        @media (max-width: 576px) {
+        /* --- МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) - Сетка 2x2 --- */
+        @media (max-width: 768px) {
           .proof-section {
             padding-bottom: 2.5rem;
           }
@@ -173,11 +173,26 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           .proof-title {
             font-size: 1.6rem;
           }
+          
           .proof-grid {
-            grid-template-columns: repeat(2, 1fr); /* На мобиле оставляем 2х2 компактной сеткой */
+            grid-template-columns: repeat(2, 1fr); 
+            border-bottom: none; /* Убираем общую рамку, передаем ее ячейкам */
           }
+          
           .proof-col {
-            padding: 1.5rem 0.5rem;
+            padding: 1.8rem 0.5rem;
+            border-right: none; /* Сбрасываем рамки от 4 колонок */
+          }
+
+          /* Восстанавливаем рамки специально для сетки 2x2 */
+          .proof-col:nth-child(odd) {
+            border-right: 1px solid ${T.border};
+          }
+          .proof-col:nth-child(1), .proof-col:nth-child(2) {
+            border-bottom: 1px solid ${T.border};
+          }
+          .proof-col:nth-child(3), .proof-col:nth-child(4) {
+            border-bottom: 1px solid ${T.border};
           }
         }
       `}</style>
