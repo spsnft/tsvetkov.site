@@ -64,13 +64,19 @@ export default function Hero({ t }: HeroProps) {
     return '$' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  const dotIndex = t.heroSub1.indexOf('. ');
-  let line1 = t.heroSub1;
+  // Универсальное деление подзаголовка: сначала проверяем \n, а если нет — то по точке
+  const rawSub = t.heroSub1 || '';
+  let line1 = rawSub;
   let line2 = '';
 
-  if (dotIndex !== -1) {
-    line1 = t.heroSub1.substring(0, dotIndex);
-    line2 = t.heroSub1.substring(dotIndex + 2);
+  if (rawSub.includes('\n')) {
+    const parts = rawSub.split('\n');
+    line1 = parts[0];
+    line2 = parts.slice(1).join(' ');
+  } else if (rawSub.includes('. ')) {
+    const dotIndex = rawSub.indexOf('. ');
+    line1 = rawSub.substring(0, dotIndex);
+    line2 = rawSub.substring(dotIndex + 2);
   }
 
   return (
@@ -149,6 +155,7 @@ export default function Hero({ t }: HeroProps) {
           color: #CBD5E1;
           font-weight: 400;
           text-wrap: pretty;
+          white-space: pre-line;
         }
         .sub-line-2 {
           margin-top: 0.4rem;
