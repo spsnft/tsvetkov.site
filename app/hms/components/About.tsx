@@ -33,14 +33,14 @@ const renderCaseTitle = (title: string) => {
   if (title.includes(' | ')) {
     const parts = title.split(' | ');
     return (
-      <>
-        <span className="title-part">{parts[0]}</span>
-        <span className="title-sep"> | </span>
-        <span className="title-part">{parts[1]}</span>
-      </>
+      <span className="case-title-container">
+        <span className="metric-part">{parts[0]}</span>
+        <span className="title-sep">•</span>
+        <span className="metric-part">{parts[1]}</span>
+      </span>
     );
   }
-  return title;
+  return <span className="metric-part">{title}</span>;
 };
 
 const renderFormattedDesc = (desc: string) => {
@@ -270,7 +270,7 @@ export default function About({ t }: AboutProps) {
 
         .case-header {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           gap: 1rem;
         }
@@ -280,19 +280,28 @@ export default function About({ t }: AboutProps) {
           font-weight: 700;
           margin: 0;
           letter-spacing: -0.01em;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
           line-height: 1.35;
         }
 
-        :global(.title-part) {
-          display: inline;
+        :global(.case-title-container) {
+          display: inline-flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.35rem 0.5rem;
+        }
+
+        :global(.metric-part) {
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          white-space: nowrap; /* Не дает разорвать фразы пополам */
         }
 
         :global(.title-sep) {
-          display: inline;
-          opacity: 0.6;
+          color: rgba(255, 255, 255, 0.35);
+          -webkit-text-fill-color: rgba(255, 255, 255, 0.35); /* Фикс прозрачности! */
+          font-size: 0.8rem;
+          user-select: none;
         }
 
         :global(.nobr) {
@@ -321,7 +330,19 @@ export default function About({ t }: AboutProps) {
           text-wrap: pretty;
         }
 
-        /* --- ПЛАНШЕТЫ (768px - 1024px) --- */
+        /* --- ПЛАНШЕТЫ И НОУТБУКИ (ДО 1024px) --- */
+        @media (max-width: 1024px) {
+          :global(.case-title-container) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+          }
+          :global(.title-sep) {
+            display: none !important;
+          }
+        }
+
         @media (min-width: 768px) and (max-width: 1024px) {
           .about-section {
             padding: 0 0 3rem 0;
@@ -354,11 +375,6 @@ export default function About({ t }: AboutProps) {
           }
           .stat-sub {
             font-size: 0.62rem;
-          }
-          .case-header {
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
           }
           .case-card {
             padding: 1rem 1rem;
@@ -427,12 +443,6 @@ export default function About({ t }: AboutProps) {
           .case-title {
             font-size: 0.9rem;
             line-height: 1.35;
-          }
-          :global(.title-sep) {
-            display: none !important;
-          }
-          :global(.title-part) {
-            display: block !important;
           }
           .case-desc {
             font-size: 0.82rem;
