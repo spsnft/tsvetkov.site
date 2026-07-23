@@ -8,12 +8,13 @@ import { NetworkBackground } from '../../src/components/NetworkBackground';
 // Импорт констант и словарей перевода
 import { contentData } from './constants';
 
-// Импорт изолированных компонентов секций (без удаленного IndustryProof)
+// Импорт изолированных компонентов секций
 import Hero from './components/Hero';
 import LogoMarquee from './components/LogoMarquee';
 import ScalePractice from './components/ScalePractice';
 import About from './components/About';
 import Pricing from './components/Pricing';
+import FAQ from './components/FAQ'; // <-- НОВЫЙ ИМПОРТ
 import FooterCTA from './components/FooterCTA';
 
 export default function HospitalityB2B() {
@@ -115,13 +116,13 @@ export default function HospitalityB2B() {
         {/* БЛОК 5: ТАРИФНЫЕ ПЛАНЫ */}
         <Pricing t={t} />
 
-        {/* БЛОК 6: ПРИЗЫВ К ДЕЙСТВИЮ (CALENDLY) */}
+        {/* БЛОК 6: FAQ (СНЯТИЕ ВОЗРАЖЕНИЙ) */}
+        <FAQ t={t} />
+
+        {/* БЛОК 7: ПРИЗЫВ К ДЕЙСТВИЮ (CALENDLY) */}
         <FooterCTA t={t} />
 
       </main>
     </div>
   );
 }
-
-
-
