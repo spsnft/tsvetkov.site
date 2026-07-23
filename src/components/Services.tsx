@@ -7,20 +7,19 @@ const offers = [
   {
     num: '01', color: T.accent,
     title: 'Upgraded Sales Engine',
-    copy: "Fix the leaks in your sales process and connect everything into one system. Your team gets to focus on closing deals, not copy-pasting data.",
+    copy: "Fix the leaks in your sales process and connect everything into one system. Your team gets to focus on closing deals, not copy-pasting data",
     tags: ['CRM Integration', 'Pipeline Auto', 'Lead Routing', 'Analytics Sync'],
   },
   {
     num: '02', color: T.acc2,
     title: 'Precision Ad Scaling',
-    // ИСПРАВЛЕНО: Текст стал емким, убраны длинные обороты, чтобы избежать висящих слов
-    copy: "We manage ad campaigns where every single dollar is tracked — stopping budget leaks, cutting waste, and scaling the exact channels that bring paying clients.",
+    copy: "We manage ad campaigns where every single dollar is tracked — stopping budget leaks, cutting waste, and scaling the exact channels that bring paying clients",
     tags: ['Paid Media', 'ROAS Opt', 'Multi-channel', 'Funnel Tracking'],
   },
   {
     num: '03', color: '#C084FC',
     title: 'Practical AI Integration',
-    copy: "We implement simple, affordable AI tools that actually work for your daily tasks. Automate the boring routine, speed up your team, and keep your business ahead of the trends without the headache.",
+    copy: "We implement simple, affordable AI tools that actually work for your daily tasks. Automate the boring routine, speed up your team, and keep your business ahead of the trends without the headache",
     tags: ['AI Automation', 'Workflow Design', 'Tool Deploy', 'Routine Cuts'],
   },
 ];
@@ -45,16 +44,24 @@ export const Services = () => (
 
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
-      <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '4rem' }}>
-        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Services</span>
-          
-          {/* ИСПРАВЛЕНО: Точки в конце строк удалены по аналогии с остальным сайтом */}
-          <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
-            Three protocols<br />Measurable results
-          </h2>
-        </motion.div>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: 16 }} 
+        whileInView={{ opacity: 1, y: 0 }} 
+        viewport={{ once: true }}
+        style={{ textAlign: 'center', marginBottom: '4rem' }}
+      >
+        <span style={{ 
+          display: 'inline-block', padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1rem', 
+          fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase' as const, 
+          background: 'rgba(0, 229, 153, 0.05)', border: '1px solid rgba(0, 229, 153, 0.2)', color: T.accent 
+        }}>
+          SERVICES & SOLUTIONS
+        </span>
+        
+        <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
+          Three execution protocols<br />Measurable business outcomes
+        </h2>
+      </motion.div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         {offers.map((offer, i) => (
