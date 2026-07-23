@@ -110,23 +110,23 @@ export const contentData = {
     faqItems: [
       {
         q: "Are there any hidden fees or commissions?",
-        a: "Zero commission from us — you pay our one-time setup fee and keep 100% of direct booking revenue. The only separate expense is the third-party software subscription, paid directly to providers without any agent markups."
+        a: "Zero commission from us — you pay our one-time setup fee and keep 100% of direct booking revenue. The only separate expense is the third-party software subscription, paid directly to providers without any agent markups"
       },
       {
         q: "Will my team be able to manage the system easily?",
-        a: "Yes, modern Cloud PMS platforms are designed to be as intuitive as smartphone apps and require zero technical background. If your team needs custom operational handbooks, checklists, and staff onboarding, those are included in our Enterprise tier or available as a custom add-on."
+        a: "Yes, modern Cloud PMS platforms are designed to be as intuitive as smartphone apps and require zero technical background. If your team needs custom operational handbooks, checklists, and staff onboarding, those are included in our Enterprise tier or available as a custom add-on"
       },
       {
         q: "How long does the setup take, and will it interrupt my daily bookings?",
-        a: "Full integration takes 7 to 14 days. All technical configuration, payment testing, and channel syncing are done in the background, so your existing reservations and daily operations run smoothly without downtime."
+        a: "Full integration takes 7 to 14 days. All technical configuration, payment testing, and channel syncing are done in the background, so your existing reservations and daily operations run smoothly without downtime"
       },
       {
         q: "What support do you offer after the system goes live?",
-        a: "We don't disappear after setup. Every project includes 14 days of dedicated post-launch monitoring to fine-tune operations and ensure everything runs flawlessly. After that, you can manage it independently or opt for our monthly maintenance package."
+        a: "We don't disappear after setup. Every project includes 14 days of dedicated post-launch monitoring to fine-tune operations and ensure everything runs flawlessly. After that, you can manage it independently or opt for our monthly maintenance package"
       },
       {
         q: "How do guests pay, and how fast do I get my money?",
-        a: "We connect secure payment gateways directly to your direct booking engine. Guest payments go into your corporate bank account without middleman delays."
+        a: "We connect secure payment gateways directly to your direct booking engine. Guest payments go into your corporate bank account without middleman delays"
       }
     ],
 
@@ -140,7 +140,7 @@ export const contentData = {
   th: {
     // --- HERO SECTION ---
     badge: "โซลูชั่นเพื่อการเติบโตของธุรกิจโรงแรม",
-    heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15-20% ให้ Booking.com และ Agoda",
+    heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15\u201120% ให้ Booking.com และ Agoda",
     heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง\nไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnAudit: "นัดหมายตรวจสอบระบบฟรี",
