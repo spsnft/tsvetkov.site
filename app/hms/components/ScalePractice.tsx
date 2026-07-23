@@ -107,7 +107,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <style jsx>{`
         .scale-section {
           width: 100%;
-          padding: 3rem 0 3.5rem 0; /* Вернули верхний отступ 3rem */
+          padding: 3rem 0 3.5rem 0;
           background: transparent;
         }
 
@@ -131,7 +131,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           line-height: 1.5;
           margin: 0 auto;
           max-width: 800px;
-          text-wrap: balance;
+          white-space: nowrap; /* Гарантирует одну строку на ПК */
         }
 
         .mobile-br {
@@ -263,7 +263,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         /* --- ПЛАНШЕТЫ (768px – 1024px) --- */
         @media (min-width: 768px) and (max-width: 1024px) {
           .scale-section {
-            padding: 2.5rem 0 3rem 0; /* Вернули 2.5rem сверху */
+            padding: 2.5rem 0 3rem 0;
           }
           .scale-header {
             margin-bottom: 2.5rem;
@@ -273,7 +273,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
           .scale-subtitle {
             font-size: 0.95rem;
-            max-width: 700px;
+            max-width: 100%;
+            white-space: nowrap; /* Однострочный вид на планшетах */
           }
           .scale-grid {
             grid-template-columns: repeat(3, 1fr);
@@ -305,7 +306,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
         @media (max-width: 767px) {
           .scale-section {
-            padding: 2.25rem 0 2.75rem 0; /* Вернули 2.25rem сверху */
+            padding: 2.25rem 0 2.75rem 0;
           }
           .scale-header {
             margin-bottom: 2.25rem;
@@ -316,6 +317,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .scale-subtitle {
             font-size: 0.95rem;
             max-width: 100%;
+            white-space: normal; /* Разрешаем перенос на мобилках */
           }
           .mobile-br {
             display: inline;
