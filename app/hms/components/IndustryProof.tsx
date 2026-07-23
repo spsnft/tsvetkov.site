@@ -12,7 +12,6 @@ interface MetricItem {
 
 interface IndustryProofProps {
   t: {
-    proofTitle?: string;
     proofMetrics?: MetricItem[];
     [key: string]: any;
   };
@@ -77,7 +76,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
     return () => observer.disconnect();
   }, []);
 
-  // Метрики по умолчанию, если в t не переданы
+  // Метрики по умолчанию
   const metrics = t?.proofMetrics || [
     { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue" },
     { endValue: 60, prefix: "+", suffix: "%", label: "Margin per Guest" },
@@ -85,39 +84,24 @@ export default function IndustryProof({ t }: IndustryProofProps) {
     { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Bookings" },
   ];
 
-  const title = t?.proofTitle || "System Impact";
-
   return (
     <section ref={sectionRef} className="proof-section">
       <style jsx>{`
         .proof-section {
           width: 100%;
           background-color: transparent;
-          padding: 0 0 3.5rem 0; 
+          /* Верхний отступ оставляем от Hero, нижний полностью убираем для стыковки с Marquee */
+          padding: 1.5rem 0 0 0; 
         }
 
-        /* СКРЫВАЕМ НА ПК (на экранах от 1025px), так как там отображается Bento-дашборд в Hero */
+        /* СКРЫВАЕМ НА ПК (от 1025px) */
         @media (min-width: 1025px) {
           .proof-section {
             display: none !important;
           }
         }
 
-        .proof-header {
-          text-align: center;
-          margin-bottom: 2.5rem; 
-        }
-
-        .proof-title {
-          font-size: 2rem;
-          font-weight: 700;
-          color: #ffffff;
-          letter-spacing: -0.02em;
-          line-height: 1.2;
-          margin: 0;
-        }
-
-        /* --- ПЛАНШЕТЫ (по умолчанию для видимого блока) - Сетка 4x1 --- */
+        /* --- ПЛАНШЕТЫ (Сетка 4x1) --- */
         .proof-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -127,7 +111,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         }
         
         .proof-col {
-          padding: 2.5rem 1rem;
+          padding: 2rem 1rem;
           display: flex;
           flex-direction: column;
           gap: 0.5rem;
@@ -165,32 +149,27 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         /* --- МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) - Сетка 2x2 --- */
         @media (max-width: 768px) {
           .proof-section {
-            padding-bottom: 2.5rem;
-          }
-          .proof-header {
-            margin-bottom: 2rem;
-          }
-          .proof-title {
-            font-size: 1.6rem;
+            padding: 1rem 0 0 0; /* Также 0 снизу */
           }
           
           .proof-grid {
             grid-template-columns: repeat(2, 1fr); 
-            border-bottom: none; /* Убираем общую рамку, передаем ее ячейкам */
+            border-bottom: none;
           }
           
           .proof-col {
-            padding: 1.8rem 0.5rem;
-            border-right: none; /* Сбрасываем рамки от 4 колонок */
+            padding: 1.5rem 0.5rem;
+            border-right: none;
           }
 
-          /* Восстанавливаем рамки специально для сетки 2x2 */
+          /* Рамки для сетки 2x2 */
           .proof-col:nth-child(odd) {
             border-right: 1px solid ${T.border};
           }
           .proof-col:nth-child(1), .proof-col:nth-child(2) {
             border-bottom: 1px solid ${T.border};
           }
+          /* Низ 3-го и 4-го элементов подчёркиваем рамкой, чтобы отделить от Marquee */
           .proof-col:nth-child(3), .proof-col:nth-child(4) {
             border-bottom: 1px solid ${T.border};
           }
@@ -198,12 +177,6 @@ export default function IndustryProof({ t }: IndustryProofProps) {
       `}</style>
 
       <div className="container">
-        <div className="proof-header">
-          <h2 className="proof-title">
-            {title}
-          </h2>
-        </div>
-
         <div className="proof-grid">
           {metrics.map((item, idx) => (
             <div key={idx} className="proof-col">
