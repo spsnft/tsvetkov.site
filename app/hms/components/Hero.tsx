@@ -23,7 +23,7 @@ export default function Hero({ t }: HeroProps) {
   const [liveAmount, setLiveAmount] = useState(4850);
   const [isTicking, setIsTicking] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
     setIsMounted(true);
 
     if (!document.getElementById('calendly-w-css-hero')) {
@@ -68,7 +68,7 @@ export default function Hero({ t }: HeroProps) {
     return '$' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  // Универсальное деление подзаголовка: сначала проверяем \n, а если нет — то по точке
+  // Универсальное деление подзаголовка
   const rawSub = t.heroSub1 || '';
   let line1 = rawSub;
   let line2 = '';
@@ -180,33 +180,6 @@ export default function Hero({ t }: HeroProps) {
           gap: 0.85rem;
           flex-wrap: nowrap;
         }
-        
-        .btn-primary-main {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          height: 54px;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          color: #0A0A0E;
-          padding: 0 2.2rem;
-          border-radius: 10px;
-          font-weight: 800;
-          letter-spacing: 0.01em;
-          text-decoration: none;
-          font-size: 1.05rem;
-          flex-shrink: 0;
-          cursor: pointer;
-          transition: all 0.25s ease;
-          border: none;
-          box-shadow: 0 4px 20px rgba(0, 229, 153, 0.25);
-          box-sizing: border-box;
-          white-space: nowrap;
-        }
-
-        .btn-primary-main:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(0, 229, 153, 0.45);
-        }
 
         .btn-secondary-chat {
           display: inline-flex;
@@ -214,7 +187,7 @@ export default function Hero({ t }: HeroProps) {
           justify-content: center;
           width: 54px;
           height: 54px;
-          border-radius: 10px;
+          border-radius: 12px;
           background: rgba(0, 229, 153, 0.06);
           border: 1px solid rgba(0, 229, 153, 0.25);
           backdrop-filter: blur(8px);
@@ -452,7 +425,7 @@ export default function Hero({ t }: HeroProps) {
             </div>
             
             <div className="cta-container">
-              <button onClick={handleCalendlyPopup} className="btn-primary-main">
+              <button onClick={handleCalendlyPopup} className="btn-premium-core">
                 {t.btnAudit || "Book a Free Audit"}
               </button>
               
