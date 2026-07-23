@@ -182,7 +182,7 @@ export const Contact = () => {
                 style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
-                  justify: 'space-between', 
+                  justifyContent: 'space-between', // Исправлено: justifyContent
                   padding: '14px 20px', 
                   borderRadius: 12, 
                   background: `linear-gradient(135deg, ${T.accent}, ${T.acc2})`, 
