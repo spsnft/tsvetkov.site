@@ -15,11 +15,11 @@ interface FooterCTAProps {
   };
 }
 
-export default function FooterCTA({ t }: FooterCTAProps) {
-  const titleText = t?.footerTitle || "Ready to maximize your revenue?";
-  const sub1Text = t?.footerSub1 || t?.footerSub || "Stop leaving 15–20% on the table";
-  const sub2Text = t?.footerSub2 || "Take full control of your direct bookings";
-  const btnText = t?.footerBtn || t?.btnAudit || "Book a Free Audit";
+export default function FooterCTA({ t = {} }: FooterCTAProps) {
+  const titleText = t.footerTitle || "Ready to maximize your revenue?";
+  const sub1Text = t.footerSub1 || t.footerSub || "Stop leaving 15–20% on the table";
+  const sub2Text = t.footerSub2 || "Take full control of your direct bookings";
+  const btnText = t.footerBtn || t.btnAudit || "Book a Free Audit";
 
   useEffect(() => {
     if (!document.getElementById('calendly-w-css')) {
@@ -98,40 +98,9 @@ export default function FooterCTA({ t }: FooterCTAProps) {
           text-wrap: pretty;
         }
         
-        .btn-gradient-cta {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          color: #000000 !important;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          padding: 1.1rem 2.8rem;
-          border-radius: 8px;
-          font-weight: 700;
-          font-size: 1.05rem;
-          text-decoration: none;
-          border: none;
-          cursor: pointer;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 10px 30px rgba(0, 229, 153, 0.25), 0 10px 30px rgba(0, 163, 255, 0.15);
-        }
-        
-        .btn-gradient-cta:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 15px 40px rgba(0, 229, 153, 0.4), 0 15px 40px rgba(0, 163, 255, 0.25);
-          filter: brightness(1.08);
-        }
-
-        .btn-gradient-cta:active {
-          transform: translateY(0);
-        }
-        
         @media (max-width: 768px) {
           .footer-cta-section {
             padding: 0 0 4.5rem 0;
-          }
-          .btn-gradient-cta {
-            width: 100%;
-            padding: 1.1rem 1.5rem;
           }
         }
       `}</style>
@@ -145,7 +114,7 @@ export default function FooterCTA({ t }: FooterCTAProps) {
             {sub2Text && <p className="subtitle">{sub2Text}</p>}
           </div>
           
-          <button type="button" onClick={handleCalendlyPopup} className="btn-gradient-cta">
+          <button type="button" onClick={handleCalendlyPopup} className="btn-premium-core">
             {btnText}
           </button>
         </div>
