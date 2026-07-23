@@ -10,11 +10,12 @@ import { contentData } from './constants';
 
 // Импорт изолированных компонентов секций
 import Hero from './components/Hero';
+import IndustryProof from './components/IndustryProof'; // <-- ДОБАВЛЕН ИМПОРТ
 import LogoMarquee from './components/LogoMarquee';
 import ScalePractice from './components/ScalePractice';
 import About from './components/About';
 import Pricing from './components/Pricing';
-import FAQ from './components/FAQ'; // <-- НОВЫЙ ИМПОРТ
+import FAQ from './components/FAQ';
 import FooterCTA from './components/FooterCTA';
 
 export default function HospitalityB2B() {
@@ -103,6 +104,9 @@ export default function HospitalityB2B() {
         
         {/* БЛОК 1: ПЕРВЫЙ ЭКРАН */}
         <Hero t={t} />
+
+        {/* БЛОК 1.5: МЕТРИКИ ДЛЯ ПЛАНШЕТОВ И МОБИЛЬНЫХ УСТРОЙСТВ (скрыто на ПК) */}
+        <IndustryProof t={t} />
 
         {/* БЛОК 2: БЕГУЩАЯ СТРОКА ЛОГОТИПОВ */}
         <LogoMarquee />
