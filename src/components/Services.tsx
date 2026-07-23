@@ -4,27 +4,33 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
-const offers = [
+const models = [
   {
     num: '01',
-    color: T.accent,
-    title: 'Upgraded Sales Engine',
-    copy: 'Fix the leaks in your sales process and connect everything into one system. Your team gets to focus on closing deals, not copy-pasting data.',
-    tags: ['CRM Integration', 'Pipeline Auto', 'Lead Routing', 'Analytics Sync'],
+    badge: 'QUICK START / 1-2 WEEKS',
+    title: 'Audit & Growth Roadmap',
+    description: 'Deep-dive diagnostic of your current ad channels, CRM workflows, and unit economics. We identify traffic leakage, broken attribution, and sales bottlenecks.',
+    deliverables: ['P&L & Analytics Audit', 'CRM & Pipeline Diagnostic', 'Growth Bottleneck Map', 'Step-by-Step Action Plan'],
+    impact: 'Full clarity on lost revenue before committing capital',
+    color: '#00A3FF',
   },
   {
     num: '02',
-    color: T.acc2,
-    title: 'Precision Ad Scaling',
-    copy: 'We manage ad campaigns where every single dollar is tracked — stopping budget leaks, cutting waste, and scaling the exact channels that bring paying clients.',
-    tags: ['Paid Media', 'ROAS Opt', 'Multi-channel', 'Funnel Tracking'],
+    badge: 'SYSTEM BUILD / TURNKEY',
+    title: 'Growth Infrastructure Build',
+    description: 'End-to-end architecture deployment: high-intent funnels, automated lead routing, zero-leakage CRM configuration, and custom P&L attribution dashboards.',
+    deliverables: ['Custom Funnel Architecture', 'Instant CRM Lead Routing', 'End-to-End P&L Tracking', 'AI Workflow Automation'],
+    impact: 'Scalable system ready for high-budget traffic expansion',
+    color: T.accent,
   },
   {
     num: '03',
+    badge: 'ONGOING / FRACTIONAL CMO',
+    title: 'Growth Partner & Performance Scaling',
+    description: 'Continuous strategic direction and hands-on execution. We optimize CAC, manage ad spend, accelerate sales speed, and scale net margin month-over-month.',
+    deliverables: ['Omnichannel Traffic Mgmt', 'Weekly P&L Optimization', 'Funnel Conversion Tuning', 'Executive Reporting'],
+    impact: 'Predictable revenue growth and guaranteed system reliability',
     color: '#C084FC',
-    title: 'Practical AI Integration',
-    copy: 'We implement simple, affordable AI tools that actually work for your daily tasks. Automate the boring routine, speed up your team, and keep your business ahead of the trends without the headache.',
-    tags: ['AI Automation', 'Workflow Design', 'Tool Deploy', 'Routine Cuts'],
   },
 ];
 
@@ -41,22 +47,6 @@ export const Services = () => (
       background: 'transparent',
     }}
   >
-    <style>{`
-      .services-tag-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
-        max-width: 360px;
-      }
-      @media (min-width: 768px) {
-        .services-tag-container {
-          display: flex !important;
-          flex-wrap: wrap !important;
-          max-width: 100% !important;
-        }
-      }
-    `}</style>
-
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
       {/* Centered Section Header */}
@@ -79,7 +69,7 @@ export const Services = () => (
           border: '1px solid rgba(0, 229, 153, 0.2)', 
           color: T.accent 
         }}>
-          SERVICES & SOLUTIONS
+          ENGAGEMENT MODELS
         </span>
         
         <h2 style={{ 
@@ -90,59 +80,89 @@ export const Services = () => (
           color: '#fff', 
           margin: 0 
         }}>
-          Three execution protocols<br />Measurable business outcomes
+          How We Work Together
         </h2>
       </motion.div>
 
-      {/* Services List */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        {offers.map((offer, i) => (
+      {/* Grid of Engagement Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+        {models.map((item, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, x: -20 }} 
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} 
             transition={{ delay: i * 0.1 }}
-          >
-            <div style={{ 
-              background: `linear-gradient(135deg, rgba(10, 10, 12, 0.75) 0%, ${offer.color}04 100%)`, 
-              border: `1px solid ${offer.color}20`, 
-              borderRadius: 20, 
-              padding: '2rem', 
-              position: 'relative',
-              backdropFilter: 'blur(12px)', 
+            style={{
+              background: `linear-gradient(135deg, rgba(14, 14, 18, 0.8) 0%, ${item.color}04 100%)`,
+              border: `1px solid ${item.color}20`,
+              borderRadius: 20,
+              padding: '2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              backdropFilter: 'blur(12px)',
               WebkitBackdropFilter: 'blur(12px)',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.03)',
-            }}>
-              {/* Left accent stripe */}
-              <div style={{ position: 'absolute', left: 0, top: '15%', bottom: '15%', width: 2.5, borderRadius: 2, background: `linear-gradient(to bottom, ${offer.color}, ${offer.color}44)` }} />
-
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: offer.color }}>{offer.num}</span>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginTop: '0.5rem', marginBottom: '0.75rem' }}>{offer.title}</h3>
-              <p style={{ color: T.sub, fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 750, marginBottom: '1.5rem' }}>{offer.copy}</p>
-
-              {/* Tag Container */}
-              <div className="services-tag-container">
-                {offer.tags.map((tag, ti) => (
-                  <span 
-                    key={ti} 
-                    style={{ 
-                      padding: '6px 12px', 
-                      borderRadius: 6, 
-                      fontSize: '0.75rem', 
-                      background: `${offer.color}08`, 
-                      border: `1px solid ${offer.color}15`, 
-                      color: offer.color, 
-                      textAlign: 'center', 
-                      whiteSpace: 'nowrap', 
-                      overflow: 'hidden', 
-                      textOverflow: 'ellipsis' 
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
+              boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+              position: 'relative',
+            }}
+          >
+            <div>
+              {/* Top Bar: Badge & Number */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                <span style={{ 
+                  fontSize: '0.65rem', 
+                  fontWeight: 800, 
+                  letterSpacing: '0.1em', 
+                  color: item.color, 
+                  textTransform: 'uppercase', 
+                  background: `${item.color}10`, 
+                  padding: '4px 10px', 
+                  borderRadius: 6, 
+                  border: `1px solid ${item.color}25` 
+                }}>
+                  {item.badge}
+                </span>
+                <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(255,255,255,0.2)' }}>
+                  {item.num}
+                </span>
               </div>
+
+              {/* Title & Description */}
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
+                {item.title}
+              </h3>
+              <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.75rem' }}>
+                {item.description}
+              </p>
+
+              {/* Deliverables List */}
+              <div style={{ marginBottom: '1.5rem' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
+                  Key Deliverables
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem' }}>
+                  {item.deliverables.map((del, di) => (
+                    <div key={di} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.825rem', color: 'rgba(255,255,255,0.85)' }}>
+                      <span style={{ width: 4, height: 4, borderRadius: '50%', background: item.color, flexShrink: 0 }} />
+                      <span>{del}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Outcome */}
+            <div style={{ 
+              paddingTop: '1rem', 
+              borderTop: '1px solid rgba(255,255,255,0.06)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '0.5rem' 
+            }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: T.muted, lineHeight: 1.4 }}>
+                Outcome: <span style={{ color: '#fff' }}>{item.impact}</span>
+              </span>
             </div>
           </motion.div>
         ))}
