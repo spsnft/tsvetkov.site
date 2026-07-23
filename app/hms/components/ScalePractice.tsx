@@ -7,14 +7,12 @@ interface ScalePracticeProps {
   t?: any;
 }
 
-// Картинки для карточек по порядку
 const CARD_ASSETS = [
   '/assets/sync.webp',
   '/assets/revenue.webp',
   '/assets/growth.webp'
 ];
 
-// Дефолтные данные по Варианту А (для корректной работы без t)
 const DEFAULT_ITEMS = [
   {
     pain: "24/7 MANUAL UPDATES",
@@ -33,7 +31,6 @@ const DEFAULT_ITEMS = [
   }
 ];
 
-// Хелпер для парсинга **bold** и неразрывных связок
 const renderFormattedText = (text: string) => {
   if (!text) return null;
 
@@ -86,7 +83,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
   const items = t?.scaleItems || DEFAULT_ITEMS;
   const subtitleText = t?.scaleSub || "Automate workflows so your team can focus on guest experience";
 
-  // Разрываем подзаголовок принудительно только на мобилке
+  // Оборачиваем вторую часть фразы в span без использования <br>
   const renderSubtitle = (sub: string) => {
     const target = "so your team";
     if (sub.includes(target)) {
@@ -94,8 +91,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       return (
         <>
           {parts[0]}
-          <br className="mobile-br" />
-          {target}{parts[1]}
+          <span className="sub-break">{target}{parts[1]}</span>
         </>
       );
     }
@@ -130,12 +126,13 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           font-size: 1.05rem;
           line-height: 1.5;
           margin: 0 auto;
-          max-width: 800px;
-          white-space: nowrap; /* Гарантирует одну строку на ПК */
+          max-width: 900px;
+          white-space: nowrap; /* Жесткая одна строка на ПК */
         }
 
-        .mobile-br {
-          display: none;
+        /* На ПК и планшетах оборачиваемый блок идет сплошным текстом */
+        :global(.sub-break) {
+          display: inline;
         }
 
         .scale-grid {
@@ -274,7 +271,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .scale-subtitle {
             font-size: 0.95rem;
             max-width: 100%;
-            white-space: nowrap; /* Однострочный вид на планшетах */
+            white-space: nowrap;
           }
           .scale-grid {
             grid-template-columns: repeat(3, 1fr);
@@ -319,8 +316,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             max-width: 100%;
             white-space: normal; /* Разрешаем перенос на мобилках */
           }
-          .mobile-br {
-            display: inline;
+          /* Превращаем span в блочный элемент для принудительного переноса */
+          :global(.sub-break) {
+            display: block;
+            margin-top: 0.25rem;
           }
           .scale-grid {
             grid-template-columns: 1fr;
