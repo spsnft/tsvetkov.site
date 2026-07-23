@@ -1,188 +1,172 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { T } from '@/src/theme/tokens';
 
-const cards = [
-  {
-    id: 'growth', color: T.accent,
-    badge: 'GROWTH ENGINE',
-    title: 'Go-To-Market & Growth Strategy',
-    desc: 'Designing scalable acquisition funnels and positioning that convert demand into predictable revenue — without budget waste',
-    items: ['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
-        <path d="M3 23L9 17l4 4 6-8 8-6" stroke={T.accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'data', color: T.acc2,
-    badge: 'UNIT ECONOMICS',
-    title: 'Data & Revenue Intelligence',
-    desc: 'End-to-end attribution bridging marketing spend directly with net P&L, cohort retention, and true customer LTV',
-    items: ['P&L Attribution', 'Unit Economics', 'BI Dashboards', 'LTV & Cohorts'],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
-        <rect x="3"  y="19" width="5" height="8"  rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.8"/>
-        <rect x="11" y="13" width="5" height="14" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.8"/>
-        <rect x="19" y="7"  width="5" height="20" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.8"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'ai', color: '#C084FC',
-    badge: 'SYSTEM AUTOMATION',
-    title: 'CRM & AI Automation',
-    desc: 'Architecting zero-leakage CRM workflows and AI processing to slash operational overhead and accelerate deal cycles',
-    items: ['CRM Architecture', 'AI Lead Scoring', 'Process Automation', 'Retention Loops'],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C084FC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-        <circle cx="12" cy="12" r="3" fill="rgba(192,132,252,0.15)" />
-      </svg>
-    ),
-  },
-];
+interface CapabilityCardProps {
+  icon: React.ReactNode;
+  badge: string;
+  title: string;
+  description: string;
+  tags: string[];
+}
 
-export const Expertise = () => (
-  <section 
-    id="expertise" 
-    style={{ 
-      width: '100%',
-      position: 'relative',
-      paddingTop: 0,
-      paddingBottom: 'clamp(3rem, 6vw, 6rem)',
-      paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
-      paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
-      background: 'transparent' 
-    }}
-  >
-    <style jsx>{`
-      .expertise-grid {
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      }
+const CapabilityCard: React.FC<CapabilityCardProps> = ({
+  icon,
+  badge,
+  title,
+  description,
+  tags,
+}) => {
+  return (
+    <div
+      className="group relative flex flex-col justify-between rounded-2xl border p-6 md:p-8 transition-all duration-300"
+      style={{
+        backgroundColor: 'rgba(13, 15, 21, 0.6)',
+        borderColor: 'rgba(16, 185, 129, 0.15)', // Единый зеленый бордер
+        backdropFilter: 'blur(12px)',
+      }}
+    >
+      {/* Hover glow effect */}
+      <div 
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.08), transparent 40%)',
+        }}
+      />
 
-      .bento-expertise-card {
-        height: 100%;
-        min-height: 280px;
-        background: radial-gradient(
-          circle at 50% 0%,
-          rgba(255, 255, 255, 0.03) 0%,
-          rgba(12, 14, 20, 0.85) 75%
-        );
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        box-sizing: border-box;
-      }
-
-      .bento-expertise-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(255, 255, 255, 0.18);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-      }
-
-      .card-badge {
-        font-size: 0.65rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        padding: 0.25rem 0.6rem;
-        border-radius: 6px;
-        width: fit-content;
-      }
-
-      .skill-tag {
-        padding: 6px 10px;
-        border-radius: 6px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        color: rgba(255, 255, 255, 0.8);
-      }
-    `}</style>
-
-    <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-
-      <motion.div 
-        initial={{ opacity: 0, y: 16 }} 
-        whileInView={{ opacity: 1, y: 0 }} 
-        viewport={{ once: true }} 
-        style={{ marginBottom: '3rem', textAlign: 'center' }}
-      >
-        <span style={{ 
-          display: 'inline-block', padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1rem', 
-          fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', 
-          background: 'rgba(0, 229, 153, 0.05)', border: '1px solid rgba(0, 229, 153, 0.2)', color: T.accent 
-        }}>
-          CORE CAPABILITIES
-        </span>
-        
-        <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3.2rem)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
-          Architecting Growth<br />Engineering Scalable Revenue
-        </h2>
-      </motion.div>
-
-      <div className="expertise-grid">
-        {cards.map((card, i) => (
-          <motion.div
-            key={card.id}
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} 
-            transition={{ delay: i * 0.1 }}
+      <div>
+        {/* Header: Icon & Badge */}
+        <div className="mb-6 flex items-center justify-between">
+          <div
+            className="flex h-12 w-12 items-center justify-center rounded-xl"
+            style={{
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
+              border: '1px solid rgba(16, 185, 129, 0.2)',
+              color: '#10B981',
+            }}
           >
-            <div className="bento-expertise-card">
-              
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                  <div style={{ width: 46, height: 46, borderRadius: 12, background: `${card.color}12`, border: `1px solid ${card.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {card.icon}
-                  </div>
-                  <span className="card-badge" style={{ color: card.color, background: `${card.color}10`, border: `1px solid ${card.color}25` }}>
-                    {card.badge}
-                  </span>
-                </div>
+            {icon}
+          </div>
+          <span
+            className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider"
+            style={{
+              backgroundColor: 'rgba(16, 185, 129, 0.1)',
+              color: '#10B981',
+              border: '1px solid rgba(16, 185, 129, 0.2)',
+            }}
+          >
+            {badge}
+          </span>
+        </div>
 
-                <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', margin: '0 0 0.6rem 0', letterSpacing: '-0.02em' }}>
-                  {card.title}
-                </h3>
+        {/* Title */}
+        <h3 className="mb-4 text-xl font-bold tracking-tight text-white md:text-2xl">
+          {title}
+        </h3>
 
-                <p style={{ fontSize: '0.9rem', color: T.sub, margin: 0, lineHeight: 1.55 }}>
-                  {card.desc}
-                </p>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginTop: '2rem' }}>
-                {card.items.map((item, j) => (
-                  <span key={j} className="skill-tag">
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-            </div>
-          </motion.div>
-        ))}
+        {/* Description */}
+        <p className="text-sm leading-relaxed text-neutral-400 md:text-base">
+          {description}
+        </p>
       </div>
 
+      {/* Tags Grid */}
+      <div className="mt-8 border-t border-neutral-800/60 pt-6">
+        <div className="grid grid-cols-2 gap-2">
+          {tags.map((tag, idx) => (
+            <div
+              key={idx}
+              className="rounded-lg px-3 py-2 text-center text-xs font-medium text-neutral-300 transition-colors group-hover:border-emerald-500/30 group-hover:text-white"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.06)',
+              }}
+            >
+              {tag}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
-  </section>
-);
+  );
+};
+
+export const Expertise: React.FC = () => {
+  const capabilities = [
+    {
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+      ),
+      badge: 'GROWTH ENGINE',
+      title: 'Go-To-Market & Growth Strategy',
+      // Обновленное описание с акцентом на квалификацию и чистый профит
+      description:
+        'Designing high-intent acquisition funnels that filter out junk traffic, target qualified buyers, and turn ad spend into predictable net profit.',
+      tags: ['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'],
+    },
+    {
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      ),
+      badge: 'UNIT ECONOMICS',
+      title: 'Data & Revenue Intelligence',
+      description:
+        'End-to-end attribution bridging marketing spend directly with net P&L, cohort retention, and true customer LTV.',
+      tags: ['P&L Attribution', 'Unit Economics', 'BI Dashboards', 'LTV & Cohorts'],
+    },
+    {
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 010 4m-6 8a2 2 0 100-4m0 4a2 2 0 010-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 010-4m0 4v2m0-6V4" />
+        </svg>
+      ),
+      badge: 'SYSTEM AUTOMATION',
+      title: 'CRM & AI Automation',
+      description:
+        'Architecting zero-leakage CRM workflows and AI processing to slash operational overhead and accelerate deal cycles.',
+      // Заменен AI Lead Scoring на Instant Lead Routing
+      tags: ['CRM Architecture', 'Instant Lead Routing', 'Process Automation', 'Retention Loops'],
+    },
+  ];
+
+  return (
+    <section
+      className="relative w-full"
+      style={{
+        paddingTop: 0,
+        paddingBottom: 'clamp(3rem, 6vw, 6rem)',
+      }}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="mb-12 text-center md:mb-16">
+          <span
+            className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+            style={{
+              backgroundColor: 'rgba(16, 185, 129, 0.08)',
+              color: '#10B981',
+              border: '1px solid rgba(16, 185, 129, 0.2)',
+            }}
+          >
+            CORE CAPABILITIES
+          </span>
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+            Architecting Growth <br className="hidden sm:inline" />
+            Engineering Scalable Revenue
+          </h2>
+        </div>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+          {capabilities.map((capability) => (
+            <CapabilityCard key={capability.badge} {...capability} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
