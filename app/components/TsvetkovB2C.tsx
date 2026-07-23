@@ -4,7 +4,7 @@ import React from 'react';
 import { NetworkBackground } from '@/src/components/NetworkBackground';
 import { Nav } from '@/src/components/Nav';
 import { Hero } from '@/src/components/Hero';
-import { Bottleneck } from '@/src/components/sections/Bottleneck';
+import { Bottleneck } from '@/src/components/Bottleneck'; // FIXED: Без подпапки sections
 import { Expertise } from '@/src/components/Expertise';
 import { Services } from '@/src/components/Services';
 import { CaseStudies } from '@/src/components/CaseStudies';
