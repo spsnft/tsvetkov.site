@@ -68,32 +68,32 @@ const renderFormattedDesc = (desc: string) => {
   });
 };
 
-export default function About({ t }: AboutProps) {
-  const titleText = t?.aboutTitle || "Systems. Optimization. Scale.";
+export default function About({ t = {} }: AboutProps) {
+  const titleText = t.aboutTitle || "Systems. Optimization. Scale.";
   
-  const firstSentence = t?.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
-  const restText = t?.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
+  const firstSentence = t.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
+  const restText = t.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
 
   const trustStats = [
-    { num: t?.stat1Num || "$1M+", name: t?.stat1Name || "Saved Fees", sub: t?.stat1Sub || "In OTA commissions" },
-    { num: t?.stat2Num || "20+", name: t?.stat2Name || "Brands Scaled", sub: t?.stat2Sub || "B2B & Direct models" },
-    { num: t?.stat3Num || "10+", name: t?.stat3Name || "Years Experience", sub: t?.stat3Sub || "Growth & systems" }
+    { num: t.stat1Num || "$1M+", name: t.stat1Name || "Saved Fees", sub: t.stat1Sub || "In OTA commissions" },
+    { num: t.stat2Num || "20+", name: t.stat2Name || "Brands Scaled", sub: t.stat2Sub || "B2B & Direct models" },
+    { num: t.stat3Num || "10+", name: t.stat3Name || "Years Experience", sub: t.stat3Sub || "Growth & systems" }
   ];
 
   const cases = [
     {
-      title: t?.case1Title || "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
-      badge: t?.case1Badge || "Villa Resort",
-      desc: t?.case1Desc || "Replaced manual management with an automated Direct Engine"
+      title: t.case1Title || "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
+      badge: t.case1Badge || "Villa Resort",
+      desc: t.case1Desc || "Replaced manual management with an automated Direct Engine"
     },
     {
-      title: t?.case2Title || "+310% Google Traffic | Zero Double-Bookings",
-      badge: t?.case2Badge || "Boutique Hotel",
-      desc: t?.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
+      title: t.case2Title || "+310% Google Traffic | Zero Double-Bookings",
+      badge: t.case2Badge || "Boutique Hotel",
+      desc: t.case2Desc || "Integrated Google Ads & Direct Engine, cutting Booking.com dependence"
     }
   ];
 
-  const proofLabel = t?.proofLabel || "Proven Results";
+  const proofLabel = t.proofLabel || "Proven Results";
 
   return (
     <section className="about-section">
@@ -294,12 +294,12 @@ export default function About({ t }: AboutProps) {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          white-space: nowrap; /* Не дает разорвать фразы пополам */
+          white-space: nowrap;
         }
 
         :global(.title-sep) {
           color: rgba(255, 255, 255, 0.35);
-          -webkit-text-fill-color: rgba(255, 255, 255, 0.35); /* Фикс прозрачности! */
+          -webkit-text-fill-color: rgba(255, 255, 255, 0.35);
           font-size: 0.8rem;
           user-select: none;
         }
@@ -463,7 +463,6 @@ export default function About({ t }: AboutProps) {
           {/* LEFT COLUMN */}
           <div className="left-col">
             <div className="left-top-content">
-              {/* Невидимый выравниватель верхнего уровня */}
               <span className="col-label-placeholder">ALIGNMENT</span>
               <p className="description">
                 <span className="highlight-sentence">{firstSentence}</span>{' '}
