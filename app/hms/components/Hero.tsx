@@ -23,18 +23,24 @@ export default function Hero({ t }: HeroProps) {
   const [liveAmount, setLiveAmount] = useState(4850);
   const [isTicking, setIsTicking] = useState(false);
 
-  useEffect(() => {
+    useEffect(() => {
     setIsMounted(true);
 
-    const link = document.createElement('link');
-    link.href = 'https://assets.calendly.com/assets/external/widget.css';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
+    if (!document.getElementById('calendly-w-css-hero')) {
+      const link = document.createElement('link');
+      link.id = 'calendly-w-css-hero';
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
 
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.head.appendChild(script);
+    if (!document.getElementById('calendly-w-js-hero')) {
+      const script = document.createElement('script');
+      script.id = 'calendly-w-js-hero';
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
 
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 3) + 1);
@@ -44,8 +50,6 @@ export default function Hero({ t }: HeroProps) {
 
     return () => {
       clearInterval(interval);
-      document.head.removeChild(link);
-      document.head.removeChild(script);
     };
   }, []);
 
