@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
@@ -39,8 +40,7 @@ export const Bottleneck = () => (
       paddingBottom: 'clamp(3rem, 6vw, 6rem)',
       paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
       paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
-      background: 'transparent', 
-      borderTop: `1px solid ${T.border}` 
+      background: 'transparent',
     }}
   >
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -60,7 +60,7 @@ export const Bottleneck = () => (
           fontSize: '0.7rem', 
           fontWeight: 700, 
           letterSpacing: '0.15em', 
-          textTransform: 'uppercase' as const, 
+          textTransform: 'uppercase', 
           background: 'rgba(255, 85, 85, 0.08)', 
           border: '1px solid rgba(255, 85, 85, 0.25)', 
           color: RED_ACCENT 
@@ -116,7 +116,7 @@ export const Bottleneck = () => (
                   fontWeight: 800, 
                   letterSpacing: '0.1em', 
                   color: RED_ACCENT, 
-                  textTransform: 'uppercase' as const, 
+                  textTransform: 'uppercase', 
                   background: 'rgba(255, 85, 85, 0.1)', 
                   padding: '4px 10px', 
                   borderRadius: 6, 
@@ -158,3 +158,5 @@ export const Bottleneck = () => (
     </div>
   </section>
 );
+
+export default Bottleneck;
