@@ -6,11 +6,11 @@ import { T } from '@/src/theme/tokens';
 
 const cards = [
   {
-    id: 'demand', color: T.accent,
-    badge: 'ACQUISITION ENGINE',
-    title: 'Demand & Lead Capture',
-    desc: 'High-intent performance marketing built for maximum ROI and predictable client pipelines.',
-    items: ['High-Budget Ads', 'Omnichannel Scale', 'B2B Lead Gen', 'Performance SEO'],
+    id: 'growth', color: T.accent,
+    badge: 'GROWTH ENGINE',
+    title: 'Go-To-Market & Growth Strategy',
+    desc: 'Designing scalable acquisition funnels and positioning that convert demand into predictable revenue — without budget waste',
+    items: ['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
         <path d="M3 23L9 17l4 4 6-8 8-6" stroke={T.accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -20,9 +20,9 @@ const cards = [
   {
     id: 'data', color: T.acc2,
     badge: 'UNIT ECONOMICS',
-    title: 'Data & Revenue Analytics',
-    desc: 'Full-funnel tracking from first ad impression to net margin and customer LTV.',
-    items: ['BI Dashboards', 'GA4 Infrastructure', 'CRO Optimization', 'Funnel Analytics'],
+    title: 'Data & Revenue Intelligence',
+    desc: 'End-to-end attribution bridging marketing spend directly with net P&L, cohort retention, and true customer LTV',
+    items: ['P&L Attribution', 'Unit Economics', 'BI Dashboards', 'LTV & Cohorts'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
         <rect x="3"  y="19" width="5" height="8"  rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.8"/>
@@ -34,9 +34,9 @@ const cards = [
   {
     id: 'ai', color: '#C084FC',
     badge: 'SYSTEM AUTOMATION',
-    title: 'AI Workflows & CRM Systems',
-    desc: 'Automating operational routine and lead qualification into zero-leakage sales funnels.',
-    items: ['Custom CRM Systems', 'AI Lead Processing', 'Workflow Design', 'Retention Loops'],
+    title: 'CRM & AI Automation',
+    desc: 'Architecting zero-leakage CRM workflows and AI processing to slash operational overhead and accelerate deal cycles',
+    items: ['CRM Architecture', 'AI Lead Scoring', 'Process Automation', 'Retention Loops'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C084FC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
@@ -121,17 +121,22 @@ export const Expertise = () => (
 
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
 
-      <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '3rem' }}>
+      <motion.div 
+        initial={{ opacity: 0, y: 16 }} 
+        whileInView={{ opacity: 1, y: 0 }} 
+        viewport={{ once: true }} 
+        style={{ marginBottom: '3rem', textAlign: 'center' }}
+      >
         <span style={{ 
           display: 'inline-block', padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1rem', 
           fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', 
           background: 'rgba(0, 229, 153, 0.05)', border: '1px solid rgba(0, 229, 153, 0.2)', color: T.accent 
         }}>
-          SYSTEM ARCHITECTURE
+          CORE CAPABILITIES
         </span>
         
         <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3.2rem)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
-          Three pillars<br />One growth machine
+          Architecting Growth<br />Engineering Scalable Revenue
         </h2>
       </motion.div>
 
