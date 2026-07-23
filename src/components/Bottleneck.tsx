@@ -34,7 +34,12 @@ export const Bottleneck = () => (
   <section 
     id="problems" 
     style={{ 
-      padding: 'clamp(4rem, 8vw, 7rem) clamp(1.25rem, 5vw, 2.5rem)', 
+      width: '100%',
+      position: 'relative',
+      paddingTop: 0,
+      paddingBottom: 'clamp(3rem, 6vw, 6rem)',
+      paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
+      paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
       background: 'transparent', 
       borderTop: `1px solid ${T.border}` 
     }}
