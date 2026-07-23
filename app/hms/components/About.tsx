@@ -122,7 +122,7 @@ export default function About({ t }: AboutProps) {
           display: grid;
           grid-template-columns: 48fr 52fr;
           gap: 3.5rem;
-          align-items: stretch; /* Растягиваем обе колонки на равную высоту */
+          align-items: stretch;
           box-sizing: border-box;
         }
         
@@ -130,7 +130,7 @@ export default function About({ t }: AboutProps) {
         .left-col {
           display: flex;
           flex-direction: column;
-          justify-content: space-between; /* Распределяем верх и низ */
+          justify-content: space-between;
           gap: 1.5rem;
         }
 
@@ -140,7 +140,6 @@ export default function About({ t }: AboutProps) {
           gap: 0.8rem;
         }
 
-        /* Невидимый корректор высоты, чтобы левый текст идеально совпадал по верхней линии с PROVEN RESULTS справа */
         .col-label-placeholder {
           font-size: 0.72rem;
           font-weight: 700;
@@ -221,7 +220,7 @@ export default function About({ t }: AboutProps) {
         .right-col {
           display: flex;
           flex-direction: column;
-          justify-content: space-between; /* Распределяем аналогично левой колонке */
+          justify-content: space-between;
           gap: 1.5rem;
         }
 
@@ -243,7 +242,7 @@ export default function About({ t }: AboutProps) {
         .cases-wrapper {
           display: flex;
           flex-direction: column;
-          justify-content: space-between; /* Кейсы равномерно закладывают высоту */
+          justify-content: space-between;
           gap: 1rem;
           height: 100%;
         }
@@ -261,7 +260,7 @@ export default function About({ t }: AboutProps) {
           backdrop-filter: blur(12px);
           box-sizing: border-box;
           transition: all 0.25s ease;
-          flex: 1; /* Одинаковый размер обеих карточек кейсов */
+          flex: 1;
         }
 
         .case-card:hover {
@@ -284,15 +283,15 @@ export default function About({ t }: AboutProps) {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          text-wrap: balance;
+          line-height: 1.35;
         }
 
         :global(.title-part) {
-          display: inline-block;
+          display: inline;
         }
 
         :global(.title-sep) {
-          display: inline-block;
+          display: inline;
           opacity: 0.6;
         }
 
@@ -357,7 +356,7 @@ export default function About({ t }: AboutProps) {
             font-size: 0.62rem;
           }
           .case-header {
-            flex-direction: row; /* Фиксируем в одну строку с бейджем, чтобы не ломать высоту */
+            flex-direction: row;
             align-items: center;
             justify-content: space-between;
           }
@@ -428,6 +427,12 @@ export default function About({ t }: AboutProps) {
           .case-title {
             font-size: 0.9rem;
             line-height: 1.35;
+          }
+          :global(.title-sep) {
+            display: none !important;
+          }
+          :global(.title-part) {
+            display: block !important;
           }
           .case-desc {
             font-size: 0.82rem;
