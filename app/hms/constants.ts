@@ -75,7 +75,7 @@ export const contentData = {
     tier1F1: "Cloud PMS Setup",
     tier1F2: "0% Commission Engine",
     tier1F3: "Booking & Agoda Sync",
-    tier1F4: "Google Maps Setup",
+    tier1F4: "Payment Integration",
     
     tier2Title: "STANDARD (10-30 Rooms)",
     tier2Price: "$1,500",
@@ -83,17 +83,43 @@ export const contentData = {
     tier2F1: "Everything in ",
     tier2F1Badge: "LITE",
     tier2F2: "Connect 300+ OTA Channels",
-    tier2F3: "Guest Return System",
-    tier2F4: "Staff Guides & Checklists",
+    tier2F3: "Direct Promo Engine",
+    tier2F4: "Marketing Analytics Setup",
     
     tier3Title: "ENTERPRISE (30+ Rooms)",
     tier3Price: "Custom",
     tier3Desc: "For hotel chains & management firms",
     tier3F1: "Everything in ",
     tier3F1Badge: "STANDARD",
-    tier3F2: "Staff Roles & Permissions",
-    tier3F3: "Marketing Analytics Setup",
-    tier3F4: "Custom Revenue Reports",
+    tier3F2: "Custom CRM Setup",
+    tier3F3: "Custom Revenue Reports",
+    tier3F4: "Staff Guides & Checklists",
+
+    // --- FAQ SECTION ---
+    faqTitle: "Frequently Asked Questions",
+    faqSub: "Everything you need to know about pricing, setup, and system ownership",
+    faqItems: [
+      {
+        q: "Are there any hidden fees or commissions?",
+        a: "Zero commission from us — you keep 100% of direct booking revenue. You only pay our one-time setup fee. The only separate expense is the third-party software subscription (like Cloud PMS or Channel Manager), paid directly to providers without any agent markups (typically $30–$80/mo depending on room count)."
+      },
+      {
+        q: "Will my team be able to manage the system easily?",
+        a: "Yes, modern Cloud PMS platforms are designed to be as intuitive as smartphone apps and require zero technical background. If your team needs custom operational handbooks, checklists, and staff onboarding, those are included in our Enterprise tier or available as a custom add-on."
+      },
+      {
+        q: "How long does the setup take, and will it interrupt my daily bookings?",
+        a: "Full integration takes 7 to 14 days. All technical configuration, payment testing, and channel syncing are done in the background, so your existing reservations and daily operations run smoothly without downtime."
+      },
+      {
+        q: "What support do you offer after the system goes live?",
+        a: "We don't disappear after setup. Every project includes 14 days of dedicated post-launch monitoring to fine-tune operations and ensure everything runs flawlessly. After that, you can manage it independently or opt for our monthly maintenance package."
+      },
+      {
+        q: "How do guests pay, and how fast do I get my money?",
+        a: "We connect secure payment gateways (like Stripe, Omise, or local bank solutions) directly to your direct booking engine. Guest payments go straight into your corporate bank account without middleman delays."
+      }
+    ],
 
     // --- FOOTER CTA ---
     footerTitle: "Ready to maximize your revenue?",
@@ -178,7 +204,7 @@ export const contentData = {
     tier1F1: "ระบบ Cloud PMS Setup",
     tier1F2: "ระบบจองตรงไม่เสียค่าคอม",
     tier1F3: "ซิงค์ปฏิทิน Booking & Agoda",
-    tier1F4: "ตั้งค่าโปรไฟล์ Google Maps",
+    tier1F4: "ระบบชำระเงินตรง (Payment Integration)",
     
     tier2Title: "STANDARD (10-30 ห้อง)",
     tier2Price: "$1,500",
@@ -186,17 +212,43 @@ export const contentData = {
     tier2F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier2F1Badge: "LITE",
     tier2F2: "เชื่อมต่อช่องทางจองกว่า 300+ แห่ง",
-    tier2F3: "ระบบดึงลูกค้าเก่ากลับมาจองซ้ำ",
-    tier2F4: "คู่มือและเช็คลิสต์สำหรับพนักงาน",
+    tier2F3: "ระบบโปรโมชั่นจองตรง (Direct Promo Engine)",
+    tier2F4: "ตั้งค่าระบบวิเคราะห์การตลาด",
     
     tier3Title: "ENTERPRISE (30+ ห้อง)",
     tier3Price: "ตามตกลง",
     tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
     tier3F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier3F1Badge: "STANDARD",
-    tier3F2: "ระบบควบคุมสิทธิ์พนักงาน",
-    tier3F3: "ตั้งค่าระบบวิเคราะห์การตลาด",
-    tier3F4: "รายงานรายได้แบบกำหนดเอง",
+    tier3F2: "ระบบ CRM แบบกำหนดเอง (Custom CRM Setup)",
+    tier3F3: "รายงานรายได้แบบกำหนดเอง",
+    tier3F4: "คู่มือและเช็คลิสต์สำหรับพนักงาน",
+
+    // --- FAQ SECTION ---
+    faqTitle: "คำถามที่พบบ่อย",
+    faqSub: "ทุกเรื่องที่คุณต้องรู้เกี่ยวกับราคา การติดตั้ง และการครอบครองระบบ",
+    faqItems: [
+      {
+        q: "มีค่าธรรมเนียมแอบแฝงหรือค่าคอมมิชชั่นหรือไม่?",
+        a: "ไม่มีค่าคอมมิชชั่นจากเรา — คุณรับรายได้จากการจองตรง 100% ชำระเพียงค่าตั้งค่าระบบแบบครั้งเดียว โดยมีเพียงค่าสมัครใช้งานซอฟต์แวร์ภายนอก (เช่น Cloud PMS หรือ Channel Manager) ที่ชำระตรงกับผู้ให้บริการโดยไม่มีการบวกเพิ่ม (โดยทั่วไปประมาณ $30–$80/เดือน ขึ้นอยู่กับจำนวนห้องพัก)"
+      },
+      {
+        q: "ทีมงานของเราจะสามารถดูแลระบบได้ง่ายหรือไม่?",
+        a: "แน่นอนครับ ระบบ Cloud PMS สมัยใหม่ถูกออกแบบให้ใช้งานง่ายเหมือนแอปบนมือถือ ไม่จำเป็นต้องมีความรู้ทางเทคนิค หากทีมของคุณต้องการคู่มือการทำงาน (SOP) เช็กลิสต์ และการฝึกอบรมทีมงาน สามารถเลือกแพ็กเกจ Enterprise หรือขอเพิ่มเป็นออปชันเสริมได้"
+      },
+      {
+        q: "การติดตั้งใช้เวลานานเท่าใด และจะกระทบต่อการจองประจำวันหรือไม่?",
+        a: "การติดตั้งระบบใช้เวลา 7 ถึง 14 วัน การเชื่อมต่อระบบ การทดสอบชำระเงิน และการซิงค์ปฏิทินทั้งหมดจะทำอยู่หลังบ้าน ทำให้การจองที่มีอยู่และการทำงานประจำวันของคุณดำเนินไปได้อย่างต่อเนื่องโดยไม่มีชะงัก"
+      },
+      {
+        q: "มีการดูแลอย่างไรหลังจากเปิดใช้งานระบบแล้ว?",
+        a: "เราไม่ทิ้งคุณหลังตั้งค่าเสร็จ ทุกโครงการรวมการดูแลและติดตามผลหลังเปิดใช้งาน 14 วันเพื่อปรับแต่งระบบให้สมบูรณ์แบบ หลังจากนั้นคุณสามารถดูแลระบบเอง หรือเลือกใช้บริการดูแลและติดตามผลรายเดือนจากเราได้"
+      },
+      {
+        q: "ผู้เข้าพักชำระเงินอย่างไร และเราจะได้รับเงินเร็วแค่ไหน?",
+        a: "เราเชื่อมต่อระบบชำระเงินที่ปลอดภัย (เช่น Stripe, Omise หรือระบบของธนาคาร) เข้ากับระบบจองตรงของคุณโดยตรง เงินจากผู้เข้าพักจะโอนเข้าบัญชีธนาคารของคุณโดยตรงโดยไม่มีการล่าช้าจากคนกลาง"
+      }
+    ],
 
     // --- FOOTER CTA ---
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
