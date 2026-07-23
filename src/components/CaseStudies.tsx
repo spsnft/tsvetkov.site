@@ -8,21 +8,20 @@ const cases = [
   {
     id: 1, industry: 'E-Commerce', highlight: '7X', suffix: 'GROWTH',
     title: 'Performance Infrastructure Scaling', color: T.accent,
-    // ИСПРАВЛЕНО: Добавили operations, чтобы вытолкнуть целую фразу на новую строку и убрать одинокое выпадение
-    problem: 'Lack of end-to-end CRM & analytics sync, chaotic marketing operations, and cross-department lead leaks.',
-    solution: 'Deployed a transparent data infrastructure, implemented full-funnel tracking, and optimized unit economics for actual margin rather than empty clicks.',
+    problem: 'Lack of end-to-end CRM & analytics sync, chaotic marketing operations, and cross-department lead leaks',
+    solution: 'Deployed a transparent data infrastructure, implemented full-funnel tracking, and optimized unit economics for actual margin rather than empty clicks',
   },
   {
     id: 2, industry: 'HealthTech', highlight: '$3–5', suffix: 'CUSTOMER ACQUISITION COST',
     title: 'Global User Acquisition Optimization', color: T.acc2,
-    problem: 'Aggressive, overheated competition in the US and EU markets burning ad budgets, and a high baseline CAC.',
-    solution: 'Launched behavior-driven precision targeting, restructured auction logic, and optimized page conversions.',
+    problem: 'Aggressive, overheated competition in the US and EU markets burning ad budgets, and a high baseline CAC',
+    solution: 'Launched behavior-driven precision targeting, restructured auction logic, and optimized page conversions',
   },
   {
     id: 3, industry: 'B2B Manufacturing', highlight: '1,000+', suffix: 'LEADS/MO',
     title: 'Digital Inbound Expansion Protocol', color: '#C084FC',
-    problem: 'Complete reliance on offline sales, zero digital inbound flow, and lack of systematic B2B lead qualification.',
-    solution: 'Digitized acquisition, automated lead routing, and scaled omnichannel capture across 40+ global markets.',
+    problem: 'Complete reliance on offline sales, zero digital inbound flow, and lack of systematic B2B lead qualification',
+    solution: 'Digitized acquisition, automated lead routing, and scaled omnichannel capture across 40+ global markets',
   },
 ];
 
@@ -33,10 +32,21 @@ export const CaseStudies = () => {
     <section id="work" style={{ padding: 'clamp(5rem,10vw,9rem) clamp(1.25rem,5vw,2.5rem)', background: 'transparent', borderTop: `1px solid ${T.border}` }}>
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
 
-        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
-          <span style={{ display: 'inline-block', padding: '3px 12px', borderRadius: 999, marginBottom: '1rem', fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, background: `${T.accent}18`, border: `1px solid ${T.accent}40`, color: T.accent }}>Case Studies</span>
+        <motion.div 
+          initial={{ opacity: 0, y: 16 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true }} 
+          style={{ marginBottom: '4rem', textAlign: 'center' }}
+        >
+          <span style={{ 
+            display: 'inline-block', padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1rem', 
+            fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase' as const, 
+            background: 'rgba(0, 229, 153, 0.05)', border: '1px solid rgba(0, 229, 153, 0.2)', color: T.accent 
+          }}>
+            SELECTED WORK
+          </span>
           <h2 style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
-            Results that speak<br />for themselves
+            Systems in action<br />Real numbers, zero fluff
           </h2>
         </motion.div>
 
