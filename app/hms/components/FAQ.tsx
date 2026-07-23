@@ -144,7 +144,9 @@ export default function FAQ({ t }: FAQProps) {
           }
           .faq-title { font-size: 1.8rem; }
           .faq-button { font-size: 1rem; padding: 1.2rem; }
-          .faq-answer-text { padding: 0 1.2rem 1.2rem 1.2rem; font-size: 0.9rem; }
+          
+          /* Было: padding: 0 1.2rem... Стало: padding: 1rem 1.2rem... */
+          .faq-answer-text { padding: 1rem 1.2rem 1.2rem 1.2rem; font-size: 0.9rem; } 
         }
       `}</style>
 
