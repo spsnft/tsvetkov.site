@@ -110,7 +110,7 @@ export const contentData = {
     faqItems: [
       {
         q: "Are there any hidden fees or commissions?",
-        a: "Zero commission from us — you keep 100% of direct booking revenue. You only pay our one-time setup fee. The only separate expense is the third-party software subscription (like Cloud PMS or Channel Manager), paid directly to providers without any agent markups (typically $30–$80/mo depending on room count)."
+        a: "Zero commission from us — you pay our one-time setup fee and keep 100% of direct booking revenue. The only separate expense is the third-party software subscription, paid directly to providers without any agent markups."
       },
       {
         q: "Will my team be able to manage the system easily?",
@@ -126,7 +126,7 @@ export const contentData = {
       },
       {
         q: "How do guests pay, and how fast do I get my money?",
-        a: "We connect secure payment gateways (like Stripe, Omise, or local bank solutions) directly to your direct booking engine. Guest payments go straight into your corporate bank account without middleman delays."
+        a: "We connect secure payment gateways directly to your direct booking engine. Guest payments go into your corporate bank account without middleman delays."
       }
     ],
 
@@ -248,7 +248,7 @@ export const contentData = {
     faqItems: [
       {
         q: "มีค่าธรรมเนียมแอบแฝงหรือค่าคอมมิชชั่นหรือไม่?",
-        a: "ไม่มีค่าคอมมิชชั่นจากเรา — คุณรับรายได้จากการจองตรง 100% ชำระเพียงค่าตั้งค่าระบบแบบครั้งเดียว โดยมีเพียงค่าสมัครใช้งานซอฟต์แวร์ภายนอก (เช่น Cloud PMS หรือ Channel Manager) ที่ชำระตรงกับผู้ให้บริการโดยไม่มีการบวกเพิ่ม (โดยทั่วไปประมาณ $30–$80/เดือน ขึ้นอยู่กับจำนวนห้องพัก)"
+        a: "ไม่มีค่าคอมมิชชั่นจากเรา — คุณจ่ายเพียงค่าตั้งค่าระบบครั้งเดียวและรับรายได้จากการจองตรง 100% โดยมีเพียงค่าสมัครใช้งานซอฟต์แวร์ภายนอกที่ชำระตรงกับผู้ให้บริการโดยไม่มีการบวกเพิ่ม"
       },
       {
         q: "ทีมงานของเราจะสามารถดูแลระบบได้ง่ายหรือไม่?",
@@ -264,7 +264,7 @@ export const contentData = {
       },
       {
         q: "ผู้เข้าพักชำระเงินอย่างไร และเราจะได้รับเงินเร็วแค่ไหน?",
-        a: "เราเชื่อมต่อระบบชำระเงินที่ปลอดภัย (เช่น Stripe, Omise หรือระบบของธนาคาร) เข้ากับระบบจองตรงของคุณโดยตรง เงินจากผู้เข้าพักจะโอนเข้าบัญชีธนาคารของคุณโดยตรงโดยไม่มีการล่าช้าจากคนกลาง"
+        a: "เราเชื่อมต่อระบบชำระเงินที่ปลอดภัยเข้ากับระบบจองตรงของคุณโดยตรง เงินจากผู้เข้าพักจะโอนเข้าบัญชีธนาคารของคุณโดยตรงโดยไม่มีการล่าช้าจากคนกลาง"
       }
     ],
 
