@@ -11,21 +11,33 @@ const bottlenecks = [
     num: '01',
     tag: 'EMPTY TRAFFIC',
     title: 'Traffic Without Profit',
-    description: 'Agencies report clicks and leads, but your sales team gets poor-quality inquiries. Ad budgets keep growing, but net profit stays flat.',
+    description: (
+      <>
+        Agencies report clicks and leads, but your sales team gets <strong style={{ color: '#fff', fontWeight: 600 }}>poor-quality inquiries</strong>. Ad budgets keep growing, but <strong style={{ color: '#fff', fontWeight: 600 }}>net profit stays flat</strong>.
+      </>
+    ),
     impact: 'Uncontrolled CAC Inflation',
   },
   {
     num: '02',
     tag: 'UNRELIABLE TRACKING',
     title: 'Broken Data & Unclear Numbers',
-    description: 'Ad platforms, CRM, and actual revenue live in separate places. You end up guessing what works instead of seeing real ROI and true net profit.',
+    description: (
+      <>
+        Ad platforms, CRM, and actual revenue live in separate places. You end up <strong style={{ color: '#fff', fontWeight: 600 }}>guessing what works</strong> instead of seeing real ROI and true net profit.
+      </>
+    ),
     impact: 'Wasted Marketing Capital',
   },
   {
     num: '03',
     tag: 'MANUAL ROUTINES',
     title: 'Manual Work & Slow Lead Response',
-    description: 'Leads sit untouched for hours due to manual handoffs. Your team wastes time copy-pasting data across tables instead of closing deals.',
+    description: (
+      <>
+        Leads sit untouched for hours due to manual handoffs. Your team wastes time <strong style={{ color: '#fff', fontWeight: 600 }}>copy-pasting data</strong> across tables instead of closing deals.
+      </>
+    ),
     impact: 'Revenue Leakage & High Overhead',
   },
 ];
@@ -43,6 +55,57 @@ export const Bottleneck = () => (
       background: 'transparent',
     }}
   >
+    <style jsx>{`
+      .bottleneck-card {
+        background: linear-gradient(135deg, rgba(14, 14, 18, 0.75) 0%, rgba(255, 85, 85, 0.03) 100%);
+        border: 1px solid rgba(255, 85, 85, 0.18);
+        border-radius: 20px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .bottleneck-card:hover {
+        border-color: rgba(255, 85, 85, 0.45);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 85, 85, 0.12);
+        transform: translateY(-4px);
+      }
+
+      .watermark {
+        position: absolute;
+        top: -15px;
+        right: -10px;
+        font-size: 7.5rem;
+        font-weight: 900;
+        line-height: 1;
+        color: rgba(255, 85, 85, 0.04);
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
+        transition: color 0.35s ease;
+      }
+
+      .bottleneck-card:hover .watermark {
+        color: rgba(255, 85, 85, 0.08);
+      }
+
+      .card-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+      }
+    `}</style>
+
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
       
       {/* Centered Section Header */}
@@ -93,63 +156,56 @@ export const Bottleneck = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            style={{
-              background: 'linear-gradient(135deg, rgba(14, 14, 18, 0.75) 0%, rgba(255, 85, 85, 0.03) 100%)',
-              border: '1px solid rgba(255, 85, 85, 0.18)',
-              borderRadius: 20,
-              padding: '2rem',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              position: 'relative',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-            }}
+            className="bottleneck-card"
           >
-            {/* Top Content */}
-            <div>
-              {/* Tag & Number */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                <span style={{ 
-                  fontSize: '0.65rem', 
-                  fontWeight: 800, 
-                  letterSpacing: '0.1em', 
-                  color: RED_ACCENT, 
-                  textTransform: 'uppercase', 
-                  background: 'rgba(255, 85, 85, 0.1)', 
-                  padding: '4px 10px', 
-                  borderRadius: 6, 
-                  border: '1px solid rgba(255, 85, 85, 0.25)' 
-                }}>
-                  {item.tag}
-                </span>
-                <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(255,255,255,0.2)' }}>
-                  {item.num}
-                </span>
+            {/* Background Watermark Number */}
+            <div className="watermark">{item.num}</div>
+
+            <div className="card-content">
+              {/* Top Content */}
+              <div>
+                {/* Tag */}
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem' }}>
+                  <span style={{ 
+                    fontSize: '0.65rem', 
+                    fontWeight: 800, 
+                    letterSpacing: '0.1em', 
+                    color: RED_ACCENT, 
+                    textTransform: 'uppercase', 
+                    background: 'rgba(255, 85, 85, 0.1)', 
+                    padding: '4px 10px', 
+                    borderRadius: 6, 
+                    border: '1px solid rgba(255, 85, 85, 0.25)' 
+                  }}>
+                    {item.tag}
+                  </span>
+                </div>
+
+                {/* Title & Description */}
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
+                  {item.title}
+                </h3>
+                <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '2rem' }}>
+                  {item.description}
+                </p>
               </div>
 
-              {/* Title & Description */}
-              <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
-                {item.title}
-              </h3>
-              <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '2rem' }}>
-                {item.description}
-              </p>
-            </div>
-
-            {/* Bottom Impact Indicator */}
-            <div style={{ 
-              paddingTop: '1rem', 
-              borderTop: '1px solid rgba(255,255,255,0.06)', 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '0.5rem' 
-            }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: RED_ACCENT, display: 'inline-block' }} />
-              <span style={{ fontSize: '0.75rem', fontWeight: 600, color: T.muted }}>
-                Impact: <span style={{ color: RED_ACCENT }}>{item.impact}</span>
-              </span>
+              {/* Bottom Impact Indicator with Trend Icon */}
+              <div style={{ 
+                paddingTop: '1rem', 
+                borderTop: '1px solid rgba(255,255,255,0.06)', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem' 
+              }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={RED_ACCENT} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                  <polyline points="17 18 23 18 23 12"></polyline>
+                </svg>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: T.muted }}>
+                  Impact: <span style={{ color: RED_ACCENT }}>{item.impact}</span>
+                </span>
+              </div>
             </div>
           </motion.div>
         ))}
