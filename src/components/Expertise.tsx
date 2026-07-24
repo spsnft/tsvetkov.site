@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 const CYAN_ACCENT = '#00A3FF';
-const CYAN_GLOW = 'rgba(0, 163, 255, 0.15)';
 
 export const Expertise = () => {
   return (
@@ -21,31 +20,6 @@ export const Expertise = () => {
         background: 'transparent',
       }}
     >
-      <style jsx>{`
-        .bento-card {
-          grid-column: span 12;
-          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        @media (min-width: 900px) {
-          .bento-card-half {
-            grid-column: span 6 !important;
-          }
-        }
-        .bento-card:hover {
-          border-color: rgba(0, 163, 255, 0.45) !important;
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px ${CYAN_GLOW} !important;
-          transform: translateY(-4px);
-        }
-        .skill-pill {
-          transition: all 0.2s ease;
-        }
-        .bento-card:hover .skill-pill {
-          background: rgba(0, 163, 255, 0.12) !important;
-          border-color: rgba(0, 163, 255, 0.3) !important;
-          color: #fff !important;
-        }
-      `}</style>
-
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         
         {/* Header Section */}
@@ -87,22 +61,25 @@ export const Expertise = () => {
           </h2>
         </motion.div>
 
-        {/* Bento Grid */}
+        {/* Robust Bento Grid Container using Flexbox */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
+            display: 'flex',
+            flexWrap: 'wrap',
             gap: '1.5rem',
+            width: '100%',
           }}
         >
-          {/* CARD 1: GTM & Strategy (Top Left - 6 cols on Desktop) */}
+          {/* CARD 1: GTM & Strategy (50% on Desktop / 100% on Mobile) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4, borderColor: 'rgba(0, 163, 255, 0.45)' }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="bento-card bento-card-half"
+            transition={{ delay: 0.1, duration: 0.25 }}
             style={{
+              flex: '1 1 420px',
+              minWidth: 0,
               position: 'relative',
               overflow: 'hidden',
               background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.8) 0%, rgba(0, 163, 255, 0.03) 100%)',
@@ -149,7 +126,6 @@ export const Expertise = () => {
               {['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'].map((pill, i) => (
                 <span
                   key={i}
-                  className="skill-pill"
                   style={{
                     fontSize: '0.72rem',
                     fontWeight: 600,
@@ -166,14 +142,16 @@ export const Expertise = () => {
             </div>
           </motion.div>
 
-          {/* CARD 2: Data & Revenue Intelligence (Top Right - 6 cols on Desktop) */}
+          {/* CARD 2: Data & Revenue Intelligence (50% on Desktop / 100% on Mobile) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4, borderColor: 'rgba(0, 163, 255, 0.45)' }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="bento-card bento-card-half"
+            transition={{ delay: 0.2, duration: 0.25 }}
             style={{
+              flex: '1 1 420px',
+              minWidth: 0,
               position: 'relative',
               overflow: 'hidden',
               background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.8) 0%, rgba(0, 163, 255, 0.03) 100%)',
@@ -192,7 +170,7 @@ export const Expertise = () => {
                 Data & Revenue Intelligence
               </h3>
               <p style={{ color: T.sub, fontSize: '0.88rem', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', textWrap: 'pretty' }}>
-                End-to-end attribution bridging marketing spend directly with <strong style={{ color: '#fff', fontWeight: 600 }}>net P&L, cohort retention, and true customer LTV</strong>
+                End-to-end attribution bridging marketing spend directly with <strong style={{ color: '#fff', fontWeight 600 }}>net P&L, cohort retention, and true customer LTV</strong>
               </p>
             </div>
 
@@ -222,7 +200,6 @@ export const Expertise = () => {
               {['P&L Attribution', 'Unit Economics', 'BI Dashboards', 'LTV & Cohorts'].map((pill, i) => (
                 <span
                   key={i}
-                  className="skill-pill"
                   style={{
                     fontSize: '0.72rem',
                     fontWeight: 600,
@@ -239,14 +216,16 @@ export const Expertise = () => {
             </div>
           </motion.div>
 
-          {/* CARD 3: CRM & AI Automation (Bottom Wide - 12 cols) */}
+          {/* CARD 3: CRM & AI Automation (100% Full Width) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4, borderColor: 'rgba(0, 163, 255, 0.45)' }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="bento-card"
+            transition={{ delay: 0.3, duration: 0.25 }}
             style={{
+              flex: '1 1 100%',
+              width: '100%',
               position: 'relative',
               overflow: 'hidden',
               background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.85) 0%, rgba(0, 163, 255, 0.05) 100%)',
@@ -276,7 +255,6 @@ export const Expertise = () => {
                   {['CRM Architecture', 'AI Lead Scoring', 'Process Automation', 'Retention Loops'].map((pill, i) => (
                     <span
                       key={i}
-                      className="skill-pill"
                       style={{
                         fontSize: '0.72rem',
                         fontWeight: 600,
