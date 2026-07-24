@@ -1,295 +1,278 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 export const Hero = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-
   return (
-    <section 
-      ref={containerRef} 
+    <section
       style={{
         width: '100%',
         position: 'relative',
-        overflow: 'hidden',
-        paddingTop: 'calc(64px + clamp(1rem, 2.5vw, 2rem))',
-        paddingBottom: 'clamp(3rem, 6vw, 6rem)',
+        paddingTop: 'clamp(4rem, 8vw, 8rem)',
+        paddingBottom: 'clamp(4rem, 8vw, 7rem)',
         paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
         paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
+        background: 'transparent',
+        overflow: 'hidden',
       }}
     >
-      <style>{`
-        .hero-grid {
-          display: grid; 
-          grid-template-columns: 1fr; 
-          gap: 2.5rem; 
-          width: 100%; 
-          max-width: 1200px; 
-          margin: 0 auto;
-          position: relative; 
-          z-index: 4;
-        }
-        .hero-left { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        
-        .hero-right { display: none; }
-        
-        .dt-only { display: inline; }
-        .mb-only { display: none; }
-        
-        @media (max-width: 967px) {
-          .dt-only { display: none; }
-          .mb-only { display: inline; white-space: nowrap; }
-        }
-        
-        @media (min-width: 968px) {
-          .hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: 3.5rem; align-items: center; }
-          .hero-left { align-items: flex-start; text-align: left; }
-          .hero-right { 
-            display: flex; 
-            width: 100%; 
-            height: 100%;
-            min-height: 420px;
-            align-items: center;
-            justify-content: center;
-            perspective: 1200px;
-          }
-        }
-
-        /* --- 3D ENGINE VISUAL (RED -> BLUE -> GREEN) --- */
-        .engine-scene {
-          position: relative;
-          width: 100%;
-          max-width: 440px;
-          height: 380px;
-          transform-style: preserve-3d;
-          transform: rotateX(20deg) rotateY(-16deg) rotateZ(3deg);
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .hero-right:hover .engine-scene {
-          transform: rotateX(14deg) rotateY(-8deg) rotateZ(1deg) scale(1.02);
-        }
-
-        .engine-layer {
-          position: absolute;
-          width: 100%;
-          backdrop-filter: blur(18px);
-          -webkit-backdrop-filter: blur(18px);
-          border-radius: 18px;
-          padding: 1.25rem 1.4rem;
-          box-sizing: border-box;
-          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
-        }
-
-        /* 1. НИЖНИЙ СЛОЙ (КРАСНЫЙ): Проблема / Хаос / Потери */
-        .layer-base {
-          bottom: 0;
-          height: 110px;
-          transform: translateZ(0px);
-          background: rgba(28, 12, 16, 0.85);
-          border: 1px solid rgba(239, 68, 68, 0.3);
-          box-shadow: 
-            -12px 24px 40px rgba(0, 0, 0, 0.6),
-            0 0 20px rgba(239, 68, 68, 0.08);
-        }
-
-        /* 2. СРЕДНИЙ СЛОЙ (СИНИЙ): Починка / Инженерия / Архитектура */
-        .layer-middle {
-          bottom: 90px;
-          height: 125px;
-          transform: translateZ(45px);
-          background: rgba(10, 18, 30, 0.88);
-          border: 1px solid rgba(0, 163, 255, 0.35);
-          box-shadow: 
-            -14px 28px 45px rgba(0, 0, 0, 0.65),
-            0 0 25px rgba(0, 163, 255, 0.12);
-        }
-
-        /* 3. ВЕРХНИЙ СЛОЙ (ЗЕЛЕНЫЙ): Результат / Прибыль / Рост */
-        .layer-top {
-          bottom: 185px;
-          height: 145px;
-          transform: translateZ(90px);
-          background: rgba(12, 24, 20, 0.92);
-          border: 1px solid rgba(0, 229, 153, 0.45);
-          box-shadow: 
-            -18px 35px 55px rgba(0, 0, 0, 0.7),
-            0 0 35px rgba(0, 229, 153, 0.18),
-            inset 0 1px 1px rgba(255, 255, 255, 0.3);
-        }
-
-        .hero-right:hover .layer-base { transform: translateZ(-10px); }
-        .hero-right:hover .layer-middle { transform: translateZ(55px); }
-        .hero-right:hover .layer-top { transform: translateZ(125px); }
-
-        .layer-tag {
-          font-size: 0.64rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          margin-bottom: 0.5rem;
-          display: flex;
+      <style jsx>{`
+        /* Стили для Glassmorphic CTA кнопки */
+        .btn-glass-cta {
+          display: inline-flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: center;
+          gap: 10px;
+          padding: 0.9rem 1.8rem;
+          border-radius: 14px;
+          background: rgba(0, 229, 153, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.4);
+          color: #fff;
+          font-weight: 700;
+          font-size: 0.95rem;
+          letter-spacing: -0.01em;
+          text-decoration: none;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 0 20px rgba(0, 229, 153, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer;
         }
 
-        .tag-red { color: #EF4444; }
-        .tag-blue { color: #38BDF8; }
-        .tag-green { color: ${T.accent}; }
+        .btn-glass-cta:hover {
+          background: rgba(0, 229, 153, 0.16);
+          border-color: rgba(0, 229, 153, 0.8);
+          box-shadow: 0 0 30px rgba(0, 229, 153, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+          transform: translateY(-2px);
+        }
 
-        .nodes-grid {
+        .btn-glass-cta:hover .cta-arrow {
+          transform: translateX(4px);
+        }
+
+        .cta-arrow {
+          transition: transform 0.25s ease;
+        }
+
+        /* 3D Инженерный движок */
+        .engine-container {
+          position: relative;
           display: flex;
-          gap: 0.5rem;
-          margin-top: 0.6rem;
+          flex-direction: column;
+          gap: -20px;
         }
 
-        .node-chip {
-          flex: 1;
-          border-radius: 6px;
-          padding: 0.45rem 0.3rem;
-          font-size: 0.7rem;
-          text-align: center;
+        .layer-card {
+          border-radius: 16px;
+          padding: 1.25rem 1.5rem;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          box-sizing: border-box;
+        }
+
+        .layer-card:hover {
+          transform: translateY(-4px) scale(1.01);
+          z-index: 10 !important;
+        }
+
+        /* Чипы систем */
+        .chip {
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-size: 0.75rem;
           font-weight: 600;
           white-space: nowrap;
         }
-
-        .chip-red {
-          background: rgba(239, 68, 68, 0.08);
-          border: 1px solid rgba(239, 68, 68, 0.25);
-          color: #FCA5A5;
-        }
-
-        .chip-blue {
-          background: rgba(0, 163, 255, 0.08);
-          border: 1px solid rgba(0, 163, 255, 0.25);
-          color: #7DD3FC;
-        }
-
-        .pulse-light {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: ${T.accent};
-          box-shadow: 0 0 10px ${T.accent};
-          animation: blink 1.8s infinite;
-        }
-
-        @keyframes blink {
-          0%, 100% { opacity: 0.3; transform: scale(0.9); }
-          50% { opacity: 1; transform: scale(1.2); }
-        }
       `}</style>
 
-      {/* ФОНОВОЕ СВЕЧЕНИЕ */}
-      <div style={{ 
-        position: 'absolute', 
-        top: '0%', 
-        left: '50%', 
-        transform: 'translateX(-50%)', 
-        width: '650px', 
-        height: '450px', 
-        borderRadius: '50%', 
-        background: `radial-gradient(circle, ${T.glow} 0%, transparent 70%)`, 
-        opacity: 0.5, 
-        zIndex: 2, 
-        pointerEvents: 'none' 
-      }} />
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '3rem',
+          alignItems: 'center',
+        }}
+      >
+        {/* ЛЕВАЯ КОЛОНКА: Смысловой оффер */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Верхний бейдж */}
+          <div style={{ marginBottom: '1.25rem' }}>
+            <span
+              style={{
+                fontSize: '0.68rem',
+                fontWeight: 700,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: T.accent,
+                background: 'rgba(0, 229, 153, 0.08)',
+                padding: '5px 12px',
+                borderRadius: 20,
+                border: '1px solid rgba(0, 229, 153, 0.25)',
+              }}
+            >
+              TSVETKOV • FOUNDER-LED AGENCY
+            </span>
+          </div>
 
-      <div className="hero-grid">
-        <motion.div className="hero-left" style={{ y, opacity }}>
-          
-          {/* БЕЙДЖ ПО СТАНДАРТУ */}
-          <span style={{ 
-            display: 'inline-flex', alignItems: 'center', gap: 8, 
-            padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1.25rem', 
-            fontSize: '0.7rem', fontWeight: 600, color: T.accent, 
-            background: 'rgba(0, 229, 153, 0.05)', border: `1px solid rgba(0, 229, 153, 0.2)`, 
-            letterSpacing: '0.15em', textTransform: 'uppercase', backdropFilter: 'blur(8px)' 
-          }}>
-            TSVETKOV <div style={{ width: 5, height: 5, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} /> FOUNDER-LED AGENCY
-          </span>
-
-          <h1 style={{ fontSize: 'clamp(2.3rem, 4.8vw, 4rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', marginBottom: '1.25rem' }}>
+          {/* H1 Заголовок */}
+          <h1
+            style={{
+              fontSize: 'clamp(2.5rem, 5vw, 4.2rem)',
+              fontWeight: 800,
+              lineHeight: 1.08,
+              letterSpacing: '-0.035em',
+              color: '#fff',
+              margin: '0 0 1.5rem 0',
+            }}
+          >
             Value Growth<br />
-            <span style={{ background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            <span
+              style={{
+                background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: 'drop-shadow(0 0 20px rgba(0, 229, 153, 0.2))',
+              }}
+            >
               Engineered to Scale
             </span>
           </h1>
 
-          <div style={{ fontSize: 'clamp(1rem, 1.5vw, 1.15rem)', color: T.sub, fontWeight: 400, lineHeight: 1.6, marginBottom: '2rem', maxWidth: 520 }}>
-            <span style={{ display: 'block' }}>
-              <span className="dt-only">We eliminate chaos in marketing and digital systems</span>
-              <span className="mb-only">We eliminate marketing & digital chaos</span>
-            </span>
-            <span style={{ display: 'block' }}>No fluff — just high-performance architectures</span>
-            <span style={{ display: 'block' }}>Track every dollar and automate sales flow</span>
+          {/* Дескриптор с ритмом и буллитами */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', marginBottom: '2.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', color: T.sub }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>We eliminate chaos in <strong style={{ color: '#fff' }}>marketing and digital systems</strong></span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', color: T.sub }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>No fluff — just <strong style={{ color: '#fff' }}>high-performance architectures</strong></span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', color: T.sub }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Track every dollar and <strong style={{ color: '#fff' }}>automate sales flow</strong></span>
+            </div>
           </div>
 
-          <a href="#contact" className="btn-premium-core">
-            Audit My Business
+          {/* Glassmorphic CTA */}
+          <a href="#contact" className="btn-glass-cta">
+            <span>Audit My Business</span>
+            <svg className="cta-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
           </a>
         </motion.div>
 
-        {/* ПРАВАЯ КОЛОНКА (3D ENGINE: RED -> BLUE -> GREEN) */}
-        <div className="hero-right">
-          <div className="engine-scene">
-            
-            {/* 1. Слой 1 (КРАСНЫЙ): Хаос и утечки */}
-            <div className="engine-layer layer-base">
-              <div className="layer-tag tag-red">
-                <span>01. SYSTEM CHAOS & LEAKAGE</span>
-                <span style={{ background: 'rgba(239, 68, 68, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>HIGH RISK</span>
-              </div>
-              <div className="nodes-grid">
-                <div className="node-chip chip-red">Disjointed Ads</div>
-                <div className="node-chip chip-red">Manual CRM</div>
-                <div className="node-chip chip-red">Lost Margin</div>
-              </div>
+        {/* ПРАВАЯ КОЛОНКА: 3D Изометрический Engine */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="engine-container"
+        >
+          {/* СЛОЙ 3: RESULT (Зеленый) */}
+          <div
+            className="layer-card"
+            style={{
+              background: 'radial-gradient(circle at 50% 0%, rgba(0, 229, 153, 0.12) 0%, rgba(12, 22, 20, 0.9) 80%)',
+              border: '1px solid rgba(0, 229, 153, 0.4)',
+              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 153, 0.12)',
+              zIndex: 3,
+              marginBottom: '-15px',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em', color: T.accent, textTransform: 'uppercase' }}>
+                03. SYSTEMIC SCALE & PROFIT
+              </span>
             </div>
 
-            {/* 2. Слой 2 (СИНИЙ): Процесс починки и архитектура */}
-            <div className="engine-layer layer-middle">
-              <div className="layer-tag tag-blue">
-                <span>02. ARCHITECTURE & OPTIMIZATION</span>
-                <div className="pulse-light" />
-              </div>
-              <div className="nodes-grid">
-                <div className="node-chip chip-blue">E2E Analytics</div>
-                <div className="node-chip chip-blue">Auto-Funnels</div>
-                <div className="node-chip chip-blue">Unit Economics</div>
-              </div>
+            <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: '0.2rem' }}>
+              5.2x <span style={{ color: T.accent }}>Average ROI</span>
             </div>
-
-            {/* 3. Слой 3 (ЗЕЛЕНЫЙ): Результат и прибыль */}
-            <div className="engine-layer layer-top">
-              <div className="layer-tag tag-green">
-                <span>03. SYSTEMIC SCALE & PROFIT</span>
-                <span style={{ background: 'rgba(0, 229, 153, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>ACTIVE</span>
-              </div>
-              <div style={{ 
-                fontSize: '1.85rem', 
-                fontWeight: 800, 
-                letterSpacing: '-0.02em', 
-                background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`, 
-                WebkitBackgroundClip: 'text', 
-                WebkitTextFillColor: 'transparent',
-                margin: '0.2rem 0'
-              }}>
-                5.2x Average ROI
-              </div>
-              <div style={{ fontSize: '0.78rem', color: '#94A3B8', fontWeight: 500 }}>
-                Predictable Revenue • <strong style={{ color: '#fff' }}>Zero Traffic Leakage</strong>
-              </div>
+            <div style={{ fontSize: '0.8rem', color: T.sub, fontWeight: 500 }}>
+              Predictable Revenue • Zero Traffic Leakage
             </div>
-
           </div>
-        </div>
+
+          {/* СЛОЙ 2: PROCESS (Синий) */}
+          <div
+            className="layer-card"
+            style={{
+              background: 'radial-gradient(circle at 50% 0%, rgba(0, 163, 255, 0.1) 0%, rgba(10, 18, 26, 0.9) 80%)',
+              border: '1px solid rgba(0, 163, 255, 0.3)',
+              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
+              zIndex: 2,
+              marginBottom: '-15px',
+            }}
+          >
+            <div style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em', color: T.acc2, textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+              02. ARCHITECTURE & OPTIMIZATION
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#BAE6FD' }}>
+                E2E Analytics
+              </span>
+              <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#BAE6FD' }}>
+                Auto-Funnels
+              </span>
+              <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#BAE6FD' }}>
+                Unit Economics
+              </span>
+            </div>
+          </div>
+
+          {/* СЛОЙ 1: PROBLEM (Красный) */}
+          <div
+            className="layer-card"
+            style={{
+              background: 'radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.08) 0%, rgba(20, 12, 14, 0.9) 80%)',
+              border: '1px solid rgba(239, 68, 68, 0.25)',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+              zIndex: 1,
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em', color: '#EF4444', textTransform: 'uppercase' }}>
+                01. SYSTEM CHAOS & LEAKAGE
+              </span>
+              <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#EF4444', background: 'rgba(239, 68, 68, 0.12)', padding: '2px 6px', borderRadius: 4, border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+                HIGH RISK
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#FCA5A5' }}>
+                Disjointed Ads
+              </span>
+              <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#FCA5A5' }}>
+                Manual CRM
+              </span>
+              <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#FCA5A5' }}>
+                Lost Margin
+              </span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
