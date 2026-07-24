@@ -13,7 +13,7 @@ const bottlenecks = [
     title: 'Traffic Without Profit',
     description: (
       <>
-        Agencies report clicks and leads, but your sales team gets <strong style={{ color: '#fff', fontWeight: 600 }}>poor-quality inquiries</strong>. Ad budgets keep growing, but <strong style={{ color: '#fff', fontWeight: 600 }}>net profit stays flat</strong>.
+        Agencies report clicks and leads, but your sales team gets <strong style={{ color: '#fff', fontWeight: 600 }}>poor-quality inquiries</strong>. Ad budgets keep growing, but <strong style={{ color: '#fff', fontWeight: 600 }}>net profit stays flat</strong>
       </>
     ),
     impact: 'Uncontrolled CAC Inflation',
@@ -24,7 +24,7 @@ const bottlenecks = [
     title: 'Broken Data & Blind Scaling',
     description: (
       <>
-        Ad platforms, CRM, and actual revenue live in separate places. You end up <strong style={{ color: '#fff', fontWeight: 600 }}>guessing what works</strong> instead of seeing real ROI and true net profit.
+        Ad platforms, CRM, and actual revenue live in separate places. You end up <strong style={{ color: '#fff', fontWeight: 600 }}>guessing what works</strong> instead of seeing real ROI and true net profit
       </>
     ),
     impact: 'Wasted Marketing Capital',
@@ -35,7 +35,7 @@ const bottlenecks = [
     title: 'Manual Work & Slow Sales',
     description: (
       <>
-        Leads sit untouched for hours due to manual handoffs. Your team wastes time <strong style={{ color: '#fff', fontWeight: 600 }}>copy-pasting data</strong> across tables instead of closing deals.
+        High-intent leads sit untouched for hours due to manual CRM handoffs. Your sales team burns valuable time <strong style={{ color: '#fff', fontWeight: 600 }}>managing spreadsheets</strong> instead of closing deals, killing your conversion rates
       </>
     ),
     impact: 'Revenue Leakage & High Overhead',
@@ -104,7 +104,7 @@ export const Bottleneck = () => (
           border: '1px solid rgba(255, 85, 85, 0.25)', 
           color: RED_ACCENT 
         }}>
-          GROWTH BARRIERS
+          SCALING BARRIERS
         </span>
         
         <h2 style={{ 
@@ -134,7 +134,6 @@ export const Bottleneck = () => (
             transition={{ delay: i * 0.1 }}
             className="bottleneck-card"
             style={{
-              /* ЖЕЛЕЗОБЕТОННЫЕ ИНЛАЙН СТИЛИ ДЛЯ КОНТЕЙНЕРА */
               position: 'relative', 
               overflow: 'hidden',   
               background: 'linear-gradient(135deg, rgba(14, 14, 18, 0.75) 0%, rgba(255, 85, 85, 0.03) 100%)',
@@ -176,7 +175,14 @@ export const Bottleneck = () => (
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
                   {item.title}
                 </h3>
-                <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '2rem' }}>
+                <p style={{ 
+                  color: T.sub, 
+                  fontSize: '0.88rem', 
+                  lineHeight: 1.55, 
+                  margin: 0, 
+                  marginBottom: '2rem',
+                  textWrap: 'pretty'
+                }}>
                   {item.description}
                 </p>
               </div>
