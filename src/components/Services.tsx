@@ -47,41 +47,7 @@ export const Services = () => (
       background: 'transparent',
     }}
   >
-    <style jsx>{`
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .service-card {
-        background: radial-gradient(
-          circle at 50% 0%,
-          rgba(0, 229, 153, 0.05) 0%,
-          rgba(12, 22, 20, 0.88) 75%
-        );
-        border: 1px solid rgba(0, 229, 153, 0.2);
-        border-radius: 20px;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        position: relative;
-        box-sizing: border-box;
-      }
-
-      .service-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(0, 229, 153, 0.45);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 229, 153, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-      }
-    `}</style>
-
-    <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+    <div style={{ maxWidth: 1000, margin: '0 auto' }}>
 
       {/* Centered Section Header */}
       <motion.div 
@@ -118,77 +84,187 @@ export const Services = () => (
         </h2>
       </motion.div>
 
-      {/* Grid of Engagement Cards */}
-      <div className="services-grid">
-        {models.map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} 
-            transition={{ delay: i * 0.1 }}
-          >
-            <div className="service-card">
-              <div>
-                {/* Top Bar: Badge & Number */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                  <span style={{ 
-                    fontSize: '0.65rem', 
-                    fontWeight: 800, 
-                    letterSpacing: '0.1em', 
-                    color: item.color, 
-                    textTransform: 'uppercase', 
-                    background: `${item.color}12`, 
-                    padding: '4px 10px', 
-                    borderRadius: 6, 
-                    border: `1px solid ${item.color}30` 
-                  }}>
+      {/* Vertical Timeline Container */}
+      <div style={{ position: 'relative', paddingLeft: 'clamp(1rem, 5vw, 3.5rem)' }}>
+        
+        {/* Vertical Track Line */}
+        <div
+          style={{
+            position: 'absolute',
+            left: 'clamp(0.4rem, 2.2vw, 1.25rem)',
+            top: '1.5rem',
+            bottom: '3rem',
+            width: 2,
+            background: `linear-gradient(180deg, ${T.accent} 0%, rgba(0, 229, 153, 0.15) 90%, transparent 100%)`,
+            zIndex: 1,
+          }}
+        />
+
+        {/* Steps List */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+          {models.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -20 }} 
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }} 
+              transition={{ delay: i * 0.15, duration: 0.4 }}
+              style={{ position: 'relative' }}
+            >
+              {/* Node Point on the Vertical Line */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: 'calc(-1 * clamp(1rem, 5vw, 3.5rem) + clamp(0.4rem, 2.2vw, 1.25rem) - 13px)',
+                  top: '1.75rem',
+                  width: 28,
+                  height: 28,
+                  borderRadius: '50%',
+                  background: '#0c1614',
+                  border: `2px solid ${item.color}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '0.75rem',
+                  fontWeight: 800,
+                  color: item.color,
+                  zIndex: 2,
+                  boxShadow: `0 0 15px ${item.color}40`,
+                }}
+              >
+                {item.num}
+              </div>
+
+              {/* Service Card */}
+              <div
+                style={{
+                  background: 'radial-gradient(circle at 50% 0%, rgba(0, 229, 153, 0.05) 0%, rgba(12, 22, 20, 0.88) 75%)',
+                  border: `1px solid ${item.color}35`,
+                  borderRadius: 20,
+                  padding: 'clamp(1.5rem, 3vw, 2.25rem)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                }}
+              >
+                {/* Top Badge */}
+                <div style={{ marginBottom: '1rem' }}>
+                  <span
+                    style={{
+                      fontSize: '0.65rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.1em',
+                      color: item.color,
+                      textTransform: 'uppercase',
+                      background: `${item.color}12`,
+                      padding: '4px 10px',
+                      borderRadius: 6,
+                      border: `1px solid ${item.color}30`,
+                    }}
+                  >
                     {item.badge}
-                  </span>
-                  <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'rgba(255,255,255,0.25)' }}>
-                    {item.num}
                   </span>
                 </div>
 
                 {/* Title & Description */}
-                <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
+                <h3
+                  style={{
+                    fontSize: 'clamp(1.3rem, 2.5vw, 1.6rem)',
+                    fontWeight: 700,
+                    color: '#fff',
+                    marginBottom: '0.75rem',
+                    lineHeight: 1.25,
+                  }}
+                >
                   {item.title}
                 </h3>
-                <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.75rem' }}>
+                <p
+                  style={{
+                    color: T.sub,
+                    fontSize: '0.9rem',
+                    lineHeight: 1.6,
+                    margin: 0,
+                    marginBottom: '1.5rem',
+                    maxWidth: '850px',
+                  }}
+                >
                   {item.description}
                 </p>
 
-                {/* Deliverables List */}
+                {/* Key Deliverables Grid */}
                 <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{ fontSize: '0.725rem', fontWeight: 700, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
+                  <div
+                    style={{
+                      fontSize: '0.725rem',
+                      fontWeight: 700,
+                      color: 'rgba(255, 255, 255, 0.4)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                      marginBottom: '0.75rem',
+                    }}
+                  >
                     Key Deliverables
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.55rem' }}>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                      gap: '0.6rem',
+                    }}
+                  >
                     {item.deliverables.map((del, di) => (
-                      <div key={di} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '0.825rem', color: 'rgba(255,255,255,0.85)' }}>
-                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: item.color, boxShadow: `0 0 8px ${item.color}`, flexShrink: 0 }} />
+                      <div
+                        key={di}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.6rem',
+                          fontSize: '0.825rem',
+                          color: 'rgba(255, 255, 255, 0.85)',
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: 5,
+                            height: 5,
+                            borderRadius: '50%',
+                            background: item.color,
+                            boxShadow: `0 0 8px ${item.color}`,
+                            flexShrink: 0,
+                          }}
+                        />
                         <span>{del}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              {/* Bottom Outcome */}
-              <div style={{ 
-                paddingTop: '1rem', 
-                borderTop: '1px solid rgba(255,255,255,0.08)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '0.5rem' 
-              }}>
-                <span style={{ fontSize: '0.78rem', fontWeight: 600, color: T.muted, lineHeight: 1.4 }}>
-                  Outcome: <span style={{ color: '#fff', fontWeight: 700 }}>{item.impact}</span>
-                </span>
+                {/* Outcome Highlight Box (Micro-UI) */}
+                <div
+                  style={{
+                    background: 'rgba(0, 229, 153, 0.06)',
+                    border: '1px solid rgba(0, 229, 153, 0.22)',
+                    borderRadius: 12,
+                    padding: '0.85rem 1.1rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                  }}
+                >
+                  <span style={{ fontSize: '1.1rem' }}>🎯</span>
+                  <div style={{ fontSize: '0.825rem', lineHeight: 1.4, color: T.sub }}>
+                    <strong style={{ color: T.accent, fontWeight: 700 }}>
+                      Outcome:&nbsp;
+                    </strong>
+                    <span style={{ color: '#fff', fontWeight: 600 }}>{item.impact}</span>
+                  </div>
+                </div>
+
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
     </div>
