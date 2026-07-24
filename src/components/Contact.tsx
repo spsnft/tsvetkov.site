@@ -22,7 +22,6 @@ export const Contact = () => {
           body: JSON.stringify(form),
         });
       } else {
-        // Симуляция успешной отправки, если вебхук пока не подвязан в .env
         await new Promise((res) => setTimeout(res, 1000));
       }
       setStatus('success');
@@ -42,14 +41,14 @@ export const Contact = () => {
   const inputStyle: React.CSSProperties = {
     width: '100%', 
     padding: '14px 18px',
-    background: 'rgba(255,255,255,0.02)', 
-    border: `1px solid rgba(255,255,255,0.06)`,
+    background: 'rgba(0, 0, 0, 0.3)', 
+    border: `1px solid rgba(255, 255, 255, 0.08)`,
     borderRadius: 10, 
     color: '#fff', 
-    fontSize: '0.95rem',
-    fontFamily: 'inherit', 
+    fontSize: '0.9rem',
+    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', 
     outline: 'none', 
-    transition: 'border-color .2s, background-color .2s',
+    transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
     boxSizing: 'border-box'
   };
 
@@ -77,19 +76,26 @@ export const Contact = () => {
           max-width: 1000px; 
           margin: 0 auto;
         }
+
+        /* Интерактивный фокус терминала */
         .contact-input:focus {
-          border-color: ${T.accent}50 !important;
-          background: rgba(255,255,255,0.04) !important;
+          border-color: ${T.accent} !important;
+          background: rgba(0, 229, 153, 0.03) !important;
+          box-shadow: 0 0 15px rgba(0, 229, 153, 0.15), inset 0 0 10px rgba(0, 229, 153, 0.05);
         }
+
         .contact-select {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(0,229,153,0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
           background-repeat: no-repeat !important;
           background-position: right 18px center !important;
         }
+
         .contact-select option {
           background: #0C0C0F; 
           color: #fff;
+          font-family: sans-serif;
         }
+
         .element-wrapper {
           width: 100%; 
           max-width: 420px; 
@@ -99,24 +105,31 @@ export const Contact = () => {
           justify-content: center;
           box-sizing: border-box;
         }
+
         .element-wrapper * {
           box-sizing: border-box !important;
         }
+
         .contact-card {
           width: 100%; 
           height: auto;
-          background: linear-gradient(135deg, rgba(12, 12, 15, 0.8) 0%, ${T.accent}03 100%); 
-          border: 1px solid ${T.accent}16; 
+          background: radial-gradient(
+            circle at 50% 0%,
+            rgba(0, 229, 153, 0.05) 0%,
+            rgba(12, 18, 22, 0.9) 80%
+          ); 
+          border: 1px solid rgba(0, 229, 153, 0.25); 
           border-radius: 20px; 
           padding: 2.5rem 2rem;
-          backdrop-filter: blur(12px); 
-          -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.03);
+          backdrop-filter: blur(14px); 
+          -webkit-backdrop-filter: blur(14px);
+          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
           box-sizing: border-box;
           display: flex; 
           flex-direction: column; 
           justify-content: center;
         }
+
         @media (min-width: 868px) {
           .contact-grid {
             grid-template-columns: 1fr 1.1fr; 
@@ -132,12 +145,44 @@ export const Contact = () => {
             height: 100% !important;
           }
         }
+
         .calendar-frame {
           width: 100%; 
           height: 100%; 
           border: none; 
           background: transparent;
           -webkit-overflow-scrolling: touch;
+        }
+
+        /* Премиальная кнопка с эффектом Glass & Glow */
+        .btn-glass-glow {
+          background: rgba(0, 229, 153, 0.06);
+          border: 1px solid rgba(0, 229, 153, 0.4);
+          color: #fff;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          backdrop-filter: blur(8px);
+        }
+
+        .btn-glass-glow:hover {
+          background: rgba(0, 229, 153, 0.15);
+          border-color: ${T.accent};
+          box-shadow: 0 0 25px rgba(0, 229, 153, 0.35);
+          color: #fff;
+        }
+
+        /* Акцентная сабмит-кнопка в инженерном стиле */
+        .btn-submit-glow {
+          background: linear-gradient(135deg, rgba(0, 229, 153, 0.9) 0%, rgba(0, 163, 255, 0.9) 100%);
+          border: 1px solid rgba(0, 229, 153, 0.5);
+          color: #0A0A0E;
+          font-weight: 800;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 20px rgba(0, 229, 153, 0.25);
+        }
+
+        .btn-submit-glow:hover {
+          box-shadow: 0 6px 30px rgba(0, 229, 153, 0.45);
+          transform: translateY(-1px);
         }
       `}</style>
 
@@ -156,8 +201,8 @@ export const Contact = () => {
               fontWeight: 700, 
               letterSpacing: '0.15em', 
               textTransform: 'uppercase', 
-              background: 'rgba(0, 229, 153, 0.05)', 
-              border: '1px solid rgba(0, 229, 153, 0.2)', 
+              background: 'rgba(0, 229, 153, 0.08)', 
+              border: '1px solid rgba(0, 229, 153, 0.25)', 
               color: T.accent 
             }}>
               Contact Protocols
@@ -175,27 +220,28 @@ export const Contact = () => {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               
+              {/* Премиальная кнопка Calendly (Glass + Glow) */}
               <motion.button
                 onClick={() => setIsModalOpen(true)}
-                whileHover={{ scale: 1.01, boxShadow: `0 0 30px ${T.glow}` }} 
                 whileTap={{ scale: 0.99 }}
+                className="btn-glass-glow"
                 style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
-                  justifyContent: 'space-between', // Исправлено: justifyContent
+                  justifyContent: 'space-between',
                   padding: '14px 20px', 
                   borderRadius: 12, 
-                  background: `linear-gradient(135deg, ${T.accent}, ${T.acc2})`, 
-                  color: '#0A0A0C', 
                   fontWeight: 700, 
                   fontSize: '0.95rem', 
-                  border: 'none', 
                   cursor: 'pointer', 
                   fontFamily: 'inherit' 
                 }}
               >
                 <span>Book a 15-Min Strategy Call</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0C" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
               </motion.button>
 
               <motion.a
@@ -246,7 +292,7 @@ export const Contact = () => {
           </div>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА */}
+        {/* ПРАВАЯ КОЛОНКА (Форма) */}
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
           <div className="element-wrapper" style={{ width: '100%' }}>
             <div className="contact-card">
@@ -262,22 +308,22 @@ export const Contact = () => {
                 ) : (
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Your Name</label>
+                      <label style={{ display: 'block', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>Your Name</label>
                       <input className="contact-input" type="text" required placeholder="John Doe" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Contact Email</label>
+                      <label style={{ display: 'block', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>Contact Email</label>
                       <input className="contact-input" type="email" required placeholder="john@company.com" value={form.contact} onChange={e => setForm(p => ({ ...p, contact: e.target.value }))} style={inputStyle} />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Website / Socials</label>
+                      <label style={{ display: 'block', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>Website / Socials</label>
                       <input className="contact-input" type="text" required placeholder="company.com or @company" value={form.website} onChange={e => setForm(p => ({ ...p, website: e.target.value }))} style={inputStyle} />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', color: T.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>Monthly Ad Budget</label>
+                      <label style={{ display: 'block', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>Monthly Ad Budget</label>
                       <select 
                         className="contact-input contact-select" 
                         required 
@@ -293,21 +339,18 @@ export const Contact = () => {
                       </select>
                     </div>
 
+                    {/* Акцентная сабмит-кнопка в инженерном стиле */}
                     <motion.button
                       type="submit"
                       disabled={status === 'sending'}
-                      whileHover={{ scale: 1.01 }} 
                       whileTap={{ scale: 0.99 }}
+                      className="btn-submit-glow"
                       style={{
                         padding: '14px 28px', 
                         borderRadius: 12, 
-                        border: 'none', 
                         fontFamily: 'inherit', 
-                        fontWeight: 700, 
                         fontSize: '0.95rem',
                         cursor: status === 'sending' ? 'not-allowed' : 'pointer', 
-                        background: '#fff', 
-                        color: '#0A0A0C',
                         display: 'flex', 
                         alignItems: 'center', 
                         justifyContent: 'center', 
@@ -350,12 +393,12 @@ export const Contact = () => {
                 height: '90vh', 
                 maxHeight: '680px',
                 background: '#0C0C0F', 
-                border: `1px solid rgba(0, 255, 179, 0.15)`,
+                border: `1px solid rgba(0, 255, 179, 0.25)`,
                 borderRadius: 24, 
                 display: 'flex', 
                 flexDirection: 'column', 
                 overflow: 'hidden',
-                boxShadow: '0 30px 60px rgba(0,0,0,0.8)'
+                boxShadow: '0 30px 60px rgba(0,0,0,0.85)'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.25rem 2rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
