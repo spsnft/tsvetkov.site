@@ -61,7 +61,7 @@ export const Expertise = () => {
           </h2>
         </motion.div>
 
-        {/* Robust Bento Grid Container using Flexbox */}
+        {/* Bento Grid */}
         <div
           style={{
             display: 'flex',
@@ -70,7 +70,7 @@ export const Expertise = () => {
             width: '100%',
           }}
         >
-          {/* CARD 1: GTM & Strategy (50% on Desktop / 100% on Mobile) */}
+          {/* CARD 1: GTM Strategy */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -82,43 +82,60 @@ export const Expertise = () => {
               minWidth: 0,
               position: 'relative',
               overflow: 'hidden',
-              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.8) 0%, rgba(0, 163, 255, 0.03) 100%)',
+              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.85) 0%, rgba(0, 163, 255, 0.04) 100%)',
               border: '1px solid rgba(0, 163, 255, 0.18)',
-              borderRadius: 20,
-              padding: '2rem',
+              borderRadius: 24,
+              padding: '2.5rem 2rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              backdropFilter: 'blur(12px)',
+              backdropFilter: 'blur(16px)',
               boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
             }}
           >
+            {/* 3D Visual Asset Slot */}
+            <div style={{
+              position: 'relative',
+              height: 180,
+              width: '100%',
+              marginBottom: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <div style={{
+                position: 'absolute',
+                width: 140,
+                height: 140,
+                background: 'radial-gradient(circle, rgba(0,163,255,0.25) 0%, rgba(0,0,0,0) 70%)',
+                borderRadius: '50%',
+                filter: 'blur(20px)',
+              }} />
+              {/* Сюда вставляется сгенерированная картинка */}
+              <img
+                src="/assets/3d-gtm-prism.png"
+                alt="GTM Strategy Visual"
+                style={{
+                  maxHeight: '100%',
+                  objectFit: 'contain',
+                  position: 'relative',
+                  zIndex: 1,
+                  filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
+                }}
+                onError={(e) => {
+                  // Плейсхолдер до загрузки картинки
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+            </div>
+
             <div>
               <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
                 Go-To-Market & Growth Strategy
               </h3>
-              <p style={{ color: T.sub, fontSize: '0.88rem', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', textWrap: 'pretty' }}>
+              <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
                 Designing scalable acquisition funnels and positioning that turn market demand into <strong style={{ color: '#fff', fontWeight: 600 }}>predictable, high-margin revenue</strong>
               </p>
-            </div>
-
-            {/* Micro UI Widget: Conversion Funnel */}
-            <div style={{
-              background: 'rgba(0, 0, 0, 0.35)',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              borderRadius: 12,
-              padding: '1rem',
-              marginBottom: '1.5rem',
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: T.muted, marginBottom: '8px' }}>
-                <span>Funnel Conversion Rate</span>
-                <span style={{ color: CYAN_ACCENT, fontWeight: 700 }}>+142% vs Benchmark</span>
-              </div>
-              <div style={{ display: 'flex', gap: '6px', height: '8px', borderRadius: 4, overflow: 'hidden', background: 'rgba(255,255,255,0.05)' }}>
-                <div style={{ width: '45%', background: CYAN_ACCENT, borderRadius: 2 }} />
-                <div style={{ width: '30%', background: '#38BDF8', borderRadius: 2 }} />
-                <div style={{ width: '25%', background: '#818CF8', borderRadius: 2 }} />
-              </div>
             </div>
 
             {/* Skill Pills */}
@@ -132,8 +149,8 @@ export const Expertise = () => {
                     color: T.sub,
                     background: 'rgba(255, 255, 255, 0.04)',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
-                    padding: '4px 10px',
-                    borderRadius: 6,
+                    padding: '5px 12px',
+                    borderRadius: 8,
                   }}
                 >
                   • {pill}
@@ -142,7 +159,7 @@ export const Expertise = () => {
             </div>
           </motion.div>
 
-          {/* CARD 2: Data & Revenue Intelligence (50% on Desktop / 100% on Mobile) */}
+          {/* CARD 2: Data & Revenue Intelligence */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -154,45 +171,56 @@ export const Expertise = () => {
               minWidth: 0,
               position: 'relative',
               overflow: 'hidden',
-              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.8) 0%, rgba(0, 163, 255, 0.03) 100%)',
+              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.85) 0%, rgba(0, 163, 255, 0.04) 100%)',
               border: '1px solid rgba(0, 163, 255, 0.18)',
-              borderRadius: 20,
-              padding: '2rem',
+              borderRadius: 24,
+              padding: '2.5rem 2rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              backdropFilter: 'blur(12px)',
+              backdropFilter: 'blur(16px)',
               boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
             }}
           >
+            {/* 3D Visual Asset Slot */}
+            <div style={{
+              position: 'relative',
+              height: 180,
+              width: '100%',
+              marginBottom: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <div style={{
+                position: 'absolute',
+                width: 140,
+                height: 140,
+                background: 'radial-gradient(circle, rgba(16,185,129,0.2) 0%, rgba(0,0,0,0) 70%)',
+                borderRadius: '50%',
+                filter: 'blur(20px)',
+              }} />
+              <img
+                src="/assets/3d-data-cube.png"
+                alt="Data Intelligence Visual"
+                style={{
+                  maxHeight: '100%',
+                  objectFit: 'contain',
+                  position: 'relative',
+                  zIndex: 1,
+                  filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
+                }}
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              />
+            </div>
+
             <div>
               <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
                 Data & Revenue Intelligence
               </h3>
-              <p style={{ color: T.sub, fontSize: '0.88rem', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', textWrap: 'pretty' }}>
+              <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
                 End-to-end attribution bridging marketing spend directly with <strong style={{ color: '#fff', fontWeight: 600 }}>net P&L, cohort retention, and true customer LTV</strong>
               </p>
-            </div>
-
-            {/* Micro UI Widget: P&L Chart */}
-            <div style={{
-              background: 'rgba(0, 0, 0, 0.35)',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              borderRadius: 12,
-              padding: '1rem',
-              marginBottom: '1.5rem',
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ fontSize: '0.72rem', color: T.muted }}>Attributed Net P&L</span>
-                <span style={{ fontSize: '0.72rem', color: '#10B981', fontWeight: 700 }}>Real-Time Synced</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', height: '28px', paddingTop: '4px' }}>
-                <div style={{ width: '20%', height: '40%', background: 'rgba(0, 163, 255, 0.3)', borderRadius: 3 }} />
-                <div style={{ width: '20%', height: '65%', background: 'rgba(0, 163, 255, 0.5)', borderRadius: 3 }} />
-                <div style={{ width: '20%', height: '50%', background: 'rgba(0, 163, 255, 0.4)', borderRadius: 3 }} />
-                <div style={{ width: '20%', height: '85%', background: 'rgba(0, 163, 255, 0.8)', borderRadius: 3 }} />
-                <div style={{ width: '20%', height: '100%', background: CYAN_ACCENT, borderRadius: 3, boxShadow: `0 0 10px ${CYAN_ACCENT}` }} />
-              </div>
             </div>
 
             {/* Skill Pills */}
@@ -206,8 +234,8 @@ export const Expertise = () => {
                     color: T.sub,
                     background: 'rgba(255, 255, 255, 0.04)',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
-                    padding: '4px 10px',
-                    borderRadius: 6,
+                    padding: '5px 12px',
+                    borderRadius: 8,
                   }}
                 >
                   • {pill}
@@ -216,7 +244,7 @@ export const Expertise = () => {
             </div>
           </motion.div>
 
-          {/* CARD 3: CRM & AI Automation (100% Full Width) */}
+          {/* CARD 3: CRM & AI Operations */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -228,17 +256,17 @@ export const Expertise = () => {
               width: '100%',
               position: 'relative',
               overflow: 'hidden',
-              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.85) 0%, rgba(0, 163, 255, 0.05) 100%)',
+              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.9) 0%, rgba(0, 163, 255, 0.06) 100%)',
               border: '1px solid rgba(0, 163, 255, 0.22)',
-              borderRadius: 20,
-              padding: '2rem',
-              backdropFilter: 'blur(12px)',
+              borderRadius: 24,
+              padding: '2.5rem 2rem',
+              backdropFilter: 'blur(16px)',
               boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
             }}
           >
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
               gap: '2rem',
               alignItems: 'center',
             }}>
@@ -246,7 +274,7 @@ export const Expertise = () => {
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
                   CRM & AI-Powered Operations
                 </h3>
-                <p style={{ color: T.sub, fontSize: '0.88rem', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', textWrap: 'pretty' }}>
+                <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
                   Building zero-leakage CRM workflows and AI processing to <strong style={{ color: '#fff', fontWeight: 600 }}>eliminate manual routines, slash overhead, and accelerate deal closure</strong>
                 </p>
 
@@ -261,8 +289,8 @@ export const Expertise = () => {
                         color: T.sub,
                         background: 'rgba(255, 255, 255, 0.04)',
                         border: '1px solid rgba(255, 255, 255, 0.08)',
-                        padding: '4px 10px',
-                        borderRadius: 6,
+                        padding: '5px 12px',
+                        borderRadius: 8,
                       }}
                     >
                       • {pill}
@@ -271,29 +299,37 @@ export const Expertise = () => {
                 </div>
               </div>
 
-              {/* Micro UI Widget: Automation Node Flow */}
+              {/* 3D Visual Asset Slot (Wide) */}
               <div style={{
-                background: 'rgba(0, 0, 0, 0.4)',
-                border: '1px solid rgba(0, 163, 255, 0.2)',
-                borderRadius: 14,
-                padding: '1.25rem',
+                position: 'relative',
+                height: 160,
+                width: '100%',
                 display: 'flex',
-                flexDirection: 'column',
-                gap: '10px',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '8px' }}>
-                  <span style={{ fontSize: '0.7rem', color: T.muted, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Automated Pipeline</span>
-                  <span style={{ fontSize: '0.65rem', color: CYAN_ACCENT, background: 'rgba(0,163,255,0.1)', padding: '2px 8px', borderRadius: 10, border: '1px solid rgba(0,163,255,0.2)' }}>Instant Sync</span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: '#fff' }}>
-                  <span style={{ background: 'rgba(255,255,255,0.08)', padding: '4px 8px', borderRadius: 6, fontSize: '0.7rem', color: T.sub }}>New Lead</span>
-                  <span style={{ color: CYAN_ACCENT }}>➔</span>
-                  <span style={{ background: 'rgba(0, 163, 255, 0.15)', border: '1px solid rgba(0, 163, 255, 0.3)', padding: '4px 8px', borderRadius: 6, fontSize: '0.7rem', color: CYAN_ACCENT, fontWeight: 600 }}>AI Qualifier</span>
-                  <span style={{ color: CYAN_ACCENT }}>➔</span>
-                  <span style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '4px 8px', borderRadius: 6, fontSize: '0.7rem', color: '#10B981', fontWeight: 600 }}>Deal Closed</span>
-                </div>
+                <div style={{
+                  position: 'absolute',
+                  width: 200,
+                  height: 100,
+                  background: 'radial-gradient(circle, rgba(0,163,255,0.2) 0%, rgba(0,0,0,0) 70%)',
+                  borderRadius: '50%',
+                  filter: 'blur(20px)',
+                }} />
+                <img
+                  src="/assets/3d-ai-loop.png"
+                  alt="CRM AI Automation Visual"
+                  style={{
+                    maxHeight: '100%',
+                    objectFit: 'contain',
+                    position: 'relative',
+                    zIndex: 1,
+                    filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
+                  }}
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                />
               </div>
+
             </div>
           </motion.div>
 
