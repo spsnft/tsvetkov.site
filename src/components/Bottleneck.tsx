@@ -31,11 +31,11 @@ const bottlenecks = [
   },
   {
     num: '03',
-    tag: 'MANUAL ROUTINES',
+    tag: 'PROCESS FRICTION',
     title: 'Manual Work & Slow Sales',
     description: (
       <>
-        High-intent leads sit untouched for hours due to manual CRM handoffs. Your sales team burns valuable time <strong style={{ color: '#fff', fontWeight: 600 }}>managing spreadsheets</strong> instead of closing deals, killing your conversion rates
+        Leads sit untouched for hours due to manual CRM handoffs. Your team wastes time <strong style={{ color: '#fff', fontWeight: 600 }}>managing spreadsheets</strong> instead of closing deals
       </>
     ),
     impact: 'Revenue Leakage & High Overhead',
@@ -66,9 +66,9 @@ export const Bottleneck = () => (
       }
       .watermark {
         position: absolute;
-        top: -15px;
-        right: -10px;
-        font-size: 7.5rem;
+        top: 12px;
+        right: 20px;
+        font-size: 5.5rem;
         font-weight: 900;
         line-height: 1;
         color: rgba(255, 85, 85, 0.04);
