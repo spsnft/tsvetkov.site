@@ -6,41 +6,44 @@ import { T } from '@/src/theme/tokens';
 
 const cards = [
   {
-    id: 'growth', color: T.accent,
-    badge: 'GROWTH ENGINE',
+    id: 'growth', 
+    color: '#00A3FF',
+    badge: 'GTM & STRATEGY',
     title: 'Go-To-Market & Growth Strategy',
     desc: 'Designing scalable acquisition funnels and positioning that convert demand into predictable revenue — without budget waste',
     items: ['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
-        <path d="M3 23L9 17l4 4 6-8 8-6" stroke={T.accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M3 23L9 17l4 4 6-8 8-6" stroke="#00A3FF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
   {
-    id: 'data', color: T.acc2,
+    id: 'data', 
+    color: '#38BDF8',
     badge: 'UNIT ECONOMICS',
     title: 'Data & Revenue Intelligence',
     desc: 'End-to-end attribution bridging marketing spend directly with net P&L, cohort retention, and true customer LTV',
     items: ['P&L Attribution', 'Unit Economics', 'BI Dashboards', 'LTV & Cohorts'],
     icon: (
       <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
-        <rect x="3"  y="19" width="5" height="8"  rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.8"/>
-        <rect x="11" y="13" width="5" height="14" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.8"/>
-        <rect x="19" y="7"  width="5" height="20" rx="1.5" fill={`${T.acc2}20`} stroke={T.acc2} strokeWidth="1.8"/>
+        <rect x="3"  y="19" width="5" height="8"  rx="1.5" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" strokeWidth="1.8"/>
+        <rect x="11" y="13" width="5" height="14" rx="1.5" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" strokeWidth="1.8"/>
+        <rect x="19" y="7"  width="5" height="20" rx="1.5" fill="rgba(56, 189, 248, 0.15)" stroke="#38BDF8" strokeWidth="1.8"/>
       </svg>
     ),
   },
   {
-    id: 'ai', color: '#C084FC',
+    id: 'ai', 
+    color: '#60A5FA',
     badge: 'SYSTEM AUTOMATION',
     title: 'CRM & AI Automation',
     desc: 'Architecting zero-leakage CRM workflows and AI processing to slash operational overhead and accelerate deal cycles',
     items: ['CRM Architecture', 'AI Lead Scoring', 'Process Automation', 'Retention Loops'],
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C084FC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-        <circle cx="12" cy="12" r="3" fill="rgba(192,132,252,0.15)" />
+        <circle cx="12" cy="12" r="3" fill="rgba(96, 165, 250, 0.15)" />
       </svg>
     ),
   },
@@ -71,10 +74,10 @@ export const Expertise = () => (
         min-height: 280px;
         background: radial-gradient(
           circle at 50% 0%,
-          rgba(255, 255, 255, 0.03) 0%,
-          rgba(12, 14, 20, 0.85) 75%
+          rgba(0, 163, 255, 0.05) 0%,
+          rgba(10, 16, 26, 0.88) 75%
         );
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(0, 163, 255, 0.2);
         border-radius: 20px;
         padding: 2rem;
         display: flex;
@@ -90,8 +93,8 @@ export const Expertise = () => (
 
       .bento-expertise-card:hover {
         transform: translateY(-4px);
-        border-color: rgba(255, 255, 255, 0.18);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        border-color: rgba(0, 163, 255, 0.45);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 163, 255, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
       }
 
       .card-badge {
@@ -113,9 +116,15 @@ export const Expertise = () => (
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        color: rgba(255, 255, 255, 0.8);
+        background: rgba(0, 163, 255, 0.05);
+        border: 1px solid rgba(0, 163, 255, 0.15);
+        color: #E0F2FE;
+        transition: all 0.2s ease;
+      }
+
+      .bento-expertise-card:hover .skill-tag {
+        background: rgba(0, 163, 255, 0.1);
+        border-color: rgba(0, 163, 255, 0.3);
       }
     `}</style>
 
@@ -130,9 +139,9 @@ export const Expertise = () => (
         <span style={{ 
           display: 'inline-block', padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1rem', 
           fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', 
-          background: 'rgba(0, 229, 153, 0.05)', border: '1px solid rgba(0, 229, 153, 0.2)', color: T.accent 
+          background: 'rgba(0, 163, 255, 0.08)', border: '1px solid rgba(0, 163, 255, 0.25)', color: T.acc2 
         }}>
-          CORE CAPABILITIES
+          CORE CAPABILITIES & ENGINEERING
         </span>
         
         <h2 style={{ fontSize: 'clamp(2rem, 3.8vw, 3.2rem)', fontWeight: 800, lineHeight: 1.12, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>
@@ -153,10 +162,10 @@ export const Expertise = () => (
               
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                  <div style={{ width: 46, height: 46, borderRadius: 12, background: `${card.color}12`, border: `1px solid ${card.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 46, height: 46, borderRadius: 12, background: `${card.color}15`, border: `1px solid ${card.color}35`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {card.icon}
                   </div>
-                  <span className="card-badge" style={{ color: card.color, background: `${card.color}10`, border: `1px solid ${card.color}25` }}>
+                  <span className="card-badge" style={{ color: card.color, background: `${card.color}12`, border: `1px solid ${card.color}30` }}>
                     {card.badge}
                   </span>
                 </div>
