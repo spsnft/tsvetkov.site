@@ -36,7 +36,7 @@ export const Hero = () => {
           text-decoration: none;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 0 20px rgba(0, 229, 153, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 0 20px rgba(0, 0, 229, 153, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
         }
@@ -56,27 +56,84 @@ export const Hero = () => {
           transition: transform 0.25s ease;
         }
 
-        /* 3D Инженерный движок */
-        .engine-container {
-          position: relative;
+        /* --- 3D ИЗОМЕТРИЧЕСКИЙ ДВИЖОК --- */
+        .3d-perspective-wrapper {
+          width: 100%;
           display: flex;
-          flex-direction: column;
-          gap: -20px;
+          align-items: center;
+          justify-content: center;
+          perspective: 1200px;
+          min-height: 400px;
         }
 
-        .layer-card {
-          border-radius: 16px;
-          padding: 1.25rem 1.5rem;
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        .engine-scene {
+          position: relative;
+          width: 100%;
+          max-width: 440px;
+          height: 380px;
+          transform-style: preserve-3d;
+          transform: rotateX(20deg) rotateY(-16deg) rotateZ(3deg);
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .3d-perspective-wrapper:hover .engine-scene {
+          transform: rotateX(14deg) rotateY(-8deg) rotateZ(1deg) scale(1.02);
+        }
+
+        .layer-card-3d {
+          position: absolute;
+          width: 100%;
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          border-radius: 18px;
+          padding: 1.25rem 1.4rem;
           box-sizing: border-box;
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         }
 
-        .layer-card:hover {
-          transform: translateY(-4px) scale(1.01);
-          z-index: 10 !important;
+        /* Слой 1: PROBLEM (Красный - Низ) */
+        .layer-base {
+          bottom: 0;
+          height: 110px;
+          transform: translateZ(0px);
+          background: rgba(24, 12, 14, 0.88);
+          border: 1px solid rgba(239, 68, 68, 0.3);
+          box-shadow: 
+            -12px 24px 40px rgba(0, 0, 0, 0.6),
+            0 0 20px rgba(239, 68, 68, 0.08);
+          z-index: 1;
         }
+
+        /* Слой 2: PROCESS (Синий - Центр) */
+        .layer-middle {
+          bottom: 90px;
+          height: 125px;
+          transform: translateZ(45px);
+          background: rgba(10, 18, 30, 0.9);
+          border: 1px solid rgba(0, 163, 255, 0.35);
+          box-shadow: 
+            -14px 28px 45px rgba(0, 0, 0, 0.65),
+            0 0 25px rgba(0, 163, 255, 0.12);
+          z-index: 2;
+        }
+
+        /* Слой 3: RESULT (Зеленый - Верх) */
+        .layer-top {
+          bottom: 185px;
+          height: 145px;
+          transform: translateZ(90px);
+          background: rgba(12, 24, 20, 0.92);
+          border: 1px solid rgba(0, 229, 153, 0.45);
+          box-shadow: 
+            -18px 35px 55px rgba(0, 0, 0, 0.7),
+            0 0 35px rgba(0, 229, 153, 0.18),
+            inset 0 1px 1px rgba(255, 255, 255, 0.3);
+          z-index: 3;
+        }
+
+        .3d-perspective-wrapper:hover .layer-base { transform: translateZ(-10px); }
+        .3d-perspective-wrapper:hover .layer-middle { transform: translateZ(55px); }
+        .3d-perspective-wrapper:hover .layer-top { transform: translateZ(125px); }
 
         /* Чипы систем */
         .chip {
@@ -88,14 +145,33 @@ export const Hero = () => {
         }
       `}</style>
 
+      {/* ФОНОВОЕ СВЕЧЕНИЕ */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '0%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '650px',
+          height: '450px',
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${T.glow} 0%, transparent 70%)`,
+          opacity: 0.5,
+          zIndex: 2,
+          pointerEvents: 'none',
+        }}
+      />
+
       <div
         style={{
           maxWidth: 1200,
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '3rem',
+          gap: '3.5rem',
           alignItems: 'center',
+          position: 'relative',
+          zIndex: 4,
         }}
       >
         {/* ЛЕВАЯ КОЛОНКА: Смысловой оффер */}
@@ -186,90 +262,66 @@ export const Hero = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="engine-container"
+          className="3d-perspective-wrapper"
         >
-          {/* СЛОЙ 3: RESULT (Зеленый) */}
-          <div
-            className="layer-card"
-            style={{
-              background: 'radial-gradient(circle at 50% 0%, rgba(0, 229, 153, 0.12) 0%, rgba(12, 22, 20, 0.9) 80%)',
-              border: '1px solid rgba(0, 229, 153, 0.4)',
-              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 153, 0.12)',
-              zIndex: 3,
-              marginBottom: '-15px',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em', color: T.accent, textTransform: 'uppercase' }}>
-                03. SYSTEMIC SCALE & PROFIT
-              </span>
+          <div className="engine-scene">
+            {/* СЛОЙ 1: PROBLEM (Красный) */}
+            <div className="layer-card-3d layer-base">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+                <span style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: '#EF4444', textTransform: 'uppercase' }}>
+                  01. SYSTEM CHAOS & LEAKAGE
+                </span>
+                <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#EF4444', background: 'rgba(239, 68, 68, 0.12)', padding: '2px 6px', borderRadius: 4, border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+                  HIGH RISK
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)', color: '#FCA5A5' }}>
+                  Disjointed Ads
+                </span>
+                <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)', color: '#FCA5A5' }}>
+                  Manual CRM
+                </span>
+                <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)', color: '#FCA5A5' }}>
+                  Lost Margin
+                </span>
+              </div>
             </div>
 
-            <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: '0.2rem' }}>
-              5.2x <span style={{ color: T.accent }}>Average ROI</span>
-            </div>
-            <div style={{ fontSize: '0.8rem', color: T.sub, fontWeight: 500 }}>
-              Predictable Revenue • Zero Traffic Leakage
-            </div>
-          </div>
+            {/* СЛОЙ 2: PROCESS (Синий) */}
+            <div className="layer-card-3d layer-middle">
+              <div style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: '#38BDF8', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
+                02. ARCHITECTURE & OPTIMIZATION
+              </div>
 
-          {/* СЛОЙ 2: PROCESS (Синий) */}
-          <div
-            className="layer-card"
-            style={{
-              background: 'radial-gradient(circle at 50% 0%, rgba(0, 163, 255, 0.1) 0%, rgba(10, 18, 26, 0.9) 80%)',
-              border: '1px solid rgba(0, 163, 255, 0.3)',
-              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
-              zIndex: 2,
-              marginBottom: '-15px',
-            }}
-          >
-            <div style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em', color: T.acc2, textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-              02. ARCHITECTURE & OPTIMIZATION
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#7DD3FC' }}>
+                  E2E Analytics
+                </span>
+                <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#7DD3FC' }}>
+                  Auto-Funnels
+                </span>
+                <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#7DD3FC' }}>
+                  Unit Economics
+                </span>
+              </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#BAE6FD' }}>
-                E2E Analytics
-              </span>
-              <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#BAE6FD' }}>
-                Auto-Funnels
-              </span>
-              <span className="chip" style={{ background: 'rgba(0, 163, 255, 0.12)', border: '1px solid rgba(0, 163, 255, 0.25)', color: '#BAE6FD' }}>
-                Unit Economics
-              </span>
-            </div>
-          </div>
+            {/* СЛОЙ 3: RESULT (Зеленый) */}
+            <div className="layer-card-3d layer-top">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                <span style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: T.accent, textTransform: 'uppercase' }}>
+                  03. SYSTEMIC SCALE & PROFIT
+                </span>
+              </div>
 
-          {/* СЛОЙ 1: PROBLEM (Красный) */}
-          <div
-            className="layer-card"
-            style={{
-              background: 'radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.08) 0%, rgba(20, 12, 14, 0.9) 80%)',
-              border: '1px solid rgba(239, 68, 68, 0.25)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
-              zIndex: 1,
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <span style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.12em', color: '#EF4444', textTransform: 'uppercase' }}>
-                01. SYSTEM CHAOS & LEAKAGE
-              </span>
-              <span style={{ fontSize: '0.6rem', fontWeight: 800, color: '#EF4444', background: 'rgba(239, 68, 68, 0.12)', padding: '2px 6px', borderRadius: 4, border: '1px solid rgba(239, 68, 68, 0.2)' }}>
-                HIGH RISK
-              </span>
-            </div>
-
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#FCA5A5' }}>
-                Disjointed Ads
-              </span>
-              <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#FCA5A5' }}>
-                Manual CRM
-              </span>
-              <span className="chip" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#FCA5A5' }}>
-                Lost Margin
-              </span>
+              <div style={{ fontSize: '1.85rem', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', marginBottom: '0.2rem' }}>
+                5.2x <span style={{ color: T.accent }}>Average ROI</span>
+              </div>
+              <div style={{ fontSize: '0.78rem', color: '#94A3B8', fontWeight: 500 }}>
+                Predictable Revenue • Zero Traffic Leakage
+              </div>
             </div>
           </div>
         </motion.div>
@@ -277,3 +329,5 @@ export const Hero = () => {
     </section>
   );
 };
+
+export default Hero;
