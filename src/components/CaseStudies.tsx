@@ -30,18 +30,6 @@ const cases = [
     ],
     tags: ['Attribution', 'Unit Economics', 'P&L Dashboards'],
   },
-  {
-    category: 'AI & OPERATIONS',
-    title: 'Zero-Leakage Sales Automation',
-    challenge: 'Leads untouched for 6h. Reps wasted 40% time on copy-paste.',
-    solution: 'Custom AI lead parsing + auto-assignment in < 90 seconds.',
-    metrics: [
-      { value: '< 90s', label: 'Speed to Lead' },
-      { value: '80%', label: 'Auto Tasks' },
-      { value: '2.3x', label: 'Close Rate' },
-    ],
-    tags: ['AI Lead Scoring', 'CRM Workflows', 'Automation'],
-  },
 ];
 
 export const CaseStudies = () => (
@@ -58,16 +46,59 @@ export const CaseStudies = () => (
     }}
   >
     <style jsx>{`
-      .cases-grid {
+      .cases-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      /* Флагманская карточка HMS */
+      .hms-hero-card {
+        background: radial-gradient(
+          circle at 85% 20%,
+          rgba(0, 163, 255, 0.15) 0%,
+          rgba(0, 229, 153, 0.08) 35%,
+          rgba(10, 18, 24, 0.95) 100%
+        );
+        border: 1px solid rgba(0, 229, 153, 0.35);
+        border-radius: 20px;
+        padding: clamp(1.5rem, 3.5vw, 2.5rem);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 30px rgba(0, 229, 153, 0.12);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hms-hero-card:hover {
+        border-color: rgba(0, 229, 153, 0.6);
+        box-shadow: 0 25px 55px rgba(0, 0, 0, 0.65), 0 0 35px rgba(0, 229, 153, 0.22);
+      }
+
+      .hms-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 1.25rem;
+        gap: 2rem;
+      }
+
+      @media (min-width: 900px) {
+        .hms-grid {
+          grid-template-columns: 1.2fr 0.8fr;
+          align-items: center;
+        }
+      }
+
+      /* Сетка из 2 кейсов */
+      .pillars-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
 
       @media (min-width: 868px) {
-        .cases-grid {
+        .pillars-grid {
           grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
         }
       }
 
@@ -75,11 +106,11 @@ export const CaseStudies = () => (
         background: radial-gradient(
           circle at 50% 0%,
           rgba(0, 229, 153, 0.04) 0%,
-          rgba(12, 22, 20, 0.85) 75%
+          rgba(12, 22, 20, 0.88) 75%
         );
         border: 1px solid rgba(0, 229, 153, 0.18);
-        border-radius: 18px;
-        padding: 1.5rem;
+        border-radius: 20px;
+        padding: clamp(1.25rem, 2.5vw, 1.75rem);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -96,54 +127,26 @@ export const CaseStudies = () => (
         box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 153, 0.12);
       }
 
-      /* Промо-карточка оффера /hms */
-      .hms-card {
-        background: radial-gradient(
-          circle at 80% 0%,
-          rgba(0, 163, 255, 0.12) 0%,
-          rgba(0, 229, 153, 0.08) 40%,
-          rgba(10, 18, 24, 0.95) 100%
-        );
-        border: 1px solid rgba(0, 229, 153, 0.35);
-        border-radius: 18px;
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 229, 153, 0.1);
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hms-card:hover {
-        transform: translateY(-3px);
-        border-color: rgba(0, 229, 153, 0.6);
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 229, 153, 0.2);
-      }
-
       .btn-hms {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        padding: 0.65rem 1.25rem;
-        border-radius: 10px;
+        gap: 10px;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
         background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
         color: #0A0A0E;
-        font-weight: 700;
-        font-size: 0.85rem;
+        font-weight: 800;
+        font-size: 0.9rem;
         text-decoration: none;
         transition: all 0.25s ease;
-        box-shadow: 0 4px 15px rgba(0, 229, 153, 0.25);
+        box-shadow: 0 4px 20px rgba(0, 229, 153, 0.3);
         width: fit-content;
       }
 
       .btn-hms:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 20px rgba(0, 229, 153, 0.4);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 229, 153, 0.45);
       }
     `}</style>
 
@@ -188,195 +191,225 @@ export const CaseStudies = () => (
         </h2>
       </motion.div>
 
-      {/* 2x2 Bento Grid Layout */}
-      <div className="cases-grid">
-        {/* 3 Стандартных кейса */}
-        {cases.map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="case-card"
-          >
+      <div className="cases-container">
+        
+        {/* 1. FLAGSHIP HERO OFFER: HOSPITALITY / HMS (100% Width) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="hms-hero-card"
+        >
+          <div className="hms-grid">
+            {/* Left Content Column */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
                 <span
                   style={{
-                    fontSize: '0.625rem',
+                    fontSize: '0.65rem',
                     fontWeight: 800,
-                    letterSpacing: '0.1em',
-                    color: T.accent,
+                    letterSpacing: '0.12em',
+                    color: '#00E599',
                     textTransform: 'uppercase',
-                    background: 'rgba(0, 229, 153, 0.1)',
-                    padding: '3px 8px',
-                    borderRadius: 5,
-                    border: '1px solid rgba(0, 229, 153, 0.25)',
+                    background: 'rgba(0, 229, 153, 0.15)',
+                    padding: '4px 10px',
+                    borderRadius: 6,
+                    border: '1px solid rgba(0, 229, 153, 0.4)',
                   }}
                 >
-                  {item.category}
+                  SPECIALIZED OFFER
+                </span>
+                <span style={{ fontSize: '0.75rem', color: '#38BDF8', fontWeight: 800, letterSpacing: '0.08em' }}>
+                  HOSPITALITY / HMS
                 </span>
               </div>
 
               <h3
                 style={{
-                  fontSize: '1.2rem',
-                  fontWeight: 700,
+                  fontSize: 'clamp(1.5rem, 3vw, 2.1rem)',
+                  fontWeight: 800,
                   color: '#fff',
-                  marginBottom: '0.75rem',
-                  lineHeight: 1.3,
+                  marginBottom: '0.85rem',
+                  lineHeight: 1.2,
                 }}
               >
-                {item.title}
+                Hospitality Growth Solutions
               </h3>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '1.25rem' }}>
-                <p style={{ margin: 0, fontSize: '0.825rem', color: T.sub, lineHeight: 1.5 }}>
-                  <strong style={{ color: '#EF4444' }}>Issue:</strong> {item.challenge}
-                </p>
-                <p style={{ margin: 0, fontSize: '0.825rem', color: T.sub, lineHeight: 1.5 }}>
-                  <strong style={{ color: T.accent }}>Fix:</strong> {item.solution}
-                </p>
-              </div>
+              <p style={{ margin: 0, fontSize: '0.925rem', color: T.sub, lineHeight: 1.6, marginBottom: '1.75rem', maxWidth: '640px' }}>
+                Dedicated GTM architecture for Luxury Resorts, Hotels, and Villas. We eliminate OTA commissions and build high-margin direct booking funnels.
+              </p>
+
+              <Link href="/hms" className="btn-hms">
+                <span>Explore HMS System</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
 
-            <div>
-              {/* Метрики */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: '0.5rem',
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  border: '1px solid rgba(255, 255, 255, 0.05)',
-                  borderRadius: 12,
-                  padding: '0.75rem 0.5rem',
-                  marginBottom: '1rem',
-                  textAlign: 'center',
-                }}
-              >
-                {item.metrics.map((m, mi) => (
-                  <div key={mi}>
-                    <div
-                      style={{
-                        fontSize: '1.15rem',
-                        fontWeight: 800,
-                        color: T.accent,
-                        lineHeight: 1.1,
-                        marginBottom: '0.2rem',
-                      }}
-                    >
-                      {m.value}
-                    </div>
-                    <div style={{ fontSize: '0.675rem', fontWeight: 500, color: T.muted, lineHeight: 1.2 }}>
-                      {m.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Теги */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                {item.tags.map((tag, ti) => (
-                  <span
-                    key={ti}
-                    style={{
-                      padding: '3px 8px',
-                      borderRadius: 5,
-                      fontSize: '0.675rem',
-                      fontWeight: 500,
-                      background: 'rgba(255, 255, 255, 0.03)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: T.sub,
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ))}
-
-        {/* 4-я карточка: ФОКУСНЫЙ СПЕЦ-ОФФЕР ДЛЯ HORECA / HMS */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="hms-card"
-        >
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
-              <span
-                style={{
-                  fontSize: '0.625rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.12em',
-                  color: '#00E599',
-                  textTransform: 'uppercase',
-                  background: 'rgba(0, 229, 153, 0.15)',
-                  padding: '3px 8px',
-                  borderRadius: 5,
-                  border: '1px solid rgba(0, 229, 153, 0.4)',
-                }}
-              >
-                SPECIALIZED OFFER
-              </span>
-              <span style={{ fontSize: '0.7rem', color: '#38BDF8', fontWeight: 700, letterSpacing: '0.05em' }}>
-                HOSPITALITY / HMS
-              </span>
-            </div>
-
-            <h3
-              style={{
-                fontSize: '1.3rem',
-                fontWeight: 800,
-                color: '#fff',
-                marginBottom: '0.6rem',
-                lineHeight: 1.25,
-              }}
-            >
-              Hospitality Growth Solutions
-            </h3>
-
-            <p style={{ margin: 0, fontSize: '0.85rem', color: T.sub, lineHeight: 1.55, marginBottom: '1.25rem' }}>
-              Dedicated GTM architecture for Luxury Resorts, Hotels, and Villas. We eliminate OTA commissions and build high-margin direct booking funnels.
-            </p>
-          </div>
-
-          <div>
+            {/* Right Dashboard Terminal Metrics Panel */}
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '0.5rem',
-                background: 'rgba(0, 0, 0, 0.35)',
-                border: '1px solid rgba(0, 229, 153, 0.15)',
-                borderRadius: 12,
-                padding: '0.75rem',
-                marginBottom: '1.25rem',
+                background: 'rgba(0, 0, 0, 0.45)',
+                border: '1px solid rgba(0, 229, 153, 0.25)',
+                borderRadius: 16,
+                padding: '1.25rem 1.5rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+                boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.05)',
               }}
             >
-              <div>
-                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#00E599' }}>+40%</div>
-                <div style={{ fontSize: '0.675rem', color: T.muted }}>Direct Bookings</div>
+              <div style={{ fontSize: '0.675rem', fontWeight: 700, color: 'rgba(255, 255, 255, 0.4)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                HMS Direct Booking Impact
               </div>
-              <div>
-                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#38BDF8' }}>0%</div>
-                <div style={{ fontSize: '0.675rem', color: T.muted }}>OTA Leakage</div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div style={{ borderRight: '1px solid rgba(255, 255, 255, 0.08)', paddingRight: '0.5rem' }}>
+                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#00E599', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', lineHeight: 1 }}>
+                    +40%
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: T.sub, marginTop: '0.35rem', fontWeight: 500 }}>
+                    Direct Bookings
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#38BDF8', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', lineHeight: 1 }}>
+                    0%
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: T.sub, marginTop: '0.35rem', fontWeight: 500 }}>
+                    OTA Commission Leakage
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ paddingTop: '0.75rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', fontSize: '0.75rem', color: T.muted, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ color: '#00E599' }}>✓</span> Full Guest Data Ownership & Instant WhatsApp CRM Sync
               </div>
             </div>
-
-            <Link href="/hms" className="btn-hms">
-              <span>Explore HMS System</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
           </div>
         </motion.div>
+
+        {/* 2. PILLAR CASE STUDIES (2 Columns Grid) */}
+        <div className="pillars-grid">
+          {cases.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 + i * 0.1, duration: 0.4 }}
+              className="case-card"
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
+                  <span
+                    style={{
+                      fontSize: '0.625rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.1em',
+                      color: T.accent,
+                      textTransform: 'uppercase',
+                      background: 'rgba(0, 229, 153, 0.1)',
+                      padding: '3px 8px',
+                      borderRadius: 5,
+                      border: '1px solid rgba(0, 229, 153, 0.25)',
+                    }}
+                  >
+                    {item.category}
+                  </span>
+                </div>
+
+                <h3
+                  style={{
+                    fontSize: '1.25rem',
+                    fontWeight: 700,
+                    color: '#fff',
+                    marginBottom: '0.85rem',
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {item.title}
+                </h3>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', marginBottom: '1.5rem' }}>
+                  <p style={{ margin: 0, fontSize: '0.825rem', color: T.sub, lineHeight: 1.5 }}>
+                    <strong style={{ color: '#EF4444' }}>Issue:</strong> {item.challenge}
+                  </p>
+                  <p style={{ margin: 0, fontSize: '0.825rem', color: T.sub, lineHeight: 1.5 }}>
+                    <strong style={{ color: T.accent }}>Fix:</strong> {item.solution}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                {/* Data Dashboard Metrics Panel */}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    background: 'rgba(0, 0, 0, 0.4)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: 12,
+                    padding: '0.85rem 0.4rem',
+                    marginBottom: '1rem',
+                    textAlign: 'center',
+                  }}
+                >
+                  {item.metrics.map((m, mi) => (
+                    <div 
+                      key={mi}
+                      style={{
+                        borderRight: mi !== item.metrics.length - 1 ? '1px solid rgba(255, 255, 255, 0.08)' : 'none',
+                        padding: '0 0.25rem',
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: '1.25rem',
+                          fontWeight: 800,
+                          color: T.accent,
+                          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                          lineHeight: 1.1,
+                          marginBottom: '0.25rem',
+                        }}
+                      >
+                        {m.value}
+                      </div>
+                      <div style={{ fontSize: '0.65rem', fontWeight: 500, color: T.muted, lineHeight: 1.2 }}>
+                        {m.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Tags */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                  {item.tags.map((tag, ti) => (
+                    <span
+                      key={ti}
+                      style={{
+                        padding: '3px 8px',
+                        borderRadius: 5,
+                        fontSize: '0.675rem',
+                        fontWeight: 500,
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        color: T.sub,
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
 
     </div>
