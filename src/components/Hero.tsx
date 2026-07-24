@@ -61,7 +61,7 @@ export const Hero = () => {
           }
         }
 
-        /* --- 3D ENGINE VISUAL STYLES --- */
+        /* --- 3D ENGINE VISUAL (RED -> BLUE -> GREEN) --- */
         .engine-scene {
           position: relative;
           width: 100%;
@@ -79,47 +79,48 @@ export const Hero = () => {
         .engine-layer {
           position: absolute;
           width: 100%;
-          background: rgba(12, 16, 24, 0.8);
           backdrop-filter: blur(18px);
           -webkit-backdrop-filter: blur(18px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 18px;
           padding: 1.25rem 1.4rem;
           box-sizing: border-box;
-          box-shadow: 
-            -12px 24px 45px rgba(0, 0, 0, 0.65),
-            inset 0 1px 1px rgba(255, 255, 255, 0.18);
           transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
         }
 
-        /* Нижний слой: Сырой хаотичный вход */
+        /* 1. НИЖНИЙ СЛОЙ (КРАСНЫЙ): Проблема / Хаос / Потери */
         .layer-base {
           bottom: 0;
           height: 110px;
           transform: translateZ(0px);
-          border-color: rgba(255, 255, 255, 0.08);
-          opacity: 0.75;
+          background: rgba(28, 12, 16, 0.85);
+          border: 1px solid rgba(239, 68, 68, 0.3);
+          box-shadow: 
+            -12px 24px 40px rgba(0, 0, 0, 0.6),
+            0 0 20px rgba(239, 68, 68, 0.08);
         }
 
-        /* Средний слой: Архитектура и Автоматизация */
+        /* 2. СРЕДНИЙ СЛОЙ (СИНИЙ): Починка / Инженерия / Архитектура */
         .layer-middle {
           bottom: 90px;
           height: 125px;
           transform: translateZ(45px);
-          border-color: rgba(0, 163, 255, 0.35);
           background: rgba(10, 18, 30, 0.88);
+          border: 1px solid rgba(0, 163, 255, 0.35);
+          box-shadow: 
+            -14px 28px 45px rgba(0, 0, 0, 0.65),
+            0 0 25px rgba(0, 163, 255, 0.12);
         }
 
-        /* Верхний слой: Системная прибыль */
+        /* 3. ВЕРХНИЙ СЛОЙ (ЗЕЛЕНЫЙ): Результат / Прибыль / Рост */
         .layer-top {
           bottom: 185px;
           height: 145px;
           transform: translateZ(90px);
-          border-color: rgba(0, 229, 153, 0.45);
-          background: rgba(12, 22, 28, 0.92);
+          background: rgba(12, 24, 20, 0.92);
+          border: 1px solid rgba(0, 229, 153, 0.45);
           box-shadow: 
             -18px 35px 55px rgba(0, 0, 0, 0.7),
-            0 0 35px rgba(0, 229, 153, 0.15),
+            0 0 35px rgba(0, 229, 153, 0.18),
             inset 0 1px 1px rgba(255, 255, 255, 0.3);
         }
 
@@ -138,9 +139,9 @@ export const Hero = () => {
           justify-content: space-between;
         }
 
+        .tag-red { color: #EF4444; }
+        .tag-blue { color: #38BDF8; }
         .tag-green { color: ${T.accent}; }
-        .tag-blue { color: ${T.acc2}; }
-        .tag-dim { color: rgba(255, 255, 255, 0.45); }
 
         .nodes-grid {
           display: flex;
@@ -150,15 +151,24 @@ export const Hero = () => {
 
         .node-chip {
           flex: 1;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 6px;
           padding: 0.45rem 0.3rem;
           font-size: 0.7rem;
-          color: #CBD5E1;
           text-align: center;
           font-weight: 600;
           white-space: nowrap;
+        }
+
+        .chip-red {
+          background: rgba(239, 68, 68, 0.08);
+          border: 1px solid rgba(239, 68, 68, 0.25);
+          color: #FCA5A5;
+        }
+
+        .chip-blue {
+          background: rgba(0, 163, 255, 0.08);
+          border: 1px solid rgba(0, 163, 255, 0.25);
+          color: #7DD3FC;
         }
 
         .pulse-light {
@@ -226,43 +236,37 @@ export const Hero = () => {
           </a>
         </motion.div>
 
-        {/* ПРАВАЯ КОЛОНКА (3D MULTI-LAYER ENGINE) */}
+        {/* ПРАВАЯ КОЛОНКА (3D ENGINE: RED -> BLUE -> GREEN) */}
         <div className="hero-right">
           <div className="engine-scene">
             
-            {/* Базовый слой: Хаотичные входы */}
+            {/* 1. Слой 1 (КРАСНЫЙ): Хаос и утечки */}
             <div className="engine-layer layer-base">
-              <div className="layer-tag tag-dim">
-                <span>01. FRAGMENTED INPUTS</span>
-                <span>STATUS: LEAKAGE</span>
+              <div className="layer-tag tag-red">
+                <span>01. SYSTEM CHAOS & LEAKAGE</span>
+                <span style={{ background: 'rgba(239, 68, 68, 0.15)', padding: '2px 6px', borderRadius: '4px' }}>HIGH RISK</span>
               </div>
               <div className="nodes-grid">
-                <div className="node-chip">Disjointed Ads</div>
-                <div className="node-chip">Manual CRM</div>
-                <div className="node-chip">Data Chaos</div>
+                <div className="node-chip chip-red">Disjointed Ads</div>
+                <div className="node-chip chip-red">Manual CRM</div>
+                <div className="node-chip chip-red">Lost Margin</div>
               </div>
             </div>
 
-            {/* Средний слой: Архитектура системы */}
+            {/* 2. Слой 2 (СИНИЙ): Процесс починки и архитектура */}
             <div className="engine-layer layer-middle">
               <div className="layer-tag tag-blue">
-                <span>02. GROWTH ARCHITECTURE</span>
+                <span>02. ARCHITECTURE & OPTIMIZATION</span>
                 <div className="pulse-light" />
               </div>
               <div className="nodes-grid">
-                <div className="node-chip" style={{ borderColor: 'rgba(56, 189, 248, 0.35)', color: T.acc2 }}>
-                  E2E Analytics
-                </div>
-                <div className="node-chip" style={{ borderColor: 'rgba(56, 189, 248, 0.35)', color: T.acc2 }}>
-                  Auto-Funnels
-                </div>
-                <div className="node-chip" style={{ borderColor: 'rgba(56, 189, 248, 0.35)', color: T.acc2 }}>
-                  Unit Economics
-                </div>
+                <div className="node-chip chip-blue">E2E Analytics</div>
+                <div className="node-chip chip-blue">Auto-Funnels</div>
+                <div className="node-chip chip-blue">Unit Economics</div>
               </div>
             </div>
 
-            {/* Верхний слой: Выход чистой прибыли */}
+            {/* 3. Слой 3 (ЗЕЛЕНЫЙ): Результат и прибыль */}
             <div className="engine-layer layer-top">
               <div className="layer-tag tag-green">
                 <span>03. SYSTEMIC SCALE & PROFIT</span>
@@ -280,7 +284,7 @@ export const Hero = () => {
                 5.2x Average ROI
               </div>
               <div style={{ fontSize: '0.78rem', color: '#94A3B8', fontWeight: 500 }}>
-                Predictable Net Margin • <strong style={{ color: '#fff' }}>Zero Traffic Leakage</strong>
+                Predictable Revenue • <strong style={{ color: '#fff' }}>Zero Traffic Leakage</strong>
               </div>
             </div>
 
