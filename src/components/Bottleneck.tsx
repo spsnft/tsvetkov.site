@@ -57,27 +57,13 @@ export const Bottleneck = () => (
   >
     <style jsx>{`
       .bottleneck-card {
-        background: linear-gradient(135deg, rgba(14, 14, 18, 0.75) 0%, rgba(255, 85, 85, 0.03) 100%);
-        border: 1px solid rgba(255, 85, 85, 0.18);
-        border-radius: 20px;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       }
-
       .bottleneck-card:hover {
-        border-color: rgba(255, 85, 85, 0.45);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 85, 85, 0.12);
+        border-color: rgba(255, 85, 85, 0.45) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 85, 85, 0.12) !important;
         transform: translateY(-4px);
       }
-
       .watermark {
         position: absolute;
         top: -15px;
@@ -91,18 +77,8 @@ export const Bottleneck = () => (
         z-index: 0;
         transition: color 0.35s ease;
       }
-
       .bottleneck-card:hover .watermark {
         color: rgba(255, 85, 85, 0.08);
-      }
-
-      .card-content {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        justify-content: space-between;
       }
     `}</style>
 
@@ -157,11 +133,26 @@ export const Bottleneck = () => (
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             className="bottleneck-card"
+            style={{
+              /* ЖЕЛЕЗОБЕТОННЫЕ ИНЛАЙН СТИЛИ ДЛЯ КОНТЕЙНЕРА */
+              position: 'relative', 
+              overflow: 'hidden',   
+              background: 'linear-gradient(135deg, rgba(14, 14, 18, 0.75) 0%, rgba(255, 85, 85, 0.03) 100%)',
+              border: '1px solid rgba(255, 85, 85, 0.18)',
+              borderRadius: 20,
+              padding: '2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+            }}
           >
             {/* Background Watermark Number */}
             <div className="watermark">{item.num}</div>
 
-            <div className="card-content">
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
               {/* Top Content */}
               <div>
                 {/* Tag */}
