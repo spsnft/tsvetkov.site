@@ -23,7 +23,13 @@ export const Expertise = () => {
     >
       <style jsx>{`
         .bento-card {
+          grid-column: span 12;
           transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @media (min-width: 900px) {
+          .bento-card-half {
+            grid-column: span 6 !important;
+          }
         }
         .bento-card:hover {
           border-color: rgba(0, 163, 255, 0.45) !important;
@@ -89,15 +95,14 @@ export const Expertise = () => {
             gap: '1.5rem',
           }}
         >
-          {/* CARD 1: GTM & Strategy (Top Left - 6 cols) */}
+          {/* CARD 1: GTM & Strategy (Top Left - 6 cols on Desktop) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="bento-card"
+            className="bento-card bento-card-half"
             style={{
-              gridColumn: 'span 12',
               position: 'relative',
               overflow: 'hidden',
               background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.8) 0%, rgba(0, 163, 255, 0.03) 100%)',
@@ -111,65 +116,57 @@ export const Expertise = () => {
               boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
             }}
           >
-            <style jsx>{`
-              @media (min-width: 900px) {
-                .bento-card-half { grid-column: span 6 !important; }
-              }
-            `}</style>
-            
-            <div className="bento-card-half" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
-                  Go-To-Market & Growth Strategy
-                </h3>
-                <p style={{ color: T.sub, fontSize: '0.88rem', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', textWrap: 'pretty' }}>
-                  Designing scalable acquisition funnels and positioning that turn market demand into <strong style={{ color: '#fff', fontWeight: 600 }}>predictable, high-margin revenue</strong>
-                </p>
-              </div>
+            <div>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
+                Go-To-Market & Growth Strategy
+              </h3>
+              <p style={{ color: T.sub, fontSize: '0.88rem', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', textWrap: 'pretty' }}>
+                Designing scalable acquisition funnels and positioning that turn market demand into <strong style={{ color: '#fff', fontWeight: 600 }}>predictable, high-margin revenue</strong>
+              </p>
+            </div>
 
-              {/* Micro UI Widget: Conversion Funnel */}
-              <div style={{
-                background: 'rgba(0, 0, 0, 0.35)',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
-                borderRadius: 12,
-                padding: '1rem',
-                marginBottom: '1.5rem',
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: T.muted, marginBottom: '8px' }}>
-                  <span>Funnel Conversion Rate</span>
-                  <span style={{ color: CYAN_ACCENT, fontWeight: 700 }}>+142% vs Benchmark</span>
-                </div>
-                <div style={{ display: 'flex', gap: '6px', height: '8px', borderRadius: 4, overflow: 'hidden', background: 'rgba(255,255,255,0.05)' }}>
-                  <div style={{ width: '45%', background: CYAN_ACCENT, borderRadius: 2 }} />
-                  <div style={{ width: '30%', background: '#38BDF8', borderRadius: 2 }} />
-                  <div style={{ width: '25%', background: '#818CF8', borderRadius: 2 }} />
-                </div>
+            {/* Micro UI Widget: Conversion Funnel */}
+            <div style={{
+              background: 'rgba(0, 0, 0, 0.35)',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              borderRadius: 12,
+              padding: '1rem',
+              marginBottom: '1.5rem',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: T.muted, marginBottom: '8px' }}>
+                <span>Funnel Conversion Rate</span>
+                <span style={{ color: CYAN_ACCENT, fontWeight: 700 }}>+142% vs Benchmark</span>
               </div>
+              <div style={{ display: 'flex', gap: '6px', height: '8px', borderRadius: 4, overflow: 'hidden', background: 'rgba(255,255,255,0.05)' }}>
+                <div style={{ width: '45%', background: CYAN_ACCENT, borderRadius: 2 }} />
+                <div style={{ width: '30%', background: '#38BDF8', borderRadius: 2 }} />
+                <div style={{ width: '25%', background: '#818CF8', borderRadius: 2 }} />
+              </div>
+            </div>
 
-              {/* Skill Pills */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                {['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'].map((pill, i) => (
-                  <span
-                    key={i}
-                    className="skill-pill"
-                    style={{
-                      fontSize: '0.72rem',
-                      fontWeight: 600,
-                      color: T.sub,
-                      background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      padding: '4px 10px',
-                      borderRadius: 6,
-                    }}
-                  >
-                    • {pill}
-                  </span>
-                ))}
-              </div>
+            {/* Skill Pills */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              {['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'].map((pill, i) => (
+                <span
+                  key={i}
+                  className="skill-pill"
+                  style={{
+                    fontSize: '0.72rem',
+                    fontWeight: 600,
+                    color: T.sub,
+                    background: 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    padding: '4px 10px',
+                    borderRadius: 6,
+                  }}
+                >
+                  • {pill}
+                </span>
+              ))}
             </div>
           </motion.div>
 
-          {/* CARD 2: Data & Revenue Intelligence (Top Right - 6 cols) */}
+          {/* CARD 2: Data & Revenue Intelligence (Top Right - 6 cols on Desktop) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -177,7 +174,6 @@ export const Expertise = () => {
             transition={{ delay: 0.2 }}
             className="bento-card bento-card-half"
             style={{
-              gridColumn: 'span 12',
               position: 'relative',
               overflow: 'hidden',
               background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.8) 0%, rgba(0, 163, 255, 0.03) 100%)',
@@ -251,7 +247,6 @@ export const Expertise = () => {
             transition={{ delay: 0.3 }}
             className="bento-card"
             style={{
-              gridColumn: 'span 12',
               position: 'relative',
               overflow: 'hidden',
               background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.85) 0%, rgba(0, 163, 255, 0.05) 100%)',
