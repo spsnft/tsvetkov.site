@@ -21,7 +21,7 @@ const bottlenecks = [
   {
     num: '02',
     tag: 'UNRELIABLE TRACKING',
-    title: 'Broken Data & Unclear Numbers',
+    title: 'Broken Data & Blind Scaling',
     description: (
       <>
         Ad platforms, CRM, and actual revenue live in separate places. You end up <strong style={{ color: '#fff', fontWeight: 600 }}>guessing what works</strong> instead of seeing real ROI and true net profit.
@@ -32,7 +32,7 @@ const bottlenecks = [
   {
     num: '03',
     tag: 'MANUAL ROUTINES',
-    title: 'Manual Work & Slow Lead Response',
+    title: 'Manual Work & Slow Sales',
     description: (
       <>
         Leads sit untouched for hours due to manual handoffs. Your team wastes time <strong style={{ color: '#fff', fontWeight: 600 }}>copy-pasting data</strong> across tables instead of closing deals.
