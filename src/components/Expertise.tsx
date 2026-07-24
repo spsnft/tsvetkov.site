@@ -170,7 +170,7 @@ export const Expertise = () => {
                 Data & Revenue Intelligence
               </h3>
               <p style={{ color: T.sub, fontSize: '0.88rem', lineHeight: 1.55, margin: 0, marginBottom: '1.5rem', textWrap: 'pretty' }}>
-                End-to-end attribution bridging marketing spend directly with <strong style={{ color: '#fff', fontWeight 600 }}>net P&L, cohort retention, and true customer LTV</strong>
+                End-to-end attribution bridging marketing spend directly with <strong style={{ color: '#fff', fontWeight: 600 }}>net P&L, cohort retention, and true customer LTV</strong>
               </p>
             </div>
 
