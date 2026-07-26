@@ -1,7 +1,4 @@
-'use client';
-
 import React from 'react';
-import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 const CYAN_ACCENT = '#00A3FF';
@@ -20,15 +17,21 @@ export const Expertise = () => {
         background: 'transparent',
       }}
     >
+      <style>{`
+        .expertise-card {
+          transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .expertise-card:hover {
+          border-color: rgba(0, 163, 255, 0.4) !important;
+          transform: translateY(-3px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 163, 255, 0.08);
+        }
+      `}</style>
+
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         
         {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          style={{ textAlign: 'center', marginBottom: '3.5rem' }}
-        >
+        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <span
             style={{
               display: 'inline-block',
@@ -51,7 +54,7 @@ export const Expertise = () => {
             style={{
               fontSize: 'clamp(2rem, 5vw, 3.2rem)',
               fontWeight: 800,
-              lineHeight: 1.1,
+              lineHeight: 1.15,
               letterSpacing: '-0.03em',
               color: '#fff',
               margin: 0,
@@ -59,7 +62,7 @@ export const Expertise = () => {
           >
             How We Fix Your Growth Engine
           </h2>
-        </motion.div>
+        </div>
 
         {/* Bento Grid */}
         <div
@@ -71,26 +74,17 @@ export const Expertise = () => {
           }}
         >
           {/* CARD 1: GTM Strategy */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -4, borderColor: 'rgba(0, 163, 255, 0.45)' }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.25 }}
+          <div
+            className="card-matte expertise-card"
             style={{
               flex: '1 1 420px',
               minWidth: 0,
               position: 'relative',
               overflow: 'hidden',
-              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.85) 0%, rgba(0, 163, 255, 0.04) 100%)',
-              border: '1px solid rgba(0, 163, 255, 0.18)',
-              borderRadius: 24,
               padding: '2.5rem 2rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              backdropFilter: 'blur(16px)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
             }}
           >
             {/* 3D Visual Asset Slot */}
@@ -107,11 +101,10 @@ export const Expertise = () => {
                 position: 'absolute',
                 width: 140,
                 height: 140,
-                background: 'radial-gradient(circle, rgba(0,163,255,0.25) 0%, rgba(0,0,0,0) 70%)',
+                background: 'radial-gradient(circle, rgba(0,163,255,0.18) 0%, rgba(0,0,0,0) 70%)',
                 borderRadius: '50%',
                 filter: 'blur(20px)',
               }} />
-              {/* Сюда вставляется сгенерированная картинка */}
               <img
                 src="/assets/3d-gtm-prism.png"
                 alt="GTM Strategy Visual"
@@ -122,19 +115,15 @@ export const Expertise = () => {
                   zIndex: 1,
                   filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
                 }}
-                onError={(e) => {
-                  // Плейсхолдер до загрузки картинки
-                  e.currentTarget.style.display = 'none';
-                }}
               />
             </div>
 
             <div>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
                 Go-To-Market & Growth Strategy
               </h3>
-              <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
-                Designing scalable acquisition funnels and positioning that turn market demand into <strong style={{ color: '#fff', fontWeight: 600 }}>predictable, high-margin revenue</strong>
+              <p style={{ fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
+                Designing scalable acquisition funnels and positioning that turn market demand into <strong style={{ color: '#fff', fontWeight: 600 }}>predictable, high-margin revenue</strong>.
               </p>
             </div>
 
@@ -157,29 +146,20 @@ export const Expertise = () => {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* CARD 2: Data & Revenue Intelligence */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -4, borderColor: 'rgba(0, 163, 255, 0.45)' }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.25 }}
+          <div
+            className="card-matte expertise-card"
             style={{
               flex: '1 1 420px',
               minWidth: 0,
               position: 'relative',
               overflow: 'hidden',
-              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.85) 0%, rgba(0, 163, 255, 0.04) 100%)',
-              border: '1px solid rgba(0, 163, 255, 0.18)',
-              borderRadius: 24,
               padding: '2.5rem 2rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              backdropFilter: 'blur(16px)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
             }}
           >
             {/* 3D Visual Asset Slot */}
@@ -196,7 +176,7 @@ export const Expertise = () => {
                 position: 'absolute',
                 width: 140,
                 height: 140,
-                background: 'radial-gradient(circle, rgba(16,185,129,0.2) 0%, rgba(0,0,0,0) 70%)',
+                background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(0,0,0,0) 70%)',
                 borderRadius: '50%',
                 filter: 'blur(20px)',
               }} />
@@ -210,16 +190,15 @@ export const Expertise = () => {
                   zIndex: 1,
                   filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
                 }}
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
               />
             </div>
 
             <div>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
                 Data & Revenue Intelligence
               </h3>
-              <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
-                End-to-end attribution bridging marketing spend directly with <strong style={{ color: '#fff', fontWeight: 600 }}>net P&L, cohort retention, and true customer LTV</strong>
+              <p style={{ fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
+                End-to-end attribution bridging marketing spend directly with <strong style={{ color: '#fff', fontWeight: 600 }}>net P&L, cohort retention, and true customer LTV</strong>.
               </p>
             </div>
 
@@ -242,26 +221,17 @@ export const Expertise = () => {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* CARD 3: CRM & AI Operations */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -4, borderColor: 'rgba(0, 163, 255, 0.45)' }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.25 }}
+          <div
+            className="card-matte expertise-card"
             style={{
               flex: '1 1 100%',
               width: '100%',
               position: 'relative',
               overflow: 'hidden',
-              background: 'linear-gradient(135deg, rgba(10, 18, 28, 0.9) 0%, rgba(0, 163, 255, 0.06) 100%)',
-              border: '1px solid rgba(0, 163, 255, 0.22)',
-              borderRadius: 24,
               padding: '2.5rem 2rem',
-              backdropFilter: 'blur(16px)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
             }}
           >
             <div style={{
@@ -271,11 +241,11 @@ export const Expertise = () => {
               alignItems: 'center',
             }}>
               <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
+                <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
                   CRM & AI-Powered Operations
                 </h3>
-                <p style={{ color: T.sub, fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
-                  Building zero-leakage CRM workflows and AI processing to <strong style={{ color: '#fff', fontWeight: 600 }}>eliminate manual routines, slash overhead, and accelerate deal closure</strong>
+                <p style={{ fontSize: '0.9rem', lineHeight: 1.6, margin: 0, marginBottom: '1.5rem' }}>
+                  Building zero-leakage CRM workflows and AI processing to <strong style={{ color: '#fff', fontWeight: 600 }}>eliminate manual routines, slash overhead, and accelerate deal closure</strong>.
                 </p>
 
                 {/* Skill Pills */}
@@ -312,7 +282,7 @@ export const Expertise = () => {
                   position: 'absolute',
                   width: 200,
                   height: 100,
-                  background: 'radial-gradient(circle, rgba(0,163,255,0.2) 0%, rgba(0,0,0,0) 70%)',
+                  background: 'radial-gradient(circle, rgba(0,163,255,0.15) 0%, rgba(0,0,0,0) 70%)',
                   borderRadius: '50%',
                   filter: 'blur(20px)',
                 }} />
@@ -326,12 +296,11 @@ export const Expertise = () => {
                     zIndex: 1,
                     filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
                   }}
-                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
               </div>
 
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>
