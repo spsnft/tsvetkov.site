@@ -1,7 +1,4 @@
-'use client';
-
 import React from 'react';
-import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 const models = [
@@ -47,15 +44,21 @@ export const Services = () => (
       background: 'transparent',
     }}
   >
+    <style>{`
+      .service-card {
+        transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .service-card:hover {
+        border-color: rgba(0, 229, 153, 0.4) !important;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 153, 0.08);
+      }
+    `}</style>
+
     <div style={{ maxWidth: 1000, margin: '0 auto' }}>
 
       {/* Centered Section Header */}
-      <motion.div 
-        initial={{ opacity: 0, y: 16 }} 
-        whileInView={{ opacity: 1, y: 0 }} 
-        viewport={{ once: true }}
-        style={{ textAlign: 'center', marginBottom: '3.5rem' }}
-      >
+      <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
         <span style={{ 
           display: 'inline-block', 
           padding: '0.35rem 0.85rem', 
@@ -75,14 +78,14 @@ export const Services = () => (
         <h2 style={{ 
           fontSize: 'clamp(2rem, 5vw, 3.2rem)', 
           fontWeight: 800, 
-          lineHeight: 1.1, 
+          lineHeight: 1.15, 
           letterSpacing: '-0.03em', 
           color: '#fff', 
           margin: 0 
         }}>
           How We Work Together
         </h2>
-      </motion.div>
+      </div>
 
       {/* Vertical Timeline Container */}
       <div style={{ position: 'relative', paddingLeft: 'clamp(1rem, 5vw, 3.5rem)' }}>
@@ -103,14 +106,7 @@ export const Services = () => (
         {/* Steps List */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
           {models.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -20 }} 
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }} 
-              transition={{ delay: i * 0.15, duration: 0.4 }}
-              style={{ position: 'relative' }}
-            >
+            <div key={i} style={{ position: 'relative' }}>
               {/* Node Point on the Vertical Line */}
               <div
                 style={{
@@ -120,7 +116,7 @@ export const Services = () => (
                   width: 28,
                   height: 28,
                   borderRadius: '50%',
-                  background: '#0c1614',
+                  background: '#090B0E',
                   border: `2px solid ${item.color}`,
                   display: 'flex',
                   alignItems: 'center',
@@ -129,7 +125,7 @@ export const Services = () => (
                   fontWeight: 800,
                   color: item.color,
                   zIndex: 2,
-                  boxShadow: `0 0 15px ${item.color}40`,
+                  boxShadow: `0 0 12px ${item.color}30`,
                 }}
               >
                 {item.num}
@@ -137,15 +133,9 @@ export const Services = () => (
 
               {/* Service Card */}
               <div
+                className="card-matte service-card"
                 style={{
-                  background: 'radial-gradient(circle at 50% 0%, rgba(0, 229, 153, 0.05) 0%, rgba(12, 22, 20, 0.88) 75%)',
-                  border: `1px solid ${item.color}35`,
-                  borderRadius: 20,
                   padding: 'clamp(1.5rem, 3vw, 2.25rem)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
-                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
-                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
               >
                 {/* Top Badge */}
@@ -170,7 +160,7 @@ export const Services = () => (
                 {/* Title & Description */}
                 <h3
                   style={{
-                    fontSize: 'clamp(1.3rem, 2.5vw, 1.6rem)',
+                    fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)',
                     fontWeight: 700,
                     color: '#fff',
                     marginBottom: '0.75rem',
@@ -181,7 +171,6 @@ export const Services = () => (
                 </h3>
                 <p
                   style={{
-                    color: T.sub,
                     fontSize: '0.9rem',
                     lineHeight: 1.6,
                     margin: 0,
@@ -230,7 +219,6 @@ export const Services = () => (
                             height: 5,
                             borderRadius: '50%',
                             background: item.color,
-                            boxShadow: `0 0 8px ${item.color}`,
                             flexShrink: 0,
                           }}
                         />
@@ -240,11 +228,11 @@ export const Services = () => (
                   </div>
                 </div>
 
-                {/* Outcome Highlight Box (Micro-UI) */}
+                {/* Outcome Highlight Box */}
                 <div
                   style={{
-                    background: 'rgba(0, 229, 153, 0.06)',
-                    border: '1px solid rgba(0, 229, 153, 0.22)',
+                    background: 'rgba(0, 229, 153, 0.05)',
+                    border: '1px solid rgba(0, 229, 153, 0.2)',
                     borderRadius: 12,
                     padding: '0.85rem 1.1rem',
                     display: 'flex',
@@ -253,7 +241,7 @@ export const Services = () => (
                   }}
                 >
                   <span style={{ fontSize: '1.1rem' }}>🎯</span>
-                  <div style={{ fontSize: '0.825rem', lineHeight: 1.4, color: T.sub }}>
+                  <div style={{ fontSize: '0.825rem', lineHeight: 1.4 }}>
                     <strong style={{ color: T.accent, fontWeight: 700 }}>
                       Outcome:&nbsp;
                     </strong>
@@ -262,7 +250,7 @@ export const Services = () => (
                 </div>
 
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
