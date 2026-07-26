@@ -195,7 +195,7 @@ export const HeroEngine = () => {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-            <span style={{ fontSize: '0.64rem', fontWeight 800, letterSpacing: '0.12em', color: T.accent, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: T.accent, textTransform: 'uppercase' }}>
               03. SYSTEMIC SCALE & PROFIT
             </span>
           </div>
