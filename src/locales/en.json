@@ -1,20 +1,92 @@
 {
   "nav": {
-    "about": "About",
     "expertise": "Expertise",
     "services": "Services",
     "work": "Work",
     "hospitality": "Hospitality Tech (/hms)",
+    "about": "About",
     "letsTalk": "Let's talk"
   },
   "hero": {
     "badge": "TSVETKOV • FOUNDER-LED AGENCY",
     "titleLine1": "Value Growth",
     "titleLine2": "Engineered to Scale",
+    "sub1": "We eliminate chaos in marketing and digital systems",
+    "sub2": "No fluff — just high-performance architectures",
+    "sub3": "Track every dollar and automate sales flow",
     "cta": "Audit My Business"
+  },
+  "bottleneck": {
+    "badge": "SCALING BARRIERS",
+    "title": "Why your business isn't growing",
+    "item1Tag": "EMPTY TRAFFIC",
+    "item1Title": "Traffic Without Profit",
+    "item1Desc": "Agencies report clicks and leads, but your sales team gets poor-quality inquiries. Ad budgets keep growing, but net profit stays flat.",
+    "item1Impact": "Uncontrolled CAC Inflation",
+    "item2Tag": "UNRELIABLE TRACKING",
+    "item2Title": "Broken Data & Blind Scaling",
+    "item2Desc": "Ad platforms, CRM, and actual revenue live in separate places. You end up guessing what works instead of seeing real ROI and true net profit.",
+    "item2Impact": "Wasted Marketing Capital",
+    "item3Tag": "PROCESS FRICTION",
+    "item3Title": "Manual Work & Slow Sales",
+    "item3Desc": "Leads sit untouched for hours due to manual CRM handoffs. Your team wastes time managing spreadsheets instead of closing deals.",
+    "item3Impact": "Revenue Leakage & High Overhead"
+  },
+  "expertise": {
+    "badge": "THE SOLUTION",
+    "title": "How We Fix Your Growth Engine",
+    "card1Title": "Go-To-Market & Growth Strategy",
+    "card1Desc": "Designing scalable acquisition funnels and positioning that turn market demand into predictable, high-margin revenue.",
+    "card1Pills": ["GTM Strategy", "Funnel Architecture", "Omnichannel Scale", "CAC Optimization"],
+    "card2Title": "Data & Revenue Intelligence",
+    "card2Desc": "End-to-end attribution bridging marketing spend directly with net P&L, cohort retention, and true customer LTV.",
+    "card2Pills": ["P&L Attribution", "Unit Economics", "BI Dashboards", "LTV & Cohorts"],
+    "card3Title": "CRM & AI-Powered Operations",
+    "card3Desc": "Building zero-leakage CRM workflows and AI processing to eliminate manual routines, slash overhead, and accelerate deal closure.",
+    "card3Pills": ["CRM Architecture", "AI Lead Scoring", "Process Automation", "Retention Loops"]
+  },
+  "services": {
+    "badge": "ENGAGEMENT MODELS & SERVICES",
+    "title": "How We Work Together",
+    "step1Badge": "QUICK START / 1-2 WEEKS",
+    "step1Title": "Audit & Growth Roadmap",
+    "step1Desc": "Deep-dive diagnostic of your current ad channels, CRM workflows, and unit economics. We identify traffic leakage, broken attribution, and sales bottlenecks.",
+    "step1Deliverables": ["P&L & Analytics Audit", "CRM & Pipeline Diagnostic", "Growth Bottleneck Map", "Step-by-Step Action Plan"],
+    "step1Impact": "Full clarity on lost revenue before committing capital",
+    "step2Badge": "SYSTEM BUILD / TURNKEY",
+    "step2Title": "Growth Infrastructure Build",
+    "step2Desc": "End-to-end architecture deployment: high-intent funnels, automated lead routing, zero-leakage CRM configuration, and custom P&L attribution dashboards.",
+    "step2Deliverables": ["Custom Funnel Architecture", "Instant CRM Lead Routing", "End-to-End P&L Tracking", "AI Workflow Automation"],
+    "step2Impact": "Scalable system ready for high-budget traffic expansion",
+    "step3Badge": "ONGOING / FRACTIONAL CMO",
+    "step3Title": "Growth Partner & Performance Scaling",
+    "step3Desc": "Continuous strategic direction and hands-on execution. We optimize CAC, manage ad spend, accelerate sales speed, and scale net margin month-over-month.",
+    "step3Deliverables": ["Omnichannel Traffic Mgmt", "Weekly P&L Optimization", "Funnel Conversion Tuning", "Executive Reporting"],
+    "step3Impact": "Predictable revenue growth and guaranteed system reliability"
+  },
+  "contact": {
+    "badge": "GET IN TOUCH",
+    "title": "Ready to scale your business?",
+    "desc": "Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.",
+    "callBtn": "Book a 15-Min Strategy Call",
+    "formTitle": "Request an Audit",
+    "nameLabel": "Your Name",
+    "emailLabel": "Contact Email",
+    "websiteLabel": "Website or Socials",
+    "budgetLabel": "Monthly Ad Budget",
+    "submitBtn": "Submit Audit Request"
   },
   "hms": {
     "badge": "Hospitality Growth Solutions",
-    "heroTitle": "Stop Paying 15-20% Commissions to Booking.com & Agoda"
+    "heroTitle": "Stop Paying 15-20% Commissions to Booking.com & Agoda",
+    "heroSub1": "Connect your property directly to guests\nZero risk of human error and double-bookings",
+    "heroSub2": "Keep 100% of the profit in your pocket",
+    "btnAudit": "Book a Free Audit",
+    "syncBadge": "DIRECT BOOKING SYNCHRONIZATION",
+    "otaSavedLabel": "OTA Margin Saved",
+    "statDirectRevenue": "Direct Revenue",
+    "statMarginGuest": "Margin per Guest",
+    "statGoogleTraffic": "Google Traffic",
+    "statRepeatBookings": "Repeat Bookings"
   }
 }
