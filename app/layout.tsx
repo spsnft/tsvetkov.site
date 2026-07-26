@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { CalendlyScript } from "@/src/components/CalendlyScript";
 
 export const metadata: Metadata = {
   title: "Fedor Tsvetkov — Growth Architect & Performance Marketer",
@@ -29,7 +30,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CalendlyScript />
+      </body>
     </html>
   );
 }
