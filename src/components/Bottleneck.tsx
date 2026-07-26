@@ -1,7 +1,4 @@
-'use client';
-
 import React from 'react';
-import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
 const RED_ACCENT = '#FF5555';
@@ -13,7 +10,7 @@ const bottlenecks = [
     title: 'Traffic Without Profit',
     description: (
       <>
-        Agencies report clicks and leads, but your sales team gets <strong style={{ color: '#fff', fontWeight: 600 }}>poor-quality inquiries</strong>. Ad budgets keep growing, but <strong style={{ color: '#fff', fontWeight: 600 }}>net profit stays flat</strong>
+        Agencies report clicks and leads, but your sales team gets <strong style={{ color: '#fff', fontWeight: 600 }}>poor-quality inquiries</strong>. Ad budgets keep growing, but <strong style={{ color: '#fff', fontWeight: 600 }}>net profit stays flat</strong>.
       </>
     ),
     impact: 'Uncontrolled CAC Inflation',
@@ -24,7 +21,7 @@ const bottlenecks = [
     title: 'Broken Data & Blind Scaling',
     description: (
       <>
-        Ad platforms, CRM, and actual revenue live in separate places. You end up <strong style={{ color: '#fff', fontWeight: 600 }}>guessing what works</strong> instead of seeing real ROI and true net profit
+        Ad platforms, CRM, and actual revenue live in separate places. You end up <strong style={{ color: '#fff', fontWeight: 600 }}>guessing what works</strong> instead of seeing real ROI and true net profit.
       </>
     ),
     impact: 'Wasted Marketing Capital',
@@ -35,7 +32,7 @@ const bottlenecks = [
     title: 'Manual Work & Slow Sales',
     description: (
       <>
-        Leads sit untouched for hours due to manual CRM handoffs. Your team wastes time <strong style={{ color: '#fff', fontWeight: 600 }}>managing spreadsheets</strong> instead of closing deals
+        Leads sit untouched for hours due to manual CRM handoffs. Your team wastes time <strong style={{ color: '#fff', fontWeight: 600 }}>managing spreadsheets</strong> instead of closing deals.
       </>
     ),
     impact: 'Revenue Leakage & High Overhead',
@@ -55,27 +52,28 @@ export const Bottleneck = () => (
       background: 'transparent',
     }}
   >
-    <style jsx>{`
+    <style>{`
       .bottleneck-card {
-        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
       }
       .bottleneck-card:hover {
-        border-color: rgba(255, 85, 85, 0.45) !important;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 85, 85, 0.12) !important;
-        transform: translateY(-4px);
+        border-color: rgba(255, 85, 85, 0.4) !important;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 85, 85, 0.08);
       }
       .watermark {
         position: absolute;
-        top: 12px;
-        right: 20px;
-        font-size: 5.5rem;
+        top: 10px;
+        right: 18px;
+        font-family: var(--font-space-grotesk), sans-serif;
+        font-size: 5rem;
         font-weight: 900;
         line-height: 1;
         color: rgba(255, 85, 85, 0.04);
         pointer-events: none;
         user-select: none;
         z-index: 0;
-        transition: color 0.35s ease;
+        transition: color 0.25s ease;
       }
       .bottleneck-card:hover .watermark {
         color: rgba(255, 85, 85, 0.08);
@@ -85,12 +83,7 @@ export const Bottleneck = () => (
     <div style={{ maxWidth: 1200, margin: '0 auto' }}>
       
       {/* Centered Section Header */}
-      <motion.div 
-        initial={{ opacity: 0, y: 16 }} 
-        whileInView={{ opacity: 1, y: 0 }} 
-        viewport={{ once: true }} 
-        style={{ textAlign: 'center', marginBottom: '3.5rem' }}
-      >
+      <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
         <span style={{ 
           display: 'inline-block', 
           padding: '0.35rem 0.85rem', 
@@ -110,14 +103,14 @@ export const Bottleneck = () => (
         <h2 style={{ 
           fontSize: 'clamp(2rem, 5vw, 3.2rem)', 
           fontWeight: 800, 
-          lineHeight: 1.1, 
+          lineHeight: 1.15, 
           letterSpacing: '-0.03em', 
           color: '#fff', 
           margin: 0 
         }}>
           Why your business isn't growing
         </h2>
-      </motion.div>
+      </div>
 
       {/* 3-Column Grid */}
       <div style={{ 
@@ -126,26 +119,16 @@ export const Bottleneck = () => (
         gap: '1.5rem' 
       }}>
         {bottlenecks.map((item, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="bottleneck-card"
+            className="card-matte bottleneck-card"
             style={{
               position: 'relative', 
-              overflow: 'hidden',   
-              background: 'linear-gradient(135deg, rgba(14, 14, 18, 0.75) 0%, rgba(255, 85, 85, 0.03) 100%)',
-              border: '1px solid rgba(255, 85, 85, 0.18)',
-              borderRadius: 20,
+              overflow: 'hidden',
               padding: '2rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
             }}
           >
             {/* Background Watermark Number */}
@@ -162,23 +145,22 @@ export const Bottleneck = () => (
                     letterSpacing: '0.1em', 
                     color: RED_ACCENT, 
                     textTransform: 'uppercase', 
-                    background: 'rgba(255, 85, 85, 0.1)', 
+                    background: 'rgba(255, 85, 85, 0.08)', 
                     padding: '4px 10px', 
                     borderRadius: 6, 
-                    border: '1px solid rgba(255, 85, 85, 0.25)' 
+                    border: '1px solid rgba(255, 85, 85, 0.2)' 
                   }}>
                     {item.tag}
                   </span>
                 </div>
 
                 {/* Title & Description */}
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.25 }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: '0.75rem', lineHeight: 1.3 }}>
                   {item.title}
                 </h3>
                 <p style={{ 
-                  color: T.sub, 
-                  fontSize: '0.88rem', 
-                  lineHeight: 1.55, 
+                  fontSize: '0.9rem', 
+                  lineHeight: 1.6, 
                   margin: 0, 
                   marginBottom: '2rem',
                   textWrap: 'pretty'
@@ -190,7 +172,7 @@ export const Bottleneck = () => (
               {/* Bottom Impact Indicator with Trend Icon */}
               <div style={{ 
                 paddingTop: '1rem', 
-                borderTop: '1px solid rgba(255,255,255,0.06)', 
+                borderTop: '1px solid rgba(255, 255, 255, 0.06)', 
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: '0.5rem' 
@@ -204,7 +186,7 @@ export const Bottleneck = () => (
                 </span>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
