@@ -18,7 +18,7 @@ const models = [
     description: 'End-to-end architecture deployment: high-intent funnels, automated lead routing, zero-leakage CRM configuration, and custom P&L attribution dashboards.',
     deliverables: ['Custom Funnel Architecture', 'Instant CRM Lead Routing', 'End-to-End P&L Tracking', 'AI Workflow Automation'],
     impact: 'Scalable system ready for high-budget traffic expansion',
-    color: T.accent, // #00E599
+    color: T.accent,
   },
   {
     num: '03',
@@ -32,113 +32,168 @@ const models = [
 ];
 
 export const Services = () => (
-  <section 
-    id="services" 
-    style={{ 
-      width: '100%',
-      position: 'relative',
-      paddingTop: 0,
-      paddingBottom: 'clamp(3rem, 6vw, 6rem)',
-      paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
-      paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
-      background: 'transparent',
-    }}
-  >
-    <style>{`
-      .service-card {
+  <section id="services" className="services-section">
+    <style jsx>{`
+      .services-section {
+        width: 100%;
+        position: relative;
+        padding: 1rem 0 clamp(3rem, 6vw, 6rem) 0;
+        background: transparent;
+      }
+
+      .header-box {
+        text-align: center;
+        margin-bottom: 3.5rem;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.35rem 0.85rem;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: rgba(0, 229, 153, 0.08);
+        border: 1px solid rgba(0, 229, 153, 0.25);
+        color: ${T.accent};
+      }
+
+      .title {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        color: #ffffff;
+        margin: 0;
+      }
+
+      .timeline-box {
+        position: relative;
+        padding-left: clamp(1rem, 5vw, 3.5rem);
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .track-line {
+        position: absolute;
+        left: clamp(0.4rem, 2.2vw, 1.25rem);
+        top: 1.5rem;
+        bottom: 3rem;
+        width: 2px;
+        background: linear-gradient(180deg, ${T.accent} 0%, rgba(0, 229, 153, 0.15) 90%, transparent 100%);
+        z-index: 1;
+      }
+
+      .steps-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      .step-node {
+        position: absolute;
+        left: calc(-1 * clamp(1rem, 5vw, 3.5rem) + clamp(0.4rem, 2.2vw, 1.25rem) - 13px);
+        top: 1.75rem;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #090B0E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 800;
+        z-index: 2;
+      }
+
+      .card {
+        padding: clamp(1.5rem, 3vw, 2.25rem);
         transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
       }
-      .service-card:hover {
+
+      .card:hover {
         border-color: rgba(0, 229, 153, 0.4) !important;
         transform: translateY(-3px);
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 229, 153, 0.08);
       }
+
+      .card-title {
+        font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.75rem;
+        line-height: 1.25;
+      }
+
+      .card-desc {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.72);
+        margin: 0 0 1.5rem 0;
+        max-width: 850px;
+      }
+
+      .deliverables-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.75rem;
+      }
+
+      .deliverables-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.6rem;
+      }
+
+      .deliverable-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .outcome-box {
+        background: rgba(0, 229, 153, 0.05);
+        border: 1px solid rgba(0, 229, 153, 0.2);
+        border-radius: 12px;
+        padding: 0.85rem 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
     `}</style>
 
-    <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-
-      {/* Centered Section Header */}
-      <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-        <span style={{ 
-          display: 'inline-block', 
-          padding: '0.35rem 0.85rem', 
-          borderRadius: 20, 
-          marginBottom: '1rem', 
-          fontSize: '0.7rem', 
-          fontWeight: 700, 
-          letterSpacing: '0.15em', 
-          textTransform: 'uppercase', 
-          background: 'rgba(0, 229, 153, 0.08)', 
-          border: '1px solid rgba(0, 229, 153, 0.25)', 
-          color: T.accent 
-        }}>
-          ENGAGEMENT MODELS & SERVICES
-        </span>
-        
-        <h2 style={{ 
-          fontSize: 'clamp(2rem, 5vw, 3.2rem)', 
-          fontWeight: 800, 
-          lineHeight: 1.15, 
-          letterSpacing: '-0.03em', 
-          color: '#fff', 
-          margin: 0 
-        }}>
-          How We Work Together
-        </h2>
+    <div className="container">
+      <div className="header-box">
+        <span className="badge">ENGAGEMENT MODELS & SERVICES</span>
+        <h2 className="title">How We Work Together</h2>
       </div>
 
-      {/* Vertical Timeline Container */}
-      <div style={{ position: 'relative', paddingLeft: 'clamp(1rem, 5vw, 3.5rem)' }}>
-        
-        {/* Vertical Track Line */}
-        <div
-          style={{
-            position: 'absolute',
-            left: 'clamp(0.4rem, 2.2vw, 1.25rem)',
-            top: '1.5rem',
-            bottom: '3rem',
-            width: 2,
-            background: `linear-gradient(180deg, ${T.accent} 0%, rgba(0, 229, 153, 0.15) 90%, transparent 100%)`,
-            zIndex: 1,
-          }}
-        />
+      <div className="timeline-box">
+        <div className="track-line" />
 
-        {/* Steps List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+        <div className="steps-list">
           {models.map((item, i) => (
             <div key={i} style={{ position: 'relative' }}>
-              {/* Node Point on the Vertical Line */}
-              <div
-                style={{
-                  position: 'absolute',
-                  left: 'calc(-1 * clamp(1rem, 5vw, 3.5rem) + clamp(0.4rem, 2.2vw, 1.25rem) - 13px)',
-                  top: '1.75rem',
-                  width: 28,
-                  height: 28,
-                  borderRadius: '50%',
-                  background: '#090B0E',
-                  border: `2px solid ${item.color}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '0.75rem',
-                  fontWeight: 800,
+              <div 
+                className="step-node" 
+                style={{ 
+                  border: `2px solid ${item.color}`, 
                   color: item.color,
-                  zIndex: 2,
-                  boxShadow: `0 0 12px ${item.color}30`,
+                  boxShadow: `0 0 12px ${item.color}30` 
                 }}
               >
                 {item.num}
               </div>
 
-              {/* Service Card */}
-              <div
-                className="card-matte service-card"
-                style={{
-                  padding: 'clamp(1.5rem, 3vw, 2.25rem)',
-                }}
-              >
-                {/* Top Badge */}
+              <div className="card-matte card">
                 <div style={{ marginBottom: '1rem' }}>
                   <span
                     style={{
@@ -157,104 +212,33 @@ export const Services = () => (
                   </span>
                 </div>
 
-                {/* Title & Description */}
-                <h3
-                  style={{
-                    fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)',
-                    fontWeight: 700,
-                    color: '#fff',
-                    marginBottom: '0.75rem',
-                    lineHeight: 1.25,
-                  }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: '0.9rem',
-                    lineHeight: 1.6,
-                    margin: 0,
-                    marginBottom: '1.5rem',
-                    maxWidth: '850px',
-                  }}
-                >
-                  {item.description}
-                </p>
+                <h3 className="card-title">{item.title}</h3>
+                <p className="card-desc">{item.description}</p>
 
-                {/* Key Deliverables Grid */}
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <div
-                    style={{
-                      fontSize: '0.725rem',
-                      fontWeight: 700,
-                      color: 'rgba(255, 255, 255, 0.4)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      marginBottom: '0.75rem',
-                    }}
-                  >
-                    Key Deliverables
-                  </div>
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                      gap: '0.6rem',
-                    }}
-                  >
+                <div>
+                  <div className="deliverables-label">Key Deliverables</div>
+                  <div className="deliverables-grid">
                     {item.deliverables.map((del, di) => (
-                      <div
-                        key={di}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.6rem',
-                          fontSize: '0.825rem',
-                          color: 'rgba(255, 255, 255, 0.85)',
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: 5,
-                            height: 5,
-                            borderRadius: '50%',
-                            background: item.color,
-                            flexShrink: 0,
-                          }}
-                        />
+                      <div key={di} className="deliverable-item">
+                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: item.color, flexShrink: 0 }} />
                         <span>{del}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Outcome Highlight Box */}
-                <div
-                  style={{
-                    background: 'rgba(0, 229, 153, 0.05)',
-                    border: '1px solid rgba(0, 229, 153, 0.2)',
-                    borderRadius: 12,
-                    padding: '0.85rem 1.1rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.75rem',
-                  }}
-                >
+                <div className="outcome-box">
                   <span style={{ fontSize: '1.1rem' }}>🎯</span>
-                  <div style={{ fontSize: '0.825rem', lineHeight: 1.4 }}>
-                    <strong style={{ color: T.accent, fontWeight: 700 }}>
-                      Outcome:&nbsp;
-                    </strong>
+                  <div style={{ fontSize: '0.85rem', lineHeight: 1.4 }}>
+                    <strong style={{ color: T.accent, fontWeight: 700 }}>Outcome:&nbsp;</strong>
                     <span style={{ color: '#fff', fontWeight: 600 }}>{item.impact}</span>
                   </div>
                 </div>
-
               </div>
             </div>
           ))}
         </div>
       </div>
-
     </div>
   </section>
 );
