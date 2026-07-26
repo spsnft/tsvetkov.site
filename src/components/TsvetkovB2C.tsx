@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { NetworkBackground } from '@/src/components/NetworkBackground';
 import { Nav } from '@/src/components/Nav';
@@ -11,10 +13,10 @@ import { Contact } from '@/src/components/Contact';
 export default function TsvetkovB2C() {
   return (
     <main style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
-      {/* Единый интерактивный фон */}
+      {/* Единый неубиваемый интерактивный фон на весь сайт */}
       <NetworkBackground />
 
-      {/* Контент слоями поверх фона */}
+      {/* Контент слоями скользит поверх фона */}
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Nav />
         <Hero />
