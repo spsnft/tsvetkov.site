@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "about": "About",
+    "expertise": "Expertise",
+    "services": "Services",
+    "work": "Work",
+    "hospitality": "Hospitality Tech (/hms)",
+    "letsTalk": "Let's talk"
+  },
+  "hero": {
+    "badge": "TSVETKOV • FOUNDER-LED AGENCY",
+    "titleLine1": "Value Growth",
+    "titleLine2": "Engineered to Scale",
+    "cta": "Audit My Business"
+  },
+  "hms": {
+    "badge": "Hospitality Growth Solutions",
+    "heroTitle": "Stop Paying 15-20% Commissions to Booking.com & Agoda"
+  }
+}
