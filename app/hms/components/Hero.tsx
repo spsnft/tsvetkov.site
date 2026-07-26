@@ -26,22 +26,6 @@ export default function Hero({ t }: HeroProps) {
   useEffect(() => {
     setIsMounted(true);
 
-    if (!document.getElementById('calendly-w-css-hero')) {
-      const link = document.createElement('link');
-      link.id = 'calendly-w-css-hero';
-      link.href = 'https://assets.calendly.com/assets/external/widget.css';
-      link.rel = 'stylesheet';
-      document.head.appendChild(link);
-    }
-
-    if (!document.getElementById('calendly-w-js-hero')) {
-      const script = document.createElement('script');
-      script.id = 'calendly-w-js-hero';
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      document.head.appendChild(script);
-    }
-
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 3) + 1);
       setIsTicking(true);
@@ -55,10 +39,8 @@ export default function Hero({ t }: HeroProps) {
 
   const handleCalendlyPopup = (e: React.MouseEvent) => {
     e.preventDefault();
-    // @ts-ignore
-    if (window.Calendly) {
-      // @ts-ignore
-      window.Calendly.initPopupWidget({ url: 'https://calendly.com/fediatsvetkov/15min' });
+    if (typeof window !== 'undefined' && (window as any).Calendly) {
+      (window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/fediatsvetkov/15min' });
     } else {
       window.open('https://calendly.com/fediatsvetkov/15min', '_blank');
     }
@@ -219,7 +201,6 @@ export default function Hero({ t }: HeroProps) {
           transform: scale(1.08);
         }
 
-        /* --- BENTO PROOF CARD VISUAL --- */
         .visual-column {
           position: relative;
           width: 100%;
