@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { T } from '../../../src/theme/tokens';
 
 interface FooterCTAProps {
@@ -21,30 +21,11 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
   const sub2Text = t.footerSub2 || "Take full control of your direct bookings";
   const btnText = t.footerBtn || t.btnAudit || "Book a Free Audit";
 
-  useEffect(() => {
-    if (!document.getElementById('calendly-w-css')) {
-      const link = document.createElement('link');
-      link.id = 'calendly-w-css';
-      link.href = 'https://assets.calendly.com/assets/external/widget.css';
-      link.rel = 'stylesheet';
-      document.head.appendChild(link);
-    }
-
-    if (!document.getElementById('calendly-w-js')) {
-      const script = document.createElement('script');
-      script.id = 'calendly-w-js';
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      document.head.appendChild(script);
-    }
-  }, []);
-
   const handleCalendlyPopup = (e: React.MouseEvent) => {
     e.preventDefault();
     
-    const calendly = (window as any).Calendly;
-    if (calendly) {
-      calendly.initPopupWidget({
+    if (typeof window !== 'undefined' && (window as any).Calendly) {
+      (window as any).Calendly.initPopupWidget({
         url: 'https://calendly.com/fediatsvetkov/15min'
       });
     } else {
@@ -57,7 +38,6 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
       <style jsx>{`
         .footer-cta-section {
           width: 100%;
-          /* Верх: 0 | Низ: 112px (7rem) воздуха до подвала */
           padding: 0 0 7rem 0;
           text-align: center;
           position: relative;
