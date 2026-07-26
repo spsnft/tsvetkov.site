@@ -7,8 +7,6 @@ const dictionaries: Record<Language, () => Promise<Dictionary>> = {
 };
 
 export const getDictionary = async (lang: Language): Promise<Dictionary> => {
-  if (!dictionaries[lang]) {
-    return dictionaries.en(); // fallback на английский
-  }
-  return dictionaries[lang]();
+  const loadDictionary = dictionaries[lang] || dictionaries.en;
+  return loadDictionary();
 };
