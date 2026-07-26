@@ -1,6 +1,26 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { T } from '@/src/theme/tokens';
-import { HeroEngine } from './HeroEngine';
+
+// Динамический импорт 3D-движка
+const HeroEngine = dynamic(
+  () => import('./HeroEngine').then((mod) => mod.HeroEngine),
+  { 
+    ssr: false,
+    loading: () => (
+      <div 
+        style={{ 
+          width: '100%', 
+          maxWidth: 440, 
+          height: 380, 
+          borderRadius: 18, 
+          background: 'rgba(255, 255, 255, 0.02)',
+          border: '1px solid rgba(255, 255, 255, 0.05)'
+        }} 
+      />
+    )
+  }
+);
 
 export const Hero = () => {
   return (
@@ -83,7 +103,7 @@ export const Hero = () => {
           zIndex: 4,
         }}
       >
-        {/* ЛЕВАЯ КОЛОНКА: Оффер */}
+        {/* ЛЕВАЯ КОЛОНКА */}
         <div>
           <div style={{ marginBottom: '1.25rem' }}>
             <span
@@ -158,7 +178,7 @@ export const Hero = () => {
           </a>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА: Интерактивный 3D-движок */}
+        {/* ПРАВАЯ КОЛОНКА */}
         <HeroEngine />
       </div>
     </section>
