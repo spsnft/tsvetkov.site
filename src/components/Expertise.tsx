@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import Image from 'next/image';
 
 const CYAN_ACCENT = '#00A3FF';
 
@@ -102,8 +105,10 @@ export const Expertise = () => {
           background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
         }
 
-        .asset-img {
+        :global(.asset-img) {
           max-height: 100%;
+          width: auto !important;
+          height: auto !important;
           object-fit: contain;
           position: relative;
           z-index: 1;
@@ -160,7 +165,13 @@ export const Expertise = () => {
           <div className="card-matte card-half">
             <div className="asset-slot">
               <div className="asset-glow cyan" />
-              <img src="/assets/3d-gtm-prism.png" alt="GTM Strategy Visual" className="asset-img" />
+              <Image 
+                src="/assets/3d-gtm-prism.png" 
+                alt="GTM Strategy Visual" 
+                className="asset-img"
+                width={200}
+                height={180}
+              />
             </div>
 
             <div>
@@ -181,7 +192,13 @@ export const Expertise = () => {
           <div className="card-matte card-half">
             <div className="asset-slot">
               <div className="asset-glow green" />
-              <img src="/assets/3d-data-cube.png" alt="Data Intelligence Visual" className="asset-img" />
+              <Image 
+                src="/assets/3d-data-cube.png" 
+                alt="Data Intelligence Visual" 
+                className="asset-img"
+                width={200}
+                height={180}
+              />
             </div>
 
             <div>
@@ -216,7 +233,13 @@ export const Expertise = () => {
 
               <div className="asset-slot" style={{ height: 160 }}>
                 <div className="asset-glow cyan" style={{ width: 200, height: 100 }} />
-                <img src="/assets/3d-ai-loop.png" alt="CRM AI Automation Visual" className="asset-img" />
+                <Image 
+                  src="/assets/3d-ai-loop.png" 
+                  alt="CRM AI Automation Visual" 
+                  className="asset-img"
+                  width={220}
+                  height={160}
+                />
               </div>
             </div>
           </div>
