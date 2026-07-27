@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { T } from '@/src/theme/tokens';
+import { onCalendlyReady } from '@/src/components/CalendlyScript';
 
 const ACCENT = '#00E599';
 
@@ -25,6 +26,7 @@ interface ContactProps {
 export const Contact = ({ dict }: ContactProps) => {
   const [form, setForm] = useState({ name: '', contact: '', website: '', budget: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [calendlyReady, setCalendlyReady] = useState(false);
 
   const t = dict?.contact ?? {
     badge: 'GET IN TOUCH',
@@ -38,6 +40,10 @@ export const Contact = ({ dict }: ContactProps) => {
     budgetLabel: 'Monthly Ad Budget',
     submitBtn: 'Submit Audit Request',
   };
+
+  useEffect(() => {
+    onCalendlyReady(() => setCalendlyReady(true));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,8 +73,6 @@ export const Contact = ({ dict }: ContactProps) => {
       (window as any).Calendly.initPopupWidget({
         url: 'https://calendly.com/fediatsvetkov/15min'
       });
-    } else {
-      window.open('https://calendly.com/fediatsvetkov/15min', '_blank');
     }
   };
 
@@ -222,9 +226,15 @@ export const Contact = ({ dict }: ContactProps) => {
                 type="button"
                 onClick={handleCalendlyPopup}
                 className="contact-link-card"
-                style={{ borderColor: 'rgba(0, 229, 153, 0.3)', background: 'rgba(0, 229, 153, 0.05)' }}
+                disabled={!calendlyReady}
+                style={{ 
+                  borderColor: 'rgba(0, 229, 153, 0.3)', 
+                  background: 'rgba(0, 229, 153, 0.05)',
+                  opacity: calendlyReady ? 1 : 0.6,
+                  cursor: calendlyReady ? 'pointer' : 'not-allowed',
+                }}
               >
-                <span>{t.callBtn}</span>
+                <span>{calendlyReady ? t.callBtn : "Loading…"}</span>
                 <span style={{ color: ACCENT }}>→</span>
               </button>
 
