@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { onCalendlyReady } from '@/src/components/CalendlyScript';
 
 interface HeroProps {
   t: {
@@ -22,9 +23,13 @@ export default function Hero({ t }: HeroProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [liveAmount, setLiveAmount] = useState(4850);
   const [isTicking, setIsTicking] = useState(false);
+  const [calendlyReady, setCalendlyReady] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+
+    // Регистрируем колбэк — когда Calendly загрузится, кнопка станет активной
+    onCalendlyReady(() => setCalendlyReady(true));
 
     const interval = setInterval(() => {
       setLiveAmount(prev => prev + Math.floor(Math.random() * 3) + 1);
@@ -41,9 +46,8 @@ export default function Hero({ t }: HeroProps) {
     e.preventDefault();
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/fediatsvetkov/15min' });
-    } else {
-      window.open('https://calendly.com/fediatsvetkov/15min', '_blank');
     }
+    // Нет fallback'а — если Calendly не загрузился, кнопка будет disabled и ничего не произойдёт
   };
 
   const formatCurrency = (num: number) => {
@@ -406,8 +410,13 @@ export default function Hero({ t }: HeroProps) {
             </div>
             
             <div className="cta-container">
-              <button onClick={handleCalendlyPopup} className="btn-premium-core">
-                {t.btnAudit || "Book a Free Audit"}
+              <button 
+                onClick={handleCalendlyPopup} 
+                className="btn-premium-core"
+                disabled={!calendlyReady}
+                style={{ opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady ? 'pointer' : 'not-allowed' }}
+              >
+                {calendlyReady ? (t.btnAudit || "Book a Free Audit") : "Loading…"}
               </button>
               
               <a 
