@@ -5,7 +5,49 @@ import Image from 'next/image';
 
 const CYAN_ACCENT = '#00A3FF';
 
-export const Expertise = () => {
+interface ExpertiseProps {
+  dict: {
+    expertise: {
+      badge: string;
+      title: string;
+      card1Title: string;
+      card1Desc: string;
+      card1Pills: string[];
+      card2Title: string;
+      card2Desc: string;
+      card2Pills: string[];
+      card3Title: string;
+      card3Desc: string;
+      card3Pills: string[];
+    };
+  } | null;
+}
+
+export const Expertise = ({ dict }: ExpertiseProps) => {
+  const t = dict?.expertise ?? {
+    badge: 'THE SOLUTION',
+    title: 'How We Fix Your Growth Engine',
+    card1Title: 'Go-To-Market & Growth Strategy',
+    card1Desc: 'Designing scalable acquisition funnels and positioning that turn market demand into <strong>predictable, high-margin revenue</strong>.',
+    card1Pills: ['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'],
+    card2Title: 'Data & Revenue Intelligence',
+    card2Desc: 'End-to-end attribution bridging marketing spend directly with <strong>net P&L, cohort retention, and true customer LTV</strong>.',
+    card2Pills: ['P&L Attribution', 'Unit Economics', 'BI Dashboards', 'LTV & Cohorts'],
+    card3Title: 'CRM & AI-Powered Operations',
+    card3Desc: 'Building zero-leakage CRM workflows and AI processing to <strong>eliminate manual routines, slash overhead, and accelerate deal closure</strong>.',
+    card3Pills: ['CRM Architecture', 'AI Lead Scoring', 'Process Automation', 'Retention Loops'],
+  };
+
+  const renderWithStrong = (text: string) => {
+    const parts = text.split(/<strong>(.*?)<\/strong>/g);
+    return parts.map((part, i) => {
+      if (i % 2 === 1) {
+        return <strong key={i} style={{ color: '#fff' }}>{part}</strong>;
+      }
+      return part;
+    });
+  };
+
   return (
     <section id="expertise" className="expertise-section">
       <style jsx>{`
@@ -156,8 +198,8 @@ export const Expertise = () => {
 
       <div className="container">
         <div className="header-box">
-          <span className="badge">THE SOLUTION</span>
-          <h2 className="title">How We Fix Your Growth Engine</h2>
+          <span className="badge">{t.badge}</span>
+          <h2 className="title">{t.title}</h2>
         </div>
 
         <div className="bento-grid">
@@ -175,14 +217,14 @@ export const Expertise = () => {
             </div>
 
             <div>
-              <h3 className="card-title">Go-To-Market & Growth Strategy</h3>
+              <h3 className="card-title">{t.card1Title}</h3>
               <p className="card-desc">
-                Designing scalable acquisition funnels and positioning that turn market demand into <strong style={{ color: '#fff' }}>predictable, high-margin revenue</strong>.
+                {renderWithStrong(t.card1Desc)}
               </p>
             </div>
 
             <div className="pills-container">
-              {['GTM Strategy', 'Funnel Architecture', 'Omnichannel Scale', 'CAC Optimization'].map((pill, i) => (
+              {t.card1Pills.map((pill, i) => (
                 <span key={i} className="pill">• {pill}</span>
               ))}
             </div>
@@ -202,14 +244,14 @@ export const Expertise = () => {
             </div>
 
             <div>
-              <h3 className="card-title">Data & Revenue Intelligence</h3>
+              <h3 className="card-title">{t.card2Title}</h3>
               <p className="card-desc">
-                End-to-end attribution bridging marketing spend directly with <strong style={{ color: '#fff' }}>net P&L, cohort retention, and true customer LTV</strong>.
+                {renderWithStrong(t.card2Desc)}
               </p>
             </div>
 
             <div className="pills-container">
-              {['P&L Attribution', 'Unit Economics', 'BI Dashboards', 'LTV & Cohorts'].map((pill, i) => (
+              {t.card2Pills.map((pill, i) => (
                 <span key={i} className="pill">• {pill}</span>
               ))}
             </div>
@@ -219,13 +261,13 @@ export const Expertise = () => {
           <div className="card-matte card-full">
             <div className="full-card-inner">
               <div>
-                <h3 className="card-title">CRM & AI-Powered Operations</h3>
+                <h3 className="card-title">{t.card3Title}</h3>
                 <p className="card-desc">
-                  Building zero-leakage CRM workflows and AI processing to <strong style={{ color: '#fff' }}>eliminate manual routines, slash overhead, and accelerate deal closure</strong>.
+                  {renderWithStrong(t.card3Desc)}
                 </p>
 
                 <div className="pills-container">
-                  {['CRM Architecture', 'AI Lead Scoring', 'Process Automation', 'Retention Loops'].map((pill, i) => (
+                  {t.card3Pills.map((pill, i) => (
                     <span key={i} className="pill">• {pill}</span>
                   ))}
                 </div>
