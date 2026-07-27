@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-// Убедись, что путь к globals.css правильный (возможно придется поменять на "../../globals.css")
 import "../globals.css"; 
 import { CalendlyScript } from "@/src/components/CalendlyScript";
 
-// Динамическая генерация SEO в зависимости от языка
-export async function generateMetadata({ 
-  params: { lang } 
-}: { 
-  params: { lang: string } 
-}): Promise<Metadata> {
+type LayoutProps = {
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+};
+
+export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
+  // Await the params promise
+  const { lang } = await params;
   
-  // В идеале эти данные тоже берутся из JSON, но пока зашьем базовые для примера
   const meta = {
     en: {
       title: "Fedor Tsvetkov — Growth Architect & Performance Marketer",
@@ -42,13 +42,10 @@ export async function generateMetadata({
   };
 }
 
-export default function RootLayout({
-  children,
-  params: { lang }
-}: Readonly<{ 
-  children: React.ReactNode;
-  params: { lang: string };
-}>) {
+export default async function RootLayout({ children, params }: LayoutProps) {
+  // Await the params promise before using lang
+  const { lang } = await params;
+
   return (
     <html lang={lang}>
       <head>
