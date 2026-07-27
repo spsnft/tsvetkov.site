@@ -11,9 +11,9 @@
     "badge": "TSVETKOV • FOUNDER-LED AGENCY",
     "titleLine1": "Value Growth",
     "titleLine2": "Engineered to Scale",
-    "sub1": "We eliminate chaos in marketing and digital systems",
-    "sub2": "No fluff — just high-performance architectures",
-    "sub3": "Track every dollar and automate sales flow",
+    "sub1": "We eliminate chaos in <strong>marketing and digital systems</strong>",
+    "sub2": "No fluff — just <strong>high-performance architectures</strong>",
+    "sub3": "Track every dollar and <strong>automate sales flow</strong>",
     "cta": "Audit My Business"
   },
   "bottleneck": {
@@ -60,13 +60,13 @@
     "badge": "THE SOLUTION",
     "title": "How We Fix Your Growth Engine",
     "card1Title": "Go-To-Market & Growth Strategy",
-    "card1Desc": "Designing scalable acquisition funnels and positioning that turn market demand into predictable, high-margin revenue.",
+    "card1Desc": "Designing scalable acquisition funnels and positioning that turn market demand into <strong>predictable, high-margin revenue</strong>.",
     "card1Pills": ["GTM Strategy", "Funnel Architecture", "Omnichannel Scale", "CAC Optimization"],
     "card2Title": "Data & Revenue Intelligence",
-    "card2Desc": "End-to-end attribution bridging marketing spend directly with net P&L, cohort retention, and true customer LTV.",
+    "card2Desc": "End-to-end attribution bridging marketing spend directly with <strong>net P&L, cohort retention, and true customer LTV</strong>.",
     "card2Pills": ["P&L Attribution", "Unit Economics", "BI Dashboards", "LTV & Cohorts"],
     "card3Title": "CRM & AI-Powered Operations",
-    "card3Desc": "Building zero-leakage CRM workflows and AI processing to eliminate manual routines, slash overhead, and accelerate deal closure.",
+    "card3Desc": "Building zero-leakage CRM workflows and AI processing to <strong>eliminate manual routines, slash overhead, and accelerate deal closure</strong>.",
     "card3Pills": ["CRM Architecture", "AI Lead Scoring", "Process Automation", "Retention Loops"]
   },
   "services": {
