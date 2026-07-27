@@ -2,12 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 import { Logo } from '@/src/ui/Logo';
 
-export const Nav = () => {
+interface NavProps {
+  lang: string;
+}
+
+export const Nav = ({ lang }: NavProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -23,6 +31,14 @@ export const Nav = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  // Функция для переключения языка с сохранением текущего пути
+  const switchLang = (newLang: string) => {
+    if (!pathname) return;
+    const segments = pathname.split('/');
+    segments[1] = newLang; // Заменяем /en на /ru или /th
+    router.push(segments.join('/'));
+  };
 
   return (
     <motion.nav
@@ -40,19 +56,18 @@ export const Nav = () => {
         transition: 'background .3s, border-color .3s',
       }}
     >
-      <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+      <a href={`/${lang}`} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         <Logo />
       </a>
 
       {!isMobile && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <a href="#expertise" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Expertise</a>
-          <a href="#services" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Services</a>
-          <a href="#work" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Work</a>
+          <a href={`/${lang}#expertise`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Expertise</a>
+          <a href={`/${lang}#services`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Services</a>
+          <a href={`/${lang}#work`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Work</a>
           
-          {/* КАПСУЛА-ССЫЛКА НА HMS В СТИЛЕ ЛЕНДИНГА */}
           <a 
-            href="/hms" 
+            href={`/${lang}/hms`} 
             style={{ 
               display: 'inline-flex', 
               alignItems: 'center', 
@@ -80,24 +95,50 @@ export const Nav = () => {
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} />
-            Hospitality Tech (/hms)
+            Hospitality Tech (/{lang}/hms)
           </a>
         </div>
       )}
 
-      <motion.a
-        href="#contact"
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.96 }}
-        style={{
-          padding: '9px 18px', borderRadius: 10,
-          background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
-          color: '#0A0A0C', fontWeight: 800, fontSize: '0.82rem', textDecoration: 'none',
-          boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)'
-        }}
-      >
-        Let&apos;s talk
-      </motion.a>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        {/* ЛАКОНИЧНЫЙ ЯЗЫКОВОЙ ПЕРЕКЛЮЧАТЕЛЬ */}
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {['en', 'ru', 'th'].map((l) => (
+            <button
+              key={l}
+              onClick={() => switchLang(l)}
+              style={{
+                background: 'none', 
+                border: 'none', 
+                cursor: 'pointer',
+                padding: 0,
+                color: lang === l ? T.accent : T.sub,
+                fontWeight: lang === l ? 700 : 500,
+                fontSize: '0.75rem', 
+                textTransform: 'uppercase',
+                transition: 'color 0.2s',
+                opacity: lang === l ? 1 : 0.6
+              }}
+            >
+              {l}
+            </button>
+          ))}
+        </div>
+
+        <motion.a
+          href={`/${lang}#contact`}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          style={{
+            padding: '9px 18px', borderRadius: 10,
+            background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
+            color: '#0A0A0C', fontWeight: 800, fontSize: '0.82rem', textDecoration: 'none',
+            boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)'
+          }}
+        >
+          Let&apos;s talk
+        </motion.a>
+      </div>
     </motion.nav>
   );
 };
