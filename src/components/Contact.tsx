@@ -1,9 +1,47 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import { T } from '@/src/theme/tokens';
 
 const ACCENT = '#00E599';
 
 export const Contact = () => {
+  const [form, setForm] = useState({ name: '', contact: '', website: '', budget: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || `Error ${res.status}`);
+      }
+
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  const handleCalendlyPopup = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window !== 'undefined' && (window as any).Calendly) {
+      (window as any).Calendly.initPopupWidget({
+        url: 'https://calendly.com/fediatsvetkov/15min'
+      });
+    } else {
+      window.open('https://calendly.com/fediatsvetkov/15min', '_blank');
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -52,6 +90,10 @@ export const Contact = () => {
           background: #00c785;
           transform: translateY(-1px);
         }
+        .btn-submit:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
         .contact-link-card {
           display: flex;
           align-items: center;
@@ -65,10 +107,41 @@ export const Contact = () => {
           font-size: 0.9rem;
           font-weight: 600;
           transition: all 0.2s ease;
+          cursor: pointer;
         }
         .contact-link-card:hover {
           border-color: rgba(0, 229, 153, 0.4);
           background: rgba(0, 229, 153, 0.04);
+        }
+        .success-message {
+          text-align: center;
+          padding: 2rem;
+        }
+        .success-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: rgba(0, 229, 153, 0.08);
+          border: 1px solid ${ACCENT};
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 1.5rem;
+        }
+        .error-message {
+          text-align: center;
+          padding: 2rem;
+        }
+        .error-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: rgba(239, 68, 68, 0.08);
+          border: 1px solid #EF4444;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 1.5rem;
         }
       `}</style>
 
@@ -115,12 +188,17 @@ export const Contact = () => {
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxWidth: '400px' }}>
-              <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="contact-link-card" style={{ borderColor: 'rgba(0, 229, 153, 0.3)', background: 'rgba(0, 229, 153, 0.05)' }}>
+              <button
+                type="button"
+                onClick={handleCalendlyPopup}
+                className="contact-link-card"
+                style={{ borderColor: 'rgba(0, 229, 153, 0.3)', background: 'rgba(0, 229, 153, 0.05)' }}
+              >
                 <span>Book a 15-Min Strategy Call</span>
                 <span style={{ color: ACCENT }}>→</span>
-              </a>
+              </button>
 
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="contact-link-card">
+              <a href="https://linkedin.com/in/tsvetkov-marketing/" target="_blank" rel="noopener noreferrer" className="contact-link-card">
                 <span>Connect on LinkedIn</span>
                 <span style={{ color: T.sub }}>in</span>
               </a>
@@ -138,44 +216,108 @@ export const Contact = () => {
               Request an Audit
             </h3>
 
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                  Your Name
-                </label>
-                <input type="text" placeholder="John Doe" className="contact-input" required />
+            {status === 'success' ? (
+              <div className="success-message">
+                <div className="success-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem' }}>Request Submitted.</h3>
+                <p style={{ fontSize: '0.9rem', lineHeight: 1.5, margin: 0, color: T.sub }}>We will get back to you within 24 hours.</p>
               </div>
-
-              <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                  Contact Email
-                </label>
-                <input type="email" placeholder="john@company.com" className="contact-input" required />
+            ) : status === 'error' ? (
+              <div className="error-message">
+                <div className="error-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem' }}>Submission Failed.</h3>
+                <p style={{ fontSize: '0.9rem', lineHeight: 1.5, margin: '0 0 1.5rem', color: T.sub }}>There was an error sending your request.</p>
+                <button
+                  type="button"
+                  onClick={() => setStatus('idle')}
+                  className="btn-submit"
+                >
+                  Try Again
+                </button>
               </div>
+            ) : (
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div>
+                  <label htmlFor="audit-name" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                    Your Name
+                  </label>
+                  <input
+                    id="audit-name"
+                    type="text"
+                    placeholder="John Doe"
+                    className="contact-input"
+                    required
+                    value={form.name}
+                    onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
+                  />
+                </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                  Website or Socials
-                </label>
-                <input type="text" placeholder="company.com or @company" className="contact-input" />
-              </div>
+                <div>
+                  <label htmlFor="audit-email" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                    Contact Email
+                  </label>
+                  <input
+                    id="audit-email"
+                    type="email"
+                    placeholder="john@company.com"
+                    className="contact-input"
+                    required
+                    value={form.contact}
+                    onChange={e => setForm(p => ({ ...p, contact: e.target.value }))}
+                  />
+                </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                  Monthly Ad Budget
-                </label>
-                <select className="contact-input" style={{ color: '#fff' }}>
-                  <option value="" style={{ background: '#090B0E' }}>Select your budget range</option>
-                  <option value="5k-10k" style={{ background: '#090B0E' }}>$5,000 – $10,000</option>
-                  <option value="10k-50k" style={{ background: '#090B0E' }}>$10,000 – $50,000</option>
-                  <option value="50k+" style={{ background: '#090B0E' }}>$50,000+</option>
-                </select>
-              </div>
+                <div>
+                  <label htmlFor="audit-website" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                    Website or Socials
+                  </label>
+                  <input
+                    id="audit-website"
+                    type="text"
+                    placeholder="company.com or @company"
+                    className="contact-input"
+                    value={form.website}
+                    onChange={e => setForm(p => ({ ...p, website: e.target.value }))}
+                  />
+                </div>
 
-              <button type="submit" className="btn-submit" style={{ marginTop: '0.5rem' }}>
-                Submit Audit Request
-              </button>
-            </form>
+                <div>
+                  <label htmlFor="audit-budget" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                    Monthly Ad Budget
+                  </label>
+                  <select
+                    id="audit-budget"
+                    className="contact-input"
+                    style={{ color: '#fff' }}
+                    value={form.budget}
+                    onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
+                  >
+                    <option value="" style={{ background: '#090B0E' }}>Select your budget range</option>
+                    <option value="5k-10k" style={{ background: '#090B0E' }}>$5,000 – $10,000</option>
+                    <option value="10k-50k" style={{ background: '#090B0E' }}>$10,000 – $50,000</option>
+                    <option value="50k+" style={{ background: '#090B0E' }}>$50,000+</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="btn-submit"
+                  style={{ marginTop: '0.5rem' }}
+                >
+                  {status === 'sending' ? 'Sending…' : 'Submit Audit Request'}
+                </button>
+              </form>
+            )}
           </div>
 
         </div>
