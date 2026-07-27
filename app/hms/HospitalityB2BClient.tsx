@@ -39,10 +39,10 @@ export default function HospitalityB2BClient({ lang }: { lang: 'en' | 'th' }) {
         backgroundColor: 'rgba(10, 10, 12, 0.7)' 
       }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1rem', paddingBottom: '1rem' }}>
-          <a href="/" style={{ textDecoration: 'none' }}><Logo /></a>
+          <Link href="/" style={{ textDecoration: 'none' }}><Logo /></Link>
           
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <a href="/" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>About</a>
+            <Link href="/" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>About</Link>
             
             {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ В СТИЛЕ DARK GLASS CAPSULE (NEXT.JS ROUTER) */}
             <div style={{ 
