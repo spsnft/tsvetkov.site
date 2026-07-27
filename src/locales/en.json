@@ -19,18 +19,42 @@
   "bottleneck": {
     "badge": "SCALING BARRIERS",
     "title": "Why your business isn't growing",
-    "item1Tag": "EMPTY TRAFFIC",
-    "item1Title": "Traffic Without Profit",
-    "item1Desc": "Agencies report clicks and leads, but your sales team gets poor-quality inquiries. Ad budgets keep growing, but net profit stays flat.",
-    "item1Impact": "Uncontrolled CAC Inflation",
-    "item2Tag": "UNRELIABLE TRACKING",
-    "item2Title": "Broken Data & Blind Scaling",
-    "item2Desc": "Ad platforms, CRM, and actual revenue live in separate places. You end up guessing what works instead of seeing real ROI and true net profit.",
-    "item2Impact": "Wasted Marketing Capital",
-    "item3Tag": "PROCESS FRICTION",
-    "item3Title": "Manual Work & Slow Sales",
-    "item3Desc": "Leads sit untouched for hours due to manual CRM handoffs. Your team wastes time managing spreadsheets instead of closing deals.",
-    "item3Impact": "Revenue Leakage & High Overhead"
+    "impactLabel": "Impact:",
+    "items": [
+      {
+        "num": "01",
+        "tag": "EMPTY TRAFFIC",
+        "title": "Traffic Without Profit",
+        "descStart": "Agencies report clicks and leads, but your sales team gets ",
+        "descHighlight1": "poor-quality inquiries",
+        "descMiddle": ". Ad budgets keep growing, but ",
+        "descHighlight2": "net profit stays flat",
+        "descEnd": ".",
+        "impact": "Uncontrolled CAC Inflation"
+      },
+      {
+        "num": "02",
+        "tag": "UNRELIABLE TRACKING",
+        "title": "Broken Data & Blind Scaling",
+        "descStart": "Ad platforms, CRM, and actual revenue live in ",
+        "descHighlight1": "separate places",
+        "descMiddle": ". You end up guessing what works instead of seeing ",
+        "descHighlight2": "real ROI and true net profit",
+        "descEnd": ".",
+        "impact": "Wasted Marketing Capital"
+      },
+      {
+        "num": "03",
+        "tag": "PROCESS FRICTION",
+        "title": "Manual Work & Slow Sales",
+        "descStart": "Leads sit untouched for hours due to ",
+        "descHighlight1": "manual CRM handoffs",
+        "descMiddle": ". Your team wastes time managing spreadsheets instead of ",
+        "descHighlight2": "closing deals",
+        "descEnd": ".",
+        "impact": "Revenue Leakage & High Overhead"
+      }
+    ]
   },
   "expertise": {
     "badge": "THE SOLUTION",
