@@ -94,7 +94,7 @@ export default function LogoMarquee() {
               src={src} 
               alt="OTA Logo" 
               className="marquee-img"
-              loading="lazy"
+              fetchPriority="low"
             />
           </div>
         ))}
