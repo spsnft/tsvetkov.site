@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { getDictionary } from '@/src/locales/getDictionary';
+import { useDictionary } from '@/src/locales/getDictionary';
 
 const RED_ACCENT = '#FF5555';
 
@@ -8,7 +10,27 @@ type BottleneckProps = {
 };
 
 export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
-  const dict = getDictionary(lang);
+  const dict = useDictionary(lang);
+
+  // Пока словарь грузится — рендерим скелетон той же высоты, чтобы не было скачков
+  if (!dict) {
+    return (
+      <section className="bottleneck-section" style={{ width: '100%', position: 'relative', padding: '1rem 0 clamp(3rem, 6vw, 6rem) 0', background: 'transparent' }}>
+        <div className="container">
+          <div className="header-box" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+            <span className="badge" style={{ display: 'inline-block', padding: '0.35rem 0.85rem', borderRadius: 20, marginBottom: '1rem', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', background: 'rgba(255, 85, 85, 0.08)', border: '1px solid rgba(255, 85, 85, 0.25)', color: RED_ACCENT }}>&nbsp;</span>
+            <h2 className="title" style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 800, lineHeight: 1.15, letterSpacing: '-0.03em', color: '#ffffff', margin: 0 }}>&nbsp;</h2>
+          </div>
+          <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            {[1, 2, 3].map(i => (
+              <div key={i} className="card-matte" style={{ height: 320, borderRadius: 16, border: '1px solid rgba(255,255,255,0.06)', background: '#121214' }} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   const t = dict.bottleneck;
 
   return (
@@ -160,7 +182,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         </div>
 
         <div className="grid">
-          {t.items.map((item, i) => (
+          {t.items.map((item: any, i: number) => (
             <div key={i} className="card-matte card">
               <div className="watermark">{item.num}</div>
 
