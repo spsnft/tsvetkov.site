@@ -8,14 +8,33 @@ import { Logo } from '@/src/ui/Logo';
 
 interface NavProps {
   lang: string;
+  dict: {
+    nav: {
+      expertise: string;
+      services: string;
+      work: string;
+      hospitality: string;
+      about: string;
+      letsTalk: string;
+    };
+  } | null;
 }
 
-export const Nav = ({ lang }: NavProps) => {
+export const Nav = ({ lang, dict }: NavProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
   const pathname = usePathname();
   const router = useRouter();
+
+  const t = dict?.nav ?? {
+    expertise: 'Expertise',
+    services: 'Services',
+    work: 'Work',
+    hospitality: 'Hospitality Tech',
+    about: 'About',
+    letsTalk: "Let's talk",
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -62,9 +81,9 @@ export const Nav = ({ lang }: NavProps) => {
 
       {!isMobile && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <a href={`/${lang}#expertise`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Expertise</a>
-          <a href={`/${lang}#services`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Services</a>
-          <a href={`/${lang}#work`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>Work</a>
+          <a href={`/${lang}#expertise`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.expertise}</a>
+          <a href={`/${lang}#services`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.services}</a>
+          <a href={`/${lang}#work`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.work}</a>
           
           <a 
             href={`/${lang}/hms`} 
@@ -95,7 +114,7 @@ export const Nav = ({ lang }: NavProps) => {
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.accent, boxShadow: `0 0 8px ${T.accent}` }} />
-            Hospitality Tech (/{lang}/hms)
+            {t.hospitality} (/{lang}/hms)
           </a>
         </div>
       )}
@@ -136,7 +155,7 @@ export const Nav = ({ lang }: NavProps) => {
             boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)'
           }}
         >
-          Let&apos;s talk
+          {t.letsTalk}
         </motion.a>
       </div>
     </motion.nav>
