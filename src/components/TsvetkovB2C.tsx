@@ -34,7 +34,7 @@ export default function TsvetkovB2C({ lang }: TsvetkovB2CProps) {
         <Bottleneck lang={lang} />
         <Expertise dict={dict} />
         <Services dict={dict} />
-        <CaseStudies dict={dict} />
+        <CaseStudies />
         <Contact dict={dict} />
       </div>
     </main>
