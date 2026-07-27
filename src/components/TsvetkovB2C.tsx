@@ -16,19 +16,24 @@ const NetworkBackground = dynamic(
   { ssr: false }
 );
 
-export default function TsvetkovB2C() {
+interface TsvetkovB2CProps {
+  lang: string;
+}
+
+export default function TsvetkovB2C({ lang }: TsvetkovB2CProps) {
   return (
     <main style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
       <NetworkBackground />
 
       <div style={{ position: 'relative', zIndex: 10 }}>
-        <Nav />
-        <Hero />
-        <Bottleneck />
-        <Expertise />
-        <Services />
-        <CaseStudies />
-        <Contact />
+        {/* Прокидываем язык во все секции сайта */}
+        <Nav lang={lang} />
+        <Hero lang={lang} />
+        <Bottleneck lang={lang} />
+        <Expertise lang={lang} />
+        <Services lang={lang} />
+        <CaseStudies lang={lang} />
+        <Contact lang={lang} />
       </div>
     </main>
   );
