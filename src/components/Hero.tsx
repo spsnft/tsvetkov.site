@@ -22,7 +22,42 @@ const HeroEngine = dynamic(
   }
 );
 
-export const Hero = () => {
+interface HeroProps {
+  dict: {
+    hero: {
+      badge: string;
+      titleLine1: string;
+      titleLine2: string;
+      sub1: string;
+      sub2: string;
+      sub3: string;
+      cta: string;
+    };
+  } | null;
+}
+
+export const Hero = ({ dict }: HeroProps) => {
+  const t = dict?.hero ?? {
+    badge: 'TSVETKOV • FOUNDER-LED AGENCY',
+    titleLine1: 'Value Growth',
+    titleLine2: 'Engineered to Scale',
+    sub1: 'We eliminate chaos in <strong>marketing and digital systems</strong>',
+    sub2: 'No fluff — just <strong>high-performance architectures</strong>',
+    sub3: 'Track every dollar and <strong>automate sales flow</strong>',
+    cta: 'Audit My Business',
+  };
+
+  // Хелпер: парсит строку вида "текст <strong>жирный</strong> текст" в JSX
+  const renderWithStrong = (text: string) => {
+    const parts = text.split(/<strong>(.*?)<\/strong>/g);
+    return parts.map((part, i) => {
+      if (i % 2 === 1) {
+        return <strong key={i} style={{ color: '#fff' }}>{part}</strong>;
+      }
+      return part;
+    });
+  };
+
   return (
     <section
       style={{
@@ -119,7 +154,7 @@ export const Hero = () => {
                 border: '1px solid rgba(0, 229, 153, 0.25)',
               }}
             >
-              TSVETKOV • FOUNDER-LED AGENCY
+              {t.badge}
             </span>
           </div>
 
@@ -133,7 +168,7 @@ export const Hero = () => {
               margin: '0 0 1.5rem 0',
             }}
           >
-            Value Growth<br />
+            {t.titleLine1}<br />
             <span
               style={{
                 background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
@@ -142,7 +177,7 @@ export const Hero = () => {
                 filter: 'drop-shadow(0 0 20px rgba(0, 229, 153, 0.2))',
               }}
             >
-              Engineered to Scale
+              {t.titleLine2}
             </span>
           </h1>
 
@@ -151,26 +186,26 @@ export const Hero = () => {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              <span>We eliminate chaos in <strong style={{ color: '#fff' }}>marketing and digital systems</strong></span>
+              <span>{renderWithStrong(t.sub1)}</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', color: T.sub }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              <span>No fluff — just <strong style={{ color: '#fff' }}>high-performance architectures</strong></span>
+              <span>{renderWithStrong(t.sub2)}</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', color: T.sub }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              <span>Track every dollar and <strong style={{ color: '#fff' }}>automate sales flow</strong></span>
+              <span>{renderWithStrong(t.sub3)}</span>
             </div>
           </div>
 
           <a href="#contact" className="btn-glass-cta">
-            <span>Audit My Business</span>
+            <span>{t.cta}</span>
             <svg className="cta-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
