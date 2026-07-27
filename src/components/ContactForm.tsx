@@ -16,11 +16,15 @@ export const ContactForm = () => {
     try {
       const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL;
       if (webhookUrl) {
-        await fetch(webhookUrl, {
+        const res = await fetch(webhookUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(form),
         });
+
+        if (!res.ok) {
+          throw new Error(`Webhook error status: ${res.status}`);
+        }
       } else {
         await new Promise((res) => setTimeout(res, 1000));
       }
