@@ -2,6 +2,7 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
+import { useDictionary } from '@/src/locales/getDictionary';
 import { Nav } from '@/src/components/Nav';
 import { Hero } from '@/src/components/Hero';
 import { Bottleneck } from '@/src/components/Bottleneck';
@@ -21,19 +22,20 @@ interface TsvetkovB2CProps {
 }
 
 export default function TsvetkovB2C({ lang }: TsvetkovB2CProps) {
+  const dict = useDictionary(lang);
+
   return (
     <main style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
       <NetworkBackground />
 
       <div style={{ position: 'relative', zIndex: 10 }}>
-        {/* Прокидываем язык во все секции сайта */}
-        <Nav lang={lang} />
-        <Hero lang={lang} />
+        <Nav lang={lang} dict={dict} />
+        <Hero dict={dict} />
         <Bottleneck lang={lang} />
-        <Expertise lang={lang} />
-        <Services lang={lang} />
-        <CaseStudies lang={lang} />
-        <Contact lang={lang} />
+        <Expertise dict={dict} />
+        <Services dict={dict} />
+        <CaseStudies dict={dict} />
+        <Contact dict={dict} />
       </div>
     </main>
   );
