@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { T } from '../../../src/theme/tokens';
+import { onCalendlyReady } from '@/src/components/CalendlyScript';
 
 interface FooterCTAProps {
   t?: {
@@ -16,20 +17,23 @@ interface FooterCTAProps {
 }
 
 export default function FooterCTA({ t = {} }: FooterCTAProps) {
+  const [calendlyReady, setCalendlyReady] = useState(false);
+  
   const titleText = t.footerTitle || "Ready to maximize your revenue?";
   const sub1Text = t.footerSub1 || t.footerSub || "Stop leaving 15–20% on the table";
   const sub2Text = t.footerSub2 || "Take full control of your direct bookings";
   const btnText = t.footerBtn || t.btnAudit || "Book a Free Audit";
 
+  useEffect(() => {
+    onCalendlyReady(() => setCalendlyReady(true));
+  }, []);
+
   const handleCalendlyPopup = (e: React.MouseEvent) => {
     e.preventDefault();
-    
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
         url: 'https://calendly.com/fediatsvetkov/15min'
       });
-    } else {
-      window.open('https://calendly.com/fediatsvetkov/15min', '_blank');
     }
   };
 
@@ -94,8 +98,14 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
             {sub2Text && <p className="subtitle">{sub2Text}</p>}
           </div>
           
-          <button type="button" onClick={handleCalendlyPopup} className="btn-premium-core">
-            {btnText}
+          <button 
+            type="button" 
+            onClick={handleCalendlyPopup} 
+            className="btn-premium-core"
+            disabled={!calendlyReady}
+            style={{ opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady ? 'pointer' : 'not-allowed' }}
+          >
+            {calendlyReady ? btnText : "Loading…"}
           </button>
         </div>
       </div>
