@@ -153,8 +153,10 @@ export const NetworkBackground = () => {
         isTabActive = false;
         cancelAnimationFrame(animationFrameId);
       } else {
-        isTabActive = true;
-        animationFrameId = requestAnimationFrame(render);
+        if (!isTabActive) {
+          isTabActive = true;
+          render();
+        }
       }
     };
 
