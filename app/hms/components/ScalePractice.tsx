@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { T } from '../../../src/theme/tokens';
 
 interface ScalePracticeProps {
@@ -83,7 +84,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
   const items = t?.scaleItems || DEFAULT_ITEMS;
   const subtitleText = t?.scaleSub || "Automate workflows so your team can focus on guest experience";
 
-  // Оборачиваем вторую часть фразы в span без использования <br>
   const renderSubtitle = (sub: string) => {
     const target = "so your team";
     if (sub.includes(target)) {
@@ -127,10 +127,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           line-height: 1.5;
           margin: 0 auto;
           max-width: 900px;
-          white-space: nowrap; /* Жесткая одна строка на ПК */
+          white-space: nowrap;
         }
 
-        /* На ПК и планшетах оборачиваемый блок идет сплошным текстом */
         :global(.sub-break) {
           display: inline;
         }
@@ -199,6 +198,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .image-wrapper {
           width: 100%;
           height: 140px;
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -206,9 +206,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           margin-bottom: 1.25rem;
         }
 
-        .visual-asset {
-          width: 100%;
-          height: 100%;
+        :global(.visual-asset) {
+          width: 100% !important;
+          height: 100% !important;
           object-fit: contain;
           display: block;
           mix-blend-mode: screen; 
@@ -220,7 +220,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
         }
 
-        .scale-card:hover .visual-asset {
+        .scale-card:hover :global(.visual-asset) {
           transform: scale(1.06) translateZ(0);
           filter: contrast(1.2) brightness(1.12) drop-shadow(0 0 30px rgba(0, 229, 153, 0.4));
         }
@@ -257,7 +257,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           white-space: nowrap;
         }
 
-        /* --- ПЛАНШЕТЫ (768px – 1024px) --- */
         @media (min-width: 768px) and (max-width: 1024px) {
           .scale-section {
             padding: 2.5rem 0 3rem 0;
@@ -300,7 +299,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
         }
 
-        /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
         @media (max-width: 767px) {
           .scale-section {
             padding: 2.25rem 0 2.75rem 0;
@@ -314,9 +312,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .scale-subtitle {
             font-size: 0.95rem;
             max-width: 100%;
-            white-space: normal; /* Разрешаем перенос на мобилках */
+            white-space: normal;
           }
-          /* Превращаем span в блочный элемент для принудительного переноса */
           :global(.sub-break) {
             display: block;
             margin-top: 0.25rem;
@@ -359,10 +356,12 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                 )}
 
                 <div className="image-wrapper">
-                  <img 
+                  <Image 
                     src={CARD_ASSETS[idx] || CARD_ASSETS[0]} 
                     alt={`${metricTitle} visual`} 
-                    className="visual-asset" 
+                    className="visual-asset"
+                    width={280}
+                    height={140}
                   />
                 </div>
 
