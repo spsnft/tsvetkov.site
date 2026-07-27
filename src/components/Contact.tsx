@@ -5,9 +5,39 @@ import { T } from '@/src/theme/tokens';
 
 const ACCENT = '#00E599';
 
-export const Contact = () => {
+interface ContactProps {
+  dict: {
+    contact: {
+      badge: string;
+      title: string;
+      desc: string;
+      callBtn: string;
+      formTitle: string;
+      nameLabel: string;
+      emailLabel: string;
+      websiteLabel: string;
+      budgetLabel: string;
+      submitBtn: string;
+    };
+  } | null;
+}
+
+export const Contact = ({ dict }: ContactProps) => {
   const [form, setForm] = useState({ name: '', contact: '', website: '', budget: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const t = dict?.contact ?? {
+    badge: 'GET IN TOUCH',
+    title: 'Ready to scale your business?',
+    desc: 'Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.',
+    callBtn: 'Book a 15-Min Strategy Call',
+    formTitle: 'Request an Audit',
+    nameLabel: 'Your Name',
+    emailLabel: 'Contact Email',
+    websiteLabel: 'Website or Socials',
+    budgetLabel: 'Monthly Ad Budget',
+    submitBtn: 'Submit Audit Request',
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -167,7 +197,7 @@ export const Contact = () => {
                 color: ACCENT,
               }}
             >
-              GET IN TOUCH
+              {t.badge}
             </span>
 
             <h2
@@ -180,11 +210,11 @@ export const Contact = () => {
                 marginBottom: '1rem',
               }}
             >
-              Ready to scale your business?
+              {t.title}
             </h2>
 
             <p style={{ fontSize: '1rem', lineHeight: 1.6, color: T.sub, marginBottom: '2rem', maxWidth: '450px' }}>
-              Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.
+              {t.desc}
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxWidth: '400px' }}>
@@ -194,7 +224,7 @@ export const Contact = () => {
                 className="contact-link-card"
                 style={{ borderColor: 'rgba(0, 229, 153, 0.3)', background: 'rgba(0, 229, 153, 0.05)' }}
               >
-                <span>Book a 15-Min Strategy Call</span>
+                <span>{t.callBtn}</span>
                 <span style={{ color: ACCENT }}>→</span>
               </button>
 
@@ -213,7 +243,7 @@ export const Contact = () => {
           {/* Right Column: Audit Request Form */}
           <div className="card-matte" style={{ padding: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', marginBottom: '1.5rem' }}>
-              Request an Audit
+              {t.formTitle}
             </h3>
 
             {status === 'success' ? (
@@ -248,7 +278,7 @@ export const Contact = () => {
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div>
                   <label htmlFor="audit-name" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Your Name
+                    {t.nameLabel}
                   </label>
                   <input
                     id="audit-name"
@@ -263,7 +293,7 @@ export const Contact = () => {
 
                 <div>
                   <label htmlFor="audit-email" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Contact Email
+                    {t.emailLabel}
                   </label>
                   <input
                     id="audit-email"
@@ -278,7 +308,7 @@ export const Contact = () => {
 
                 <div>
                   <label htmlFor="audit-website" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Website or Socials
+                    {t.websiteLabel}
                   </label>
                   <input
                     id="audit-website"
@@ -292,7 +322,7 @@ export const Contact = () => {
 
                 <div>
                   <label htmlFor="audit-budget" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Monthly Ad Budget
+                    {t.budgetLabel}
                   </label>
                   <select
                     id="audit-budget"
@@ -314,7 +344,7 @@ export const Contact = () => {
                   className="btn-submit"
                   style={{ marginTop: '0.5rem' }}
                 >
-                  {status === 'sending' ? 'Sending…' : 'Submit Audit Request'}
+                  {status === 'sending' ? 'Sending…' : t.submitBtn}
                 </button>
               </form>
             )}
