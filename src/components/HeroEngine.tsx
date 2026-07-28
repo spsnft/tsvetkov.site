@@ -1,246 +1,230 @@
-'use client';
-
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
 import { T } from '@/src/theme/tokens';
 
-interface PillData {
-  id: number;
-  label: string;
-  title: string;
-  tags: string[];
-  accentClass: 'green' | 'blue' | 'red';
-}
-
-const pills: PillData[] = [
+const ENGINE_DATA = [
   {
-    id: 0,
-    label: '01. DATA INTELLIGENCE',
-    title: 'Grow with Data & Intelligence',
-    tags: ['Actionable Analytics', 'Real-Time Attribution'],
-    accentClass: 'green',
+    id: '01',
+    systemLabel: 'SYSTEM 01 // PERFORMANCE',
+    title: 'Scale & Revenue',
+    tags: ['Smart Funnels', 'Unit Economics', 'Profit Tracking'],
   },
   {
-    id: 1,
-    label: '02. SALES AUTOMATION',
-    title: 'Automate Sales & Eliminate Manual Work',
-    tags: ['Instant CRM Routing', 'AI Sales Workflows'],
-    accentClass: 'blue',
+    id: '02',
+    systemLabel: 'SYSTEM 02 // DATA CORE',
+    title: 'BI & Attribution',
+    tags: ['Live Dashboards', 'Cross-Platform Sync', 'Clean Data'],
   },
   {
-    id: 2,
-    label: '03. SCALE & REVENUE',
-    title: 'Convert Traffic into Revenue',
-    tags: ['Smart Funnels', 'Live Unit Economics'],
-    accentClass: 'red',
+    id: '03',
+    systemLabel: 'SYSTEM 03 // INTELLIGENCE',
+    title: 'AI & Sales Automation',
+    tags: ['Auto-Routing', 'AI Workflows', 'Lead Scoring'],
   },
 ];
 
-const accentColors = {
-  green: { color: T.accent, border: T.accent20, activeBorder: T.accent40, glow: 'rgba(0, 229, 153, 0.3)' },
-  blue: { color: '#38BDF8', border: 'rgba(56, 189, 248, 0.2)', activeBorder: 'rgba(56, 189, 248, 0.5)', glow: 'rgba(56, 189, 248, 0.25)' },
-  red: { color: '#EF4444', border: 'rgba(239, 68, 68, 0.2)', activeBorder: 'rgba(239, 68, 68, 0.5)', glow: 'rgba(239, 68, 68, 0.25)' },
-};
+export interface HeroEngineProps {
+  activeId?: string | null;
+  onHoverCard?: (id: string | null) => void;
+}
 
-const AUTOPLAY_INTERVAL = 4000;
-
-export const HeroEngine = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % pills.length);
-    }, AUTOPLAY_INTERVAL);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  const handleCardClick = useCallback((index: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setActiveIndex(index);
-    setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 10);
-  }, []);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    setIsPaused(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsPaused(false);
-  };
-
-  const getCardStyles = (index: number) => {
-    const isActive = index === activeIndex;
-    const accent = accentColors[pills[index].accentClass];
-
-    return {
-      position: 'absolute' as const,
-      bottom: 0,
-      width: '100%',
-      height: 135,
-      backdropFilter: 'blur(16px)',
-      WebkitBackdropFilter: 'blur(16px)',
-      borderRadius: 18,
-      padding: '1.25rem 1.4rem',
-      boxSizing: 'border-box' as const,
-      background: 'linear-gradient(135deg, rgba(0, 18, 20, 0.95), rgba(0, 25, 18, 0.95))',
-      border: isActive
-        ? `1px solid ${accent.activeBorder}`
-        : `1px solid ${accent.border}`,
-      boxShadow: isActive
-        ? `0 20px 40px rgba(0, 0, 0, 0.8), 0 0 35px ${accent.glow}`
-        : `-12px 24px 35px rgba(0, 0, 0, 0.5)`,
-      cursor: 'pointer',
-      userSelect: 'none' as const,
-    };
-  };
-
+export const HeroEngine: React.FC<HeroEngineProps> = ({ activeId, onHoverCard }) => {
   return (
-    <div
-      className="perspective-wrapper"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        perspective: 1200,
-        minHeight: 420,
-        cursor: 'default',
-      }}
-    >
+    <div className="engine-container">
+      {ENGINE_DATA.map((card) => {
+        const isHighlighted = activeId === card.id;
+
+        return (
+          <div
+            key={card.id}
+            className={`engine-card ${isHighlighted ? 'active-highlight' : ''}`}
+            onMouseEnter={() => onHoverCard?.(card.id)}
+            onMouseLeave={() => onHoverCard?.(null)}
+          >
+            <div className="card-header">
+              {/* Анимированная пульсирующая точка */}
+              <span className="live-dot-wrapper">
+                <span className="live-dot-ping"></span>
+                <span className="live-dot"></span>
+              </span>
+              <span className="system-label">{card.systemLabel}</span>
+            </div>
+
+            <h3 className="card-title">{card.title}</h3>
+
+            <div className="card-tags">
+              {card.tags.map((tag, i) => (
+                <span key={i} className="engine-tag">
+                  <span className="tag-bullet">•</span>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+
       <style jsx>{`
-        .perspective-wrapper {
-          user-select: none;
-          -webkit-tap-highlight-color: transparent;
+        .engine-container {
+          position: relative;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+          z-index: 3;
         }
 
-        .chip {
-          padding: 5px 10px;
-          border-radius: 6px;
-          font-size: 0.72rem;
+        .engine-card {
+          background: linear-gradient(
+            135deg,
+            rgba(20, 24, 33, 0.75) 0%,
+            rgba(10, 12, 16, 0.85) 100%
+          );
+          border: 1px solid ${T.accent15};
+          border-radius: ${T.radius.lg};
+          padding: 1.5rem 1.75rem;
+          backdrop-filter: blur(16px);
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+          box-shadow:
+            0 10px 30px -10px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          cursor: pointer;
+        }
+
+        /* Неоновая рамка при наведении или активации из текста */
+        .engine-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: ${T.radius.lg};
+          padding: 1px;
+          background: ${T.linearGradient};
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          opacity: 0.3;
+          transition: opacity 0.35s ease;
+          pointer-events: none;
+        }
+
+        .engine-card:hover,
+        .engine-card.active-highlight {
+          transform: translateY(-3px) scale(1.008);
+          border-color: ${T.accent40};
+          box-shadow:
+            0 16px 36px -10px ${T.accent20},
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .engine-card:hover::before,
+        .engine-card.active-highlight::before {
+          opacity: 1;
+        }
+
+        .card-header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 0.6rem;
+        }
+
+        .live-dot-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 8px;
+          height: 8px;
+        }
+
+        .live-dot-ping {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: ${T.accent};
+          opacity: 0.75;
+          animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .live-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: ${T.linearGradient};
+          box-shadow: 0 0 8px ${T.accent};
+        }
+
+        @keyframes ping {
+          75%,
+          100% {
+            transform: scale(2.5);
+            opacity: 0;
+          }
+        }
+
+        .system-label {
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          color: ${T.accent};
+          font-family: monospace, sans-serif;
+          opacity: 0.9;
+        }
+
+        .card-title {
+          font-size: 1.35rem;
+          font-weight: 800;
+          color: #ffffff;
+          margin: 0 0 1.1rem 0;
+          letter-spacing: -0.02em;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.6rem;
+        }
+
+        .engine-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.78rem;
           font-weight: 600;
-          white-space: nowrap;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: rgba(255, 255, 255, 0.7);
+          padding: 6px 12px;
+          border-radius: ${T.radius.sm};
+          background: ${T.accent05};
+          border: 1px solid ${T.accent20};
+          color: #e2f9f1;
+          backdrop-filter: blur(4px);
+          transition: all 0.25s ease;
         }
 
-        @media (max-width: 1024px) {
-          .perspective-wrapper {
-            padding: 30px 0;
-            min-height: auto;
-          }
+        .tag-bullet {
+          color: ${T.accent};
+          font-size: 0.9em;
+          opacity: 0.8;
         }
 
-        @media (max-width: 767px) {
-          .perspective-wrapper {
-            perspective: none;
-            min-height: auto;
-            padding: 20px 0;
-          }
-          .perspective-wrapper :global(.scene-container) {
-            transform: none !important;
-            height: auto !important;
-          }
-          .perspective-wrapper :global(.layer-card) {
-            position: relative !important;
-            margin-top: -12px !important;
-            bottom: auto !important;
-            height: auto !important;
-            min-height: 100px;
-            transform: none !important;
-            opacity: 1 !important;
-            filter: none !important;
-            cursor: default !important;
-            z-index: auto !important;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
-          }
+        .engine-card:hover .engine-tag,
+        .engine-card.active-highlight .engine-tag {
+          background: ${T.accent12};
+          border-color: ${T.accent40};
+          color: #ffffff;
+          box-shadow: 0 2px 8px ${T.accent15};
+        }
+
+        .engine-tag:hover {
+          background: linear-gradient(135deg, ${T.accent25} 0%, rgba(0, 163, 255, 0.25) 100%) !important;
+          border-color: ${T.accent} !important;
+          transform: translateY(-1px);
         }
       `}</style>
-
-      <motion.div
-        className="scene-container"
-        animate={{
-          rotateX: isHovered ? 14 : 18,
-          rotateY: isHovered ? -8 : -12,
-          rotateZ: isHovered ? 1 : 2,
-        }}
-        transition={{ type: 'spring', stiffness: 180, damping: 22 }}
-        style={{
-          position: 'relative',
-          width: '100%',
-          height: 380,
-          transformStyle: 'preserve-3d',
-        }}
-      >
-        {pills.map((pill, index) => {
-          const isActive = index === activeIndex;
-          const accent = accentColors[pill.accentClass];
-          const baseOffset = index * 90;
-          const activeOffset = -30;
-
-          return (
-            <motion.div
-              key={pill.id}
-              className="layer-card"
-              onClick={(e) => handleCardClick(index, e)}
-              animate={{
-                zIndex: isActive ? 30 : 10 - index,
-                y: isActive ? activeOffset : index * 16,
-                scale: isActive ? 1.02 : 0.96,
-                opacity: isActive ? 1 : 0.45,
-                filter: isActive ? 'blur(0px)' : 'blur(3px)',
-              }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                ...getCardStyles(index),
-                bottom: baseOffset,
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.64rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.12em',
-                  color: accent.color,
-                  textTransform: 'uppercase',
-                  marginBottom: '0.6rem',
-                }}
-              >
-                {pill.label}
-              </div>
-
-              <h3
-                style={{
-                  fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                  fontSize: '1.25rem',
-                  fontWeight: 700,
-                  lineHeight: 1.25,
-                  color: '#fff',
-                  margin: '0 0 0.6rem 0',
-                }}
-              >
-                {pill.title}
-              </h3>
-
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {pill.tags.map((tag, i) => (
-                  <span key={i} className="chip">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          );
-        })}
-      </motion.div>
     </div>
   );
 };
+
+export default HeroEngine;
