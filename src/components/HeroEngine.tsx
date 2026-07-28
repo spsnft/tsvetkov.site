@@ -1,3 +1,5 @@
+// src/components/HeroEngine.tsx
+
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -62,7 +64,6 @@ export const HeroEngine = () => {
   const handleCardClick = useCallback((index: number, e: React.MouseEvent) => {
     e.stopPropagation();
     setActiveIndex(index);
-    // Кратковременная пауза для сброса таймера
     setIsPaused(true);
     setTimeout(() => setIsPaused(false), 10);
   }, []);
@@ -76,8 +77,6 @@ export const HeroEngine = () => {
     setIsHovered(false);
     setIsPaused(false);
   };
-
-  const handleReset = () => setActiveIndex(0);
 
   const getCardStyles = (index: number) => {
     const isActive = index === activeIndex;
@@ -108,7 +107,6 @@ export const HeroEngine = () => {
   return (
     <div
       className="perspective-wrapper"
-      onClick={handleReset}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -183,7 +181,6 @@ export const HeroEngine = () => {
         style={{
           position: 'relative',
           width: '100%',
-          maxWidth: 440,
           height: 380,
           transformStyle: 'preserve-3d',
         }}
@@ -191,9 +188,8 @@ export const HeroEngine = () => {
         {pills.map((pill, index) => {
           const isActive = index === activeIndex;
           const accent = accentColors[pill.accentClass];
-          // Каскадное смещение: активная наверху, остальные сдвинуты вниз
-          const baseOffset = index * 90; // базовое положение
-          const activeOffset = -30; // активная уезжает вверх
+          const baseOffset = index * 90;
+          const activeOffset = -30;
 
           return (
             <motion.div
