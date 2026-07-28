@@ -1,47 +1,58 @@
 import React from 'react';
 import { T } from '@/src/theme/tokens';
 
-const ENGINE_DATA = [
+export interface SystemCard {
+  id: string;
+  systemLabel: string;
+  title: string;
+  tags: string[];
+  chipKeys: string[]; // Связанные ключевые чипсы из текста
+}
+
+const ENGINE_DATA: SystemCard[] = [
   {
     id: '01',
     systemLabel: 'SYSTEM 01 // PERFORMANCE',
     title: 'Scale & Revenue',
     tags: ['Smart Funnels', 'Unit Economics', 'Profit Tracking'],
+    chipKeys: ['value', 'scale', 'funnels'],
   },
   {
     id: '02',
     systemLabel: 'SYSTEM 02 // DATA CORE',
     title: 'BI & Attribution',
     tags: ['Live Dashboards', 'Cross-Platform Sync', 'Clean Data'],
+    chipKeys: ['data'],
   },
   {
     id: '03',
     systemLabel: 'SYSTEM 03 // INTELLIGENCE',
     title: 'AI & Sales Automation',
     tags: ['Auto-Routing', 'AI Workflows', 'Lead Scoring'],
+    chipKeys: ['automation'],
   },
 ];
 
 export interface HeroEngineProps {
-  activeId?: string | null;
-  onHoverCard?: (id: string | null) => void;
+  activeChip?: string | null;
+  onHoverCard?: (chipKey: string | null) => void;
 }
 
-export const HeroEngine: React.FC<HeroEngineProps> = ({ activeId, onHoverCard }) => {
+export const HeroEngine: React.FC<HeroEngineProps> = ({ activeChip, onHoverCard }) => {
   return (
     <div className="engine-container">
       {ENGINE_DATA.map((card) => {
-        const isHighlighted = activeId === card.id;
+        // Подсвечиваем карточку, если активна связанная чипса
+        const isHighlighted = activeChip ? card.chipKeys.includes(activeChip) : false;
 
         return (
           <div
             key={card.id}
             className={`engine-card ${isHighlighted ? 'active-highlight' : ''}`}
-            onMouseEnter={() => onHoverCard?.(card.id)}
+            onMouseEnter={() => onHoverCard?.(card.chipKeys[0])}
             onMouseLeave={() => onHoverCard?.(null)}
           >
             <div className="card-header">
-              {/* Анимированная пульсирующая точка */}
               <span className="live-dot-wrapper">
                 <span className="live-dot-ping"></span>
                 <span className="live-dot"></span>
@@ -92,7 +103,6 @@ export const HeroEngine: React.FC<HeroEngineProps> = ({ activeId, onHoverCard })
           cursor: pointer;
         }
 
-        /* Неоновая рамка при наведении или активации из текста */
         .engine-card::before {
           content: '';
           position: absolute;
@@ -103,17 +113,17 @@ export const HeroEngine: React.FC<HeroEngineProps> = ({ activeId, onHoverCard })
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
-          opacity: 0.3;
+          opacity: 0.2;
           transition: opacity 0.35s ease;
           pointer-events: none;
         }
 
         .engine-card:hover,
         .engine-card.active-highlight {
-          transform: translateY(-3px) scale(1.008);
-          border-color: ${T.accent40};
+          transform: translateY(-3px) scale(1.01);
+          border-color: ${T.accent};
           box-shadow:
-            0 16px 36px -10px ${T.accent20},
+            0 16px 36px -10px ${T.accent25},
             inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
@@ -170,7 +180,6 @@ export const HeroEngine: React.FC<HeroEngineProps> = ({ activeId, onHoverCard })
           letter-spacing: 0.14em;
           color: ${T.accent};
           font-family: monospace, sans-serif;
-          opacity: 0.9;
         }
 
         .card-title {
@@ -179,7 +188,6 @@ export const HeroEngine: React.FC<HeroEngineProps> = ({ activeId, onHoverCard })
           color: #ffffff;
           margin: 0 0 1.1rem 0;
           letter-spacing: -0.02em;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .card-tags {
@@ -199,28 +207,10 @@ export const HeroEngine: React.FC<HeroEngineProps> = ({ activeId, onHoverCard })
           background: ${T.accent05};
           border: 1px solid ${T.accent20};
           color: #e2f9f1;
-          backdrop-filter: blur(4px);
-          transition: all 0.25s ease;
         }
 
         .tag-bullet {
           color: ${T.accent};
-          font-size: 0.9em;
-          opacity: 0.8;
-        }
-
-        .engine-card:hover .engine-tag,
-        .engine-card.active-highlight .engine-tag {
-          background: ${T.accent12};
-          border-color: ${T.accent40};
-          color: #ffffff;
-          box-shadow: 0 2px 8px ${T.accent15};
-        }
-
-        .engine-tag:hover {
-          background: linear-gradient(135deg, ${T.accent25} 0%, rgba(0, 163, 255, 0.25) 100%) !important;
-          border-color: ${T.accent} !important;
-          transform: translateY(-1px);
         }
       `}</style>
     </div>
