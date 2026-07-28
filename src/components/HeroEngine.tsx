@@ -1,50 +1,116 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { T } from '@/src/theme/tokens';
 
-type LayerId = 'top' | 'middle' | 'bottom' | null;
-
 interface PillData {
-  id: LayerId;
+  id: number;
+  label: string;
   title: string;
   tags: string[];
+  accentClass: 'green' | 'blue' | 'red';
 }
 
 const pills: PillData[] = [
   {
-    id: 'top',
-    title: 'Convert Traffic into Revenue',
-    tags: ['Smart Funnels', 'Zero Waste Ads', 'Live Unit Economics'],
-  },
-  {
-    id: 'middle',
+    id: 0,
+    label: '01. DATA INTELLIGENCE',
     title: 'Grow with Data & Intelligence',
-    tags: ['Actionable Analytics', 'Real-Time Attribution', 'Performance Reports'],
+    tags: ['Actionable Analytics', 'Real-Time Attribution'],
+    accentClass: 'green',
   },
   {
-    id: 'bottom',
+    id: 1,
+    label: '02. SALES AUTOMATION',
     title: 'Automate Sales & Eliminate Manual Work',
-    tags: ['Instant CRM Routing', 'AI Sales Workflows', 'Zero-Leakage Ops'],
+    tags: ['Instant CRM Routing', 'AI Sales Workflows'],
+    accentClass: 'blue',
+  },
+  {
+    id: 2,
+    label: '03. SCALE & REVENUE',
+    title: 'Convert Traffic into Revenue',
+    tags: ['Smart Funnels', 'Live Unit Economics'],
+    accentClass: 'red',
   },
 ];
 
+const accentColors = {
+  green: { color: T.accent, border: T.accent20, activeBorder: T.accent40, glow: 'rgba(0, 229, 153, 0.3)' },
+  blue: { color: '#38BDF8', border: 'rgba(56, 189, 248, 0.2)', activeBorder: 'rgba(56, 189, 248, 0.5)', glow: 'rgba(56, 189, 248, 0.25)' },
+  red: { color: '#EF4444', border: 'rgba(239, 68, 68, 0.2)', activeBorder: 'rgba(239, 68, 68, 0.5)', glow: 'rgba(239, 68, 68, 0.25)' },
+};
+
+const AUTOPLAY_INTERVAL = 4000;
+
 export const HeroEngine = () => {
-  const [activeLayer, setActiveLayer] = useState<LayerId>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleCardClick = (id: LayerId, e: React.MouseEvent) => {
+  // Авто-ротация
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % pills.length);
+    }, AUTOPLAY_INTERVAL);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  // Сброс таймера при ручном клике
+  const handleCardClick = useCallback((index: number, e: React.MouseEvent) => {
     e.stopPropagation();
-    setActiveLayer(prev => (prev === id ? null : id));
+    setActiveIndex(index);
+    // Кратковременная пауза для сброса таймера
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 10);
+  }, []);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    setIsPaused(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setIsPaused(false);
+  };
+
+  const handleReset = () => setActiveIndex(0);
+
+  const getCardStyles = (index: number) => {
+    const isActive = index === activeIndex;
+    const accent = accentColors[pills[index].accentClass];
+
+    return {
+      position: 'absolute' as const,
+      bottom: 0,
+      width: '100%',
+      height: 135,
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
+      borderRadius: 18,
+      padding: '1.25rem 1.4rem',
+      boxSizing: 'border-box' as const,
+      background: 'linear-gradient(135deg, rgba(0, 18, 20, 0.95), rgba(0, 25, 18, 0.95))',
+      border: isActive
+        ? `1px solid ${accent.activeBorder}`
+        : `1px solid ${accent.border}`,
+      boxShadow: isActive
+        ? `0 20px 40px rgba(0, 0, 0, 0.8), 0 0 35px ${accent.glow}`
+        : `-12px 24px 35px rgba(0, 0, 0, 0.5)`,
+      cursor: 'pointer',
+      userSelect: 'none' as const,
+    };
   };
 
   return (
-    <div 
+    <div
       className="perspective-wrapper"
-      onClick={() => setActiveLayer(null)}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleReset}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       style={{
         width: '100%',
         display: 'flex',
@@ -52,7 +118,7 @@ export const HeroEngine = () => {
         justifyContent: 'center',
         perspective: 1200,
         minHeight: 420,
-        cursor: activeLayer ? 'zoom-out' : 'pointer',
+        cursor: 'default',
       }}
     >
       <style jsx>{`
@@ -60,14 +126,13 @@ export const HeroEngine = () => {
           user-select: none;
           -webkit-tap-highlight-color: transparent;
         }
-        
+
         .chip {
           padding: 5px 10px;
           border-radius: 6px;
           font-size: 0.72rem;
           font-weight: 600;
           white-space: nowrap;
-          /* Единый стиль для чипсов вместо светофора */
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.1);
           color: rgba(255, 255, 255, 0.7);
@@ -86,11 +151,11 @@ export const HeroEngine = () => {
             min-height: auto;
             padding: 20px 0;
           }
-          .scene-container {
+          .perspective-wrapper :global(.scene-container) {
             transform: none !important;
             height: auto !important;
           }
-          .layer-card {
+          .perspective-wrapper :global(.layer-card) {
             position: relative !important;
             margin-top: -12px !important;
             bottom: auto !important;
@@ -101,7 +166,7 @@ export const HeroEngine = () => {
             filter: none !important;
             cursor: default !important;
             z-index: auto !important;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
           }
         }
       `}</style>
@@ -110,9 +175,9 @@ export const HeroEngine = () => {
       <motion.div
         className="scene-container"
         animate={{
-          rotateX: activeLayer ? 0 : isHovered ? 14 : 18,
-          rotateY: activeLayer ? 0 : isHovered ? -8 : -12,
-          rotateZ: activeLayer ? 0 : isHovered ? 1 : 2,
+          rotateX: isHovered ? 14 : 18,
+          rotateY: isHovered ? -8 : -12,
+          rotateZ: isHovered ? 1 : 2,
         }}
         transition={{ type: 'spring', stiffness: 180, damping: 22 }}
         style={{
@@ -123,143 +188,70 @@ export const HeroEngine = () => {
           transformStyle: 'preserve-3d',
         }}
       >
-        {/* ==================== СЛОЙ 1: BOTTOM ==================== */}
-        <motion.div
-          className="layer-card"
-          onClick={(e) => handleCardClick('bottom', e)}
-          animate={{
-            z: activeLayer === 'bottom' ? 120 : activeLayer ? -40 : isHovered ? 10 : 0,
-            y: activeLayer === 'bottom' ? -10 : activeLayer === 'middle' ? 60 : activeLayer === 'top' ? 100 : 0,
-            scale: activeLayer === 'bottom' ? 1.05 : activeLayer ? 0.92 : 1,
-            opacity: activeLayer && activeLayer !== 'bottom' ? 0.35 : 1,
-            filter: activeLayer && activeLayer !== 'bottom' ? 'blur(4px)' : 'blur(0px)',
-          }}
-          transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            width: '100%',
-            height: 135,
-            backdropFilter: 'blur(16px)',
-            borderRadius: 18,
-            padding: '1.25rem 1.4rem',
-            boxSizing: 'border-box',
-            /* Единый глубокий градиент для всех карточек */
-            background: 'linear-gradient(135deg, rgba(0, 20, 30, 0.9), rgba(0, 30, 20, 0.9))',
-            border: activeLayer === 'bottom' 
-              ? '1px solid rgba(0, 163, 255, 0.6)' 
-              : '1px solid rgba(0, 163, 255, 0.2)',
-            boxShadow: activeLayer === 'bottom'
-              ? '0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 163, 255, 0.25)'
-              : '-12px 24px 35px rgba(0, 0, 0, 0.5)',
-            zIndex: activeLayer === 'bottom' ? 40 : 1,
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: '#38BDF8', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
-            01. AUTOMATE & OPTIMIZE
-          </div>
-          <h3 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.25, color: '#fff', margin: '0 0 0.6rem 0' }}>
-            {pills[2].title}
-          </h3>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {pills[2].tags.map((tag, i) => (
-              <span key={i} className="chip">{tag}</span>
-            ))}
-          </div>
-        </motion.div>
+        {pills.map((pill, index) => {
+          const isActive = index === activeIndex;
+          const accent = accentColors[pill.accentClass];
+          // Каскадное смещение: активная наверху, остальные сдвинуты вниз
+          const baseOffset = index * 90; // базовое положение
+          const activeOffset = -30; // активная уезжает вверх
 
-        {/* ==================== СЛОЙ 2: MIDDLE ==================== */}
-        <motion.div
-          className="layer-card"
-          onClick={(e) => handleCardClick('middle', e)}
-          animate={{
-            z: activeLayer === 'middle' ? 120 : activeLayer ? -20 : isHovered ? 65 : 50,
-            y: activeLayer === 'middle' ? -20 : activeLayer === 'top' ? 60 : activeLayer === 'bottom' ? -60 : 0,
-            scale: activeLayer === 'middle' ? 1.05 : activeLayer ? 0.92 : 1,
-            opacity: activeLayer && activeLayer !== 'middle' ? 0.35 : 1,
-            filter: activeLayer && activeLayer !== 'middle' ? 'blur(4px)' : 'blur(0px)',
-          }}
-          transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-          style={{
-            position: 'absolute',
-            bottom: 90,
-            width: '100%',
-            height: 130,
-            backdropFilter: 'blur(16px)',
-            borderRadius: 18,
-            padding: '1.25rem 1.4rem',
-            boxSizing: 'border-box',
-            background: 'linear-gradient(135deg, rgba(0, 20, 30, 0.9), rgba(0, 30, 20, 0.9))',
-            border: activeLayer === 'middle' 
-              ? '1px solid rgba(0, 229, 153, 0.6)' 
-              : '1px solid rgba(0, 229, 153, 0.2)',
-            boxShadow: activeLayer === 'middle'
-              ? '0 20px 40px rgba(0,0,0,0.8), 0 0 35px rgba(0, 229, 153, 0.3)'
-              : '-14px 28px 40px rgba(0, 0, 0, 0.55)',
-            zIndex: activeLayer === 'middle' ? 40 : 2,
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: T.accent, textTransform: 'uppercase', marginBottom: '0.6rem' }}>
-            02. DATA INTELLIGENCE
-          </div>
-          <h3 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.25, color: '#fff', margin: '0 0 0.6rem 0' }}>
-            {pills[1].title}
-          </h3>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {pills[1].tags.map((tag, i) => (
-              <span key={i} className="chip">{tag}</span>
-            ))}
-          </div>
-        </motion.div>
+          return (
+            <motion.div
+              key={pill.id}
+              className="layer-card"
+              onClick={(e) => handleCardClick(index, e)}
+              animate={{
+                zIndex: isActive ? 30 : 10 - index,
+                y: isActive ? activeOffset : index * 16,
+                scale: isActive ? 1.02 : 0.96,
+                opacity: isActive ? 1 : 0.45,
+                filter: isActive ? 'blur(0px)' : 'blur(3px)',
+              }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                ...getCardStyles(index),
+                bottom: baseOffset,
+              }}
+            >
+              {/* Лейбл */}
+              <div
+                style={{
+                  fontSize: '0.64rem',
+                  fontWeight: 800,
+                  letterSpacing: '0.12em',
+                  color: accent.color,
+                  textTransform: 'uppercase',
+                  marginBottom: '0.6rem',
+                }}
+              >
+                {pill.label}
+              </div>
 
-        {/* ==================== СЛОЙ 3: TOP ==================== */}
-        <motion.div
-          className="layer-card"
-          onClick={(e) => handleCardClick('top', e)}
-          animate={{
-            z: activeLayer === 'top' ? 120 : activeLayer ? 0 : isHovered ? 125 : 100,
-            y: activeLayer === 'top' ? -30 : activeLayer === 'middle' ? -80 : activeLayer === 'bottom' ? -120 : 0,
-            scale: activeLayer === 'top' ? 1.05 : activeLayer ? 0.92 : 1,
-            opacity: activeLayer && activeLayer !== 'top' ? 0.35 : 1,
-            filter: activeLayer && activeLayer !== 'top' ? 'blur(4px)' : 'blur(0px)',
-          }}
-          transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-          style={{
-            position: 'absolute',
-            bottom: 185,
-            width: '100%',
-            height: 130,
-            backdropFilter: 'blur(16px)',
-            borderRadius: 18,
-            padding: '1.25rem 1.4rem',
-            boxSizing: 'border-box',
-            background: 'linear-gradient(135deg, rgba(0, 20, 30, 0.9), rgba(0, 30, 20, 0.9))',
-            border: activeLayer === 'top' 
-              ? '1px solid rgba(239, 68, 68, 0.6)' 
-              : '1px solid rgba(239, 68, 68, 0.2)',
-            boxShadow: activeLayer === 'top'
-              ? '0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(239, 68, 68, 0.25)'
-              : '-18px 35px 50px rgba(0, 0, 0, 0.6)',
-            zIndex: activeLayer === 'top' ? 40 : 3,
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-            <span style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: '#EF4444', textTransform: 'uppercase' }}>
-              03. SCALE & REVENUE
-            </span>
-          </div>
-          <h3 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.25, color: '#fff', margin: '0 0 0.6rem 0' }}>
-            {pills[0].title}
-          </h3>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {pills[0].tags.map((tag, i) => (
-              <span key={i} className="chip">{tag}</span>
-            ))}
-          </div>
-        </motion.div>
+              {/* Заголовок */}
+              <h3
+                style={{
+                  fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                  fontSize: '1.25rem',
+                  fontWeight: 700,
+                  lineHeight: 1.25,
+                  color: '#fff',
+                  margin: '0 0 0.6rem 0',
+                }}
+              >
+                {pill.title}
+              </h3>
+
+              {/* Теги */}
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {pill.tags.map((tag, i) => (
+                  <span key={i} className="chip">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          );
+        })}
       </motion.div>
     </div>
   );
