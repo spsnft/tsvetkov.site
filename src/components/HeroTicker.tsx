@@ -64,7 +64,7 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
+
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const animTimerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -78,30 +78,38 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
     (activeChip && frame.chipKeys.includes(activeChip)) ||
     (highlightedLine && frame.highlightLineKey === highlightedLine);
 
-  // Очистка таймеров
+  // Оповещение родителя при смене кадра
+  useEffect(() => {
+    onFrameChangeRef.current(frame.chipKeys, frame.highlightLineKey);
+  }, [activeIndex, frame]);
+
+  // Чистка таймеров
   const clearAllTimers = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
     if (animTimerRef.current) clearTimeout(animTimerRef.current);
   };
 
-  // Автопереключение
+  // Автопереключение слайдов
   useEffect(() => {
-    if (isPaused || activeChip) return;
+    if (isPaused || activeChip) {
+      clearAllTimers();
+      setIsTransitioning(false);
+      return;
+    }
 
     timerRef.current = setTimeout(() => {
       setIsTransitioning(true);
 
       animTimerRef.current = setTimeout(() => {
-        setActiveIndex((prev) => {
-          const next = (prev + 1) % FRAMES.length;
-          onFrameChangeRef.current(FRAMES[next].chipKeys, FRAMES[next].highlightLineKey);
-          return next;
-        });
+        setActiveIndex((prev) => (prev + 1) % FRAMES.length);
         setIsTransitioning(false);
       }, 300);
     }, FRAME_DURATION);
 
-    return () => clearAllTimers();
+    return () => {
+      clearAllTimers();
+      setIsTransitioning(false);
+    };
   }, [activeIndex, isPaused, activeChip]);
 
   // Синхронизация при внешнем выборе чипса
@@ -113,12 +121,8 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
       clearAllTimers();
       setIsTransitioning(false);
       setActiveIndex(matchingIndex);
-      onFrameChangeRef.current(
-        FRAMES[matchingIndex].chipKeys,
-        FRAMES[matchingIndex].highlightLineKey
-      );
     }
-  }, [activeChip]);
+  }, [activeChip, activeIndex]);
 
   const handleFrameClick = () => {
     onManualSelect(frame.chipKeys, frame.highlightLineKey);
@@ -155,8 +159,11 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           </div>
         </div>
 
-        {/* Полоска прогресса */}
-        <div className={`progress-bar ${isPaused || activeChip ? 'paused' : ''}`} key={activeIndex} />
+        {/* Полоска прогресса с динамическим key для точной синхронизации */}
+        <div
+          className={`progress-bar ${isPaused || activeChip ? 'paused' : ''}`}
+          key={`${activeIndex}-${isPaused}-${!!activeChip}`}
+        />
       </div>
 
       <style jsx>{`
@@ -270,7 +277,7 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           left: 0;
           height: 2px;
           background: ${T.linearGradient};
-          animation: ticker-progress ${FRAME_DURATION}ms linear;
+          animation: ticker-progress ${FRAME_DURATION}ms linear forwards;
         }
 
         .progress-bar.paused {
