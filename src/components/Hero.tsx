@@ -56,7 +56,7 @@ export const Hero = ({ dict }: HeroProps) => {
           margin: 0 auto;
           display: grid;
           grid-template-columns: 1fr 440px;
-          gap: 3.5rem;
+          gap: 2rem;
           align-items: center;
           position: relative;
           z-index: 4;
