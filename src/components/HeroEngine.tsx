@@ -31,6 +31,11 @@ const pills: PillData[] = [
 
 const TRANSITION = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
 
+// Градиенты — только из существующих токенов
+const GRADIENT_DEFAULT = `linear-gradient(135deg, ${T.accent05}, ${T.accent05}, rgba(0, 163, 255, 0.05))`;
+const GRADIENT_HOVER = `linear-gradient(135deg, ${T.accent08}, rgba(0, 163, 255, 0.08))`;
+const GRADIENT_ACTIVE = `linear-gradient(135deg, ${T.accent15}, rgba(0, 163, 255, 0.15))`;
+
 export const HeroEngine = () => {
   const [active, setActive] = useState<ActiveCard>(null);
   const [hovered, setHovered] = useState<ActiveCard>(null);
@@ -47,7 +52,39 @@ export const HeroEngine = () => {
     const isDimmed = active !== null && active !== id;
     const isHovered = hovered === id && active === null;
 
-    const base: React.CSSProperties = {
+    // Определяем фон
+    let background = GRADIENT_DEFAULT;
+    if (isActive) background = GRADIENT_ACTIVE;
+    else if (isHovered) background = GRADIENT_HOVER;
+
+    // Определяем бордер
+    let border = `1px solid ${T.accent10}`;
+    if (isActive) border = `1px solid ${T.accent25}`;
+    else if (isHovered) border = `1px solid ${T.accent20}`;
+
+    // Определяем box-shadow
+    let boxShadow = `0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 0 transparent`;
+    if (isActive) boxShadow = `0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px ${T.accent12}`;
+    else if (isHovered) boxShadow = `0 12px 36px rgba(0, 0, 0, 0.5), 0 0 18px ${T.accent05}`;
+
+    // Определяем transform
+    let transform = '';
+    if (isActive) {
+      if (id === 'top') transform = 'translateY(-40px) scale(1.02)';
+      else if (id === 'bottom') transform = 'translateY(40px) scale(1.02)';
+      else transform = 'scale(1.02)';
+    } else if (isHovered) {
+      transform = 'translateY(-2px) scale(1.01)';
+    } else if (active === 'middle') {
+      if (id === 'top') transform = 'translateY(-40px)';
+      else if (id === 'bottom') transform = 'translateY(40px)';
+    } else if (active === 'top' && id === 'top') {
+      transform = 'translateY(-40px) scale(1.02)';
+    } else if (active === 'bottom' && id === 'bottom') {
+      transform = 'translateY(40px) scale(1.02)';
+    }
+
+    return {
       position: 'relative',
       width: '100%',
       height: 130,
@@ -61,41 +98,14 @@ export const HeroEngine = () => {
       userSelect: 'none',
       transition: TRANSITION,
       zIndex: isActive ? 10 : ['top', 'middle', 'bottom'].indexOf(id || '') + 1,
-      // Стеклянный фон по умолчанию
-      background: 'rgba(18, 18, 20, 0.75)',
+      background,
       backdropFilter: 'blur(12px)',
       WebkitBackdropFilter: 'blur(12px)',
-      border: `1px solid ${T.border}`,
-      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+      border,
+      boxShadow,
       opacity: isDimmed ? 0.4 : 1,
+      transform: transform || undefined,
     };
-
-    // Активное состояние
-    if (isActive) {
-      base.background = `linear-gradient(135deg, ${T.accent12}, rgba(0, 163, 255, 0.12))`;
-      base.border = `1px solid ${T.accent25}`;
-      base.boxShadow = `0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px ${T.accent10}`;
-      base.transform = 'scale(1.02)';
-    }
-
-    // Ховер (только когда ничего не активно)
-    if (isHovered) {
-      base.transform = 'translateY(-2px) scale(1.01)';
-      base.border = `1px solid rgba(255, 255, 255, 0.15)`;
-      base.boxShadow = '0 12px 36px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 229, 153, 0.06)';
-    }
-
-    // Сдвиги при активации
-    if (active === 'top') {
-      if (id === 'top') base.transform = 'translateY(-40px) scale(1.02)';
-    } else if (active === 'bottom') {
-      if (id === 'bottom') base.transform = 'translateY(40px) scale(1.02)';
-    } else if (active === 'middle') {
-      if (id === 'top') base.transform = 'translateY(-40px)';
-      if (id === 'bottom') base.transform = 'translateY(40px)';
-    }
-
-    return base;
   };
 
   const getTitleStyle = (id: ActiveCard): React.CSSProperties => ({
@@ -165,7 +175,6 @@ export const HeroEngine = () => {
           box-shadow: 0 0 6px ${T.accent};
         }
 
-        /* Мобильные: упрощённый список без интерактива */
         @media (max-width: 767px) {
           .pill-stack {
             transform: none;
