@@ -11,7 +11,6 @@ import { Services } from '@/src/components/Services';
 import { CaseStudies } from '@/src/components/CaseStudies';
 import { Contact } from '@/src/components/Contact';
 
-// Динамический импорт холста с частицами без SSR
 const NetworkBackground = dynamic(
   () => import('@/src/components/NetworkBackground').then((mod) => mod.NetworkBackground),
   { ssr: false }
@@ -30,7 +29,7 @@ export default function TsvetkovB2C({ lang }: TsvetkovB2CProps) {
 
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Nav lang={lang} dict={dict} />
-        <Hero dict={dict} />
+        <Hero lang={lang} dict={dict} />
         <Bottleneck lang={lang} />
         <Expertise dict={dict} />
         <Services dict={dict} />
