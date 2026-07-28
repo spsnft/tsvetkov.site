@@ -102,13 +102,13 @@ export const Hero = ({ dict }: HeroProps) => {
         position: 'relative',
         paddingTop: 'clamp(4rem, 8vw, 8rem)',
         paddingBottom: 'clamp(4rem, 8vw, 7rem)',
-        paddingLeft: 0,
-        paddingRight: 0,
+        paddingLeft: T.pagePadding,
+        paddingRight: T.pagePadding,
         background: 'transparent',
         overflow: 'hidden',
         minHeight: '80vh',
         display: 'flex',
-        align-items: 'center',
+        alignItems: 'center',
       }}
     >
       <style jsx>{`
