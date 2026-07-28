@@ -221,7 +221,7 @@ export const Hero = ({ dict }: HeroProps) => {
             </span>
           </div>
 
-          <h1 style={{ margin: '0 0 1.5rem 0', maxWidth: 520 }}>
+          <h1 style={{ margin: '0 0 1.5rem 0' }}>
             <span className="hero-title-line">{t.titleLine1}</span>
             <span className="hero-title-gradient">{t.titleLine2}</span>
           </h1>
