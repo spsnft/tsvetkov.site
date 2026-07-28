@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { HeroTimeline } from './HeroTimeline';
+'use client';
+
+import React, { useState, useCallback } from 'react';
+import { HeroTicker } from './HeroTicker';
 import { T } from '@/src/theme/tokens';
 
 interface HeroProps {
@@ -27,7 +29,9 @@ const InlineTextChip: React.FC<InlineTextChipProps> = ({
 
   return (
     <span
-      className={`inline-chip-wrapper ${isActive ? 'is-active' : ''} ${isHeader ? 'header-chip' : 'body-chip'}`}
+      className={`inline-chip-wrapper ${isActive ? 'is-active' : ''} ${
+        isHeader ? 'header-chip' : 'body-chip'
+      }`}
       onMouseEnter={() => onHover(chipKey)}
       onMouseLeave={() => onHover(null)}
     >
@@ -111,11 +115,32 @@ const InlineTextChip: React.FC<InlineTextChipProps> = ({
 
 export const Hero = ({ dict }: HeroProps) => {
   const [activeChipKey, setActiveChipKey] = useState<string | null>(null);
+  const [highlightedLine, setHighlightedLine] = useState<string | null>(null);
 
   const t = dict?.hero ?? {
     badge: 'TSVETKOV • FOUNDER-LED AGENCY',
     cta: 'Audit My Business',
   };
+
+  const handleFrameChange = useCallback(
+    (chipKeys: string[], highlightLineKey?: string) => {
+      if (chipKeys.length > 0) {
+        setActiveChipKey(chipKeys[0]);
+      }
+      setHighlightedLine(highlightLineKey || null);
+    },
+    []
+  );
+
+  const handleManualSelect = useCallback(
+    (chipKeys: string[], highlightLineKey?: string) => {
+      if (chipKeys.length > 0) {
+        setActiveChipKey(chipKeys[0]);
+      }
+      setHighlightedLine(highlightLineKey || null);
+    },
+    []
+  );
 
   return (
     <section className="hero-section">
@@ -123,102 +148,102 @@ export const Hero = ({ dict }: HeroProps) => {
         .hero-section {
           width: 100%;
           position: relative;
-          padding-top: clamp(4rem, 8vw, 8rem);
-          padding-bottom: clamp(4rem, 8vw, 7rem);
+          padding-top: clamp(5rem, 10vw, 9rem);
+          padding-bottom: clamp(3rem, 6vw, 5rem);
           background: transparent;
           overflow: hidden;
-          min-height: 80vh;
+          min-height: 85vh;
           display: flex;
+          flex-direction: column;
           align-items: center;
+          justify-content: center;
         }
 
-        .hero-grid {
+        .hero-content {
           width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 3rem;
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+          text-align: center;
           position: relative;
           z-index: 4;
-        }
-
-        @media (max-width: 991px) {
-          .hero-grid {
-            flex-direction: column;
-            gap: 2.5rem;
-          }
-        }
-
-        .hero-left {
-          max-width: 580px;
-          flex-shrink: 0;
-        }
-
-        @media (max-width: 991px) {
-          .hero-left {
-            max-width: 100%;
-            text-align: center;
-          }
-        }
-
-        .hero-right {
-          width: 520px;
-          flex-shrink: 0;
-        }
-
-        @media (max-width: 991px) {
-          .hero-right {
-            width: 100%;
-          }
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .hero-title {
-          font-size: clamp(2.4rem, 4.8vw, 4.2rem);
+          font-size: clamp(2.8rem, 5.5vw, 5rem);
           font-weight: 800;
-          line-height: 1.25;
+          line-height: 1.15;
           letter-spacing: -0.03em;
           color: #ffffff;
-          margin: 0 0 1.8rem 0;
+          margin: 0 0 1.5rem 0;
         }
 
         .hero-sublines {
           display: flex;
           flex-direction: column;
-          gap: 0.9rem;
-          margin-bottom: 2.5rem;
+          gap: 0.75rem;
+          margin-bottom: 2rem;
         }
 
         .subline-item {
           font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-          font-weight: 600;
+          font-weight: 500;
           color: ${T.body};
           line-height: 1.5;
+          transition: background 0.3s ease, color 0.3s ease;
+          padding: 2px 8px;
+          border-radius: 6px;
+        }
+
+        .subline-item.highlighted-line {
+          background: ${T.accent08};
+          color: #ffffff;
         }
 
         .btn-primary-hero {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          height: 52px;
-          padding: 0 2.2rem;
+          height: 56px;
+          padding: 0 2.5rem;
           border-radius: ${T.radius.md};
           font-weight: 800;
-          font-size: 1rem;
+          font-size: 1.05rem;
           letter-spacing: 0.01em;
           text-decoration: none;
           cursor: pointer;
           background: linear-gradient(180deg, #00e599 0%, #00a3ff 100%);
           color: #0a0a0c;
           border: 1px solid rgba(255, 255, 255, 0.4);
-          box-shadow:
-            0 8px 20px -6px ${T.accent40},
+          box-shadow: 0 8px 20px -6px ${T.accent40},
             0 4px 12px rgba(0, 163, 255, 0.2);
-          transition: all 0.2s ease;
+          transition: all 0.25s ease;
         }
 
         .btn-primary-hero:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 25px -6px ${T.accent};
+          box-shadow: 0 14px 30px -6px ${T.accent},
+            0 6px 16px rgba(0, 163, 255, 0.35);
+        }
+
+        .ticker-container {
+          width: 100%;
+          max-width: 800px;
+          margin-top: 2.5rem;
+          padding: 0 1.5rem;
+          position: relative;
+          z-index: 4;
+        }
+
+        .trust-line {
+          font-size: 0.8rem;
+          color: ${T.sub};
+          margin-bottom: 1.25rem;
+          font-weight: 500;
+          letter-spacing: 0.03em;
         }
       `}</style>
 
@@ -226,119 +251,115 @@ export const Hero = ({ dict }: HeroProps) => {
       <div
         style={{
           position: 'absolute',
-          top: '15%',
-          right: '0%',
-          width: '650px',
-          height: '550px',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '800px',
+          height: '600px',
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${T.glow} 0%, ${T.accent05} 40%, transparent 70%)`,
-          filter: 'blur(60px)',
+          background: `radial-gradient(circle, ${T.glow} 0%, ${T.accent05} 35%, transparent 65%)`,
+          filter: 'blur(80px)',
           pointerEvents: 'none',
           zIndex: 1,
         }}
       />
 
-      <div className="container" style={{ width: '100%', maxWidth: '1240px', margin: '0 auto', padding: '0 1.5rem' }}>
-        <div className="hero-grid">
-          {/* Левая часть */}
-          <div className="hero-left">
-            <div style={{ marginBottom: '1.25rem' }}>
-              <span
-                style={{
-                  fontSize: '0.68rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                  color: T.accent,
-                  background: T.accent08,
-                  padding: '6px 14px',
-                  borderRadius: 20,
-                  border: `1px solid ${T.accent25}`,
-                }}
-              >
-                {t.badge}
-              </span>
-            </div>
+      {/* Основной контент */}
+      <div className="hero-content">
+        {/* Бейдж */}
+        <div style={{ marginBottom: '1.5rem' }}>
+          <span
+            style={{
+              fontSize: '0.68rem',
+              fontWeight: 700,
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color: T.accent,
+              background: T.accent08,
+              padding: '6px 16px',
+              borderRadius: 20,
+              border: `1px solid ${T.accent25}`,
+            }}
+          >
+            {t.badge}
+          </span>
+        </div>
 
-            {/* Главный заголовок со встроенными чипсами */}
-            <h1 className="hero-title">
-              <InlineTextChip
-                chipKey="value"
-                text="Value"
-                tooltipText="ROI & Economics"
-                activeChip={activeChipKey}
-                onHover={setActiveChipKey}
-                isHeader
-              />
-              Growth
-              <br />
-              Engineered to
-              <InlineTextChip
-                chipKey="scale"
-                text="Scale"
-                tooltipText="System Scaling"
-                activeChip={activeChipKey}
-                onHover={setActiveChipKey}
-                isHeader
-              />
-            </h1>
+        {/* Заголовок */}
+        <h1 className="hero-title">
+          <InlineTextChip
+            chipKey="value"
+            text="Value"
+            tooltipText="ROI & Economics"
+            activeChip={activeChipKey}
+            onHover={setActiveChipKey}
+            isHeader
+          />
+          Growth
+          <br />
+          Engineered to
+          <InlineTextChip
+            chipKey="scale"
+            text="Scale"
+            tooltipText="System Scaling"
+            activeChip={activeChipKey}
+            onHover={setActiveChipKey}
+            isHeader
+          />
+        </h1>
 
-            {/* Список со встроенными чипсами */}
-            <div className="hero-sublines">
-              <div className="subline-item">
-                We eliminate chaos in
-                <InlineTextChip
-                  chipKey="funnels"
-                  text="funnels"
-                  tooltipText="Smart Funnel Routing"
-                  activeChip={activeChipKey}
-                  onHover={setActiveChipKey}
-                />
-              </div>
-
-              <div className="subline-item">
-                No fluff — just clean data architecture
-              </div>
-
-              <div className="subline-item">
-                Track every dollar with
-                <InlineTextChip
-                  chipKey="automation"
-                  text="automation"
-                  tooltipText="AI Agents & Workflows"
-                  activeChip={activeChipKey}
-                  onHover={setActiveChipKey}
-                />
-              </div>
-            </div>
-
-            {/* Микро-социальное доказательство */}
-            <p
-              style={{
-                fontSize: '0.78rem',
-                color: T.sub,
-                marginBottom: '1.25rem',
-                fontWeight: 500,
-                letterSpacing: '0.02em',
-              }}
-            >
-              Trusted by founders from SaaS, E-com, Real Estate
-            </p>
-
-            <a href="#contact" className="btn-primary-hero">
-              {t.cta}
-            </a>
+        {/* Подзаголовок */}
+        <div className="hero-sublines">
+          <div className="subline-item">
+            We eliminate chaos in{' '}
+            <InlineTextChip
+              chipKey="funnels"
+              text="funnels"
+              tooltipText="Smart Funnel Routing"
+              activeChip={activeChipKey}
+              onHover={setActiveChipKey}
+            />
           </div>
 
-          {/* Правая часть: Timeline вместо Engine */}
-          <div className="hero-right">
-            <HeroTimeline
+          <div
+            className={`subline-item ${
+              highlightedLine === 'data' ? 'highlighted-line' : ''
+            }`}
+          >
+            No fluff — just clean data architecture
+          </div>
+
+          <div className="subline-item">
+            Track every dollar with{' '}
+            <InlineTextChip
+              chipKey="automation"
+              text="automation"
+              tooltipText="AI Agents & Workflows"
               activeChip={activeChipKey}
-              onHoverFrame={(chipKeys) => setActiveChipKey(chipKeys[0])}
-              onLeaveFrame={() => setActiveChipKey(null)}
+              onHover={setActiveChipKey}
             />
           </div>
         </div>
+
+        {/* Социальное доказательство */}
+        <p className="trust-line">
+          Trusted by founders from SaaS, E-com, Real Estate
+        </p>
+
+        {/* Кнопка */}
+        <a href="#contact" className="btn-primary-hero">
+          {t.cta}
+        </a>
+      </div>
+
+      {/* Тикер под кнопкой */}
+      <div className="ticker-container">
+        <HeroTicker
+          activeChip={activeChipKey}
+          highlightedLine={highlightedLine}
+          onFrameChange={handleFrameChange}
+          onManualSelect={handleManualSelect}
+        />
       </div>
     </section>
   );
