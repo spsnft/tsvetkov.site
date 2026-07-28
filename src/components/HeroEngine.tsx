@@ -22,32 +22,46 @@ const ENGINE_DATA = [
   },
 ];
 
-export const HeroEngine = () => {
+interface HeroEngineProps {
+  activeId?: string | null;
+  onHoverCard?: (id: string | null) => void;
+}
+
+export const HeroEngine: React.FC<HeroEngineProps> = ({ activeId, onHoverCard }) => {
   return (
     <div className="engine-container">
-      {ENGINE_DATA.map((card) => (
-        <div key={card.id} className="engine-card">
-          <div className="card-header">
-            {/* Анимированная пульсирующая точка */}
-            <span className="live-dot-wrapper">
-              <span className="live-dot-ping"></span>
-              <span className="live-dot"></span>
-            </span>
-            <span className="system-label">{card.systemLabel}</span>
-          </div>
-          
-          <h3 className="card-title">{card.title}</h3>
-          
-          <div className="card-tags">
-            {card.tags.map((tag, i) => (
-              <span key={i} className="engine-tag">
-                <span className="tag-bullet">•</span>
-                {tag}
+      {ENGINE_DATA.map((card) => {
+        const isHighlighted = activeId === card.id;
+
+        return (
+          <div
+            key={card.id}
+            className={`engine-card ${isHighlighted ? 'active-highlight' : ''}`}
+            onMouseEnter={() => onHoverCard?.(card.id)}
+            onMouseLeave={() => onHoverCard?.(null)}
+          >
+            <div className="card-header">
+              {/* Анимированная пульсирующая точка */}
+              <span className="live-dot-wrapper">
+                <span className="live-dot-ping"></span>
+                <span className="live-dot"></span>
               </span>
-            ))}
+              <span className="system-label">{card.systemLabel}</span>
+            </div>
+
+            <h3 className="card-title">{card.title}</h3>
+
+            <div className="card-tags">
+              {card.tags.map((tag, i) => (
+                <span key={i} className="engine-tag">
+                  <span className="tag-bullet">•</span>
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <style jsx>{`
         .engine-container {
@@ -61,30 +75,31 @@ export const HeroEngine = () => {
 
         .engine-card {
           background: linear-gradient(
-            135deg, 
-            rgba(20, 24, 33, 0.75) 0%, 
+            135deg,
+            rgba(20, 24, 33, 0.75) 0%,
             rgba(10, 12, 16, 0.85) 100%
           );
-          border: 1px solid rgba(0, 229, 153, 0.15);
-          border-radius: 16px;
+          border: 1px solid ${T.accent15};
+          border-radius: ${T.radius.lg};
           padding: 1.5rem 1.75rem;
           backdrop-filter: blur(16px);
           transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
           position: relative;
           overflow: hidden;
-          box-shadow: 
+          box-shadow:
             0 10px 30px -10px rgba(0, 0, 0, 0.5),
             inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          cursor: pointer;
         }
 
-        /* Неоновая рамка при наведении */
+        /* Неоновая рамка при наведении или активации из текста */
         .engine-card::before {
           content: '';
           position: absolute;
           inset: 0;
-          border-radius: 16px;
+          border-radius: ${T.radius.lg};
           padding: 1px;
-          background: linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%);
+          background: ${T.linearGradient};
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -93,15 +108,17 @@ export const HeroEngine = () => {
           pointer-events: none;
         }
 
-        .engine-card:hover {
-          transform: translateY(-3px) scale(1.005);
-          border-color: rgba(0, 229, 153, 0.4);
-          box-shadow: 
-            0 16px 36px -10px rgba(0, 229, 153, 0.2),
+        .engine-card:hover,
+        .engine-card.active-highlight {
+          transform: translateY(-3px) scale(1.008);
+          border-color: ${T.accent40};
+          box-shadow:
+            0 16px 36px -10px ${T.accent20},
             inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
-        .engine-card:hover::before {
+        .engine-card:hover::before,
+        .engine-card.active-highlight::before {
           opacity: 1;
         }
 
@@ -112,7 +129,6 @@ export const HeroEngine = () => {
           margin-bottom: 0.6rem;
         }
 
-        /* Анимация пульсации живого статуса */
         .live-dot-wrapper {
           position: relative;
           display: flex;
@@ -136,12 +152,13 @@ export const HeroEngine = () => {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: linear-gradient(135deg, ${T.accent}, ${T.acc2});
+          background: ${T.linearGradient};
           box-shadow: 0 0 8px ${T.accent};
         }
 
         @keyframes ping {
-          75%, 100% {
+          75%,
+          100% {
             transform: scale(2.5);
             opacity: 0;
           }
@@ -162,7 +179,7 @@ export const HeroEngine = () => {
           color: #ffffff;
           margin: 0 0 1.1rem 0;
           letter-spacing: -0.02em;
-          text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .card-tags {
@@ -171,7 +188,6 @@ export const HeroEngine = () => {
           gap: 0.6rem;
         }
 
-        /* Сочные объёмные чипсы */
         .engine-tag {
           display: inline-flex;
           align-items: center;
@@ -179,9 +195,9 @@ export const HeroEngine = () => {
           font-size: 0.78rem;
           font-weight: 600;
           padding: 6px 12px;
-          border-radius: 8px;
-          background: rgba(0, 229, 153, 0.06);
-          border: 1px solid rgba(0, 229, 153, 0.2);
+          border-radius: ${T.radius.sm};
+          background: ${T.accent05};
+          border: 1px solid ${T.accent20};
           color: #e2f9f1;
           backdrop-filter: blur(4px);
           transition: all 0.25s ease;
@@ -193,15 +209,16 @@ export const HeroEngine = () => {
           opacity: 0.8;
         }
 
-        .engine-card:hover .engine-tag {
-          background: rgba(0, 229, 153, 0.12);
-          border-color: rgba(0, 229, 153, 0.4);
+        .engine-card:hover .engine-tag,
+        .engine-card.active-highlight .engine-tag {
+          background: ${T.accent12};
+          border-color: ${T.accent40};
           color: #ffffff;
-          box-shadow: 0 2px 8px rgba(0, 229, 153, 0.15);
+          box-shadow: 0 2px 8px ${T.accent15};
         }
 
         .engine-tag:hover {
-          background: linear-gradient(135deg, rgba(0,229,153,0.25) 0%, rgba(0,163,255,0.25) 100%) !important;
+          background: linear-gradient(135deg, ${T.accent25} 0%, rgba(0, 163, 255, 0.25) 100%) !important;
           border-color: ${T.accent} !important;
           transform: translateY(-1px);
         }
