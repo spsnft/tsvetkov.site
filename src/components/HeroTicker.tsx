@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 
@@ -65,65 +65,56 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
   const [isPaused, setIsPaused] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const animTimerRef = useRef<NodeJS.Timeout | null>(null);
-
+  // Сохраняем колбэк в ref, чтобы не пересоздавать эффекты
   const onFrameChangeRef = useRef(onFrameChange);
   useEffect(() => {
     onFrameChangeRef.current = onFrameChange;
   }, [onFrameChange]);
 
   const frame = FRAMES[activeIndex];
+  
+  // Проверка активности чипса или линии
   const isHighlighted =
     (activeChip && frame.chipKeys.includes(activeChip)) ||
     (highlightedLine && frame.highlightLineKey === highlightedLine);
 
-  // Оповещение родителя при смене кадра
+  // Переход на следующий кадр с анимацией
+  const goToNextFrame = useCallback(() => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveIndex((prev) => (prev + 1) % FRAMES.length);
+      setIsTransitioning(false);
+    }, 250);
+  }, []);
+
+  // Уведомляем родителя при смене кадра
   useEffect(() => {
     onFrameChangeRef.current(frame.chipKeys, frame.highlightLineKey);
   }, [activeIndex, frame]);
 
-  // Чистка таймеров
-  const clearAllTimers = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    if (animTimerRef.current) clearTimeout(animTimerRef.current);
-  };
-
-  // Автопереключение слайдов
+  // Автоматический таймер слайдера
   useEffect(() => {
-    if (isPaused || activeChip) {
-      clearAllTimers();
-      setIsTransitioning(false);
-      return;
-    }
+    if (isPaused || activeChip) return;
 
-    timerRef.current = setTimeout(() => {
-      setIsTransitioning(true);
-
-      animTimerRef.current = setTimeout(() => {
-        setActiveIndex((prev) => (prev + 1) % FRAMES.length);
-        setIsTransitioning(false);
-      }, 300);
+    const timer = setTimeout(() => {
+      goToNextFrame();
     }, FRAME_DURATION);
 
-    return () => {
-      clearAllTimers();
-      setIsTransitioning(false);
-    };
-  }, [activeIndex, isPaused, activeChip]);
+    return () => clearTimeout(timer);
+  }, [activeIndex, isPaused, activeChip, goToNextFrame]);
 
-  // Синхронизация при внешнем выборе чипса
+  // Реакция на внешний ховер по чипсам
   useEffect(() => {
     if (!activeChip) return;
 
     const matchingIndex = FRAMES.findIndex((f) => f.chipKeys.includes(activeChip));
     if (matchingIndex !== -1 && matchingIndex !== activeIndex) {
-      clearAllTimers();
       setIsTransitioning(false);
       setActiveIndex(matchingIndex);
     }
   }, [activeChip, activeIndex]);
 
+  // Клик по кадру
   const handleFrameClick = () => {
     onManualSelect(frame.chipKeys, frame.highlightLineKey);
     if (frame.link) {
@@ -159,10 +150,10 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           </div>
         </div>
 
-        {/* Полоска прогресса с динамическим key для точной синхронизации */}
+        {/* Полоска прогресса перезапускается ТОЛЬКО при смене activeIndex */}
         <div
           className={`progress-bar ${isPaused || activeChip ? 'paused' : ''}`}
-          key={`${activeIndex}-${isPaused}-${!!activeChip}`}
+          key={activeIndex}
         />
       </div>
 
@@ -216,11 +207,11 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           padding: 1.5rem 1.75rem;
           position: relative;
           z-index: 2;
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
         }
 
         .ticker-slide.slide-out {
-          transform: translateX(-25px);
+          transform: translateX(-20px);
           opacity: 0;
         }
 
