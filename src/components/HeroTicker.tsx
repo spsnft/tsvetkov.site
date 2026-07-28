@@ -64,7 +64,9 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const animTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const onFrameChangeRef = useRef(onFrameChange);
   useEffect(() => {
@@ -72,16 +74,24 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
   }, [onFrameChange]);
 
   const frame = FRAMES[activeIndex];
-  const isHighlighted = activeChip ? frame.chipKeys.includes(activeChip) : false;
+  const isHighlighted =
+    (activeChip && frame.chipKeys.includes(activeChip)) ||
+    (highlightedLine && frame.highlightLineKey === highlightedLine);
 
-  // Автопереключение — просто setTimeout, без анимационных таймеров
+  // Очистка таймеров
+  const clearAllTimers = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (animTimerRef.current) clearTimeout(animTimerRef.current);
+  };
+
+  // Автопереключение
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || activeChip) return;
 
     timerRef.current = setTimeout(() => {
       setIsTransitioning(true);
 
-      setTimeout(() => {
+      animTimerRef.current = setTimeout(() => {
         setActiveIndex((prev) => {
           const next = (prev + 1) % FRAMES.length;
           onFrameChangeRef.current(FRAMES[next].chipKeys, FRAMES[next].highlightLineKey);
@@ -91,29 +101,27 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
       }, 300);
     }, FRAME_DURATION);
 
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [activeIndex, isPaused]);
+    return () => clearAllTimers();
+  }, [activeIndex, isPaused, activeChip]);
 
-  // Внешний ховер на чипс
+  // Синхронизация при внешнем выборе чипса
   useEffect(() => {
-    if (activeChip) {
-      const matchingIndex = FRAMES.findIndex((f) => f.chipKeys.includes(activeChip));
-      if (matchingIndex !== -1 && matchingIndex !== activeIndex) {
-        setIsPaused(true);
-        setActiveIndex(matchingIndex);
-        onFrameChangeRef.current(
-          FRAMES[matchingIndex].chipKeys,
-          FRAMES[matchingIndex].highlightLineKey
-        );
-      }
-    } else {
-      setIsPaused(false);
+    if (!activeChip) return;
+
+    const matchingIndex = FRAMES.findIndex((f) => f.chipKeys.includes(activeChip));
+    if (matchingIndex !== -1 && matchingIndex !== activeIndex) {
+      clearAllTimers();
+      setIsTransitioning(false);
+      setActiveIndex(matchingIndex);
+      onFrameChangeRef.current(
+        FRAMES[matchingIndex].chipKeys,
+        FRAMES[matchingIndex].highlightLineKey
+      );
     }
-  }, [activeChip, activeIndex]);
+  }, [activeChip]);
 
   const handleFrameClick = () => {
+    onManualSelect(frame.chipKeys, frame.highlightLineKey);
     if (frame.link) {
       router.push(`/${lang}${frame.link}`);
     }
@@ -130,10 +138,13 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
         onClick={handleFrameClick}
       >
         <div className={`ticker-slide ${isTransitioning ? 'slide-out' : ''}`}>
-          <span className="frame-title">
-            {frame.title}
-            {frame.link && <span className="link-arrow"> →</span>}
-          </span>
+          <div className="title-group">
+            <span className="frame-id">{frame.id}</span>
+            <span className="frame-title">
+              {frame.title}
+              {frame.link && <span className="link-arrow"> →</span>}
+            </span>
+          </div>
 
           <div className="ticker-tags">
             {frame.tags.map((tag, i) => (
@@ -145,7 +156,7 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
         </div>
 
         {/* Полоска прогресса */}
-        <div className={`progress-bar ${isPaused ? 'paused' : ''}`} key={activeIndex} />
+        <div className={`progress-bar ${isPaused || activeChip ? 'paused' : ''}`} key={activeIndex} />
       </div>
 
       <style jsx>{`
@@ -206,6 +217,20 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           opacity: 0;
         }
 
+        .title-group {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .frame-id {
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: ${T.accent};
+          opacity: 0.7;
+          font-family: monospace;
+        }
+
         .frame-title {
           font-size: clamp(1.1rem, 1.8vw, 1.35rem);
           font-weight: 700;
@@ -239,7 +264,6 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           white-space: nowrap;
         }
 
-        /* Чистая CSS-анимация полоски */
         .progress-bar {
           position: absolute;
           bottom: 0;
