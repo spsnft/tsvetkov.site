@@ -40,49 +40,75 @@ export const HeroEngine = () => {
   };
 
   return (
+    // Основной контейнер - Flex с прижатыми элементами
     <div 
-      className="perspective-wrapper"
+      className="hero-engine-wrapper"
       onClick={() => setActiveLayer(null)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
         width: '100%',
         display: 'flex',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: '40px', // Убираем пустоту, прижимаем блоки
+        padding: '40px 20px',
         perspective: 1200,
-        minHeight: 420,
-        cursor: activeLayer ? 'zoom-out' : 'pointer',
+        flexWrap: 'wrap',
+        cursor: activeLayer ? 'zoom-out' : 'default',
       }}
     >
       <style jsx>{`
-        .perspective-wrapper {
+        .hero-engine-wrapper {
           user-select: none;
           -webkit-tap-highlight-color: transparent;
         }
         
         .chip {
-          padding: 5px 10px;
+          padding: 4px 10px;
           border-radius: 6px;
-          font-size: 0.72rem;
-          font-weight: 600;
+          font-size: 0.7rem;
+          font-weight: 500;
           white-space: nowrap;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.03);
+          color: rgba(255, 255, 255, 0.7);
+          transition: all 0.3s ease;
         }
 
-        /* Адаптив для мобильных - убираем 3D и клики */
+        .layer-card {
+          /* Единый фирменный градиент для всех карточек вместо светофора */
+          background: linear-gradient(135deg, rgba(0, 20, 30, 0.85), rgba(0, 30, 20, 0.85));
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Специфичные бордеры для каждого слоя, чтобы сохранить иерархию */
+        .layer-top { border-color: rgba(56, 189, 248, 0.2); }
+        .layer-middle { border-color: rgba(52, 211, 153, 0.2); }
+        .layer-bottom { border-color: rgba(255, 255, 255, 0.1); }
+
+        /* Адаптив для планшетов и мобильных */
+        @media (max-width: 1024px) {
+          .hero-engine-wrapper {
+            flex-direction: column !important;
+            gap: 30px !important;
+          }
+        }
         @media (max-width: 767px) {
           .perspective-wrapper {
             perspective: none;
             min-height: auto;
-            padding: 20px 0;
           }
           .scene-container {
             transform: none !important;
             height: auto !important;
+            gap: 10px !important;
           }
           .layer-card {
             position: relative !important;
-            margin-top: -12px !important;
+            margin: 0 !important;
             bottom: auto !important;
             height: auto !important;
             min-height: 100px;
@@ -91,179 +117,252 @@ export const HeroEngine = () => {
             filter: none !important;
             cursor: default !important;
             z-index: auto !important;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
           }
         }
       `}</style>
 
-      {/* 3D Сцена */}
-      <motion.div
-        className="scene-container"
-        animate={{
-          rotateX: activeLayer ? 0 : isHovered ? 14 : 18,
-          rotateY: activeLayer ? 0 : isHovered ? -8 : -12,
-          rotateZ: activeLayer ? 0 : isHovered ? 1 : 2,
-        }}
-        transition={{ type: 'spring', stiffness: 180, damping: 22 }}
+      {/* ---------- ЛЕВАЯ ЧАСТЬ: ТЕКСТ ---------- */}
+      <div style={{ 
+        flex: 1, 
+        maxWidth: 480, 
+        minWidth: 280, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: 24 
+      }}>
+        {/* Бейдж */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          padding: '6px 14px',
+          borderRadius: 20,
+          border: '1px solid rgba(255,255,255,0.1)',
+          background: 'rgba(255,255,255,0.05)',
+          fontSize: '0.75rem',
+          fontWeight: 600,
+          color: 'rgba(255,255,255,0.5)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          width: 'fit-content',
+          marginBottom: 8
+        }}>
+          TSVETKOV • FOUNDER-LED AGENCY
+        </div>
+
+        {/* ДВУХСТРОЧНЫЙ ЗАГОЛОВОК */}
+        <h1 style={{
+          fontFamily: "'Space Grotesk', system-ui, sans-serif",
+          fontSize: '3.5rem',
+          fontWeight: 700,
+          lineHeight: 1.1,
+          margin: 0,
+          letterSpacing: '-0.03em',
+        }}>
+          <span style={{ color: '#fff', display: 'block' }}>Value Growth</span>
+          {/* Вторая строка с градиентом */}
+          <span style={{
+            display: 'block',
+            background: 'linear-gradient(135deg, #00E599 0%, #00A3FF 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>
+            Engineered to Scale
+          </span>
+        </h1>
+
+        {/* Список */}
+        <ul style={{
+          listStyle: 'none',
+          padding: 0,
+          margin: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+          color: 'rgba(255,255,255,0.7)',
+          fontSize: '1rem',
+          lineHeight: 1.5
+        }}>
+          <li style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+            <span style={{ color: '#00E599' }}>✓</span> We eliminate chaos in <strong style={{ color: '#fff' }}>marketing and digital systems</strong>
+          </li>
+          <li style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+            <span style={{ color: '#00E599' }}>✓</span> No fluff — just <strong style={{ color: '#fff' }}>high-performance architectures</strong>
+          </li>
+          <li style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+            <span style={{ color: '#00E599' }}>✓</span> Track every dollar and <strong style={{ color: '#fff' }}>automate sales flow</strong>
+          </li>
+        </ul>
+
+        {/* Кнопка */}
+        <button style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 8,
+          padding: '14px 28px',
+          borderRadius: 12,
+          background: 'rgba(0, 229, 153, 0.1)',
+          border: '1px solid rgba(0, 229, 153, 0.3)',
+          color: '#fff',
+          fontSize: '1rem',
+          fontWeight: 600,
+          cursor: 'pointer',
+          width: 'fit-content',
+          transition: 'all 0.3s ease',
+          boxShadow: '0 0 20px rgba(0, 229, 153, 0.05)'
+        }}>
+          Audit My Business <span style={{ color: '#00E599' }}>→</span>
+        </button>
+      </div>
+
+      {/* ---------- ПРАВАЯ ЧАСТЬ: 3D ПИЛЮЛИ ---------- */}
+      <div 
+        className="perspective-wrapper"
         style={{
-          position: 'relative',
-          width: '100%',
-          maxWidth: 440,
-          height: 380,
-          transformStyle: 'preserve-3d',
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          minWidth: 280,
+          maxWidth: 480,
         }}
       >
-        {/* ==================== СЛОЙ 1: BOTTOM (Голубой/Технологичный) ==================== */}
         <motion.div
-          className="layer-card"
-          onClick={(e) => handleCardClick('bottom', e)}
+          className="scene-container"
           animate={{
-            z: activeLayer === 'bottom' ? 120 : activeLayer ? -40 : isHovered ? 10 : 0,
-            y: activeLayer === 'bottom' ? -10 : activeLayer === 'middle' ? 60 : activeLayer === 'top' ? 100 : 0,
-            scale: activeLayer === 'bottom' ? 1.05 : activeLayer ? 0.92 : 1,
-            opacity: activeLayer && activeLayer !== 'bottom' ? 0.35 : 1,
-            filter: activeLayer && activeLayer !== 'bottom' ? 'blur(4px)' : 'blur(0px)',
+            rotateX: activeLayer ? 0 : isHovered ? 8 : 12,
+            rotateY: activeLayer ? 0 : isHovered ? -4 : -6,
+            rotateZ: activeLayer ? 0 : isHovered ? 0.5 : 1,
           }}
-          transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+          transition={{ type: 'spring', stiffness: 180, damping: 22 }}
           style={{
-            position: 'absolute',
-            bottom: 0,
+            position: 'relative',
             width: '100%',
-            height: 135,
-            backdropFilter: 'blur(16px)',
-            borderRadius: 18,
-            padding: '1.25rem 1.4rem',
-            boxSizing: 'border-box',
-            background: 'rgba(10, 16, 26, 0.9)',
-            border: activeLayer === 'bottom' 
-              ? '1px solid rgba(0, 163, 255, 0.8)' 
-              : '1px solid rgba(0, 163, 255, 0.25)',
-            boxShadow: activeLayer === 'bottom'
-              ? '0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 163, 255, 0.25)'
-              : '-12px 24px 35px rgba(0, 0, 0, 0.5)',
-            zIndex: activeLayer === 'bottom' ? 40 : 1,
-            cursor: 'pointer',
+            height: 380,
+            transformStyle: 'preserve-3d',
           }}
         >
-          {/* Заголовок слоя (как в старом коде) */}
-          <div style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: '#38BDF8', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
-            01. AUTOMATE & OPTIMIZE
-          </div>
-          
-          {/* Основной текст (из нового контента) */}
-          <h3 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.25, color: '#fff', margin: '0 0 0.6rem 0' }}>
-            {pills[2].title}
-          </h3>
-          
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {pills[2].tags.map((tag, i) => (
-              <span key={i} className="chip" style={{ background: 'rgba(0, 163, 255, 0.08)', border: '1px solid rgba(0, 163, 255, 0.2)', color: '#7DD3FC' }}>
-                {tag}
+          {/* СЛОЙ BOTTOM */}
+          <motion.div
+            className="layer-card layer-bottom"
+            onClick={(e) => handleCardClick('bottom', e)}
+            animate={{
+              z: activeLayer === 'bottom' ? 120 : activeLayer ? -20 : isHovered ? 5 : 0,
+              y: activeLayer === 'bottom' ? -10 : activeLayer === 'middle' ? 60 : activeLayer === 'top' ? 100 : 0,
+              scale: activeLayer === 'bottom' ? 1.05 : activeLayer ? 0.92 : 1,
+              opacity: activeLayer && activeLayer !== 'bottom' ? 0.35 : 1,
+              filter: activeLayer && activeLayer !== 'bottom' ? 'blur(4px)' : 'blur(0px)',
+            }}
+            transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              width: '100%',
+              height: 125,
+              borderRadius: 16,
+              padding: '1.25rem 1.5rem',
+              boxSizing: 'border-box',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              boxShadow: activeLayer === 'bottom' 
+                ? '0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 163, 255, 0.15)'
+                : '-8px 16px 30px rgba(0, 0, 0, 0.6)',
+              zIndex: activeLayer === 'bottom' ? 40 : 1,
+              cursor: 'pointer',
+            }}
+          >
+            <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+              01. AUTOMATE & OPTIMIZE
+            </div>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#fff', margin: '0 0 0.6rem 0' }}>
+              {pills[2].title}
+            </h3>
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              {pills[2].tags.map((tag, i) => <span key={i} className="chip">{tag}</span>)}
+            </div>
+          </motion.div>
+
+          {/* СЛОЙ MIDDLE */}
+          <motion.div
+            className="layer-card layer-middle"
+            onClick={(e) => handleCardClick('middle', e)}
+            animate={{
+              z: activeLayer === 'middle' ? 120 : activeLayer ? -10 : isHovered ? 70 : 55,
+              y: activeLayer === 'middle' ? -20 : activeLayer === 'top' ? 60 : activeLayer === 'bottom' ? -60 : 0,
+              scale: activeLayer === 'middle' ? 1.05 : activeLayer ? 0.92 : 1,
+              opacity: activeLayer && activeLayer !== 'middle' ? 0.35 : 1,
+              filter: activeLayer && activeLayer !== 'middle' ? 'blur(4px)' : 'blur(0px)',
+            }}
+            transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+            style={{
+              position: 'absolute',
+              bottom: 95,
+              width: '100%',
+              height: 125,
+              borderRadius: 16,
+              padding: '1.25rem 1.5rem',
+              boxSizing: 'border-box',
+              border: '1px solid rgba(52, 211, 153, 0.15)',
+              boxShadow: activeLayer === 'middle' 
+                ? '0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 229, 153, 0.15)'
+                : '-10px 22px 35px rgba(0, 0, 0, 0.6)',
+              zIndex: activeLayer === 'middle' ? 40 : 2,
+              cursor: 'pointer',
+            }}
+          >
+            <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(82, 211, 153, 0.7)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+              02. DATA INTELLIGENCE
+            </div>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#fff', margin: '0 0 0.6rem 0' }}>
+              {pills[1].title}
+            </h3>
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              {pills[1].tags.map((tag, i) => <span key={i} className="chip">{tag}</span>)}
+            </div>
+          </motion.div>
+
+          {/* СЛОЙ TOP */}
+          <motion.div
+            className="layer-card layer-top"
+            onClick={(e) => handleCardClick('top', e)}
+            animate={{
+              z: activeLayer === 'top' ? 120 : activeLayer ? 0 : isHovered ? 135 : 110,
+              y: activeLayer === 'top' ? -30 : activeLayer === 'middle' ? -80 : activeLayer === 'bottom' ? -120 : 0,
+              scale: activeLayer === 'top' ? 1.05 : activeLayer ? 0.92 : 1,
+              opacity: activeLayer && activeLayer !== 'top' ? 0.35 : 1,
+              filter: activeLayer && activeLayer !== 'top' ? 'blur(4px)' : 'blur(0px)',
+            }}
+            transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+            style={{
+              position: 'absolute',
+              bottom: 190,
+              width: '100%',
+              height: 125,
+              borderRadius: 16,
+              padding: '1.25rem 1.5rem',
+              boxSizing: 'border-box',
+              border: '1px solid rgba(56, 189, 248, 0.15)',
+              boxShadow: activeLayer === 'top' 
+                ? '0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(56, 189, 248, 0.15)'
+                : '-12px 28px 40px rgba(0, 0, 0, 0.6)',
+              zIndex: activeLayer === 'top' ? 40 : 3,
+              cursor: 'pointer',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+              <span style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(56, 189, 248, 0.7)', textTransform: 'uppercase' }}>
+                03. SCALE & REVENUE
               </span>
-            ))}
-          </div>
+            </div>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#fff', margin: '0 0 0.6rem 0' }}>
+              {pills[0].title}
+            </h3>
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              {pills[0].tags.map((tag, i) => <span key={i} className="chip">{tag}</span>)}
+            </div>
+          </motion.div>
         </motion.div>
-
-        {/* ==================== СЛОЙ 2: MIDDLE (Зеленый/Результат) ==================== */}
-        <motion.div
-          className="layer-card"
-          onClick={(e) => handleCardClick('middle', e)}
-          animate={{
-            z: activeLayer === 'middle' ? 120 : activeLayer ? -20 : isHovered ? 65 : 50,
-            y: activeLayer === 'middle' ? -20 : activeLayer === 'top' ? 60 : activeLayer === 'bottom' ? -60 : 0,
-            scale: activeLayer === 'middle' ? 1.05 : activeLayer ? 0.92 : 1,
-            opacity: activeLayer && activeLayer !== 'middle' ? 0.35 : 1,
-            filter: activeLayer && activeLayer !== 'middle' ? 'blur(4px)' : 'blur(0px)',
-          }}
-          transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-          style={{
-            position: 'absolute',
-            bottom: 90,
-            width: '100%',
-            height: 130,
-            backdropFilter: 'blur(16px)',
-            borderRadius: 18,
-            padding: '1.25rem 1.4rem',
-            boxSizing: 'border-box',
-            background: 'rgba(10, 20, 16, 0.92)',
-            border: activeLayer === 'middle' 
-              ? '1px solid rgba(0, 229, 153, 0.8)' 
-              : '1px solid rgba(0, 229, 153, 0.35)',
-            boxShadow: activeLayer === 'middle'
-              ? '0 20px 40px rgba(0,0,0,0.8), 0 0 35px rgba(0, 229, 153, 0.3)'
-              : '-14px 28px 40px rgba(0, 0, 0, 0.55)',
-            zIndex: activeLayer === 'middle' ? 40 : 2,
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: T.accent, textTransform: 'uppercase', marginBottom: '0.6rem' }}>
-            02. DATA INTELLIGENCE
-          </div>
-          
-          <h3 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.25, color: '#fff', margin: '0 0 0.6rem 0' }}>
-            {pills[1].title}
-          </h3>
-
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {pills[1].tags.map((tag, i) => (
-              <span key={i} className="chip" style={{ background: 'rgba(0, 229, 153, 0.08)', border: '1px solid rgba(0, 229, 153, 0.2)', color: '#6EE7B7' }}>
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ==================== СЛОЙ 3: TOP (Фиолетовый/Проблема - для контраста) ==================== */}
-        <motion.div
-          className="layer-card"
-          onClick={(e) => handleCardClick('top', e)}
-          animate={{
-            z: activeLayer === 'top' ? 120 : activeLayer ? 0 : isHovered ? 125 : 100,
-            y: activeLayer === 'top' ? -30 : activeLayer === 'middle' ? -80 : activeLayer === 'bottom' ? -120 : 0,
-            scale: activeLayer === 'top' ? 1.05 : activeLayer ? 0.92 : 1,
-            opacity: activeLayer && activeLayer !== 'top' ? 0.35 : 1,
-            filter: activeLayer && activeLayer !== 'top' ? 'blur(4px)' : 'blur(0px)',
-          }}
-          transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-          style={{
-            position: 'absolute',
-            bottom: 185,
-            width: '100%',
-            height: 130,
-            backdropFilter: 'blur(16px)',
-            borderRadius: 18,
-            padding: '1.25rem 1.4rem',
-            boxSizing: 'border-box',
-            background: 'rgba(18, 10, 12, 0.88)',
-            border: activeLayer === 'top' 
-              ? '1px solid rgba(239, 68, 68, 0.8)' 
-              : '1px solid rgba(239, 68, 68, 0.25)',
-            boxShadow: activeLayer === 'top'
-              ? '0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(239, 68, 68, 0.25)'
-              : '-18px 35px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05)',
-            zIndex: activeLayer === 'top' ? 40 : 3,
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-            <span style={{ fontSize: '0.64rem', fontWeight: 800, letterSpacing: '0.12em', color: '#EF4444', textTransform: 'uppercase' }}>
-              03. SCALE & REVENUE
-            </span>
-          </div>
-          
-          <h3 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.25, color: '#fff', margin: '0 0 0.6rem 0' }}>
-            {pills[0].title}
-          </h3>
-
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {pills[0].tags.map((tag, i) => (
-              <span key={i} className="chip" style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#FCA5A5' }}>
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };
