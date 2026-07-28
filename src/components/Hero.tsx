@@ -1,5 +1,3 @@
-// src/components/Hero.tsx
-
 import React from 'react';
 import { HeroEngine } from './HeroEngine';
 import { T } from '@/src/theme/tokens';
@@ -61,9 +59,9 @@ export const Hero = ({ dict }: HeroProps) => {
           max-width: 1280px;
           margin: 0 auto;
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
-          gap: 3rem;
+          gap: 2rem;
           position: relative;
           z-index: 4;
         }
