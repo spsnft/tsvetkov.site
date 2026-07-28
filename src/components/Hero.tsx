@@ -27,7 +27,6 @@ export const Hero = ({ dict }: HeroProps) => {
     cta: 'Audit My Business',
   };
 
-  // Хелпер: парсит строку вида "текст <strong>жирный</strong> текст" в JSX
   const renderWithStrong = (text: string) => {
     const parts = text.split(/<strong>(.*?)<\/strong>/g);
     return parts.map((part, i) => {
@@ -45,51 +44,146 @@ export const Hero = ({ dict }: HeroProps) => {
         position: 'relative',
         paddingTop: 'clamp(4rem, 8vw, 8rem)',
         paddingBottom: 'clamp(4rem, 8vw, 7rem)',
-        paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
-        paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
+        paddingLeft: T.pagePadding,
+        paddingRight: T.pagePadding,
         background: 'transparent',
         overflow: 'hidden',
       }}
     >
       <style jsx>{`
-        .btn-glass-cta {
+        .hero-grid {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 440px;
+          gap: 3.5rem;
+          align-items: center;
+          position: relative;
+          z-index: 4;
+        }
+
+        @media (max-width: 1024px) {
+          .hero-grid {
+            grid-template-columns: 1fr 380px;
+            gap: 2.5rem;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+        }
+
+        .hero-left {
+          max-width: 580px;
+        }
+
+        @media (max-width: 767px) {
+          .hero-left {
+            max-width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+        }
+
+        .hero-title-line {
+          display: block;
+          font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+          font-weight: 800;
+          line-height: 1.08;
+          letter-spacing: -0.035em;
+          color: #fff;
+        }
+
+        .hero-title-gradient {
+          display: block;
+          font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+          font-weight: 800;
+          line-height: 1.08;
+          letter-spacing: -0.035em;
+          background: linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          filter: drop-shadow(0 0 20px rgba(0, 229, 153, 0.2));
+        }
+
+        .hero-bullets {
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+          margin-bottom: 2.25rem;
+        }
+
+        @media (max-width: 767px) {
+          .hero-bullets {
+            align-items: center;
+          }
+        }
+
+        .hero-bullet-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 0.95rem;
+          color: ${T.sub};
+        }
+
+        .btn-primary-hero {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          gap: 10px;
-          padding: 0.9rem 1.8rem;
-          border-radius: 14px;
-          background: rgba(0, 229, 153, 0.08);
-          border: 1px solid rgba(0, 229, 153, 0.4);
-          color: #fff;
-          font-weight: 700;
-          font-size: 0.95rem;
-          letter-spacing: -0.01em;
+          height: 52px;
+          padding: 0 2rem;
+          border-radius: 12px;
+          font-weight: 800;
+          font-size: 1rem;
+          letter-spacing: 0.01em;
           text-decoration: none;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 0 20px rgba(0, 229, 153, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
+          white-space: nowrap;
+          background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%);
+          color: #0A0A0C;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          box-shadow: 
+            inset 0 2px 0 rgba(255, 255, 255, 0.5),
+            inset 0 -3px 0 rgba(0, 0, 0, 0.25),
+            0 8px 20px -6px rgba(0, 229, 153, 0.4),
+            0 4px 12px rgba(0, 163, 255, 0.2);
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          font-family: 'Space Grotesk', system-ui, sans-serif;
         }
 
-        .btn-glass-cta:hover {
-          background: rgba(0, 229, 153, 0.16);
-          border-color: rgba(0, 229, 153, 0.8);
-          box-shadow: 0 0 30px rgba(0, 229, 153, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+        .btn-primary-hero:hover {
           transform: translateY(-2px);
+          background: linear-gradient(180deg, #1affaa 0%, #1ab1ff 100%);
+          box-shadow: 
+            inset 0 2px 0 rgba(255, 255, 255, 0.6),
+            inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+            0 12px 25px -6px rgba(0, 229, 153, 0.55),
+            0 6px 16px rgba(0, 163, 255, 0.35);
         }
 
-        .btn-glass-cta:hover .cta-arrow {
-          transform: translateX(4px);
+        .btn-primary-hero:active {
+          transform: translateY(1px);
+          box-shadow: 
+            inset 0 2px 4px rgba(0, 0, 0, 0.3),
+            0 2px 8px -4px rgba(0, 229, 153, 0.3);
         }
 
-        .cta-arrow {
-          transition: transform 0.25s ease;
+        @media (max-width: 640px) {
+          .btn-primary-hero {
+            width: auto;
+            min-width: 220px;
+          }
         }
       `}</style>
 
-      {/* ФОНОВОЕ СВЕЧЕНИЕ */}
+      {/* Фоновое свечение */}
       <div
         style={{
           position: 'absolute',
@@ -106,20 +200,9 @@ export const Hero = ({ dict }: HeroProps) => {
         }}
       />
 
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '3.5rem',
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: 4,
-        }}
-      >
-        {/* ЛЕВАЯ КОЛОНКА */}
-        <div>
+      <div className="hero-grid">
+        {/* Левая колонка */}
+        <div className="hero-left">
           <div style={{ marginBottom: '1.25rem' }}>
             <span
               style={{
@@ -128,72 +211,50 @@ export const Hero = ({ dict }: HeroProps) => {
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
                 color: T.accent,
-                background: 'rgba(0, 229, 153, 0.08)',
+                background: T.accent08,
                 padding: '5px 12px',
                 borderRadius: 20,
-                border: '1px solid rgba(0, 229, 153, 0.25)',
+                border: `1px solid ${T.accent25}`,
               }}
             >
               {t.badge}
             </span>
           </div>
 
-          <h1
-            style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4.2rem)',
-              fontWeight: 800,
-              lineHeight: 1.08,
-              letterSpacing: '-0.035em',
-              color: '#fff',
-              margin: '0 0 1.5rem 0',
-            }}
-          >
-            {t.titleLine1}<br />
-            <span
-              style={{
-                background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                filter: 'drop-shadow(0 0 20px rgba(0, 229, 153, 0.2))',
-              }}
-            >
-              {t.titleLine2}
-            </span>
+          <h1 style={{ margin: '0 0 1.5rem 0', maxWidth: 520 }}>
+            <span className="hero-title-line">{t.titleLine1}</span>
+            <span className="hero-title-gradient">{t.titleLine2}</span>
           </h1>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', marginBottom: '2.25rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', color: T.sub }}>
+          <div className="hero-bullets">
+            <div className="hero-bullet-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
+                <polyline points="20 6 9 17 4 12" />
               </svg>
               <span>{renderWithStrong(t.sub1)}</span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', color: T.sub }}>
+            <div className="hero-bullet-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
+                <polyline points="20 6 9 17 4 12" />
               </svg>
               <span>{renderWithStrong(t.sub2)}</span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.95rem', color: T.sub }}>
+            <div className="hero-bullet-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
+                <polyline points="20 6 9 17 4 12" />
               </svg>
               <span>{renderWithStrong(t.sub3)}</span>
             </div>
           </div>
 
-          <a href="#contact" className="btn-glass-cta">
-            <span>{t.cta}</span>
-            <svg className="cta-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
+          <a href="#contact" className="btn-primary-hero">
+            {t.cta}
           </a>
         </div>
 
-        {/* ПРАВАЯ КОЛОНКА */}
+        {/* Правая колонка */}
         <HeroEngine />
       </div>
     </section>
