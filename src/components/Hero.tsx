@@ -263,7 +263,7 @@ export const Hero = ({ dict }: HeroProps) => {
         }
       `}</style>
 
-      {/* Фоновое свечение (смещено под правый блок) */}
+      {/* Фоновое свечение */}
       <div
         style={{
           position: 'absolute',
