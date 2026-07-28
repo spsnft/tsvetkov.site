@@ -5,6 +5,7 @@ import { HeroTicker } from './HeroTicker';
 import { T } from '@/src/theme/tokens';
 
 interface HeroProps {
+  lang: string;
   dict?: any;
 }
 
@@ -113,7 +114,7 @@ const InlineTextChip: React.FC<InlineTextChipProps> = ({
   );
 };
 
-export const Hero = ({ dict }: HeroProps) => {
+export const Hero = ({ lang, dict }: HeroProps) => {
   const [activeChipKey, setActiveChipKey] = useState<string | null>(null);
   const [highlightedLine, setHighlightedLine] = useState<string | null>(null);
 
@@ -237,14 +238,6 @@ export const Hero = ({ dict }: HeroProps) => {
           position: relative;
           z-index: 4;
         }
-
-        .trust-line {
-          font-size: 0.8rem;
-          color: ${T.sub};
-          margin-bottom: 1.25rem;
-          font-weight: 500;
-          letter-spacing: 0.03em;
-        }
       `}</style>
 
       {/* Фоновое неоновое свечение */}
@@ -341,11 +334,6 @@ export const Hero = ({ dict }: HeroProps) => {
           </div>
         </div>
 
-        {/* Социальное доказательство */}
-        <p className="trust-line">
-          Trusted by founders from SaaS, E-com, Real Estate
-        </p>
-
         {/* Кнопка */}
         <a href="#contact" className="btn-primary-hero">
           {t.cta}
@@ -355,6 +343,7 @@ export const Hero = ({ dict }: HeroProps) => {
       {/* Тикер под кнопкой */}
       <div className="ticker-container">
         <HeroTicker
+          lang={lang}
           activeChip={activeChipKey}
           highlightedLine={highlightedLine}
           onFrameChange={handleFrameChange}
