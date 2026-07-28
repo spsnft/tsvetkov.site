@@ -1,3 +1,5 @@
+// src/components/Hero.tsx
+
 import React from 'react';
 import { HeroEngine } from './HeroEngine';
 import { T } from '@/src/theme/tokens';
@@ -48,45 +50,68 @@ export const Hero = ({ dict }: HeroProps) => {
         paddingRight: T.pagePadding,
         background: 'transparent',
         overflow: 'hidden',
+        minHeight: '80vh',
+        display: 'flex',
+        alignItems: 'center',
       }}
     >
       <style jsx>{`
         .hero-grid {
-          max-width: 1200px;
+          width: 100%;
+          max-width: 1280px;
           margin: 0 auto;
-          display: grid;
-          grid-template-columns: 1fr 440px;
-          gap: 2rem;
+          display: flex;
+          justify-content: center;
           align-items: center;
+          gap: 3rem;
           position: relative;
           z-index: 4;
         }
 
         @media (max-width: 1024px) {
           .hero-grid {
-            grid-template-columns: 1fr 380px;
             gap: 2.5rem;
           }
         }
 
         @media (max-width: 767px) {
           .hero-grid {
-            grid-template-columns: 1fr;
+            flex-direction: column;
             gap: 2rem;
           }
         }
 
         .hero-left {
-          max-width: 580px;
+          max-width: 560px;
+          flex-shrink: 0;
         }
 
         @media (max-width: 767px) {
           .hero-left {
             max-width: 100%;
+            flex-shrink: 1;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+          }
+        }
+
+        .hero-right {
+          width: 420px;
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 1024px) {
+          .hero-right {
+            width: 380px;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .hero-right {
+            width: 100%;
+            flex-shrink: 1;
           }
         }
 
@@ -115,8 +140,8 @@ export const Hero = ({ dict }: HeroProps) => {
         .hero-bullets {
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
-          margin-bottom: 2.25rem;
+          gap: 1rem;
+          margin-bottom: 3rem;
         }
 
         @media (max-width: 767px) {
@@ -255,7 +280,9 @@ export const Hero = ({ dict }: HeroProps) => {
         </div>
 
         {/* Правая колонка */}
-        <HeroEngine />
+        <div className="hero-right">
+          <HeroEngine />
+        </div>
       </div>
     </section>
   );
