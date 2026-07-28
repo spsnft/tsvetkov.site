@@ -2,8 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { T } from '@/src/theme/tokens';
 
-// Динамический импорт 3D-движка
-const HeroEngine = dynamic(
+import { HeroEngine } from './HeroEngine';
   () => import('./HeroEngine').then((mod) => mod.HeroEngine),
   { 
     ssr: false,
