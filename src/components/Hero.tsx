@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HeroEngine } from './HeroEngine';
+import { HeroTimeline } from './HeroTimeline';
 import { T } from '@/src/theme/tokens';
 
 interface HeroProps {
@@ -46,7 +46,6 @@ const InlineTextChip: React.FC<InlineTextChipProps> = ({
           user-select: none;
         }
 
-        /* Стиль капсулы для заголовка H1 */
         .header-chip {
           padding: 0px 14px;
           margin: 0 4px;
@@ -56,7 +55,6 @@ const InlineTextChip: React.FC<InlineTextChipProps> = ({
           box-shadow: 0 0 15px ${T.accent08};
         }
 
-        /* Стиль капсулы для подзаголовка / списка */
         .body-chip {
           padding: 1px 10px;
           margin: 0 4px;
@@ -79,7 +77,6 @@ const InlineTextChip: React.FC<InlineTextChipProps> = ({
           box-shadow: 0 4px 20px ${T.accent35};
         }
 
-        /* Тултип-баббл над чипсой */
         .chip-popover {
           position: absolute;
           bottom: 125%;
@@ -243,7 +240,7 @@ export const Hero = ({ dict }: HeroProps) => {
 
       <div className="container" style={{ width: '100%', maxWidth: '1240px', margin: '0 auto', padding: '0 1.5rem' }}>
         <div className="hero-grid">
-          {/* Левая часть: Точно по твоему макету со скриншота */}
+          {/* Левая часть */}
           <div className="hero-left">
             <div style={{ marginBottom: '1.25rem' }}>
               <span
@@ -315,16 +312,30 @@ export const Hero = ({ dict }: HeroProps) => {
               </div>
             </div>
 
+            {/* Микро-социальное доказательство */}
+            <p
+              style={{
+                fontSize: '0.78rem',
+                color: T.sub,
+                marginBottom: '1.25rem',
+                fontWeight: 500,
+                letterSpacing: '0.02em',
+              }}
+            >
+              Trusted by founders from SaaS, E-com, Real Estate
+            </p>
+
             <a href="#contact" className="btn-primary-hero">
               {t.cta}
             </a>
           </div>
 
-          {/* Правая часть: Блок систем */}
+          {/* Правая часть: Timeline вместо Engine */}
           <div className="hero-right">
-            <HeroEngine
+            <HeroTimeline
               activeChip={activeChipKey}
-              onHoverCard={setActiveChipKey}
+              onHoverFrame={(chipKeys) => setActiveChipKey(chipKeys[0])}
+              onLeaveFrame={() => setActiveChipKey(null)}
             />
           </div>
         </div>
