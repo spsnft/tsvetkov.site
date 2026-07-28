@@ -1,5 +1,3 @@
-// src/components/HeroEngine.tsx
-
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -19,21 +17,21 @@ const pills: PillData[] = [
     id: 0,
     label: '01. DATA INTELLIGENCE',
     title: 'Grow with Data & Intelligence',
-    tags: ['Actionable Analytics', 'Real-Time Attribution'],
+    tags: ['Actionable Analytics', 'Real-Time Attribution', 'Zero Blind Spots'],
     accentClass: 'green',
   },
   {
     id: 1,
     label: '02. SALES AUTOMATION',
     title: 'Automate Sales & Eliminate Manual Work',
-    tags: ['Instant CRM Routing', 'AI Sales Workflows'],
+    tags: ['Instant CRM Routing', 'AI Sales Workflows', 'Lead Scoring'],
     accentClass: 'blue',
   },
   {
     id: 2,
     label: '03. SCALE & REVENUE',
     title: 'Convert Traffic into Revenue',
-    tags: ['Smart Funnels', 'Live Unit Economics'],
+    tags: ['Smart Funnels', 'Live Unit Economics', 'Predictable CAC'],
     accentClass: 'red',
   },
 ];
@@ -85,8 +83,9 @@ export const HeroEngine = () => {
     return {
       position: 'absolute' as const,
       bottom: 0,
+      left: 0,
       width: '100%',
-      height: 135,
+      minHeight: 145,
       backdropFilter: 'blur(16px)',
       WebkitBackdropFilter: 'blur(16px)',
       borderRadius: 18,
