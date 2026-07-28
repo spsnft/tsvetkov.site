@@ -44,8 +44,8 @@ export const Hero = ({ dict }: HeroProps) => {
         position: 'relative',
         paddingTop: 'clamp(4rem, 8vw, 8rem)',
         paddingBottom: 'clamp(4rem, 8vw, 7rem)',
-        paddingLeft: T.pagePadding,
-        paddingRight: T.pagePadding,
+        paddingLeft: '1.5rem',
+        paddingRight: '1.5rem',
         background: 'transparent',
         overflow: 'hidden',
         minHeight: '80vh',
@@ -56,7 +56,7 @@ export const Hero = ({ dict }: HeroProps) => {
       <style jsx>{`
         .hero-grid {
           width: 100%;
-          max-width: 1280px;
+          max-width: 1200px; /* Привели к единому стандарту Design System */
           margin: 0 auto;
           display: flex;
           justify-content: space-between;
@@ -68,7 +68,7 @@ export const Hero = ({ dict }: HeroProps) => {
 
         @media (max-width: 1024px) {
           .hero-grid {
-            gap: 2.5rem;
+            gap: 2rem;
           }
         }
 
@@ -80,7 +80,7 @@ export const Hero = ({ dict }: HeroProps) => {
         }
 
         .hero-left {
-          max-width: 560px;
+          max-width: 580px; /* Слегка добавили ширины для плотности */
           flex-shrink: 0;
         }
 
@@ -96,13 +96,13 @@ export const Hero = ({ dict }: HeroProps) => {
         }
 
         .hero-right {
-          width: 420px;
+          width: 440px; /* Оптимальная ширина для 3D стопки */
           flex-shrink: 0;
         }
 
         @media (max-width: 1024px) {
           .hero-right {
-            width: 380px;
+            width: 390px;
           }
         }
 
