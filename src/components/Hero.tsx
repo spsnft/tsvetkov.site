@@ -17,6 +17,7 @@ interface HeroProps {
 }
 
 export const Hero = ({ dict }: HeroProps) => {
+  // Левую часть (копирайтинг) не трогаем, оставляем как было
   const t = dict?.hero ?? {
     badge: 'TSVETKOV • FOUNDER-LED AGENCY',
     titleLine1: 'Value Growth',
@@ -78,7 +79,7 @@ export const Hero = ({ dict }: HeroProps) => {
         }
 
         .hero-left {
-          max-width: 580px;
+          max-width: 520px; /* Было 580px, чуть сузили для баланса */
           flex-shrink: 0;
         }
 
@@ -94,13 +95,13 @@ export const Hero = ({ dict }: HeroProps) => {
         }
 
         .hero-right {
-          width: 440px;
+          width: 540px; /* Увеличили с 440px для масштабности HeroEngine */
           flex-shrink: 0;
         }
 
         @media (max-width: 1024px) {
           .hero-right {
-            width: 390px;
+            width: 440px;
           }
         }
 
@@ -204,24 +205,23 @@ export const Hero = ({ dict }: HeroProps) => {
         }
       `}</style>
 
-      {/* Фоновое свечение */}
+      {/* ПУНКТ 1: Новое фоновое свечение (смещено вправо, под движок) */}
       <div
         style={{
           position: 'absolute',
-          top: '0%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '650px',
-          height: '450px',
+          top: '10%',
+          right: '-5%', // Увели вправо
+          width: '700px',
+          height: '600px',
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${T.glow} 0%, transparent 70%)`,
-          opacity: 0.5,
-          zIndex: 2,
+          background: `radial-gradient(circle, ${T.glow} 0%, rgba(0, 229, 153, 0.05) 40%, transparent 70%)`,
+          filter: 'blur(50px)',
+          opacity: 0.85,
+          zIndex: 1,
           pointerEvents: 'none',
         }}
       />
 
-      {/* Использование глобального контейнера для идеального выравнивания */}
       <div className="container">
         <div className="hero-grid">
           {/* Левая колонка */}
