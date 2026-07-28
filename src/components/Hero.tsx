@@ -44,8 +44,8 @@ export const Hero = ({ dict }: HeroProps) => {
         position: 'relative',
         paddingTop: 'clamp(4rem, 8vw, 8rem)',
         paddingBottom: 'clamp(4rem, 8vw, 7rem)',
-        paddingLeft: '1.5rem',
-        paddingRight: '1.5rem',
+        paddingLeft: 0,
+        paddingRight: 0,
         background: 'transparent',
         overflow: 'hidden',
         minHeight: '80vh',
@@ -56,8 +56,6 @@ export const Hero = ({ dict }: HeroProps) => {
       <style jsx>{`
         .hero-grid {
           width: 100%;
-          max-width: 1200px; /* Привели к единому стандарту Design System */
-          margin: 0 auto;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -80,7 +78,7 @@ export const Hero = ({ dict }: HeroProps) => {
         }
 
         .hero-left {
-          max-width: 580px; /* Слегка добавили ширины для плотности */
+          max-width: 580px;
           flex-shrink: 0;
         }
 
@@ -96,7 +94,7 @@ export const Hero = ({ dict }: HeroProps) => {
         }
 
         .hero-right {
-          width: 440px; /* Оптимальная ширина для 3D стопки */
+          width: 440px;
           flex-shrink: 0;
         }
 
@@ -223,63 +221,66 @@ export const Hero = ({ dict }: HeroProps) => {
         }}
       />
 
-      <div className="hero-grid">
-        {/* Левая колонка */}
-        <div className="hero-left">
-          <div style={{ marginBottom: '1.25rem' }}>
-            <span
-              style={{
-                fontSize: '0.68rem',
-                fontWeight: 700,
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                color: T.accent,
-                background: T.accent08,
-                padding: '5px 12px',
-                borderRadius: 20,
-                border: `1px solid ${T.accent25}`,
-              }}
-            >
-              {t.badge}
-            </span>
+      {/* Использование глобального контейнера для идеального выравнивания */}
+      <div className="container">
+        <div className="hero-grid">
+          {/* Левая колонка */}
+          <div className="hero-left">
+            <div style={{ marginBottom: '1.25rem' }}>
+              <span
+                style={{
+                  fontSize: '0.68rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  color: T.accent,
+                  background: T.accent08,
+                  padding: '5px 12px',
+                  borderRadius: 20,
+                  border: `1px solid ${T.accent25}`,
+                }}
+              >
+                {t.badge}
+              </span>
+            </div>
+
+            <h1 style={{ margin: '0 0 1.5rem 0' }}>
+              <span className="hero-title-line">{t.titleLine1}</span>
+              <span className="hero-title-gradient">{t.titleLine2}</span>
+            </h1>
+
+            <div className="hero-bullets">
+              <div className="hero-bullet-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>{renderWithStrong(t.sub1)}</span>
+              </div>
+
+              <div className="hero-bullet-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>{renderWithStrong(t.sub2)}</span>
+              </div>
+
+              <div className="hero-bullet-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>{renderWithStrong(t.sub3)}</span>
+              </div>
+            </div>
+
+            <a href="#contact" className="btn-primary-hero">
+              {t.cta}
+            </a>
           </div>
 
-          <h1 style={{ margin: '0 0 1.5rem 0' }}>
-            <span className="hero-title-line">{t.titleLine1}</span>
-            <span className="hero-title-gradient">{t.titleLine2}</span>
-          </h1>
-
-          <div className="hero-bullets">
-            <div className="hero-bullet-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>{renderWithStrong(t.sub1)}</span>
-            </div>
-
-            <div className="hero-bullet-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>{renderWithStrong(t.sub2)}</span>
-            </div>
-
-            <div className="hero-bullet-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={T.accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>{renderWithStrong(t.sub3)}</span>
-            </div>
+          {/* Правая колонка */}
+          <div className="hero-right">
+            <HeroEngine />
           </div>
-
-          <a href="#contact" className="btn-primary-hero">
-            {t.cta}
-          </a>
-        </div>
-
-        {/* Правая колонка */}
-        <div className="hero-right">
-          <HeroEngine />
         </div>
       </div>
     </section>
