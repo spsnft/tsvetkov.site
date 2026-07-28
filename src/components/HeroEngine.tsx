@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { T } from '@/src/theme/tokens';
 
 type LayerId = 'top' | 'middle' | 'bottom' | null;
 
@@ -47,14 +46,16 @@ export const HeroEngine = () => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         width: '100%',
+        maxWidth: 1200,
+        margin: '0 auto',
         padding: '40px 20px',
-        display: 'grid',
-        // Жесткая сетка: левая часть ~480px, правая ~440px. Пустое пространство заполняет 1fr
-        gridTemplateColumns: 'minmax(300px, 480px) minmax(320px, 440px)',
+        display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
-        gap: '60px', // Отступ между текстом и пилюлями
         alignItems: 'center',
+        gap: '60px',
         perspective: 1200,
+        flexWrap: 'wrap',
         cursor: activeLayer ? 'zoom-out' : 'default',
       }}
     >
@@ -86,13 +87,11 @@ export const HeroEngine = () => {
         .layer-middle { border-color: rgba(52, 211, 153, 0.2); }
         .layer-bottom { border-color: rgba(255, 255, 255, 0.08); }
 
-        /* Переключение на колонку на планшетах и мобильных */
         @media (max-width: 1024px) {
           .hero-engine-wrapper {
-            gridTemplateColumns: 1fr !important;
-            max-width: 500px;
-            margin: 0 auto;
+            flex-direction: column !important;
             gap: 50px !important;
+            max-width: 550px;
           }
         }
 
@@ -118,8 +117,11 @@ export const HeroEngine = () => {
         }
       `}</style>
 
-      {/* ---------- ЛЕВАЯ ЧАСТЬ: ТЕКСТ ---------- */}
+      {/* ---------- ЛЕВАЯ ЧАСТЬ: ТЕКСТ (Она здесь только одна!) ---------- */}
       <div style={{ 
+        flex: 1,
+        maxWidth: 480,
+        minWidth: 280,
         display: 'flex', 
         flexDirection: 'column', 
         gap: 24
@@ -143,9 +145,10 @@ export const HeroEngine = () => {
           TSVETKOV • FOUNDER-LED AGENCY
         </div>
 
+        {/* Заголовок */}
         <h1 style={{
           fontFamily: "'Space Grotesk', system-ui, sans-serif",
-          fontSize: '3.5rem',
+          fontSize: 'clamp(2.8rem, 5vw, 3.8rem)',
           fontWeight: 700,
           lineHeight: 1.1,
           margin: 0,
@@ -163,28 +166,30 @@ export const HeroEngine = () => {
           </span>
         </h1>
 
+        {/* Список */}
         <ul style={{
           listStyle: 'none',
           padding: 0,
           margin: 0,
           display: 'flex',
           flexDirection: 'column',
-          gap: 10,
+          gap: 12,
           color: 'rgba(255,255,255,0.7)',
           fontSize: '1rem',
           lineHeight: 1.5
         }}>
           <li style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <span style={{ color: '#00E599' }}>✓</span> We eliminate chaos in <strong style={{ color: '#fff' }}>marketing and digital systems</strong>
+            <span style={{ color: '#00E599', marginTop: 2 }}>✓</span> <span>We eliminate chaos in <strong style={{ color: '#fff' }}>marketing and digital systems</strong></span>
           </li>
           <li style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <span style={{ color: '#00E599' }}>✓</span> No fluff — just <strong style={{ color: '#fff' }}>high-performance architectures</strong>
+            <span style={{ color: '#00E599', marginTop: 2 }}>✓</span> <span>No fluff — just <strong style={{ color: '#fff' }}>high-performance architectures</strong></span>
           </li>
           <li style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <span style={{ color: '#00E599' }}>✓</span> Track every dollar and <strong style={{ color: '#fff' }}>automate sales flow</strong>
+            <span style={{ color: '#00E599', marginTop: 2 }}>✓</span> <span>Track every dollar and <strong style={{ color: '#fff' }}>automate sales flow</strong></span>
           </li>
         </ul>
 
+        {/* Кнопка */}
         <button style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -200,9 +205,10 @@ export const HeroEngine = () => {
           cursor: 'pointer',
           width: 'fit-content',
           transition: 'all 0.3s ease',
-          boxShadow: '0 0 20px rgba(0, 229, 153, 0.05)'
+          boxShadow: '0 0 20px rgba(0, 229, 153, 0.05)',
+          marginTop: 4
         }}>
-          Audit My Business <span style={{ color: '#00E599' }}>→</span>
+          Audit My Business <span style={{ color: '#00E599', marginLeft: 2 }}>→</span>
         </button>
       </div>
 
@@ -210,9 +216,11 @@ export const HeroEngine = () => {
       <div 
         className="perspective-wrapper"
         style={{
+          flex: 1,
+          maxWidth: 440,
+          minWidth: 280,
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
         }}
       >
         <motion.div
