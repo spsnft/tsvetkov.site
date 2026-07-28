@@ -1,59 +1,59 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 
 interface TickerFrame {
   id: string;
   systemLabel: string;
-  emoji: string;
+  title: string;
   tags: string[];
-  highlightMetric: string;
   chipKeys: string[];
-  highlightLineKey?: string; // для подсветки строки "clean data architecture"
+  highlightLineKey?: string;
+  link?: string;
 }
 
 const FRAMES: TickerFrame[] = [
   {
     id: '01',
-    systemLabel: 'SYSTEM 01 // METRICS',
-    emoji: '⚙️',
-    tags: ['CAC <$40', 'ROAS 4.2x', 'LTV/CAC >3.0'],
-    highlightMetric: '+340%',
-    chipKeys: ['value'],
+    systemLabel: 'SYSTEM 01 // PERFORMANCE',
+    title: 'Scale & Revenue',
+    tags: ['Smart Funnels', 'Unit Economics', 'Profit Tracking'],
+    chipKeys: ['value', 'scale', 'funnels'],
   },
   {
     id: '02',
-    systemLabel: 'SYSTEM 02 // AI OPS',
-    emoji: '🤖',
-    tags: ['14s Lead Route', '150+ Automations', '0 Manual Handoffs'],
-    highlightMetric: '14s',
-    chipKeys: ['automation'],
-  },
-  {
-    id: '03',
-    systemLabel: 'SYSTEM 03 // DATA',
-    emoji: '📊',
-    tags: ['P&L Attribution', 'Cross-Platform Sync', 'Real-Time BI'],
-    highlightMetric: '100%',
+    systemLabel: 'SYSTEM 02 // DATA CORE',
+    title: 'BI & Attribution',
+    tags: ['Live Dashboards', 'Cross-Platform Sync', 'Clean Data'],
     chipKeys: ['data'],
     highlightLineKey: 'data',
   },
   {
+    id: '03',
+    systemLabel: 'SYSTEM 03 // INTELLIGENCE',
+    title: 'AI & Sales Automation',
+    tags: ['Auto-Routing', 'AI Workflows', 'Lead Scoring'],
+    chipKeys: ['automation'],
+  },
+  {
     id: '04',
-    systemLabel: 'SYSTEM 04 // SCALE',
-    emoji: '🎯',
-    tags: ['+$1.4M Pipeline', 'Omnichannel Ready', 'Weekly P&L'],
-    highlightMetric: '$1.4M',
-    chipKeys: ['scale', 'funnels'],
+    systemLabel: 'SYSTEM 04 // HOSPITALITY',
+    title: 'Direct Booking Engine',
+    tags: ['0% OTA Commissions', 'Cloud PMS', 'WhatsApp CRM Sync'],
+    chipKeys: ['data'],
+    highlightLineKey: 'data',
+    link: '/hms',
   },
 ];
 
-const FRAME_DURATION = 4000;
-const TICK_INTERVAL = 40;
-const TOTAL_TICKS = FRAME_DURATION / TICK_INTERVAL; // 100
+const FRAME_DURATION = 3000;
+const TICK_INTERVAL = 30;
+const TOTAL_TICKS = FRAME_DURATION / TICK_INTERVAL;
 
 interface HeroTickerProps {
+  lang: string;
   activeChip: string | null;
   highlightedLine: string | null;
   onFrameChange: (chipKeys: string[], highlightLineKey?: string) => void;
@@ -61,17 +61,17 @@ interface HeroTickerProps {
 }
 
 export const HeroTicker: React.FC<HeroTickerProps> = ({
+  lang,
   activeChip,
   highlightedLine,
   onFrameChange,
   onManualSelect,
 }) => {
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [slideDirection, setSlideDirection] = useState<'left' | 'right'>(
-    'left'
-  );
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('left');
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -79,10 +79,7 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
 
   const frame = FRAMES[activeIndex];
 
-  // Определяем, подсвечен ли фрейм через чипсы извне
-  const isHighlighted = activeChip
-    ? frame.chipKeys.includes(activeChip)
-    : false;
+  const isHighlighted = activeChip ? frame.chipKeys.includes(activeChip) : false;
 
   const goToFrame = useCallback(
     (index: number, direction: 'left' | 'right' = 'left') => {
@@ -94,11 +91,8 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
       setTimeout(() => {
         setActiveIndex(index);
         setIsTransitioning(false);
-        onFrameChange(
-          FRAMES[index].chipKeys,
-          FRAMES[index].highlightLineKey
-        );
-      }, 350); // длительность анимации слайда
+        onFrameChange(FRAMES[index].chipKeys, FRAMES[index].highlightLineKey);
+      }, 300);
     },
     [isTransitioning, onFrameChange]
   );
@@ -132,25 +126,26 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
     startAutoPlay();
   }, [isPaused, startAutoPlay]);
 
-  // Если активный чипс извне совпадает — ставим на паузу и показываем нужный кадр
+  // При внешнем ховере на чипс — пауза + показ нужного кадра
   useEffect(() => {
     if (activeChip) {
-      const matchingIndex = FRAMES.findIndex((f) =>
-        f.chipKeys.includes(activeChip)
-      );
+      const matchingIndex = FRAMES.findIndex((f) => f.chipKeys.includes(activeChip));
       if (matchingIndex !== -1 && matchingIndex !== activeIndex) {
         setIsPaused(true);
         setActiveIndex(matchingIndex);
         setProgress(100);
-        onFrameChange(
-          FRAMES[matchingIndex].chipKeys,
-          FRAMES[matchingIndex].highlightLineKey
-        );
+        onFrameChange(FRAMES[matchingIndex].chipKeys, FRAMES[matchingIndex].highlightLineKey);
       }
     } else {
       setIsPaused(false);
     }
   }, [activeChip, activeIndex, onFrameChange]);
+
+  const handleFrameClick = () => {
+    if (frame.link) {
+      router.push(`/${lang}${frame.link}`);
+    }
+  };
 
   return (
     <div
@@ -158,38 +153,18 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Прогресс-бар */}
-      <div className="progress-track">
-        <div
-          className="progress-fill"
-          style={{
-            width: `${progress}%`,
-            transition: `width ${TICK_INTERVAL}ms linear`,
-          }}
-        />
-      </div>
-
-      {/* Точки навигации */}
-      <div className="dots-row">
-        {FRAMES.map((_, i) => (
-          <button
-            key={i}
-            className={`dot ${i === activeIndex ? 'active' : ''}`}
-            onClick={() => {
-              const direction = i > activeIndex ? 'left' : 'right';
-              goToFrame(i, direction);
-              onManualSelect(
-                FRAMES[i].chipKeys,
-                FRAMES[i].highlightLineKey
-              );
-            }}
-            aria-label={`System ${i + 1}`}
-          />
-        ))}
-      </div>
-
       {/* Тикер-полоса */}
-      <div className="ticker-track">
+      <div
+        className={`ticker-track ${isHighlighted ? 'highlighted' : ''} ${frame.link ? 'clickable' : ''}`}
+        onClick={handleFrameClick}
+      >
+        {/* Прогресс-бар по верхней рамке */}
+        <div
+          className="border-progress"
+          style={{ width: `${progress}%` }}
+        />
+
+        {/* Слайд */}
         <div
           className={`ticker-slide ${
             isTransitioning
@@ -197,7 +172,7 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
                 ? 'slide-out-left'
                 : 'slide-out-right'
               : ''
-          } ${isHighlighted ? 'highlighted' : ''}`}
+          }`}
         >
           {/* Левая зона: система */}
           <div className="ticker-zone ticker-zone-left">
@@ -205,9 +180,10 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
               <span className="live-dot-ping" />
               <span className="live-dot" />
             </span>
-            <span className="system-label">
-              {frame.emoji} {frame.systemLabel}
-            </span>
+            <div className="system-info">
+              <span className="system-label">{frame.systemLabel}</span>
+              <span className="system-title">{frame.title}</span>
+            </div>
           </div>
 
           {/* Центр: теги */}
@@ -219,10 +195,31 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
             ))}
           </div>
 
-          {/* Правая зона: главная метрика */}
-          <div className="ticker-zone ticker-zone-right">
-            <span className="highlight-metric">{frame.highlightMetric}</span>
-          </div>
+          {/* Индикатор ссылки для 4-го кадра */}
+          {frame.link && (
+            <div className="ticker-zone ticker-zone-right">
+              <span className="link-indicator">
+                Explore <span className="link-arrow">→</span>
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Точки внутри */}
+        <div className="dots-row">
+          {FRAMES.map((_, i) => (
+            <button
+              key={i}
+              className={`dot ${i === activeIndex ? 'active' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                const direction = i > activeIndex ? 'left' : 'right';
+                goToFrame(i, direction);
+                onManualSelect(FRAMES[i].chipKeys, FRAMES[i].highlightLineKey);
+              }}
+              aria-label={`System ${i + 1}`}
+            />
+          ))}
         </div>
       </div>
 
@@ -231,58 +228,13 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 0.6rem;
+          gap: 0;
           z-index: 3;
           user-select: none;
         }
 
-        /* Прогресс-бар */
-        .progress-track {
-          width: 100%;
-          height: 2px;
-          background: ${T.accent10};
-          border-radius: 1px;
-          overflow: hidden;
-        }
-
-        .progress-fill {
-          height: 100%;
-          background: ${T.linearGradient};
-          border-radius: 1px;
-        }
-
-        /* Точки */
-        .dots-row {
-          display: flex;
-          gap: 8px;
-          justify-content: center;
-        }
-
-        .dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          border: none;
-          background: ${T.accent20};
-          cursor: pointer;
-          padding: 0;
-          transition: all 0.3s ease;
-        }
-
-        .dot:hover {
-          background: ${T.accent40};
-        }
-
-        .dot.active {
-          background: ${T.accent};
-          box-shadow: 0 0 10px ${T.accent};
-          transform: scale(1.3);
-        }
-
-        /* Тикер-полоса */
         .ticker-track {
           width: 100%;
-          height: 68px;
           background: linear-gradient(
             135deg,
             rgba(20, 24, 33, 0.75) 0%,
@@ -296,31 +248,52 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5),
             inset 0 1px 0 rgba(255, 255, 255, 0.1);
           transition: border-color 0.35s ease, box-shadow 0.35s ease;
+          padding: 1rem 1.25rem 2.5rem 1.25rem;
         }
 
-        .ticker-track:has(.highlighted) {
+        .ticker-track.highlighted {
           border-color: ${T.accent};
           box-shadow: 0 16px 36px -10px ${T.accent25},
             inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
+        .ticker-track.clickable {
+          cursor: pointer;
+        }
+
+        .ticker-track.clickable:hover {
+          border-color: ${T.accent};
+          transform: translateY(-2px);
+          box-shadow: 0 16px 36px -10px ${T.accent25};
+        }
+
+        /* Прогресс-бар по верхней рамке */
+        .border-progress {
+          position: absolute;
+          top: -1px;
+          left: -1px;
+          height: 2px;
+          background: ${T.linearGradient};
+          border-radius: ${T.radius.lg} ${T.radius.lg} 0 0;
+          z-index: 5;
+          transition: width ${TICK_INTERVAL}ms linear;
+          box-shadow: 0 0 8px ${T.accent};
+        }
+
         .ticker-slide {
           display: flex;
           align-items: center;
-          height: 100%;
-          padding: 0 1.5rem;
-          gap: 1.5rem;
-          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-            opacity 0.35s ease;
+          gap: 1.25rem;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
         }
 
         .ticker-slide.slide-out-left {
-          transform: translateX(-30px);
+          transform: translateX(-25px);
           opacity: 0;
         }
 
         .ticker-slide.slide-out-right {
-          transform: translateX(30px);
+          transform: translateX(25px);
           opacity: 0;
         }
 
@@ -331,21 +304,22 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
 
         .ticker-zone-left {
           gap: 10px;
-          min-width: 220px;
+          min-width: 240px;
         }
 
         .ticker-zone-center {
           flex: 1;
-          gap: 1rem;
+          gap: 0.6rem;
           justify-content: center;
+          flex-wrap: wrap;
         }
 
         .ticker-zone-right {
-          min-width: 100px;
+          min-width: 80px;
           justify-content: flex-end;
+          flex-shrink: 0;
         }
 
-        /* Пульсирующая точка */
         .live-dot-wrapper {
           position: relative;
           display: flex;
@@ -375,23 +349,36 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
         }
 
         @keyframes ping {
-          75%,
-          100% {
+          75%, 100% {
             transform: scale(2.5);
             opacity: 0;
           }
         }
 
+        .system-info {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
         .system-label {
-          font-size: 0.72rem;
+          font-size: 0.62rem;
           font-weight: 700;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.12em;
           color: ${T.accent};
           font-family: 'Space Grotesk', monospace, sans-serif;
+          text-transform: uppercase;
+        }
+
+        .system-title {
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #ffffff;
+          letter-spacing: -0.01em;
         }
 
         .ticker-tag {
-          font-size: 0.8rem;
+          font-size: 0.75rem;
           font-weight: 600;
           padding: 4px 10px;
           border-radius: ${T.radius.sm};
@@ -401,17 +388,50 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           white-space: nowrap;
         }
 
-        .highlight-metric {
-          font-size: 1.4rem;
-          font-weight: 800;
-          font-family: 'Space Grotesk', monospace, sans-serif;
-          background: ${T.linearGradient};
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+        .link-indicator {
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: ${T.accent};
+          display: flex;
+          align-items: center;
+          gap: 4px;
         }
 
-        /* Адаптив: на планшете центрируем, на мобилке скрываем центр */
+        .link-arrow {
+          font-size: 1rem;
+        }
+
+        /* Точки */
+        .dots-row {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 8px;
+        }
+
+        .dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          border: none;
+          background: ${T.accent20};
+          cursor: pointer;
+          padding: 0;
+          transition: all 0.3s ease;
+        }
+
+        .dot:hover {
+          background: ${T.accent40};
+        }
+
+        .dot.active {
+          background: ${T.accent};
+          box-shadow: 0 0 8px ${T.accent};
+          transform: scale(1.4);
+        }
+
         @media (max-width: 768px) {
           .ticker-zone-center {
             display: none;
@@ -422,12 +442,15 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           }
 
           .system-label {
-            font-size: 0.65rem;
+            font-size: 0.58rem;
           }
 
-          .ticker-slide {
-            padding: 0 1rem;
-            gap: 0.75rem;
+          .system-title {
+            font-size: 0.75rem;
+          }
+
+          .ticker-track {
+            padding: 0.85rem 1rem 2.2rem 1rem;
           }
         }
       `}</style>
