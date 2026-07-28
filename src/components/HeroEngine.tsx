@@ -40,7 +40,6 @@ export const HeroEngine = () => {
   };
 
   return (
-    // Основной контейнер - Flex с прижатыми элементами
     <div 
       className="hero-engine-wrapper"
       onClick={() => setActiveLayer(null)}
@@ -48,14 +47,14 @@ export const HeroEngine = () => {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '40px', // Убираем пустоту, прижимаем блоки
         padding: '40px 20px',
+        display: 'grid',
+        // Жесткая сетка: левая часть ~480px, правая ~440px. Пустое пространство заполняет 1fr
+        gridTemplateColumns: 'minmax(300px, 480px) minmax(320px, 440px)',
+        justifyContent: 'center',
+        gap: '60px', // Отступ между текстом и пилюлями
+        alignItems: 'center',
         perspective: 1200,
-        flexWrap: 'wrap',
         cursor: activeLayer ? 'zoom-out' : 'default',
       }}
     >
@@ -78,29 +77,26 @@ export const HeroEngine = () => {
         }
 
         .layer-card {
-          /* Единый фирменный градиент для всех карточек вместо светофора */
           background: linear-gradient(135deg, rgba(0, 20, 30, 0.85), rgba(0, 30, 20, 0.85));
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
         }
 
-        /* Специфичные бордеры для каждого слоя, чтобы сохранить иерархию */
         .layer-top { border-color: rgba(56, 189, 248, 0.2); }
         .layer-middle { border-color: rgba(52, 211, 153, 0.2); }
-        .layer-bottom { border-color: rgba(255, 255, 255, 0.1); }
+        .layer-bottom { border-color: rgba(255, 255, 255, 0.08); }
 
-        /* Адаптив для планшетов и мобильных */
+        /* Переключение на колонку на планшетах и мобильных */
         @media (max-width: 1024px) {
           .hero-engine-wrapper {
-            flex-direction: column !important;
-            gap: 30px !important;
+            gridTemplateColumns: 1fr !important;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 50px !important;
           }
         }
+
         @media (max-width: 767px) {
-          .perspective-wrapper {
-            perspective: none;
-            min-height: auto;
-          }
           .scene-container {
             transform: none !important;
             height: auto !important;
@@ -124,12 +120,9 @@ export const HeroEngine = () => {
 
       {/* ---------- ЛЕВАЯ ЧАСТЬ: ТЕКСТ ---------- */}
       <div style={{ 
-        flex: 1, 
-        maxWidth: 480, 
-        minWidth: 280, 
         display: 'flex', 
         flexDirection: 'column', 
-        gap: 24 
+        gap: 24
       }}>
         {/* Бейдж */}
         <div style={{
@@ -150,7 +143,6 @@ export const HeroEngine = () => {
           TSVETKOV • FOUNDER-LED AGENCY
         </div>
 
-        {/* ДВУХСТРОЧНЫЙ ЗАГОЛОВОК */}
         <h1 style={{
           fontFamily: "'Space Grotesk', system-ui, sans-serif",
           fontSize: '3.5rem',
@@ -160,7 +152,6 @@ export const HeroEngine = () => {
           letterSpacing: '-0.03em',
         }}>
           <span style={{ color: '#fff', display: 'block' }}>Value Growth</span>
-          {/* Вторая строка с градиентом */}
           <span style={{
             display: 'block',
             background: 'linear-gradient(135deg, #00E599 0%, #00A3FF 100%)',
@@ -172,7 +163,6 @@ export const HeroEngine = () => {
           </span>
         </h1>
 
-        {/* Список */}
         <ul style={{
           listStyle: 'none',
           padding: 0,
@@ -195,7 +185,6 @@ export const HeroEngine = () => {
           </li>
         </ul>
 
-        {/* Кнопка */}
         <button style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -221,11 +210,9 @@ export const HeroEngine = () => {
       <div 
         className="perspective-wrapper"
         style={{
-          flex: 1,
           display: 'flex',
           justifyContent: 'center',
-          minWidth: 280,
-          maxWidth: 480,
+          alignItems: 'center',
         }}
       >
         <motion.div
