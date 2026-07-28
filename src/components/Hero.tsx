@@ -1,25 +1,6 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
-import { T } from '@/src/theme/tokens';
-
 import { HeroEngine } from './HeroEngine';
-  () => import('./HeroEngine').then((mod) => mod.HeroEngine),
-  { 
-    ssr: false,
-    loading: () => (
-      <div 
-        style={{ 
-          width: '100%', 
-          maxWidth: 440, 
-          height: 380, 
-          borderRadius: 18, 
-          background: 'rgba(255, 255, 255, 0.02)',
-          border: '1px solid rgba(255, 255, 255, 0.05)'
-        }} 
-      />
-    )
-  }
-);
+import { T } from '@/src/theme/tokens';
 
 interface HeroProps {
   dict: {
