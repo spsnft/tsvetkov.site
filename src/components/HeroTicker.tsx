@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 
@@ -44,7 +44,6 @@ const FRAMES: TickerFrame[] = [
 ];
 
 const FRAME_DURATION = 3000;
-const TICK_INTERVAL = 30;
 
 interface HeroTickerProps {
   lang: string;
@@ -63,25 +62,12 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
 }) => {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
+  const transitionTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const tickRef = useRef<NodeJS.Timeout | null>(null);
-  const activeIndexRef = useRef(activeIndex);
-  const isPausedRef = useRef(isPaused);
   const onFrameChangeRef = useRef(onFrameChange);
-
-  // Синхронизируем refs
-  useEffect(() => {
-    activeIndexRef.current = activeIndex;
-  }, [activeIndex]);
-
-  useEffect(() => {
-    isPausedRef.current = isPaused;
-  }, [isPaused]);
-
   useEffect(() => {
     onFrameChangeRef.current = onFrameChange;
   }, [onFrameChange]);
@@ -89,53 +75,39 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
   const frame = FRAMES[activeIndex];
   const isHighlighted = activeChip ? frame.chipKeys.includes(activeChip) : false;
 
-  // Стабильный goToFrame, не меняется
-  const goToFrame = useCallback((index: number) => {
-    setIsTransitioning(true);
-    setProgress(0);
-
-    setTimeout(() => {
-      setActiveIndex(index);
-      setIsTransitioning(false);
-      onFrameChangeRef.current(
-        FRAMES[index].chipKeys,
-        FRAMES[index].highlightLineKey
-      );
-    }, 300);
-  }, []);
-
-  // Единственный эффект для автопрокрутки
+  // Автопереключение кадров
   useEffect(() => {
-    const tick = () => {
-      if (isPausedRef.current) return;
+    if (isPaused) return;
 
-      setProgress((prev) => {
-        const next = prev + (100 / (FRAME_DURATION / TICK_INTERVAL));
-        if (next >= 100) {
-          // Переключение
-          const nextIndex = (activeIndexRef.current + 1) % FRAMES.length;
-          goToFrame(nextIndex);
-          return 0;
-        }
-        return next;
-      });
-    };
+    const timer = setTimeout(() => {
+      setIsTransitioning(true);
 
-    tickRef.current = setInterval(tick, TICK_INTERVAL);
+      transitionTimerRef.current = setTimeout(() => {
+        const nextIndex = (activeIndex + 1) % FRAMES.length;
+        setActiveIndex(nextIndex);
+        setAnimationKey((k) => k + 1);
+        setIsTransitioning(false);
+        onFrameChangeRef.current(
+          FRAMES[nextIndex].chipKeys,
+          FRAMES[nextIndex].highlightLineKey
+        );
+      }, 300);
+    }, FRAME_DURATION);
 
     return () => {
-      if (tickRef.current) clearInterval(tickRef.current);
+      clearTimeout(timer);
+      if (transitionTimerRef.current) clearTimeout(transitionTimerRef.current);
     };
-  }, [goToFrame]);
+  }, [activeIndex, isPaused]);
 
   // Внешний ховер на чипс
   useEffect(() => {
     if (activeChip) {
       const matchingIndex = FRAMES.findIndex((f) => f.chipKeys.includes(activeChip));
-      if (matchingIndex !== -1 && matchingIndex !== activeIndexRef.current) {
+      if (matchingIndex !== -1 && matchingIndex !== activeIndex) {
         setIsPaused(true);
         setActiveIndex(matchingIndex);
-        setProgress(100);
+        setAnimationKey((k) => k + 1);
         onFrameChangeRef.current(
           FRAMES[matchingIndex].chipKeys,
           FRAMES[matchingIndex].highlightLineKey
@@ -144,7 +116,7 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
     } else {
       setIsPaused(false);
     }
-  }, [activeChip]);
+  }, [activeChip, activeIndex]);
 
   const handleFrameClick = () => {
     if (frame.link) {
@@ -153,37 +125,40 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
   };
 
   return (
-    <div
-      className="ticker-wrapper"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <>
+      {/* CSS @property для анимации угла */}
+      <style jsx global>{`
+        @property --ticker-angle {
+          syntax: '<angle>';
+          initial-value: 0deg;
+          inherits: false;
+        }
+      `}</style>
+
       <div
-        className={`ticker-track ${isHighlighted ? 'highlighted' : ''} ${frame.link ? 'clickable' : ''}`}
-        onClick={handleFrameClick}
+        className="ticker-wrapper"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Контент */}
-        <div className={`ticker-slide ${isTransitioning ? 'slide-out' : ''}`}>
-          <span className="frame-title">
-            {frame.title}
-            {frame.link && <span className="link-arrow"> →</span>}
-          </span>
+        <div
+          className={`ticker-track ${isHighlighted ? 'highlighted' : ''} ${frame.link ? 'clickable' : ''}`}
+          onClick={handleFrameClick}
+        >
+          {/* Контент */}
+          <div className={`ticker-slide ${isTransitioning ? 'slide-out' : ''}`}>
+            <span className="frame-title">
+              {frame.title}
+              {frame.link && <span className="link-arrow"> →</span>}
+            </span>
 
-          <div className="ticker-tags">
-            {frame.tags.map((tag, i) => (
-              <span key={i} className="ticker-tag">
-                {tag}
-              </span>
-            ))}
+            <div className="ticker-tags">
+              {frame.tags.map((tag, i) => (
+                <span key={i} className="ticker-tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Прогресс-бар снизу */}
-        <div className="progress-track">
-          <div
-            className="progress-fill"
-            style={{ width: `${progress}%` }}
-          />
         </div>
       </div>
 
@@ -198,23 +173,58 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
 
         .ticker-track {
           width: 100%;
+          position: relative;
+          border-radius: ${T.radius.lg};
           background: linear-gradient(
             135deg,
             rgba(20, 24, 33, 0.75) 0%,
             rgba(10, 12, 16, 0.85) 100%
           );
-          border: 1px solid ${T.accent15};
-          border-radius: ${T.radius.lg};
-          overflow: hidden;
-          position: relative;
           backdrop-filter: blur(16px);
           box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5),
             inset 0 1px 0 rgba(255, 255, 255, 0.1);
-          transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.25s ease;
+          transition: box-shadow 0.35s ease, transform 0.25s ease;
+          overflow: hidden;
+        }
+
+        /* Анимированная рамка через псевдоэлемент */
+        .ticker-track::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: calc(${T.radius.lg} + 2px);
+          padding: 2px;
+          background: conic-gradient(
+            from var(--ticker-angle),
+            transparent 0%,
+            ${T.accent} 5%,
+            ${T.acc2} 15%,
+            transparent 20%,
+            transparent 50%,
+            ${T.accent} 55%,
+            ${T.acc2} 65%,
+            transparent 70%,
+            transparent 100%
+          );
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+          animation: ticker-spin ${FRAME_DURATION}ms linear infinite;
+          animation-play-state: ${isPaused ? 'paused' : 'running'};
+          z-index: 3;
+        }
+
+        @keyframes ticker-spin {
+          from {
+            --ticker-angle: 0deg;
+          }
+          to {
+            --ticker-angle: 360deg;
+          }
         }
 
         .ticker-track.highlighted {
-          border-color: ${T.accent};
           box-shadow: 0 16px 36px -10px ${T.accent25},
             inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
@@ -224,7 +234,6 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
         }
 
         .ticker-track.clickable:hover {
-          border-color: ${T.accent};
           transform: translateY(-2px);
           box-shadow: 0 16px 36px -10px ${T.accent25};
         }
@@ -234,7 +243,7 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           align-items: center;
           justify-content: space-between;
           gap: 1.5rem;
-          padding: 1.5rem 1.75rem 1.75rem 1.75rem;
+          padding: 1.5rem 1.75rem;
           position: relative;
           z-index: 2;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
@@ -278,27 +287,12 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           white-space: nowrap;
         }
 
-        .progress-track {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: ${T.accent08};
-        }
-
-        .progress-fill {
-          height: 100%;
-          background: ${T.linearGradient};
-          transition: width 30ms linear;
-        }
-
         @media (max-width: 640px) {
           .ticker-slide {
             flex-direction: column;
             align-items: flex-start;
             gap: 0.75rem;
-            padding: 1.25rem 1.25rem 1.5rem 1.25rem;
+            padding: 1.25rem;
           }
 
           .ticker-tags {
@@ -310,7 +304,7 @@ export const HeroTicker: React.FC<HeroTickerProps> = ({
           }
         }
       `}</style>
-    </div>
+    </>
   );
 };
 
