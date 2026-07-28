@@ -1,253 +1,148 @@
-'use client';
-
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
 import { T } from '@/src/theme/tokens';
 
-interface PillData {
-  id: number;
-  label: string;
-  title: string;
-  tags: string[];
-  accentClass: 'green' | 'blue' | 'red';
-}
-
-const pills: PillData[] = [
+const ENGINE_DATA = [
   {
-    id: 0,
-    label: '01. DATA INTELLIGENCE',
-    title: 'Grow with Data & Intelligence',
-    tags: ['Actionable Analytics', 'Real-Time Attribution', 'Zero Blind Spots'],
-    accentClass: 'green',
+    id: '01',
+    title: 'Scale & Revenue',
+    tags: ['Smart Funnels', 'Unit Economics', 'Profit Tracking'],
   },
   {
-    id: 1,
-    label: '02. SALES AUTOMATION',
-    title: 'Automate Sales & Eliminate Manual Work',
-    tags: ['Instant CRM Routing', 'AI Sales Workflows', 'Lead Scoring'],
-    accentClass: 'blue',
+    id: '02',
+    title: 'BI & Attribution',
+    tags: ['Live Dashboards', 'Cross-Platform Sync', 'Clean Data'],
   },
   {
-    id: 2,
-    label: '03. SCALE & REVENUE',
-    title: 'Convert Traffic into Revenue',
-    tags: ['Smart Funnels', 'Live Unit Economics', 'Predictable CAC'],
-    accentClass: 'red',
+    id: '03',
+    title: 'AI & Sales Automation',
+    tags: ['Auto-Routing', 'AI Workflows', 'Lead Scoring'],
   },
 ];
 
-const accentColors = {
-  green: { color: T.accent, border: T.accent20, activeBorder: T.accent40, glow: 'rgba(0, 229, 153, 0.3)' },
-  blue: { color: '#38BDF8', border: 'rgba(56, 189, 248, 0.2)', activeBorder: 'rgba(56, 189, 248, 0.5)', glow: 'rgba(56, 189, 248, 0.25)' },
-  red: { color: '#EF4444', border: 'rgba(239, 68, 68, 0.2)', activeBorder: 'rgba(239, 68, 68, 0.5)', glow: 'rgba(239, 68, 68, 0.25)' },
-};
-
-const AUTOPLAY_INTERVAL = 4000;
-
 export const HeroEngine = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Авто-ротация
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % pills.length);
-    }, AUTOPLAY_INTERVAL);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  // Сброс таймера при ручном клике
-  const handleCardClick = useCallback((index: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setActiveIndex(index);
-    setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 10);
-  }, []);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    setIsPaused(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsPaused(false);
-  };
-
-  const getCardStyles = (index: number) => {
-    const isActive = index === activeIndex;
-    const accent = accentColors[pills[index].accentClass];
-
-    return {
-      position: 'absolute' as const,
-      bottom: 0,
-      left: 0,
-      width: '100%',
-      minHeight: 145,
-      backdropFilter: 'blur(16px)',
-      WebkitBackdropFilter: 'blur(16px)',
-      borderRadius: 18,
-      padding: '1.25rem 1.4rem',
-      boxSizing: 'border-box' as const,
-      background: 'linear-gradient(135deg, rgba(0, 18, 20, 0.95), rgba(0, 25, 18, 0.95))',
-      border: isActive
-        ? `1px solid ${accent.activeBorder}`
-        : `1px solid ${accent.border}`,
-      boxShadow: isActive
-        ? `0 20px 40px rgba(0, 0, 0, 0.8), 0 0 35px ${accent.glow}`
-        : `-12px 24px 35px rgba(0, 0, 0, 0.5)`,
-      cursor: 'pointer',
-      userSelect: 'none' as const,
-    };
-  };
-
   return (
-    <div
-      className="perspective-wrapper"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        perspective: 1200,
-        minHeight: 420,
-        cursor: 'default',
-      }}
-    >
+    <div className="engine-container">
+      {ENGINE_DATA.map((card, index) => (
+        <div key={card.id} className="engine-card">
+          <div className="card-header">
+            {/* ПУНКТ 3: Единая градиентная точка вместо "светофора" */}
+            <span className="dot-indicator"></span>
+            <span className="card-id">{card.id}. {card.title.toUpperCase()}</span>
+          </div>
+          <h3 className="card-title">{card.title}</h3>
+          
+          <div className="card-tags">
+            {card.tags.map((tag, i) => (
+              <span key={i} className="engine-tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
       <style jsx>{`
-        .perspective-wrapper {
-          user-select: none;
-          -webkit-tap-highlight-color: transparent;
+        .engine-container {
+          position: relative;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem; 
         }
 
-        .chip {
-          padding: 5px 10px;
-          border-radius: 6px;
-          font-size: 0.72rem;
-          font-weight: 600;
-          white-space: nowrap;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: rgba(255, 255, 255, 0.7);
+        .engine-card {
+          background: rgba(10, 10, 12, 0.4);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 16px;
+          padding: 1.75rem;
+          backdrop-filter: blur(12px);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        @media (max-width: 1024px) {
-          .perspective-wrapper {
-            padding: 30px 0;
-            min-height: auto;
-          }
+        /* Градиентная рамка при наведении */
+        .engine-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          border-radius: 16px;
+          padding: 1px;
+          background: linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          pointer-events: none;
         }
 
-        @media (max-width: 767px) {
-          .perspective-wrapper {
-            perspective: none;
-            min-height: auto;
-            padding: 20px 0;
-          }
-          .perspective-wrapper :global(.scene-container) {
-            transform: none !important;
-            height: auto !important;
-          }
-          .perspective-wrapper :global(.layer-card) {
-            position: relative !important;
-            margin-top: -12px !important;
-            bottom: auto !important;
-            height: auto !important;
-            min-height: 100px;
-            transform: none !important;
-            opacity: 1 !important;
-            filter: none !important;
-            cursor: default !important;
-            z-index: auto !important;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
-          }
+        .engine-card:hover {
+          transform: translateY(-4px) scale(1.01);
+          background: rgba(10, 10, 12, 0.7);
+          box-shadow: 0 12px 30px -10px rgba(0, 229, 153, 0.15);
+        }
+
+        .engine-card:hover::before {
+          opacity: 1;
+        }
+
+        .card-header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 0.75rem;
+        }
+
+        .dot-indicator {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%);
+          box-shadow: 0 0 10px rgba(0, 229, 153, 0.5);
+        }
+
+        .card-id {
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: ${T.accent};
+          text-transform: uppercase;
+        }
+
+        .card-title {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: #fff;
+          margin: 0 0 1.25rem 0;
+          letter-spacing: -0.01em;
+        }
+
+        .card-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.6rem;
+        }
+
+        .engine-tag {
+          font-size: 0.75rem;
+          font-weight: 500;
+          padding: 6px 14px;
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: rgba(255, 255, 255, 0.6);
+          transition: all 0.3s ease;
+        }
+
+        /* "Чипсы" окрашиваются в фирменные цвета при наведении на карточку */
+        .engine-card:hover .engine-tag {
+          border-color: rgba(0, 229, 153, 0.2);
+          color: #fff;
+          background: rgba(0, 229, 153, 0.05);
         }
       `}</style>
-
-      {/* 3D Сцена */}
-      <motion.div
-        className="scene-container"
-        animate={{
-          rotateX: isHovered ? 14 : 18,
-          rotateY: isHovered ? -8 : -12,
-          rotateZ: isHovered ? 1 : 2,
-        }}
-        transition={{ type: 'spring', stiffness: 180, damping: 22 }}
-        style={{
-          position: 'relative',
-          width: '100%',
-          height: 380,
-          transformStyle: 'preserve-3d',
-        }}
-      >
-        {pills.map((pill, index) => {
-          const isActive = index === activeIndex;
-          const accent = accentColors[pill.accentClass];
-          const baseOffset = index * 90;
-          const activeOffset = -30;
-
-          return (
-            <motion.div
-              key={pill.id}
-              className="layer-card"
-              onClick={(e) => handleCardClick(index, e)}
-              animate={{
-                zIndex: isActive ? 30 : 10 - index,
-                y: isActive ? activeOffset : index * 16,
-                scale: isActive ? 1.02 : 0.96,
-                opacity: isActive ? 1 : 0.45,
-                filter: isActive ? 'blur(0px)' : 'blur(3px)',
-              }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                ...getCardStyles(index),
-                bottom: baseOffset,
-              }}
-            >
-              {/* Лейбл */}
-              <div
-                style={{
-                  fontSize: '0.64rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.12em',
-                  color: accent.color,
-                  textTransform: 'uppercase',
-                  marginBottom: '0.6rem',
-                }}
-              >
-                {pill.label}
-              </div>
-
-              {/* Заголовок */}
-              <h3
-                style={{
-                  fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                  fontSize: '1.25rem',
-                  fontWeight: 700,
-                  lineHeight: 1.25,
-                  color: '#fff',
-                  margin: '0 0 0.6rem 0',
-                }}
-              >
-                {pill.title}
-              </h3>
-
-              {/* Теги */}
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                {pill.tags.map((tag, i) => (
-                  <span key={i} className="chip">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          );
-        })}
-      </motion.div>
     </div>
   );
 };
+
+export default HeroEngine;
