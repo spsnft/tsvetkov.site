@@ -33,6 +33,7 @@ const TRANSITION = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
 
 export const HeroEngine = () => {
   const [active, setActive] = useState<ActiveCard>(null);
+  const [hovered, setHovered] = useState<ActiveCard>(null);
 
   const handleCardClick = (id: ActiveCard, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -44,8 +45,8 @@ export const HeroEngine = () => {
   const getCardStyles = (id: ActiveCard): React.CSSProperties => {
     const isActive = active === id;
     const isDimmed = active !== null && active !== id;
+    const isHovered = hovered === id && active === null;
 
-    // Базовые стили
     const base: React.CSSProperties = {
       position: 'relative',
       width: '100%',
@@ -60,9 +61,12 @@ export const HeroEngine = () => {
       userSelect: 'none',
       transition: TRANSITION,
       zIndex: isActive ? 10 : ['top', 'middle', 'bottom'].indexOf(id || '') + 1,
-      // Default фон
-      background: T.bg1,
+      // Стеклянный фон по умолчанию
+      background: 'rgba(18, 18, 20, 0.75)',
+      backdropFilter: 'blur(12px)',
+      WebkitBackdropFilter: 'blur(12px)',
       border: `1px solid ${T.border}`,
+      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
       opacity: isDimmed ? 0.4 : 1,
     };
 
@@ -70,20 +74,23 @@ export const HeroEngine = () => {
     if (isActive) {
       base.background = `linear-gradient(135deg, ${T.accent12}, rgba(0, 163, 255, 0.12))`;
       base.border = `1px solid ${T.accent25}`;
-      base.backdropFilter = 'blur(16px)';
-      base.WebkitBackdropFilter = 'blur(16px)';
       base.boxShadow = `0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px ${T.accent10}`;
+      base.transform = 'scale(1.02)';
     }
 
-    // Сдвиги
+    // Ховер (только когда ничего не активно)
+    if (isHovered) {
+      base.transform = 'translateY(-2px) scale(1.01)';
+      base.border = `1px solid rgba(255, 255, 255, 0.15)`;
+      base.boxShadow = '0 12px 36px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 229, 153, 0.06)';
+    }
+
+    // Сдвиги при активации
     if (active === 'top') {
-      // Верхняя активна — она уезжает вверх
-      if (id === 'top') base.transform = 'translateY(-40px)';
+      if (id === 'top') base.transform = 'translateY(-40px) scale(1.02)';
     } else if (active === 'bottom') {
-      // Нижняя активна — она уезжает вниз
-      if (id === 'bottom') base.transform = 'translateY(40px)';
+      if (id === 'bottom') base.transform = 'translateY(40px) scale(1.02)';
     } else if (active === 'middle') {
-      // Средняя активна — верхняя вверх, нижняя вниз
       if (id === 'top') base.transform = 'translateY(-40px)';
       if (id === 'bottom') base.transform = 'translateY(40px)';
     }
@@ -110,15 +117,6 @@ export const HeroEngine = () => {
     transition: TRANSITION,
   });
 
-  const getTagItemStyle = (): React.CSSProperties => ({
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: 6,
-    fontSize: '0.85rem',
-    color: T.sub,
-    whiteSpace: 'nowrap',
-  });
-
   return (
     <div
       onClick={handleReset}
@@ -128,6 +126,7 @@ export const HeroEngine = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: 420,
+        perspective: 800,
         cursor: active ? undefined : 'default',
       }}
     >
@@ -139,17 +138,59 @@ export const HeroEngine = () => {
           width: 100%;
           max-width: 440px;
           position: relative;
+          transform: rotateX(6deg);
+          transform-style: preserve-3d;
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .pill-stack.has-active {
+          transform: rotateX(0deg);
+        }
+
+        .pill-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.85rem;
+          color: ${T.sub};
+          white-space: nowrap;
+        }
+
+        .pill-bullet {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: ${T.accent};
+          flex-shrink: 0;
+          box-shadow: 0 0 6px ${T.accent};
+        }
+
+        /* Мобильные: упрощённый список без интерактива */
+        @media (max-width: 767px) {
+          .pill-stack {
+            transform: none;
+            gap: 12px;
+          }
+          .pill-stack > div {
+            margin-top: 0 !important;
+            transform: none !important;
+            opacity: 1 !important;
+            cursor: default;
+            pointer-events: none;
+          }
         }
       `}</style>
 
-      <div className="pill-stack">
+      <div className={`pill-stack${active ? ' has-active' : ''}`}>
         {pills.map((pill, index) => {
-          const marginTop = index === 0 ? 0 : -52; // Наезд ~40%
+          const marginTop = index === 0 ? 0 : -46;
 
           return (
             <div
               key={pill.id}
               onClick={(e) => handleCardClick(pill.id, e)}
+              onMouseEnter={() => setHovered(pill.id)}
+              onMouseLeave={() => setHovered(null)}
               style={{
                 ...getCardStyles(pill.id),
                 marginTop,
@@ -158,16 +199,8 @@ export const HeroEngine = () => {
               {/* Теги */}
               <div style={getTagsStyle(pill.id)}>
                 {pill.tags.map((tag, ti) => (
-                  <span key={ti} style={getTagItemStyle()}>
-                    <span
-                      style={{
-                        width: 6,
-                        height: 6,
-                        borderRadius: '50%',
-                        background: T.accent,
-                        flexShrink: 0,
-                      }}
-                    />
+                  <span key={ti} className="pill-tag">
+                    <span className="pill-bullet" />
                     {tag}
                   </span>
                 ))}
@@ -179,15 +212,6 @@ export const HeroEngine = () => {
           );
         })}
       </div>
-
-      {/* Скрываем на мобильных */}
-      <style jsx>{`
-        @media (max-width: 767px) {
-          .pill-stack {
-            display: none;
-          }
-        }
-      `}</style>
     </div>
   );
 };
