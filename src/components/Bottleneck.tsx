@@ -14,7 +14,7 @@ type BottleneckProps = {
 export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
   const dict = useDictionary(lang);
 
-  // Скелетон той же высоты во избежание сдвига верстки (CLS)
+  // Скелетон во избежание CLS
   if (!dict) {
     return (
       <section
@@ -29,7 +29,6 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         <div className="container" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1.5rem' }}>
           <div className="header-box" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
             <span
-              className="badge"
               style={{
                 display: 'inline-block',
                 padding: '0.35rem 0.85rem',
@@ -47,12 +46,10 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
               &nbsp;
             </span>
             <h2
-              className="title"
               style={{
                 fontSize: 'clamp(2rem, 5vw, 3.2rem)',
                 fontWeight: 800,
                 lineHeight: 1.15,
-                letterSpacing: '-0.03em',
                 color: '#ffffff',
                 margin: 0,
               }}
@@ -61,17 +58,15 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
             </h2>
           </div>
           <div
-            className="grid"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '1.5rem',
             }}
           >
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="card-matte"
                 style={{
                   height: 320,
                   borderRadius: 16,
@@ -88,7 +83,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
   const t = dict.bottleneck;
 
-  // Варианты анимаций с повторным срабатыванием на каждый скролл
+  // Варианты анимаций Framer Motion
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -139,7 +134,6 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           align-items: center;
         }
 
-        /* Фирменный изумрудный шильдик-оглавление */
         .badge {
           display: inline-flex;
           align-items: center;
@@ -176,35 +170,41 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           text-wrap: balance;
         }
 
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        /* Использование :global гарантирует, что motion.div сработает со стилями 100% */
+        :global(.bt-grid) {
+          display: grid !important;
+          grid-template-columns: 1fr;
           gap: 1.5rem;
         }
 
-        .card {
-          position: relative;
-          overflow: hidden;
-          padding: 2rem;
-          border-radius: 16px;
-          background: rgba(14, 14, 18, 0.55);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.07);
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          box-sizing: border-box;
-          transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        @media (min-width: 768px) {
+          :global(.bt-grid) {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
         }
 
-        .card:hover {
+        :global(.bt-card) {
+          position: relative !important;
+          overflow: hidden !important;
+          padding: 2rem !important;
+          border-radius: 16px !important;
+          background: rgba(14, 14, 18, 0.6) !important;
+          backdrop-filter: blur(16px) !important;
+          -webkit-backdrop-filter: blur(16px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.07) !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+          box-sizing: border-box !important;
+          transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+        }
+
+        :global(.bt-card:hover) {
           border-color: rgba(255, 85, 85, 0.4) !important;
-          transform: translateY(-4px);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 85, 85, 0.08);
+          transform: translateY(-4px) !important;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 85, 85, 0.08) !important;
         }
 
-        /* Текстурная заплывающая цифра на фоне */
         .watermark {
           position: absolute;
           top: 8px;
@@ -220,7 +220,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           transition: color 0.3s ease;
         }
 
-        .card:hover .watermark {
+        :global(.bt-card:hover) .watermark {
           color: rgba(255, 85, 85, 0.14);
         }
 
@@ -251,7 +251,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           font-size: 1.25rem;
           font-weight: 700;
           color: #ffffff;
-          margin-bottom: 0.75rem;
+          margin: 0 0 0.75rem 0;
           line-height: 1.3;
         }
 
@@ -297,16 +297,15 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           <h2 className="title">{t.title}</h2>
         </div>
 
-        {/* Анимация Framer Motion, срабатывающая каждый раз при появлении во вьюпорте */}
         <motion.div
-          className="grid"
+          className="bt-grid"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.15 }}
         >
           {t.items.map((item: any, i: number) => (
-            <motion.div key={i} variants={cardVariants} className="card-matte card">
+            <motion.div key={i} variants={cardVariants} className="bt-card">
               <div className="watermark">{item.num}</div>
 
               <div className="card-inner">
