@@ -25,11 +25,11 @@ export const Hero = ({ dict }: HeroProps) => {
         .hero-section {
           width: 100%;
           position: relative;
-          min-height: 82vh;
           display: flex;
-          align-items: flex-end;
-          padding-top: clamp(6rem, 12vw, 10rem);
-          padding-bottom: clamp(3rem, 6vw, 5.5rem);
+          flex-direction: column;
+          justify-content: center;
+          padding-top: clamp(6rem, 8vw, 8.5rem);
+          padding-bottom: clamp(3rem, 6vw, 6rem);
           background: transparent;
           overflow: hidden;
           box-sizing: border-box;
@@ -37,11 +37,20 @@ export const Hero = ({ dict }: HeroProps) => {
 
         .hero-container {
           width: 100%;
-          max-width: 1224px;
+          max-width: 1200px;
           margin: 0 auto;
-          padding: 0 1.5rem;
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
           position: relative;
           z-index: 4;
+          box-sizing: border-box;
+        }
+
+        @media (max-width: 640px) {
+          .hero-container {
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+          }
         }
 
         .hero-split-grid {
@@ -59,7 +68,7 @@ export const Hero = ({ dict }: HeroProps) => {
           }
         }
 
-        /* ЛЕВАЯ КОЛОНКА */
+        /* ЛЕВАЯ КОЛОНКА: ЗАГОЛОВОК */
         .left-col {
           flex: 1 1 auto;
           max-width: 720px;
@@ -101,7 +110,6 @@ export const Hero = ({ dict }: HeroProps) => {
           font-weight: 800;
           line-height: 1.05;
           letter-spacing: -0.035em;
-          color: #ffffff;
           margin: 0;
           text-wrap: balance;
         }
@@ -111,10 +119,13 @@ export const Hero = ({ dict }: HeroProps) => {
         }
 
         .hero-title .title-line2 {
-          color: ${T.accent};
+          background: linear-gradient(135deg, #00e599 0%, #00a3ff 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
-        /* ПРАВАЯ КОЛОНКА */
+        /* ПРАВАЯ КОЛОНКА: ОПИСАНИЕ И КНОПКА */
         .right-col {
           flex: 0 0 auto;
           width: 100%;
@@ -135,7 +146,7 @@ export const Hero = ({ dict }: HeroProps) => {
         .desc-item {
           font-size: clamp(0.95rem, 1.3vw, 1.1rem);
           line-height: 1.55;
-          color: ${T.body};
+          color: rgba(255, 255, 255, 0.65);
           font-weight: 400;
           margin: 0;
         }
@@ -148,51 +159,31 @@ export const Hero = ({ dict }: HeroProps) => {
         .cta-action-box {
           display: flex;
           align-items: center;
-          gap: 1rem;
-        }
-
-        .btn-primary-hero {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          height: 54px;
-          padding: 0 2.25rem;
-          border-radius: ${T.radius.md};
-          font-weight: 800;
-          font-size: 1rem;
-          letter-spacing: 0.01em;
-          text-decoration: none;
-          cursor: pointer;
-          white-space: nowrap;
-          background: linear-gradient(180deg, #00e599 0%, #00a3ff 100%);
-          color: #0a0a0c;
-          border: 1px solid rgba(255, 255, 255, 0.4);
-          box-shadow: 0 8px 20px -6px ${T.accent40}, 0 4px 12px rgba(0, 163, 255, 0.2);
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .btn-primary-hero:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 14px 30px -6px ${T.accent}, 0 6px 16px rgba(0, 163, 255, 0.35);
         }
 
         .btn-arrow {
+          margin-left: 8px;
           transition: transform 0.2s ease;
         }
 
-        .btn-primary-hero:hover .btn-arrow {
+        .cta-action-box :global(.btn-primary:hover) .btn-arrow {
           transform: translateX(4px);
         }
 
+        /* Атмосферное неоновое свечение */
         .ambient-glow {
           position: absolute;
-          bottom: 10%;
-          left: 20%;
+          bottom: 5%;
+          left: 15%;
           width: 700px;
           height: 450px;
           border-radius: 50%;
-          background: radial-gradient(circle, ${T.glow} 0%, rgba(0, 163, 255, 0.06) 40%, transparent 70%);
+          background: radial-gradient(
+            circle,
+            ${T.glow} 0%,
+            rgba(0, 163, 255, 0.06) 40%,
+            transparent 70%
+          );
           filter: blur(90px);
           pointer-events: none;
           z-index: 1;
@@ -204,8 +195,7 @@ export const Hero = ({ dict }: HeroProps) => {
 
       <div className="hero-container">
         <div className="hero-split-grid">
-          
-          {/* Левая сторона: Заголовок из файлов локализации */}
+          {/* Левая сторона: Заголовок */}
           <div className="left-col">
             <div className="hero-badge-wrapper">
               <span className="hero-badge">
@@ -221,40 +211,49 @@ export const Hero = ({ dict }: HeroProps) => {
             </h1>
           </div>
 
-          {/* Правая сторона: Подзаголовки из локализаций и CTA */}
+          {/* Правая сторона: Подзаголовки и CTA */}
           <div className="right-col">
             <div className="hero-description">
               {t.sub1 && (
-                <p 
-                  className="desc-item" 
-                  dangerouslySetInnerHTML={{ __html: t.sub1 }} 
+                <p
+                  className="desc-item"
+                  dangerouslySetInnerHTML={{ __html: t.sub1 }}
                 />
               )}
               {t.sub2 && (
-                <p 
-                  className="desc-item" 
-                  dangerouslySetInnerHTML={{ __html: t.sub2 }} 
+                <p
+                  className="desc-item"
+                  dangerouslySetInnerHTML={{ __html: t.sub2 }}
                 />
               )}
               {t.sub3 && (
-                <p 
-                  className="desc-item" 
-                  dangerouslySetInnerHTML={{ __html: t.sub3 }} 
+                <p
+                  className="desc-item"
+                  dangerouslySetInnerHTML={{ __html: t.sub3 }}
                 />
               )}
             </div>
 
             <div className="cta-action-box">
-              <a href="#contact" className="btn-primary-hero">
+              <a href="#contact" className="btn-primary">
                 <span>{t.cta}</span>
-                <svg className="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  className="btn-arrow"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
