@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useDictionary } from '@/src/locales/getDictionary';
+import { T } from '@/src/theme/tokens';
 
 const RED_ACCENT = '#FF5555';
 
@@ -13,7 +13,7 @@ type BottleneckProps = {
 export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
   const dict = useDictionary(lang);
 
-  // Скелетон во избежание CLS
+  // Скелетон во избежание сдвигов верстки (CLS)
   if (!dict) {
     return (
       <section
@@ -37,9 +37,9 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
                 fontWeight: 700,
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                background: 'rgba(255, 85, 85, 0.08)',
-                border: '1px solid rgba(255, 85, 85, 0.25)',
-                color: RED_ACCENT,
+                background: 'rgba(0, 229, 153, 0.05)',
+                border: '1px solid rgba(0, 229, 153, 0.25)',
+                color: T.accent,
               }}
             >
               &nbsp;
@@ -68,9 +68,9 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
                 key={i}
                 style={{
                   height: 300,
-                  borderRadius: 16,
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  background: 'rgba(14, 14, 18, 0.55)',
+                  borderRadius: 18,
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  background: 'rgba(18, 18, 24, 0.45)',
                 }}
               />
             ))}
@@ -81,27 +81,6 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
   }
 
   const t = dict.bottleneck;
-
-  // Медленная, кинематографичная анимация с задержкой для старта
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.2, // Задержка перед началом каскада
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 35 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
 
   return (
     <section id="problems" className="bottleneck-section">
@@ -136,7 +115,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           align-items: center;
         }
 
-        /* Красный тревожный шильдик с мигающей точкой */
+        /* Зеленый фирменный шильдик */
         .badge {
           display: inline-flex;
           align-items: center;
@@ -148,13 +127,14 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           font-weight: 800;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: ${RED_ACCENT};
-          background: rgba(255, 85, 85, 0.06);
-          border: 1px solid rgba(255, 85, 85, 0.22);
-          backdrop-filter: blur(10px);
-          box-shadow: 0 0 15px rgba(255, 85, 85, 0.08);
+          color: ${T.accent};
+          background: rgba(0, 229, 153, 0.05);
+          border: 1px solid rgba(0, 229, 153, 0.25);
+          backdrop-filter: blur(12px);
+          box-shadow: 0 0 15px rgba(0, 229, 153, 0.08);
         }
 
+        /* ТОЛЬКО ТОЧКА КРАСНАЯ И МЕРЦАЮЩАЯ */
         .badge-dot {
           width: 6px;
           height: 6px;
@@ -166,7 +146,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
         @keyframes pulseRed {
           0%, 100% {
-            opacity: 0.35;
+            opacity: 0.4;
             transform: scale(0.9);
           }
           50% {
@@ -185,39 +165,56 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           text-wrap: balance;
         }
 
-        /* Сетка с использованием :global для предотвращения конфликтов классов */
-        :global(.bt-grid) {
-          display: grid !important;
+        /* Сетка карточек */
+        .grid {
+          display: grid;
           grid-template-columns: 1fr;
           gap: 1.5rem;
         }
 
         @media (min-width: 768px) {
-          :global(.bt-grid) {
-            grid-template-columns: repeat(3, 1fr) !important;
+          .grid {
+            grid-template-columns: repeat(3, 1fr);
           }
         }
 
-        :global(.bt-card) {
-          position: relative !important;
-          overflow: hidden !important;
-          padding: 2.25rem 2rem 1.75rem 2rem !important;
-          border-radius: 16px !important;
-          background: rgba(14, 14, 18, 0.6) !important;
-          backdrop-filter: blur(16px) !important;
-          -webkit-backdrop-filter: blur(16px) !important;
-          border: 1px solid rgba(255, 255, 255, 0.07) !important;
-          display: flex !important;
-          flex-direction: column !important;
-          justify-content: space-between !important;
-          box-sizing: border-box !important;
-          transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+        /* РЕАЛЬНОЕ СТЕКЛО (GLASSMORPHISM) С НАДОБНЫМ БЛИКОМ И ГЛУБОКИМ РАЗМЫТИЕМ */
+        .card {
+          position: relative;
+          overflow: hidden;
+          padding: 2.25rem 2rem 1.75rem 2rem;
+          border-radius: 18px;
+          
+          /* Матовое просвечивающее стекло */
+          background: rgba(18, 18, 24, 0.45);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          
+          /* Тонкая стеклянная грань + внутренний световой блик сверху */
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 
+                      inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          box-sizing: border-box;
+
+          /* Плавная усиленная интерактивность без анимаций загрузки */
+          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                      background 0.35s ease,
+                      border-color 0.35s ease,
+                      box-shadow 0.35s ease;
         }
 
-        :global(.bt-card:hover) {
-          border-color: rgba(255, 85, 85, 0.4) !important;
-          transform: translateY(-4px) !important;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 85, 85, 0.08) !important;
+        /* УСИЛЕННЫЙ ХОВЕР С КРАСНЫМ ОРЕОЛОМ */
+        .card:hover {
+          transform: translateY(-6px);
+          background: rgba(22, 22, 30, 0.65);
+          border-color: rgba(255, 85, 85, 0.35);
+          box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.65),
+                      0 0 35px rgba(255, 85, 85, 0.12),
+                      inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
         }
 
         .watermark {
@@ -232,11 +229,12 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           pointer-events: none;
           user-select: none;
           z-index: 0;
-          transition: color 0.3s ease;
+          transition: color 0.35s ease, transform 0.35s ease;
         }
 
-        :global(.bt-card:hover) .watermark {
+        .card:hover .watermark {
           color: rgba(255, 85, 85, 0.16);
+          transform: scale(1.05);
         }
 
         .card-inner {
@@ -254,7 +252,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           color: #ffffff;
           margin: 0 0 0.85rem 0;
           line-height: 1.3;
-          padding-right: 2rem; /* Чтобы текст не заходил под цифру */
+          padding-right: 2rem;
         }
 
         .card-desc {
@@ -272,7 +270,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
         .impact-footer {
           padding-top: 1rem;
-          border-top: 1px dashed rgba(255, 255, 255, 0.09);
+          border-top: 1px dashed rgba(255, 255, 255, 0.1);
           display: flex;
           align-items: center;
           gap: 0.5rem;
@@ -299,15 +297,9 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           <h2 className="title">{t.title}</h2>
         </div>
 
-        <motion.div
-          className="bt-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.15 }}
-        >
+        <div className="grid">
           {t.items.map((item: any, i: number) => (
-            <motion.div key={i} variants={cardVariants} className="bt-card">
+            <div key={i} className="card">
               <div className="watermark">{item.num}</div>
 
               <div className="card-inner">
@@ -345,9 +337,9 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
