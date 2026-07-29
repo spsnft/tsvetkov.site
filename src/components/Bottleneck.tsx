@@ -70,7 +70,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
                   height: 300,
                   borderRadius: 18,
                   border: '1px solid rgba(255,255,255,0.08)',
-                  background: 'rgba(18, 18, 24, 0.45)',
+                  background: 'rgba(12, 12, 16, 0.25)',
                 }}
               />
             ))}
@@ -115,7 +115,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           align-items: center;
         }
 
-        /* Зеленый фирменный шильдик */
+        /* Зеленый шильдик */
         .badge {
           display: inline-flex;
           align-items: center;
@@ -134,7 +134,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           box-shadow: 0 0 15px rgba(0, 229, 153, 0.08);
         }
 
-        /* ТОЛЬКО ТОЧКА КРАСНАЯ И МЕРЦАЮЩАЯ */
+        /* Красная мерцающая точка */
         .badge-dot {
           width: 6px;
           height: 6px;
@@ -165,7 +165,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           text-wrap: balance;
         }
 
-        /* Сетка карточек */
+        /* Сетка */
         .grid {
           display: grid;
           grid-template-columns: 1fr;
@@ -178,54 +178,52 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           }
         }
 
-        /* РЕАЛЬНОЕ СТЕКЛО (GLASSMORPHISM) С НАДОБНЫМ БЛИКОМ И ГЛУБОКИМ РАЗМЫТИЕМ */
+        /* УЛЬТРА-ПРОЗРАЧНОЕ СТЕКЛО (ПРОСВЕЧИВАЮТ ТОЧКИ ФОНА) */
         .card {
           position: relative;
           overflow: hidden;
-          padding: 2.25rem 2rem 1.75rem 2rem;
+          padding: 2rem 1.75rem 1.75rem 1.75rem;
           border-radius: 18px;
           
-          /* Матовое просвечивающее стекло */
-          background: rgba(18, 18, 24, 0.45);
-          backdrop-filter: blur(20px) saturate(180%);
-          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          /* Воздушная прозрачность с легким блюром */
+          background: rgba(12, 12, 16, 0.25);
+          backdrop-filter: blur(10px) saturate(140%);
+          -webkit-backdrop-filter: blur(10px) saturate(140%);
           
-          /* Тонкая стеклянная грань + внутренний световой блик сверху */
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 
-                      inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+          /* Блик по верху и тонкий контур */
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 
+                      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           box-sizing: border-box;
 
-          /* Плавная усиленная интерактивность без анимаций загрузки */
           transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                       background 0.35s ease,
                       border-color 0.35s ease,
                       box-shadow 0.35s ease;
         }
 
-        /* УСИЛЕННЫЙ ХОВЕР С КРАСНЫМ ОРЕОЛОМ */
         .card:hover {
-          transform: translateY(-6px);
-          background: rgba(22, 22, 30, 0.65);
+          transform: translateY(-5px);
+          background: rgba(18, 18, 26, 0.45);
           border-color: rgba(255, 85, 85, 0.35);
-          box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.65),
-                      0 0 35px rgba(255, 85, 85, 0.12),
-                      inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+          box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5),
+                      0 0 30px rgba(255, 85, 85, 0.12),
+                      inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
         }
 
         .watermark {
           position: absolute;
-          top: 12px;
-          right: 18px;
+          top: 10px;
+          right: 14px;
           font-family: 'Space Grotesk', sans-serif;
-          font-size: 4.5rem;
+          font-size: 4.2rem;
           font-weight: 900;
           line-height: 1;
-          color: rgba(255, 85, 85, 0.07);
+          color: rgba(255, 85, 85, 0.05);
           pointer-events: none;
           user-select: none;
           z-index: 0;
@@ -233,8 +231,8 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         }
 
         .card:hover .watermark {
-          color: rgba(255, 85, 85, 0.16);
-          transform: scale(1.05);
+          color: rgba(255, 85, 85, 0.14);
+          transform: scale(1.04);
         }
 
         .card-inner {
@@ -246,20 +244,21 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           justify-content: space-between;
         }
 
+        /* ЧЕТКО В 1 СТРОКУ НА ПК */
         .card-title {
-          font-size: 1.3rem;
+          font-size: clamp(1.05rem, 1.2vw, 1.2rem);
           font-weight: 700;
           color: #ffffff;
           margin: 0 0 0.85rem 0;
-          line-height: 1.3;
-          padding-right: 2rem;
+          line-height: 1.25;
+          letter-spacing: -0.02em;
         }
 
         .card-desc {
-          font-size: 0.92rem;
-          line-height: 1.6;
-          color: rgba(255, 255, 255, 0.7);
-          margin: 0 0 2rem 0;
+          font-size: 0.9rem;
+          line-height: 1.55;
+          color: rgba(255, 255, 255, 0.68);
+          margin: 0 0 1.75rem 0;
           text-wrap: pretty;
         }
 
@@ -269,15 +268,15 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         }
 
         .impact-footer {
-          padding-top: 1rem;
-          border-top: 1px dashed rgba(255, 255, 255, 0.1);
+          padding-top: 0.9rem;
+          border-top: 1px dashed rgba(255, 255, 255, 0.09);
           display: flex;
           align-items: center;
           gap: 0.5rem;
         }
 
         .impact-label {
-          font-size: 0.78rem;
+          font-size: 0.76rem;
           font-weight: 600;
           color: rgba(255, 255, 255, 0.55);
         }
