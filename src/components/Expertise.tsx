@@ -142,7 +142,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 163, 255, 0.06);
         }
 
-        /* SPLIT STRUCTURE FOR ROW 2 & ROW 1 HERO */
+        /* SPLIT STRUCTURE */
         .card-split {
           display: flex;
           flex-direction: column;
@@ -159,7 +159,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           }
         }
 
-        /* ТЕКСТ ЗАНАНИЕ В СЕБЕ ВСЁ СВОБОДНОЕ МЕСТО ВПЛОТНУЮ К ИКОНКЕ */
         .card-text-side {
           flex: 1 1 0%;
           min-width: 0;
@@ -168,7 +167,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           justify-content: center;
         }
 
-        /* КОНТЕЙНЕР ДЛЯ ИКОНКИ: ПРИЖАТ ВПРАВО */
         .card-asset-side {
           flex: 0 0 auto;
           display: flex;
@@ -184,7 +182,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           justify-content: center;
         }
 
-        /* РАЗМЕРЫ ИКОНОК */
+        /* SIZES */
         .size-hero {
           width: 150px;
           height: 150px;
@@ -196,8 +194,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .size-hms {
-          width: 85px;
-          height: 85px;
+          width: 90px;
+          height: 90px;
         }
 
         .asset-glow {
@@ -241,28 +239,20 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* HMS CARD (30%) & CTA */
+        /* HMS CARD (30%) REDESIGN */
         .card-hms {
           background: rgba(0, 229, 153, 0.03);
-          border: 1px solid rgba(0, 229, 153, 0.25);
+          border: 1px solid rgba(0, 229, 153, 0.22);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding-right: 1.25rem;
+          padding: 1.35rem 1.25rem;
         }
 
         .card-hms:hover {
           background: rgba(0, 229, 153, 0.06);
-          border-color: rgba(0, 229, 153, 0.5);
+          border-color: rgba(0, 229, 153, 0.45);
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 229, 153, 0.12);
-        }
-
-        .hms-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.5rem;
-          margin-bottom: 0.5rem;
         }
 
         .hms-tag {
@@ -271,54 +261,76 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           font-weight: 800;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: ${T.accent};
+          color: #00E599;
           background: rgba(0, 229, 153, 0.1);
           border: 1px solid rgba(0, 229, 153, 0.25);
-          padding: 2px 7px;
-          border-radius: 5px;
+          padding: 3px 8px;
+          border-radius: 6px;
+          margin-bottom: 0.75rem;
+        }
+
+        .hms-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
           margin-bottom: 0.5rem;
+        }
+
+        .hms-title-override {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+          text-transform: none; /* Отменяет принудительный капс из перевода */
+          line-height: 1.2;
         }
 
         .hms-desc {
           font-size: 0.82rem;
-          font-weight: 500;
+          font-weight: 400;
           line-height: 1.45;
-          color: rgba(255, 255, 255, 0.75);
-          margin-bottom: 1rem;
+          color: rgba(255, 255, 255, 0.7);
+          margin-top: 0.5rem;
+          margin-bottom: 1.25rem;
         }
 
-        .hms-glass-button {
+        /* ПОЛНОЦЕННАЯ CTA КНОПКА (БЕЗ ФИОЛЕТОВОЙ ЕРУНДЫ) */
+        :global(.hms-glass-button),
+        :global(.hms-glass-button:visited) {
           display: flex;
           align-items: center;
           justify-content: space-between;
           width: 100%;
-          padding: 0.6rem 0.9rem;
+          padding: 0.65rem 0.9rem;
           border-radius: 10px;
-          background: rgba(0, 229, 153, 0.09);
-          border: 1px solid rgba(0, 229, 153, 0.32);
-          color: #ffffff;
+          background: rgba(0, 229, 153, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.3);
+          color: #ffffff !important;
           font-size: 0.82rem;
           font-weight: 700;
-          text-decoration: none;
+          text-decoration: none !important;
           backdrop-filter: blur(8px);
-          transition: all 0.2s ease;
+          transition: all 0.25s ease;
+          box-sizing: border-box;
         }
 
-        .hms-glass-button:hover {
-          background: rgba(0, 229, 153, 0.2);
-          border-color: rgba(0, 229, 153, 0.65);
-          box-shadow: 0 0 18px rgba(0, 229, 153, 0.25);
+        :global(.hms-glass-button:hover) {
+          background: rgba(0, 229, 153, 0.18);
+          border-color: rgba(0, 229, 153, 0.6);
+          box-shadow: 0 0 20px rgba(0, 229, 153, 0.2);
+          color: #ffffff !important;
         }
 
         .hms-arrow-icon {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: ${T.accent};
+          color: #00E599;
           transition: transform 0.25s ease;
         }
 
-        .hms-glass-button:hover .hms-arrow-icon {
+        :global(.hms-glass-button:hover) .hms-arrow-icon {
           transform: translate(3px, -3px);
         }
       `}</style>
@@ -366,7 +378,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
               <span className="hms-tag">{t.hmsBadge}</span>
               
               <div className="hms-header">
-                <h3 className="card-title" style={{ fontSize: '1.05rem', margin: 0 }}>
+                <h3 className="hms-title-override">
                   {t.hmsTitle}
                 </h3>
                 <div className="asset-wrapper size-hms">
@@ -375,8 +387,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-hms-core.webp" 
                     alt={t.hmsTitle} 
                     className="asset-img"
-                    width={85}
-                    height={85}
+                    width={90}
+                    height={90}
                   />
                 </div>
               </div>
@@ -397,7 +409,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </Link>
           </div>
 
-          {/* 3. КАРТОЧКА 50% — STRATEGIC AUDITS (ROW 2 LEFT) */}
+          {/* 3. КАРТОЧКА 50% — STRATEGIC AUDITS */}
           <div className="bento-card col-50">
             <div className="card-split">
               <div className="card-text-side">
@@ -422,7 +434,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* 4. КАРТОЧКА 50% — PROCESS AUTOMATION (ROW 2 RIGHT) */}
+          {/* 4. КАРТОЧКА 50% — PROCESS AUTOMATION */}
           <div className="bento-card col-50">
             <div className="card-split">
               <div className="card-text-side">
