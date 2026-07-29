@@ -62,17 +62,19 @@
     "subtitle": "Connecting architecture, funnels, and automation into a predictable growth engine.",
     "card1Title": "Systems, Data & Architecture",
     "card1Desc": "Eliminate blind decision-making by unifying scattered business data into a <strong>single source of truth</strong>. Gain complete clarity on key financial metrics, unit economics, and growth drivers.",
-    "card1Pills": ["100% Revenue Visibility", "Real-Time Unit Economics", "Zero OTA Commissions"],
+    "card1Bullets": [
+      "Unified P&L & Multi-Channel Ad Attribution",
+      "Zero-Leakage CRM Lead Routing Protocols",
+      "Real-Time Unit Economics & Margin Dashboards"
+    ],
     "hmsBadge": "SPECIALIZED OFFER",
-    "hmsTitle": "Hospitality & HoReCa Systems",
+    "hmsTitle": "Direct Booking Ecosystems (HMS)",
     "hmsDesc": "A dedicated ecosystem for hotels & resorts designed to eliminate OTA commissions, sync PMS data seamlessly, and maximize direct bookings.",
     "hmsCta": "Explore HMS Solution",
     "card2Title": "Strategic Audits & Funnel Optimization",
     "card2Desc": "We analyze your entire customer journey to find exactly where you are losing money. By <strong>auditing bottlenecks, rebuilding sales funnels, and optimizing conversion</strong>, we maximize revenue from existing traffic.",
-    "card2Pills": ["Bottleneck Audits", "Maximized ROI", "CAC Reduction"],
     "card3Title": "Process Automation & AI Workflows",
-    "card3Desc": "Eliminate operational lag and human error across your pipelines. Instantly route leads, <strong>automate CRM handoffs, and deploy custom AI agents</strong> to speed up sales cycles and cut overhead.",
-    "card3Pills": ["Zero Lead Lag", "Automated CRM Sync", "Reduced Overhead"]
+    "card3Desc": "Eliminate operational lag and human error across your pipelines. Instantly route leads, <strong>automate CRM handoffs, and deploy custom AI agents</strong> to speed up sales cycles and cut overhead."
   },
   "services": {
     "badge": "ENGAGEMENT MODELS & SERVICES",
