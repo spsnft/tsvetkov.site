@@ -52,19 +52,19 @@ const InlineTextChip: React.FC<InlineTextChipProps> = ({
         }
 
         .header-chip {
-          padding: 0px 14px;
-          margin: 0 4px;
-          background: ${T.accent10};
-          border: 1px solid ${T.accent30};
+          padding: 2px 14px;
+          margin: 0 6px;
+          background: rgba(0, 229, 153, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.3);
           color: ${T.accent};
-          box-shadow: 0 0 15px ${T.accent08};
+          box-shadow: 0 0 15px rgba(0, 229, 153, 0.12);
         }
 
         .body-chip {
-          padding: 1px 10px;
+          padding: 1px 8px;
           margin: 0 4px;
-          background: ${T.accent08};
-          border: 1px solid ${T.accent25};
+          background: rgba(0, 229, 153, 0.06);
+          border: 1px solid rgba(0, 229, 153, 0.25);
           color: ${T.accent};
         }
 
@@ -75,11 +75,11 @@ const InlineTextChip: React.FC<InlineTextChipProps> = ({
 
         .inline-chip-wrapper:hover,
         .inline-chip-wrapper.is-active {
-          background: ${T.accent25};
+          background: rgba(0, 229, 153, 0.18);
           border-color: ${T.accent};
           color: #ffffff;
           transform: translateY(-2px);
-          box-shadow: 0 4px 20px ${T.accent35};
+          box-shadow: 0 4px 20px rgba(0, 229, 153, 0.35);
         }
 
         .chip-popover {
@@ -149,7 +149,7 @@ export const Hero = ({ lang, dict }: HeroProps) => {
         .hero-section {
           width: 100%;
           position: relative;
-          padding-top: clamp(5rem, 10vw, 9rem);
+          padding-top: clamp(5.5rem, 10vw, 8.5rem);
           padding-bottom: clamp(3rem, 6vw, 5rem);
           background: transparent;
           overflow: hidden;
@@ -162,7 +162,7 @@ export const Hero = ({ lang, dict }: HeroProps) => {
 
         .hero-content {
           width: 100%;
-          max-width: 900px;
+          max-width: 920px;
           margin: 0 auto;
           padding: 0 1.5rem;
           text-align: center;
@@ -173,10 +173,27 @@ export const Hero = ({ lang, dict }: HeroProps) => {
           align-items: center;
         }
 
+        .hero-badge-wrapper {
+          margin-bottom: 1.25rem;
+        }
+
+        .hero-badge {
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: ${T.accent};
+          background: ${T.accent08};
+          padding: 6px 16px;
+          border-radius: 20px;
+          border: 1px solid ${T.accent25};
+          backdrop-filter: blur(8px);
+        }
+
         .hero-title {
-          font-size: clamp(2.8rem, 5.5vw, 5rem);
+          font-size: clamp(2.6rem, 5.2vw, 4.8rem);
           font-weight: 800;
-          line-height: 1.15;
+          line-height: 1.18;
           letter-spacing: -0.03em;
           color: #ffffff;
           margin: 0 0 1.5rem 0;
@@ -185,34 +202,40 @@ export const Hero = ({ lang, dict }: HeroProps) => {
         .hero-sublines {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
-          margin-bottom: 2rem;
+          gap: 0.5rem;
+          margin-bottom: 2.25rem;
+          max-width: 680px;
         }
 
         .subline-item {
-          font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+          font-size: clamp(1rem, 1.6vw, 1.25rem);
           font-weight: 500;
           color: ${T.body};
           line-height: 1.5;
-          transition: background 0.3s ease, color 0.3s ease;
-          padding: 2px 8px;
+          transition: all 0.3s ease;
+          padding: 3px 10px;
           border-radius: 6px;
         }
 
         .subline-item.highlighted-line {
           background: ${T.accent08};
           color: #ffffff;
+          border: 1px solid ${T.accent20};
+        }
+
+        .cta-wrapper {
+          margin-bottom: 2.5rem;
         }
 
         .btn-primary-hero {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          height: 56px;
-          padding: 0 2.5rem;
+          height: 54px;
+          padding: 0 2.25rem;
           border-radius: ${T.radius.md};
           font-weight: 800;
-          font-size: 1.05rem;
+          font-size: 1rem;
           letter-spacing: 0.01em;
           text-decoration: none;
           cursor: pointer;
@@ -232,23 +255,21 @@ export const Hero = ({ lang, dict }: HeroProps) => {
 
         .ticker-container {
           width: 100%;
-          max-width: 800px;
-          margin-top: 2.5rem;
-          padding: 0 1.5rem;
+          max-width: 820px;
+          padding: 0;
           position: relative;
           z-index: 4;
         }
       `}</style>
 
-      {/* Фоновое неоновое свечение */}
       <div
         style={{
           position: 'absolute',
-          top: '50%',
+          top: '45%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: '800px',
-          height: '600px',
+          height: '550px',
           borderRadius: '50%',
           background: `radial-gradient(circle, ${T.glow} 0%, ${T.accent05} 35%, transparent 65%)`,
           filter: 'blur(80px)',
@@ -257,28 +278,11 @@ export const Hero = ({ lang, dict }: HeroProps) => {
         }}
       />
 
-      {/* Основной контент */}
       <div className="hero-content">
-        {/* Бейдж */}
-        <div style={{ marginBottom: '1.5rem' }}>
-          <span
-            style={{
-              fontSize: '0.68rem',
-              fontWeight: 700,
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: T.accent,
-              background: T.accent08,
-              padding: '6px 16px',
-              borderRadius: 20,
-              border: `1px solid ${T.accent25}`,
-            }}
-          >
-            {t.badge}
-          </span>
+        <div className="hero-badge-wrapper">
+          <span className="hero-badge">{t.badge}</span>
         </div>
 
-        {/* Заголовок */}
         <h1 className="hero-title">
           <InlineTextChip
             chipKey="value"
@@ -301,7 +305,6 @@ export const Hero = ({ lang, dict }: HeroProps) => {
           />
         </h1>
 
-        {/* Подзаголовок */}
         <div className="hero-sublines">
           <div className="subline-item">
             We eliminate chaos in{' '}
@@ -312,6 +315,7 @@ export const Hero = ({ lang, dict }: HeroProps) => {
               activeChip={activeChipKey}
               onHover={setActiveChipKey}
             />
+            &nbsp;&amp; digital systems
           </div>
 
           <div
@@ -319,7 +323,7 @@ export const Hero = ({ lang, dict }: HeroProps) => {
               highlightedLine === 'data' ? 'highlighted-line' : ''
             }`}
           >
-            No fluff — just clean data architecture
+            No fluff — clean data architecture &amp; P&amp;L attribution
           </div>
 
           <div className="subline-item">
@@ -334,21 +338,21 @@ export const Hero = ({ lang, dict }: HeroProps) => {
           </div>
         </div>
 
-        {/* Кнопка */}
-        <a href="#contact" className="btn-primary-hero">
-          {t.cta}
-        </a>
-      </div>
+        <div className="cta-wrapper">
+          <a href="#contact" className="btn-primary-hero">
+            {t.cta}
+          </a>
+        </div>
 
-      {/* Тикер под кнопкой */}
-      <div className="ticker-container">
-        <HeroTicker
-          lang={lang}
-          activeChip={activeChipKey}
-          highlightedLine={highlightedLine}
-          onFrameChange={handleFrameChange}
-          onManualSelect={handleManualSelect}
-        />
+        <div className="ticker-container">
+          <HeroTicker
+            lang={lang}
+            activeChip={activeChipKey}
+            highlightedLine={highlightedLine}
+            onFrameChange={handleFrameChange}
+            onManualSelect={handleManualSelect}
+          />
+        </div>
       </div>
     </section>
   );
