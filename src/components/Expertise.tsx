@@ -15,17 +15,14 @@ interface ExpertiseProps {
       subtitle?: string;
       card1Title: string;
       card1Desc: string;
-      card1Pills: string[];
       hmsBadge: string;
       hmsTitle: string;
       hmsDesc: string;
       hmsCta: string;
       card2Title: string;
       card2Desc: string;
-      card2Pills: string[];
       card3Title: string;
       card3Desc: string;
-      card3Pills: string[];
     };
   } | null;
 }
@@ -37,17 +34,14 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
     subtitle: 'Connecting architecture, funnels, and automation into a predictable growth engine.',
     card1Title: 'Systems, Data & Architecture',
     card1Desc: 'Eliminate blind decision-making by unifying scattered business data into a <strong>single source of truth</strong>. Gain complete clarity on key financial metrics, unit economics, and growth drivers.',
-    card1Pills: ['100% Revenue Visibility', 'Real-Time Unit Economics', 'Zero OTA Commissions'],
     hmsBadge: 'SPECIALIZED OFFER',
     hmsTitle: 'Hospitality & HoReCa Systems',
     hmsDesc: 'A dedicated ecosystem for hotels & resorts designed to eliminate OTA commissions, sync PMS data seamlessly, and maximize direct bookings.',
     hmsCta: 'Explore HMS Solution',
     card2Title: 'Strategic Audits & Funnel Optimization',
     card2Desc: 'We analyze your entire customer journey to find exactly where you are losing money. By <strong>auditing bottlenecks, rebuilding sales funnels, and optimizing conversion</strong>, we maximize revenue from existing traffic.',
-    card2Pills: ['Bottleneck Audits', 'Maximized ROI', 'CAC Reduction'],
     card3Title: 'Process Automation & AI Workflows',
     card3Desc: 'Eliminate operational lag and human error across your pipelines. Instantly route leads, <strong>automate CRM handoffs, and deploy custom AI agents</strong> to speed up sales cycles and cut overhead.',
-    card3Pills: ['Zero Lead Lag', 'Automated CRM Sync', 'Reduced Overhead'],
   };
 
   const renderWithStrong = (text: string) => {
@@ -112,7 +106,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           line-height: 1.5;
         }
 
-        /* BENTO GRID 10-TRACK (70/30 верх, 50/50 низ) */
+        /* BENTO GRID 10-TRACK */
         .bento-grid {
           display: grid;
           grid-template-columns: 1fr;
@@ -160,7 +154,77 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 163, 255, 0.08);
         }
 
-        /* CARD HEADER (Горизонтальное объединение заголовка и иконки) */
+        /* HERO CARD (FLAGSHIP 70%) SPLIT LAYOUT */
+        .hero-split-container {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          height: 100%;
+          justify-content: space-between;
+        }
+
+        @media (min-width: 768px) {
+          .hero-split-container {
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+
+        .hero-left {
+          flex: 1.3;
+        }
+
+        .hero-right {
+          flex: 0.9;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+        }
+
+        /* BULLET LIST FOR HERO CARD */
+        .hero-bullets {
+          margin-top: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+        }
+
+        .bullet-item {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.88);
+        }
+
+        .bullet-icon {
+          color: ${T.accent};
+          font-size: 0.9rem;
+          line-height: 1;
+        }
+
+        /* LARGE 3D HERO ASSET */
+        .hero-asset-box {
+          position: relative;
+          width: 150px;
+          height: 150px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-asset-glow {
+          position: absolute;
+          inset: -20px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(0, 163, 255, 0.22) 0%, rgba(0, 229, 153, 0.12) 45%, transparent 70%);
+          filter: blur(24px);
+          pointer-events: none;
+        }
+
+        /* CARD HEADER (FOR standard 50% & 30% CARDS) */
         .card-header {
           display: flex;
           justify-content: space-between;
@@ -176,8 +240,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         /* INLINE 3D ASSET SLOT */
         .asset-slot-inline {
           position: relative;
-          width: 80px;
-          height: 80px;
+          width: 76px;
+          height: 76px;
           flex-shrink: 0;
           display: flex;
           align-items: center;
@@ -277,28 +341,48 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         <div className="bento-grid">
           
-          {/* РЯД 1: КАРТОЧКА 1 (70% / col-70) — Systems, Data & Architecture */}
+          {/* РЯД 1: КАРТОЧКА 1 (70% / col-70) — HERO FLAGSHIP WITH SPLIT LAYOUT */}
           <div className="bento-card col-70">
-            <div>
-              <div className="card-header">
-                <div className="header-content">
-                  <h3 className="card-title">{t.card1Title}</h3>
+            <div className="hero-split-container">
+              <div className="hero-left">
+                <h3 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '0.85rem' }}>
+                  {t.card1Title}
+                </h3>
+                <p className="card-desc">
+                  {renderWithStrong(t.card1Desc)}
+                </p>
+
+                {/* ИНЖЕНЕРНЫЕ ГАРАНТИИ (Заполняют пространство) */}
+                <div className="hero-bullets">
+                  <div className="bullet-item">
+                    <span className="bullet-icon">◆</span>
+                    <span>Unified P&amp;L &amp; Multi-Channel Ad Attribution</span>
+                  </div>
+                  <div className="bullet-item">
+                    <span className="bullet-icon">◆</span>
+                    <span>Zero-Leakage CRM Lead Routing Protocols</span>
+                  </div>
+                  <div className="bullet-item">
+                    <span className="bullet-icon">◆</span>
+                    <span>Real-Time Unit Economics &amp; Margin Dashboards</span>
+                  </div>
                 </div>
-                <div className="asset-slot-inline">
-                  <div className="asset-glow-inline green" />
+              </div>
+
+              {/* КРУПНЫЙ 3D АССЕТ (150px) */}
+              <div className="hero-right">
+                <div className="hero-asset-box">
+                  <div className="hero-asset-glow" />
                   <Image 
                     src="/assets/3d-data-cube.webp" 
                     alt="Systems & Data Architecture" 
                     className="asset-img-inline"
-                    width={80}
-                    height={80}
+                    width={150}
+                    height={150}
+                    priority
                   />
                 </div>
               </div>
-
-              <p className="card-desc">
-                {renderWithStrong(t.card1Desc)}
-              </p>
             </div>
           </div>
 
@@ -350,8 +434,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-gtm-prism.webp" 
                     alt="Funnel Strategy Visual" 
                     className="asset-img-inline"
-                    width={80}
-                    height={80}
+                    width={76}
+                    height={76}
                   />
                 </div>
               </div>
@@ -375,8 +459,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-ai-loop.webp" 
                     alt="AI Automation Visual" 
                     className="asset-img-inline"
-                    width={80}
-                    height={80}
+                    width={76}
+                    height={76}
                   />
                 </div>
               </div>
