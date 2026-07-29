@@ -30,7 +30,8 @@ export const Hero = ({ dict }: HeroProps) => {
           padding-top: clamp(4.5rem, 7vw, 7rem);
           padding-bottom: clamp(3rem, 5vw, 5.5rem);
           background: transparent;
-          overflow: hidden;
+          /* Убираем overflow: hidden, чтобы дать свечению бесшовно заходить на следующую секцию */
+          overflow: visible;
           box-sizing: border-box;
         }
 
@@ -59,7 +60,6 @@ export const Hero = ({ dict }: HeroProps) => {
           gap: 2.5rem;
         }
 
-        /* Сохраняем Split-макет на планшетах (от 768px) */
         @media (min-width: 768px) {
           .hero-split-grid {
             flex-direction: row;
@@ -75,7 +75,7 @@ export const Hero = ({ dict }: HeroProps) => {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          position: relative; /* Фиксируем позиционирование свечения */
+          position: relative;
         }
 
         .hero-title {
@@ -100,22 +100,22 @@ export const Hero = ({ dict }: HeroProps) => {
           background-clip: text;
         }
 
-        /* Неоновое свечение — строго за градиентным заголовком */
+        /* Неоновое свечение с органичным переливом в следующий блок */
         .ambient-glow {
           position: absolute;
-          top: 55%;
-          left: 40%;
+          top: 60%;
+          left: 35%;
           transform: translate(-50%, -50%);
-          width: 550px;
-          height: 380px;
+          width: 580px;
+          height: 420px;
           border-radius: 50%;
           background: radial-gradient(
             circle,
             ${T.glow} 0%,
             rgba(0, 163, 255, 0.08) 45%,
-            transparent 70%
+            transparent 75%
           );
-          filter: blur(85px);
+          filter: blur(90px);
           pointer-events: none;
           z-index: 1;
         }
@@ -158,7 +158,6 @@ export const Hero = ({ dict }: HeroProps) => {
           align-items: center;
         }
 
-        /* Оптическая микро-компенсация выравнивания на десктопе/планшете */
         @media (min-width: 768px) {
           .cta-action-box {
             transform: translateY(-6px);
@@ -177,7 +176,7 @@ export const Hero = ({ dict }: HeroProps) => {
 
       <div className="hero-container">
         <div className="hero-split-grid">
-          {/* Левая сторона: Заголовок + привязанное к нему свечение */}
+          {/* Левая сторона: Заголовок + бесшовный glow */}
           <div className="left-col">
             <div className="ambient-glow" />
 
