@@ -15,6 +15,7 @@ interface ExpertiseProps {
       subtitle?: string;
       card1Title: string;
       card1Desc: string;
+      card1Bullets?: string[];
       hmsBadge: string;
       hmsTitle: string;
       hmsDesc: string;
@@ -34,6 +35,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
     subtitle: 'Connecting architecture, funnels, and automation into a predictable growth engine.',
     card1Title: 'Systems, Data & Architecture',
     card1Desc: 'Eliminate blind decision-making by unifying scattered business data into a <strong>single source of truth</strong>. Gain complete clarity on key financial metrics, unit economics, and growth drivers.',
+    card1Bullets: [
+      'Unified P&L & Multi-Channel Ad Attribution',
+      'Zero-Leakage CRM Lead Routing Protocols',
+      'Real-Time Unit Economics & Margin Dashboards'
+    ],
     hmsBadge: 'SPECIALIZED OFFER',
     hmsTitle: 'Hospitality & HoReCa Systems',
     hmsDesc: 'A dedicated ecosystem for hotels & resorts designed to eliminate OTA commissions, sync PMS data seamlessly, and maximize direct bookings.',
@@ -154,7 +160,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 163, 255, 0.08);
         }
 
-        /* HERO CARD (FLAGSHIP 70%) SPLIT LAYOUT */
+        /* HERO CARD (70%) SPLIT LAYOUT */
         .hero-split-container {
           display: flex;
           flex-direction: column;
@@ -171,18 +177,18 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .hero-left {
-          flex: 1.3;
+          flex: 1.2;
         }
 
         .hero-right {
-          flex: 0.9;
+          flex: 1;
           display: flex;
           justify-content: center;
           align-items: center;
           position: relative;
         }
 
-        /* BULLET LIST FOR HERO CARD */
+        /* BULLET LIST */
         .hero-bullets {
           margin-top: 1.5rem;
           display: flex;
@@ -205,11 +211,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           line-height: 1;
         }
 
-        /* LARGE 3D HERO ASSET */
+        /* УВЕЛИЧЕННЫЙ КУБ (220px) */
         .hero-asset-box {
           position: relative;
-          width: 150px;
-          height: 150px;
+          width: 220px;
+          height: 220px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -217,19 +223,19 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         .hero-asset-glow {
           position: absolute;
-          inset: -20px;
+          inset: -25px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(0, 163, 255, 0.22) 0%, rgba(0, 229, 153, 0.12) 45%, transparent 70%);
-          filter: blur(24px);
+          background: radial-gradient(circle, rgba(0, 163, 255, 0.25) 0%, rgba(0, 229, 153, 0.15) 50%, transparent 75%);
+          filter: blur(28px);
           pointer-events: none;
         }
 
-        /* CARD HEADER (FOR standard 50% & 30% CARDS) */
+        /* CARD HEADER С ЦЕНТРИРОВАНИЕМ ИКОНОК И ЗАГОЛОВКОВ */
         .card-header {
           display: flex;
           justify-content: space-between;
-          align-items: flex-start;
-          gap: 1.25rem;
+          align-items: center; /* Центрирует иконки относительно высоты заголовка */
+          gap: 1rem;
           margin-bottom: 1.25rem;
         }
 
@@ -237,11 +243,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           flex: 1;
         }
 
-        /* INLINE 3D ASSET SLOT */
+        /* ИКОНКИ СПРАВА В ЗАГОЛОВКАХ */
         .asset-slot-inline {
           position: relative;
-          width: 76px;
-          height: 76px;
+          width: 72px;
+          height: 72px;
           flex-shrink: 0;
           display: flex;
           align-items: center;
@@ -274,7 +280,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .card-title {
-          font-size: 1.35rem;
+          font-size: 1.3rem;
           font-weight: 700;
           color: #ffffff;
           line-height: 1.25;
@@ -288,7 +294,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* SPECIALIZED HMS CARD ACCENT (30% WIDTH) */
+        /* HMS CARD (30%) */
         .card-hms {
           background: rgba(0, 229, 153, 0.035);
           border: 1px solid rgba(0, 229, 153, 0.3);
@@ -341,7 +347,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         <div className="bento-grid">
           
-          {/* РЯД 1: КАРТОЧКА 1 (70% / col-70) — HERO FLAGSHIP WITH SPLIT LAYOUT */}
+          {/* 1. КАРТОЧКА 70% — HERO FLAGSHIP */}
           <div className="bento-card col-70">
             <div className="hero-split-container">
               <div className="hero-left">
@@ -352,24 +358,19 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                   {renderWithStrong(t.card1Desc)}
                 </p>
 
-                {/* ИНЖЕНЕРНЫЕ ГАРАНТИИ (Заполняют пространство) */}
-                <div className="hero-bullets">
-                  <div className="bullet-item">
-                    <span className="bullet-icon">◆</span>
-                    <span>Unified P&amp;L &amp; Multi-Channel Ad Attribution</span>
+                {t.card1Bullets && (
+                  <div className="hero-bullets">
+                    {t.card1Bullets.map((bullet, idx) => (
+                      <div className="bullet-item" key={idx}>
+                        <span className="bullet-icon">◆</span>
+                        <span>{bullet}</span>
+                      </div>
+                    ))}
                   </div>
-                  <div className="bullet-item">
-                    <span className="bullet-icon">◆</span>
-                    <span>Zero-Leakage CRM Lead Routing Protocols</span>
-                  </div>
-                  <div className="bullet-item">
-                    <span className="bullet-icon">◆</span>
-                    <span>Real-Time Unit Economics &amp; Margin Dashboards</span>
-                  </div>
-                </div>
+                )}
               </div>
 
-              {/* КРУПНЫЙ 3D АССЕТ (150px) */}
+              {/* УВЕЛИЧЕННЫЙ КУБ */}
               <div className="hero-right">
                 <div className="hero-asset-box">
                   <div className="hero-asset-glow" />
@@ -377,8 +378,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-data-cube.webp" 
                     alt="Systems & Data Architecture" 
                     className="asset-img-inline"
-                    width={150}
-                    height={150}
+                    width={220}
+                    height={220}
                     priority
                   />
                 </div>
@@ -386,7 +387,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* РЯД 1: КАРТОЧКА 2 (30% / col-30) — Specialized Offer (HMS) */}
+          {/* 2. КАРТОЧКА 30% — HMS OFFER */}
           <div className="bento-card card-hms col-30">
             <div>
               <span className="hms-tag">{t.hmsBadge}</span>
@@ -395,14 +396,14 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                 <div className="header-content">
                   <h3 className="card-title" style={{ fontSize: '1.2rem' }}>{t.hmsTitle}</h3>
                 </div>
-                <div className="asset-slot-inline" style={{ width: 68, height: 68 }}>
+                <div className="asset-slot-inline" style={{ width: 60, height: 60 }}>
                   <div className="asset-glow-inline green" />
                   <Image 
                     src="/assets/3d-hms-core.webp" 
                     alt="HMS Hospitality Tech" 
                     className="asset-img-inline"
-                    width={68}
-                    height={68}
+                    width={60}
+                    height={60}
                   />
                 </div>
               </div>
@@ -421,7 +422,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </Link>
           </div>
 
-          {/* РЯД 2: КАРТОЧКА 3 (50% / col-50) — Strategic Audits & Funnel Optimization */}
+          {/* 3. КАРТОЧКА 50% — FUNNEL OPTIMIZATION */}
           <div className="bento-card col-50">
             <div>
               <div className="card-header">
@@ -434,8 +435,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-gtm-prism.webp" 
                     alt="Funnel Strategy Visual" 
                     className="asset-img-inline"
-                    width={76}
-                    height={76}
+                    width={72}
+                    height={72}
                   />
                 </div>
               </div>
@@ -446,7 +447,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* РЯД 2: КАРТОЧКА 4 (50% / col-50) — Process Automation & AI Workflows */}
+          {/* 4. КАРТОЧКА 50% — AI WORKFLOWS */}
           <div className="bento-card col-50">
             <div>
               <div className="card-header">
@@ -459,8 +460,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-ai-loop.webp" 
                     alt="AI Automation Visual" 
                     className="asset-img-inline"
-                    width={76}
-                    height={76}
+                    width={72}
+                    height={72}
                   />
                 </div>
               </div>
