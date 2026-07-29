@@ -13,7 +13,7 @@ export const Hero = ({ dict }: HeroProps) => {
     badge: 'TSVETKOV • FOUNDER-LED AGENCY',
     titleLine1: 'Value Growth',
     titleLine2: 'Engineered to Scale',
-    sub1: 'We eliminate chaos in <strong>marketing and digital systems</strong>',
+    sub1: 'We eliminate chaos in <strong>marketing &amp; digital systems</strong>',
     sub2: 'No fluff — just <strong>high-performance architectures</strong>',
     sub3: 'Track every dollar and <strong>automate sales flow</strong>',
     cta: 'Audit My Business',
@@ -60,11 +60,12 @@ export const Hero = ({ dict }: HeroProps) => {
           gap: 2.5rem;
         }
 
-        @media (min-width: 992px) {
+        /* Сохраняем Split-макет на планшетах (от 768px) */
+        @media (min-width: 768px) {
           .hero-split-grid {
             flex-direction: row;
             align-items: flex-end;
-            gap: 3.5rem;
+            gap: 3rem;
           }
         }
 
@@ -106,7 +107,7 @@ export const Hero = ({ dict }: HeroProps) => {
         }
 
         .hero-title {
-          font-size: clamp(3rem, 6.2vw, 5.6rem);
+          font-size: clamp(2.8rem, 5.8vw, 5.6rem);
           font-weight: 800;
           line-height: 1.05;
           letter-spacing: -0.035em;
@@ -132,7 +133,7 @@ export const Hero = ({ dict }: HeroProps) => {
           max-width: 460px;
           display: flex;
           flex-direction: column;
-          gap: 1.75rem;
+          gap: 2.25rem; /* Увеличен воздух между описанием и кнопкой */
         }
 
         .hero-description {
@@ -145,7 +146,7 @@ export const Hero = ({ dict }: HeroProps) => {
 
         .desc-item {
           font-size: clamp(0.95rem, 1.3vw, 1.1rem);
-          line-height: 1.55;
+          line-height: 1.6; /* Добавлена читаемость текста */
           color: rgba(255, 255, 255, 0.65);
           font-weight: 400;
           margin: 0;
@@ -161,6 +162,13 @@ export const Hero = ({ dict }: HeroProps) => {
           align-items: center;
         }
 
+        /* Оптическая микро-компенсация выравнивания на десктопе/планшете */
+        @media (min-width: 768px) {
+          .cta-action-box {
+            transform: translateY(-6px);
+          }
+        }
+
         .btn-arrow {
           margin-left: 8px;
           transition: transform 0.2s ease;
@@ -170,7 +178,7 @@ export const Hero = ({ dict }: HeroProps) => {
           transform: translateX(4px);
         }
 
-        /* Атмосферное неоновое свечение */
+        /* Неоновое свечение */
         .ambient-glow {
           position: absolute;
           bottom: 5%;
