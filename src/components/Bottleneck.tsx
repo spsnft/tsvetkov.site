@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useDictionary } from '@/src/locales/getDictionary';
-import { T } from '@/src/theme/tokens';
 
 const RED_ACCENT = '#FF5555';
 
@@ -38,9 +37,9 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
                 fontWeight: 700,
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                background: 'rgba(0, 229, 153, 0.05)',
-                border: '1px solid rgba(0, 229, 153, 0.25)',
-                color: T.accent,
+                background: 'rgba(255, 85, 85, 0.08)',
+                border: '1px solid rgba(255, 85, 85, 0.25)',
+                color: RED_ACCENT,
               }}
             >
               &nbsp;
@@ -68,7 +67,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
               <div
                 key={i}
                 style={{
-                  height: 320,
+                  height: 300,
                   borderRadius: 16,
                   border: '1px solid rgba(255,255,255,0.06)',
                   background: 'rgba(14, 14, 18, 0.55)',
@@ -83,21 +82,24 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
   const t = dict.bottleneck;
 
-  // Варианты анимаций Framer Motion
+  // Медленная, кинематографичная анимация с задержкой для старта
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.12 },
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.2, // Задержка перед началом каскада
+      },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 35 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -134,10 +136,11 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           align-items: center;
         }
 
+        /* Красный тревожный шильдик с мигающей точкой */
         .badge {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
           padding: 0.35rem 0.85rem;
           border-radius: 20px;
           margin-bottom: 1rem;
@@ -145,19 +148,31 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           font-weight: 800;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: ${T.accent};
-          background: rgba(0, 229, 153, 0.05);
-          border: 1px solid rgba(0, 229, 153, 0.25);
+          color: ${RED_ACCENT};
+          background: rgba(255, 85, 85, 0.06);
+          border: 1px solid rgba(255, 85, 85, 0.22);
           backdrop-filter: blur(10px);
-          box-shadow: 0 0 15px rgba(0, 229, 153, 0.08);
+          box-shadow: 0 0 15px rgba(255, 85, 85, 0.08);
         }
 
         .badge-dot {
-          width: 5px;
-          height: 5px;
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
-          background: ${T.accent};
-          box-shadow: 0 0 6px ${T.accent};
+          background: ${RED_ACCENT};
+          box-shadow: 0 0 8px ${RED_ACCENT};
+          animation: pulseRed 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseRed {
+          0%, 100% {
+            opacity: 0.35;
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.3);
+          }
         }
 
         .title {
@@ -170,7 +185,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           text-wrap: balance;
         }
 
-        /* Использование :global гарантирует, что motion.div сработает со стилями 100% */
+        /* Сетка с использованием :global для предотвращения конфликтов классов */
         :global(.bt-grid) {
           display: grid !important;
           grid-template-columns: 1fr;
@@ -186,7 +201,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         :global(.bt-card) {
           position: relative !important;
           overflow: hidden !important;
-          padding: 2rem !important;
+          padding: 2.25rem 2rem 1.75rem 2rem !important;
           border-radius: 16px !important;
           background: rgba(14, 14, 18, 0.6) !important;
           backdrop-filter: blur(16px) !important;
@@ -207,13 +222,13 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
         .watermark {
           position: absolute;
-          top: 8px;
+          top: 12px;
           right: 18px;
           font-family: 'Space Grotesk', sans-serif;
-          font-size: 4.8rem;
+          font-size: 4.5rem;
           font-weight: 900;
           line-height: 1;
-          color: rgba(255, 85, 85, 0.06);
+          color: rgba(255, 85, 85, 0.07);
           pointer-events: none;
           user-select: none;
           z-index: 0;
@@ -221,7 +236,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         }
 
         :global(.bt-card:hover) .watermark {
-          color: rgba(255, 85, 85, 0.14);
+          color: rgba(255, 85, 85, 0.16);
         }
 
         .card-inner {
@@ -233,32 +248,19 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           justify-content: space-between;
         }
 
-        .tag-badge {
-          font-size: 0.68rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          color: ${RED_ACCENT};
-          text-transform: uppercase;
-          background: rgba(255, 85, 85, 0.08);
-          padding: 4px 10px;
-          border-radius: 6px;
-          border: 1px solid rgba(255, 85, 85, 0.2);
-          display: inline-block;
-          margin-bottom: 1.5rem;
-        }
-
         .card-title {
-          font-size: 1.25rem;
+          font-size: 1.3rem;
           font-weight: 700;
           color: #ffffff;
-          margin: 0 0 0.75rem 0;
+          margin: 0 0 0.85rem 0;
           line-height: 1.3;
+          padding-right: 2rem; /* Чтобы текст не заходил под цифру */
         }
 
         .card-desc {
           font-size: 0.92rem;
           line-height: 1.6;
-          color: rgba(255, 255, 255, 0.72);
+          color: rgba(255, 255, 255, 0.7);
           margin: 0 0 2rem 0;
           text-wrap: pretty;
         }
@@ -270,7 +272,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
         .impact-footer {
           padding-top: 1rem;
-          border-top: 1px dashed rgba(255, 255, 255, 0.1);
+          border-top: 1px dashed rgba(255, 255, 255, 0.09);
           display: flex;
           align-items: center;
           gap: 0.5rem;
@@ -279,7 +281,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         .impact-label {
           font-size: 0.78rem;
           font-weight: 600;
-          color: rgba(255, 255, 255, 0.6);
+          color: rgba(255, 255, 255, 0.55);
         }
 
         .impact-value {
@@ -310,7 +312,6 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
               <div className="card-inner">
                 <div>
-                  <span className="tag-badge">{item.tag}</span>
                   <h3 className="card-title">{item.title}</h3>
                   <p className="card-desc">
                     {item.descStart}
