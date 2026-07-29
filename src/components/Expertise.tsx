@@ -112,166 +112,123 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           line-height: 1.5;
         }
 
+        /* 12-COLUMN BENTO GRID */
         .bento-grid {
-          display: flex;
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: 1fr;
           gap: 1.5rem;
           width: 100%;
         }
 
-        /* CARD FULL (Top / Featured 2+1 Layout) */
-        .card-full {
-          flex: 1 1 100%;
-          width: 100%;
+        @media (min-width: 992px) {
+          .bento-grid {
+            grid-template-columns: repeat(12, 1fr);
+          }
+
+          .col-7 {
+            grid-column: span 7;
+          }
+
+          .col-5 {
+            grid-column: span 5;
+          }
+
+          .col-6 {
+            grid-column: span 6;
+          }
+        }
+
+        /* BENTO CARD BASE */
+        .bento-card {
           position: relative;
           overflow: hidden;
           padding: 2.25rem 2rem;
           border-radius: 20px;
-          transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-          background: rgba(18, 18, 22, 0.5);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          background: rgba(12, 12, 16, 0.25);
           backdrop-filter: blur(12px) saturate(140%);
           border: 1px solid rgba(255, 255, 255, 0.08);
           box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+          transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .card-full:hover {
-          border-color: rgba(0, 163, 255, 0.35) !important;
+        .bento-card:hover {
+          border-color: rgba(0, 163, 255, 0.35);
           transform: translateY(-3px);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 163, 255, 0.08);
         }
 
-        .featured-content {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 2rem;
-          align-items: center;
-        }
-
-        @media (min-width: 992px) {
-          .featured-content {
-            grid-template-columns: 1fr 320px;
-          }
-        }
-
-        .featured-main {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          height: 100%;
-        }
-
-        /* EMBEDDED HMS OFFER BOX */
-        .hms-offer-box {
-          position: relative;
+        /* SPECIALIZED HMS CARD ACCENT */
+        .card-hms {
           background: rgba(0, 229, 153, 0.03);
-          border: 1px solid rgba(0, 229, 153, 0.22);
-          border-radius: 16px;
-          padding: 1.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          gap: 1.25rem;
-          transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+          border: 1px solid rgba(0, 229, 153, 0.25);
         }
 
-        .hms-offer-box:hover {
+        .card-hms:hover {
           background: rgba(0, 229, 153, 0.06);
-          border-color: rgba(0, 229, 153, 0.45);
-          transform: translateY(-2px);
+          border-color: rgba(0, 229, 153, 0.5);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 229, 153, 0.12);
         }
 
         .hms-tag {
           display: inline-block;
-          align-self: flex-start;
           font-size: 0.65rem;
           font-weight: 800;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           color: ${T.accent};
-          background: rgba(0, 229, 153, 0.1);
-          border: 1px solid rgba(0, 229, 153, 0.25);
-          padding: 3px 8px;
+          background: rgba(0, 229, 153, 0.12);
+          border: 1px solid rgba(0, 229, 153, 0.3);
+          padding: 4px 10px;
           border-radius: 6px;
+          margin-bottom: 1rem;
         }
 
-        .hms-title {
-          font-size: 1.1rem;
-          font-weight: 700;
-          color: #ffffff;
-          margin: 0.5rem 0 0.35rem 0;
-          line-height: 1.25;
-        }
-
-        .hms-desc {
-          font-size: 0.82rem;
-          line-height: 1.5;
-          color: rgba(255, 255, 255, 0.65);
-          margin: 0;
-        }
-
-        .hms-cta {
+        .hms-cta-btn {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          font-size: 0.82rem;
+          gap: 8px;
+          font-size: 0.88rem;
           font-weight: 700;
           color: ${T.accent};
           text-decoration: none;
+          margin-top: 1.25rem;
           transition: gap 0.2s ease, color 0.2s ease;
         }
 
-        .hms-offer-box:hover .hms-cta {
+        .hms-cta-btn:hover {
           color: #ffffff;
-          gap: 10px;
+          gap: 12px;
         }
 
-        /* CARD HALF (Bottom Row) */
-        .card-half {
-          flex: 1 1 420px;
-          min-width: 0;
-          position: relative;
-          overflow: hidden;
-          padding: 2.25rem 2rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          border-radius: 18px;
-          transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-          background: rgba(12, 12, 16, 0.25);
-          backdrop-filter: blur(10px) saturate(140%);
-          border: 1px solid rgba(255, 255, 255, 0.07);
-        }
-
-        .card-half:hover {
-          border-color: rgba(0, 163, 255, 0.35) !important;
-          transform: translateY(-3px);
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 163, 255, 0.08);
-        }
-
+        /* 3D ASSET SLOT */
         .asset-slot {
           position: relative;
-          height: 130px;
+          height: 120px;
           width: 100%;
           margin-bottom: 1.25rem;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
         }
 
         .asset-glow {
           position: absolute;
-          width: 130px;
-          height: 130px;
+          width: 120px;
+          height: 120px;
           border-radius: 50%;
-          filter: blur(20px);
+          filter: blur(22px);
+          pointer-events: none;
         }
 
         .asset-glow.cyan {
-          background: radial-gradient(circle, rgba(0, 163, 255, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+          background: radial-gradient(circle, rgba(0, 163, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
         }
 
         .asset-glow.green {
-          background: radial-gradient(circle, rgba(0, 229, 153, 0.16) 0%, rgba(0, 0, 0, 0) 70%);
+          background: radial-gradient(circle, rgba(0, 229, 153, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
         }
 
         :global(.asset-img) {
@@ -328,66 +285,74 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         <div className="bento-grid">
           
-          {/* 1. FEATURED BLOCK (Top / Full-Width Systems, Data & HMS) */}
-          <div className="card-full card-matte">
-            <div className="featured-content">
-              
-              <div className="featured-main">
-                <div className="asset-slot" style={{ height: 110, justifyContent: 'flex-start', marginBottom: '0.75rem' }}>
-                  <div className="asset-glow green" style={{ left: 0 }} />
-                  <Image 
-                    src="/assets/3d-data-cube.png" 
-                    alt="Systems & Data Architecture" 
-                    className="asset-img"
-                    width={180}
-                    height={110}
-                  />
-                </div>
+          {/* РЯД 1: КАРТОЧКА 1 (60% / col-7) — Systems, Data & Architecture */}
+          <div className="bento-card col-7">
+            <div className="asset-slot">
+              <div className="asset-glow green" style={{ left: 0 }} />
+              <Image 
+                src="/assets/3d-data-cube.webp" 
+                alt="Systems & Data Architecture" 
+                className="asset-img"
+                width={160}
+                height={120}
+              />
+            </div>
 
-                <div>
-                  <h3 className="card-title">{t.card1Title}</h3>
-                  <p className="card-desc">
-                    {renderWithStrong(t.card1Desc)}
-                  </p>
-                </div>
+            <div>
+              <h3 className="card-title">{t.card1Title}</h3>
+              <p className="card-desc">
+                {renderWithStrong(t.card1Desc)}
+              </p>
+            </div>
 
-                <div className="pills-container">
-                  {t.card1Pills.map((pill, i) => (
-                    <span key={i} className="pill">✓ {pill}</span>
-                  ))}
-                </div>
-              </div>
-
-              {/* HMS Embedded Offer Box */}
-              <div className="hms-offer-box">
-                <div>
-                  <span className="hms-tag">{t.hmsBadge}</span>
-                  <h4 className="hms-title">{t.hmsTitle}</h4>
-                  <p className="hms-desc">{t.hmsDesc}</p>
-                </div>
-
-                <Link href="/hms" className="hms-cta">
-                  <span>{t.hmsCta}</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </Link>
-              </div>
-
+            <div className="pills-container">
+              {t.card1Pills.map((pill, i) => (
+                <span key={i} className="pill">✓ {pill}</span>
+              ))}
             </div>
           </div>
 
-          {/* 2. SECONDARY BLOCK A (Strategic Audits & Funnel Optimization) */}
-          <div className="card-half card-matte">
+          {/* РЯД 1: КАРТОЧКА 2 (40% / col-5) — Specialized Offer (HMS) */}
+          <div className="bento-card card-hms col-5">
+            <div>
+              <span className="hms-tag">{t.hmsBadge}</span>
+              
+              <div className="asset-slot" style={{ height: 100 }}>
+                <div className="asset-glow green" style={{ left: 0 }} />
+                <Image 
+                  src="/assets/3d-hms-core.webp" 
+                  alt="HMS Hospitality Tech" 
+                  className="asset-img"
+                  width={140}
+                  height={100}
+                />
+              </div>
+
+              <h3 className="card-title">{t.hmsTitle}</h3>
+              <p className="card-desc" style={{ marginBottom: '1rem' }}>
+                {t.hmsDesc}
+              </p>
+            </div>
+
+            <Link href="/hms" className="hms-cta-btn">
+              <span>{t.hmsCta}</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </Link>
+          </div>
+
+          {/* РЯД 2: КАРТОЧКА 3 (50% / col-6) — Strategic Audits & Funnel Optimization */}
+          <div className="bento-card col-6">
             <div className="asset-slot">
-              <div className="asset-glow cyan" />
+              <div className="asset-glow cyan" style={{ left: 0 }} />
               <Image 
-                src="/assets/3d-gtm-prism.png" 
+                src="/assets/3d-gtm-prism.webp" 
                 alt="Funnel Strategy Visual" 
                 className="asset-img"
-                width={180}
-                height={130}
+                width={160}
+                height={120}
               />
             </div>
 
@@ -405,16 +370,16 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* 3. SECONDARY BLOCK B (Process Automation & AI Workflows) */}
-          <div className="card-half card-matte">
+          {/* РЯД 2: КАРТОЧКА 4 (50% / col-6) — Process Automation & AI Workflows */}
+          <div className="bento-card col-6">
             <div className="asset-slot">
-              <div className="asset-glow green" />
+              <div className="asset-glow green" style={{ left: 0 }} />
               <Image 
-                src="/assets/3d-ai-loop.png" 
+                src="/assets/3d-ai-loop.webp" 
                 alt="AI Automation Visual" 
                 className="asset-img"
-                width={180}
-                height={130}
+                width={160}
+                height={120}
               />
             </div>
 
