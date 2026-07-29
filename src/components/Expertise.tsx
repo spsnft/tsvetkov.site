@@ -31,10 +31,8 @@ interface ExpertiseProps {
 export const Expertise = ({ dict }: ExpertiseProps) => {
   const t = dict?.expertise;
 
-  // Защита на случай некорректной прогрузки словаря
   if (!t) return null;
 
-  // Парсинг <strong> тегов из JSON для подсветки ключевых фраз
   const renderWithStrong = (text: string) => {
     if (!text) return null;
     const parts = text.split(/<strong>(.*?)<\/strong>/g);
