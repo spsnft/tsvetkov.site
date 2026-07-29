@@ -9,7 +9,7 @@ const CYAN_ACCENT = T.acc2 || '#00A3FF';
 
 interface ExpertiseProps {
   dict: {
-    expertise: {
+    expertise?: {
       badge: string;
       title: string;
       subtitle?: string;
@@ -25,7 +25,8 @@ interface ExpertiseProps {
       card3Title: string;
       card3Desc: string;
     };
-  };
+    [key: string]: any;
+  } | null;
 }
 
 export const Expertise = ({ dict }: ExpertiseProps) => {
@@ -177,7 +178,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.5));
         }
 
-        /* TYPOGRAPHY (ЧЕСТНЫЕ 4PX ОТСТУПА) */
+        /* TYPOGRAPHY */
         .card-title {
           font-size: 1.15rem;
           font-weight: 700;
