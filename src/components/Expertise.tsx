@@ -184,8 +184,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         /* SIZES */
         .size-hero {
-          width: 150px;
-          height: 150px;
+          width: 140px;
+          height: 140px;
         }
 
         .size-row2 {
@@ -193,9 +193,9 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           height: 145px;
         }
 
-        .size-hms {
-          width: 90px;
-          height: 90px;
+        .size-hms-compact {
+          width: 65px;
+          height: 65px;
         }
 
         .asset-glow {
@@ -239,14 +239,14 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* HMS CARD (30%) REDESIGN */
+        /* HMS CARD (30%) - ULTRA COMPACT THREE-ROW LAYOUT */
         .card-hms {
           background: rgba(0, 229, 153, 0.03);
           border: 1px solid rgba(0, 229, 153, 0.22);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 1.35rem 1.25rem;
+          padding: 1.1rem 1.25rem;
         }
 
         .card-hms:hover {
@@ -255,70 +255,79 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 229, 153, 0.12);
         }
 
+        .hms-row-top {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 0.5rem;
+        }
+
         .hms-tag {
           display: inline-block;
-          font-size: 0.65rem;
+          font-size: 0.62rem;
           font-weight: 800;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
           color: #00E599;
           background: rgba(0, 229, 153, 0.1);
           border: 1px solid rgba(0, 229, 153, 0.25);
           padding: 3px 8px;
           border-radius: 6px;
-          margin-bottom: 0.75rem;
+          margin-top: 2px;
         }
 
-        .hms-header {
+        .hms-row-middle {
+          margin: 0.2rem 0 0.6rem 0;
+        }
+
+        .hms-title-override {
+          font-size: 1.12rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+          line-height: 1.2;
+        }
+
+        .hms-row-bottom {
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 0.75rem;
-          margin-bottom: 0.5rem;
+          margin-top: 0.25rem;
         }
 
-        .hms-title-override {
-          font-size: 1.1rem;
-          font-weight: 700;
-          color: #ffffff;
+        .hms-desc-compact {
+          font-size: 0.8rem;
+          font-weight: 500;
+          line-height: 1.35;
+          color: rgba(255, 255, 255, 0.72);
           margin: 0;
-          text-transform: none; /* Отменяет принудительный капс из перевода */
-          line-height: 1.2;
+          flex: 1;
         }
 
-        .hms-desc {
-          font-size: 0.82rem;
-          font-weight: 400;
-          line-height: 1.45;
-          color: rgba(255, 255, 255, 0.7);
-          margin-top: 0.5rem;
-          margin-bottom: 1.25rem;
-        }
-
-        /* ПОЛНОЦЕННАЯ CTA КНОПКА (БЕЗ ФИОЛЕТОВОЙ ЕРУНДЫ) */
-        :global(.hms-glass-button),
-        :global(.hms-glass-button:visited) {
-          display: flex;
+        :global(.hms-btn-compact),
+        :global(.hms-btn-compact:visited) {
+          display: inline-flex;
           align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          padding: 0.65rem 0.9rem;
-          border-radius: 10px;
-          background: rgba(0, 229, 153, 0.08);
-          border: 1px solid rgba(0, 229, 153, 0.3);
+          gap: 0.4rem;
+          padding: 0.45rem 0.8rem;
+          border-radius: 8px;
+          background: rgba(0, 229, 153, 0.1);
+          border: 1px solid rgba(0, 229, 153, 0.35);
           color: #ffffff !important;
-          font-size: 0.82rem;
+          font-size: 0.78rem;
           font-weight: 700;
           text-decoration: none !important;
           backdrop-filter: blur(8px);
           transition: all 0.25s ease;
-          box-sizing: border-box;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
-        :global(.hms-glass-button:hover) {
-          background: rgba(0, 229, 153, 0.18);
-          border-color: rgba(0, 229, 153, 0.6);
-          box-shadow: 0 0 20px rgba(0, 229, 153, 0.2);
+        :global(.hms-btn-compact:hover) {
+          background: rgba(0, 229, 153, 0.22);
+          border-color: rgba(0, 229, 153, 0.7);
+          box-shadow: 0 0 16px rgba(0, 229, 153, 0.28);
           color: #ffffff !important;
         }
 
@@ -330,8 +339,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           transition: transform 0.25s ease;
         }
 
-        :global(.hms-glass-button:hover) .hms-arrow-icon {
-          transform: translate(3px, -3px);
+        :global(.hms-btn-compact:hover) .hms-arrow-icon {
+          transform: translate(2px, -2px);
         }
       `}</style>
 
@@ -348,7 +357,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           <div className="bento-card col-70">
             <div className="card-split">
               <div className="card-text-side">
-                <h3 className="card-title" style={{ fontSize: '1.3rem' }}>
+                <h3 className="card-title" style={{ fontSize: '1.25rem' }}>
                   {t.card1Title}
                 </h3>
                 <p className="card-desc">
@@ -363,8 +372,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-data-cube.webp" 
                     alt={t.card1Title} 
                     className="asset-img"
-                    width={150}
-                    height={150}
+                    width={140}
+                    height={140}
                     priority
                   />
                 </div>
@@ -372,41 +381,45 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER */}
+          {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER (COMPACT 3-ROW) */}
           <div className="bento-card card-hms col-30">
-            <div>
+            {/* ROW 1: TAG + ICON */}
+            <div className="hms-row-top">
               <span className="hms-tag">{t.hmsBadge}</span>
-              
-              <div className="hms-header">
-                <h3 className="hms-title-override">
-                  {t.hmsTitle}
-                </h3>
-                <div className="asset-wrapper size-hms">
-                  <div className="asset-glow green" />
-                  <Image 
-                    src="/assets/3d-hms-core.webp" 
-                    alt={t.hmsTitle} 
-                    className="asset-img"
-                    width={90}
-                    height={90}
-                  />
-                </div>
-              </div>
-
-              <div className="hms-desc">
-                {t.hmsDesc}
+              <div className="asset-wrapper size-hms-compact">
+                <div className="asset-glow green" />
+                <Image 
+                  src="/assets/3d-hms-core.webp" 
+                  alt={t.hmsTitle} 
+                  className="asset-img"
+                  width={65}
+                  height={65}
+                />
               </div>
             </div>
 
-            <Link href="/hms" className="hms-glass-button">
-              <span>{t.hmsCta}</span>
-              <div className="hms-arrow-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
-              </div>
-            </Link>
+            {/* ROW 2: TITLE */}
+            <div className="hms-row-middle">
+              <h3 className="hms-title-override">
+                {t.hmsTitle}
+              </h3>
+            </div>
+
+            {/* ROW 3: VALUE PROP + CTA BUTTON */}
+            <div className="hms-row-bottom">
+              <p className="hms-desc-compact">
+                {t.hmsDesc}
+              </p>
+              <Link href="/hms" className="hms-btn-compact">
+                <span>{t.hmsCta}</span>
+                <div className="hms-arrow-icon">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </div>
+              </Link>
+            </div>
           </div>
 
           {/* 3. КАРТОЧКА 50% — STRATEGIC AUDITS */}
