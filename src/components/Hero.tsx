@@ -10,7 +10,6 @@ interface HeroProps {
 
 export const Hero = ({ dict }: HeroProps) => {
   const t = dict?.hero ?? {
-    badge: 'TSVETKOV • FOUNDER-LED AGENCY',
     titleLine1: 'Value Growth',
     titleLine2: 'Engineered to Scale',
     sub1: 'We eliminate chaos in <strong>marketing &amp; digital systems</strong>',
@@ -28,8 +27,8 @@ export const Hero = ({ dict }: HeroProps) => {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding-top: clamp(6rem, 8vw, 8.5rem);
-          padding-bottom: clamp(3rem, 6vw, 6rem);
+          padding-top: clamp(4.5rem, 7vw, 7rem);
+          padding-bottom: clamp(3rem, 5vw, 5.5rem);
           background: transparent;
           overflow: hidden;
           box-sizing: border-box;
@@ -69,41 +68,14 @@ export const Hero = ({ dict }: HeroProps) => {
           }
         }
 
-        /* ЛЕВАЯ КОЛОНКА: ЗАГОЛОВОК */
+        /* ЛЕВАЯ КОЛОНКА: ЗАГОЛОВОК И СВЕЧЕНИЕ */
         .left-col {
           flex: 1 1 auto;
           max-width: 720px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-        }
-
-        .hero-badge-wrapper {
-          margin-bottom: 1.5rem;
-        }
-
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          color: ${T.accent};
-          background: ${T.accent08};
-          padding: 6px 16px;
-          border-radius: 20px;
-          border: 1px solid ${T.accent25};
-          backdrop-filter: blur(8px);
-        }
-
-        .badge-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: ${T.accent};
-          box-shadow: 0 0 8px ${T.accent};
+          position: relative; /* Фиксируем позиционирование свечения */
         }
 
         .hero-title {
@@ -113,6 +85,8 @@ export const Hero = ({ dict }: HeroProps) => {
           letter-spacing: -0.035em;
           margin: 0;
           text-wrap: balance;
+          position: relative;
+          z-index: 2;
         }
 
         .hero-title .title-line1 {
@@ -126,6 +100,26 @@ export const Hero = ({ dict }: HeroProps) => {
           background-clip: text;
         }
 
+        /* Неоновое свечение — строго за градиентным заголовком */
+        .ambient-glow {
+          position: absolute;
+          top: 55%;
+          left: 40%;
+          transform: translate(-50%, -50%);
+          width: 550px;
+          height: 380px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle,
+            ${T.glow} 0%,
+            rgba(0, 163, 255, 0.08) 45%,
+            transparent 70%
+          );
+          filter: blur(85px);
+          pointer-events: none;
+          z-index: 1;
+        }
+
         /* ПРАВАЯ КОЛОНКА: ОПИСАНИЕ И КНОПКА */
         .right-col {
           flex: 0 0 auto;
@@ -133,7 +127,9 @@ export const Hero = ({ dict }: HeroProps) => {
           max-width: 460px;
           display: flex;
           flex-direction: column;
-          gap: 2.25rem; /* Увеличен воздух между описанием и кнопкой */
+          gap: 2.25rem;
+          position: relative;
+          z-index: 2;
         }
 
         .hero-description {
@@ -146,7 +142,7 @@ export const Hero = ({ dict }: HeroProps) => {
 
         .desc-item {
           font-size: clamp(0.95rem, 1.3vw, 1.1rem);
-          line-height: 1.6; /* Добавлена читаемость текста */
+          line-height: 1.6;
           color: rgba(255, 255, 255, 0.65);
           font-weight: 400;
           margin: 0;
@@ -177,40 +173,13 @@ export const Hero = ({ dict }: HeroProps) => {
         .cta-action-box :global(.btn-primary:hover) .btn-arrow {
           transform: translateX(4px);
         }
-
-        /* Неоновое свечение */
-        .ambient-glow {
-          position: absolute;
-          bottom: 5%;
-          left: 15%;
-          width: 700px;
-          height: 450px;
-          border-radius: 50%;
-          background: radial-gradient(
-            circle,
-            ${T.glow} 0%,
-            rgba(0, 163, 255, 0.06) 40%,
-            transparent 70%
-          );
-          filter: blur(90px);
-          pointer-events: none;
-          z-index: 1;
-        }
       `}</style>
-
-      {/* Мягкий неоновый фон */}
-      <div className="ambient-glow" />
 
       <div className="hero-container">
         <div className="hero-split-grid">
-          {/* Левая сторона: Заголовок */}
+          {/* Левая сторона: Заголовок + привязанное к нему свечение */}
           <div className="left-col">
-            <div className="hero-badge-wrapper">
-              <span className="hero-badge">
-                <span className="badge-dot" />
-                {t.badge}
-              </span>
-            </div>
+            <div className="ambient-glow" />
 
             <h1 className="hero-title">
               <span className="title-line1">{t.titleLine1}</span>
