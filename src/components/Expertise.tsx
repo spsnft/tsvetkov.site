@@ -97,11 +97,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           line-height: 1.45;
         }
 
-        /* BENTO GRID 10-TRACK */
+        /* BENTO GRID */
         .bento-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1rem;
+          gap: 1.25rem;
           width: 100%;
         }
 
@@ -123,12 +123,12 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           }
         }
 
-        /* BENTO CARD BASE */
+        /* CARD BASE */
         .bento-card {
           position: relative;
           overflow: hidden;
-          padding: 1.25rem 1.4rem;
-          border-radius: 18px;
+          padding: 1.5rem 1.6rem;
+          border-radius: 20px;
           background: rgba(12, 12, 16, 0.45);
           backdrop-filter: blur(14px) saturate(140%);
           border: 1px solid rgba(255, 255, 255, 0.08);
@@ -142,31 +142,76 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 163, 255, 0.06);
         }
 
-        /* FLOAT ASSET (ОБТЕКАНИЕ ТЕКСТОМ) */
-        .float-asset {
-          float: right;
-          margin-left: 0.85rem;
-          margin-bottom: 0.25rem;
+        /* FULL HEIGHT SPLIT LAYOUT */
+        .card-split {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+          height: 100%;
+          justify-content: space-between;
+        }
+
+        @media (min-width: 640px) {
+          .card-split {
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+
+        .card-text-side {
+          flex: 1.2;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        /* 3D ASSET CONTAINER (ЗАПОЛНЯЕТ ВСЮ ВЫСОТУ ПО ЦЕНТРУ) */
+        .card-asset-side {
+          flex: 0.8;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          min-height: 120px;
+        }
+
+        .asset-wrapper {
           position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
+        /* КРУПНЫЕ РАЗМЕРЫ ИКОНОК */
+        .size-hero {
+          width: 140px;
+          height: 140px;
+        }
+
+        .size-standard {
+          width: 125px;
+          height: 125px;
+        }
+
+        .size-hms {
+          width: 90px;
+          height: 90px;
+        }
+
         .asset-glow {
           position: absolute;
-          inset: -6px;
+          inset: -12px;
           border-radius: 50%;
-          filter: blur(12px);
+          filter: blur(18px);
           pointer-events: none;
         }
 
         .asset-glow.cyan {
-          background: radial-gradient(circle, rgba(0, 163, 255, 0.25) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 163, 255, 0.3) 0%, transparent 70%);
         }
 
         .asset-glow.green {
-          background: radial-gradient(circle, rgba(0, 229, 153, 0.25) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 229, 153, 0.3) 0%, transparent 70%);
         }
 
         :global(.asset-img) {
@@ -175,26 +220,26 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           object-fit: contain;
           position: relative;
           z-index: 1;
-          filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.5));
+          filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.6));
         }
 
         /* TYPOGRAPHY */
         .card-title {
-          font-size: 1.15rem;
+          font-size: 1.2rem;
           font-weight: 700;
           color: #ffffff;
           line-height: 1.25;
-          margin: 0 0 4px 0;
+          margin: 0 0 6px 0;
         }
 
         .card-desc {
-          font-size: 0.86rem;
-          line-height: 1.5;
-          color: rgba(255, 255, 255, 0.65);
+          font-size: 0.88rem;
+          line-height: 1.55;
+          color: rgba(255, 255, 255, 0.68);
           margin: 0;
         }
 
-        /* HMS CARD (30%) & MICRO CTA */
+        /* HMS CARD (30%) & CTA */
         .card-hms {
           background: rgba(0, 229, 153, 0.03);
           border: 1px solid rgba(0, 229, 153, 0.25);
@@ -209,9 +254,17 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 229, 153, 0.12);
         }
 
+        .hms-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          margin-bottom: 0.5rem;
+        }
+
         .hms-tag {
           display: inline-block;
-          font-size: 0.68rem;
+          font-size: 0.65rem;
           font-weight: 800;
           letter-spacing: 0.12em;
           text-transform: uppercase;
@@ -224,11 +277,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .hms-desc {
-          font-size: 0.8rem;
+          font-size: 0.82rem;
           font-weight: 500;
-          line-height: 1.4;
-          color: rgba(255, 255, 255, 0.7);
-          margin-top: 4px;
+          line-height: 1.45;
+          color: rgba(255, 255, 255, 0.75);
+          margin-bottom: 1rem;
         }
 
         /* B2B LINK BUTTON */
@@ -237,8 +290,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           align-items: center;
           justify-content: space-between;
           width: 100%;
-          padding: 0.55rem 0.85rem;
-          margin-top: 0.85rem;
+          padding: 0.6rem 0.9rem;
           border-radius: 10px;
           background: rgba(0, 229, 153, 0.09);
           border: 1px solid rgba(0, 229, 153, 0.32);
@@ -280,24 +332,30 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           
           {/* 1. КАРТОЧКА 70% — HERO FLAGSHIP */}
           <div className="bento-card col-70">
-            <div className="float-asset" style={{ width: 105, height: 105 }}>
-              <div className="asset-glow cyan" />
-              <Image 
-                src="/assets/3d-data-cube.webp" 
-                alt={t.card1Title} 
-                className="asset-img"
-                width={105}
-                height={105}
-                priority
-              />
+            <div className="card-split">
+              <div className="card-text-side">
+                <h3 className="card-title" style={{ fontSize: '1.35rem' }}>
+                  {t.card1Title}
+                </h3>
+                <p className="card-desc">
+                  {renderWithStrong(t.card1Desc)}
+                </p>
+              </div>
+
+              <div className="card-asset-side">
+                <div className="asset-wrapper size-hero">
+                  <div className="asset-glow cyan" />
+                  <Image 
+                    src="/assets/3d-data-cube.webp" 
+                    alt={t.card1Title} 
+                    className="asset-img"
+                    width={140}
+                    height={140}
+                    priority
+                  />
+                </div>
+              </div>
             </div>
-            
-            <h3 className="card-title" style={{ fontSize: '1.25rem' }}>
-              {t.card1Title}
-            </h3>
-            <p className="card-desc">
-              {renderWithStrong(t.card1Desc)}
-            </p>
           </div>
 
           {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER */}
@@ -305,20 +363,21 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             <div>
               <span className="hms-tag">{t.hmsBadge}</span>
               
-              <div className="float-asset" style={{ width: 46, height: 46 }}>
-                <div className="asset-glow green" />
-                <Image 
-                  src="/assets/3d-hms-core.webp" 
-                  alt={t.hmsTitle} 
-                  className="asset-img"
-                  width={46}
-                  height={46}
-                />
+              <div className="hms-header">
+                <h3 className="card-title" style={{ fontSize: '1.1rem', margin: 0 }}>
+                  {t.hmsTitle}
+                </h3>
+                <div className="asset-wrapper size-hms">
+                  <div className="asset-glow green" />
+                  <Image 
+                    src="/assets/3d-hms-core.webp" 
+                    alt={t.hmsTitle} 
+                    className="asset-img"
+                    width={90}
+                    height={90}
+                  />
+                </div>
               </div>
-
-              <h3 className="card-title" style={{ fontSize: '1.05rem' }}>
-                {t.hmsTitle}
-              </h3>
 
               <div className="hms-desc">
                 {t.hmsDesc}
@@ -338,40 +397,52 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
           {/* 3. КАРТОЧКА 50% — STRATEGIC AUDITS */}
           <div className="bento-card col-50">
-            <div className="float-asset" style={{ width: 48, height: 48 }}>
-              <div className="asset-glow cyan" />
-              <Image 
-                src="/assets/3d-gtm-prism.webp" 
-                alt={t.card2Title} 
-                className="asset-img"
-                width={48}
-                height={48}
-              />
-            </div>
+            <div className="card-split">
+              <div className="card-text-side">
+                <h3 className="card-title">{t.card2Title}</h3>
+                <p className="card-desc">
+                  {renderWithStrong(t.card2Desc)}
+                </p>
+              </div>
 
-            <h3 className="card-title">{t.card2Title}</h3>
-            <p className="card-desc">
-              {renderWithStrong(t.card2Desc)}
-            </p>
+              <div className="card-asset-side">
+                <div className="asset-wrapper size-standard">
+                  <div className="asset-glow cyan" />
+                  <Image 
+                    src="/assets/3d-gtm-prism.webp" 
+                    alt={t.card2Title} 
+                    className="asset-img"
+                    width={125}
+                    height={125}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* 4. КАРТОЧКА 50% — PROCESS AUTOMATION */}
           <div className="bento-card col-50">
-            <div className="float-asset" style={{ width: 48, height: 48 }}>
-              <div className="asset-glow green" />
-              <Image 
-                src="/assets/3d-ai-loop.webp" 
-                alt={t.card3Title} 
-                className="asset-img"
-                width={48}
-                height={48}
-              />
-            </div>
+            <div className="card-split">
+              <div className="card-text-side">
+                <h3 className="card-title">{t.card3Title}</h3>
+                <p className="card-desc">
+                  {renderWithStrong(t.card3Desc)}
+                </p>
+              </div>
 
-            <h3 className="card-title">{t.card3Title}</h3>
-            <p className="card-desc">
-              {renderWithStrong(t.card3Desc)}
-            </p>
+              <div className="card-asset-side">
+                <div className="asset-wrapper size-standard">
+                  <div className="asset-glow green" />
+                  <Image 
+                    src="/assets/3d-ai-loop.webp" 
+                    alt={t.card3Title} 
+                    className="asset-img"
+                    width={125}
+                    height={125}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
