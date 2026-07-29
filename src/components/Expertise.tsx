@@ -41,7 +41,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
       'Real-Time Unit Economics & Margin Dashboards'
     ],
     hmsBadge: 'SPECIALIZED OFFER',
-    hmsTitle: 'Hospitality & HoReCa Systems',
+    hmsTitle: 'Direct Booking Ecosystems (HMS)',
     hmsDesc: 'A dedicated ecosystem for hotels & resorts designed to eliminate OTA commissions, sync PMS data seamlessly, and maximize direct bookings.',
     hmsCta: 'Explore HMS Solution',
     card2Title: 'Strategic Audits & Funnel Optimization',
@@ -73,7 +73,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         .header-box {
           text-align: center;
-          margin-bottom: 3.5rem;
+          margin-bottom: 3rem;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -83,7 +83,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           display: inline-block;
           padding: 0.35rem 0.85rem;
           border-radius: 20px;
-          margin-bottom: 1rem;
+          margin-bottom: 0.85rem;
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.15em;
@@ -95,7 +95,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .title {
-          font-size: clamp(2rem, 5vw, 3.2rem);
+          font-size: clamp(2rem, 4.5vw, 3.1rem);
           font-weight: 800;
           line-height: 1.15;
           letter-spacing: -0.03em;
@@ -105,10 +105,10 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .subtitle {
-          font-size: 1.05rem;
+          font-size: 1rem;
           color: rgba(255, 255, 255, 0.6);
           margin: 0;
-          max-width: 640px;
+          max-width: 620px;
           line-height: 1.5;
         }
 
@@ -116,7 +116,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         .bento-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1.5rem;
+          gap: 1.25rem;
           width: 100%;
         }
 
@@ -142,80 +142,83 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         .bento-card {
           position: relative;
           overflow: hidden;
-          padding: 2.25rem 2rem;
+          padding: 2rem 1.85rem;
           border-radius: 20px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          background: rgba(12, 12, 16, 0.35);
-          backdrop-filter: blur(12px) saturate(140%);
+          background: rgba(12, 12, 16, 0.4);
+          backdrop-filter: blur(14px) saturate(140%);
           border: 1px solid rgba(255, 255, 255, 0.08);
           box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
           transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .bento-card:hover {
-          border-color: rgba(0, 163, 255, 0.35);
-          transform: translateY(-3px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 163, 255, 0.08);
+          border-color: rgba(0, 163, 255, 0.3);
+          transform: translateY(-2px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 163, 255, 0.06);
         }
 
         /* HERO CARD (70%) SPLIT LAYOUT */
         .hero-split-container {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1.5rem;
           height: 100%;
-          justify-content: space-between;
+          align-items: center;
         }
 
         @media (min-width: 768px) {
           .hero-split-container {
             flex-direction: row;
-            align-items: center;
           }
         }
 
         .hero-left {
-          flex: 1.2;
+          flex: 1.35;
         }
 
         .hero-right {
-          flex: 1;
+          flex: 0.85;
           display: flex;
           justify-content: center;
           align-items: center;
           position: relative;
         }
 
-        /* BULLET LIST */
+        /* BULLET LIST WITH GLASS CONTAINERS */
         .hero-bullets {
-          margin-top: 1.5rem;
+          margin-top: 1.25rem;
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
+          gap: 0.5rem;
         }
 
         .bullet-item {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
-          font-size: 0.85rem;
+          gap: 0.65rem;
+          padding: 0.5rem 0.75rem;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.025);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          font-size: 0.83rem;
           font-weight: 600;
-          color: rgba(255, 255, 255, 0.88);
+          color: rgba(255, 255, 255, 0.9);
         }
 
         .bullet-icon {
           color: ${T.accent};
-          font-size: 0.9rem;
+          font-size: 0.75rem;
           line-height: 1;
         }
 
-        /* УВЕЛИЧЕННЫЙ КУБ (220px) */
+        /* СБАЛАНСИРОВАННЫЙ КУБ (170px) */
         .hero-asset-box {
           position: relative;
-          width: 220px;
-          height: 220px;
+          width: 170px;
+          height: 170px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -223,20 +226,20 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         .hero-asset-glow {
           position: absolute;
-          inset: -25px;
+          inset: -15px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(0, 163, 255, 0.25) 0%, rgba(0, 229, 153, 0.15) 50%, transparent 75%);
-          filter: blur(28px);
+          background: radial-gradient(circle, rgba(0, 163, 255, 0.2) 0%, rgba(0, 229, 153, 0.1) 55%, transparent 75%);
+          filter: blur(24px);
           pointer-events: none;
         }
 
-        /* CARD HEADER С ЦЕНТРИРОВАНИЕМ ИКОНОК И ЗАГОЛОВКОВ */
+        /* CARD HEADER (ПОДЖАТЫЕ ОТСТУПЫ) */
         .card-header {
           display: flex;
           justify-content: space-between;
-          align-items: center; /* Центрирует иконки относительно высоты заголовка */
+          align-items: flex-start;
           gap: 1rem;
-          margin-bottom: 1.25rem;
+          margin-bottom: 0.65rem;
         }
 
         .header-content {
@@ -246,28 +249,29 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         /* ИКОНКИ СПРАВА В ЗАГОЛОВКАХ */
         .asset-slot-inline {
           position: relative;
-          width: 72px;
-          height: 72px;
+          width: 58px;
+          height: 58px;
           flex-shrink: 0;
           display: flex;
           align-items: center;
           justify-content: center;
+          margin-top: -4px;
         }
 
         .asset-glow-inline {
           position: absolute;
-          inset: -8px;
+          inset: -6px;
           border-radius: 50%;
-          filter: blur(16px);
+          filter: blur(14px);
           pointer-events: none;
         }
 
         .asset-glow-inline.cyan {
-          background: radial-gradient(circle, rgba(0, 163, 255, 0.28) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 163, 255, 0.25) 0%, transparent 70%);
         }
 
         .asset-glow-inline.green {
-          background: radial-gradient(circle, rgba(0, 229, 153, 0.28) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 229, 153, 0.25) 0%, transparent 70%);
         }
 
         :global(.asset-img-inline) {
@@ -276,11 +280,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           object-fit: contain;
           position: relative;
           z-index: 1;
-          filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6));
+          filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
         }
 
         .card-title {
-          font-size: 1.3rem;
+          font-size: 1.25rem;
           font-weight: 700;
           color: #ffffff;
           line-height: 1.25;
@@ -288,22 +292,22 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .card-desc {
-          font-size: 0.92rem;
-          line-height: 1.6;
-          color: rgba(255, 255, 255, 0.72);
+          font-size: 0.9rem;
+          line-height: 1.55;
+          color: rgba(255, 255, 255, 0.68);
           margin: 0;
         }
 
-        /* HMS CARD (30%) */
+        /* HMS CARD (30%) & PREMIUM BUTTON */
         .card-hms {
-          background: rgba(0, 229, 153, 0.035);
-          border: 1px solid rgba(0, 229, 153, 0.3);
+          background: rgba(0, 229, 153, 0.03);
+          border: 1px solid rgba(0, 229, 153, 0.22);
         }
 
         .card-hms:hover {
-          background: rgba(0, 229, 153, 0.07);
-          border-color: rgba(0, 229, 153, 0.6);
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 229, 153, 0.15);
+          background: rgba(0, 229, 153, 0.05);
+          border-color: rgba(0, 229, 153, 0.45);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 229, 153, 0.12);
         }
 
         .hms-tag {
@@ -313,28 +317,54 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           letter-spacing: 0.12em;
           text-transform: uppercase;
           color: ${T.accent};
-          background: rgba(0, 229, 153, 0.12);
-          border: 1px solid rgba(0, 229, 153, 0.3);
-          padding: 4px 9px;
+          background: rgba(0, 229, 153, 0.1);
+          border: 1px solid rgba(0, 229, 153, 0.25);
+          padding: 3px 8px;
           border-radius: 6px;
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.85rem;
         }
 
-        .hms-cta-btn {
-          display: inline-flex;
+        /* ПОЛНОЦЕННАЯ B2B-КНОПКА */
+        .hms-glass-button {
+          display: flex;
           align-items: center;
-          gap: 8px;
-          font-size: 0.9rem;
-          font-weight: 800;
-          color: ${T.accent};
-          text-decoration: none;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0.75rem 1rem;
           margin-top: 1.5rem;
-          transition: gap 0.2s ease, color 0.2s ease;
+          border-radius: 12px;
+          background: rgba(0, 229, 153, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.3);
+          color: #ffffff;
+          font-size: 0.85rem;
+          font-weight: 700;
+          text-decoration: none;
+          backdrop-filter: blur(8px);
+          transition: all 0.25s ease;
         }
 
-        .hms-cta-btn:hover {
-          color: #ffffff;
-          gap: 12px;
+        .hms-glass-button:hover {
+          background: rgba(0, 229, 153, 0.18);
+          border-color: rgba(0, 229, 153, 0.6);
+          box-shadow: 0 0 18px rgba(0, 229, 153, 0.25);
+        }
+
+        .hms-button-arrow {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          background: rgba(0, 229, 153, 0.15);
+          color: ${T.accent};
+          transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+        }
+
+        .hms-glass-button:hover .hms-button-arrow {
+          transform: translateX(3px);
+          background: ${T.accent};
+          color: #0d0e12;
         }
       `}</style>
 
@@ -351,7 +381,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           <div className="bento-card col-70">
             <div className="hero-split-container">
               <div className="hero-left">
-                <h3 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '0.85rem' }}>
+                <h3 className="card-title" style={{ fontSize: '1.4rem', marginBottom: '0.65rem' }}>
                   {t.card1Title}
                 </h3>
                 <p className="card-desc">
@@ -370,7 +400,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                 )}
               </div>
 
-              {/* УВЕЛИЧЕННЫЙ КУБ */}
+              {/* АККУРАТНЫЙ СБАЛАНСИРОВАННЫЙ КУБ */}
               <div className="hero-right">
                 <div className="hero-asset-box">
                   <div className="hero-asset-glow" />
@@ -378,8 +408,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-data-cube.webp" 
                     alt="Systems & Data Architecture" 
                     className="asset-img-inline"
-                    width={220}
-                    height={220}
+                    width={170}
+                    height={170}
                     priority
                   />
                 </div>
@@ -394,31 +424,34 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
               
               <div className="card-header">
                 <div className="header-content">
-                  <h3 className="card-title" style={{ fontSize: '1.2rem' }}>{t.hmsTitle}</h3>
+                  <h3 className="card-title" style={{ fontSize: '1.15rem' }}>{t.hmsTitle}</h3>
                 </div>
-                <div className="asset-slot-inline" style={{ width: 60, height: 60 }}>
+                <div className="asset-slot-inline" style={{ width: 52, height: 52 }}>
                   <div className="asset-glow-inline green" />
                   <Image 
                     src="/assets/3d-hms-core.webp" 
                     alt="HMS Hospitality Tech" 
                     className="asset-img-inline"
-                    width={60}
-                    height={60}
+                    width={52}
+                    height={52}
                   />
                 </div>
               </div>
 
-              <p className="card-desc" style={{ fontSize: '0.86rem' }}>
+              <p className="card-desc" style={{ fontSize: '0.85rem' }}>
                 {t.hmsDesc}
               </p>
             </div>
 
-            <Link href="/hms" className="hms-cta-btn">
+            {/* ИНТЕРАКТИВНАЯ B2B КНОПКА */}
+            <Link href="/hms" className="hms-glass-button">
               <span>{t.hmsCta}</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
+              <div className="hms-button-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
             </Link>
           </div>
 
@@ -435,8 +468,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-gtm-prism.webp" 
                     alt="Funnel Strategy Visual" 
                     className="asset-img-inline"
-                    width={72}
-                    height={72}
+                    width={58}
+                    height={58}
                   />
                 </div>
               </div>
@@ -460,8 +493,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-ai-loop.webp" 
                     alt="AI Automation Visual" 
                     className="asset-img-inline"
-                    width={72}
-                    height={72}
+                    width={58}
+                    height={58}
                   />
                 </div>
               </div>
