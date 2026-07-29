@@ -11,6 +11,11 @@ interface HeroProps {
 export const Hero = ({ dict }: HeroProps) => {
   const t = dict?.hero ?? {
     badge: 'TSVETKOV • FOUNDER-LED AGENCY',
+    titleLine1: 'Value Growth',
+    titleLine2: 'Engineered to Scale',
+    sub1: 'We eliminate chaos in <strong>marketing and digital systems</strong>',
+    sub2: 'No fluff — just <strong>high-performance architectures</strong>',
+    sub3: 'Track every dollar and <strong>automate sales flow</strong>',
     cta: 'Audit My Business',
   };
 
@@ -101,22 +106,19 @@ export const Hero = ({ dict }: HeroProps) => {
           text-wrap: balance;
         }
 
-        .hero-title .accent-text {
-          background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        .hero-title .title-line1 {
+          color: #ffffff;
         }
 
-        .hero-title .highlight {
+        .hero-title .title-line2 {
           color: ${T.accent};
-          -webkit-text-fill-color: initial;
         }
 
         /* ПРАВАЯ КОЛОНКА */
         .right-col {
           flex: 0 0 auto;
           width: 100%;
-          max-width: 440px;
+          max-width: 460px;
           display: flex;
           flex-direction: column;
           gap: 1.75rem;
@@ -130,19 +132,17 @@ export const Hero = ({ dict }: HeroProps) => {
           padding-left: 1.25rem;
         }
 
-        .desc-main {
-          font-size: clamp(1rem, 1.4vw, 1.15rem);
+        .desc-item {
+          font-size: clamp(0.95rem, 1.3vw, 1.1rem);
           line-height: 1.55;
           color: ${T.body};
-          font-weight: 500;
+          font-weight: 400;
           margin: 0;
         }
 
-        .desc-sub {
-          font-size: 0.875rem;
-          line-height: 1.5;
-          color: ${T.sub};
-          margin: 0;
+        .desc-item :global(strong) {
+          color: #ffffff;
+          font-weight: 600;
         }
 
         .cta-action-box {
@@ -185,7 +185,6 @@ export const Hero = ({ dict }: HeroProps) => {
           transform: translateX(4px);
         }
 
-        /* Неоновое фоновое свечение в стиле Chaos Labs */
         .ambient-glow {
           position: absolute;
           bottom: 10%;
@@ -206,7 +205,7 @@ export const Hero = ({ dict }: HeroProps) => {
       <div className="hero-container">
         <div className="hero-split-grid">
           
-          {/* Левая сторона: Заголовок Chaos Labs Style */}
+          {/* Левая сторона: Заголовок из файлов локализации */}
           <div className="left-col">
             <div className="hero-badge-wrapper">
               <span className="hero-badge">
@@ -216,23 +215,33 @@ export const Hero = ({ dict }: HeroProps) => {
             </div>
 
             <h1 className="hero-title">
-              Value Growth
+              <span className="title-line1">{t.titleLine1}</span>
               <br />
-              <span className="accent-text">Engineered to</span>
-              <br />
-              <span className="highlight">Scale</span>
+              <span className="title-line2">{t.titleLine2}</span>
             </h1>
           </div>
 
-          {/* Правая сторона: Описание и Главный CTA */}
+          {/* Правая сторона: Подзаголовки из локализаций и CTA */}
           <div className="right-col">
             <div className="hero-description">
-              <p className="desc-main">
-                We eliminate chaos in marketing &amp; digital systems with high-performance architectures.
-              </p>
-              <p className="desc-sub">
-                No guesswork or empty clicks — clean data attribution, automated CRM sales routing, and full control over every dollar.
-              </p>
+              {t.sub1 && (
+                <p 
+                  className="desc-item" 
+                  dangerouslySetInnerHTML={{ __html: t.sub1 }} 
+                />
+              )}
+              {t.sub2 && (
+                <p 
+                  className="desc-item" 
+                  dangerouslySetInnerHTML={{ __html: t.sub2 }} 
+                />
+              )}
+              {t.sub3 && (
+                <p 
+                  className="desc-item" 
+                  dangerouslySetInnerHTML={{ __html: t.sub3 }} 
+                />
+              )}
             </div>
 
             <div className="cta-action-box">
