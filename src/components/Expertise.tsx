@@ -15,36 +15,28 @@ interface ExpertiseProps {
       subtitle?: string;
       card1Title: string;
       card1Desc: string;
+      card1Bullets?: string[];
       hmsBadge: string;
       hmsTitle: string;
-      hmsUsp?: string;
+      hmsDesc: string;
       hmsCta: string;
       card2Title: string;
       card2Desc: string;
       card3Title: string;
       card3Desc: string;
     };
-  } | null;
+  };
 }
 
 export const Expertise = ({ dict }: ExpertiseProps) => {
-  const t = dict?.expertise ?? {
-    badge: 'SOLUTIONS & ARSENAL',
-    title: 'Systems Built to Scale Your Business',
-    subtitle: 'Connecting architecture, funnels, and automation into a predictable growth engine.',
-    card1Title: 'Systems, Data & Architecture',
-    card1Desc: 'Eliminate blind decision-making by unifying scattered business data into a <strong>single source of truth</strong>. Gain complete clarity on key financial metrics, unit economics, and margin dashboards.',
-    hmsBadge: 'SPECIAL OFFER',
-    hmsTitle: 'DIRECT BOOKING SYSTEM',
-    hmsUsp: 'For Hotels & Resorts • Save 15–20% on OTA Commissions',
-    hmsCta: 'Explore',
-    card2Title: 'Strategic Audits & Funnel Optimization',
-    card2Desc: 'We analyze your customer journey to eliminate bottlenecks. Rebuilding sales funnels and optimizing conversion to <strong>maximize revenue from existing traffic</strong>.',
-    card3Title: 'Process Automation & AI Workflows',
-    card3Desc: 'Eliminate operational lag and human error. Instantly route leads, <strong>automate CRM handoffs, and deploy AI agents</strong> to cut overhead and accelerate sales.',
-  };
+  const t = dict?.expertise;
 
+  // Защита на случай некорректной прогрузки словаря
+  if (!t) return null;
+
+  // Парсинг <strong> тегов из JSON для подсветки ключевых фраз
   const renderWithStrong = (text: string) => {
+    if (!text) return null;
     const parts = text.split(/<strong>(.*?)<\/strong>/g);
     return parts.map((part, i) => {
       if (i % 2 === 1) {
@@ -151,7 +143,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 163, 255, 0.06);
         }
 
-        /* FLOAT ASSET (OPTION 2: ОБТЕКАНИЕ ТЕКСТОМ) */
+        /* FLOAT ASSET (ОБТЕКАНИЕ ТЕКСТОМ) */
         .float-asset {
           float: right;
           margin-left: 0.85rem;
@@ -193,7 +185,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           font-weight: 700;
           color: #ffffff;
           line-height: 1.25;
-          margin: 0 0 4px 0; /* Жестко 4px между заголовком и текстом */
+          margin: 0 0 4px 0;
         }
 
         .card-desc {
@@ -232,15 +224,15 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin-bottom: 0.5rem;
         }
 
-        .hms-usp {
+        .hms-desc {
           font-size: 0.8rem;
-          font-weight: 600;
+          font-weight: 500;
           line-height: 1.4;
-          color: rgba(255, 255, 255, 0.75);
+          color: rgba(255, 255, 255, 0.7);
           margin-top: 4px;
         }
 
-        /* MICRO B2B LINK (EXPLORE ↗) */
+        /* B2B LINK BUTTON */
         .hms-glass-button {
           display: flex;
           align-items: center;
@@ -287,16 +279,16 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         <div className="bento-grid">
           
-          {/* 1. КАРТОЧКА 70% — HERO FLAGSHIP (БЕЗ ТЕГОВ, FLOAT ИКОНКА) */}
+          {/* 1. КАРТОЧКА 70% — HERO FLAGSHIP */}
           <div className="bento-card col-70">
-            <div className="float-asset" style={{ width: 110, height: 110 }}>
+            <div className="float-asset" style={{ width: 105, height: 105 }}>
               <div className="asset-glow cyan" />
               <Image 
                 src="/assets/3d-data-cube.webp" 
-                alt="Systems & Data Architecture" 
+                alt={t.card1Title} 
                 className="asset-img"
-                width={110}
-                height={110}
+                width={105}
+                height={105}
                 priority
               />
             </div>
@@ -309,7 +301,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </p>
           </div>
 
-          {/* 2. КАРТОЧКА 30% — HMS OFFER (SPECIAL OFFER + DIRECT BOOKING SYSTEM) */}
+          {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER */}
           <div className="bento-card card-hms col-30">
             <div>
               <span className="hms-tag">{t.hmsBadge}</span>
@@ -318,7 +310,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                 <div className="asset-glow green" />
                 <Image 
                   src="/assets/3d-hms-core.webp" 
-                  alt="HMS Hospitality Tech" 
+                  alt={t.hmsTitle} 
                   className="asset-img"
                   width={46}
                   height={46}
@@ -329,12 +321,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                 {t.hmsTitle}
               </h3>
 
-              <div className="hms-usp">
-                {t.hmsUsp}
+              <div className="hms-desc">
+                {t.hmsDesc}
               </div>
             </div>
 
-            {/* МИКРО-CTA КНОПКА С ДИАГОНАЛЬНОЙ СТРЕЛКОЙ */}
             <Link href="/hms" className="hms-glass-button">
               <span>{t.hmsCta}</span>
               <div className="hms-arrow-icon">
@@ -346,16 +337,16 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </Link>
           </div>
 
-          {/* 3. КАРТОЧКА 50% — FUNNEL OPTIMIZATION */}
+          {/* 3. КАРТОЧКА 50% — STRATEGIC AUDITS */}
           <div className="bento-card col-50">
-            <div className="float-asset" style={{ width: 50, height: 50 }}>
+            <div className="float-asset" style={{ width: 48, height: 48 }}>
               <div className="asset-glow cyan" />
               <Image 
                 src="/assets/3d-gtm-prism.webp" 
-                alt="Funnel Strategy Visual" 
+                alt={t.card2Title} 
                 className="asset-img"
-                width={50}
-                height={50}
+                width={48}
+                height={48}
               />
             </div>
 
@@ -365,16 +356,16 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </p>
           </div>
 
-          {/* 4. КАРТОЧКА 50% — AI WORKFLOWS */}
+          {/* 4. КАРТОЧКА 50% — PROCESS AUTOMATION */}
           <div className="bento-card col-50">
-            <div className="float-asset" style={{ width: 50, height: 50 }}>
+            <div className="float-asset" style={{ width: 48, height: 48 }}>
               <div className="asset-glow green" />
               <Image 
                 src="/assets/3d-ai-loop.webp" 
-                alt="AI Automation Visual" 
+                alt={t.card3Title} 
                 className="asset-img"
-                width={50}
-                height={50}
+                width={48}
+                height={48}
               />
             </div>
 
