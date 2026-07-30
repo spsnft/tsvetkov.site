@@ -173,9 +173,8 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
   if (!t) return null;
 
-  const CASES = CASE_ORDER.map((id, i) => ({
+  const CASES = CASE_ORDER.map((id) => ({
     id,
-    num: String(i + 1).padStart(2, '0'),
     label: t.tabs?.[id],
     ...CASE_META[id],
     ...t.items?.[id],
@@ -344,15 +343,8 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           font-size: clamp(1.4rem, 3vw, 1.9rem);
           font-weight: 700;
           color: #ffffff;
-          margin: 0 0 0.5rem 0;
+          margin: 0 0 1.75rem 0;
           line-height: 1.25;
-        }
-
-        .case-meta {
-          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-          font-size: 0.76rem;
-          color: ${T.muted};
-          margin: 0 0 2rem 0;
         }
 
         .panels-grid {
@@ -441,19 +433,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           line-height: 1.35;
         }
 
-        .logs-box {
-          margin-top: 1.5rem;
-          padding-top: 1.25rem;
-          border-top: 1px dashed ${T.border};
-        }
-
-        .log-line {
-          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-          font-size: 0.82rem;
-          line-height: 1.9;
-          color: ${T.acc2};
-        }
-
         .cta-row {
           margin-top: 1.5rem;
           padding-top: 1.25rem;
@@ -509,7 +488,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                   className={`tab${c.id === activeId ? ' active' : ''}`}
                 >
                   <TabIcon id={c.id} />
-                  <span>{`${c.num} // ${c.label}`}</span>
+                  <span>{c.label}</span>
                 </button>
               );
             })}
@@ -518,7 +497,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           <div className="content">
             <span className="offer-tag">{active.category}</span>
             <h3 className="case-title">{active.title}</h3>
-            <p className="case-meta">{active.meta}</p>
 
             <div className="panels-grid">
               <Panel tone="red" icon={Icons.AlertTriangle} num="01" label={t.bottleneckLabel} text={active.challenge} />
@@ -540,7 +518,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
             <div className="metrics-box">
               <div className="box-label">
                 <span>{t.metricsTitle}</span>
-                <StatusBadge tone={active.tone} text={active.status} />
               </div>
               <div className="metrics-grid">
                 {active.metrics?.map((m: { value: string; label: string }, i: number) => (
@@ -548,13 +525,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                     <div className="metric-value">{m.value}</div>
                     <div className="metric-label">{m.label}</div>
                   </div>
-                ))}
-              </div>
-
-              <div className="logs-box">
-                <div className="box-label">{t.logsLabel}</div>
-                {active.telemetryLogs?.map((line: string, i: number) => (
-                  <div key={i} className="log-line">{line}</div>
                 ))}
               </div>
             </div>

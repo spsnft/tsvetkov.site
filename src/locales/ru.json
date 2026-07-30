@@ -110,11 +110,10 @@
     "badge": "CASE STUDIES",
     "title": "What Can We Show",
     "terminalBarTitle": "TELEMETRY ENGINE // LIVE SYSTEM DATA",
-    "bottleneckLabel": "THE BOTTLENECK //",
-    "solutionLabel": "ENGINEERED FIX //",
+    "bottleneckLabel": "THE PROBLEM //",
+    "solutionLabel": "THE SOLUTION //",
     "infraLabel": "DEPLOYED INFRASTRUCTURE //",
     "metricsTitle": "SYSTEM IMPACT METRICS",
-    "logsLabel": "TRAJECTORY & TELEMETRY LOGS //",
     "hmsCta": "Explore HMS System",
     "tabs": {
       "hms": "01 // HOSPITALITY / HMS",
@@ -127,7 +126,6 @@
         "category": "SPECIALIZED OFFER / HOSPITALITY",
         "status": "TARGET MODEL · PRE-LAUNCH",
         "title": "Direct Booking Architecture & OTA Elimination",
-        "meta": "SEGMENT — independent hotels, villas & condos, TH  ·  CURRENT STATE — fully OTA-reliant",
         "challenge": "High OTA commissions (18–25%), total loss of guest data ownership, and low direct channel conversion.",
         "solution": "Turnkey HMS deployment: direct booking funnels, automated WhatsApp CRM sync, and zero-commission engine.",
         "architecture": [
@@ -149,18 +147,12 @@
             "value": "100%",
             "label": "Guest Data Ownership"
           }
-        ],
-        "telemetryLogs": [
-          "> OTA LEAKAGE: REDUCED TO 0%",
-          "> WHATSAPP CRM SYNC: ACTIVE (60s SLA)",
-          "> MARGIN BOOST: +22% NET PROFIT"
         ]
       },
       "ecomm": {
         "category": "OMNICHANNEL E-COMM",
         "status": "CASE STUDY",
         "title": "P&L Attribution & Performance Scaling Engine",
-        "meta": "SEGMENT — DTC e-commerce, 5+ ad channels  ·  CURRENT STATE — profit-blind scaling",
         "challenge": "Ad spend scaled across 5 channels with zero net profit visibility, broken tracking, and ballooning CAC.",
         "solution": "End-to-end data pipeline linking ad accounts directly to live net-margin P&L attribution dashboards.",
         "architecture": [
@@ -182,18 +174,12 @@
             "value": "100%",
             "label": "P&L Visibility"
           }
-        ],
-        "telemetryLogs": [
-          "> ATTRIBUTION PIPELINE: SYNCHRONIZED",
-          "> DATA ACCURACY: 99.8%",
-          "> CAC OPTIMIZATION: AUTOMATED"
         ]
       },
       "b2b": {
         "category": "ENTERPRISE B2B",
         "status": "CASE STUDY",
         "title": "Lead Velocity & Automated GTM Architecture",
-        "meta": "SEGMENT — high-ticket B2B sales teams  ·  CURRENT STATE — manual lead handoffs",
         "challenge": "High CPL, slow lead response time (>4 hours), and low sales conversion from manual CRM lead handoffs.",
         "solution": "Rebuilt acquisition funnels coupled with instant 60-second automated CRM lead routing and AI scoring.",
         "architecture": [
@@ -215,18 +201,12 @@
             "value": "$1.4M",
             "label": "Pipeline ARR"
           }
-        ],
-        "telemetryLogs": [
-          "> LEAD VELOCITY: <60s RESPONSE TIME",
-          "> CRM ROUTING: AUTOMATED",
-          "> PIPELINE HEALTH: OPTIMIZED"
         ]
       },
       "realestate": {
         "category": "REAL ESTATE & PROPERTY",
         "status": "CASE STUDY",
         "title": "High-Intent Investor Acquisition System",
-        "meta": "SEGMENT — real estate developers & brokers  ·  CURRENT STATE — untargeted lead spam",
         "challenge": "Untargeted lead spam, high cost per qualified buyer, and zero visibility on broker sales velocity.",
         "solution": "Targeted investor acquisition funnels, automated financial qualification surveys, and broker SLA tracking.",
         "architecture": [
@@ -248,11 +228,6 @@
             "value": "12m",
             "label": "Avg Broker Response"
           }
-        ],
-        "telemetryLogs": [
-          "> QUALIFICATION RATE: 84%",
-          "> BROKER SLA: TRACKED LIVE",
-          "> INVESTOR FUNNEL: HIGH-INTENT"
         ]
       }
     }
