@@ -463,7 +463,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                   padding: '1.25rem 1.5rem',
                   display: 'flex',
                   flexDirection: 'column',
-                  justify-style: 'space-between',
+                  justifyContent: 'space-between',
                   gap: '1.5rem',
                 }}
               >
