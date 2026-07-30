@@ -193,9 +193,10 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           height: 145px;
         }
 
+        /* Увеличен размер 3D-ассета для HMS */
         .size-hms-compact {
-          width: 65px;
-          height: 65px;
+          width: 110px;
+          height: 110px;
         }
 
         .asset-glow {
@@ -239,14 +240,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* HMS CARD (30%) - ULTRA COMPACT THREE-ROW LAYOUT */
+        /* HMS CARD (30%) - NEW SPLIT LAYOUT */
         .card-hms {
           background: rgba(0, 229, 153, 0.03);
           border: 1px solid rgba(0, 229, 153, 0.22);
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: 1.1rem 1.25rem;
+          padding: 1.35rem 1.25rem;
         }
 
         .card-hms:hover {
@@ -255,11 +253,29 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 229, 153, 0.12);
         }
 
-        .hms-row-top {
+        .hms-content-wrapper {
           display: flex;
-          align-items: flex-start;
+          flex-direction: column;
           justify-content: space-between;
-          gap: 0.5rem;
+          gap: 1rem;
+          height: 100%;
+        }
+
+        @media (min-width: 640px) {
+          .hms-content-wrapper {
+            flex-direction: row;
+            align-items: center;
+            gap: 0.75rem;
+          }
+        }
+
+        .hms-left-side {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+          flex: 1 1 0%;
+          min-width: 0;
         }
 
         .hms-tag {
@@ -273,27 +289,14 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           border: 1px solid rgba(0, 229, 153, 0.25);
           padding: 3px 8px;
           border-radius: 6px;
-          margin-top: 2px;
-        }
-
-        .hms-row-middle {
-          margin: 0.2rem 0 0.6rem 0;
         }
 
         .hms-title-override {
-          font-size: 1.12rem;
+          font-size: 1.15rem;
           font-weight: 700;
           color: #ffffff;
           margin: 0;
           line-height: 1.2;
-        }
-
-        .hms-row-bottom {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.75rem;
-          margin-top: 0.25rem;
         }
 
         .hms-desc-compact {
@@ -302,7 +305,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           line-height: 1.35;
           color: rgba(255, 255, 255, 0.72);
           margin: 0;
-          flex: 1;
         }
 
         :global(.hms-btn-compact),
@@ -381,44 +383,45 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER (COMPACT 3-ROW) */}
+          {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER (SPLIT LAYOUT) */}
           <div className="bento-card card-hms col-30">
-            {/* ROW 1: TAG + ICON */}
-            <div className="hms-row-top">
-              <span className="hms-tag">{t.hmsBadge}</span>
-              <div className="asset-wrapper size-hms-compact">
-                <div className="asset-glow green" />
-                <Image 
-                  src="/assets/3d-hms-core.webp" 
-                  alt={t.hmsTitle} 
-                  className="asset-img"
-                  width={65}
-                  height={65}
-                />
-              </div>
-            </div>
-
-            {/* ROW 2: TITLE */}
-            <div className="hms-row-middle">
-              <h3 className="hms-title-override">
-                {t.hmsTitle}
-              </h3>
-            </div>
-
-            {/* ROW 3: VALUE PROP + CTA BUTTON */}
-            <div className="hms-row-bottom">
-              <p className="hms-desc-compact">
-                {t.hmsDesc}
-              </p>
-              <Link href="/hms" className="hms-btn-compact">
-                <span>{t.hmsCta}</span>
-                <div className="hms-arrow-icon">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7" />
-                    <polyline points="7 7 17 7 17 17" />
-                  </svg>
+            <div className="hms-content-wrapper">
+              <div className="hms-left-side">
+                <div>
+                  <span className="hms-tag">{t.hmsBadge}</span>
+                  <h3 className="hms-title-override" style={{ marginTop: '0.55rem' }}>
+                    {t.hmsTitle}
+                  </h3>
+                  <p className="hms-desc-compact" style={{ marginTop: '0.35rem' }}>
+                    {t.hmsDesc}
+                  </p>
                 </div>
-              </Link>
+
+                <div style={{ marginTop: '0.85rem' }}>
+                  <Link href="/hms" className="hms-btn-compact">
+                    <span>{t.hmsCta}</span>
+                    <div className="hms-arrow-icon">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7" />
+                        <polyline points="7 7 17 7 17 17" />
+                      </svg>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="card-asset-side">
+                <div className="asset-wrapper size-hms-compact">
+                  <div className="asset-glow green" />
+                  <Image 
+                    src="/assets/3d-hms-core.webp" 
+                    alt={t.hmsTitle} 
+                    className="asset-img"
+                    width={110}
+                    height={110}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
