@@ -299,20 +299,24 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           padding: clamp(1.25rem, 3vw, 2rem);
         }
 
-        .content-header {
+        .title-row {
           display: flex;
-          justify-content: flex-end;
-          margin-bottom: 1.25rem;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 1rem;
+          margin-bottom: 1.75rem;
         }
 
-        .content-header :global(.btn-primary) {
+        .title-row :global(.btn-primary) {
+          flex-shrink: 0;
           height: 44px;
           padding: 0 1.5rem;
           font-size: 0.85rem;
           gap: 8px;
         }
 
-        .content-header :global(.btn-primary:hover) .btn-arrow {
+        .title-row :global(.btn-primary:hover) .btn-arrow {
           transform: translateX(4px);
         }
 
@@ -324,7 +328,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           font-size: clamp(1.4rem, 3vw, 1.9rem);
           font-weight: 700;
           color: #ffffff;
-          margin: 0 0 1.75rem 0;
+          margin: 0;
           line-height: 1.25;
         }
 
@@ -341,26 +345,35 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           }
         }
 
-        .split-grid {
+        .infra-metrics-box {
           display: grid;
           grid-template-columns: 1fr;
-          align-items: start;
-          gap: 1rem;
+          border: 1px solid ${T.border};
+          border-radius: ${T.radius.lg};
+          background: ${T.bg1};
           margin-top: 1rem;
+          overflow: hidden;
         }
 
         @media (min-width: 768px) {
-          .split-grid {
+          .infra-metrics-box {
             grid-template-columns: 3fr 2fr;
           }
         }
 
-        .infra-box,
-        .metrics-box {
-          border: 1px solid ${T.border};
-          border-radius: ${T.radius.lg};
+        .im-col {
           padding: clamp(1.1rem, 2.5vw, 1.5rem);
-          background: ${T.bg1};
+        }
+
+        .im-col:first-child {
+          border-bottom: 1px solid ${T.border};
+        }
+
+        @media (min-width: 768px) {
+          .im-col:first-child {
+            border-bottom: none;
+            border-right: 1px solid ${T.border};
+          }
         }
 
         .box-label {
@@ -456,8 +469,9 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           </div>
 
           <div className="content">
-            {active.hasCta && active.ctaLink && (
-              <div className="content-header">
+            <div className="title-row">
+              <h3 className="case-title">{active.title}</h3>
+              {active.hasCta && active.ctaLink && (
                 <Link href={getCtaLink(active.ctaLink)} className="btn-primary">
                   <span>{t.hmsCta}</span>
                   <svg
@@ -475,17 +489,16 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                     <polyline points="12 5 19 12 12 19" />
                   </svg>
                 </Link>
-              </div>
-            )}
-            <h3 className="case-title">{active.title}</h3>
+              )}
+            </div>
 
             <div className="panels-grid">
               <Panel tone="red" icon={Icons.AlertTriangle} num="01" label={t.bottleneckLabel} items={active.challenge} />
               <Panel tone="emerald" icon={Icons.Zap} num="02" label={t.solutionLabel} items={active.solution} />
             </div>
 
-            <div className="split-grid">
-              <div className="infra-box">
+            <div className="infra-metrics-box">
+              <div className="im-col">
                 <div className="box-label">{t.infraLabel}</div>
                 <div className="infra-grid">
                   {active.architecture?.map((item: string, i: number) => (
@@ -497,10 +510,8 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                 </div>
               </div>
 
-              <div className="metrics-box">
-                <div className="box-label">
-                  <span>{t.metricsTitle}</span>
-                </div>
+              <div className="im-col">
+                <div className="box-label">{t.metricsTitle}</div>
                 <div className="metrics-grid">
                   {active.metrics?.map((m: { value: string; label: string }, i: number) => (
                     <div key={i} className="metric-card">

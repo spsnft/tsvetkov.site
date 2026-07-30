@@ -111,8 +111,8 @@
     "title": "What Can We Show",
     "bottleneckLabel": "THE PROBLEM //",
     "solutionLabel": "THE SOLUTION //",
-    "infraLabel": "DEPLOYED INFRASTRUCTURE //",
-    "metricsTitle": "SYSTEM IMPACT METRICS",
+    "infraLabel": "// DEPLOYED INFRASTRUCTURE //",
+    "metricsTitle": "// SYSTEM IMPACT METRICS //",
     "hmsCta": "Explore HMS System",
     "tabs": {
       "hms": "01 // HOTELS & SHORT-TERM RENTALS",
