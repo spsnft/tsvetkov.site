@@ -263,27 +263,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
         }
 
-        .top-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-          padding: 0.85rem 1.25rem;
-          border-bottom: 1px solid ${T.border};
-          background: ${T.bg1};
-          flex-wrap: wrap;
-        }
-
-        .top-bar-label {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-          letter-spacing: 0.1em;
-          font-size: 0.72rem;
-          color: ${T.sub};
-        }
-
         .tabs {
           display: flex;
           flex-wrap: wrap;
@@ -324,6 +303,15 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           padding: clamp(1.25rem, 3vw, 2rem);
         }
 
+        .content-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          margin-bottom: 1rem;
+        }
+
         .offer-tag {
           display: inline-block;
           font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -336,7 +324,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           background: ${T.accent10};
           border-radius: 999px;
           padding: 5px 12px;
-          margin-bottom: 1rem;
         }
 
         .case-title {
@@ -360,13 +347,25 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           }
         }
 
+        .split-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+
+        @media (min-width: 768px) {
+          .split-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
         .infra-box,
         .metrics-box {
           border: 1px solid ${T.border};
           border-radius: ${T.radius.lg};
           padding: clamp(1.1rem, 2.5vw, 1.5rem);
           background: ${T.bg1};
-          margin-top: 1rem;
         }
 
         .box-label {
@@ -470,14 +469,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         </div>
 
         <div className="terminal">
-          <div className="top-bar">
-            <span className="top-bar-label">
-              <span className="badge-dot" />
-              {t.terminalBarTitle}
-            </span>
-            <StatusBadge tone={active.tone} text={active.status} />
-          </div>
-
           <div className="tabs">
             {CASES.map((c) => {
               return (
@@ -495,7 +486,10 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           </div>
 
           <div className="content">
-            <span className="offer-tag">{active.category}</span>
+            <div className="content-header">
+              <span className="offer-tag">{active.category}</span>
+              <StatusBadge tone={active.tone} text={active.status} />
+            </div>
             <h3 className="case-title">{active.title}</h3>
 
             <div className="panels-grid">
@@ -503,29 +497,31 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
               <Panel tone="emerald" icon={Icons.Zap} num="02" label={t.solutionLabel} text={active.solution} />
             </div>
 
-            <div className="infra-box">
-              <div className="box-label">{t.infraLabel}</div>
-              <div className="infra-grid">
-                {active.architecture?.map((item: string, i: number) => (
-                  <div key={i} className="infra-item">
-                    <span className="infra-check">✓</span>
-                    <span>{item}</span>
-                  </div>
-                ))}
+            <div className="split-grid">
+              <div className="infra-box">
+                <div className="box-label">{t.infraLabel}</div>
+                <div className="infra-grid">
+                  {active.architecture?.map((item: string, i: number) => (
+                    <div key={i} className="infra-item">
+                      <span className="infra-check">✓</span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="metrics-box">
-              <div className="box-label">
-                <span>{t.metricsTitle}</span>
-              </div>
-              <div className="metrics-grid">
-                {active.metrics?.map((m: { value: string; label: string }, i: number) => (
-                  <div key={i} className="metric-card">
-                    <div className="metric-value">{m.value}</div>
-                    <div className="metric-label">{m.label}</div>
-                  </div>
-                ))}
+              <div className="metrics-box">
+                <div className="box-label">
+                  <span>{t.metricsTitle}</span>
+                </div>
+                <div className="metrics-grid">
+                  {active.metrics?.map((m: { value: string; label: string }, i: number) => (
+                    <div key={i} className="metric-card">
+                      <div className="metric-value">{m.value}</div>
+                      <div className="metric-label">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 

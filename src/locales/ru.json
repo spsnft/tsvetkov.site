@@ -109,7 +109,6 @@
   "cases": {
     "badge": "CASE STUDIES",
     "title": "What Can We Show",
-    "terminalBarTitle": "TELEMETRY ENGINE // LIVE SYSTEM DATA",
     "bottleneckLabel": "THE PROBLEM //",
     "solutionLabel": "THE SOLUTION //",
     "infraLabel": "DEPLOYED INFRASTRUCTURE //",
