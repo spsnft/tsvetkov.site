@@ -111,14 +111,13 @@ export const Hero = ({ dict }: HeroProps) => {
 
         .hero-title-dot {
           display: inline-block;
-          width: 0.42em;
-          height: 0.42em;
-          margin-left: 0.12em;
-          margin-bottom: 0.1em;
+          width: 0.15em;
+          height: 0.15em;
+          margin-left: 0.06em;
           border-radius: 50%;
           background: ${T.accent};
-          box-shadow: 0 0 14px ${T.accent}, 0 0 28px ${T.accent};
-          vertical-align: middle;
+          box-shadow: 0 0 6px ${T.accent}, 0 0 12px ${T.accent};
+          vertical-align: baseline;
           animation: heroDotPulse 1.8s infinite ease-in-out;
         }
 
