@@ -8,10 +8,8 @@ const COLOR_EMERALD = '#00E599';
 const COLOR_MINT = '#34D399';
 
 interface StepData {
-  badge: string;
   title: string;
   desc: string;
-  deliverables: string[];
   impact: string;
 }
 
@@ -20,22 +18,15 @@ interface ServicesProps {
     services?: {
       badge: string;
       title: string;
-      deliverablesLabel?: string;
       outcomeLabel?: string;
-      step1Badge: string;
       step1Title: string;
       step1Desc: string;
-      step1Deliverables: string[];
       step1Impact: string;
-      step2Badge: string;
       step2Title: string;
       step2Desc: string;
-      step2Deliverables: string[];
       step2Impact: string;
-      step3Badge: string;
       step3Title: string;
       step3Desc: string;
-      step3Deliverables: string[];
       step3Impact: string;
     };
     [key: string]: any;
@@ -50,28 +41,22 @@ export const Services = ({ dict }: ServicesProps) => {
   const steps: (StepData & { num: string; color: string })[] = [
     {
       num: '01',
-      badge: t.step1Badge,
       title: t.step1Title,
       desc: t.step1Desc,
-      deliverables: t.step1Deliverables || [],
       impact: t.step1Impact,
       color: COLOR_CYAN,
     },
     {
       num: '02',
-      badge: t.step2Badge,
       title: t.step2Title,
       desc: t.step2Desc,
-      deliverables: t.step2Deliverables || [],
       impact: t.step2Impact,
       color: COLOR_EMERALD,
     },
     {
       num: '03',
-      badge: t.step3Badge,
       title: t.step3Title,
       desc: t.step3Desc,
-      deliverables: t.step3Deliverables || [],
       impact: t.step3Impact,
       color: COLOR_MINT,
     },
@@ -157,10 +142,10 @@ export const Services = ({ dict }: ServicesProps) => {
           bottom: 3rem;
           width: 2px;
           background: linear-gradient(
-            180deg, 
-            ${COLOR_CYAN} 0%, 
-            ${COLOR_EMERALD} 50%, 
-            rgba(52, 211, 153, 0.1) 100%
+            180deg,
+            ${COLOR_EMERALD} 0%,
+            ${COLOR_CYAN} 70%,
+            rgba(0, 163, 255, 0.1) 100%
           );
           z-index: 1;
         }
@@ -223,37 +208,7 @@ export const Services = ({ dict }: ServicesProps) => {
           font-size: 0.9rem;
           line-height: 1.55;
           color: rgba(255, 255, 255, 0.68);
-          margin: 0 0 1.25rem 0;
-        }
-
-        .deliverables-label {
-          font-size: 0.7rem;
-          font-weight: 700;
-          color: rgba(255, 255, 255, 0.45);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          margin-bottom: 0.65rem;
-        }
-
-        .deliverables-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 0.55rem;
-        }
-
-        .deliverable-item {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.83rem;
-          color: rgba(255, 255, 255, 0.85);
-          font-weight: 500;
-        }
-
-        .check-icon {
-          font-size: 0.75rem;
-          font-weight: 800;
-          flex-shrink: 0;
+          margin: 0;
         }
 
         .outcome-box {
@@ -308,42 +263,10 @@ export const Services = ({ dict }: ServicesProps) => {
                     border: `1px solid rgba(255, 255, 255, 0.08)`,
                   }}
                 >
-                  <div style={{ marginBottom: '0.85rem' }}>
-                    <span
-                      style={{
-                        fontSize: '0.62rem',
-                        fontWeight: 800,
-                        letterSpacing: '0.12em',
-                        color: item.color,
-                        textTransform: 'uppercase',
-                        background: `${item.color}12`,
-                        padding: '4px 9px',
-                        borderRadius: 6,
-                        border: `1px solid ${item.color}30`,
-                      }}
-                    >
-                      {item.badge}
-                    </span>
-                  </div>
-
                   <h3 className="card-title">{item.title}</h3>
                   <p className="card-desc">{item.desc}</p>
 
-                  <div>
-                    <div className="deliverables-label">
-                      {t.deliverablesLabel || 'Deliverables //'}
-                    </div>
-                    <div className="deliverables-grid">
-                      {item.deliverables.map((del, di) => (
-                        <div key={di} className="deliverable-item">
-                          <span className="check-icon" style={{ color: item.color }}>✓</span>
-                          <span>{del}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div 
+                  <div
                     className="outcome-box"
                     style={{
                       background: `${item.color}08`,
