@@ -70,7 +70,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
                   height: 300,
                   borderRadius: 18,
                   border: '1px solid rgba(255,255,255,0.08)',
-                  background: 'rgba(12, 12, 16, 0.25)',
+                  background: 'rgba(12, 12, 16, 0.125)',
                 }}
               />
             ))}
@@ -186,7 +186,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           border-radius: 18px;
           
           /* Воздушная прозрачность с легким блюром */
-          background: rgba(12, 12, 16, 0.25);
+          background: rgba(12, 12, 16, 0.125);
           backdrop-filter: blur(10px) saturate(140%);
           -webkit-backdrop-filter: blur(10px) saturate(140%);
           
@@ -208,7 +208,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
         .card:hover {
           transform: translateY(-5px);
-          background: rgba(18, 18, 26, 0.45);
+          background: rgba(18, 18, 26, 0.225);
           border-color: rgba(255, 85, 85, 0.35);
           box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5),
                       0 0 30px rgba(255, 85, 85, 0.12),

@@ -11,7 +11,7 @@ interface HeroProps {
 export const Hero = ({ dict }: HeroProps) => {
   const t = dict?.hero ?? {
     badge: 'FOUNDER-LED AGENCY',
-    titleLine1: 'More Revenue.',
+    titleLine1: 'More Revenue',
     titleLine2: 'Engineered',
     sub1: 'We eliminate chaos in <strong>marketing &amp; digital systems</strong>',
     sub2: 'No fluff — just <strong>high-performance architectures</strong>',
@@ -98,14 +98,6 @@ export const Hero = ({ dict }: HeroProps) => {
           z-index: 2;
         }
 
-        .badge-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: ${T.accent};
-          box-shadow: 0 0 8px ${T.accent};
-        }
-
         .hero-title {
           font-size: clamp(2.8rem, 5.8vw, 5.6rem);
           font-weight: 800;
@@ -115,6 +107,30 @@ export const Hero = ({ dict }: HeroProps) => {
           text-wrap: balance;
           position: relative;
           z-index: 2;
+        }
+
+        .hero-title-dot {
+          display: inline-block;
+          width: 0.42em;
+          height: 0.42em;
+          margin-left: 0.12em;
+          margin-bottom: 0.1em;
+          border-radius: 50%;
+          background: ${T.accent};
+          box-shadow: 0 0 14px ${T.accent}, 0 0 28px ${T.accent};
+          vertical-align: middle;
+          animation: heroDotPulse 1.8s infinite ease-in-out;
+        }
+
+        @keyframes heroDotPulse {
+          0%, 100% {
+            opacity: 0.5;
+            transform: scale(0.85);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.15);
+          }
         }
 
         .hero-title .title-line1 {
@@ -210,13 +226,13 @@ export const Hero = ({ dict }: HeroProps) => {
 
             {t.badge && (
               <span className="hero-badge">
-                <span className="badge-dot" />
                 {t.badge}
               </span>
             )}
 
             <h1 className="hero-title">
               <span className="title-line1">{t.titleLine1}</span>
+              <span className="hero-title-dot" />
               <br />
               <span className="title-line2">{t.titleLine2}</span>
             </h1>

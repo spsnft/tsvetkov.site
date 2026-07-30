@@ -9,7 +9,7 @@
   },
   "hero": {
     "badge": "FOUNDER-LED AGENCY",
-    "titleLine1": "More Revenue.",
+    "titleLine1": "More Revenue",
     "titleLine2": "Engineered",
     "sub1": "We eliminate chaos in <strong>marketing & digital systems</strong>",
     "sub2": "No fluff — just <strong>high-performance architectures</strong>",
@@ -29,7 +29,7 @@
         "descHighlight1": "poor-quality inquiries",
         "descMiddle": ". Ad budgets keep growing, but ",
         "descHighlight2": "net profit stays flat",
-        "descEnd": ".",
+        "descEnd": "",
         "impact": "Uncontrolled CAC Inflation"
       },
       {
@@ -40,7 +40,7 @@
         "descHighlight1": "separate places",
         "descMiddle": ". You end up guessing what works instead of seeing ",
         "descHighlight2": "real ROI and true net profit",
-        "descEnd": ".",
+        "descEnd": "",
         "impact": "Wasted Marketing Capital"
       },
       {
@@ -51,7 +51,7 @@
         "descHighlight1": "manual CRM handoffs",
         "descMiddle": ". Your team wastes time managing spreadsheets instead of ",
         "descHighlight2": "closing deals",
-        "descEnd": ".",
+        "descEnd": "",
         "impact": "Revenue Leakage & High Overhead"
       }
     ]
