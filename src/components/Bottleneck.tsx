@@ -1,18 +1,15 @@
 'use client';
 
 import React from 'react';
-import { useDictionary } from '@/src/locales/getDictionary';
 import { T } from '@/src/theme/tokens';
 
 const RED_ACCENT = '#FF5555';
 
 type BottleneckProps = {
-  lang?: string;
+  dict?: any;
 };
 
-export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
-  const dict = useDictionary(lang);
-
+export const Bottleneck = ({ dict }: BottleneckProps) => {
   // Скелетон во избежание сдвигов верстки (CLS)
   if (!dict) {
     return (

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { T } from '@/src/theme/tokens';
 
 const CYAN_ACCENT = T.acc2 || '#00A3FF';
@@ -16,10 +15,9 @@ interface ExpertiseProps {
       card1Title: string;
       card1Desc: string;
       card1Bullets?: string[];
-      hmsBadge: string;
-      hmsTitle: string;
-      hmsDesc: string;
-      hmsCta: string;
+      uspTag: string;
+      uspLine1: string;
+      uspLine2: string;
       card2Title: string;
       card2Desc: string;
       card3Title: string;
@@ -65,7 +63,9 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .badge {
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
           padding: 0.3rem 0.75rem;
           border-radius: 20px;
           margin-bottom: 0.65rem;
@@ -77,6 +77,26 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           border: 1px solid rgba(0, 163, 255, 0.25);
           color: ${CYAN_ACCENT};
           backdrop-filter: blur(12px);
+        }
+
+        .badge-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: ${CYAN_ACCENT};
+          box-shadow: 0 0 8px ${CYAN_ACCENT};
+          animation: pulseDot 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+          0%, 100% {
+            opacity: 0.4;
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.3);
+          }
         }
 
         .title {
@@ -121,8 +141,9 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           overflow: hidden;
           padding: 1.35rem 1.1rem 1.35rem 1.5rem;
           border-radius: 20px;
-          background: rgba(12, 12, 16, 0.45);
-          backdrop-filter: blur(14px) saturate(140%);
+          background: rgba(12, 12, 16, 0.06);
+          backdrop-filter: blur(4px) saturate(140%);
+          -webkit-backdrop-filter: blur(4px) saturate(140%);
           border: 1px solid rgba(255, 255, 255, 0.08);
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
           transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -185,11 +206,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           height: 145px;
         }
 
-        .size-hms-compact {
-          width: 120px;
-          height: 120px;
-        }
-
         .asset-glow {
           position: absolute;
           inset: -10px;
@@ -231,121 +247,66 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* HMS CARD (30%) - MONOLITHIC Tight LAYOUT */
-        .card-hms {
-          background: rgba(0, 229, 153, 0.03);
-          border: 1px solid rgba(0, 229, 153, 0.22);
+        /* USP CARD (30%) — "ODD ONE OUT" HOOK TILE */
+        .card-usp {
+          display: flex;
+          align-items: center;
+          background: linear-gradient(135deg, rgba(0, 229, 153, 0.05) 0%, rgba(0, 163, 255, 0.05) 100%), rgba(12, 12, 16, 0.06);
+          border: 1px solid rgba(0, 163, 255, 0.25);
           padding: 1.35rem 1.25rem;
         }
 
-        .card-hms:hover {
-          background: rgba(0, 229, 153, 0.06);
-          border-color: rgba(0, 229, 153, 0.45);
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 229, 153, 0.12);
+        .card-usp:hover {
+          border-color: rgba(0, 163, 255, 0.45);
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 163, 255, 0.12);
         }
 
-        .hms-content-wrapper {
+        .usp-content {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          gap: 1rem;
-          height: 100%;
+          gap: 0.65rem;
         }
 
-        @media (min-width: 640px) {
-          .hms-content-wrapper {
-            flex-direction: row;
-            align-items: center;
-            gap: 0.75rem;
-          }
-        }
-
-        .hms-left-side {
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          gap: 0.55rem;
-          height: 100%;
-          flex: 1 1 0%;
-          min-width: 0;
-        }
-
-        /* Облегченный тег без лишней жирности на 1 строчку */
-        .hms-tag {
+        .usp-tag {
           display: inline-block;
           font-size: 0.62rem;
           font-weight: 600;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-          color: #00E599;
-          background: rgba(0, 229, 153, 0.08);
-          border: 1px solid rgba(0, 229, 153, 0.25);
+          color: ${CYAN_ACCENT};
+          background: rgba(0, 163, 255, 0.08);
+          border: 1px solid rgba(0, 163, 255, 0.25);
           padding: 3px 8px;
           border-radius: 6px;
           width: fit-content;
-          white-space: nowrap;
         }
 
-        .hms-title-override {
-          font-size: 1.15rem;
-          font-weight: 800;
-          color: #ffffff;
+        .usp-hook {
           margin: 0;
-          line-height: 1.2;
-          white-space: nowrap;
-        }
-
-        .hms-desc-compact {
-          font-size: 0.78rem;
-          font-weight: 500;
+          font-size: 1.2rem;
+          font-weight: 800;
           line-height: 1.3;
-          color: rgba(255, 255, 255, 0.75);
-          margin: 0;
-          white-space: nowrap;
+          letter-spacing: -0.02em;
         }
 
-        :global(.hms-btn-compact),
-        :global(.hms-btn-compact:visited) {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          margin-top: 0.25rem;
-          padding: 0.5rem 0.95rem;
-          border-radius: 9px;
+        .usp-line1 {
+          color: #ffffff;
+        }
+
+        .usp-line2 {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          color: #0A0A0C !important;
-          font-size: 0.78rem;
-          font-weight: 800;
-          text-decoration: none !important;
-          box-shadow: 0 4px 15px rgba(0, 229, 153, 0.25);
-          transition: all 0.25s ease;
-          white-space: nowrap;
-          width: fit-content;
-          flex-shrink: 0;
-        }
-
-        :global(.hms-btn-compact:hover) {
-          transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(0, 229, 153, 0.45);
-          color: #0A0A0C !important;
-        }
-
-        .hms-arrow-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #0A0A0C;
-          transition: transform 0.25s ease;
-        }
-
-        :global(.hms-btn-compact:hover) .hms-arrow-icon {
-          transform: translate(2px, -2px);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
       `}</style>
 
       <div className="container">
         <div className="header-box">
-          <span className="badge">{t.badge}</span>
+          <span className="badge">
+            <span className="badge-dot" />
+            {t.badge}
+          </span>
           <h2 className="title">{t.title || 'How We Help You Scale'}</h2>
         </div>
 
@@ -379,41 +340,15 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER */}
-          <div className="bento-card card-hms col-30">
-            <div className="hms-content-wrapper">
-              <div className="hms-left-side">
-                <span className="hms-tag">{t.hmsBadge || 'FOR HOTELS & RESORTS'}</span>
-                <h3 className="hms-title-override">
-                  {t.hmsTitle}
-                </h3>
-                <p className="hms-desc-compact">
-                  0% OTA commission
-                </p>
-
-                <Link href="/hms" className="hms-btn-compact">
-                  <span>{t.hmsCta}</span>
-                  <div className="hms-arrow-icon">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="7" y1="17" x2="17" y2="7" />
-                      <polyline points="7 7 17 7 17 17" />
-                    </svg>
-                  </div>
-                </Link>
-              </div>
-
-              <div className="card-asset-side">
-                <div className="asset-wrapper size-hms-compact">
-                  <div className="asset-glow green" />
-                  <Image 
-                    src="/assets/3d-hms-core.webp" 
-                    alt={t.hmsTitle} 
-                    className="asset-img"
-                    width={120}
-                    height={120}
-                  />
-                </div>
-              </div>
+          {/* 2. КАРТОЧКА 30% — USP HOOK */}
+          <div className="bento-card card-usp col-30">
+            <div className="usp-content">
+              <span className="usp-tag">{t.uspTag}</span>
+              <p className="usp-hook">
+                <span className="usp-line1">{t.uspLine1}</span>
+                <br />
+                <span className="usp-line2">{t.uspLine2}</span>
+              </p>
             </div>
           </div>
 

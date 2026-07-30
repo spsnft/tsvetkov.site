@@ -240,6 +240,18 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           border-radius: 50%;
           background: ${T.accent};
           box-shadow: 0 0 8px ${T.accent};
+          animation: pulseDot 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+          0%, 100% {
+            opacity: 0.4;
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.3);
+          }
         }
 
         .title {
@@ -255,7 +267,9 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           border: 1px solid ${T.border};
           border-radius: ${T.radius.xl};
           overflow: hidden;
-          background: ${T.bg0};
+          background: rgba(10, 10, 12, 0.5);
+          backdrop-filter: blur(8px) saturate(140%);
+          -webkit-backdrop-filter: blur(8px) saturate(140%);
           box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
         }
 

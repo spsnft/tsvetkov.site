@@ -97,7 +97,9 @@ export const Services = ({ dict }: ServicesProps) => {
         }
 
         .badge {
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
           padding: 0.35rem 0.85rem;
           border-radius: 20px;
           margin-bottom: 0.8rem;
@@ -109,6 +111,26 @@ export const Services = ({ dict }: ServicesProps) => {
           border: 1px solid rgba(0, 229, 153, 0.25);
           color: ${COLOR_EMERALD};
           backdrop-filter: blur(12px);
+        }
+
+        .badge-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: ${COLOR_EMERALD};
+          box-shadow: 0 0 8px ${COLOR_EMERALD};
+          animation: pulseDot 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseDot {
+          0%, 100% {
+            opacity: 0.4;
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.3);
+          }
         }
 
         .title {
@@ -175,8 +197,9 @@ export const Services = ({ dict }: ServicesProps) => {
         .card-custom {
           padding: clamp(1.25rem, 3vw, 2rem);
           border-radius: 20px;
-          background: rgba(12, 12, 16, 0.45);
-          backdrop-filter: blur(14px) saturate(140%);
+          background: rgba(12, 12, 16, 0.06);
+          backdrop-filter: blur(4px) saturate(140%);
+          -webkit-backdrop-filter: blur(4px) saturate(140%);
           border: 1px solid rgba(255, 255, 255, 0.08);
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
           transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -255,7 +278,10 @@ export const Services = ({ dict }: ServicesProps) => {
 
       <div className="container">
         <div className="header-box">
-          <span className="badge">{t.badge}</span>
+          <span className="badge">
+            <span className="badge-dot" />
+            {t.badge}
+          </span>
           <h2 className="title">{t.title}</h2>
         </div>
 

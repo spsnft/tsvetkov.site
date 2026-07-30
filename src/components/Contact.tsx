@@ -177,6 +177,24 @@ export const Contact = ({ dict }: ContactProps) => {
           justify-content: center;
           margin: 0 auto 1.5rem;
         }
+        .contact-badge-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: ${ACCENT};
+          box-shadow: 0 0 8px ${ACCENT};
+          animation: pulseDot 1.8s infinite ease-in-out;
+        }
+        @keyframes pulseDot {
+          0%, 100% {
+            opacity: 0.4;
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.3);
+          }
+        }
       `}</style>
 
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -188,7 +206,9 @@ export const Contact = ({ dict }: ContactProps) => {
           <div>
             <span
               style={{
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
                 padding: '0.35rem 0.85rem',
                 borderRadius: 20,
                 marginBottom: '1rem',
@@ -201,6 +221,7 @@ export const Contact = ({ dict }: ContactProps) => {
                 color: ACCENT,
               }}
             >
+              <span className="contact-badge-dot" />
               {t.badge}
             </span>
 
