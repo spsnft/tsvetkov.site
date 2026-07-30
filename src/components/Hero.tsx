@@ -12,7 +12,7 @@ export const Hero = ({ dict }: HeroProps) => {
   const t = dict?.hero ?? {
     badge: 'FOUNDER-LED AGENCY',
     titleLine1: 'More Revenue.',
-    titleLine2: 'Engineered.',
+    titleLine2: 'Engineered',
     sub1: 'We eliminate chaos in <strong>marketing &amp; digital systems</strong>',
     sub2: 'No fluff — just <strong>high-performance architectures</strong>',
     sub3: 'Track every dollar and <strong>automate sales flow</strong>',

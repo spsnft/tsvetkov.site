@@ -10,7 +10,6 @@ interface NavProps {
   lang: string;
   dict: {
     nav: {
-      badge?: string;
       expertise: string;
       services: string;
       work: string;
@@ -29,7 +28,6 @@ export const Nav = ({ lang, dict }: NavProps) => {
   const router = useRouter();
 
   const t = dict?.nav ?? {
-    badge: 'FOUNDER-LED AGENCY',
     expertise: 'Expertise',
     services: 'Services',
     work: 'Work',
@@ -77,43 +75,11 @@ export const Nav = ({ lang, dict }: NavProps) => {
         transition: 'background .3s, border-color .3s',
       }}
     >
-      {/* ЛОГОТИПИ И ШИЛЬДИК АГЕНТСТВА */}
+      {/* ЛОГОТИП */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <a href={`/${lang}`} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <Logo />
         </a>
-
-        {!isMobile && (
-          <span
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '0.62rem',
-              fontWeight: 700,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: T.accent,
-              background: 'rgba(0, 229, 153, 0.06)',
-              padding: '4px 10px',
-              borderRadius: '20px',
-              border: '1px solid rgba(0, 229, 153, 0.2)',
-              backdropFilter: 'blur(8px)',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            <span
-              style={{
-                width: 5,
-                height: 5,
-                borderRadius: '50%',
-                background: T.accent,
-                boxShadow: `0 0 6px ${T.accent}`,
-              }}
-            />
-            {t.badge ?? 'FOUNDER-LED AGENCY'}
-          </span>
-        )}
       </div>
 
       {/* ОСНОВНАЯ НАВИГАЦИЯ */}
