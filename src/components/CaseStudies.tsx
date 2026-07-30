@@ -113,7 +113,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         .cases-section {
           width: 100%;
           position: relative;
-          padding: 1.5rem 0 clamp(3rem, 6vw, 6rem) 0;
+          padding: 2rem 0 clamp(3rem, 6vw, 6rem) 0;
           background: transparent;
           z-index: 5;
         }
@@ -152,7 +152,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .terminal-container {
           width: 100%;
-          background: rgba(10, 12, 16, 0.8);
+          background: rgba(10, 12, 16, 0.85);
           border: 1px solid rgba(0, 229, 153, 0.2);
           border-radius: 20px;
           overflow: hidden;
@@ -224,13 +224,13 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           display: grid;
           grid-template-columns: 1fr;
           gap: 2rem;
-          padding: clamp(1.5rem, 3vw, 2.5rem);
+          padding: clamp(1.25rem, 3vw, 2.25rem);
           align-items: start;
         }
 
-        @media (min-width: 968px) {
+        @media (min-width: 1024px) {
           .console-body {
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1.25fr 0.75fr;
           }
         }
 
@@ -239,7 +239,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           background: rgba(15, 18, 24, 0.6);
           border: 1px solid rgba(0, 229, 153, 0.18);
           border-radius: 16px;
-          padding: 1.5rem;
+          padding: 1.25rem;
           display: flex;
           flex-direction: column;
           gap: 1rem;
@@ -248,14 +248,21 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         .metrics-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 0.85rem;
+          gap: 0.75rem;
+        }
+
+        /* On Tablets/Medium screens when dropped below, display 3 columns in a row */
+        @media (min-width: 640px) and (max-width: 1023px) {
+          .metrics-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
         }
 
         .metric-card {
-          background: rgba(6, 8, 12, 0.7);
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          background: rgba(6, 8, 12, 0.8);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 12px;
-          padding: 1rem 1.25rem;
+          padding: 1rem;
           display: flex;
           flex-direction: column;
           gap: 4px;
@@ -267,7 +274,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         }
 
         .metric-value {
-          font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+          font-size: clamp(1.6rem, 2.2vw, 2rem);
           font-weight: 800;
           color: #00E599;
           font-family: var(--font-mono, monospace);
@@ -276,34 +283,39 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         }
 
         .metric-label {
-          font-size: 0.78rem;
+          font-size: 0.75rem;
           color: rgba(255, 255, 255, 0.7);
           font-weight: 500;
           letter-spacing: 0.02em;
         }
 
-        /* CTA Button */
-        .btn-hero-cta {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          padding: 0.85rem 1.6rem;
-          border-radius: 12px;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          color: #06080C !important;
-          font-weight: 800;
-          font-size: 0.88rem;
-          text-decoration: none !important;
-          transition: all 0.25s ease;
-          box-shadow: 0 4px 20px rgba(0, 229, 153, 0.25);
+        /* CTA Wrapper & Fixed Button Styles */
+        .cta-wrapper {
           margin-top: 1.75rem;
-          width: fit-content;
+          display: flex;
+        }
+
+        .btn-hero-cta,
+        .btn-hero-cta:link,
+        .btn-hero-cta:visited {
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          gap: 10px !important;
+          padding: 0.85rem 1.6rem !important;
+          border-radius: 12px !important;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%) !important;
+          color: #06080C !important;
+          font-weight: 800 !important;
+          font-size: 0.88rem !important;
+          text-decoration: none !important;
+          transition: all 0.25s ease !important;
+          box-shadow: 0 4px 20px rgba(0, 229, 153, 0.25) !important;
         }
 
         .btn-hero-cta:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 28px rgba(0, 229, 153, 0.4);
+          transform: translateY(-2px) !important;
+          box-shadow: 0 6px 28px rgba(0, 229, 153, 0.4) !important;
         }
       `}</style>
 
@@ -445,9 +457,9 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                   </div>
                 </div>
 
-                {/* HMS SPECIFIC CTA */}
+                {/* HMS SPECIFIC CTA BUTTON */}
                 {activeCase.hasCta && (
-                  <div>
+                  <div className="cta-wrapper">
                     <Link href={getCtaLink(activeCase.ctaLink)} className="btn-hero-cta">
                       <span>{activeCase.ctaText}</span>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
