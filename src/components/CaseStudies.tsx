@@ -5,126 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { T } from '@/src/theme/tokens';
 
-interface CaseStudy {
-  id: string;
-  tabLabel: string;
-  category: string;
-  title: string;
-  challenge: string;
-  solution: string;
-  architecture: string[];
-  metrics: { value: string; label: string }[];
-  telemetryLogs: string[];
-  hasCta?: boolean;
-  ctaText?: string;
-  ctaLink?: string;
-}
-
-const caseData: CaseStudy[] = [
-  {
-    id: 'hms',
-    tabLabel: '01 // HOSPITALITY / HMS',
-    category: 'SPECIALIZED OFFER / HOSPITALITY',
-    title: 'Direct Booking Architecture & OTA Elimination',
-    challenge: 'High OTA commissions (18–25%), total loss of guest data ownership, and low direct channel conversion.',
-    solution: 'Turnkey HMS deployment: direct booking funnels, automated WhatsApp CRM sync, and zero-commission engine.',
-    architecture: [
-      'WhatsApp Instant Booking AI Engine',
-      'Direct Payment Gateway Integration',
-      'Zero-Leakage Guest Data Pipeline',
-      'Automated Retargeting & Upsell Triggers',
-    ],
-    metrics: [
-      { value: '+40%', label: 'Direct Bookings' },
-      { value: '0%', label: 'OTA Commission Leakage' },
-      { value: '100%', label: 'Guest Data Ownership' },
-    ],
-    telemetryLogs: [
-      '> OTA LEAKAGE: REDUCED TO 0%',
-      '> WHATSAPP CRM SYNC: ACTIVE (60s SLA)',
-      '> MARGIN BOOST: +22% NET PROFIT',
-    ],
-    hasCta: true,
-    ctaText: 'Explore HMS System',
-    ctaLink: '/hms',
-  },
-  {
-    id: 'ecomm',
-    tabLabel: '02 // E-COMMERCE & SCALING',
-    category: 'OMNICHANNEL E-COMM',
-    title: 'P&L Attribution & Performance Scaling Engine',
-    challenge: 'Ad spend scaled across 5 channels with zero net profit visibility, broken tracking, and ballooning CAC.',
-    solution: 'End-to-end data pipeline linking ad accounts directly to live net-margin P&L attribution dashboards.',
-    architecture: [
-      'Real-Time Blended ROAS Attribution',
-      'Automated LTV Cohort Analytics',
-      'Dynamic Ad Budget Re-allocation Rules',
-      'Server-Side Conversions API (CAPI)',
-    ],
-    metrics: [
-      { value: '5.2x', label: 'Blended ROAS' },
-      { value: '+$520k', label: 'Net Profit Growth' },
-      { value: '100%', label: 'P&L Visibility' },
-    ],
-    telemetryLogs: [
-      '> ATTRIBUTION PIPELINE: SYNCHRONIZED',
-      '> DATA ACCURACY: 99.8%',
-      '> CAC OPTIMIZATION: AUTOMATED',
-    ],
-    hasCta: false,
-  },
-  {
-    id: 'b2b',
-    tabLabel: '03 // HIGH-TICKET B2B',
-    category: 'ENTERPRISE B2B',
-    title: 'Lead Velocity & Automated GTM Architecture',
-    challenge: 'High CPL, slow lead response time (>4 hours), and low sales conversion from manual CRM lead handoffs.',
-    solution: 'Rebuilt acquisition funnels coupled with instant 60-second automated CRM lead routing and AI scoring.',
-    architecture: [
-      'Instant Lead Speed Routing (<60s)',
-      'Enriched B2B Prospect Profiling',
-      'Automated Sales Pipeline Triggers',
-      'Executive P&L Forecast Dashboards',
-    ],
-    metrics: [
-      { value: '+340%', label: 'Qual. Lead Volume' },
-      { value: '-42%', label: 'CAC Reduction' },
-      { value: '$1.4M', label: 'Pipeline ARR' },
-    ],
-    telemetryLogs: [
-      '> LEAD VELOCITY: <60s RESPONSE TIME',
-      '> CRM ROUTING: AUTOMATED',
-      '> PIPELINE HEALTH: OPTIMIZED',
-    ],
-    hasCta: false,
-  },
-  {
-    id: 'realestate',
-    tabLabel: '04 // REAL ESTATE DEVELOPMENT',
-    category: 'REAL ESTATE & PROPERTY',
-    title: 'High-Intent Investor Acquisition System',
-    challenge: 'Untargeted lead spam, high cost per qualified buyer, and zero visibility on broker sales velocity.',
-    solution: 'Targeted investor acquisition funnels, automated financial qualification surveys, and broker SLA tracking.',
-    architecture: [
-      'Financial Qualification Micro-Funnels',
-      'Broker SLA & Pipeline Dashboard',
-      'WhatsApp VIP Concierge Automation',
-      'Multi-Currency ROAS Analytics',
-    ],
-    metrics: [
-      { value: '3.8x', label: 'Qual. Investor Leads' },
-      { value: '-35%', label: 'Cost Per Booking' },
-      { value: '12m', label: 'Avg Broker Response' },
-    ],
-    telemetryLogs: [
-      '> QUALIFICATION RATE: 84%',
-      '> BROKER SLA: TRACKED LIVE',
-      '> INVESTOR FUNNEL: HIGH-INTENT',
-    ],
-    hasCta: false,
-  },
-];
-
 interface CaseStudiesProps {
   dict?: any;
   lang?: string;
@@ -132,6 +12,115 @@ interface CaseStudiesProps {
 
 export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
   const [activeIdx, setActiveIdx] = useState(0);
+
+  const t = dict?.cases || {};
+
+  // Формируем данные кейсов динамически из словаря локализации
+  const caseData = [
+    {
+      id: 'hms',
+      tabLabel: t.tabs?.hms || '01 // HOSPITALITY / HMS',
+      category: t.hmsCategory || 'SPECIALIZED OFFER / HOSPITALITY',
+      title: t.items?.hms?.title || 'Direct Booking Architecture & OTA Elimination',
+      challenge: t.items?.hms?.challenge || 'High OTA commissions (18–25%), total loss of guest data ownership, and low direct channel conversion.',
+      solution: t.items?.hms?.solution || 'Turnkey HMS deployment: direct booking funnels, automated WhatsApp CRM sync, and zero-commission engine.',
+      architecture: t.items?.hms?.architecture || [
+        'WhatsApp Instant Booking AI Engine',
+        'Direct Payment Gateway Integration',
+        'Zero-Leakage Guest Data Pipeline',
+        'Automated Retargeting & Upsell Triggers',
+      ],
+      metrics: t.items?.hms?.metrics || [
+        { value: '+40%', label: 'Direct Bookings' },
+        { value: '0%', label: 'OTA Commission Leakage' },
+        { value: '100%', label: 'Guest Data Ownership' },
+      ],
+      telemetryLogs: t.items?.hms?.telemetryLogs || [
+        '> OTA LEAKAGE: REDUCED TO 0%',
+        '> WHATSAPP CRM SYNC: ACTIVE (60s SLA)',
+        '> MARGIN BOOST: +22% NET PROFIT',
+      ],
+      hasCta: true,
+      ctaText: t.hmsCta || 'Explore HMS System',
+      ctaLink: '/hms',
+    },
+    {
+      id: 'ecomm',
+      tabLabel: t.tabs?.ecomm || '02 // E-COMMERCE & SCALING',
+      category: t.items?.ecomm?.category || 'OMNICHANNEL E-COMM',
+      title: t.items?.ecomm?.title || 'P&L Attribution & Performance Scaling Engine',
+      challenge: t.items?.ecomm?.challenge || 'Ad spend scaled across 5 channels with zero net profit visibility, broken tracking, and ballooning CAC.',
+      solution: t.items?.ecomm?.solution || 'End-to-end data pipeline linking ad accounts directly to live net-margin P&L attribution dashboards.',
+      architecture: t.items?.ecomm?.architecture || [
+        'Real-Time Blended ROAS Attribution',
+        'Automated LTV Cohort Analytics',
+        'Dynamic Ad Budget Re-allocation Rules',
+        'Server-Side Conversions API (CAPI)',
+      ],
+      metrics: t.items?.ecomm?.metrics || [
+        { value: '5.2x', label: 'Blended ROAS' },
+        { value: '+$520k', label: 'Net Profit Growth' },
+        { value: '100%', label: 'P&L Visibility' },
+      ],
+      telemetryLogs: t.items?.ecomm?.telemetryLogs || [
+        '> ATTRIBUTION PIPELINE: SYNCHRONIZED',
+        '> DATA ACCURACY: 99.8%',
+        '> CAC OPTIMIZATION: AUTOMATED',
+      ],
+      hasCta: false,
+    },
+    {
+      id: 'b2b',
+      tabLabel: t.tabs?.b2b || '03 // HIGH-TICKET B2B',
+      category: t.items?.b2b?.category || 'ENTERPRISE B2B',
+      title: t.items?.b2b?.title || 'Lead Velocity & Automated GTM Architecture',
+      challenge: t.items?.b2b?.challenge || 'High CPL, slow lead response time (>4 hours), and low sales conversion from manual CRM lead handoffs.',
+      solution: t.items?.b2b?.solution || 'Rebuilt acquisition funnels coupled with instant 60-second automated CRM lead routing and AI scoring.',
+      architecture: t.items?.b2b?.architecture || [
+        'Instant Lead Speed Routing (<60s)',
+        'Enriched B2B Prospect Profiling',
+        'Automated Sales Pipeline Triggers',
+        'Executive P&L Forecast Dashboards',
+      ],
+      metrics: t.items?.b2b?.metrics || [
+        { value: '+340%', label: 'Qual. Lead Volume' },
+        { value: '-42%', label: 'CAC Reduction' },
+        { value: '$1.4M', label: 'Pipeline ARR' },
+      ],
+      telemetryLogs: t.items?.b2b?.telemetryLogs || [
+        '> LEAD VELOCITY: <60s RESPONSE TIME',
+        '> CRM ROUTING: AUTOMATED',
+        '> PIPELINE HEALTH: OPTIMIZED',
+      ],
+      hasCta: false,
+    },
+    {
+      id: 'realestate',
+      tabLabel: t.tabs?.realestate || '04 // REAL ESTATE DEVELOPMENT',
+      category: t.items?.realestate?.category || 'REAL ESTATE & PROPERTY',
+      title: t.items?.realestate?.title || 'High-Intent Investor Acquisition System',
+      challenge: t.items?.realestate?.challenge || 'Untargeted lead spam, high cost per qualified buyer, and zero visibility on broker sales velocity.',
+      solution: t.items?.realestate?.solution || 'Targeted investor acquisition funnels, automated financial qualification surveys, and broker SLA tracking.',
+      architecture: t.items?.realestate?.architecture || [
+        'Financial Qualification Micro-Funnels',
+        'Broker SLA & Pipeline Dashboard',
+        'WhatsApp VIP Concierge Automation',
+        'Multi-Currency ROAS Analytics',
+      ],
+      metrics: t.items?.realestate?.metrics || [
+        { value: '3.8x', label: 'Qual. Investor Leads' },
+        { value: '-35%', label: 'Cost Per Booking' },
+        { value: '12m', label: 'Avg Broker Response' },
+      ],
+      telemetryLogs: t.items?.realestate?.telemetryLogs || [
+        '> QUALIFICATION RATE: 84%',
+        '> BROKER SLA: TRACKED LIVE',
+        '> INVESTOR FUNNEL: HIGH-INTENT',
+      ],
+      hasCta: false,
+    },
+  ];
+
   const activeCase = caseData[activeIdx];
 
   const getCtaLink = (path?: string) => {
@@ -182,7 +171,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           margin: 0;
         }
 
-        /* COMMAND CENTER TERMINAL CONTAINER */
         .terminal-container {
           width: 100%;
           background: rgba(10, 12, 16, 0.75);
@@ -193,7 +181,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 229, 153, 0.05);
         }
 
-        /* TERMINAL TOP HEADER BAR */
         .terminal-bar {
           background: rgba(15, 18, 24, 0.9);
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -213,7 +200,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           margin-right: 8px;
         }
 
-        /* TABS CONTROL BAR */
         .tabs-bar {
           display: flex;
           gap: 0.5rem;
@@ -255,7 +241,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           box-shadow: 0 0 15px rgba(0, 229, 153, 0.1);
         }
 
-        /* TERMINAL BODY GRID */
         .console-body {
           display: grid;
           grid-template-columns: 1fr;
@@ -269,7 +254,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           }
         }
 
-        /* HERO CTA BUTTON (FOR HMS ONLY) */
         .btn-hero-cta {
           display: inline-flex;
           align-items: center;
@@ -311,8 +295,8 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           viewport={{ once: true }}
           className="header-box"
         >
-          <span className="badge">PROOF OF EXECUTION & TELEMETRY</span>
-          <h2 className="title">Proven Growth Architectures</h2>
+          <span className="badge">{t.badge || 'CASE STUDIES'}</span>
+          <h2 className="title">{t.title || 'What Can We Show'}</h2>
         </motion.div>
 
         {/* TELEMETRY COMMAND CENTER MODULE */}
@@ -320,10 +304,10 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           
           {/* TOP BAR */}
           <div className="terminal-bar">
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', border: 'none', alignItems: 'center' }}>
               <span className="status-dot" />
               <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'rgba(255, 255, 255, 0.7)', fontFamily: 'var(--font-mono, monospace)', letterSpacing: '0.08em' }}>
-                TELEMETRY ENGINE // LIVE SYSTEM DATA
+                {t.terminalBarTitle || 'TELEMETRY ENGINE // LIVE SYSTEM DATA'}
               </span>
             </div>
             <span style={{ fontSize: '0.65rem', color: T.muted, fontFamily: 'var(--font-mono, monospace)' }}>
@@ -401,7 +385,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                       }}
                     >
                       <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#F87171', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '2px' }}>
-                        THE BOTTLENECK //
+                        {t.bottleneckLabel || 'THE BOTTLENECK //'}
                       </span>
                       <p style={{ margin: 0, fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.5 }}>
                         {activeCase.challenge}
@@ -417,7 +401,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                       }}
                     >
                       <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#00E599', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '2px' }}>
-                        ENGINEERED FIX //
+                        {t.solutionLabel || 'ENGINEERED FIX //'}
                       </span>
                       <p style={{ margin: 0, fontSize: '0.85rem', color: '#ffffff', fontWeight: 500, lineHeight: 1.5 }}>
                         {activeCase.solution}
@@ -428,10 +412,10 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                   {/* Deployed Architecture List */}
                   <div>
                     <div style={{ fontSize: '0.68rem', fontWeight: 700, color: T.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.65rem' }}>
-                      DEPLOYED INFRASTRUCTURE //
+                      {t.infraLabel || 'DEPLOYED INFRASTRUCTURE //'}
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem' }}>
-                      {activeCase.architecture.map((arch, ai) => (
+                      {activeCase.architecture.map((arch: string, ai: number) => (
                         <div key={ai} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.85)' }}>
                           <span style={{ color: '#00E599', fontWeight: 800 }}>✓</span>
                           <span>{arch}</span>
@@ -470,12 +454,12 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                 {/* Metrics Grid */}
                 <div>
                   <div style={{ fontSize: '0.65rem', fontWeight: 700, color: T.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-                    <span>SYSTEM IMPACT METRICS</span>
+                    <span>{t.metricsTitle || 'SYSTEM IMPACT METRICS'}</span>
                     <span style={{ color: '#00E599' }}>[ ACTIVE ]</span>
                   </div>
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
-                    {activeCase.metrics.map((m, mi) => (
+                    {activeCase.metrics.map((m: { value: string; label: string }, mi: number) => (
                       <div
                         key={mi}
                         style={{
@@ -508,7 +492,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                 {/* Growth Sparkline & Telemetry Terminal Logs */}
                 <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '1rem' }}>
                   <div style={{ fontSize: '0.62rem', fontWeight: 700, color: T.muted, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>
-                    TRAJECTORY & TELEMETRY LOGS //
+                    {t.logsLabel || 'TRAJECTORY & TELEMETRY LOGS //'}
                   </div>
 
                   {/* Sparkline Visual */}
@@ -536,7 +520,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
                   {/* Terminal Text Logs */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontFamily: 'var(--font-mono, monospace)', fontSize: '0.68rem', color: 'rgba(0, 229, 153, 0.85)' }}>
-                    {activeCase.telemetryLogs.map((log, li) => (
+                    {activeCase.telemetryLogs.map((log: string, li: number) => (
                       <div key={li}>{log}</div>
                     ))}
                   </div>
