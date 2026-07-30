@@ -194,8 +194,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .size-hms-compact {
-          width: 110px;
-          height: 110px;
+          width: 98px;
+          height: 98px;
         }
 
         .asset-glow {
@@ -239,7 +239,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* HMS CARD (30%) - HIGH CONVERTING MINIMALIST LAYOUT */
+        /* HMS CARD (30%) - OPTIMIZED ACCENT LAYOUT */
         .card-hms {
           background: rgba(0, 229, 153, 0.03);
           border: 1px solid rgba(0, 229, 153, 0.22);
@@ -277,18 +277,18 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           min-width: 0;
         }
 
-        /* Плотный изумрудный бейдж для максимального внимания */
+        /* Информационный аккуратный тег */
         .hms-tag {
           display: inline-block;
           font-size: 0.62rem;
           font-weight: 800;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: #0A0A0C;
-          background: #00E599;
-          padding: 4px 9px;
+          color: #00E599;
+          background: rgba(0, 229, 153, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.25);
+          padding: 3px 8px;
           border-radius: 6px;
-          box-shadow: 0 0 12px rgba(0, 229, 153, 0.35);
         }
 
         .hms-title-override {
@@ -301,44 +301,44 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .hms-desc-compact {
-          font-size: 0.8rem;
+          font-size: 0.78rem;
           font-weight: 500;
-          line-height: 1.35;
+          line-height: 1.3;
           color: rgba(255, 255, 255, 0.75);
           margin: 0;
+          white-space: nowrap;
         }
 
+        /* Главная кнопка-магнит в градиенте */
         :global(.hms-btn-compact),
         :global(.hms-btn-compact:visited) {
           display: inline-flex;
           align-items: center;
-          gap: 0.4rem;
-          padding: 0.45rem 0.85rem;
-          border-radius: 8px;
-          background: rgba(0, 229, 153, 0.12);
-          border: 1px solid rgba(0, 229, 153, 0.4);
-          color: #ffffff !important;
+          gap: 0.45rem;
+          padding: 0.5rem 0.95rem;
+          border-radius: 9px;
+          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
+          color: #0A0A0C !important;
           font-size: 0.78rem;
-          font-weight: 700;
+          font-weight: 800;
           text-decoration: none !important;
-          backdrop-filter: blur(8px);
+          box-shadow: 0 4px 15px rgba(0, 229, 153, 0.25);
           transition: all 0.25s ease;
           white-space: nowrap;
           flex-shrink: 0;
         }
 
         :global(.hms-btn-compact:hover) {
-          background: rgba(0, 229, 153, 0.25);
-          border-color: rgba(0, 229, 153, 0.75);
-          box-shadow: 0 0 16px rgba(0, 229, 153, 0.3);
-          color: #ffffff !important;
+          transform: translateY(-1px);
+          box-shadow: 0 6px 20px rgba(0, 229, 153, 0.45);
+          color: #0A0A0C !important;
         }
 
         .hms-arrow-icon {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #00E599;
+          color: #0A0A0C;
           transition: transform 0.25s ease;
         }
 
@@ -394,7 +394,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     {t.hmsTitle}
                   </h3>
                   <p className="hms-desc-compact" style={{ marginTop: '0.35rem' }}>
-                    {t.hmsDesc}
+                    0% OTA commission
                   </p>
                 </div>
 
@@ -418,8 +418,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-hms-core.webp" 
                     alt={t.hmsTitle} 
                     className="asset-img"
-                    width={110}
-                    height={110}
+                    width={98}
+                    height={98}
                   />
                 </div>
               </div>
