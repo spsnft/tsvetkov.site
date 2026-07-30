@@ -1,13 +1,46 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Building2, ShoppingCart, Briefcase, Home, AlertTriangle, Zap } from 'lucide-react';
 import Link from 'next/link';
 
 interface CaseStudiesProps {
   dict?: any;
   lang?: string;
 }
+
+// Inline Clean SVG Icons (Zero external dependency)
+const Icons = {
+  Building2: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+      <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>
+    </svg>
+  ),
+  ShoppingCart: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+      <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+    </svg>
+  ),
+  Briefcase: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>
+    </svg>
+  ),
+  Home: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    </svg>
+  ),
+  AlertTriangle: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/>
+    </svg>
+  ),
+  Zap: () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>
+  ),
+};
 
 const STATUS_TONES: Record<string, string> = {
   amber: 'border-amber-700 text-amber-300',
@@ -30,7 +63,7 @@ function Panel({
   items,
 }: {
   tone: 'red' | 'emerald';
-  icon: any;
+  icon: React.ComponentType;
   num: string;
   label: string;
   items: string[];
@@ -41,7 +74,7 @@ function Panel({
   return (
     <div className={`border border-neutral-800 border-l-2 ${border} rounded-lg p-5 bg-neutral-950`}>
       <div className={`flex items-center gap-2 text-xs font-mono tracking-widest mb-3 ${text}`}>
-        <Icon className="w-3.5 h-3.5" />
+        <Icon />
         <span>{num} // {label}</span>
       </div>
       <ul className="space-y-2">
@@ -66,7 +99,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
       id: 'hms',
       num: '01',
       label: t.tabs?.hms || 'HOSPITALITY / HMS',
-      icon: Building2,
+      icon: Icons.Building2,
       offerTag: t.hmsCategory || 'SPECIALIZED OFFER / HOSPITALITY',
       status: 'TARGET MODEL · PRE-LAUNCH',
       statusTone: 'amber',
@@ -101,7 +134,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
       id: 'ecom',
       num: '02',
       label: t.tabs?.ecomm || 'E-COMMERCE & SCALING',
-      icon: ShoppingCart,
+      icon: Icons.ShoppingCart,
       offerTag: 'CASE STUDY / E-COMMERCE',
       status: 'PLACEHOLDER',
       statusTone: 'neutral',
@@ -122,7 +155,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
       id: 'b2b',
       num: '03',
       label: t.tabs?.b2b || 'HIGH-TICKET B2B',
-      icon: Briefcase,
+      icon: Icons.Briefcase,
       offerTag: 'CASE STUDY / B2B',
       status: 'PLACEHOLDER',
       statusTone: 'neutral',
@@ -143,7 +176,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
       id: 'realestate',
       num: '04',
       label: t.tabs?.realestate || 'REAL ESTATE DEVELOPMENT',
-      icon: Home,
+      icon: Icons.Home,
       offerTag: 'CASE STUDY / REAL ESTATE',
       status: 'PLACEHOLDER',
       statusTone: 'neutral',
@@ -206,7 +239,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                       : 'border-transparent text-neutral-500 hover:text-neutral-300 hover:bg-neutral-900'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5" />
+                  <Icon />
                   <span>{c.num} // {c.label}</span>
                 </button>
               );
@@ -225,14 +258,14 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               <Panel
                 tone="red"
-                icon={AlertTriangle}
+                icon={Icons.AlertTriangle}
                 num="01"
                 label="THE BOTTLENECK (PROBLEM)"
                 items={active.problem}
               />
               <Panel
                 tone="emerald"
-                icon={Zap}
+                icon={Icons.Zap}
                 num="02"
                 label="ARCHITECTURE FIX (EXECUTION)"
                 items={active.execution}
