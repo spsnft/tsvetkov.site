@@ -85,16 +85,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           line-height: 1.15;
           letter-spacing: -0.03em;
           color: #ffffff;
-          margin: 0 0 0.5rem 0;
-          text-wrap: balance;
-        }
-
-        .subtitle {
-          font-size: 0.95rem;
-          color: rgba(255, 255, 255, 0.6);
           margin: 0;
-          max-width: 600px;
-          line-height: 1.45;
+          text-wrap: balance;
         }
 
         /* BENTO GRID */
@@ -193,7 +185,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           height: 145px;
         }
 
-        /* Увеличен размер 3D-ассета HMS до 120px */
         .size-hms-compact {
           width: 120px;
           height: 120px;
@@ -230,7 +221,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           font-weight: 700;
           color: #ffffff;
           line-height: 1.25;
-          margin: 0 0 6px 0;
+          margin: 0 0 8px 0; /* Отступ 8px согласно договоренности */
         }
 
         .card-desc {
@@ -269,7 +260,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           }
         }
 
-        /* Скучкованная левая колонка без вытягивания по высоте */
         .hms-left-side {
           display: flex;
           flex-direction: column;
@@ -280,11 +270,12 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           min-width: 0;
         }
 
+        /* Облегченный тег без лишней жирности на 1 строчку */
         .hms-tag {
           display: inline-block;
           font-size: 0.62rem;
-          font-weight: 800;
-          letter-spacing: 0.1em;
+          font-weight: 600;
+          letter-spacing: 0.05em;
           text-transform: uppercase;
           color: #00E599;
           background: rgba(0, 229, 153, 0.08);
@@ -292,6 +283,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           padding: 3px 8px;
           border-radius: 6px;
           width: fit-content;
+          white-space: nowrap;
         }
 
         .hms-title-override {
@@ -312,7 +304,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           white-space: nowrap;
         }
 
-        /* Акцентная кнопка с точным фирменным отступом */
         :global(.hms-btn-compact),
         :global(.hms-btn-compact:visited) {
           display: inline-flex;
@@ -355,8 +346,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
       <div className="container">
         <div className="header-box">
           <span className="badge">{t.badge}</span>
-          <h2 className="title">{t.title}</h2>
-          {t.subtitle && <p className="subtitle">{t.subtitle}</p>}
+          <h2 className="title">{t.title || 'How We Help You Scale'}</h2>
         </div>
 
         <div className="bento-grid">
@@ -393,7 +383,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           <div className="bento-card card-hms col-30">
             <div className="hms-content-wrapper">
               <div className="hms-left-side">
-                <span className="hms-tag">{t.hmsBadge}</span>
+                <span className="hms-tag">{t.hmsBadge || 'FOR HOTELS & RESORTS'}</span>
                 <h3 className="hms-title-override">
                   {t.hmsTitle}
                 </h3>
