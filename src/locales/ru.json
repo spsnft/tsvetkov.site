@@ -115,18 +115,24 @@
     "metricsTitle": "SYSTEM IMPACT METRICS",
     "hmsCta": "Explore HMS System",
     "tabs": {
-      "hms": "01 // HOSPITALITY / HMS",
+      "hms": "01 // HOTELS & SHORT-TERM RENTALS",
       "ecomm": "02 // E-COMMERCE & SCALING",
       "b2b": "03 // HIGH-TICKET B2B",
       "realestate": "04 // REAL ESTATE DEVELOPMENT"
     },
     "items": {
       "hms": {
-        "category": "SPECIALIZED OFFER / HOSPITALITY",
-        "status": "TARGET MODEL · PRE-LAUNCH",
         "title": "Direct Booking Architecture & OTA Elimination",
-        "challenge": "High OTA commissions (18–25%), total loss of guest data ownership, and low direct channel conversion.",
-        "solution": "Turnkey HMS deployment: direct booking funnels, automated WhatsApp CRM sync, and zero-commission engine.",
+        "challenge": [
+          "OTA commissions eating 18–25% of every booking",
+          "Zero ownership of guest data — OTAs own the relationship",
+          "Low direct-channel conversion, most bookings routed through commissions"
+        ],
+        "solution": [
+          "Turnkey direct booking funnel, live in weeks",
+          "Automated WhatsApp CRM sync for every guest",
+          "Zero-commission booking engine, built to scale"
+        ],
         "architecture": [
           "WhatsApp Instant Booking AI Engine",
           "Direct Payment Gateway Integration",
@@ -149,11 +155,17 @@
         ]
       },
       "ecomm": {
-        "category": "OMNICHANNEL E-COMM",
-        "status": "CASE STUDY",
         "title": "P&L Attribution & Performance Scaling Engine",
-        "challenge": "Ad spend scaled across 5 channels with zero net profit visibility, broken tracking, and ballooning CAC.",
-        "solution": "End-to-end data pipeline linking ad accounts directly to live net-margin P&L attribution dashboards.",
+        "challenge": [
+          "Ad spend scaled across 5+ channels with zero net-profit visibility",
+          "Broken tracking — blended ROAS is a guess, not a number",
+          "CAC climbing faster than revenue"
+        ],
+        "solution": [
+          "End-to-end pipeline linking ad accounts to real P&L",
+          "Live net-margin attribution dashboards, not last-click guesses",
+          "Budget re-allocation rules that follow actual profit"
+        ],
         "architecture": [
           "Real-Time Blended ROAS Attribution",
           "Automated LTV Cohort Analytics",
@@ -176,11 +188,17 @@
         ]
       },
       "b2b": {
-        "category": "ENTERPRISE B2B",
-        "status": "CASE STUDY",
         "title": "Lead Velocity & Automated GTM Architecture",
-        "challenge": "High CPL, slow lead response time (>4 hours), and low sales conversion from manual CRM lead handoffs.",
-        "solution": "Rebuilt acquisition funnels coupled with instant 60-second automated CRM lead routing and AI scoring.",
+        "challenge": [
+          "High cost per lead, budget burning faster than pipeline grows",
+          "Leads sit untouched for 4+ hours before first contact",
+          "Manual CRM handoffs killing conversion rate"
+        ],
+        "solution": [
+          "Rebuilt acquisition funnels tuned for lead quality",
+          "Instant CRM routing — leads contacted within 60 seconds",
+          "AI scoring, so reps chase the deals worth closing"
+        ],
         "architecture": [
           "Instant Lead Speed Routing (<60s)",
           "Enriched B2B Prospect Profiling",
@@ -203,11 +221,17 @@
         ]
       },
       "realestate": {
-        "category": "REAL ESTATE & PROPERTY",
-        "status": "CASE STUDY",
         "title": "High-Intent Investor Acquisition System",
-        "challenge": "Untargeted lead spam, high cost per qualified buyer, and zero visibility on broker sales velocity.",
-        "solution": "Targeted investor acquisition funnels, automated financial qualification surveys, and broker SLA tracking.",
+        "challenge": [
+          "Untargeted lead spam, low buyer intent",
+          "High cost per qualified investor",
+          "Zero visibility into broker response times"
+        ],
+        "solution": [
+          "Targeted investor acquisition funnels by budget & intent",
+          "Automated financial qualification before a broker gets involved",
+          "Broker SLA tracking, so nothing goes cold"
+        ],
         "architecture": [
           "Financial Qualification Micro-Funnels",
           "Broker SLA & Pipeline Dashboard",

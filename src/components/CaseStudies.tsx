@@ -55,11 +55,11 @@ const Icons = {
 
 const CASE_ORDER = ['hms', 'ecomm', 'b2b', 'realestate'] as const;
 
-const CASE_META: Record<string, { tone: 'amber' | 'emerald'; hasCta?: boolean; ctaLink?: string }> = {
-  hms: { tone: 'amber', hasCta: true, ctaLink: '/hms' },
-  ecomm: { tone: 'emerald' },
-  b2b: { tone: 'emerald' },
-  realestate: { tone: 'emerald' },
+const CASE_META: Record<string, { hasCta?: boolean; ctaLink?: string }> = {
+  hms: { hasCta: true, ctaLink: '/hms' },
+  ecomm: {},
+  b2b: {},
+  realestate: {},
 };
 
 function TabIcon({ id }: { id: string }) {
@@ -77,46 +77,18 @@ function TabIcon({ id }: { id: string }) {
   }
 }
 
-function StatusBadge({ tone, text }: { tone: 'amber' | 'emerald'; text: string }) {
-  return (
-    <span className={`status-badge status-badge--${tone}`}>
-      [{text}]
-      <style jsx>{`
-        .status-badge {
-          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-          letter-spacing: 0.08em;
-          font-size: 0.68rem;
-          font-weight: 700;
-          border: 1px solid;
-          border-radius: ${T.radius.sm};
-          padding: 4px 9px;
-          white-space: nowrap;
-        }
-        .status-badge--amber {
-          border-color: rgba(245, 158, 11, 0.4);
-          color: #f5b342;
-        }
-        .status-badge--emerald {
-          border-color: ${T.accent25};
-          color: ${T.accent};
-        }
-      `}</style>
-    </span>
-  );
-}
-
 function Panel({
   tone,
   icon: Icon,
   num,
   label,
-  text,
+  items,
 }: {
   tone: 'red' | 'emerald';
   icon: React.ComponentType;
   num: string;
   label: string;
-  text: string;
+  items: string[];
 }) {
   return (
     <div className={`panel panel--${tone}`}>
@@ -124,7 +96,11 @@ function Panel({
         <Icon />
         <span>{`${num} // ${label}`}</span>
       </div>
-      <p className="panel-text">{text}</p>
+      <ul className="panel-list">
+        {items.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
       <style jsx>{`
         .panel {
           border: 1px solid ${T.border};
@@ -156,11 +132,35 @@ function Panel({
         .panel--emerald .panel-label {
           color: ${T.accent};
         }
-        .panel-text {
-          font-size: 0.9rem;
-          line-height: 1.6;
-          color: ${T.body};
+        .panel-list {
           margin: 0;
+          padding: 0;
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 0.6rem;
+        }
+        .panel-list li {
+          position: relative;
+          padding-left: 1.1rem;
+          font-size: 0.9rem;
+          line-height: 1.5;
+          color: ${T.body};
+        }
+        .panel-list li::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0.5em;
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+        }
+        .panel--red .panel-list li::before {
+          background: ${T.red};
+        }
+        .panel--emerald .panel-list li::before {
+          background: ${T.accent};
         }
       `}</style>
     </div>
@@ -251,10 +251,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           margin: 0;
         }
 
-        .title-dot {
-          color: ${T.accent};
-        }
-
         .terminal {
           border: 1px solid ${T.border};
           border-radius: ${T.radius.xl};
@@ -305,25 +301,23 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .content-header {
           display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 0.75rem;
-          margin-bottom: 1rem;
+          justify-content: flex-end;
+          margin-bottom: 1.25rem;
         }
 
-        .offer-tag {
-          display: inline-block;
-          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          font-size: 0.68rem;
-          font-weight: 700;
-          color: ${T.accent};
-          border: 1px solid ${T.accent25};
-          background: ${T.accent10};
-          border-radius: 999px;
-          padding: 5px 12px;
+        .content-header :global(.btn-primary) {
+          height: 44px;
+          padding: 0 1.5rem;
+          font-size: 0.85rem;
+          gap: 8px;
+        }
+
+        .content-header :global(.btn-primary:hover) .btn-arrow {
+          transform: translateX(4px);
+        }
+
+        .btn-arrow {
+          transition: transform 0.2s ease;
         }
 
         .case-title {
@@ -350,13 +344,14 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         .split-grid {
           display: grid;
           grid-template-columns: 1fr;
+          align-items: start;
           gap: 1rem;
           margin-top: 1rem;
         }
 
         @media (min-width: 768px) {
           .split-grid {
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 3fr 2fr;
           }
         }
 
@@ -404,7 +399,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .metrics-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
           gap: 0.75rem;
         }
 
@@ -432,28 +427,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           line-height: 1.35;
         }
 
-        .cta-row {
-          margin-top: 1.5rem;
-          padding-top: 1.25rem;
-          border-top: 1px solid ${T.border};
-          display: flex;
-          justify-content: flex-end;
-        }
-
-        .cta-row :global(.btn-primary) {
-          height: 44px;
-          padding: 0 1.5rem;
-          font-size: 0.85rem;
-          gap: 8px;
-        }
-
-        .cta-row :global(.btn-primary:hover) .btn-arrow {
-          transform: translateX(4px);
-        }
-
-        .btn-arrow {
-          transition: transform 0.2s ease;
-        }
       `}</style>
 
       <div className="container">
@@ -462,10 +435,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
             <span className="badge-dot" />
             {t.badge}
           </span>
-          <h2 className="title">
-            {t.title}
-            <span className="title-dot">.</span>
-          </h2>
+          <h2 className="title">{t.title}</h2>
         </div>
 
         <div className="terminal">
@@ -486,15 +456,32 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           </div>
 
           <div className="content">
-            <div className="content-header">
-              <span className="offer-tag">{active.category}</span>
-              <StatusBadge tone={active.tone} text={active.status} />
-            </div>
+            {active.hasCta && active.ctaLink && (
+              <div className="content-header">
+                <Link href={getCtaLink(active.ctaLink)} className="btn-primary">
+                  <span>{t.hmsCta}</span>
+                  <svg
+                    className="btn-arrow"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </Link>
+              </div>
+            )}
             <h3 className="case-title">{active.title}</h3>
 
             <div className="panels-grid">
-              <Panel tone="red" icon={Icons.AlertTriangle} num="01" label={t.bottleneckLabel} text={active.challenge} />
-              <Panel tone="emerald" icon={Icons.Zap} num="02" label={t.solutionLabel} text={active.solution} />
+              <Panel tone="red" icon={Icons.AlertTriangle} num="01" label={t.bottleneckLabel} items={active.challenge} />
+              <Panel tone="emerald" icon={Icons.Zap} num="02" label={t.solutionLabel} items={active.solution} />
             </div>
 
             <div className="split-grid">
@@ -524,28 +511,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                 </div>
               </div>
             </div>
-
-            {active.hasCta && active.ctaLink && (
-              <div className="cta-row">
-                <Link href={getCtaLink(active.ctaLink)} className="btn-primary">
-                  <span>{t.hmsCta}</span>
-                  <svg
-                    className="btn-arrow"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </Link>
-              </div>
-            )}
           </div>
         </div>
       </div>
