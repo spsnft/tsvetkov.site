@@ -18,7 +18,7 @@
   },
   "bottleneck": {
     "badge": "SCALING BARRIERS",
-    "title": "Why your business isn't growing",
+    "title": "Where Systems Break",
     "impactLabel": "Impact:",
     "items": [
       {
@@ -72,7 +72,7 @@
   },
 "services": {
   "badge": "EXECUTION ALGORITHM",
-  "title": "Engineering & Scaling Systems",
+  "title": "How Systems Get Built",
   "deliverablesLabel": "Deliverables //",
   "outcomeLabel": "OUTCOME //",
   "step1Badge": "PHASE 01 / 1-2 WEEKS",
@@ -93,7 +93,7 @@
 },
   "cases": {
   "badge": "CASE STUDIES",
-  "title": "Proven Growth Architectures",
+  "title": "What Can We Show",
   "hmsBadge": "SPECIALIZED OFFER",
   "hmsCategory": "HOSPITALITY / HMS",
   "hmsTitle": "Hospitality Growth Solutions",
@@ -136,7 +136,7 @@
 },
   "contact": {
     "badge": "GET IN TOUCH",
-    "title": "Ready to scale your business?",
+    "title": "Let's Engineer Your Scale",
     "desc": "Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.",
     "callBtn": "Book a 15-Min Strategy Call",
     "formTitle": "Request an Audit",
