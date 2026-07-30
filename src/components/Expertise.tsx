@@ -193,7 +193,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           height: 145px;
         }
 
-        /* Увеличен размер 3D-ассета для HMS */
         .size-hms-compact {
           width: 110px;
           height: 110px;
@@ -240,7 +239,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* HMS CARD (30%) - NEW SPLIT LAYOUT */
+        /* HMS CARD (30%) - HIGH CONVERTING MINIMALIST LAYOUT */
         .card-hms {
           background: rgba(0, 229, 153, 0.03);
           border: 1px solid rgba(0, 229, 153, 0.22);
@@ -278,32 +277,34 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           min-width: 0;
         }
 
+        /* Плотный изумрудный бейдж для максимального внимания */
         .hms-tag {
           display: inline-block;
           font-size: 0.62rem;
           font-weight: 800;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: #00E599;
-          background: rgba(0, 229, 153, 0.1);
-          border: 1px solid rgba(0, 229, 153, 0.25);
-          padding: 3px 8px;
+          color: #0A0A0C;
+          background: #00E599;
+          padding: 4px 9px;
           border-radius: 6px;
+          box-shadow: 0 0 12px rgba(0, 229, 153, 0.35);
         }
 
         .hms-title-override {
           font-size: 1.15rem;
-          font-weight: 700;
+          font-weight: 800;
           color: #ffffff;
           margin: 0;
           line-height: 1.2;
+          white-space: nowrap;
         }
 
         .hms-desc-compact {
           font-size: 0.8rem;
           font-weight: 500;
           line-height: 1.35;
-          color: rgba(255, 255, 255, 0.72);
+          color: rgba(255, 255, 255, 0.75);
           margin: 0;
         }
 
@@ -312,10 +313,10 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           display: inline-flex;
           align-items: center;
           gap: 0.4rem;
-          padding: 0.45rem 0.8rem;
+          padding: 0.45rem 0.85rem;
           border-radius: 8px;
-          background: rgba(0, 229, 153, 0.1);
-          border: 1px solid rgba(0, 229, 153, 0.35);
+          background: rgba(0, 229, 153, 0.12);
+          border: 1px solid rgba(0, 229, 153, 0.4);
           color: #ffffff !important;
           font-size: 0.78rem;
           font-weight: 700;
@@ -327,9 +328,9 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         :global(.hms-btn-compact:hover) {
-          background: rgba(0, 229, 153, 0.22);
-          border-color: rgba(0, 229, 153, 0.7);
-          box-shadow: 0 0 16px rgba(0, 229, 153, 0.28);
+          background: rgba(0, 229, 153, 0.25);
+          border-color: rgba(0, 229, 153, 0.75);
+          box-shadow: 0 0 16px rgba(0, 229, 153, 0.3);
           color: #ffffff !important;
         }
 
@@ -383,13 +384,13 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER (SPLIT LAYOUT) */}
+          {/* 2. КАРТОЧКА 30% — HMS SPECIAL OFFER */}
           <div className="bento-card card-hms col-30">
             <div className="hms-content-wrapper">
               <div className="hms-left-side">
                 <div>
                   <span className="hms-tag">{t.hmsBadge}</span>
-                  <h3 className="hms-title-override" style={{ marginTop: '0.55rem' }}>
+                  <h3 className="hms-title-override" style={{ marginTop: '0.6rem' }}>
                     {t.hmsTitle}
                   </h3>
                   <p className="hms-desc-compact" style={{ marginTop: '0.35rem' }}>
