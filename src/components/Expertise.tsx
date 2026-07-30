@@ -193,9 +193,10 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           height: 145px;
         }
 
+        /* Увеличен размер 3D-ассета HMS до 120px */
         .size-hms-compact {
-          width: 98px;
-          height: 98px;
+          width: 120px;
+          height: 120px;
         }
 
         .asset-glow {
@@ -239,7 +240,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* HMS CARD (30%) - OPTIMIZED ACCENT LAYOUT */
+        /* HMS CARD (30%) - MONOLITHIC Tight LAYOUT */
         .card-hms {
           background: rgba(0, 229, 153, 0.03);
           border: 1px solid rgba(0, 229, 153, 0.22);
@@ -268,16 +269,17 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           }
         }
 
+        /* Скучкованная левая колонка без вытягивания по высоте */
         .hms-left-side {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: flex-start;
+          gap: 0.55rem;
           height: 100%;
           flex: 1 1 0%;
           min-width: 0;
         }
 
-        /* Информационный аккуратный тег */
         .hms-tag {
           display: inline-block;
           font-size: 0.62rem;
@@ -289,6 +291,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           border: 1px solid rgba(0, 229, 153, 0.25);
           padding: 3px 8px;
           border-radius: 6px;
+          width: fit-content;
         }
 
         .hms-title-override {
@@ -309,12 +312,13 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           white-space: nowrap;
         }
 
-        /* Главная кнопка-магнит в градиенте */
+        /* Акцентная кнопка с точным фирменным отступом */
         :global(.hms-btn-compact),
         :global(.hms-btn-compact:visited) {
           display: inline-flex;
           align-items: center;
           gap: 0.45rem;
+          margin-top: 0.25rem;
           padding: 0.5rem 0.95rem;
           border-radius: 9px;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
@@ -325,6 +329,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           box-shadow: 0 4px 15px rgba(0, 229, 153, 0.25);
           transition: all 0.25s ease;
           white-space: nowrap;
+          width: fit-content;
           flex-shrink: 0;
         }
 
@@ -388,27 +393,23 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           <div className="bento-card card-hms col-30">
             <div className="hms-content-wrapper">
               <div className="hms-left-side">
-                <div>
-                  <span className="hms-tag">{t.hmsBadge}</span>
-                  <h3 className="hms-title-override" style={{ marginTop: '0.6rem' }}>
-                    {t.hmsTitle}
-                  </h3>
-                  <p className="hms-desc-compact" style={{ marginTop: '0.35rem' }}>
-                    0% OTA commission
-                  </p>
-                </div>
+                <span className="hms-tag">{t.hmsBadge}</span>
+                <h3 className="hms-title-override">
+                  {t.hmsTitle}
+                </h3>
+                <p className="hms-desc-compact">
+                  0% OTA commission
+                </p>
 
-                <div style={{ marginTop: '0.85rem' }}>
-                  <Link href="/hms" className="hms-btn-compact">
-                    <span>{t.hmsCta}</span>
-                    <div className="hms-arrow-icon">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="7" y1="17" x2="17" y2="7" />
-                        <polyline points="7 7 17 7 17 17" />
-                      </svg>
-                    </div>
-                  </Link>
-                </div>
+                <Link href="/hms" className="hms-btn-compact">
+                  <span>{t.hmsCta}</span>
+                  <div className="hms-arrow-icon">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
+                    </svg>
+                  </div>
+                </Link>
               </div>
 
               <div className="card-asset-side">
@@ -418,8 +419,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
                     src="/assets/3d-hms-core.webp" 
                     alt={t.hmsTitle} 
                     className="asset-img"
-                    width={98}
-                    height={98}
+                    width={120}
+                    height={120}
                   />
                 </div>
               </div>
