@@ -17,14 +17,13 @@ interface ContactProps {
       nameLabel: string;
       emailLabel: string;
       websiteLabel: string;
-      budgetLabel: string;
       submitBtn: string;
     };
   } | null;
 }
 
 export const Contact = ({ dict }: ContactProps) => {
-  const [form, setForm] = useState({ name: '', contact: '', website: '', budget: '' });
+  const [form, setForm] = useState({ name: '', contact: '', website: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [calendlyReady, setCalendlyReady] = useState(false);
 
@@ -37,7 +36,6 @@ export const Contact = ({ dict }: ContactProps) => {
     nameLabel: 'Your Name',
     emailLabel: 'Contact Email',
     websiteLabel: 'Website or Socials',
-    budgetLabel: 'Monthly Ad Budget',
     submitBtn: 'Submit Audit Request',
   };
 
@@ -110,7 +108,7 @@ export const Contact = ({ dict }: ContactProps) => {
         }
         .btn-submit {
           width: 100%;
-          background: ${ACCENT};
+          background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%);
           color: #000;
           font-weight: 700;
           padding: 0.9rem 1.5rem;
@@ -121,12 +119,22 @@ export const Contact = ({ dict }: ContactProps) => {
           transition: background 0.2s ease, transform 0.2s ease;
         }
         .btn-submit:hover {
-          background: #00c785;
+          background: linear-gradient(180deg, #1affaa 0%, #1ab1ff 100%);
           transform: translateY(-1px);
         }
         .btn-submit:disabled {
           opacity: 0.7;
           cursor: not-allowed;
+        }
+        .form-row-split {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
+        }
+        @media (min-width: 480px) {
+          .form-row-split {
+            grid-template-columns: 1fr 1fr;
+          }
         }
         .contact-link-card {
           display: flex;
@@ -307,34 +315,36 @@ export const Contact = ({ dict }: ContactProps) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div>
-                  <label htmlFor="audit-name" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    {t.nameLabel}
-                  </label>
-                  <input
-                    id="audit-name"
-                    type="text"
-                    placeholder="John Doe"
-                    className="contact-input"
-                    required
-                    value={form.name}
-                    onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                  />
-                </div>
+                <div className="form-row-split">
+                  <div>
+                    <label htmlFor="audit-name" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                      {t.nameLabel}
+                    </label>
+                    <input
+                      id="audit-name"
+                      type="text"
+                      placeholder="John Doe"
+                      className="contact-input"
+                      required
+                      value={form.name}
+                      onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="audit-email" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    {t.emailLabel}
-                  </label>
-                  <input
-                    id="audit-email"
-                    type="email"
-                    placeholder="john@company.com"
-                    className="contact-input"
-                    required
-                    value={form.contact}
-                    onChange={e => setForm(p => ({ ...p, contact: e.target.value }))}
-                  />
+                  <div>
+                    <label htmlFor="audit-email" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                      {t.emailLabel}
+                    </label>
+                    <input
+                      id="audit-email"
+                      type="email"
+                      placeholder="john@company.com"
+                      className="contact-input"
+                      required
+                      value={form.contact}
+                      onChange={e => setForm(p => ({ ...p, contact: e.target.value }))}
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -349,24 +359,6 @@ export const Contact = ({ dict }: ContactProps) => {
                     value={form.website}
                     onChange={e => setForm(p => ({ ...p, website: e.target.value }))}
                   />
-                </div>
-
-                <div>
-                  <label htmlFor="audit-budget" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    {t.budgetLabel}
-                  </label>
-                  <select
-                    id="audit-budget"
-                    className="contact-input"
-                    style={{ color: '#fff' }}
-                    value={form.budget}
-                    onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
-                  >
-                    <option value="" style={{ background: '#090B0E' }}>Select your budget range</option>
-                    <option value="5k-10k" style={{ background: '#090B0E' }}>$5,000 – $10,000</option>
-                    <option value="10k-50k" style={{ background: '#090B0E' }}>$10,000 – $50,000</option>
-                    <option value="50k+" style={{ background: '#090B0E' }}>$50,000+</option>
-                  </select>
                 </div>
 
                 <button

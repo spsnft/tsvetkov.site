@@ -15,7 +15,6 @@ interface ExpertiseProps {
       card1Title: string;
       card1Desc: string;
       card1Bullets?: string[];
-      uspTag: string;
       uspLine1: string;
       uspLine2: string;
       card2Title: string;
@@ -264,26 +263,12 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         .usp-content {
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
-        }
-
-        .usp-tag {
-          display: inline-block;
-          font-size: 0.62rem;
-          font-weight: 600;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          color: ${CYAN_ACCENT};
-          background: rgba(0, 163, 255, 0.08);
-          border: 1px solid rgba(0, 163, 255, 0.25);
-          padding: 3px 8px;
-          border-radius: 6px;
-          width: fit-content;
+          width: 100%;
         }
 
         .usp-hook {
           margin: 0;
-          font-size: 1.2rem;
+          font-size: clamp(1.4rem, 2.3vw, 1.85rem);
           font-weight: 800;
           line-height: 1.3;
           letter-spacing: -0.02em;
@@ -343,7 +328,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           {/* 2. КАРТОЧКА 30% — USP HOOK */}
           <div className="bento-card card-usp col-30">
             <div className="usp-content">
-              <span className="usp-tag">{t.uspTag}</span>
               <p className="usp-hook">
                 <span className="usp-line1">{t.uspLine1}</span>
                 <br />

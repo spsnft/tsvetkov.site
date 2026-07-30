@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
     // --- Валидация ---
     const body = await request.json();
-    const { name, contact, website, budget } = body;
+    const { name, contact, website } = body;
 
     const errors: string[] = [];
 
@@ -34,9 +34,6 @@ export async function POST(request: NextRequest) {
     if (!website || typeof website !== 'string' || website.trim().length < 2) {
       errors.push('Website or socials is required');
     }
-    if (!budget || typeof budget !== 'string') {
-      errors.push('Budget range is required');
-    }
 
     if (errors.length > 0) {
       return NextResponse.json({ error: errors.join('; ') }, { status: 400 });
@@ -47,7 +44,6 @@ export async function POST(request: NextRequest) {
       name: name.trim().slice(0, 100),
       contact: contact.trim().toLowerCase().slice(0, 200),
       website: website.trim().slice(0, 300),
-      budget: budget.trim(),
     };
 
     // --- Отправка в webhook ---
