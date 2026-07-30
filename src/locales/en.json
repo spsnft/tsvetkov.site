@@ -115,7 +115,6 @@
     "infraLabel": "DEPLOYED INFRASTRUCTURE //",
     "metricsTitle": "SYSTEM IMPACT METRICS",
     "logsLabel": "TRAJECTORY & TELEMETRY LOGS //",
-    "hmsCategory": "SPECIALIZED OFFER / HOSPITALITY",
     "hmsCta": "Explore HMS System",
     "tabs": {
       "hms": "01 // HOSPITALITY / HMS",
@@ -125,7 +124,10 @@
     },
     "items": {
       "hms": {
+        "category": "SPECIALIZED OFFER / HOSPITALITY",
+        "status": "TARGET MODEL · PRE-LAUNCH",
         "title": "Direct Booking Architecture & OTA Elimination",
+        "meta": "SEGMENT — independent hotels, villas & condos, TH  ·  CURRENT STATE — fully OTA-reliant",
         "challenge": "High OTA commissions (18–25%), total loss of guest data ownership, and low direct channel conversion.",
         "solution": "Turnkey HMS deployment: direct booking funnels, automated WhatsApp CRM sync, and zero-commission engine.",
         "architecture": [
@@ -147,7 +149,9 @@
       },
       "ecomm": {
         "category": "OMNICHANNEL E-COMM",
+        "status": "CASE STUDY",
         "title": "P&L Attribution & Performance Scaling Engine",
+        "meta": "SEGMENT — DTC e-commerce, 5+ ad channels  ·  CURRENT STATE — profit-blind scaling",
         "challenge": "Ad spend scaled across 5 channels with zero net profit visibility, broken tracking, and ballooning CAC.",
         "solution": "End-to-end data pipeline linking ad accounts directly to live net-margin P&L attribution dashboards.",
         "architecture": [
@@ -169,7 +173,9 @@
       },
       "b2b": {
         "category": "ENTERPRISE B2B",
+        "status": "CASE STUDY",
         "title": "Lead Velocity & Automated GTM Architecture",
+        "meta": "SEGMENT — high-ticket B2B sales teams  ·  CURRENT STATE — manual lead handoffs",
         "challenge": "High CPL, slow lead response time (>4 hours), and low sales conversion from manual CRM lead handoffs.",
         "solution": "Rebuilt acquisition funnels coupled with instant 60-second automated CRM lead routing and AI scoring.",
         "architecture": [
@@ -191,7 +197,9 @@
       },
       "realestate": {
         "category": "REAL ESTATE & PROPERTY",
+        "status": "CASE STUDY",
         "title": "High-Intent Investor Acquisition System",
+        "meta": "SEGMENT — real estate developers & brokers  ·  CURRENT STATE — untargeted lead spam",
         "challenge": "Untargeted lead spam, high cost per qualified buyer, and zero visibility on broker sales velocity.",
         "solution": "Targeted investor acquisition funnels, automated financial qualification surveys, and broker SLA tracking.",
         "architecture": [

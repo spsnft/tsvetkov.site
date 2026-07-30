@@ -2,55 +2,90 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { T } from '@/src/theme/tokens';
 
 interface CaseStudiesProps {
   dict?: any;
   lang?: string;
 }
 
-// Inline Clean SVG Icons (Zero external dependency)
+const ICON_PROPS = {
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 2,
+  strokeLinecap: 'round' as const,
+  strokeLinejoin: 'round' as const,
+  width: 14,
+  height: 14,
+};
+
 const Icons = {
   Building2: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-      <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>
+    <svg {...ICON_PROPS}>
+      <rect width="16" height="20" x="4" y="2" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01" /><path d="M16 6h.01" /><path d="M12 6h.01" /><path d="M12 10h.01" /><path d="M12 14h.01" /><path d="M16 10h.01" /><path d="M16 14h.01" /><path d="M8 10h.01" /><path d="M8 14h.01" />
     </svg>
   ),
   ShoppingCart: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-      <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+    <svg {...ICON_PROPS}>
+      <circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
     </svg>
   ),
   Briefcase: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>
+    <svg {...ICON_PROPS}>
+      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /><rect width="20" height="14" x="2" y="6" rx="2" />
     </svg>
   ),
   Home: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <svg {...ICON_PROPS}>
+      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
     </svg>
   ),
   AlertTriangle: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/>
+    <svg {...ICON_PROPS}>
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" /><line x1="12" x2="12" y1="9" y2="13" /><line x1="12" x2="12.01" y1="17" y2="17" />
     </svg>
   ),
   Zap: () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    <svg {...ICON_PROPS}>
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
     </svg>
   ),
 };
 
-const STATUS_TONES: Record<string, string> = {
-  amber: 'border-amber-700 text-amber-300',
-  neutral: 'border-neutral-700 text-neutral-500',
+const CASE_ORDER = ['hms', 'ecomm', 'b2b', 'realestate'] as const;
+
+const CASE_META: Record<string, { icon: React.ComponentType; tone: 'amber' | 'emerald'; hasCta?: boolean; ctaLink?: string }> = {
+  hms: { icon: Icons.Building2, tone: 'amber', hasCta: true, ctaLink: '/hms' },
+  ecomm: { icon: Icons.ShoppingCart, tone: 'emerald' },
+  b2b: { icon: Icons.Briefcase, tone: 'emerald' },
+  realestate: { icon: Icons.Home, tone: 'emerald' },
 };
 
-function StatusBadge({ tone, text }: { tone: string; text: string }) {
+function StatusBadge({ tone, text }: { tone: 'amber' | 'emerald'; text: string }) {
   return (
-    <span className={`font-mono tracking-widest text-xs border rounded px-2 py-1 ${STATUS_TONES[tone] || STATUS_TONES.neutral}`}>
+    <span className={`status-badge status-badge--${tone}`}>
       [{text}]
+      <style jsx>{`
+        .status-badge {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          letter-spacing: 0.08em;
+          font-size: 0.68rem;
+          font-weight: 700;
+          border: 1px solid;
+          border-radius: ${T.radius.sm};
+          padding: 4px 9px;
+          white-space: nowrap;
+        }
+        .status-badge--amber {
+          border-color: rgba(245, 158, 11, 0.4);
+          color: #f5b342;
+        }
+        .status-badge--emerald {
+          border-color: ${T.accent25};
+          color: ${T.accent};
+        }
+      `}</style>
     </span>
   );
 }
@@ -60,281 +95,477 @@ function Panel({
   icon: Icon,
   num,
   label,
-  items,
+  text,
 }: {
   tone: 'red' | 'emerald';
   icon: React.ComponentType;
   num: string;
   label: string;
-  items: string[];
+  text: string;
 }) {
-  const border = tone === 'red' ? 'border-l-red-500' : 'border-l-emerald-400';
-  const text = tone === 'red' ? 'text-red-400' : 'text-emerald-400';
-  
   return (
-    <div className={`border border-neutral-800 border-l-2 ${border} rounded-lg p-5 bg-neutral-950`}>
-      <div className={`flex items-center gap-2 text-xs font-mono tracking-widest mb-3 ${text}`}>
+    <div className={`panel panel--${tone}`}>
+      <div className="panel-label">
         <Icon />
-        <span>{num} // {label}</span>
+        <span>{`${num} // ${label}`}</span>
       </div>
-      <ul className="space-y-2">
-        {items.map((item, i) => (
-          <li key={i} className="text-sm text-neutral-300 flex gap-2">
-            <span className="text-neutral-600">—</span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
+      <p className="panel-text">{text}</p>
+      <style jsx>{`
+        .panel {
+          border: 1px solid ${T.border};
+          border-left: 2px solid;
+          border-radius: ${T.radius.md};
+          padding: 1.25rem;
+          background: ${T.bg1};
+        }
+        .panel--red {
+          border-left-color: ${T.red};
+        }
+        .panel--emerald {
+          border-left-color: ${T.accent};
+        }
+        .panel-label {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          font-size: 0.72rem;
+          font-weight: 700;
+          margin-bottom: 0.75rem;
+        }
+        .panel--red .panel-label {
+          color: ${T.red};
+        }
+        .panel--emerald .panel-label {
+          color: ${T.accent};
+        }
+        .panel-text {
+          font-size: 0.9rem;
+          line-height: 1.6;
+          color: ${T.body};
+          margin: 0;
+        }
+      `}</style>
     </div>
   );
 }
 
 export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
-  const [activeId, setActiveId] = useState('hms');
+  const [activeId, setActiveId] = useState<string>('hms');
+  const t = dict?.cases;
 
-  const t = dict?.cases || {};
+  if (!t) return null;
 
-  const CASES = [
-    {
-      id: 'hms',
-      num: '01',
-      label: t.tabs?.hms || 'HOSPITALITY / HMS',
-      icon: Icons.Building2,
-      offerTag: t.hmsCategory || 'SPECIALIZED OFFER / HOSPITALITY',
-      status: 'TARGET MODEL · PRE-LAUNCH',
-      statusTone: 'amber',
-      title: t.items?.hms?.title || 'Direct Booking Architecture & OTA Elimination',
-      meta: 'SEGMENT — independent hotels, villas & condos, TH  ·  CURRENT STATE — fully OTA-reliant',
-      problem: t.items?.hms?.problemList || [
-        'OTA commissions eating 18–25% of every booking',
-        'Channels out of sync — double bookings, manual firefighting',
-        'TM30 & guest reporting still filed by hand',
-      ],
-      execution: t.items?.hms?.executionList || [
-        'Direct booking engine + WhatsApp CRM sync, zero commission',
-        'Live channel-manager sync across every OTA',
-        'TM30 filing automated into the check-in flow',
-      ],
-      hero: {
-        value: '+35–45%',
-        label: 'target share of direct bookings',
-        caption: 'projected within 6 months of HMS launch',
-      },
-      byDesign: [
-        { value: '0%', label: 'OTA leakage on direct channel' },
-        { value: '100%', label: 'guest data ownership' },
-        { value: '✓', label: 'TM30 auto-filed' },
-      ],
-      bar: { before: 100, after: 58 },
-      hasCta: true,
-      ctaLink: '/hms',
-      ctaText: t.hmsCta || 'Explore HMS System',
-    },
-    {
-      id: 'ecom',
-      num: '02',
-      label: t.tabs?.ecomm || 'E-COMMERCE & SCALING',
-      icon: Icons.ShoppingCart,
-      offerTag: 'CASE STUDY / E-COMMERCE',
-      status: 'PLACEHOLDER',
-      statusTone: 'neutral',
-      title: t.items?.ecomm?.title || '[ case title ]',
-      meta: '[ segment · region · starting state ]',
-      problem: t.items?.ecomm?.problemList || ['[ pain point ]', '[ pain point ]', '[ pain point ]'],
-      execution: t.items?.ecomm?.executionList || ['[ what you built ]', '[ what you built ]', '[ what you built ]'],
-      hero: { value: '[+XX%]', label: '[ headline metric ]', caption: '[ timeframe / baseline ]' },
-      byDesign: [
-        { value: '[X]', label: '[ supporting fact ]' },
-        { value: '[X]', label: '[ supporting fact ]' },
-        { value: '[X]', label: '[ supporting fact ]' },
-      ],
-      bar: null,
-      hasCta: false,
-    },
-    {
-      id: 'b2b',
-      num: '03',
-      label: t.tabs?.b2b || 'HIGH-TICKET B2B',
-      icon: Icons.Briefcase,
-      offerTag: 'CASE STUDY / B2B',
-      status: 'PLACEHOLDER',
-      statusTone: 'neutral',
-      title: t.items?.b2b?.title || '[ case title ]',
-      meta: '[ segment · region · starting state ]',
-      problem: t.items?.b2b?.problemList || ['[ pain point ]', '[ pain point ]', '[ pain point ]'],
-      execution: t.items?.b2b?.executionList || ['[ what you built ]', '[ what you built ]', '[ what you built ]'],
-      hero: { value: '[+XX%]', label: '[ headline metric ]', caption: '[ timeframe / baseline ]' },
-      byDesign: [
-        { value: '[X]', label: '[ supporting fact ]' },
-        { value: '[X]', label: '[ supporting fact ]' },
-        { value: '[X]', label: '[ supporting fact ]' },
-      ],
-      bar: null,
-      hasCta: false,
-    },
-    {
-      id: 'realestate',
-      num: '04',
-      label: t.tabs?.realestate || 'REAL ESTATE DEVELOPMENT',
-      icon: Icons.Home,
-      offerTag: 'CASE STUDY / REAL ESTATE',
-      status: 'PLACEHOLDER',
-      statusTone: 'neutral',
-      title: t.items?.realestate?.title || '[ case title ]',
-      meta: '[ segment · region · starting state ]',
-      problem: t.items?.realestate?.problemList || ['[ pain point ]', '[ pain point ]', '[ pain point ]'],
-      execution: t.items?.realestate?.executionList || ['[ what you built ]', '[ what you built ]', '[ what you built ]'],
-      hero: { value: '[+XX%]', label: '[ headline metric ]', caption: '[ timeframe / baseline ]' },
-      byDesign: [
-        { value: '[X]', label: '[ supporting fact ]' },
-        { value: '[X]', label: '[ supporting fact ]' },
-        { value: '[X]', label: '[ supporting fact ]' },
-      ],
-      bar: null,
-      hasCta: false,
-    },
-  ];
+  const CASES = CASE_ORDER.map((id, i) => ({
+    id,
+    num: String(i + 1).padStart(2, '0'),
+    label: t.tabs?.[id],
+    ...CASE_META[id],
+    ...t.items?.[id],
+  }));
 
   const active = CASES.find((c) => c.id === activeId) || CASES[0];
 
-  const getCtaLink = (path?: string) => {
-    if (!path) return '#';
-    return lang === 'en' ? path : `/${lang}${path}`;
-  };
+  const getCtaLink = (path: string) => (lang === 'en' ? path : `/${lang}${path}`);
 
   return (
-    <section id="cases" className="bg-black py-12 px-4 md:px-10 font-sans text-left">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center gap-2 mb-8">
-          <span className="w-2 h-2 rounded-full bg-emerald-400" />
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
-            {t.title || 'What Can We Show'}<span className="text-emerald-400">.</span>
+    <section id="cases" className="cases-section">
+      <style jsx>{`
+        .cases-section {
+          width: 100%;
+          position: relative;
+          padding: 1.5rem 0 clamp(3rem, 6vw, 6rem) 0;
+          background: transparent;
+          z-index: 5;
+        }
+
+        .container {
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1.5rem;
+          box-sizing: border-box;
+        }
+
+        @media (max-width: 640px) {
+          .container {
+            padding: 0 1.25rem;
+          }
+        }
+
+        .header-box {
+          text-align: center;
+          margin-bottom: 3rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 0.35rem 0.85rem;
+          border-radius: 20px;
+          margin-bottom: 1rem;
+          font-size: 0.7rem;
+          font-weight: 800;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: ${T.accent};
+          background: ${T.accent05};
+          border: 1px solid ${T.accent25};
+          backdrop-filter: blur(12px);
+        }
+
+        .badge-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: ${T.accent};
+          box-shadow: 0 0 8px ${T.accent};
+        }
+
+        .title {
+          font-size: clamp(1.8rem, 4vw, 2.8rem);
+          font-weight: 800;
+          line-height: 1.15;
+          letter-spacing: -0.03em;
+          color: #ffffff;
+          margin: 0;
+        }
+
+        .title-dot {
+          color: ${T.accent};
+        }
+
+        .terminal {
+          border: 1px solid ${T.border};
+          border-radius: ${T.radius.xl};
+          overflow: hidden;
+          background: ${T.bg0};
+          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .top-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          padding: 0.85rem 1.25rem;
+          border-bottom: 1px solid ${T.border};
+          background: ${T.bg1};
+          flex-wrap: wrap;
+        }
+
+        .top-bar-label {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          letter-spacing: 0.1em;
+          font-size: 0.72rem;
+          color: ${T.sub};
+        }
+
+        .tabs {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          padding: 1rem;
+          border-bottom: 1px solid ${T.border};
+          background: ${T.bg1};
+        }
+
+        .tab {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 0.55rem 1rem;
+          border-radius: ${T.radius.md};
+          border: 1px solid transparent;
+          background: transparent;
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          font-size: 0.72rem;
+          letter-spacing: 0.05em;
+          color: ${T.muted};
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .tab:hover {
+          color: ${T.sub};
+          background: rgba(255, 255, 255, 0.04);
+        }
+
+        .tab.active {
+          border-color: ${T.accent};
+          color: ${T.accent};
+          background: ${T.accent10};
+        }
+
+        .content {
+          padding: clamp(1.25rem, 3vw, 2rem);
+        }
+
+        .offer-tag {
+          display: inline-block;
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          font-size: 0.68rem;
+          font-weight: 700;
+          color: ${T.accent};
+          border: 1px solid ${T.accent25};
+          background: ${T.accent10};
+          border-radius: 999px;
+          padding: 5px 12px;
+          margin-bottom: 1rem;
+        }
+
+        .case-title {
+          font-size: clamp(1.4rem, 3vw, 1.9rem);
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0 0 0.5rem 0;
+          line-height: 1.25;
+        }
+
+        .case-meta {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          font-size: 0.76rem;
+          color: ${T.muted};
+          margin: 0 0 2rem 0;
+        }
+
+        .panels-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+          .panels-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        .infra-box,
+        .metrics-box {
+          border: 1px solid ${T.border};
+          border-radius: ${T.radius.lg};
+          padding: clamp(1.1rem, 2.5vw, 1.5rem);
+          background: ${T.bg1};
+          margin-top: 1rem;
+        }
+
+        .box-label {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: ${T.muted};
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+
+        .infra-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 0.65rem;
+        }
+
+        .infra-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.85rem;
+          color: ${T.body};
+        }
+
+        .infra-check {
+          color: ${T.accent};
+          font-weight: 800;
+          flex-shrink: 0;
+        }
+
+        .metrics-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          gap: 0.75rem;
+        }
+
+        .metric-card {
+          border: 1px solid ${T.border};
+          border-radius: ${T.radius.md};
+          padding: 1rem 0.75rem;
+          text-align: center;
+          background: ${T.bg0};
+        }
+
+        .metric-value {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: clamp(1.35rem, 3vw, 1.7rem);
+          font-weight: 800;
+          color: ${T.accent};
+          line-height: 1;
+          font-variant-numeric: tabular-nums;
+        }
+
+        .metric-label {
+          font-size: 0.76rem;
+          color: ${T.muted};
+          margin-top: 0.5rem;
+          line-height: 1.35;
+        }
+
+        .logs-box {
+          margin-top: 1.5rem;
+          padding-top: 1.25rem;
+          border-top: 1px dashed ${T.border};
+        }
+
+        .log-line {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+          font-size: 0.82rem;
+          line-height: 1.9;
+          color: ${T.acc2};
+        }
+
+        .cta-row {
+          margin-top: 1.5rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid ${T.border};
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .cta-row :global(.btn-primary) {
+          height: 44px;
+          padding: 0 1.5rem;
+          font-size: 0.85rem;
+          gap: 8px;
+        }
+
+        .cta-row :global(.btn-primary:hover) .btn-arrow {
+          transform: translateX(4px);
+        }
+
+        .btn-arrow {
+          transition: transform 0.2s ease;
+        }
+      `}</style>
+
+      <div className="container">
+        <div className="header-box">
+          <span className="badge">
+            <span className="badge-dot" />
+            {t.badge}
+          </span>
+          <h2 className="title">
+            {t.title}
+            <span className="title-dot">.</span>
           </h2>
         </div>
 
-        {/* Terminal Container */}
-        <div className="border border-neutral-800 rounded-2xl overflow-hidden bg-black shadow-2xl">
-          {/* Top Bar */}
-          <div className="flex items-center justify-between gap-3 px-4 md:px-5 py-3 border-b border-neutral-800 bg-neutral-950">
-            <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-neutral-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              COMMAND_CENTER // CASE_STUDIES
-            </div>
-            <StatusBadge tone={active.statusTone} text={active.status} />
+        <div className="terminal">
+          <div className="top-bar">
+            <span className="top-bar-label">
+              <span className="badge-dot" />
+              {t.terminalBarTitle}
+            </span>
+            <StatusBadge tone={active.tone} text={active.status} />
           </div>
 
-          {/* Navigation Tabs */}
-          <div className="flex flex-wrap gap-2 p-4 border-b border-neutral-800 bg-neutral-950/50">
+          <div className="tabs">
             {CASES.map((c) => {
-              const isActive = c.id === activeId;
               const Icon = c.icon;
               return (
                 <button
                   key={c.id}
+                  type="button"
                   onClick={() => setActiveId(c.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-xs tracking-wide border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
-                    isActive
-                      ? 'border-emerald-400 text-emerald-300 bg-emerald-950/80'
-                      : 'border-transparent text-neutral-500 hover:text-neutral-300 hover:bg-neutral-900'
-                  }`}
+                  className={`tab${c.id === activeId ? ' active' : ''}`}
                 >
                   <Icon />
-                  <span>{c.num} // {c.label}</span>
+                  <span>{`${c.num} // ${c.label}`}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* Case Content */}
-          <div className="p-5 md:p-8">
-            <span className="inline-block text-xs font-mono tracking-widest text-emerald-400 border border-emerald-700/60 rounded-full px-3 py-1 mb-4 bg-emerald-950/30">
-              {active.offerTag}
-            </span>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{active.title}</h3>
-            <p className="text-xs font-mono text-neutral-500 mb-8">{active.meta}</p>
+          <div className="content">
+            <span className="offer-tag">{active.category}</span>
+            <h3 className="case-title">{active.title}</h3>
+            <p className="case-meta">{active.meta}</p>
 
-            {/* Panels Grid: Problem & Solution */}
-            <div className="grid md:grid-cols-2 gap-4 mb-6">
-              <Panel
-                tone="red"
-                icon={Icons.AlertTriangle}
-                num="01"
-                label="THE BOTTLENECK (PROBLEM)"
-                items={active.problem}
-              />
-              <Panel
-                tone="emerald"
-                icon={Icons.Zap}
-                num="02"
-                label="ARCHITECTURE FIX (EXECUTION)"
-                items={active.execution}
-              />
+            <div className="panels-grid">
+              <Panel tone="red" icon={Icons.AlertTriangle} num="01" label={t.bottleneckLabel} text={active.challenge} />
+              <Panel tone="emerald" icon={Icons.Zap} num="02" label={t.solutionLabel} text={active.solution} />
             </div>
 
-            {/* Target Impact Section */}
-            <div className="border border-neutral-800 rounded-xl p-5 md:p-6 bg-neutral-950">
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-mono tracking-widest text-neutral-500">03 // TARGET IMPACT</span>
-                <StatusBadge tone={active.statusTone} text={active.status} />
+            <div className="infra-box">
+              <div className="box-label">{t.infraLabel}</div>
+              <div className="infra-grid">
+                {active.architecture?.map((item: string, i: number) => (
+                  <div key={i} className="infra-item">
+                    <span className="infra-check">✓</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="metrics-box">
+              <div className="box-label">
+                <span>{t.metricsTitle}</span>
+                <StatusBadge tone={active.tone} text={active.status} />
+              </div>
+              <div className="metrics-grid">
+                {active.metrics?.map((m: { value: string; label: string }, i: number) => (
+                  <div key={i} className="metric-card">
+                    <div className="metric-value">{m.value}</div>
+                    <div className="metric-label">{m.label}</div>
+                  </div>
+                ))}
               </div>
 
-              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-                <div>
-                  <div className="text-5xl md:text-6xl font-black text-emerald-400 tabular-nums leading-none">
-                    {active.hero.value}
-                  </div>
-                  <div className="text-sm text-neutral-300 mt-2 font-medium">{active.hero.label}</div>
-                  <div className="text-xs font-mono text-neutral-500 mt-1">{active.hero.caption}</div>
-                </div>
-
-                <div className="grid grid-cols-3 gap-3 flex-1">
-                  {active.byDesign.map((d, i) => (
-                    <div key={i} className="border border-neutral-800 rounded-lg px-3 py-3 text-center bg-black">
-                      <div className="text-xl font-bold text-white font-mono">{d.value}</div>
-                      <div className="text-xs text-neutral-500 mt-1 leading-tight">{d.label}</div>
-                    </div>
-                  ))}
-                </div>
+              <div className="logs-box">
+                <div className="box-label">{t.logsLabel}</div>
+                {active.telemetryLogs?.map((line: string, i: number) => (
+                  <div key={i} className="log-line">{line}</div>
+                ))}
               </div>
+            </div>
 
-              {/* Progress Bar (HMS specific) */}
-              {active.bar && (
-                <div className="mt-6 pt-6 border-t border-neutral-800 space-y-3">
-                  <div>
-                    <div className="flex justify-between text-xs font-mono text-neutral-500 mb-1">
-                      <span>OTA-BOOKED SHARE — TODAY</span>
-                      <span>{active.bar.before}%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-neutral-800 overflow-hidden">
-                      <div className="h-full bg-neutral-500" style={{ width: `${active.bar.before}%` }} />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-xs font-mono text-neutral-500 mb-1">
-                      <span>OTA-BOOKED SHARE — TARGET</span>
-                      <span>{active.bar.after}%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-neutral-800 overflow-hidden">
-                      <div className="h-full bg-emerald-400" style={{ width: `${active.bar.after}%` }} />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Optional CTA Link for HMS */}
-              {active.hasCta && active.ctaLink && (
-                <div className="mt-6 pt-4 border-t border-neutral-900 flex justify-end">
-                  <Link
-                    href={getCtaLink(active.ctaLink)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-400 text-black font-extrabold text-xs tracking-wider uppercase hover:bg-emerald-300 transition-colors"
+            {active.hasCta && active.ctaLink && (
+              <div className="cta-row">
+                <Link href={getCtaLink(active.ctaLink)} className="btn-primary">
+                  <span>{t.hmsCta}</span>
+                  <svg
+                    className="btn-arrow"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    <span>{active.ctaText}</span>
-                    <span>→</span>
-                  </Link>
-                </div>
-              )}
-            </div>
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
