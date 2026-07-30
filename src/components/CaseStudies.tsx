@@ -55,12 +55,27 @@ const Icons = {
 
 const CASE_ORDER = ['hms', 'ecomm', 'b2b', 'realestate'] as const;
 
-const CASE_META: Record<string, { icon: React.ComponentType; tone: 'amber' | 'emerald'; hasCta?: boolean; ctaLink?: string }> = {
-  hms: { icon: Icons.Building2, tone: 'amber', hasCta: true, ctaLink: '/hms' },
-  ecomm: { icon: Icons.ShoppingCart, tone: 'emerald' },
-  b2b: { icon: Icons.Briefcase, tone: 'emerald' },
-  realestate: { icon: Icons.Home, tone: 'emerald' },
+const CASE_META: Record<string, { tone: 'amber' | 'emerald'; hasCta?: boolean; ctaLink?: string }> = {
+  hms: { tone: 'amber', hasCta: true, ctaLink: '/hms' },
+  ecomm: { tone: 'emerald' },
+  b2b: { tone: 'emerald' },
+  realestate: { tone: 'emerald' },
 };
+
+function TabIcon({ id }: { id: string }) {
+  switch (id) {
+    case 'hms':
+      return <Icons.Building2 />;
+    case 'ecomm':
+      return <Icons.ShoppingCart />;
+    case 'b2b':
+      return <Icons.Briefcase />;
+    case 'realestate':
+      return <Icons.Home />;
+    default:
+      return null;
+  }
+}
 
 function StatusBadge({ tone, text }: { tone: 'amber' | 'emerald'; text: string }) {
   return (
@@ -486,7 +501,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
           <div className="tabs">
             {CASES.map((c) => {
-              const Icon = c.icon;
               return (
                 <button
                   key={c.id}
@@ -494,7 +508,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                   onClick={() => setActiveId(c.id)}
                   className={`tab${c.id === activeId ? ' active' : ''}`}
                 >
-                  <Icon />
+                  <TabIcon id={c.id} />
                   <span>{`${c.num} // ${c.label}`}</span>
                 </button>
               );
