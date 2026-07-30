@@ -91,6 +91,49 @@
   "step3Deliverables": ["Omnichannel Traffic Mgmt", "Weekly P&L Optimization", "Funnel Conversion Tuning", "Executive Reporting"],
   "step3Impact": "Predictable revenue growth and guaranteed system reliability"
 },
+  "cases": {
+  "badge": "PROOF OF EXECUTION & INDUSTRY SOLUTIONS",
+  "title": "Proven Growth Architectures",
+  "hmsBadge": "SPECIALIZED OFFER",
+  "hmsCategory": "HOSPITALITY / HMS",
+  "hmsTitle": "Hospitality Growth Solutions",
+  "hmsDesc": "Dedicated GTM architecture for Luxury Resorts, Hotels, and Villas. We eliminate OTA commissions and build high-margin direct booking funnels.",
+  "hmsCta": "Explore HMS System",
+  "hmsImpactTitle": "HMS Direct Booking Impact",
+  "hmsMetric1Value": "+40%",
+  "hmsMetric1Label": "Direct Bookings",
+  "hmsMetric2Value": "0%",
+  "hmsMetric2Label": "OTA Commission Leakage",
+  "hmsFeature": "Full Guest Data Ownership & Instant WhatsApp CRM Sync",
+  "issueLabel": "Issue:",
+  "fixLabel": "Fix:",
+  "items": [
+    {
+      "category": "HIGH-TICKET B2B",
+      "title": "Scaling Lead Velocity & GTM Architecture",
+      "challenge": "High CPL & low sales conversion from manual CRM handoffs.",
+      "solution": "Rebuilt acquisition funnels + automated instant CRM routing.",
+      "metrics": [
+        { "value": "+340%", "label": "Qual. Leads" },
+        { "value": "-42%", "label": "CAC" },
+        { "value": "$1.4M", "label": "Pipeline ARR" }
+      ],
+      "tags": ["GTM Strategy", "CRM Routing", "CAC Scale"]
+    },
+    {
+      "category": "REAL ESTATE & E-COMM",
+      "title": "P&L Attribution & Omnichannel Scale",
+      "challenge": "Ad spend across 5 channels with zero net profit visibility.",
+      "solution": "End-to-end data pipeline linking ad spend to net P&L.",
+      "metrics": [
+        { "value": "5.2x", "label": "Blended ROAS" },
+        { "value": "100%", "label": "Data Clear" },
+        { "value": "+$520k", "label": "Net Margin" }
+      ],
+      "tags": ["Attribution", "Unit Economics", "P&L Dashboards"]
+    }
+  ]
+},
   "contact": {
     "badge": "GET IN TOUCH",
     "title": "Ready to scale your business?",
