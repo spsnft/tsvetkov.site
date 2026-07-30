@@ -136,24 +136,41 @@ export const Contact = ({ dict }: ContactProps) => {
             grid-template-columns: 1fr 1fr;
           }
         }
-        .contact-link-card {
+        .quick-links-row {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.65rem;
+          max-width: 420px;
+        }
+        @media (max-width: 420px) {
+          .quick-links-row {
+            grid-template-columns: 1fr;
+          }
+        }
+        .quick-link-card {
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: space-between;
-          padding: 1rem 1.25rem;
+          justify-content: center;
+          gap: 0.35rem;
+          padding: 0.9rem 0.5rem;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 10px;
           color: #fff;
           text-decoration: none;
-          font-size: 0.9rem;
+          font-size: 0.78rem;
           font-weight: 600;
+          text-align: center;
           transition: all 0.2s ease;
           cursor: pointer;
         }
-        .contact-link-card:hover {
+        .quick-link-card:hover {
           border-color: rgba(0, 229, 153, 0.4);
           background: rgba(0, 229, 153, 0.04);
+        }
+        .quick-link-icon {
+          font-size: 0.9rem;
         }
         .success-message {
           text-align: center;
@@ -250,31 +267,31 @@ export const Contact = ({ dict }: ContactProps) => {
               {t.desc}
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxWidth: '400px' }}>
+            <div className="quick-links-row">
               <button
                 type="button"
                 onClick={handleCalendlyPopup}
-                className="contact-link-card"
+                className="quick-link-card"
                 disabled={!calendlyReady}
-                style={{ 
-                  borderColor: 'rgba(0, 229, 153, 0.3)', 
+                style={{
+                  borderColor: 'rgba(0, 229, 153, 0.3)',
                   background: 'rgba(0, 229, 153, 0.05)',
                   opacity: calendlyReady ? 1 : 0.6,
                   cursor: calendlyReady ? 'pointer' : 'not-allowed',
                 }}
               >
+                <span className="quick-link-icon" style={{ color: ACCENT }}>→</span>
                 <span>{calendlyReady ? t.callBtn : "Loading…"}</span>
-                <span style={{ color: ACCENT }}>→</span>
               </button>
 
-              <a href="https://linkedin.com/in/tsvetkov-marketing/" target="_blank" rel="noopener noreferrer" className="contact-link-card">
-                <span>Connect on LinkedIn</span>
-                <span style={{ color: T.sub }}>in</span>
+              <a href="https://linkedin.com/in/tsvetkov-marketing/" target="_blank" rel="noopener noreferrer" className="quick-link-card">
+                <span className="quick-link-icon" style={{ color: T.sub }}>in</span>
+                <span>LinkedIn</span>
               </a>
 
-              <a href="mailto:fedor@tsvetkov.site" className="contact-link-card">
-                <span>fedor@tsvetkov.site</span>
-                <span style={{ color: T.sub }}>Email</span>
+              <a href="mailto:fedor@tsvetkov.site" className="quick-link-card">
+                <span className="quick-link-icon" style={{ color: T.sub }}>✉</span>
+                <span>Email</span>
               </a>
             </div>
           </div>
