@@ -108,11 +108,22 @@ function Panel({
           border-radius: ${T.radius.md};
           padding: 1.25rem;
           background: rgba(18, 18, 20, 0.15);
+          transition: border-color 0.25s ease, transform 0.25s ease;
         }
         .panel--red {
           border-left-color: ${T.red};
         }
         .panel--emerald {
+          border-left-color: ${T.accent};
+        }
+        .panel--red:hover {
+          transform: translateY(-2px);
+          border-color: ${T.red25};
+          border-left-color: ${T.red};
+        }
+        .panel--emerald:hover {
+          transform: translateY(-2px);
+          border-color: ${T.accent35};
           border-left-color: ${T.accent};
         }
         .panel-label {
@@ -282,7 +293,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           gap: 0.5rem;
           padding: 1rem;
           border-bottom: 1px solid ${T.border};
-          background: ${T.bg1};
+          background: linear-gradient(180deg, rgba(0, 229, 153, 0.05) 0%, rgba(0, 229, 153, 0) 60%), ${T.bg1};
         }
 
         .tabs::-webkit-scrollbar {
@@ -305,6 +316,25 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           transition: all 0.2s ease;
           white-space: nowrap;
           flex-shrink: 0;
+        }
+
+        .tab :global(svg) {
+          width: 14px;
+          height: 14px;
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+          .tab {
+            padding: 0.4rem 0.65rem;
+            font-size: 0.62rem;
+            gap: 6px;
+          }
+
+          .tab :global(svg) {
+            width: 12px;
+            height: 12px;
+          }
         }
 
         .tab:hover {
@@ -331,6 +361,12 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           margin-bottom: 1.75rem;
         }
 
+        @media (min-width: 600px) {
+          .title-row {
+            flex-wrap: nowrap;
+          }
+        }
+
         .title-row :global(.btn-primary) {
           flex-shrink: 0;
           height: 44px;
@@ -353,6 +389,8 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           color: #ffffff;
           margin: 0;
           line-height: 1.25;
+          flex: 1 1 auto;
+          min-width: 0;
         }
 
         .panels-grid {
@@ -428,6 +466,11 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           color: ${T.body};
         }
 
+        .infra-item span:last-child {
+          min-width: 0;
+          flex: 1 1 auto;
+        }
+
         .infra-check {
           color: ${T.accent};
           font-weight: 800;
@@ -441,11 +484,33 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         }
 
         .metric-card {
+          min-width: 0;
           border: 1px solid ${T.accent15};
           border-radius: ${T.radius.md};
           padding: 1.1rem 0.5rem;
           text-align: center;
           background: transparent;
+          transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .metric-card:hover {
+          transform: translateY(-2px);
+          border-color: ${T.accent35};
+        }
+
+        .metric-label {
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: ${T.sub};
+          margin-bottom: 0.5rem;
+          line-height: 1.3;
+          min-height: 2.1em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow-wrap: break-word;
         }
 
         .metric-value {
@@ -460,13 +525,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           line-height: 1;
           font-variant-numeric: tabular-nums;
           text-shadow: 0 0 24px rgba(0, 229, 153, 0.35);
-        }
-
-        .metric-label {
-          font-size: 0.76rem;
-          color: ${T.sub};
-          margin-top: 0.6rem;
-          line-height: 1.35;
         }
 
       `}</style>
@@ -544,8 +602,8 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
                 <div className="metrics-grid">
                   {active.metrics?.map((m: { value: string; label: string }, i: number) => (
                     <div key={i} className="metric-card">
-                      <div className="metric-value">{m.value}</div>
                       <div className="metric-label">{m.label}</div>
+                      <div className="metric-value">{m.value}</div>
                     </div>
                   ))}
                 </div>

@@ -191,11 +191,6 @@ export const Hero = ({ dict }: HeroProps) => {
           margin: 0;
         }
 
-        .desc-item :global(strong) {
-          color: #ffffff;
-          font-weight: 600;
-        }
-
         .cta-action-box {
           display: flex;
           align-items: center;

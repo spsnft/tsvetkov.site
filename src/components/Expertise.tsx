@@ -242,7 +242,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           align-items: center;
           background: linear-gradient(135deg, rgba(0, 229, 153, 0.05) 0%, rgba(0, 163, 255, 0.05) 100%), rgba(12, 12, 16, 0.06);
           border: 1px solid rgba(0, 163, 255, 0.25);
-          padding: 1.35rem 1.25rem;
+          padding: 1.1rem 1.1rem;
           /* Mobile/tablet: promoted to the top of the stack (see .bento-grid order) */
           order: -1;
         }
@@ -266,10 +266,22 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         .usp-hook {
           margin: 0;
-          font-size: clamp(1.35rem, 2.15vw, 1.9rem);
+          font-size: clamp(1.6rem, 6vw, 2.1rem);
           font-weight: 800;
-          line-height: 1.3;
+          line-height: 1.22;
           letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+          .usp-hook {
+            font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+          }
+        }
+
+        @media (min-width: 992px) {
+          .usp-hook {
+            font-size: clamp(1.6rem, 2.2vw, 1.95rem);
+          }
         }
 
         .usp-line1 {

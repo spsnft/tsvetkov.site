@@ -11,9 +11,9 @@
     "badge": "FOUNDER-LED AGENCY",
     "titleLine1": "More Revenue",
     "titleLine2": "Engineered",
-    "sub1": "We eliminate chaos in <strong>marketing & digital systems</strong>",
-    "sub2": "No fluff — just <strong>high-performance architectures</strong>",
-    "sub3": "Track every dollar and <strong>automate sales flow</strong>",
+    "sub1": "Eliminate chaos in marketing & digital systems",
+    "sub2": "No fluff — just high-performance architectures",
+    "sub3": "Track every dollar and automate sales flow",
     "cta": "Audit My Business"
   },
   "bottleneck": {
@@ -229,8 +229,9 @@
   },
   "contact": {
     "badge": "GET IN TOUCH",
-    "title": "Let's Engineer Your Scale",
-    "desc": "Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.",
+    "titleLine1": "Let's Engineer",
+    "titleLine2": "Your Scale",
+    "desc": "Book a quick intro call or fill out the request form. We review your project and get back to you within 24h.",
     "callBtn": "Book a Call",
     "formTitle": "Request an Audit",
     "nameLabel": "Your Name",

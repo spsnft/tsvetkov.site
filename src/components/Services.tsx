@@ -122,11 +122,12 @@ export const Services = ({ dict }: ServicesProps) => {
           margin: 0;
         }
 
-        /* ТАЙМЛАЙН: Полноширинный контейнер без искусственных ограничений */
+        /* ТАЙМЛАЙН: сужен до читаемой колонки, не растянут на весь контейнер */
         .timeline-box {
           position: relative;
           padding-left: clamp(2rem, 5vw, 4rem);
           width: 100%;
+          max-width: 820px;
           margin: 0 auto;
         }
 
@@ -214,6 +215,14 @@ export const Services = ({ dict }: ServicesProps) => {
           align-items: center;
           gap: 0.75rem;
           margin-top: 1.25rem;
+        }
+
+        @media (max-width: 640px) {
+          .outcome-box {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+          }
         }
 
         .outcome-tag {

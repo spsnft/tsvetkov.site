@@ -261,8 +261,8 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
         }
 
         .highlight-text {
-          color: #ffffff;
-          font-weight: 600;
+          color: inherit;
+          font-weight: inherit;
         }
 
         .impact-footer {
@@ -305,11 +305,11 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
                   <p className="card-desc">
                     {item.descStart}
                     {item.descHighlight1 && (
-                      <strong className="highlight-text">{item.descHighlight1}</strong>
+                      <span className="highlight-text">{item.descHighlight1}</span>
                     )}
                     {item.descMiddle}
                     {item.descHighlight2 && (
-                      <strong className="highlight-text">{item.descHighlight2}</strong>
+                      <span className="highlight-text">{item.descHighlight2}</span>
                     )}
                     {item.descEnd}
                   </p>

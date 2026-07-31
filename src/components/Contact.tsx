@@ -10,7 +10,8 @@ interface ContactProps {
   dict: {
     contact: {
       badge: string;
-      title: string;
+      titleLine1: string;
+      titleLine2: string;
       desc: string;
       callBtn: string;
       formTitle: string;
@@ -29,8 +30,9 @@ export const Contact = ({ dict }: ContactProps) => {
 
   const t = dict?.contact ?? {
     badge: 'GET IN TOUCH',
-    title: 'Ready to scale your business?',
-    desc: 'Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.',
+    titleLine1: 'Ready to scale',
+    titleLine2: 'your business?',
+    desc: 'Book a quick intro call or fill out the request form. We review your project and get back to you within 24h.',
     callBtn: 'Book a 15-Min Strategy Call',
     formTitle: 'Request an Audit',
     nameLabel: 'Your Name',
@@ -154,8 +156,10 @@ export const Contact = ({ dict }: ContactProps) => {
           justify-content: center;
           gap: 0.35rem;
           padding: 0.9rem 0.5rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(18, 18, 20, 0.15);
+          backdrop-filter: blur(4px) saturate(140%);
+          -webkit-backdrop-filter: blur(4px) saturate(140%);
+          border: 1px solid rgba(0, 229, 153, 0.15);
           border-radius: 10px;
           color: #fff;
           text-decoration: none;
@@ -167,7 +171,8 @@ export const Contact = ({ dict }: ContactProps) => {
         }
         .quick-link-card:hover {
           border-color: rgba(0, 229, 153, 0.4);
-          background: rgba(0, 229, 153, 0.04);
+          background: rgba(0, 229, 153, 0.06);
+          transform: translateY(-2px);
         }
         .quick-link-icon {
           font-size: 0.9rem;
@@ -225,47 +230,51 @@ export const Contact = ({ dict }: ContactProps) => {
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         
         {/* Main Section Content */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'start', marginBottom: '4rem' }}>
-          
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'stretch', marginBottom: '4rem' }}>
+
           {/* Left Column: Copy & Quick Actions */}
-          <div>
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: '0.35rem 0.85rem',
-                borderRadius: 20,
-                marginBottom: T.section.badgeGap,
-                fontSize: '0.7rem',
-                fontWeight: 700,
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                background: 'rgba(0, 229, 153, 0.08)',
-                border: '1px solid rgba(0, 229, 153, 0.25)',
-                color: ACCENT,
-              }}
-            >
-              <span className="contact-badge-dot" />
-              {t.badge}
-            </span>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '0.35rem 0.85rem',
+                  borderRadius: 20,
+                  marginBottom: T.section.badgeGap,
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  background: 'rgba(0, 229, 153, 0.08)',
+                  border: '1px solid rgba(0, 229, 153, 0.25)',
+                  color: ACCENT,
+                }}
+              >
+                <span className="contact-badge-dot" />
+                {t.badge}
+              </span>
 
-            <h2
-              style={{
-                fontSize: T.section.titleSize,
-                fontWeight: 800,
-                lineHeight: 1.15,
-                letterSpacing: '-0.03em',
-                color: '#fff',
-                marginBottom: '1rem',
-              }}
-            >
-              {t.title}
-            </h2>
+              <h2
+                style={{
+                  fontSize: T.section.titleSize,
+                  fontWeight: 800,
+                  lineHeight: 1.15,
+                  letterSpacing: '-0.03em',
+                  color: '#fff',
+                  marginBottom: '1rem',
+                }}
+              >
+                {t.titleLine1}
+                <br />
+                {t.titleLine2}
+              </h2>
 
-            <p style={{ fontSize: '1rem', lineHeight: 1.6, color: T.sub, marginBottom: '2rem', maxWidth: '450px' }}>
-              {t.desc}
-            </p>
+              <p style={{ fontSize: '1rem', lineHeight: 1.6, color: T.sub, marginBottom: '2rem', maxWidth: '450px' }}>
+                {t.desc}
+              </p>
+            </div>
 
             <div className="quick-links-row">
               <button
