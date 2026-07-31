@@ -73,14 +73,14 @@
     "title": "How Systems Get Built",
     "outcomeLabel": "OUTCOME //",
     "step1Title": "Full Audit & Roadmap",
-    "step1Desc": "Deep-dive diagnostic of your current business infrastructure. We identify the main problems and bottlenecks.",
-    "step1Impact": "Full clarity on lost revenue before committing capital",
-    "step2Title": "System Build & Launch",
-    "step2Desc": "We build and deploy your entire growth infrastructure — funnels, CRM, and reporting — so every dollar you spend is tracked and accountable.",
-    "step2Impact": "Scalable system ready for high-budget traffic expansion",
-    "step3Title": "Ongoing Optimization & Scale",
-    "step3Desc": "We stay hands-on as your growth partner, continuously optimizing spend, speed, and margin to keep results compounding.",
-    "step3Impact": "Predictable revenue growth and guaranteed system reliability"
+    "step1Desc": "A deep-dive diagnostic of your current business infrastructure — surfacing the exact problems and bottlenecks holding your growth back",
+    "step1Impact": "A complete picture of where the business really stands — before you commit another dollar",
+    "step2Title": "System Build & Optimization",
+    "step2Desc": "A high-performance marketing system built from scratch, or your existing infrastructure fixed and re-engineered to actually perform",
+    "step2Impact": "A system built to carry real growth — not just traffic",
+    "step3Title": "System Delivery & Partnership",
+    "step3Desc": "A fully working system running on its own — with the option to keep scaling together",
+    "step3Impact": "A working system you own, with room to keep growing"
   },
   "cases": {
     "badge": "CASE STUDIES",
