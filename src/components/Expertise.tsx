@@ -121,12 +121,12 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             grid-template-columns: repeat(10, 1fr);
           }
 
-          .col-70 {
-            grid-column: span 7;
+          .col-60 {
+            grid-column: span 6;
           }
 
-          .col-30 {
-            grid-column: span 3;
+          .col-40 {
+            grid-column: span 4;
           }
 
           .col-50 {
@@ -246,13 +246,21 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           margin: 0;
         }
 
-        /* USP CARD (30%) — "ODD ONE OUT" HOOK TILE */
+        /* USP CARD (40%) — "ODD ONE OUT" HOOK TILE */
         .card-usp {
           display: flex;
           align-items: center;
           background: linear-gradient(135deg, rgba(0, 229, 153, 0.05) 0%, rgba(0, 163, 255, 0.05) 100%), rgba(12, 12, 16, 0.06);
           border: 1px solid rgba(0, 163, 255, 0.25);
           padding: 1.35rem 1.25rem;
+          /* Mobile/tablet: promoted to the top of the stack (see .bento-grid order) */
+          order: -1;
+        }
+
+        @media (min-width: 992px) {
+          .card-usp {
+            order: 0;
+          }
         }
 
         .card-usp:hover {
@@ -268,7 +276,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         .usp-hook {
           margin: 0;
-          font-size: clamp(1.4rem, 2.3vw, 1.85rem);
+          font-size: clamp(1.35rem, 2.15vw, 1.9rem);
           font-weight: 800;
           line-height: 1.3;
           letter-spacing: -0.02em;
@@ -279,10 +287,17 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .usp-line2 {
+          display: inline;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+        }
+
+        @media (min-width: 992px) {
+          .usp-line2 {
+            display: block;
+          }
         }
       `}</style>
 
@@ -297,8 +312,8 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         <div className="bento-grid">
           
-          {/* 1. КАРТОЧКА 70% — HERO FLAGSHIP */}
-          <div className="bento-card col-70">
+          {/* 1. КАРТОЧКА 60% — HERO FLAGSHIP */}
+          <div className="bento-card col-60">
             <div className="card-split">
               <div className="card-text-side">
                 <h3 className="card-title" style={{ fontSize: '1.25rem' }}>
@@ -325,12 +340,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
             </div>
           </div>
 
-          {/* 2. КАРТОЧКА 30% — USP HOOK */}
-          <div className="bento-card card-usp col-30">
+          {/* 2. КАРТОЧКА 40% — USP HOOK */}
+          <div className="bento-card card-usp col-40">
             <div className="usp-content">
               <p className="usp-hook">
-                <span className="usp-line1">{t.uspLine1}</span>
-                <br />
+                <span className="usp-line1">{t.uspLine1}</span>{' '}
                 <span className="usp-line2">{t.uspLine2}</span>
               </p>
             </div>
