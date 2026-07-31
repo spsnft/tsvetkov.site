@@ -10,8 +10,9 @@ interface HeroProps {
 
 export const Hero = ({ dict }: HeroProps) => {
   const t = dict?.hero ?? {
-    titleLine1: 'Value Growth',
-    titleLine2: 'Engineered to Scale',
+    badge: 'FOUNDER-LED AGENCY',
+    titleLine1: 'More Revenue',
+    titleLine2: 'Engineered',
     sub1: 'We eliminate chaos in <strong>marketing &amp; digital systems</strong>',
     sub2: 'No fluff — just <strong>high-performance architectures</strong>',
     sub3: 'Track every dollar and <strong>automate sales flow</strong>',
@@ -27,8 +28,8 @@ export const Hero = ({ dict }: HeroProps) => {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding-top: clamp(4.5rem, 7vw, 7rem);
-          padding-bottom: clamp(3rem, 5vw, 5.5rem);
+          padding-top: clamp(5.25rem, 8vw, 8rem);
+          padding-bottom: ${T.section.bottomPad};
           background: transparent;
           /* Убираем overflow: hidden, чтобы дать свечению бесшовно заходить на следующую секцию */
           overflow: visible;
@@ -64,7 +65,7 @@ export const Hero = ({ dict }: HeroProps) => {
           .hero-split-grid {
             flex-direction: row;
             align-items: flex-end;
-            gap: 3rem;
+            gap: 3.5rem;
           }
         }
 
@@ -78,6 +79,25 @@ export const Hero = ({ dict }: HeroProps) => {
           position: relative;
         }
 
+        .hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 0.35rem 0.85rem;
+          border-radius: 20px;
+          margin-bottom: 1.25rem;
+          font-size: 0.7rem;
+          font-weight: 800;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: ${T.accent};
+          background: ${T.accent05};
+          border: 1px solid ${T.accent25};
+          backdrop-filter: blur(12px);
+          position: relative;
+          z-index: 2;
+        }
+
         .hero-title {
           font-size: clamp(2.8rem, 5.8vw, 5.6rem);
           font-weight: 800;
@@ -87,6 +107,29 @@ export const Hero = ({ dict }: HeroProps) => {
           text-wrap: balance;
           position: relative;
           z-index: 2;
+        }
+
+        .hero-title-dot {
+          display: inline-block;
+          width: 0.15em;
+          height: 0.15em;
+          margin-left: 0.06em;
+          border-radius: 50%;
+          background: ${T.accent};
+          box-shadow: 0 0 6px ${T.accent}, 0 0 12px ${T.accent};
+          vertical-align: baseline;
+          animation: heroDotPulse 1.8s infinite ease-in-out;
+        }
+
+        @keyframes heroDotPulse {
+          0%, 100% {
+            opacity: 0.5;
+            transform: scale(0.85);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.15);
+          }
         }
 
         .hero-title .title-line1 {
@@ -180,8 +223,15 @@ export const Hero = ({ dict }: HeroProps) => {
           <div className="left-col">
             <div className="ambient-glow" />
 
+            {t.badge && (
+              <span className="hero-badge">
+                {t.badge}
+              </span>
+            )}
+
             <h1 className="hero-title">
               <span className="title-line1">{t.titleLine1}</span>
+              <span className="hero-title-dot" />
               <br />
               <span className="title-line2">{t.titleLine2}</span>
             </h1>

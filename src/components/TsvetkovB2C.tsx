@@ -30,7 +30,7 @@ export default function TsvetkovB2C({ lang }: TsvetkovB2CProps) {
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Nav lang={lang} dict={dict} />
         <Hero lang={lang} dict={dict} />
-        <Bottleneck lang={lang} />
+        <Bottleneck dict={dict} />
         <Expertise dict={dict} />
         <Services dict={dict} />
         <CaseStudies dict={dict} />

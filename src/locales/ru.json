@@ -8,9 +8,9 @@
     "letsTalk": "Let's talk"
   },
   "hero": {
-    "badge": "TSVETKOV • FOUNDER-LED AGENCY",
-    "titleLine1": "Value Growth",
-    "titleLine2": "Engineered to Scale",
+    "badge": "FOUNDER-LED AGENCY",
+    "titleLine1": "More Revenue",
+    "titleLine2": "Engineered",
     "sub1": "We eliminate chaos in <strong>marketing & digital systems</strong>",
     "sub2": "No fluff — just <strong>high-performance architectures</strong>",
     "sub3": "Track every dollar and <strong>automate sales flow</strong>",
@@ -29,8 +29,8 @@
         "descHighlight1": "poor-quality inquiries",
         "descMiddle": ". Ad budgets keep growing, but ",
         "descHighlight2": "net profit stays flat",
-        "descEnd": ".",
-        "impact": "Uncontrolled CAC Inflation"
+        "descEnd": "",
+        "impact": "Rising Cost Per Customer"
       },
       {
         "num": "02",
@@ -40,8 +40,8 @@
         "descHighlight1": "separate places",
         "descMiddle": ". You end up guessing what works instead of seeing ",
         "descHighlight2": "real ROI and true net profit",
-        "descEnd": ".",
-        "impact": "Wasted Marketing Capital"
+        "descEnd": "",
+        "impact": "Flying Blind on ROI"
       },
       {
         "num": "03",
@@ -51,8 +51,8 @@
         "descHighlight1": "manual CRM handoffs",
         "descMiddle": ". Your team wastes time managing spreadsheets instead of ",
         "descHighlight2": "closing deals",
-        "descEnd": ".",
-        "impact": "Revenue Leakage & High Overhead"
+        "descEnd": "",
+        "impact": "Deals Lost to Slow Follow-Up"
       }
     ]
   },
@@ -61,10 +61,8 @@
     "title": "How We Help You Scale",
     "card1Title": "Systems, Data & Architecture",
     "card1Desc": "Eliminate blind decision-making by unifying scattered business data into a <strong>single source of truth</strong>. Gain complete clarity on key financial metrics, unit economics, and margin dashboards",
-    "hmsBadge": "FOR HOTELS & RESORTS",
-    "hmsTitle": "Direct Booking",
-    "hmsDesc": "0% OTA commission",
-    "hmsCta": "Explore System",
+    "uspLine1": "We Don't Just Run Ads.",
+    "uspLine2": "We Build the Systems",
     "card2Title": "Strategic Audits & Funnel Optimization",
     "card2Desc": "We analyze your customer journey to eliminate bottlenecks. Rebuilding sales funnels and optimizing conversion to <strong>maximize revenue from existing traffic</strong>",
     "card3Title": "Process Automation & AI Workflows",
@@ -73,52 +71,27 @@
   "services": {
     "badge": "EXECUTION ALGORITHM",
     "title": "How Systems Get Built",
-    "deliverablesLabel": "Deliverables //",
     "outcomeLabel": "OUTCOME //",
-    "step1Badge": "PHASE 01 / 1-2 WEEKS",
     "step1Title": "Audit & Growth Roadmap",
     "step1Desc": "Deep-dive diagnostic of current ad channels, CRM workflows, and unit economics. Identification of traffic leakage, broken attribution, and sales bottlenecks.",
-    "step1Deliverables": [
-      "P&L & Analytics Audit",
-      "CRM & Pipeline Diagnostic",
-      "Growth Bottleneck Map",
-      "Step-by-Step Action Plan"
-    ],
     "step1Impact": "Full clarity on lost revenue before committing capital",
-    "step2Badge": "PHASE 02 / TURNKEY SYSTEM",
     "step2Title": "Growth Infrastructure Build",
     "step2Desc": "End-to-end architecture deployment: high-intent funnels, automated lead routing, zero-leakage CRM configuration, and custom P&L attribution dashboards.",
-    "step2Deliverables": [
-      "Custom Funnel Architecture",
-      "Instant CRM Lead Routing",
-      "End-to-End P&L Tracking",
-      "AI Workflow Automation"
-    ],
     "step2Impact": "Scalable system ready for high-budget traffic expansion",
-    "step3Badge": "PHASE 03 / FRACTIONAL CMO",
     "step3Title": "Growth Partner & Performance Scaling",
     "step3Desc": "Continuous strategic direction and hands-on execution. CAC optimization, ad spend management, sales speed acceleration, and net margin growth.",
-    "step3Deliverables": [
-      "Omnichannel Traffic Mgmt",
-      "Weekly P&L Optimization",
-      "Funnel Conversion Tuning",
-      "Executive Reporting"
-    ],
     "step3Impact": "Predictable revenue growth and guaranteed system reliability"
   },
   "cases": {
     "badge": "CASE STUDIES",
     "title": "What Can We Show",
-    "terminalBarTitle": "TELEMETRY ENGINE // LIVE SYSTEM DATA",
-    "bottleneckLabel": "THE BOTTLENECK //",
-    "solutionLabel": "ENGINEERED FIX //",
-    "infraLabel": "DEPLOYED INFRASTRUCTURE //",
-    "metricsTitle": "SYSTEM IMPACT METRICS",
-    "logsLabel": "TRAJECTORY & TELEMETRY LOGS //",
-    "hmsCategory": "SPECIALIZED OFFER / HOSPITALITY",
+    "bottleneckLabel": "THE PROBLEM //",
+    "solutionLabel": "THE SOLUTION //",
+    "infraLabel": "// DEPLOYED INFRASTRUCTURE //",
+    "metricsTitle": "// SYSTEM IMPACT METRICS //",
     "hmsCta": "Explore HMS System",
     "tabs": {
-      "hms": "01 // HOSPITALITY / HMS",
+      "hms": "01 // HOTELS & SHORT-TERM RENTALS",
       "ecomm": "02 // E-COMMERCE & SCALING",
       "b2b": "03 // HIGH-TICKET B2B",
       "realestate": "04 // REAL ESTATE DEVELOPMENT"
@@ -126,8 +99,16 @@
     "items": {
       "hms": {
         "title": "Direct Booking Architecture & OTA Elimination",
-        "challenge": "High OTA commissions (18–25%), total loss of guest data ownership, and low direct channel conversion.",
-        "solution": "Turnkey HMS deployment: direct booking funnels, automated WhatsApp CRM sync, and zero-commission engine.",
+        "challenge": [
+          "OTA commissions eating 18–25% of every booking",
+          "Zero ownership of guest data — OTAs own the relationship",
+          "Low direct-channel conversion, most bookings routed through commissions"
+        ],
+        "solution": [
+          "Turnkey direct booking funnel, live in weeks",
+          "Automated WhatsApp CRM sync for every guest",
+          "Zero-commission booking engine, built to scale"
+        ],
         "architecture": [
           "WhatsApp Instant Booking AI Engine",
           "Direct Payment Gateway Integration",
@@ -135,21 +116,32 @@
           "Automated Retargeting & Upsell Triggers"
         ],
         "metrics": [
-          { "value": "+40%", "label": "Direct Bookings" },
-          { "value": "0%", "label": "OTA Commission Leakage" },
-          { "value": "100%", "label": "Guest Data Ownership" }
-        ],
-        "telemetryLogs": [
-          "> OTA LEAKAGE: REDUCED TO 0%",
-          "> WHATSAPP CRM SYNC: ACTIVE (60s SLA)",
-          "> MARGIN BOOST: +22% NET PROFIT"
+          {
+            "value": "+40%",
+            "label": "Direct Bookings"
+          },
+          {
+            "value": "0%",
+            "label": "OTA Commission Leakage"
+          },
+          {
+            "value": "100%",
+            "label": "Guest Data Ownership"
+          }
         ]
       },
       "ecomm": {
-        "category": "OMNICHANNEL E-COMM",
         "title": "P&L Attribution & Performance Scaling Engine",
-        "challenge": "Ad spend scaled across 5 channels with zero net profit visibility, broken tracking, and ballooning CAC.",
-        "solution": "End-to-end data pipeline linking ad accounts directly to live net-margin P&L attribution dashboards.",
+        "challenge": [
+          "Ad spend scaled across 5+ channels with zero net-profit visibility",
+          "Broken tracking — blended ROAS is a guess, not a number",
+          "CAC climbing faster than revenue"
+        ],
+        "solution": [
+          "End-to-end pipeline linking ad accounts to real P&L",
+          "Live net-margin attribution dashboards, not last-click guesses",
+          "Budget re-allocation rules that follow actual profit"
+        ],
         "architecture": [
           "Real-Time Blended ROAS Attribution",
           "Automated LTV Cohort Analytics",
@@ -157,21 +149,32 @@
           "Server-Side Conversions API (CAPI)"
         ],
         "metrics": [
-          { "value": "5.2x", "label": "Blended ROAS" },
-          { "value": "+$520k", "label": "Net Profit Growth" },
-          { "value": "100%", "label": "P&L Visibility" }
-        ],
-        "telemetryLogs": [
-          "> ATTRIBUTION PIPELINE: SYNCHRONIZED",
-          "> DATA ACCURACY: 99.8%",
-          "> CAC OPTIMIZATION: AUTOMATED"
+          {
+            "value": "5.2x",
+            "label": "Blended ROAS"
+          },
+          {
+            "value": "+$520k",
+            "label": "Net Profit Growth"
+          },
+          {
+            "value": "100%",
+            "label": "P&L Visibility"
+          }
         ]
       },
       "b2b": {
-        "category": "ENTERPRISE B2B",
         "title": "Lead Velocity & Automated GTM Architecture",
-        "challenge": "High CPL, slow lead response time (>4 hours), and low sales conversion from manual CRM lead handoffs.",
-        "solution": "Rebuilt acquisition funnels coupled with instant 60-second automated CRM lead routing and AI scoring.",
+        "challenge": [
+          "High cost per lead, budget burning faster than pipeline grows",
+          "Leads sit untouched for 4+ hours before first contact",
+          "Manual CRM handoffs killing conversion rate"
+        ],
+        "solution": [
+          "Rebuilt acquisition funnels tuned for lead quality",
+          "Instant CRM routing — leads contacted within 60 seconds",
+          "AI scoring, so reps chase the deals worth closing"
+        ],
         "architecture": [
           "Instant Lead Speed Routing (<60s)",
           "Enriched B2B Prospect Profiling",
@@ -179,21 +182,32 @@
           "Executive P&L Forecast Dashboards"
         ],
         "metrics": [
-          { "value": "+340%", "label": "Qual. Lead Volume" },
-          { "value": "-42%", "label": "CAC Reduction" },
-          { "value": "$1.4M", "label": "Pipeline ARR" }
-        ],
-        "telemetryLogs": [
-          "> LEAD VELOCITY: <60s RESPONSE TIME",
-          "> CRM ROUTING: AUTOMATED",
-          "> PIPELINE HEALTH: OPTIMIZED"
+          {
+            "value": "+340%",
+            "label": "Qual. Lead Volume"
+          },
+          {
+            "value": "-42%",
+            "label": "CAC Reduction"
+          },
+          {
+            "value": "$1.4M",
+            "label": "Pipeline ARR"
+          }
         ]
       },
       "realestate": {
-        "category": "REAL ESTATE & PROPERTY",
         "title": "High-Intent Investor Acquisition System",
-        "challenge": "Untargeted lead spam, high cost per qualified buyer, and zero visibility on broker sales velocity.",
-        "solution": "Targeted investor acquisition funnels, automated financial qualification surveys, and broker SLA tracking.",
+        "challenge": [
+          "Untargeted lead spam, low buyer intent",
+          "High cost per qualified investor",
+          "Zero visibility into broker response times"
+        ],
+        "solution": [
+          "Targeted investor acquisition funnels by budget & intent",
+          "Automated financial qualification before a broker gets involved",
+          "Broker SLA tracking, so nothing goes cold"
+        ],
         "architecture": [
           "Financial Qualification Micro-Funnels",
           "Broker SLA & Pipeline Dashboard",
@@ -201,14 +215,18 @@
           "Multi-Currency ROAS Analytics"
         ],
         "metrics": [
-          { "value": "3.8x", "label": "Qual. Investor Leads" },
-          { "value": "-35%", "label": "Cost Per Booking" },
-          { "value": "12m", "label": "Avg Broker Response" }
-        ],
-        "telemetryLogs": [
-          "> QUALIFICATION RATE: 84%",
-          "> BROKER SLA: TRACKED LIVE",
-          "> INVESTOR FUNNEL: HIGH-INTENT"
+          {
+            "value": "3.8x",
+            "label": "Qual. Investor Leads"
+          },
+          {
+            "value": "-35%",
+            "label": "Cost Per Booking"
+          },
+          {
+            "value": "12m",
+            "label": "Avg Broker Response"
+          }
         ]
       }
     }
@@ -217,12 +235,11 @@
     "badge": "GET IN TOUCH",
     "title": "Let's Engineer Your Scale",
     "desc": "Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.",
-    "callBtn": "Book a 15-Min Strategy Call",
+    "callBtn": "Book a Call",
     "formTitle": "Request an Audit",
     "nameLabel": "Your Name",
     "emailLabel": "Contact Email",
     "websiteLabel": "Website or Socials",
-    "budgetLabel": "Monthly Ad Budget",
     "submitBtn": "Submit Audit Request"
   },
   "hms": {

@@ -17,14 +17,13 @@ interface ContactProps {
       nameLabel: string;
       emailLabel: string;
       websiteLabel: string;
-      budgetLabel: string;
       submitBtn: string;
     };
   } | null;
 }
 
 export const Contact = ({ dict }: ContactProps) => {
-  const [form, setForm] = useState({ name: '', contact: '', website: '', budget: '' });
+  const [form, setForm] = useState({ name: '', contact: '', website: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [calendlyReady, setCalendlyReady] = useState(false);
 
@@ -37,7 +36,6 @@ export const Contact = ({ dict }: ContactProps) => {
     nameLabel: 'Your Name',
     emailLabel: 'Contact Email',
     websiteLabel: 'Website or Socials',
-    budgetLabel: 'Monthly Ad Budget',
     submitBtn: 'Submit Audit Request',
   };
 
@@ -82,8 +80,8 @@ export const Contact = ({ dict }: ContactProps) => {
       style={{
         width: '100%',
         position: 'relative',
-        paddingTop: 'clamp(2rem, 4vw, 4rem)',
-        paddingBottom: '2rem',
+        paddingTop: T.section.topPad,
+        paddingBottom: T.section.bottomPad,
         paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
         paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
         background: 'transparent',
@@ -110,7 +108,7 @@ export const Contact = ({ dict }: ContactProps) => {
         }
         .btn-submit {
           width: 100%;
-          background: ${ACCENT};
+          background: linear-gradient(180deg, #00E599 0%, #00A3FF 100%);
           color: #000;
           font-weight: 700;
           padding: 0.9rem 1.5rem;
@@ -121,31 +119,58 @@ export const Contact = ({ dict }: ContactProps) => {
           transition: background 0.2s ease, transform 0.2s ease;
         }
         .btn-submit:hover {
-          background: #00c785;
+          background: linear-gradient(180deg, #1affaa 0%, #1ab1ff 100%);
           transform: translateY(-1px);
         }
         .btn-submit:disabled {
           opacity: 0.7;
           cursor: not-allowed;
         }
-        .contact-link-card {
+        .form-row-split {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
+        }
+        @media (min-width: 480px) {
+          .form-row-split {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+        .quick-links-row {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.65rem;
+          max-width: 420px;
+        }
+        @media (max-width: 420px) {
+          .quick-links-row {
+            grid-template-columns: 1fr;
+          }
+        }
+        .quick-link-card {
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: space-between;
-          padding: 1rem 1.25rem;
+          justify-content: center;
+          gap: 0.35rem;
+          padding: 0.9rem 0.5rem;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 10px;
           color: #fff;
           text-decoration: none;
-          font-size: 0.9rem;
+          font-size: 0.78rem;
           font-weight: 600;
+          text-align: center;
           transition: all 0.2s ease;
           cursor: pointer;
         }
-        .contact-link-card:hover {
+        .quick-link-card:hover {
           border-color: rgba(0, 229, 153, 0.4);
           background: rgba(0, 229, 153, 0.04);
+        }
+        .quick-link-icon {
+          font-size: 0.9rem;
         }
         .success-message {
           text-align: center;
@@ -177,6 +202,24 @@ export const Contact = ({ dict }: ContactProps) => {
           justify-content: center;
           margin: 0 auto 1.5rem;
         }
+        .contact-badge-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: ${ACCENT};
+          box-shadow: 0 0 8px ${ACCENT};
+          animation: pulseDot 1.8s infinite ease-in-out;
+        }
+        @keyframes pulseDot {
+          0%, 100% {
+            opacity: 0.4;
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.3);
+          }
+        }
       `}</style>
 
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -188,10 +231,12 @@ export const Contact = ({ dict }: ContactProps) => {
           <div>
             <span
               style={{
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
                 padding: '0.35rem 0.85rem',
                 borderRadius: 20,
-                marginBottom: '1rem',
+                marginBottom: T.section.badgeGap,
                 fontSize: '0.7rem',
                 fontWeight: 700,
                 letterSpacing: '0.15em',
@@ -201,12 +246,13 @@ export const Contact = ({ dict }: ContactProps) => {
                 color: ACCENT,
               }}
             >
+              <span className="contact-badge-dot" />
               {t.badge}
             </span>
 
             <h2
               style={{
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontSize: T.section.titleSize,
                 fontWeight: 800,
                 lineHeight: 1.15,
                 letterSpacing: '-0.03em',
@@ -221,31 +267,31 @@ export const Contact = ({ dict }: ContactProps) => {
               {t.desc}
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxWidth: '400px' }}>
+            <div className="quick-links-row">
               <button
                 type="button"
                 onClick={handleCalendlyPopup}
-                className="contact-link-card"
+                className="quick-link-card"
                 disabled={!calendlyReady}
-                style={{ 
-                  borderColor: 'rgba(0, 229, 153, 0.3)', 
+                style={{
+                  borderColor: 'rgba(0, 229, 153, 0.3)',
                   background: 'rgba(0, 229, 153, 0.05)',
                   opacity: calendlyReady ? 1 : 0.6,
                   cursor: calendlyReady ? 'pointer' : 'not-allowed',
                 }}
               >
+                <span className="quick-link-icon" style={{ color: ACCENT }}>→</span>
                 <span>{calendlyReady ? t.callBtn : "Loading…"}</span>
-                <span style={{ color: ACCENT }}>→</span>
               </button>
 
-              <a href="https://linkedin.com/in/tsvetkov-marketing/" target="_blank" rel="noopener noreferrer" className="contact-link-card">
-                <span>Connect on LinkedIn</span>
-                <span style={{ color: T.sub }}>in</span>
+              <a href="https://linkedin.com/in/tsvetkov-marketing/" target="_blank" rel="noopener noreferrer" className="quick-link-card">
+                <span className="quick-link-icon" style={{ color: T.sub }}>in</span>
+                <span>LinkedIn</span>
               </a>
 
-              <a href="mailto:fedor@tsvetkov.site" className="contact-link-card">
-                <span>fedor@tsvetkov.site</span>
-                <span style={{ color: T.sub }}>Email</span>
+              <a href="mailto:fedor@tsvetkov.site" className="quick-link-card">
+                <span className="quick-link-icon" style={{ color: T.sub }}>✉</span>
+                <span>Email</span>
               </a>
             </div>
           </div>
@@ -286,34 +332,36 @@ export const Contact = ({ dict }: ContactProps) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div>
-                  <label htmlFor="audit-name" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    {t.nameLabel}
-                  </label>
-                  <input
-                    id="audit-name"
-                    type="text"
-                    placeholder="John Doe"
-                    className="contact-input"
-                    required
-                    value={form.name}
-                    onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                  />
-                </div>
+                <div className="form-row-split">
+                  <div>
+                    <label htmlFor="audit-name" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                      {t.nameLabel}
+                    </label>
+                    <input
+                      id="audit-name"
+                      type="text"
+                      placeholder="John Doe"
+                      className="contact-input"
+                      required
+                      value={form.name}
+                      onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="audit-email" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    {t.emailLabel}
-                  </label>
-                  <input
-                    id="audit-email"
-                    type="email"
-                    placeholder="john@company.com"
-                    className="contact-input"
-                    required
-                    value={form.contact}
-                    onChange={e => setForm(p => ({ ...p, contact: e.target.value }))}
-                  />
+                  <div>
+                    <label htmlFor="audit-email" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                      {t.emailLabel}
+                    </label>
+                    <input
+                      id="audit-email"
+                      type="email"
+                      placeholder="john@company.com"
+                      className="contact-input"
+                      required
+                      value={form.contact}
+                      onChange={e => setForm(p => ({ ...p, contact: e.target.value }))}
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -328,24 +376,6 @@ export const Contact = ({ dict }: ContactProps) => {
                     value={form.website}
                     onChange={e => setForm(p => ({ ...p, website: e.target.value }))}
                   />
-                </div>
-
-                <div>
-                  <label htmlFor="audit-budget" style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: T.sub, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    {t.budgetLabel}
-                  </label>
-                  <select
-                    id="audit-budget"
-                    className="contact-input"
-                    style={{ color: '#fff' }}
-                    value={form.budget}
-                    onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
-                  >
-                    <option value="" style={{ background: '#090B0E' }}>Select your budget range</option>
-                    <option value="5k-10k" style={{ background: '#090B0E' }}>$5,000 – $10,000</option>
-                    <option value="10k-50k" style={{ background: '#090B0E' }}>$10,000 – $50,000</option>
-                    <option value="50k+" style={{ background: '#090B0E' }}>$50,000+</option>
-                  </select>
                 </div>
 
                 <button

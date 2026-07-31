@@ -1,18 +1,15 @@
 'use client';
 
 import React from 'react';
-import { useDictionary } from '@/src/locales/getDictionary';
 import { T } from '@/src/theme/tokens';
 
 const RED_ACCENT = '#FF5555';
 
 type BottleneckProps = {
-  lang?: string;
+  dict?: any;
 };
 
-export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
-  const dict = useDictionary(lang);
-
+export const Bottleneck = ({ dict }: BottleneckProps) => {
   // Скелетон во избежание сдвигов верстки (CLS)
   if (!dict) {
     return (
@@ -21,18 +18,18 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         style={{
           width: '100%',
           position: 'relative',
-          padding: '1rem 0 clamp(3rem, 6vw, 6rem) 0',
+          padding: `${T.section.topPad} 0 ${T.section.bottomPad} 0`,
           background: 'transparent',
         }}
       >
         <div className="container" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1.5rem' }}>
-          <div className="header-box" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+          <div className="header-box" style={{ textAlign: 'center', marginBottom: T.section.titleGap }}>
             <span
               style={{
                 display: 'inline-block',
                 padding: '0.35rem 0.85rem',
                 borderRadius: 20,
-                marginBottom: '1rem',
+                marginBottom: T.section.badgeGap,
                 fontSize: '0.7rem',
                 fontWeight: 700,
                 letterSpacing: '0.15em',
@@ -46,7 +43,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
             </span>
             <h2
               style={{
-                fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+                fontSize: T.section.titleSize,
                 fontWeight: 800,
                 lineHeight: 1.15,
                 color: '#ffffff',
@@ -70,7 +67,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
                   height: 300,
                   borderRadius: 18,
                   border: '1px solid rgba(255,255,255,0.08)',
-                  background: 'rgba(12, 12, 16, 0.25)',
+                  background: 'rgba(12, 12, 16, 0.06)',
                 }}
               />
             ))}
@@ -88,7 +85,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         .bottleneck-section {
           width: 100%;
           position: relative;
-          padding: 1rem 0 clamp(3rem, 6vw, 6rem) 0;
+          padding: ${T.section.topPad} 0 ${T.section.bottomPad} 0;
           background: transparent;
           z-index: 5;
         }
@@ -109,7 +106,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
         .header-box {
           text-align: center;
-          margin-bottom: 3.5rem;
+          margin-bottom: ${T.section.titleGap};
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -122,7 +119,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           gap: 8px;
           padding: 0.35rem 0.85rem;
           border-radius: 20px;
-          margin-bottom: 1rem;
+          margin-bottom: ${T.section.badgeGap};
           font-size: 0.7rem;
           font-weight: 800;
           letter-spacing: 0.15em;
@@ -156,7 +153,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         }
 
         .title {
-          font-size: clamp(2rem, 5vw, 3.2rem);
+          font-size: ${T.section.titleSize};
           font-weight: 800;
           line-height: 1.15;
           letter-spacing: -0.03em;
@@ -175,6 +172,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
         @media (min-width: 768px) {
           .grid {
             grid-template-columns: repeat(3, 1fr);
+            align-items: start;
           }
         }
 
@@ -186,9 +184,9 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
           border-radius: 18px;
           
           /* Воздушная прозрачность с легким блюром */
-          background: rgba(12, 12, 16, 0.25);
-          backdrop-filter: blur(10px) saturate(140%);
-          -webkit-backdrop-filter: blur(10px) saturate(140%);
+          background: rgba(12, 12, 16, 0.06);
+          backdrop-filter: blur(4px) saturate(140%);
+          -webkit-backdrop-filter: blur(4px) saturate(140%);
           
           /* Блик по верху и тонкий контур */
           border: 1px solid rgba(255, 255, 255, 0.07);
@@ -208,7 +206,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
         .card:hover {
           transform: translateY(-5px);
-          background: rgba(18, 18, 26, 0.45);
+          background: rgba(18, 18, 26, 0.12);
           border-color: rgba(255, 85, 85, 0.35);
           box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5),
                       0 0 30px rgba(255, 85, 85, 0.12),
@@ -246,7 +244,7 @@ export const Bottleneck = ({ lang = 'en' }: BottleneckProps) => {
 
         /* ЧЕТКО В 1 СТРОКУ НА ПК */
         .card-title {
-          font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+          font-size: clamp(1.15rem, 1.4vw, 1.35rem);
           font-weight: 700;
           color: #ffffff;
           margin: 0 0 0.85rem 0;

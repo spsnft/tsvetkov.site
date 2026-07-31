@@ -52,6 +52,26 @@ export const T = {
   // Page padding
   pagePadding: 'clamp(1rem, 4vw, 2.5rem)',
 
+  // Section rhythm — shared vertical spacing logic for every content section
+  section: {
+    // Gap from the previous section down to this section's badge/tag —
+    // this is the ONLY source of inter-section spacing (see bottomPad below)
+    topPad: 'clamp(1.5rem, 3vw, 2.5rem)',
+    // Trailing space at the end of a section's own content. Kept small on
+    // purpose: the visible gap between two sections is topPad + bottomPad,
+    // and topPad alone should carry most of it so the badge/title doesn't
+    // end up stranded near the bottom of an oversized gap.
+    bottomPad: 'clamp(1rem, 2vw, 1.5rem)',
+    // Section H2 size — unified across Bottleneck/Expertise/Services/CaseStudies/Contact
+    titleSize: 'clamp(2rem, 5vw, 3.2rem)',
+    // Badge -> title gap — kept tight so the badge reads as one unit with the title
+    badgeGap: '0.6rem',
+    // Title -> content gap — the bigger breathing-room jump before cards/timeline
+    titleGap: '3rem',
+  },
+
+  // Breakpoint standard: Mobile <768px / Tablet 768–1023px / Desktop ≥1024px
+
   // Gradients
   linearGradient: 'linear-gradient(135deg, #00E599 0%, #00A3FF 100%)',
   textGradientStyles: {
