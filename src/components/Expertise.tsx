@@ -31,17 +31,6 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
   if (!t) return null;
 
-  const renderWithStrong = (text: string) => {
-    if (!text) return null;
-    const parts = text.split(/<strong>(.*?)<\/strong>/g);
-    return parts.map((part, i) => {
-      if (i % 2 === 1) {
-        return <strong key={i} style={{ color: '#ffffff' }}>{part}</strong>;
-      }
-      return part;
-    });
-  };
-
   return (
     <section id="expertise" className="expertise-section">
       <style jsx>{`
@@ -157,18 +146,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         /* SPLIT STRUCTURE */
         .card-split {
           display: flex;
-          flex-direction: column;
-          gap: 1rem;
+          flex-direction: row;
+          align-items: center;
+          gap: 0.75rem;
           height: 100%;
           justify-content: space-between;
-        }
-
-        @media (min-width: 640px) {
-          .card-split {
-            flex-direction: row;
-            align-items: center;
-            gap: 0.75rem;
-          }
         }
 
         .card-text-side {
@@ -205,6 +187,14 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           height: 145px;
         }
 
+        @media (max-width: 767px) {
+          .size-hero,
+          .size-row2 {
+            width: 72px;
+            height: 72px;
+          }
+        }
+
         .asset-glow {
           position: absolute;
           inset: -10px;
@@ -232,11 +222,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
 
         /* TYPOGRAPHY */
         .card-title {
-          font-size: 1.18rem;
+          font-size: clamp(1.15rem, 1.4vw, 1.35rem);
           font-weight: 700;
           color: #ffffff;
           line-height: 1.25;
-          margin: 0 0 8px 0; /* Отступ 8px согласно договоренности */
+          margin: 0 0 12px 0;
         }
 
         .card-desc {
@@ -287,16 +277,16 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .usp-line2 {
-          display: inline;
+          display: block;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 768px) and (max-width: 991px) {
           .usp-line2 {
-            display: block;
+            display: inline;
           }
         }
       `}</style>
@@ -316,11 +306,11 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           <div className="bento-card col-60">
             <div className="card-split">
               <div className="card-text-side">
-                <h3 className="card-title" style={{ fontSize: '1.25rem' }}>
+                <h3 className="card-title">
                   {t.card1Title}
                 </h3>
                 <p className="card-desc">
-                  {renderWithStrong(t.card1Desc)}
+                  {t.card1Desc}
                 </p>
               </div>
 
@@ -356,7 +346,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
               <div className="card-text-side">
                 <h3 className="card-title">{t.card2Title}</h3>
                 <p className="card-desc">
-                  {renderWithStrong(t.card2Desc)}
+                  {t.card2Desc}
                 </p>
               </div>
 
@@ -381,7 +371,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
               <div className="card-text-side">
                 <h3 className="card-title">{t.card3Title}</h3>
                 <p className="card-desc">
-                  {renderWithStrong(t.card3Desc)}
+                  {t.card3Desc}
                 </p>
               </div>
 
