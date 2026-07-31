@@ -18,7 +18,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
         style={{
           width: '100%',
           position: 'relative',
-          padding: `${T.section.topPad} 0 clamp(3rem, 6vw, 6rem) 0`,
+          padding: `${T.section.topPad} 0 ${T.section.bottomPad} 0`,
           background: 'transparent',
         }}
       >
@@ -85,7 +85,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
         .bottleneck-section {
           width: 100%;
           position: relative;
-          padding: ${T.section.topPad} 0 clamp(3rem, 6vw, 6rem) 0;
+          padding: ${T.section.topPad} 0 ${T.section.bottomPad} 0;
           background: transparent;
           z-index: 5;
         }
@@ -172,6 +172,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
         @media (min-width: 768px) {
           .grid {
             grid-template-columns: repeat(3, 1fr);
+            align-items: start;
           }
         }
 
@@ -243,7 +244,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
 
         /* ЧЕТКО В 1 СТРОКУ НА ПК */
         .card-title {
-          font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+          font-size: clamp(1.15rem, 1.4vw, 1.35rem);
           font-weight: 700;
           color: #ffffff;
           margin: 0 0 0.85rem 0;

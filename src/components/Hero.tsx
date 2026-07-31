@@ -29,7 +29,7 @@ export const Hero = ({ dict }: HeroProps) => {
           flex-direction: column;
           justify-content: center;
           padding-top: clamp(5.25rem, 8vw, 8rem);
-          padding-bottom: clamp(3.5rem, 6vw, 6.5rem);
+          padding-bottom: ${T.section.bottomPad};
           background: transparent;
           /* Убираем overflow: hidden, чтобы дать свечению бесшовно заходить на следующую секцию */
           overflow: visible;

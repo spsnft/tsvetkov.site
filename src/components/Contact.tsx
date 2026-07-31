@@ -81,7 +81,7 @@ export const Contact = ({ dict }: ContactProps) => {
         width: '100%',
         position: 'relative',
         paddingTop: T.section.topPad,
-        paddingBottom: '2rem',
+        paddingBottom: T.section.bottomPad,
         paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
         paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
         background: 'transparent',

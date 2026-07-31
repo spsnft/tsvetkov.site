@@ -68,7 +68,7 @@ export const Services = ({ dict }: ServicesProps) => {
         .services-section {
           width: 100%;
           position: relative;
-          padding: ${T.section.topPad} 0 clamp(3rem, 6vw, 6rem) 0;
+          padding: ${T.section.topPad} 0 ${T.section.bottomPad} 0;
           background: transparent;
           z-index: 5;
         }
