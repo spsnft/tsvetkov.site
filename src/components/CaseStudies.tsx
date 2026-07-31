@@ -275,11 +275,18 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .tabs {
           display: flex;
-          flex-wrap: wrap;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
           gap: 0.5rem;
           padding: 1rem;
           border-bottom: 1px solid ${T.border};
           background: ${T.bg1};
+        }
+
+        .tabs::-webkit-scrollbar {
+          display: none;
         }
 
         .tab {
@@ -296,6 +303,8 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           color: ${T.muted};
           cursor: pointer;
           transition: all 0.2s ease;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
         .tab:hover {
@@ -364,14 +373,14 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           grid-template-columns: 1fr;
           border: 1px solid ${T.accent15};
           border-radius: ${T.radius.lg};
-          background: ${T.bg1};
+          background: rgba(18, 18, 20, 0.15);
           margin-top: 1rem;
           overflow: hidden;
         }
 
         @media (min-width: 768px) {
           .infra-metrics-box {
-            grid-template-columns: minmax(240px, 280px) 1fr;
+            grid-template-columns: 3fr 2fr;
           }
         }
 
@@ -432,29 +441,31 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         }
 
         .metric-card {
-          border: 1px solid ${T.border};
+          border: 1px solid ${T.accent15};
           border-radius: ${T.radius.md};
-          padding: 1rem 0.5rem;
+          padding: 1.1rem 0.5rem;
           text-align: center;
-          background: ${T.bg0};
+          background: transparent;
         }
 
         .metric-value {
+          position: relative;
           font-family: 'Space Grotesk', sans-serif;
-          font-size: clamp(1.1rem, 3vw, 1.7rem);
+          font-size: clamp(1.2rem, 3vw, 1.85rem);
           font-weight: 800;
-          background: ${T.linearGradient};
+          background: linear-gradient(90deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           line-height: 1;
           font-variant-numeric: tabular-nums;
+          text-shadow: 0 0 24px rgba(0, 229, 153, 0.35);
         }
 
         .metric-label {
           font-size: 0.76rem;
-          color: ${T.muted};
-          margin-top: 0.5rem;
+          color: ${T.sub};
+          margin-top: 0.6rem;
           line-height: 1.35;
         }
 
