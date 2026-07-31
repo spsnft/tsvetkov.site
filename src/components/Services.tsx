@@ -185,7 +185,7 @@ export const Services = ({ dict }: ServicesProps) => {
           background: rgba(12, 12, 16, 0.06);
           backdrop-filter: blur(4px) saturate(140%);
           -webkit-backdrop-filter: blur(4px) saturate(140%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.15);
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
           transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
           width: 100%;
@@ -193,6 +193,7 @@ export const Services = ({ dict }: ServicesProps) => {
 
         .card-custom:hover {
           transform: translateY(-2px);
+          border-color: rgba(0, 229, 153, 0.35);
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
         }
 
@@ -257,12 +258,7 @@ export const Services = ({ dict }: ServicesProps) => {
                   {item.num}
                 </div>
 
-                <div 
-                  className="card-custom"
-                  style={{
-                    border: `1px solid rgba(255, 255, 255, 0.08)`,
-                  }}
-                >
+                <div className="card-custom">
                   <h3 className="card-title">{item.title}</h3>
                   <p className="card-desc">{item.desc}</p>
 

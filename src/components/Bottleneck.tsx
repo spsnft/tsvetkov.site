@@ -189,7 +189,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
           -webkit-backdrop-filter: blur(4px) saturate(140%);
           
           /* Блик по верху и тонкий контур */
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          border: 1px solid rgba(255, 85, 85, 0.15);
           box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 
                       inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 

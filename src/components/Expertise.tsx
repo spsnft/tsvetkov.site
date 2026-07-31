@@ -72,9 +72,9 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          background: rgba(0, 163, 255, 0.08);
-          border: 1px solid rgba(0, 163, 255, 0.25);
-          color: ${CYAN_ACCENT};
+          background: rgba(0, 229, 153, 0.05);
+          border: 1px solid rgba(0, 229, 153, 0.25);
+          color: ${T.accent};
           backdrop-filter: blur(12px);
         }
 
@@ -143,7 +143,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           background: rgba(12, 12, 16, 0.06);
           backdrop-filter: blur(4px) saturate(140%);
           -webkit-backdrop-filter: blur(4px) saturate(140%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(0, 163, 255, 0.15);
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
           transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }

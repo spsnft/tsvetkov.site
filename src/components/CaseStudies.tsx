@@ -264,7 +264,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         }
 
         .terminal {
-          border: 1px solid ${T.border};
+          border: 1px solid ${T.accent15};
           border-radius: ${T.radius.xl};
           overflow: hidden;
           background: rgba(10, 10, 12, 0.5);
@@ -362,7 +362,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         .infra-metrics-box {
           display: grid;
           grid-template-columns: 1fr;
-          border: 1px solid ${T.border};
+          border: 1px solid ${T.accent15};
           border-radius: ${T.radius.lg};
           background: ${T.bg1};
           margin-top: 1rem;
