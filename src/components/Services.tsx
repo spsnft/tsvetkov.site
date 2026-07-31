@@ -3,9 +3,7 @@
 import React from 'react';
 import { T } from '@/src/theme/tokens';
 
-const COLOR_CYAN = '#00A3FF';
 const COLOR_EMERALD = '#00E599';
-const COLOR_MINT = '#34D399';
 
 interface StepData {
   title: string;
@@ -38,27 +36,24 @@ export const Services = ({ dict }: ServicesProps) => {
 
   if (!t) return null;
 
-  const steps: (StepData & { num: string; color: string })[] = [
+  const steps: (StepData & { num: string })[] = [
     {
       num: '01',
       title: t.step1Title,
       desc: t.step1Desc,
       impact: t.step1Impact,
-      color: COLOR_CYAN,
     },
     {
       num: '02',
       title: t.step2Title,
       desc: t.step2Desc,
       impact: t.step2Impact,
-      color: COLOR_EMERALD,
     },
     {
       num: '03',
       title: t.step3Title,
       desc: t.step3Desc,
       impact: t.step3Impact,
-      color: COLOR_MINT,
     },
   ];
 
@@ -144,8 +139,8 @@ export const Services = ({ dict }: ServicesProps) => {
           background: linear-gradient(
             180deg,
             ${COLOR_EMERALD} 0%,
-            ${COLOR_CYAN} 70%,
-            rgba(0, 163, 255, 0.1) 100%
+            ${COLOR_EMERALD} 70%,
+            rgba(0, 229, 153, 0.1) 100%
           );
           z-index: 1;
         }
@@ -247,12 +242,12 @@ export const Services = ({ dict }: ServicesProps) => {
           <div className="steps-list">
             {steps.map((item, i) => (
               <div key={i} className="step-item">
-                <div 
-                  className="step-node" 
-                  style={{ 
-                    border: `2px solid ${item.color}`, 
-                    color: item.color,
-                    boxShadow: `0 0 14px ${item.color}40` 
+                <div
+                  className="step-node"
+                  style={{
+                    border: `2px solid ${COLOR_EMERALD}`,
+                    color: COLOR_EMERALD,
+                    boxShadow: `0 0 14px ${COLOR_EMERALD}40`
                   }}
                 >
                   {item.num}
@@ -265,15 +260,15 @@ export const Services = ({ dict }: ServicesProps) => {
                   <div
                     className="outcome-box"
                     style={{
-                      background: `${item.color}08`,
-                      border: `1px solid ${item.color}25`
+                      background: `${COLOR_EMERALD}08`,
+                      border: `1px solid ${COLOR_EMERALD}25`
                     }}
                   >
-                    <span 
+                    <span
                       className="outcome-tag"
                       style={{
-                        background: `${item.color}20`,
-                        color: item.color
+                        background: `${COLOR_EMERALD}20`,
+                        color: COLOR_EMERALD
                       }}
                     >
                       {t.outcomeLabel || 'OUTCOME //'}
