@@ -107,7 +107,7 @@ function Panel({
           border-left: 2px solid;
           border-radius: ${T.radius.md};
           padding: 1.25rem;
-          background: ${T.bg1};
+          background: rgba(18, 18, 20, 0.15);
         }
         .panel--red {
           border-left-color: ${T.red};
@@ -371,7 +371,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         @media (min-width: 768px) {
           .infra-metrics-box {
-            grid-template-columns: 3fr 2fr;
+            grid-template-columns: minmax(240px, 280px) 1fr;
           }
         }
 
@@ -392,9 +392,9 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .box-label {
           font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.06em;
           text-transform: uppercase;
-          font-size: 0.72rem;
+          font-size: 0.66rem;
           font-weight: 700;
           color: ${T.muted};
           margin-bottom: 1rem;
@@ -402,11 +402,12 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           align-items: center;
           justify-content: space-between;
           gap: 12px;
+          text-wrap: pretty;
         }
 
         .infra-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          grid-template-columns: 1fr;
           gap: 0.65rem;
         }
 
@@ -426,23 +427,26 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .metrics-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
-          gap: 0.75rem;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.6rem;
         }
 
         .metric-card {
           border: 1px solid ${T.border};
           border-radius: ${T.radius.md};
-          padding: 1rem 0.75rem;
+          padding: 1rem 0.5rem;
           text-align: center;
           background: ${T.bg0};
         }
 
         .metric-value {
           font-family: 'Space Grotesk', sans-serif;
-          font-size: clamp(1.35rem, 3vw, 1.7rem);
+          font-size: clamp(1.1rem, 3vw, 1.7rem);
           font-weight: 800;
-          color: ${T.accent};
+          background: ${T.linearGradient};
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           line-height: 1;
           font-variant-numeric: tabular-nums;
         }

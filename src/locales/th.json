@@ -91,8 +91,8 @@
     "metricsTitle": "// SYSTEM IMPACT METRICS //",
     "hmsCta": "Explore HMS System",
     "tabs": {
-      "hms": "01 // HOTELS & SHORT-TERM RENTALS",
-      "ecomm": "02 // E-COMMERCE & SCALING",
+      "hms": "01 // HOTELS & VILLAS",
+      "ecomm": "02 // E-COMMERCE SCALING",
       "b2b": "03 // HIGH-TICKET B2B",
       "realestate": "04 // REAL ESTATE DEVELOPMENT"
     },
@@ -100,19 +100,18 @@
       "hms": {
         "title": "Direct Booking Architecture & OTA Elimination",
         "challenge": [
-          "OTA commissions eating 18–25% of every booking",
-          "Zero ownership of guest data — OTAs own the relationship",
-          "Low direct-channel conversion, most bookings routed through commissions"
+          "OTA commissions eating up to 20% of every booking",
+          "Zero ownership of guest data",
+          "Most bookings routed through OTAs, low direct-channel conversion"
         ],
         "solution": [
-          "Turnkey direct booking funnel, live in weeks",
-          "Automated WhatsApp CRM sync for every guest",
-          "Zero-commission booking engine, built to scale"
+          "Zero-commission booking engine, built to scale",
+          "Own your guest data & relationship",
+          "Turnkey direct booking funnel"
         ],
         "architecture": [
-          "WhatsApp Instant Booking AI Engine",
           "Direct Payment Gateway Integration",
-          "Zero-Leakage Guest Data Pipeline",
+          "Guest Data Pipeline",
           "Automated Retargeting & Upsell Triggers"
         ],
         "metrics": [
@@ -122,31 +121,30 @@
           },
           {
             "value": "0%",
-            "label": "OTA Commission Leakage"
+            "label": "OTA Commission"
           },
           {
             "value": "100%",
-            "label": "Guest Data Ownership"
+            "label": "Data Ownership"
           }
         ]
       },
       "ecomm": {
-        "title": "P&L Attribution & Performance Scaling Engine",
+        "title": "Performance Engine & P&L Attribution",
         "challenge": [
           "Ad spend scaled across 5+ channels with zero net-profit visibility",
-          "Broken tracking — blended ROAS is a guess, not a number",
+          "Broken tracking — ROAS numbers you can't trust",
           "CAC climbing faster than revenue"
         ],
         "solution": [
           "End-to-end pipeline linking ad accounts to real P&L",
-          "Live net-margin attribution dashboards, not last-click guesses",
+          "Live net-margin attribution dashboards",
           "Budget re-allocation rules that follow actual profit"
         ],
         "architecture": [
           "Real-Time Blended ROAS Attribution",
           "Automated LTV Cohort Analytics",
-          "Dynamic Ad Budget Re-allocation Rules",
-          "Server-Side Conversions API (CAPI)"
+          "Dynamic Ad Budget Re-allocation Rules"
         ],
         "metrics": [
           {
@@ -154,7 +152,7 @@
             "label": "Blended ROAS"
           },
           {
-            "value": "+$520k",
+            "value": "+$430k",
             "label": "Net Profit Growth"
           },
           {
@@ -166,8 +164,8 @@
       "b2b": {
         "title": "Lead Velocity & Automated GTM Architecture",
         "challenge": [
-          "High cost per lead, budget burning faster than pipeline grows",
-          "Leads sit untouched for 4+ hours before first contact",
+          "High cost per lead, burning budget fast",
+          "Leads sit untouched for too long before first contact",
           "Manual CRM handoffs killing conversion rate"
         ],
         "solution": [
@@ -176,7 +174,6 @@
           "AI scoring, so reps chase the deals worth closing"
         ],
         "architecture": [
-          "Instant Lead Speed Routing (<60s)",
           "Enriched B2B Prospect Profiling",
           "Automated Sales Pipeline Triggers",
           "Executive P&L Forecast Dashboards"
@@ -197,7 +194,7 @@
         ]
       },
       "realestate": {
-        "title": "High-Intent Investor Acquisition System",
+        "title": "High-Intent Acquisition System",
         "challenge": [
           "Untargeted lead spam, low buyer intent",
           "High cost per qualified investor",
@@ -205,27 +202,26 @@
         ],
         "solution": [
           "Targeted investor acquisition funnels by budget & intent",
-          "Automated financial qualification before a broker gets involved",
+          "Optimized financial qualification before a broker gets involved",
           "Broker SLA tracking, so nothing goes cold"
         ],
         "architecture": [
           "Financial Qualification Micro-Funnels",
           "Broker SLA & Pipeline Dashboard",
-          "WhatsApp VIP Concierge Automation",
           "Multi-Currency ROAS Analytics"
         ],
         "metrics": [
           {
-            "value": "3.8x",
+            "value": "+220%",
             "label": "Qual. Investor Leads"
           },
           {
-            "value": "-35%",
-            "label": "Cost Per Booking"
+            "value": "-29%",
+            "label": "CPL Reduction"
           },
           {
             "value": "12m",
-            "label": "Avg Broker Response"
+            "label": "Avg Response"
           }
         ]
       }
