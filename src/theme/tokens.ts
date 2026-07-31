@@ -52,6 +52,18 @@ export const T = {
   // Page padding
   pagePadding: 'clamp(1rem, 4vw, 2.5rem)',
 
+  // Section rhythm — shared vertical spacing logic for every content section
+  section: {
+    // Gap from the previous section down to this section's badge/tag
+    topPad: 'clamp(1.5rem, 3vw, 2.5rem)',
+    // Section H2 size — unified across Bottleneck/Expertise/Services/CaseStudies/Contact
+    titleSize: 'clamp(2rem, 5vw, 3.2rem)',
+    // Badge -> title gap — kept tight so the badge reads as one unit with the title
+    badgeGap: '0.6rem',
+    // Title -> content gap — the bigger breathing-room jump before cards/timeline
+    titleGap: '3rem',
+  },
+
   // Gradients
   linearGradient: 'linear-gradient(135deg, #00E599 0%, #00A3FF 100%)',
   textGradientStyles: {

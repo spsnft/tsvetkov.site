@@ -18,18 +18,18 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
         style={{
           width: '100%',
           position: 'relative',
-          padding: '1rem 0 clamp(3rem, 6vw, 6rem) 0',
+          padding: `${T.section.topPad} 0 clamp(3rem, 6vw, 6rem) 0`,
           background: 'transparent',
         }}
       >
         <div className="container" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1.5rem' }}>
-          <div className="header-box" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+          <div className="header-box" style={{ textAlign: 'center', marginBottom: T.section.titleGap }}>
             <span
               style={{
                 display: 'inline-block',
                 padding: '0.35rem 0.85rem',
                 borderRadius: 20,
-                marginBottom: '1rem',
+                marginBottom: T.section.badgeGap,
                 fontSize: '0.7rem',
                 fontWeight: 700,
                 letterSpacing: '0.15em',
@@ -43,7 +43,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
             </span>
             <h2
               style={{
-                fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+                fontSize: T.section.titleSize,
                 fontWeight: 800,
                 lineHeight: 1.15,
                 color: '#ffffff',
@@ -85,7 +85,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
         .bottleneck-section {
           width: 100%;
           position: relative;
-          padding: 1rem 0 clamp(3rem, 6vw, 6rem) 0;
+          padding: ${T.section.topPad} 0 clamp(3rem, 6vw, 6rem) 0;
           background: transparent;
           z-index: 5;
         }
@@ -106,7 +106,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
 
         .header-box {
           text-align: center;
-          margin-bottom: 3.5rem;
+          margin-bottom: ${T.section.titleGap};
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -119,7 +119,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
           gap: 8px;
           padding: 0.35rem 0.85rem;
           border-radius: 20px;
-          margin-bottom: 1rem;
+          margin-bottom: ${T.section.badgeGap};
           font-size: 0.7rem;
           font-weight: 800;
           letter-spacing: 0.15em;
@@ -153,7 +153,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
         }
 
         .title {
-          font-size: clamp(2rem, 5vw, 3.2rem);
+          font-size: ${T.section.titleSize};
           font-weight: 800;
           line-height: 1.15;
           letter-spacing: -0.03em;

@@ -48,14 +48,14 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         .expertise-section {
           width: 100%;
           position: relative;
-          padding: 1.5rem 0 clamp(2.5rem, 5vw, 5rem) 0;
+          padding: ${T.section.topPad} 0 clamp(2.5rem, 5vw, 5rem) 0;
           background: transparent;
           z-index: 5;
         }
 
         .header-box {
           text-align: center;
-          margin-bottom: 2.25rem;
+          margin-bottom: ${T.section.titleGap};
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -67,7 +67,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           gap: 8px;
           padding: 0.3rem 0.75rem;
           border-radius: 20px;
-          margin-bottom: 0.65rem;
+          margin-bottom: ${T.section.badgeGap};
           font-size: 0.68rem;
           font-weight: 700;
           letter-spacing: 0.15em;
@@ -99,7 +99,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
         }
 
         .title {
-          font-size: clamp(1.8rem, 4vw, 2.8rem);
+          font-size: ${T.section.titleSize};
           font-weight: 800;
           line-height: 1.15;
           letter-spacing: -0.03em;

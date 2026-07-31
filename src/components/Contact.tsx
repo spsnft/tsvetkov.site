@@ -80,7 +80,7 @@ export const Contact = ({ dict }: ContactProps) => {
       style={{
         width: '100%',
         position: 'relative',
-        paddingTop: 'clamp(2rem, 4vw, 4rem)',
+        paddingTop: T.section.topPad,
         paddingBottom: '2rem',
         paddingLeft: 'clamp(1rem, 4vw, 2.5rem)',
         paddingRight: 'clamp(1rem, 4vw, 2.5rem)',
@@ -236,7 +236,7 @@ export const Contact = ({ dict }: ContactProps) => {
                 gap: 8,
                 padding: '0.35rem 0.85rem',
                 borderRadius: 20,
-                marginBottom: '1rem',
+                marginBottom: T.section.badgeGap,
                 fontSize: '0.7rem',
                 fontWeight: 700,
                 letterSpacing: '0.15em',
@@ -252,7 +252,7 @@ export const Contact = ({ dict }: ContactProps) => {
 
             <h2
               style={{
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontSize: T.section.titleSize,
                 fontWeight: 800,
                 lineHeight: 1.15,
                 letterSpacing: '-0.03em',

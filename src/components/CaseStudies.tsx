@@ -190,7 +190,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         .cases-section {
           width: 100%;
           position: relative;
-          padding: 1.5rem 0 clamp(3rem, 6vw, 6rem) 0;
+          padding: ${T.section.topPad} 0 clamp(3rem, 6vw, 6rem) 0;
           background: transparent;
           z-index: 5;
         }
@@ -211,7 +211,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .header-box {
           text-align: center;
-          margin-bottom: 3rem;
+          margin-bottom: ${T.section.titleGap};
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -223,7 +223,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           gap: 8px;
           padding: 0.35rem 0.85rem;
           border-radius: 20px;
-          margin-bottom: 1rem;
+          margin-bottom: ${T.section.badgeGap};
           font-size: 0.7rem;
           font-weight: 800;
           letter-spacing: 0.15em;
@@ -255,7 +255,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         }
 
         .title {
-          font-size: clamp(1.8rem, 4vw, 2.8rem);
+          font-size: ${T.section.titleSize};
           font-weight: 800;
           line-height: 1.15;
           letter-spacing: -0.03em;
