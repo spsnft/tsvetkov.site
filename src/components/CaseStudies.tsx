@@ -62,6 +62,14 @@ const CASE_META: Record<string, { hasCta?: boolean; ctaLink?: string }> = {
   realestate: {},
 };
 
+// Forces a consistent 2-line label across every metric card, regardless
+// of viewport width, by always breaking before the last word.
+function splitBeforeLastWord(text: string) {
+  const idx = text.lastIndexOf(' ');
+  if (idx === -1) return { line1: text, line2: '' };
+  return { line1: text.slice(0, idx), line2: text.slice(idx + 1) };
+}
+
 function TabIcon({ id }: { id: string }) {
   switch (id) {
     case 'hms':
@@ -107,12 +115,23 @@ function Panel({
           border-left: 2px solid;
           border-radius: ${T.radius.md};
           padding: 1.25rem;
-          background: ${T.bg1};
+          background: rgba(18, 18, 20, 0.15);
+          transition: border-color 0.25s ease, transform 0.25s ease;
         }
         .panel--red {
           border-left-color: ${T.red};
         }
         .panel--emerald {
+          border-left-color: ${T.accent};
+        }
+        .panel--red:hover {
+          transform: translateY(-2px);
+          border-color: ${T.red25};
+          border-left-color: ${T.red};
+        }
+        .panel--emerald:hover {
+          transform: translateY(-2px);
+          border-color: ${T.accent35};
           border-left-color: ${T.accent};
         }
         .panel-label {
@@ -264,7 +283,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         }
 
         .terminal {
-          border: 1px solid ${T.border};
+          border: 1px solid ${T.accent15};
           border-radius: ${T.radius.xl};
           overflow: hidden;
           background: rgba(10, 10, 12, 0.5);
@@ -275,11 +294,18 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .tabs {
           display: flex;
-          flex-wrap: wrap;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
           gap: 0.5rem;
           padding: 1rem;
           border-bottom: 1px solid ${T.border};
-          background: ${T.bg1};
+          background: linear-gradient(180deg, rgba(0, 229, 153, 0.05) 0%, rgba(0, 229, 153, 0) 60%), ${T.bg1};
+        }
+
+        .tabs::-webkit-scrollbar {
+          display: none;
         }
 
         .tab {
@@ -296,6 +322,27 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           color: ${T.muted};
           cursor: pointer;
           transition: all 0.2s ease;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        .tab :global(svg) {
+          width: 14px;
+          height: 14px;
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+          .tab {
+            padding: 0.4rem 0.65rem;
+            font-size: 0.62rem;
+            gap: 6px;
+          }
+
+          .tab :global(svg) {
+            width: 12px;
+            height: 12px;
+          }
         }
 
         .tab:hover {
@@ -320,6 +367,13 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           flex-wrap: wrap;
           gap: 1rem;
           margin-bottom: 1.75rem;
+          min-height: 44px;
+        }
+
+        @media (min-width: 600px) {
+          .title-row {
+            flex-wrap: nowrap;
+          }
         }
 
         .title-row :global(.btn-primary) {
@@ -344,6 +398,8 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           color: #ffffff;
           margin: 0;
           line-height: 1.25;
+          flex: 1 1 auto;
+          min-width: 0;
         }
 
         .panels-grid {
@@ -362,16 +418,16 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
         .infra-metrics-box {
           display: grid;
           grid-template-columns: 1fr;
-          border: 1px solid ${T.border};
+          border: 1px solid ${T.accent15};
           border-radius: ${T.radius.lg};
-          background: ${T.bg1};
+          background: rgba(18, 18, 20, 0.15);
           margin-top: 1rem;
           overflow: hidden;
         }
 
         @media (min-width: 768px) {
           .infra-metrics-box {
-            grid-template-columns: 3fr 2fr;
+            grid-template-columns: 2fr 3fr;
           }
         }
 
@@ -392,9 +448,9 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .box-label {
           font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.06em;
           text-transform: uppercase;
-          font-size: 0.72rem;
+          font-size: 0.66rem;
           font-weight: 700;
           color: ${T.muted};
           margin-bottom: 1rem;
@@ -402,11 +458,12 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           align-items: center;
           justify-content: space-between;
           gap: 12px;
+          text-wrap: pretty;
         }
 
         .infra-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          grid-template-columns: 1fr;
           gap: 0.65rem;
         }
 
@@ -418,6 +475,11 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           color: ${T.body};
         }
 
+        .infra-item span:last-child {
+          min-width: 0;
+          flex: 1 1 auto;
+        }
+
         .infra-check {
           color: ${T.accent};
           font-weight: 800;
@@ -426,32 +488,47 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         .metrics-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
-          gap: 0.75rem;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.6rem;
         }
 
         .metric-card {
-          border: 1px solid ${T.border};
+          min-width: 0;
+          border: 1px solid ${T.accent15};
           border-radius: ${T.radius.md};
-          padding: 1rem 0.75rem;
+          padding: 1.1rem 0.5rem;
           text-align: center;
-          background: ${T.bg0};
+          background: transparent;
+          transition: border-color 0.25s ease, transform 0.25s ease;
         }
 
-        .metric-value {
-          font-family: 'Space Grotesk', sans-serif;
-          font-size: clamp(1.35rem, 3vw, 1.7rem);
-          font-weight: 800;
-          color: ${T.accent};
-          line-height: 1;
-          font-variant-numeric: tabular-nums;
+        .metric-card:hover {
+          transform: translateY(-2px);
+          border-color: ${T.accent35};
         }
 
         .metric-label {
-          font-size: 0.76rem;
-          color: ${T.muted};
-          margin-top: 0.5rem;
-          line-height: 1.35;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: ${T.sub};
+          margin-bottom: 0.5rem;
+          line-height: 1.3;
+        }
+
+        .metric-value {
+          position: relative;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: clamp(1.2rem, 3vw, 1.85rem);
+          font-weight: 800;
+          background: linear-gradient(90deg, #00E599 0%, #00A3FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          line-height: 1;
+          font-variant-numeric: tabular-nums;
+          text-shadow: 0 0 24px rgba(0, 229, 153, 0.35);
         }
 
       `}</style>
@@ -527,12 +604,23 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
               <div className="im-col">
                 <div className="box-label">{t.metricsTitle}</div>
                 <div className="metrics-grid">
-                  {active.metrics?.map((m: { value: string; label: string }, i: number) => (
-                    <div key={i} className="metric-card">
-                      <div className="metric-value">{m.value}</div>
-                      <div className="metric-label">{m.label}</div>
-                    </div>
-                  ))}
+                  {active.metrics?.map((m: { value: string; label: string }, i: number) => {
+                    const { line1, line2 } = splitBeforeLastWord(m.label);
+                    return (
+                      <div key={i} className="metric-card">
+                        <div className="metric-label">
+                          {line1}
+                          {line2 && (
+                            <>
+                              <br />
+                              {line2}
+                            </>
+                          )}
+                        </div>
+                        <div className="metric-value">{m.value}</div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

@@ -1,9 +1,9 @@
 {
   "nav": {
     "expertise": "Expertise",
-    "services": "Services",
+    "services": "Process",
     "work": "Work",
-    "hospitality": "Hospitality Tech (/hms)",
+    "hospitality": "For Hotels & Villas",
     "about": "About",
     "letsTalk": "Let's talk"
   },
@@ -11,9 +11,9 @@
     "badge": "FOUNDER-LED AGENCY",
     "titleLine1": "More Revenue",
     "titleLine2": "Engineered",
-    "sub1": "We eliminate chaos in <strong>marketing & digital systems</strong>",
-    "sub2": "No fluff — just <strong>high-performance architectures</strong>",
-    "sub3": "Track every dollar and <strong>automate sales flow</strong>",
+    "sub1": "Eliminate chaos in marketing & digital systems",
+    "sub2": "No fluff — just high-performance architectures",
+    "sub3": "Track every dollar and automate sales flow",
     "cta": "Audit My Business"
   },
   "bottleneck": {
@@ -25,34 +25,22 @@
         "num": "01",
         "tag": "EMPTY TRAFFIC",
         "title": "Traffic Without Profit",
-        "descStart": "Agencies report clicks and leads, but your sales team gets ",
-        "descHighlight1": "poor-quality inquiries",
-        "descMiddle": ". Ad budgets keep growing, but ",
-        "descHighlight2": "net profit stays flat",
-        "descEnd": "",
+        "desc": "Your team gets poor-quality leads. Ad spend keeps climbing, but net profit stays flat",
         "impact": "Rising Cost Per Customer"
       },
       {
         "num": "02",
         "tag": "UNRELIABLE TRACKING",
-        "title": "Broken Data & Blind Scaling",
-        "descStart": "Ad platforms, CRM, and actual revenue live in ",
-        "descHighlight1": "separate places",
-        "descMiddle": ". You end up guessing what works instead of seeing ",
-        "descHighlight2": "real ROI and true net profit",
-        "descEnd": "",
+        "title": "Disconnected Data",
+        "desc": "Key metrics live in separate places — you're guessing at what's working, not steering growth",
         "impact": "Flying Blind on ROI"
       },
       {
         "num": "03",
         "tag": "PROCESS FRICTION",
-        "title": "Manual Work & Slow Sales",
-        "descStart": "Leads sit untouched for hours due to ",
-        "descHighlight1": "manual CRM handoffs",
-        "descMiddle": ". Your team wastes time managing spreadsheets instead of ",
-        "descHighlight2": "closing deals",
-        "descEnd": "",
-        "impact": "Deals Lost to Slow Follow-Up"
+        "title": "Manual & Slow Sales",
+        "desc": "Leads sit untouched while your team manages spreadsheets instead of closing deals",
+        "impact": "Deals Lost to Delay"
       }
     ]
   },
@@ -60,27 +48,27 @@
     "badge": "SOLUTIONS & ARSENAL",
     "title": "How We Help You Scale",
     "card1Title": "Systems, Data & Architecture",
-    "card1Desc": "Eliminate blind decision-making by unifying scattered business data into a <strong>single source of truth</strong>. Gain complete clarity on key financial metrics, unit economics, and margin dashboards",
+    "card1Desc": "Eliminate blind decision-making by unifying scattered business data into a single source of truth. Gain complete clarity on key financial metrics, unit economics, and margin dashboards",
     "uspLine1": "We Don't Just Run Ads.",
-    "uspLine2": "We Build the Systems",
+    "uspLine2": "We Build Systems",
     "card2Title": "Strategic Audits & Funnel Optimization",
-    "card2Desc": "We analyze your customer journey to eliminate bottlenecks. Rebuilding sales funnels and optimizing conversion to <strong>maximize revenue from existing traffic</strong>",
+    "card2Desc": "We analyze your customer journey to eliminate bottlenecks. Rebuilding sales funnels and optimizing conversion to maximize revenue from existing traffic",
     "card3Title": "Process Automation & AI Workflows",
-    "card3Desc": "Eliminate operational lag and human error. Instantly route leads, <strong>automate CRM handoffs, and deploy AI agents</strong> to cut overhead and accelerate sales"
+    "card3Desc": "Eliminate operational lag and human error. Instantly route leads, automate CRM handoffs, and deploy AI agents to cut overhead and accelerate sales"
   },
   "services": {
     "badge": "EXECUTION ALGORITHM",
     "title": "How Systems Get Built",
     "outcomeLabel": "OUTCOME //",
-    "step1Title": "Audit & Growth Roadmap",
-    "step1Desc": "Deep-dive diagnostic of current ad channels, CRM workflows, and unit economics. Identification of traffic leakage, broken attribution, and sales bottlenecks.",
-    "step1Impact": "Full clarity on lost revenue before committing capital",
-    "step2Title": "Growth Infrastructure Build",
-    "step2Desc": "End-to-end architecture deployment: high-intent funnels, automated lead routing, zero-leakage CRM configuration, and custom P&L attribution dashboards.",
-    "step2Impact": "Scalable system ready for high-budget traffic expansion",
-    "step3Title": "Growth Partner & Performance Scaling",
-    "step3Desc": "Continuous strategic direction and hands-on execution. CAC optimization, ad spend management, sales speed acceleration, and net margin growth.",
-    "step3Impact": "Predictable revenue growth and guaranteed system reliability"
+    "step1Title": "Full Audit & Roadmap",
+    "step1Desc": "A deep-dive diagnostic of your current business infrastructure — surfacing the exact problems and bottlenecks holding your growth back",
+    "step1Impact": "A complete picture of where the business really stands — before your next move",
+    "step2Title": "Build & Optimization",
+    "step2Desc": "A high-performance marketing system built from scratch, or your existing infrastructure fixed and re-engineered to actually perform",
+    "step2Impact": "A system built to carry real growth — not just traffic",
+    "step3Title": "System Delivery & Partnership",
+    "step3Desc": "A fully working system running on its own — with the option to keep scaling together",
+    "step3Impact": "No lock-in — the system is fully yours, partnership is optional"
   },
   "cases": {
     "badge": "CASE STUDIES",
@@ -91,8 +79,8 @@
     "metricsTitle": "// SYSTEM IMPACT METRICS //",
     "hmsCta": "Explore HMS System",
     "tabs": {
-      "hms": "01 // HOTELS & SHORT-TERM RENTALS",
-      "ecomm": "02 // E-COMMERCE & SCALING",
+      "hms": "01 // HOTELS & VILLAS",
+      "ecomm": "02 // E-COMMERCE SCALING",
       "b2b": "03 // HIGH-TICKET B2B",
       "realestate": "04 // REAL ESTATE DEVELOPMENT"
     },
@@ -100,19 +88,18 @@
       "hms": {
         "title": "Direct Booking Architecture & OTA Elimination",
         "challenge": [
-          "OTA commissions eating 18–25% of every booking",
-          "Zero ownership of guest data — OTAs own the relationship",
-          "Low direct-channel conversion, most bookings routed through commissions"
+          "OTA commissions eating up to 20% of every booking",
+          "Zero ownership of guest data",
+          "Most bookings routed through OTAs, low direct-channel conversion"
         ],
         "solution": [
-          "Turnkey direct booking funnel, live in weeks",
-          "Automated WhatsApp CRM sync for every guest",
-          "Zero-commission booking engine, built to scale"
+          "Zero-commission booking engine, built to scale",
+          "Own your guest data & relationship",
+          "Turnkey direct booking funnel"
         ],
         "architecture": [
-          "WhatsApp Instant Booking AI Engine",
           "Direct Payment Gateway Integration",
-          "Zero-Leakage Guest Data Pipeline",
+          "Guest Data Pipeline",
           "Automated Retargeting & Upsell Triggers"
         ],
         "metrics": [
@@ -122,31 +109,30 @@
           },
           {
             "value": "0%",
-            "label": "OTA Commission Leakage"
+            "label": "OTA Commission"
           },
           {
             "value": "100%",
-            "label": "Guest Data Ownership"
+            "label": "Data Ownership"
           }
         ]
       },
       "ecomm": {
-        "title": "P&L Attribution & Performance Scaling Engine",
+        "title": "Performance Engine & P&L Attribution",
         "challenge": [
           "Ad spend scaled across 5+ channels with zero net-profit visibility",
-          "Broken tracking — blended ROAS is a guess, not a number",
+          "Broken tracking — ROAS numbers you can't trust",
           "CAC climbing faster than revenue"
         ],
         "solution": [
           "End-to-end pipeline linking ad accounts to real P&L",
-          "Live net-margin attribution dashboards, not last-click guesses",
+          "Live net-margin attribution dashboards",
           "Budget re-allocation rules that follow actual profit"
         ],
         "architecture": [
           "Real-Time Blended ROAS Attribution",
           "Automated LTV Cohort Analytics",
-          "Dynamic Ad Budget Re-allocation Rules",
-          "Server-Side Conversions API (CAPI)"
+          "Dynamic Ad Budget Re-allocation Rules"
         ],
         "metrics": [
           {
@@ -154,7 +140,7 @@
             "label": "Blended ROAS"
           },
           {
-            "value": "+$520k",
+            "value": "+$430k",
             "label": "Net Profit Growth"
           },
           {
@@ -166,8 +152,8 @@
       "b2b": {
         "title": "Lead Velocity & Automated GTM Architecture",
         "challenge": [
-          "High cost per lead, budget burning faster than pipeline grows",
-          "Leads sit untouched for 4+ hours before first contact",
+          "High cost per lead, burning budget fast",
+          "Leads sit untouched for too long before first contact",
           "Manual CRM handoffs killing conversion rate"
         ],
         "solution": [
@@ -176,7 +162,6 @@
           "AI scoring, so reps chase the deals worth closing"
         ],
         "architecture": [
-          "Instant Lead Speed Routing (<60s)",
           "Enriched B2B Prospect Profiling",
           "Automated Sales Pipeline Triggers",
           "Executive P&L Forecast Dashboards"
@@ -197,7 +182,7 @@
         ]
       },
       "realestate": {
-        "title": "High-Intent Investor Acquisition System",
+        "title": "High-Intent Acquisition System",
         "challenge": [
           "Untargeted lead spam, low buyer intent",
           "High cost per qualified investor",
@@ -205,27 +190,26 @@
         ],
         "solution": [
           "Targeted investor acquisition funnels by budget & intent",
-          "Automated financial qualification before a broker gets involved",
+          "Optimized financial qualification before a broker gets involved",
           "Broker SLA tracking, so nothing goes cold"
         ],
         "architecture": [
           "Financial Qualification Micro-Funnels",
           "Broker SLA & Pipeline Dashboard",
-          "WhatsApp VIP Concierge Automation",
           "Multi-Currency ROAS Analytics"
         ],
         "metrics": [
           {
-            "value": "3.8x",
+            "value": "+220%",
             "label": "Qual. Investor Leads"
           },
           {
-            "value": "-35%",
-            "label": "Cost Per Booking"
+            "value": "-29%",
+            "label": "CPL Reduction"
           },
           {
             "value": "12m",
-            "label": "Avg Broker Response"
+            "label": "Avg Response"
           }
         ]
       }
@@ -233,8 +217,9 @@
   },
   "contact": {
     "badge": "GET IN TOUCH",
-    "title": "Let's Engineer Your Scale",
-    "desc": "Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.",
+    "titleLine1": "Let's Engineer",
+    "titleLine2": "Your Scale",
+    "desc": "Book a quick intro call or fill out the request form. We review your project and get back to you within 24h",
     "callBtn": "Book a Call",
     "formTitle": "Request an Audit",
     "nameLabel": "Your Name",

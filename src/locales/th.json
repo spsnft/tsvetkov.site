@@ -1,258 +1,243 @@
 {
   "nav": {
-    "expertise": "Expertise",
-    "services": "Services",
-    "work": "Work",
-    "hospitality": "Hospitality Tech (/hms)",
-    "about": "About",
-    "letsTalk": "Let's talk"
+    "expertise": "ความเชี่ยวชาญ",
+    "services": "กระบวนการ",
+    "work": "ผลงาน",
+    "hospitality": "สำหรับโรงแรมและวิลล่า",
+    "about": "เกี่ยวกับเรา",
+    "letsTalk": "คุยกับเรา"
   },
   "hero": {
-    "badge": "FOUNDER-LED AGENCY",
-    "titleLine1": "More Revenue",
-    "titleLine2": "Engineered",
-    "sub1": "We eliminate chaos in <strong>marketing & digital systems</strong>",
-    "sub2": "No fluff — just <strong>high-performance architectures</strong>",
-    "sub3": "Track every dollar and <strong>automate sales flow</strong>",
-    "cta": "Audit My Business"
+    "badge": "เอเจนซี่โดยผู้ก่อตั้ง",
+    "titleLine1": "รายได้เพิ่มขึ้น",
+    "titleLine2": "อย่างเป็นระบบ",
+    "sub1": "กำจัดความยุ่งเหยิงในการตลาดและระบบดิจิทัล",
+    "sub2": "ไม่มีคำโฆษณาเกินจริง มีแต่สถาปัตยกรรมประสิทธิภาพสูง",
+    "sub3": "ติดตามทุกดอลลาร์และระบบขายอัตโนมัติ",
+    "cta": "ตรวจธุรกิจของฉัน"
   },
   "bottleneck": {
-    "badge": "SCALING BARRIERS",
-    "title": "Where Systems Break",
-    "impactLabel": "Impact:",
+    "badge": "อุปสรรคการเติบโต",
+    "title": "จุดที่ระบบพัง",
+    "impactLabel": "ผลกระทบ:",
     "items": [
       {
         "num": "01",
-        "tag": "EMPTY TRAFFIC",
-        "title": "Traffic Without Profit",
-        "descStart": "Agencies report clicks and leads, but your sales team gets ",
-        "descHighlight1": "poor-quality inquiries",
-        "descMiddle": ". Ad budgets keep growing, but ",
-        "descHighlight2": "net profit stays flat",
-        "descEnd": "",
-        "impact": "Rising Cost Per Customer"
+        "tag": "ทราฟฟิกไร้ค่า",
+        "title": "ทราฟฟิกที่ไม่สร้างกำไร",
+        "desc": "ทีมของคุณได้รับลีดคุณภาพต่ำ ค่าโฆษณาเพิ่มขึ้นเรื่อยๆ แต่กำไรสุทธิไม่ขยับ",
+        "impact": "ต้นทุนต่อลูกค้าสูงขึ้น"
       },
       {
         "num": "02",
-        "tag": "UNRELIABLE TRACKING",
-        "title": "Broken Data & Blind Scaling",
-        "descStart": "Ad platforms, CRM, and actual revenue live in ",
-        "descHighlight1": "separate places",
-        "descMiddle": ". You end up guessing what works instead of seeing ",
-        "descHighlight2": "real ROI and true net profit",
-        "descEnd": "",
-        "impact": "Flying Blind on ROI"
+        "tag": "ระบบติดตามผลไม่แม่นยำ",
+        "title": "ข้อมูลกระจัดกระจาย",
+        "desc": "ตัวชี้วัดสำคัญกระจายอยู่คนละที่ คุณต้องเดาว่าอะไรได้ผล แทนที่จะควบคุมการเติบโต",
+        "impact": "ROI แบบมองไม่เห็น"
       },
       {
         "num": "03",
-        "tag": "PROCESS FRICTION",
-        "title": "Manual Work & Slow Sales",
-        "descStart": "Leads sit untouched for hours due to ",
-        "descHighlight1": "manual CRM handoffs",
-        "descMiddle": ". Your team wastes time managing spreadsheets instead of ",
-        "descHighlight2": "closing deals",
-        "descEnd": "",
-        "impact": "Deals Lost to Slow Follow-Up"
+        "tag": "กระบวนการติดขัด",
+        "title": "ขายด้วยมือและช้า",
+        "desc": "ลีดถูกทิ้งไว้เฉยๆ ขณะที่ทีมของคุณจัดการสเปรดชีต แทนที่จะปิดการขาย",
+        "impact": "เสียดีลเพราะความล่าช้า"
       }
     ]
   },
   "expertise": {
-    "badge": "SOLUTIONS & ARSENAL",
-    "title": "How We Help You Scale",
-    "card1Title": "Systems, Data & Architecture",
-    "card1Desc": "Eliminate blind decision-making by unifying scattered business data into a <strong>single source of truth</strong>. Gain complete clarity on key financial metrics, unit economics, and margin dashboards",
-    "uspLine1": "We Don't Just Run Ads.",
-    "uspLine2": "We Build the Systems",
-    "card2Title": "Strategic Audits & Funnel Optimization",
-    "card2Desc": "We analyze your customer journey to eliminate bottlenecks. Rebuilding sales funnels and optimizing conversion to <strong>maximize revenue from existing traffic</strong>",
-    "card3Title": "Process Automation & AI Workflows",
-    "card3Desc": "Eliminate operational lag and human error. Instantly route leads, <strong>automate CRM handoffs, and deploy AI agents</strong> to cut overhead and accelerate sales"
+    "badge": "โซลูชันและเครื่องมือ",
+    "title": "เราช่วยให้ธุรกิจคุณเติบโตอย่างไร",
+    "card1Title": "ระบบ ข้อมูล และสถาปัตยกรรม",
+    "card1Desc": "เลิกตัดสินใจแบบเดา ด้วยการรวมข้อมูลธุรกิจที่กระจัดกระจายให้เป็นแหล่งข้อมูลเดียวที่เชื่อถือได้ เห็นภาพชัดเจนทั้งตัวชี้วัดทางการเงินหลัก ยูนิตอีโคโนมิกส์ และแดชบอร์ดมาร์จิ้น",
+    "uspLine1": "ไม่ใช่แค่ยิงแอด",
+    "uspLine2": "เราสร้างระบบ",
+    "card2Title": "ตรวจสอบเชิงกลยุทธ์และปรับฟันเนล",
+    "card2Desc": "เราวิเคราะห์เส้นทางลูกค้าเพื่อกำจัดจุดคอขวด ปรับโครงสร้างฟันเนลการขายและเพิ่มอัตราคอนเวอร์ชัน เพื่อสร้างรายได้สูงสุดจากทราฟฟิกที่มีอยู่",
+    "card3Title": "ระบบอัตโนมัติและเวิร์กโฟลว์ AI",
+    "card3Desc": "กำจัดความล่าช้าในการทำงานและความผิดพลาดของมนุษย์ ส่งต่อลีดได้ทันที ระบบส่งต่อ CRM อัตโนมัติ และใช้ AI เอเจนต์ เพื่อลดต้นทุนและเร่งการขาย"
   },
   "services": {
-    "badge": "EXECUTION ALGORITHM",
-    "title": "How Systems Get Built",
-    "outcomeLabel": "OUTCOME //",
-    "step1Title": "Audit & Growth Roadmap",
-    "step1Desc": "Deep-dive diagnostic of current ad channels, CRM workflows, and unit economics. Identification of traffic leakage, broken attribution, and sales bottlenecks.",
-    "step1Impact": "Full clarity on lost revenue before committing capital",
-    "step2Title": "Growth Infrastructure Build",
-    "step2Desc": "End-to-end architecture deployment: high-intent funnels, automated lead routing, zero-leakage CRM configuration, and custom P&L attribution dashboards.",
-    "step2Impact": "Scalable system ready for high-budget traffic expansion",
-    "step3Title": "Growth Partner & Performance Scaling",
-    "step3Desc": "Continuous strategic direction and hands-on execution. CAC optimization, ad spend management, sales speed acceleration, and net margin growth.",
-    "step3Impact": "Predictable revenue growth and guaranteed system reliability"
+    "badge": "อัลกอริทึมการดำเนินงาน",
+    "title": "ระบบถูกสร้างขึ้นอย่างไร",
+    "outcomeLabel": "ผลลัพธ์ //",
+    "step1Title": "ตรวจสอบเต็มรูปแบบและแผนงาน",
+    "step1Desc": "วินิจฉัยเชิงลึกโครงสร้างพื้นฐานทางธุรกิจของคุณในปัจจุบัน ค้นหาปัญหาและจุดคอขวดที่ฉุดรั้งการเติบโตของคุณอย่างชัดเจน",
+    "step1Impact": "ภาพรวมที่สมบูรณ์ของสถานะธุรกิจจริง ก่อนตัดสินใจก้าวต่อไป",
+    "step2Title": "สร้างและปรับปรุงประสิทธิภาพ",
+    "step2Desc": "ระบบการตลาดประสิทธิภาพสูงที่สร้างขึ้นใหม่ทั้งหมด หรือปรับปรุงโครงสร้างเดิมของคุณให้ทำงานได้จริง",
+    "step2Impact": "ระบบที่สร้างมาเพื่อรองรับการเติบโตจริง ไม่ใช่แค่ทราฟฟิก",
+    "step3Title": "ส่งมอบระบบและพาร์ทเนอร์ชิพ",
+    "step3Desc": "ระบบที่ทำงานได้เต็มรูปแบบด้วยตัวเอง พร้อมตัวเลือกที่จะเติบโตต่อไปด้วยกัน",
+    "step3Impact": "ไม่มีข้อผูกมัด ระบบเป็นของคุณทั้งหมด พาร์ทเนอร์ชิพเป็นทางเลือก"
   },
   "cases": {
-    "badge": "CASE STUDIES",
-    "title": "What Can We Show",
-    "bottleneckLabel": "THE PROBLEM //",
-    "solutionLabel": "THE SOLUTION //",
-    "infraLabel": "// DEPLOYED INFRASTRUCTURE //",
-    "metricsTitle": "// SYSTEM IMPACT METRICS //",
-    "hmsCta": "Explore HMS System",
+    "badge": "เคสตัวอย่าง",
+    "title": "ผลงานที่เราทำได้",
+    "bottleneckLabel": "ปัญหา //",
+    "solutionLabel": "ทางแก้ //",
+    "infraLabel": "// โครงสร้างพื้นฐานที่ติดตั้ง //",
+    "metricsTitle": "// ตัวชี้วัดผลลัพธ์ของระบบ //",
+    "hmsCta": "สำรวจระบบ HMS",
     "tabs": {
-      "hms": "01 // HOTELS & SHORT-TERM RENTALS",
-      "ecomm": "02 // E-COMMERCE & SCALING",
-      "b2b": "03 // HIGH-TICKET B2B",
-      "realestate": "04 // REAL ESTATE DEVELOPMENT"
+      "hms": "01 // โรงแรมและวิลล่า",
+      "ecomm": "02 // การขยายอีคอมเมิร์ซ",
+      "b2b": "03 // B2B มูลค่าสูง",
+      "realestate": "04 // อสังหาริมทรัพย์"
     },
     "items": {
       "hms": {
-        "title": "Direct Booking Architecture & OTA Elimination",
+        "title": "สถาปัตยกรรมจองตรงและลดพึ่งพา OTA",
         "challenge": [
-          "OTA commissions eating 18–25% of every booking",
-          "Zero ownership of guest data — OTAs own the relationship",
-          "Low direct-channel conversion, most bookings routed through commissions"
+          "ค่าคอมมิชชัน OTA กินไปสูงสุด 20% ของทุกการจอง",
+          "ไม่มีสิทธิ์ในข้อมูลแขกเลย",
+          "การจองส่วนใหญ่ผ่าน OTA คอนเวอร์ชันช่องทางตรงต่ำ"
         ],
         "solution": [
-          "Turnkey direct booking funnel, live in weeks",
-          "Automated WhatsApp CRM sync for every guest",
-          "Zero-commission booking engine, built to scale"
+          "ระบบจองไม่มีค่าคอมมิชชัน รองรับการขยายตัว",
+          "เป็นเจ้าของข้อมูลและความสัมพันธ์กับแขกเอง",
+          "ฟันเนลจองตรงพร้อมใช้งาน"
         ],
         "architecture": [
-          "WhatsApp Instant Booking AI Engine",
-          "Direct Payment Gateway Integration",
-          "Zero-Leakage Guest Data Pipeline",
-          "Automated Retargeting & Upsell Triggers"
+          "เชื่อมต่อเกตเวย์ชำระเงินโดยตรง",
+          "ไปป์ไลน์ข้อมูลแขก",
+          "รีทาร์เก็ตติ้งและอัปเซลอัตโนมัติ"
         ],
         "metrics": [
           {
             "value": "+40%",
-            "label": "Direct Bookings"
+            "label": "การจองตรง"
           },
           {
             "value": "0%",
-            "label": "OTA Commission Leakage"
+            "label": "ค่าคอมมิชชัน OTA"
           },
           {
             "value": "100%",
-            "label": "Guest Data Ownership"
+            "label": "ความเป็นเจ้าของข้อมูล"
           }
         ]
       },
       "ecomm": {
-        "title": "P&L Attribution & Performance Scaling Engine",
+        "title": "เอ็นจิ้น Performance และการระบุแหล่งที่มา P&L",
         "challenge": [
-          "Ad spend scaled across 5+ channels with zero net-profit visibility",
-          "Broken tracking — blended ROAS is a guess, not a number",
-          "CAC climbing faster than revenue"
+          "งบโฆษณากระจายไป 5 ช่องทางขึ้นไป โดยมองไม่เห็นกำไรสุทธิ",
+          "ระบบติดตามผลพัง — ตัวเลข ROAS ที่เชื่อถือไม่ได้",
+          "CAC เพิ่มขึ้นเร็วกว่ารายได้"
         ],
         "solution": [
-          "End-to-end pipeline linking ad accounts to real P&L",
-          "Live net-margin attribution dashboards, not last-click guesses",
-          "Budget re-allocation rules that follow actual profit"
+          "ไปป์ไลน์ครบวงจรเชื่อมบัญชีโฆษณากับ P&L จริง",
+          "แดชบอร์ดระบุแหล่งที่มามาร์จิ้นสุทธิแบบเรียลไทม์",
+          "กฎการจัดสรรงบใหม่ตามกำไรจริง"
         ],
         "architecture": [
-          "Real-Time Blended ROAS Attribution",
-          "Automated LTV Cohort Analytics",
-          "Dynamic Ad Budget Re-allocation Rules",
-          "Server-Side Conversions API (CAPI)"
+          "ระบุแหล่งที่มา ROAS รวมแบบเรียลไทม์",
+          "วิเคราะห์โคฮอร์ต LTV อัตโนมัติ",
+          "กฎจัดสรรงบโฆษณาแบบไดนามิก"
         ],
         "metrics": [
           {
             "value": "5.2x",
-            "label": "Blended ROAS"
+            "label": "ROAS รวม"
           },
           {
-            "value": "+$520k",
-            "label": "Net Profit Growth"
+            "value": "+$430k",
+            "label": "กำไรสุทธิที่เพิ่มขึ้น"
           },
           {
             "value": "100%",
-            "label": "P&L Visibility"
+            "label": "การมองเห็น P&L"
           }
         ]
       },
       "b2b": {
-        "title": "Lead Velocity & Automated GTM Architecture",
+        "title": "ความเร็วลีดและสถาปัตยกรรม GTM อัตโนมัติ",
         "challenge": [
-          "High cost per lead, budget burning faster than pipeline grows",
-          "Leads sit untouched for 4+ hours before first contact",
-          "Manual CRM handoffs killing conversion rate"
+          "ต้นทุนต่อลีดสูง งบหมดเร็ว",
+          "ลีดถูกทิ้งไว้นานเกินไปก่อนติดต่อครั้งแรก",
+          "การส่งต่อ CRM ด้วยมือทำลายอัตราคอนเวอร์ชัน"
         ],
         "solution": [
-          "Rebuilt acquisition funnels tuned for lead quality",
-          "Instant CRM routing — leads contacted within 60 seconds",
-          "AI scoring, so reps chase the deals worth closing"
+          "ปรับฟันเนลหาลูกค้าใหม่ให้เน้นคุณภาพลีด",
+          "ส่งต่อ CRM ทันที — ติดต่อลีดได้ภายใน 60 วินาที",
+          "ให้คะแนนด้วย AI เพื่อให้เซลส์ไล่ตามดีลที่คุ้มค่าปิด"
         ],
         "architecture": [
-          "Instant Lead Speed Routing (<60s)",
-          "Enriched B2B Prospect Profiling",
-          "Automated Sales Pipeline Triggers",
-          "Executive P&L Forecast Dashboards"
+          "โปรไฟล์ลูกค้า B2B แบบเสริมข้อมูล",
+          "ทริกเกอร์ไปป์ไลน์การขายอัตโนมัติ",
+          "แดชบอร์ดพยากรณ์ P&L สำหรับผู้บริหาร"
         ],
         "metrics": [
           {
             "value": "+340%",
-            "label": "Qual. Lead Volume"
+            "label": "ปริมาณลีดคุณภาพ"
           },
           {
             "value": "-42%",
-            "label": "CAC Reduction"
+            "label": "CAC ที่ลดลง"
           },
           {
             "value": "$1.4M",
-            "label": "Pipeline ARR"
+            "label": "ARR ในไปป์ไลน์"
           }
         ]
       },
       "realestate": {
-        "title": "High-Intent Investor Acquisition System",
+        "title": "ระบบหาลูกค้าเป้าหมายที่ตั้งใจซื้อสูง",
         "challenge": [
-          "Untargeted lead spam, low buyer intent",
-          "High cost per qualified investor",
-          "Zero visibility into broker response times"
+          "ลีดสแปมไม่ตรงกลุ่มเป้าหมาย ความตั้งใจซื้อต่ำ",
+          "ต้นทุนต่อนักลงทุนที่ผ่านคุณสมบัติสูง",
+          "มองไม่เห็นเวลาตอบกลับของนายหน้า"
         ],
         "solution": [
-          "Targeted investor acquisition funnels by budget & intent",
-          "Automated financial qualification before a broker gets involved",
-          "Broker SLA tracking, so nothing goes cold"
+          "ฟันเนลหานักลงทุนแบบเจาะกลุ่มตามงบและความตั้งใจ",
+          "คัดกรองความพร้อมทางการเงินที่ปรับให้เหมาะสม ก่อนส่งต่อนายหน้า",
+          "ติดตาม SLA ของนายหน้า ไม่ให้ลีดเย็นชืด"
         ],
         "architecture": [
-          "Financial Qualification Micro-Funnels",
-          "Broker SLA & Pipeline Dashboard",
-          "WhatsApp VIP Concierge Automation",
-          "Multi-Currency ROAS Analytics"
+          "ไมโครฟันเนลคัดกรองความพร้อมทางการเงิน",
+          "แดชบอร์ด SLA นายหน้าและไปป์ไลน์",
+          "วิเคราะห์ ROAS หลายสกุลเงิน"
         ],
         "metrics": [
           {
-            "value": "3.8x",
-            "label": "Qual. Investor Leads"
+            "value": "+220%",
+            "label": "ลีดนักลงทุนคุณภาพ"
           },
           {
-            "value": "-35%",
-            "label": "Cost Per Booking"
+            "value": "-29%",
+            "label": "CPL ที่ลดลง"
           },
           {
             "value": "12m",
-            "label": "Avg Broker Response"
+            "label": "เวลาตอบกลับเฉลี่ย"
           }
         ]
       }
     }
   },
   "contact": {
-    "badge": "GET IN TOUCH",
-    "title": "Let's Engineer Your Scale",
-    "desc": "Book a quick intro call or fill out the request form. We review every project and get back to you within 24 hours.",
-    "callBtn": "Book a Call",
-    "formTitle": "Request an Audit",
-    "nameLabel": "Your Name",
-    "emailLabel": "Contact Email",
-    "websiteLabel": "Website or Socials",
-    "submitBtn": "Submit Audit Request"
+    "badge": "ติดต่อเรา",
+    "titleLine1": "มาออกแบบ",
+    "titleLine2": "การเติบโตของคุณกัน",
+    "desc": "จองคอลแนะนำตัวสั้นๆ หรือกรอกแบบฟอร์มคำขอ เราตรวจสอบโปรเจกต์ของคุณและตอบกลับภายใน 24 ชม.",
+    "callBtn": "จองคอล",
+    "formTitle": "ขอรับการตรวจสอบ",
+    "nameLabel": "ชื่อของคุณ",
+    "emailLabel": "อีเมลติดต่อ",
+    "websiteLabel": "เว็บไซต์หรือโซเชียล",
+    "submitBtn": "ส่งคำขอตรวจสอบ"
   },
   "hms": {
-    "badge": "Hospitality Growth Solutions",
-    "heroTitle": "Stop Paying 15-20% Commissions to Booking.com & Agoda",
-    "heroSub1": "Connect your property directly to guests\nZero risk of human error and double-bookings",
-    "heroSub2": "Keep 100% of the profit in your pocket",
-    "btnAudit": "Book a Free Audit",
-    "syncBadge": "DIRECT BOOKING SYNCHRONIZATION",
-    "otaSavedLabel": "OTA Margin Saved",
-    "statDirectRevenue": "Direct Revenue",
-    "statMarginGuest": "Margin per Guest",
-    "statGoogleTraffic": "Google Traffic",
-    "statRepeatBookings": "Repeat Bookings"
+    "badge": "โซลูชันการเติบโตธุรกิจโรงแรม",
+    "heroTitle": "เลิกจ่ายค่าคอมมิชชัน 15-20% ให้ Booking.com และ Agoda",
+    "heroSub1": "เชื่อมต่อที่พักของคุณกับแขกโดยตรง\nไม่มีความเสี่ยงจากความผิดพลาดของมนุษย์และการจองซ้ำ",
+    "heroSub2": "เก็บกำไร 100% ไว้กับตัวเอง",
+    "btnAudit": "จองตรวจสอบฟรี",
+    "syncBadge": "การซิงค์การจองตรง",
+    "otaSavedLabel": "มาร์จิ้นที่ประหยัดจาก OTA",
+    "statDirectRevenue": "รายได้จากการจองตรง",
+    "statMarginGuest": "มาร์จิ้นต่อแขก",
+    "statGoogleTraffic": "ทราฟฟิกจาก Google",
+    "statRepeatBookings": "การจองซ้ำ"
   }
 }

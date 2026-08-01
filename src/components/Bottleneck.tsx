@@ -176,6 +176,12 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
           }
         }
 
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .grid {
+            gap: 0.85rem;
+          }
+        }
+
         /* УЛЬТРА-ПРОЗРАЧНОЕ СТЕКЛО (ПРОСВЕЧИВАЮТ ТОЧКИ ФОНА) */
         .card {
           position: relative;
@@ -189,7 +195,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
           -webkit-backdrop-filter: blur(4px) saturate(140%);
           
           /* Блик по верху и тонкий контур */
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          border: 1px solid rgba(255, 85, 85, 0.15);
           box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 
                       inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 
@@ -202,6 +208,12 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
                       background 0.35s ease,
                       border-color 0.35s ease,
                       box-shadow 0.35s ease;
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .card {
+            padding: 1.5rem 1.15rem 1.15rem 1.15rem;
+          }
         }
 
         .card:hover {
@@ -252,17 +264,18 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
           letter-spacing: -0.02em;
         }
 
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .card-title {
+            font-size: 1.02rem;
+          }
+        }
+
         .card-desc {
           font-size: 0.9rem;
           line-height: 1.55;
           color: rgba(255, 255, 255, 0.68);
           margin: 0 0 1.75rem 0;
           text-wrap: pretty;
-        }
-
-        .highlight-text {
-          color: #ffffff;
-          font-weight: 600;
         }
 
         .impact-footer {
@@ -277,6 +290,12 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
           font-size: 0.76rem;
           font-weight: 600;
           color: rgba(255, 255, 255, 0.55);
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .impact-label {
+            font-size: 0.68rem;
+          }
         }
 
         .impact-value {
@@ -302,17 +321,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
               <div className="card-inner">
                 <div>
                   <h3 className="card-title">{item.title}</h3>
-                  <p className="card-desc">
-                    {item.descStart}
-                    {item.descHighlight1 && (
-                      <strong className="highlight-text">{item.descHighlight1}</strong>
-                    )}
-                    {item.descMiddle}
-                    {item.descHighlight2 && (
-                      <strong className="highlight-text">{item.descHighlight2}</strong>
-                    )}
-                    {item.descEnd}
-                  </p>
+                  <p className="card-desc">{item.desc}</p>
                 </div>
 
                 <div className="impact-footer">

@@ -3,9 +3,7 @@
 import React from 'react';
 import { T } from '@/src/theme/tokens';
 
-const COLOR_CYAN = '#00A3FF';
 const COLOR_EMERALD = '#00E599';
-const COLOR_MINT = '#34D399';
 
 interface StepData {
   title: string;
@@ -38,27 +36,24 @@ export const Services = ({ dict }: ServicesProps) => {
 
   if (!t) return null;
 
-  const steps: (StepData & { num: string; color: string })[] = [
+  const steps: (StepData & { num: string })[] = [
     {
       num: '01',
       title: t.step1Title,
       desc: t.step1Desc,
       impact: t.step1Impact,
-      color: COLOR_CYAN,
     },
     {
       num: '02',
       title: t.step2Title,
       desc: t.step2Desc,
       impact: t.step2Impact,
-      color: COLOR_EMERALD,
     },
     {
       num: '03',
       title: t.step3Title,
       desc: t.step3Desc,
       impact: t.step3Impact,
-      color: COLOR_MINT,
     },
   ];
 
@@ -127,11 +122,12 @@ export const Services = ({ dict }: ServicesProps) => {
           margin: 0;
         }
 
-        /* ТАЙМЛАЙН: Полноширинный контейнер без искусственных ограничений */
+        /* ТАЙМЛАЙН: сужен до читаемой колонки, не растянут на весь контейнер */
         .timeline-box {
           position: relative;
           padding-left: clamp(2rem, 5vw, 4rem);
           width: 100%;
+          max-width: 820px;
           margin: 0 auto;
         }
 
@@ -144,8 +140,8 @@ export const Services = ({ dict }: ServicesProps) => {
           background: linear-gradient(
             180deg,
             ${COLOR_EMERALD} 0%,
-            ${COLOR_CYAN} 70%,
-            rgba(0, 163, 255, 0.1) 100%
+            ${COLOR_EMERALD} 70%,
+            rgba(0, 229, 153, 0.1) 100%
           );
           z-index: 1;
         }
@@ -185,7 +181,7 @@ export const Services = ({ dict }: ServicesProps) => {
           background: rgba(12, 12, 16, 0.06);
           backdrop-filter: blur(4px) saturate(140%);
           -webkit-backdrop-filter: blur(4px) saturate(140%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(0, 229, 153, 0.15);
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
           transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
           width: 100%;
@@ -193,6 +189,7 @@ export const Services = ({ dict }: ServicesProps) => {
 
         .card-custom:hover {
           transform: translateY(-2px);
+          border-color: rgba(0, 229, 153, 0.35);
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
         }
 
@@ -218,6 +215,14 @@ export const Services = ({ dict }: ServicesProps) => {
           align-items: center;
           gap: 0.75rem;
           margin-top: 1.25rem;
+        }
+
+        @media (max-width: 640px) {
+          .outcome-box {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+          }
         }
 
         .outcome-tag {
@@ -246,38 +251,33 @@ export const Services = ({ dict }: ServicesProps) => {
           <div className="steps-list">
             {steps.map((item, i) => (
               <div key={i} className="step-item">
-                <div 
-                  className="step-node" 
-                  style={{ 
-                    border: `2px solid ${item.color}`, 
-                    color: item.color,
-                    boxShadow: `0 0 14px ${item.color}40` 
+                <div
+                  className="step-node"
+                  style={{
+                    border: `2px solid ${COLOR_EMERALD}`,
+                    color: COLOR_EMERALD,
+                    boxShadow: `0 0 14px ${COLOR_EMERALD}40`
                   }}
                 >
                   {item.num}
                 </div>
 
-                <div 
-                  className="card-custom"
-                  style={{
-                    border: `1px solid rgba(255, 255, 255, 0.08)`,
-                  }}
-                >
+                <div className="card-custom">
                   <h3 className="card-title">{item.title}</h3>
                   <p className="card-desc">{item.desc}</p>
 
                   <div
                     className="outcome-box"
                     style={{
-                      background: `${item.color}08`,
-                      border: `1px solid ${item.color}25`
+                      background: `${COLOR_EMERALD}08`,
+                      border: `1px solid ${COLOR_EMERALD}25`
                     }}
                   >
-                    <span 
+                    <span
                       className="outcome-tag"
                       style={{
-                        background: `${item.color}20`,
-                        color: item.color
+                        background: `${COLOR_EMERALD}20`,
+                        color: COLOR_EMERALD
                       }}
                     >
                       {t.outcomeLabel || 'OUTCOME //'}
