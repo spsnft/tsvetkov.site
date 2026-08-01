@@ -29,9 +29,9 @@ export const Nav = ({ lang, dict }: NavProps) => {
 
   const t = dict?.nav ?? {
     expertise: 'Expertise',
-    services: 'Services',
+    services: 'Process',
     work: 'Work',
-    hospitality: 'Hospitality Tech',
+    hospitality: 'For Hotels & Villas',
     about: 'About',
     letsTalk: "Let's talk",
   };
@@ -87,7 +87,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <a href={`/${lang}#expertise`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.expertise}</a>
           <a href={`/${lang}#services`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.services}</a>
-          <a href={`/${lang}#work`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.work}</a>
+          <a href={`/${lang}#cases`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.work}</a>
           
           <a 
             href={`/${lang}/hms`} 

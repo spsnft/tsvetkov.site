@@ -262,6 +262,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           display: flex;
           flex-direction: column;
           width: 100%;
+          text-align: center;
         }
 
         .usp-hook {

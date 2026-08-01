@@ -260,11 +260,6 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
           text-wrap: pretty;
         }
 
-        .highlight-text {
-          color: inherit;
-          font-weight: inherit;
-        }
-
         .impact-footer {
           padding-top: 0.9rem;
           border-top: 1px dashed rgba(255, 255, 255, 0.09);
@@ -302,17 +297,7 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
               <div className="card-inner">
                 <div>
                   <h3 className="card-title">{item.title}</h3>
-                  <p className="card-desc">
-                    {item.descStart}
-                    {item.descHighlight1 && (
-                      <span className="highlight-text">{item.descHighlight1}</span>
-                    )}
-                    {item.descMiddle}
-                    {item.descHighlight2 && (
-                      <span className="highlight-text">{item.descHighlight2}</span>
-                    )}
-                    {item.descEnd}
-                  </p>
+                  <p className="card-desc">{item.desc}</p>
                 </div>
 
                 <div className="impact-footer">

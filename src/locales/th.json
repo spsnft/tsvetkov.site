@@ -1,9 +1,9 @@
 {
   "nav": {
     "expertise": "Expertise",
-    "services": "Services",
+    "services": "Process",
     "work": "Work",
-    "hospitality": "Hospitality Tech (/hms)",
+    "hospitality": "For Hotels & Villas",
     "about": "About",
     "letsTalk": "Let's talk"
   },
@@ -25,33 +25,21 @@
         "num": "01",
         "tag": "EMPTY TRAFFIC",
         "title": "Traffic Without Profit",
-        "descStart": "Agencies report clicks and leads, but your sales team gets ",
-        "descHighlight1": "poor-quality inquiries",
-        "descMiddle": ". Ad budgets keep growing, but ",
-        "descHighlight2": "net profit stays flat",
-        "descEnd": "",
+        "desc": "Your team gets poor-quality leads. Ad spend keeps climbing, but net profit stays flat",
         "impact": "Rising Cost Per Customer"
       },
       {
         "num": "02",
         "tag": "UNRELIABLE TRACKING",
         "title": "Broken Data & Blind Scaling",
-        "descStart": "Ad platforms, CRM, and actual revenue live in ",
-        "descHighlight1": "separate places",
-        "descMiddle": ". You end up guessing what works instead of seeing ",
-        "descHighlight2": "real ROI and true net profit",
-        "descEnd": "",
+        "desc": "Key metrics live in separate places — you're guessing, but not seeing them",
         "impact": "Flying Blind on ROI"
       },
       {
         "num": "03",
         "tag": "PROCESS FRICTION",
         "title": "Manual Work & Slow Sales",
-        "descStart": "Leads sit untouched for hours due to ",
-        "descHighlight1": "manual CRM handoffs",
-        "descMiddle": ". Your team wastes time managing spreadsheets instead of ",
-        "descHighlight2": "closing deals",
-        "descEnd": "",
+        "desc": "Leads sit untouched while your team manages spreadsheets instead of closing deals",
         "impact": "Deals Lost to Slow Follow-Up"
       }
     ]
@@ -231,7 +219,7 @@
     "badge": "GET IN TOUCH",
     "titleLine1": "Let's Engineer",
     "titleLine2": "Your Scale",
-    "desc": "Book a quick intro call or fill out the request form. We review your project and get back to you within 24h.",
+    "desc": "Book a quick intro call or fill out the request form. We review your project and get back to you within 24h",
     "callBtn": "Book a Call",
     "formTitle": "Request an Audit",
     "nameLabel": "Your Name",

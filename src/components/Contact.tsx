@@ -32,7 +32,7 @@ export const Contact = ({ dict }: ContactProps) => {
     badge: 'GET IN TOUCH',
     titleLine1: 'Ready to scale',
     titleLine2: 'your business?',
-    desc: 'Book a quick intro call or fill out the request form. We review your project and get back to you within 24h.',
+    desc: 'Book a quick intro call or fill out the request form. We review your project and get back to you within 24h',
     callBtn: 'Book a 15-Min Strategy Call',
     formTitle: 'Request an Audit',
     nameLabel: 'Your Name',
@@ -233,7 +233,7 @@ export const Contact = ({ dict }: ContactProps) => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'stretch', marginBottom: '4rem' }}>
 
           {/* Left Column: Copy & Quick Actions */}
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '2.5rem' }}>
             <div>
               <span
                 style={{

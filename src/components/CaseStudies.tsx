@@ -62,6 +62,14 @@ const CASE_META: Record<string, { hasCta?: boolean; ctaLink?: string }> = {
   realestate: {},
 };
 
+// Forces a consistent 2-line label across every metric card, regardless
+// of viewport width, by always breaking before the last word.
+function splitBeforeLastWord(text: string) {
+  const idx = text.lastIndexOf(' ');
+  if (idx === -1) return { line1: text, line2: '' };
+  return { line1: text.slice(0, idx), line2: text.slice(idx + 1) };
+}
+
 function TabIcon({ id }: { id: string }) {
   switch (id) {
     case 'hms':
@@ -506,11 +514,6 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           color: ${T.sub};
           margin-bottom: 0.5rem;
           line-height: 1.3;
-          min-height: 2.1em;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow-wrap: break-word;
         }
 
         .metric-value {
@@ -600,12 +603,23 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
               <div className="im-col">
                 <div className="box-label">{t.metricsTitle}</div>
                 <div className="metrics-grid">
-                  {active.metrics?.map((m: { value: string; label: string }, i: number) => (
-                    <div key={i} className="metric-card">
-                      <div className="metric-label">{m.label}</div>
-                      <div className="metric-value">{m.value}</div>
-                    </div>
-                  ))}
+                  {active.metrics?.map((m: { value: string; label: string }, i: number) => {
+                    const { line1, line2 } = splitBeforeLastWord(m.label);
+                    return (
+                      <div key={i} className="metric-card">
+                        <div className="metric-label">
+                          {line1}
+                          {line2 && (
+                            <>
+                              <br />
+                              {line2}
+                            </>
+                          )}
+                        </div>
+                        <div className="metric-value">{m.value}</div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
