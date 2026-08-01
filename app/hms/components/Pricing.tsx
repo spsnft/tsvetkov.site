@@ -31,10 +31,10 @@ export default function Pricing({ t }: PricingProps) {
 
         .pricing-title {
           font-size: 2.4rem;
-          font-weight: 700;
+          font-weight: 800;
           color: #ffffff;
           margin: 0 0 0.75rem 0;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.03em;
           line-height: 1.2;
           text-wrap: balance;
         }
@@ -59,6 +59,8 @@ export default function Pricing({ t }: PricingProps) {
           background: rgba(255, 255, 255, 0.01);
           border: 1px solid rgba(255, 255, 255, 0.04);
           border-radius: 12px;
+          backdrop-filter: blur(4px) saturate(140%);
+          -webkit-backdrop-filter: blur(4px) saturate(140%);
           padding: 3rem 2.5rem;
           position: relative;
           display: flex;

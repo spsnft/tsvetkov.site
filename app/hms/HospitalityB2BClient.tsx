@@ -30,13 +30,13 @@ export default function HospitalityB2BClient({ lang }: { lang: 'en' | 'th' }) {
     }}>
       <NetworkBackground />
 
-      <header style={{ 
-        borderBottom: `1px solid ${T.border}`, 
-        backdropFilter: 'blur(16px)', 
-        position: 'sticky', 
-        top: 0, 
-        zIndex: 100, 
-        backgroundColor: 'rgba(10, 10, 12, 0.7)' 
+      <header style={{
+        borderBottom: `1px solid ${T.border}`,
+        backdropFilter: 'blur(20px)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        backgroundColor: 'rgba(10, 10, 12, 0.85)'
       }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1rem', paddingBottom: '1rem' }}>
           <Link href="/" style={{ textDecoration: 'none' }}><Logo /></Link>

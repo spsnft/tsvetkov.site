@@ -114,10 +114,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         .scale-title {
           font-size: 2.4rem;
-          font-weight: 700;
+          font-weight: 800;
           color: #ffffff;
           margin: 0 0 0.75rem 0;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.03em;
           line-height: 1.2;
         }
 
@@ -153,6 +153,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             );
           border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 16px;
+          backdrop-filter: blur(4px) saturate(140%);
+          -webkit-backdrop-filter: blur(4px) saturate(140%);
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -188,9 +190,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: #FF6B6B;
-          background: rgba(255, 107, 107, 0.08);
-          border: 1px solid rgba(255, 107, 107, 0.2);
+          color: ${T.red};
+          background: ${T.red08};
+          border: 1px solid ${T.red20};
           padding: 0.25rem 0.75rem;
           border-radius: 9999px;
         }

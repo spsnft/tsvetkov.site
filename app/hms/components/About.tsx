@@ -111,10 +111,10 @@ export default function About({ t = {} }: AboutProps) {
 
         .about-title {
           font-size: 2.4rem;
-          font-weight: 700;
+          font-weight: 800;
           color: #ffffff;
           margin: 0;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.03em;
           line-height: 1.2;
         }
         

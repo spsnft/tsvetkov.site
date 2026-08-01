@@ -59,9 +59,9 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
         
         .main-title {
           font-size: clamp(2.2rem, 3.8vw, 3rem);
-          font-weight: 700;
+          font-weight: 800;
           line-height: 1.15;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.03em;
           margin: 0;
           color: #ffffff;
           text-wrap: pretty;

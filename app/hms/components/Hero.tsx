@@ -109,21 +109,21 @@ export default function Hero({ t }: HeroProps) {
           text-transform: uppercase;
           letter-spacing: 0.15em;
           font-size: 0.7rem;
-          font-weight: 600;
+          font-weight: 700;
           display: inline-flex;
           align-items: center;
           padding: 0.35rem 0.85rem;
           background: rgba(0, 229, 153, 0.05);
-          border: 1px solid rgba(0, 229, 153, 0.2);
+          border: 1px solid rgba(0, 229, 153, 0.25);
           border-radius: 20px;
-          backdrop-filter: blur(8px);
+          backdrop-filter: blur(12px);
           margin-bottom: 1.5rem;
           width: fit-content;
         }
-        
+
         .title {
           font-size: clamp(2.4rem, 4.4vw, 3.9rem);
-          font-weight: 700;
+          font-weight: 800;
           line-height: 1.12;
           letter-spacing: -0.03em;
           margin: 0 0 1.5rem 0;
@@ -273,7 +273,8 @@ export default function Hero({ t }: HeroProps) {
           background: rgba(0, 229, 153, 0.08);
           padding: 0.35rem 0.75rem;
           border-radius: 20px;
-          border: 1px solid rgba(0, 229, 153, 0.2);
+          border: 1px solid rgba(0, 229, 153, 0.25);
+          backdrop-filter: blur(12px);
         }
 
         .pulse-dot {

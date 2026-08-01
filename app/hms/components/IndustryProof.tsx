@@ -126,7 +126,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
         
         .metric-number {
           font-size: clamp(2rem, 4vw, 2.8rem);
-          font-weight: 700; 
+          font-weight: 800;
           line-height: 1.1; 
           letter-spacing: -0.03em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
