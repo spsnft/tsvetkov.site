@@ -1,243 +1,243 @@
 {
   "nav": {
-    "expertise": "Expertise",
-    "services": "Process",
-    "work": "Work",
-    "hospitality": "For Hotels & Villas",
-    "about": "About",
-    "letsTalk": "Let's talk"
+    "expertise": "Экспертиза",
+    "services": "Процесс",
+    "work": "Кейсы",
+    "hospitality": "Для отелей",
+    "about": "О нас",
+    "letsTalk": "Обсудить проект"
   },
   "hero": {
-    "badge": "FOUNDER-LED AGENCY",
-    "titleLine1": "More Revenue",
-    "titleLine2": "Engineered",
-    "sub1": "Eliminate chaos in marketing & digital systems",
-    "sub2": "No fluff — just high-performance architectures",
-    "sub3": "Track every dollar and automate sales flow",
-    "cta": "Audit My Business"
+    "badge": "АГЕНТСТВО ОСНОВАТЕЛЯ",
+    "titleLine1": "Больше выручки.",
+    "titleLine2": "Системно",
+    "sub1": "Устраняем хаос в маркетинге и цифровых системах",
+    "sub2": "Без воды — только высокопроизводительные архитектуры",
+    "sub3": "Отслеживаем каждый доллар и автоматизируем продажи",
+    "cta": "Аудит моего бизнеса"
   },
   "bottleneck": {
-    "badge": "SCALING BARRIERS",
-    "title": "Where Systems Break",
-    "impactLabel": "Impact:",
+    "badge": "БАРЬЕРЫ РОСТА",
+    "title": "Где ломаются системы",
+    "impactLabel": "Эффект:",
     "items": [
       {
         "num": "01",
-        "tag": "EMPTY TRAFFIC",
-        "title": "Traffic Without Profit",
-        "desc": "Your team gets poor-quality leads. Ad spend keeps climbing, but net profit stays flat",
-        "impact": "Rising Cost Per Customer"
+        "tag": "ПУСТОЙ ТРАФИК",
+        "title": "Трафик без прибыли",
+        "desc": "Команда получает лиды низкого качества. Расходы на рекламу растут, а чистая прибыль стоит на месте",
+        "impact": "Растущая стоимость клиента"
       },
       {
         "num": "02",
-        "tag": "UNRELIABLE TRACKING",
-        "title": "Disconnected Data",
-        "desc": "Key metrics live in separate places — you're guessing at what's working, not steering growth",
-        "impact": "Flying Blind on ROI"
+        "tag": "НЕНАДЁЖНАЯ АНАЛИТИКА",
+        "title": "Разрозненные данные",
+        "desc": "Ключевые метрики разбросаны по разным местам — вы гадаете, что работает, вместо того чтобы управлять ростом",
+        "impact": "ROI вслепую"
       },
       {
         "num": "03",
-        "tag": "PROCESS FRICTION",
-        "title": "Manual & Slow Sales",
-        "desc": "Leads sit untouched while your team manages spreadsheets instead of closing deals",
-        "impact": "Deals Lost to Delay"
+        "tag": "СБОИ В ПРОЦЕССАХ",
+        "title": "Медленные продажи",
+        "desc": "Лиды лежат без внимания, пока команда возится с таблицами вместо того, чтобы закрывать сделки",
+        "impact": "Сделки теряются из-за задержек"
       }
     ]
   },
   "expertise": {
-    "badge": "SOLUTIONS & ARSENAL",
-    "title": "How We Help You Scale",
-    "card1Title": "Systems, Data & Architecture",
-    "card1Desc": "Eliminate blind decision-making by unifying scattered business data into a single source of truth. Gain complete clarity on key financial metrics, unit economics, and margin dashboards",
-    "uspLine1": "We Don't Just Run Ads.",
-    "uspLine2": "We Build Systems",
-    "card2Title": "Strategic Audits & Funnel Optimization",
-    "card2Desc": "We analyze your customer journey to eliminate bottlenecks. Rebuilding sales funnels and optimizing conversion to maximize revenue from existing traffic",
-    "card3Title": "Process Automation & AI Workflows",
-    "card3Desc": "Eliminate operational lag and human error. Instantly route leads, automate CRM handoffs, and deploy AI agents to cut overhead and accelerate sales"
+    "badge": "РЕШЕНИЯ И АРСЕНАЛ",
+    "title": "Как мы помогаем расти",
+    "card1Title": "Системы, данные и архитектура",
+    "card1Desc": "Исключите решения вслепую, объединив разрозненные бизнес-данные в единый источник правды. Получите полную ясность по ключевым финансовым метрикам, юнит-экономике и дашбордам маржинальности",
+    "uspLine1": "Не только реклама.",
+    "uspLine2": "Мы строим системы",
+    "card2Title": "Стратегические аудиты и оптимизация воронок",
+    "card2Desc": "Мы анализируем путь клиента, чтобы устранить узкие места. Перестраиваем воронки продаж и повышаем конверсию, чтобы получать больше выручки с имеющегося трафика",
+    "card3Title": "Автоматизация процессов и AI-инструменты",
+    "card3Desc": "Исключите операционные задержки и человеческие ошибки. Мгновенно распределяйте лиды, автоматизируйте передачу в CRM и подключайте AI-агентов, чтобы снизить издержки и ускорить продажи"
   },
   "services": {
-    "badge": "EXECUTION ALGORITHM",
-    "title": "How Systems Get Built",
-    "outcomeLabel": "OUTCOME //",
-    "step1Title": "Full Audit & Roadmap",
-    "step1Desc": "A deep-dive diagnostic of your current business infrastructure — surfacing the exact problems and bottlenecks holding your growth back",
-    "step1Impact": "A complete picture of where the business really stands — before your next move",
-    "step2Title": "Build & Optimization",
-    "step2Desc": "A high-performance marketing system built from scratch, or your existing infrastructure fixed and re-engineered to actually perform",
-    "step2Impact": "A system built to carry real growth — not just traffic",
-    "step3Title": "System Delivery & Partnership",
-    "step3Desc": "A fully working system running on its own — with the option to keep scaling together",
-    "step3Impact": "No lock-in — the system is fully yours, partnership is optional"
+    "badge": "АЛГОРИТМ ВНЕДРЕНИЯ",
+    "title": "Как строятся системы",
+    "outcomeLabel": "РЕЗУЛЬТАТ //",
+    "step1Title": "Полный аудит и дорожная карта",
+    "step1Desc": "Глубокая диагностика текущей инфраструктуры вашего бизнеса — точно определяем проблемы и узкие места, которые тормозят рост",
+    "step1Impact": "Полная картина реального состояния бизнеса — до следующего шага",
+    "step2Title": "Внедрение и оптимизация",
+    "step2Desc": "Высокопроизводительная маркетинговая система, построенная с нуля, либо ваша текущая инфраструктура, исправленная и переработанная так, чтобы она реально работала",
+    "step2Impact": "Система, созданная для реального роста, а не только трафика",
+    "step3Title": "Передача системы и партнёрство",
+    "step3Desc": "Полностью рабочая система, которая работает самостоятельно — с возможностью продолжить масштабирование вместе с нами",
+    "step3Impact": "Никаких обязательств — система полностью ваша, партнёрство по желанию"
   },
   "cases": {
-    "badge": "CASE STUDIES",
-    "title": "What Can We Show",
-    "bottleneckLabel": "THE PROBLEM //",
-    "solutionLabel": "THE SOLUTION //",
-    "infraLabel": "// DEPLOYED INFRASTRUCTURE //",
-    "metricsTitle": "// SYSTEM IMPACT METRICS //",
-    "hmsCta": "Explore HMS System",
+    "badge": "КЕЙСЫ",
+    "title": "Что мы можем показать",
+    "bottleneckLabel": "ПРОБЛЕМА //",
+    "solutionLabel": "РЕШЕНИЕ //",
+    "infraLabel": "// ВНЕДРЁННАЯ ИНФРАСТРУКТУРА //",
+    "metricsTitle": "// МЕТРИКИ ЭФФЕКТА СИСТЕМЫ //",
+    "hmsCta": "Изучить систему HMS",
     "tabs": {
-      "hms": "01 // HOTELS & VILLAS",
-      "ecomm": "02 // E-COMMERCE SCALING",
-      "b2b": "03 // HIGH-TICKET B2B",
-      "realestate": "04 // REAL ESTATE DEVELOPMENT"
+      "hms": "01 // ОТЕЛИ И ВИЛЛЫ",
+      "ecomm": "02 // МАСШТАБИРОВАНИЕ E-COMMERCE",
+      "b2b": "03 // B2B С ВЫСОКИМ ЧЕКОМ",
+      "realestate": "04 // ДЕВЕЛОПМЕНТ НЕДВИЖИМОСТИ"
     },
     "items": {
       "hms": {
-        "title": "Direct Booking Architecture & OTA Elimination",
+        "title": "Архитектура прямых броней и отказ от OTA",
         "challenge": [
-          "OTA commissions eating up to 20% of every booking",
-          "Zero ownership of guest data",
-          "Most bookings routed through OTAs, low direct-channel conversion"
+          "Комиссии OTA съедают до 20% с каждого бронирования",
+          "Никакого доступа к данным гостей",
+          "Большинство броней идёт через OTA, низкая конверсия прямого канала"
         ],
         "solution": [
-          "Zero-commission booking engine, built to scale",
-          "Own your guest data & relationship",
-          "Turnkey direct booking funnel"
+          "Движок бронирования без комиссии, готовый к масштабированию",
+          "Данные и отношения с гостями — только ваши",
+          "Воронка прямых броней под ключ"
         ],
         "architecture": [
-          "Direct Payment Gateway Integration",
-          "Guest Data Pipeline",
-          "Automated Retargeting & Upsell Triggers"
+          "Интеграция прямого платёжного шлюза",
+          "Пайплайн данных гостей",
+          "Автоматический ретаргетинг и триггеры допродаж"
         ],
         "metrics": [
           {
             "value": "+40%",
-            "label": "Direct Bookings"
+            "label": "Прямые брони"
           },
           {
             "value": "0%",
-            "label": "OTA Commission"
+            "label": "Комиссия OTA"
           },
           {
             "value": "100%",
-            "label": "Data Ownership"
+            "label": "Владение данными"
           }
         ]
       },
       "ecomm": {
-        "title": "Performance Engine & P&L Attribution",
+        "title": "Движок Performance и атрибуция P&L",
         "challenge": [
-          "Ad spend scaled across 5+ channels with zero net-profit visibility",
-          "Broken tracking — ROAS numbers you can't trust",
-          "CAC climbing faster than revenue"
+          "Бюджет масштабирован на 5+ каналов без видимости чистой прибыли",
+          "Сломанная аналитика — цифрам ROAS нельзя доверять",
+          "CAC растёт быстрее выручки"
         ],
         "solution": [
-          "End-to-end pipeline linking ad accounts to real P&L",
-          "Live net-margin attribution dashboards",
-          "Budget re-allocation rules that follow actual profit"
+          "Сквозной пайплайн, связывающий рекламные кабинеты с реальным P&L",
+          "Дашборды атрибуции чистой маржи в реальном времени",
+          "Правила перераспределения бюджета по факту прибыли"
         ],
         "architecture": [
-          "Real-Time Blended ROAS Attribution",
-          "Automated LTV Cohort Analytics",
-          "Dynamic Ad Budget Re-allocation Rules"
+          "Атрибуция блендового ROAS в реальном времени",
+          "Автоматическая когортная аналитика LTV",
+          "Динамические правила перераспределения рекламного бюджета"
         ],
         "metrics": [
           {
             "value": "5.2x",
-            "label": "Blended ROAS"
+            "label": "Блендовый ROAS"
           },
           {
             "value": "+$430k",
-            "label": "Net Profit Growth"
+            "label": "Рост чистой прибыли"
           },
           {
             "value": "100%",
-            "label": "P&L Visibility"
+            "label": "Видимость P&L"
           }
         ]
       },
       "b2b": {
-        "title": "Lead Velocity & Automated GTM Architecture",
+        "title": "Скорость лидов и GTM-архитектура",
         "challenge": [
-          "High cost per lead, burning budget fast",
-          "Leads sit untouched for too long before first contact",
-          "Manual CRM handoffs killing conversion rate"
+          "Высокая стоимость лида, бюджет сгорает быстро",
+          "Лиды подолгу лежат без внимания до первого контакта",
+          "Ручная передача в CRM убивает конверсию"
         ],
         "solution": [
-          "Rebuilt acquisition funnels tuned for lead quality",
-          "Instant CRM routing — leads contacted within 60 seconds",
-          "AI scoring, so reps chase the deals worth closing"
+          "Перестроенные воронки привлечения, настроенные на качество лидов",
+          "Мгновенная маршрутизация в CRM — контакт с лидом за 60 секунд",
+          "AI-скоринг, чтобы менеджеры гнались за сделками, которые стоит закрывать"
         ],
         "architecture": [
-          "Enriched B2B Prospect Profiling",
-          "Automated Sales Pipeline Triggers",
-          "Executive P&L Forecast Dashboards"
+          "Обогащённый профиль B2B-лидов",
+          "Автоматические триггеры воронки продаж",
+          "Дашборды прогноза P&L для руководства"
         ],
         "metrics": [
           {
             "value": "+340%",
-            "label": "Qual. Lead Volume"
+            "label": "Объём квал. лидов"
           },
           {
             "value": "-42%",
-            "label": "CAC Reduction"
+            "label": "Снижение CAC"
           },
           {
             "value": "$1.4M",
-            "label": "Pipeline ARR"
+            "label": "ARR в воронке"
           }
         ]
       },
       "realestate": {
-        "title": "High-Intent Acquisition System",
+        "title": "Система привлечения целевых клиентов",
         "challenge": [
-          "Untargeted lead spam, low buyer intent",
-          "High cost per qualified investor",
-          "Zero visibility into broker response times"
+          "Нецелевой спам лидами, низкое намерение купить",
+          "Высокая стоимость квалифицированного инвестора",
+          "Нет видимости по скорости ответа брокеров"
         ],
         "solution": [
-          "Targeted investor acquisition funnels by budget & intent",
-          "Optimized financial qualification before a broker gets involved",
-          "Broker SLA tracking, so nothing goes cold"
+          "Целевые воронки привлечения инвесторов по бюджету и намерению",
+          "Оптимизированная финансовая квалификация до подключения брокера",
+          "Отслеживание SLA брокеров, чтобы ничего не остывало"
         ],
         "architecture": [
-          "Financial Qualification Micro-Funnels",
-          "Broker SLA & Pipeline Dashboard",
-          "Multi-Currency ROAS Analytics"
+          "Микроворонки финансовой квалификации",
+          "Дашборд SLA брокеров и воронки",
+          "Мультивалютная аналитика ROAS"
         ],
         "metrics": [
           {
             "value": "+220%",
-            "label": "Qual. Investor Leads"
+            "label": "Квал. лиды инвесторов"
           },
           {
             "value": "-29%",
-            "label": "CPL Reduction"
+            "label": "Снижение CPL"
           },
           {
             "value": "12m",
-            "label": "Avg Response"
+            "label": "Ср. время ответа"
           }
         ]
       }
     }
   },
   "contact": {
-    "badge": "GET IN TOUCH",
-    "titleLine1": "Let's Engineer",
-    "titleLine2": "Your Scale",
-    "desc": "Book a quick intro call or fill out the request form. We review your project and get back to you within 24h",
-    "callBtn": "Book a Call",
-    "formTitle": "Request an Audit",
-    "nameLabel": "Your Name",
-    "emailLabel": "Contact Email",
-    "websiteLabel": "Website or Socials",
-    "submitBtn": "Submit Audit Request"
+    "badge": "СВЯЗАТЬСЯ",
+    "titleLine1": "Спроектируем",
+    "titleLine2": "ваш рост",
+    "desc": "Запишитесь на короткий звонок или заполните форму заявки. Мы рассматриваем ваш проект и отвечаем в течение 24 часов",
+    "callBtn": "Записаться на звонок",
+    "formTitle": "Запросить аудит",
+    "nameLabel": "Ваше имя",
+    "emailLabel": "Email для связи",
+    "websiteLabel": "Сайт или соцсети",
+    "submitBtn": "Отправить заявку на аудит"
   },
   "hms": {
-    "badge": "Hospitality Growth Solutions",
-    "heroTitle": "Stop Paying 15-20% Commissions to Booking.com & Agoda",
-    "heroSub1": "Connect your property directly to guests\nZero risk of human error and double-bookings",
-    "heroSub2": "Keep 100% of the profit in your pocket",
-    "btnAudit": "Book a Free Audit",
-    "syncBadge": "DIRECT BOOKING SYNCHRONIZATION",
-    "otaSavedLabel": "OTA Margin Saved",
-    "statDirectRevenue": "Direct Revenue",
-    "statMarginGuest": "Margin per Guest",
-    "statGoogleTraffic": "Google Traffic",
-    "statRepeatBookings": "Repeat Bookings"
+    "badge": "Решения для роста в HoReCa",
+    "heroTitle": "Хватит платить 15–20% комиссии Booking.com и Agoda",
+    "heroSub1": "Подключите объект напрямую к гостям\nНикаких ошибок и двойных броней по вине человека",
+    "heroSub2": "Оставляйте 100% прибыли себе",
+    "btnAudit": "Получить бесплатный аудит",
+    "syncBadge": "СИНХРОНИЗАЦИЯ ПРЯМЫХ БРОНЕЙ",
+    "otaSavedLabel": "Сэкономленная маржа OTA",
+    "statDirectRevenue": "Прямая выручка",
+    "statMarginGuest": "Маржа на гостя",
+    "statGoogleTraffic": "Трафик из Google",
+    "statRepeatBookings": "Повторные брони"
   }
 }
