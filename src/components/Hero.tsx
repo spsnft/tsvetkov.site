@@ -64,8 +64,14 @@ export const Hero = ({ dict }: HeroProps) => {
         @media (min-width: 768px) {
           .hero-split-grid {
             flex-direction: row;
-            align-items: flex-end;
+            align-items: flex-start;
             gap: 3.5rem;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .hero-split-grid {
+            align-items: flex-end;
           }
         }
 

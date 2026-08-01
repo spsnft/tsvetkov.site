@@ -367,6 +367,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
           flex-wrap: wrap;
           gap: 1rem;
           margin-bottom: 1.75rem;
+          min-height: 44px;
         }
 
         @media (min-width: 600px) {
@@ -426,7 +427,7 @@ export const CaseStudies = ({ dict, lang = 'en' }: CaseStudiesProps) => {
 
         @media (min-width: 768px) {
           .infra-metrics-box {
-            grid-template-columns: 3fr 2fr;
+            grid-template-columns: 2fr 3fr;
           }
         }
 

@@ -31,16 +31,16 @@
       {
         "num": "02",
         "tag": "UNRELIABLE TRACKING",
-        "title": "Broken Data & Blind Scaling",
-        "desc": "Key metrics live in separate places — you're guessing, but not seeing them",
+        "title": "Disconnected Data",
+        "desc": "Key metrics live in separate places — you're guessing, not steering growth",
         "impact": "Flying Blind on ROI"
       },
       {
         "num": "03",
         "tag": "PROCESS FRICTION",
-        "title": "Manual Work & Slow Sales",
+        "title": "Manual & Slow Sales",
         "desc": "Leads sit untouched while your team manages spreadsheets instead of closing deals",
-        "impact": "Deals Lost to Slow Follow-Up"
+        "impact": "Deals Lost to Delay"
       }
     ]
   },
@@ -62,13 +62,13 @@
     "outcomeLabel": "OUTCOME //",
     "step1Title": "Full Audit & Roadmap",
     "step1Desc": "A deep-dive diagnostic of your current business infrastructure — surfacing the exact problems and bottlenecks holding your growth back",
-    "step1Impact": "A complete picture of where the business really stands — before you commit another dollar",
-    "step2Title": "System Build & Optimization",
+    "step1Impact": "A complete picture of where the business really stands — before your next move",
+    "step2Title": "Build & Optimization",
     "step2Desc": "A high-performance marketing system built from scratch, or your existing infrastructure fixed and re-engineered to actually perform",
     "step2Impact": "A system built to carry real growth — not just traffic",
     "step3Title": "System Delivery & Partnership",
     "step3Desc": "A fully working system running on its own — with the option to keep scaling together",
-    "step3Impact": "A working system you own, with room to keep growing"
+    "step3Impact": "No lock-in — the system is fully yours, partnership is optional"
   },
   "cases": {
     "badge": "CASE STUDIES",
