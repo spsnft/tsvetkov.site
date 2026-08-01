@@ -190,7 +190,7 @@ export default function About({ t = {} }: AboutProps) {
 
         .trust-stat-card:hover {
           background: rgba(22, 27, 38, 0.75);
-          border-color: rgba(255, 255, 255, 0.18);
+          border-color: ${T.accent35};
         }
 
         .stat-num {
@@ -265,7 +265,7 @@ export default function About({ t = {} }: AboutProps) {
 
         .case-card:hover {
           background: rgba(18, 22, 32, 0.75);
-          border-color: rgba(255, 255, 255, 0.18);
+          border-color: ${T.accent35};
         }
 
         .case-header {

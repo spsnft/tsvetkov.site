@@ -136,7 +136,20 @@ export default function Pricing({ t }: PricingProps) {
           font-size: 0.9rem;
           color: ${T.sub};
         }
-        
+
+        .price-disclaimer {
+          margin: 0.6rem 0 0 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+
+        .price-disclaimer span {
+          font-size: 0.72rem;
+          line-height: 1.4;
+          color: ${T.muted};
+        }
+
         .features-list {
           list-style: none;
           padding: 0;
@@ -275,8 +288,12 @@ export default function Pricing({ t }: PricingProps) {
           <div className="card">
             <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
             <div className="price-block">
-              <span className="price">{t?.tier1Price || "$900"}</span>
+              <span className="price">{t?.tier1Price || "From $1,200"}</span>
               <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
+              <p className="price-disclaimer">
+                <span>{t?.priceDisclaimerAudit || "Final price confirmed after your free audit"}</span>
+                <span>{t?.priceDisclaimerSub || "+ your PMS/channel manager subscription — billed directly by the provider"}</span>
+              </p>
             </div>
             <ul className="features-list">
               <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F1)}</li>
@@ -291,8 +308,12 @@ export default function Pricing({ t }: PricingProps) {
             <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
             <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
             <div className="price-block">
-              <span className="price">{t?.tier2Price || "$1,500"}</span>
+              <span className="price">{t?.tier2Price || "From $2,500"}</span>
               <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
+              <p className="price-disclaimer">
+                <span>{t?.priceDisclaimerAudit || "Final price confirmed after your free audit"}</span>
+                <span>{t?.priceDisclaimerSub || "+ your PMS/channel manager subscription — billed directly by the provider"}</span>
+              </p>
             </div>
             <ul className="features-list">
               <li className="feature-item">
