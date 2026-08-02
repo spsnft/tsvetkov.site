@@ -37,10 +37,10 @@ export default function FAQ({ t }: FAQProps) {
 
         .faq-title {
           font-size: 2.2rem;
-          font-weight: 700;
+          font-weight: 800;
           color: #ffffff;
           margin: 0 0 0.75rem 0;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.03em;
           line-height: 1.2;
         }
 
@@ -60,6 +60,8 @@ export default function FAQ({ t }: FAQProps) {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 12px;
+          backdrop-filter: blur(4px) saturate(140%);
+          -webkit-backdrop-filter: blur(4px) saturate(140%);
           overflow: hidden;
           transition: border-color 0.2s ease;
         }

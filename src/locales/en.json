@@ -226,18 +226,5 @@
     "emailLabel": "Contact Email",
     "websiteLabel": "Website or Socials",
     "submitBtn": "Submit Audit Request"
-  },
-  "hms": {
-    "badge": "Hospitality Growth Solutions",
-    "heroTitle": "Stop Paying 15-20% Commissions to Booking.com & Agoda",
-    "heroSub1": "Connect your property directly to guests\nZero risk of human error and double-bookings",
-    "heroSub2": "Keep 100% of the profit in your pocket",
-    "btnAudit": "Book a Free Audit",
-    "syncBadge": "DIRECT BOOKING SYNCHRONIZATION",
-    "otaSavedLabel": "OTA Margin Saved",
-    "statDirectRevenue": "Direct Revenue",
-    "statMarginGuest": "Margin per Guest",
-    "statGoogleTraffic": "Google Traffic",
-    "statRepeatBookings": "Repeat Bookings"
   }
 }

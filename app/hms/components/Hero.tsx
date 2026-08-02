@@ -5,13 +5,11 @@ import { onCalendlyReady } from '@/src/components/CalendlyScript';
 
 interface HeroProps {
   t: {
-    badge: string;
     heroTitle: string;
     heroSub1: string;
     heroSub2: string;
     btnAudit?: string;
     syncBadge?: string;
-    otaSavedLabel?: string;
     statDirectRevenue?: string;
     statMarginGuest?: string;
     statGoogleTraffic?: string;
@@ -21,8 +19,6 @@ interface HeroProps {
 
 export default function Hero({ t }: HeroProps) {
   const [isMounted, setIsMounted] = useState(false);
-  const [liveAmount, setLiveAmount] = useState(4850);
-  const [isTicking, setIsTicking] = useState(false);
   const [calendlyReady, setCalendlyReady] = useState(false);
 
   useEffect(() => {
@@ -30,16 +26,6 @@ export default function Hero({ t }: HeroProps) {
 
     // Регистрируем колбэк — когда Calendly загрузится, кнопка станет активной
     onCalendlyReady(() => setCalendlyReady(true));
-
-    const interval = setInterval(() => {
-      setLiveAmount(prev => prev + Math.floor(Math.random() * 3) + 1);
-      setIsTicking(true);
-      setTimeout(() => setIsTicking(false), 300);
-    }, 1200);
-
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
 
   const handleCalendlyPopup = (e: React.MouseEvent) => {
@@ -48,10 +34,6 @@ export default function Hero({ t }: HeroProps) {
       (window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/fediatsvetkov/15min' });
     }
     // Нет fallback'а — если Calendly не загрузился, кнопка будет disabled и ничего не произойдёт
-  };
-
-  const formatCurrency = (num: number) => {
-    return '$' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
   // Универсальное деление подзаголовка
@@ -80,7 +62,7 @@ export default function Hero({ t }: HeroProps) {
       <style jsx>{`
         .hero-section {
           width: 100%;
-          padding: 2.5rem 0 4rem 0;
+          padding: clamp(5.25rem, 8vw, 8rem) 0 4rem 0;
           position: relative;
           z-index: 10;
         }
@@ -104,26 +86,9 @@ export default function Hero({ t }: HeroProps) {
           justify-content: center;
         }
         
-        .badge {
-          color: #00E599;
-          text-transform: uppercase;
-          letter-spacing: 0.15em;
-          font-size: 0.7rem;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          padding: 0.35rem 0.85rem;
-          background: rgba(0, 229, 153, 0.05);
-          border: 1px solid rgba(0, 229, 153, 0.2);
-          border-radius: 20px;
-          backdrop-filter: blur(8px);
-          margin-bottom: 1.5rem;
-          width: fit-content;
-        }
-        
         .title {
           font-size: clamp(2.4rem, 4.4vw, 3.9rem);
-          font-weight: 700;
+          font-weight: 800;
           line-height: 1.12;
           letter-spacing: -0.03em;
           margin: 0 0 1.5rem 0;
@@ -255,7 +220,7 @@ export default function Hero({ t }: HeroProps) {
         .bento-header {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: flex-start;
           padding-bottom: 1.2rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           gap: 0.5rem;
@@ -273,7 +238,8 @@ export default function Hero({ t }: HeroProps) {
           background: rgba(0, 229, 153, 0.08);
           padding: 0.35rem 0.75rem;
           border-radius: 20px;
-          border: 1px solid rgba(0, 229, 153, 0.2);
+          border: 1px solid rgba(0, 229, 153, 0.25);
+          backdrop-filter: blur(12px);
         }
 
         .pulse-dot {
@@ -283,33 +249,6 @@ export default function Hero({ t }: HeroProps) {
           border-radius: 50%;
           box-shadow: 0 0 8px #00E599;
           animation: pulse 2s infinite;
-        }
-
-        .ota-saved-block {
-          text-align: right;
-        }
-
-        .ota-saved-label {
-          font-size: 0.65rem;
-          color: rgba(255, 255, 255, 0.45);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .ota-saved-value {
-          font-family: 'SF Mono', monospace, sans-serif;
-          font-size: clamp(1.25rem, 2vw, 1.55rem);
-          font-weight: 800;
-          color: #38BDF8;
-          margin-top: 0.15rem;
-          transition: transform 0.15s ease, color 0.15s ease;
-          display: block;
-          text-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
-        }
-
-        .ota-saved-value.ticking {
-          transform: scale(1.04);
-          color: #00E599;
         }
 
         .bento-grid {
@@ -379,11 +318,10 @@ export default function Hero({ t }: HeroProps) {
         }
 
         @media (max-width: 1024px) {
-          .hero-section { padding: 2rem 0; }
+          .hero-section { padding-bottom: 2rem; }
           .hero-grid { grid-template-columns: 1fr; gap: 0; }
           .text-column { text-align: center; align-items: center; }
-          .badge { margin-left: auto; margin-right: auto; }
-          .cta-container { 
+          .cta-container {
             flex-direction: row !important; 
             justify-content: center; 
             align-items: center;
@@ -397,7 +335,6 @@ export default function Hero({ t }: HeroProps) {
       <div className="container">
         <div className="hero-grid">
           <div className="text-column">
-            <span className="badge">{t.badge}</span>
             <h1 className="title">{t.heroTitle}</h1>
             
             <div className="subtitles-block">
@@ -441,13 +378,7 @@ export default function Hero({ t }: HeroProps) {
               <div className="bento-card">
                 <div className="bento-header">
                   <div className="sync-badge">
-                    <div className="pulse-dot"></div> {t.syncBadge || "DIRECT BOOKING SYNC ACTIVE"}
-                  </div>
-                  <div className="ota-saved-block">
-                    <div className="ota-saved-label">{t.otaSavedLabel || "OTA Margin Saved"}</div>
-                    <span className={`ota-saved-value ${isTicking ? 'ticking' : ''}`}>
-                      {formatCurrency(liveAmount)}
-                    </span>
+                    <div className="pulse-dot"></div> {t.syncBadge || "CLIENT OUTCOMES"}
                   </div>
                 </div>
 

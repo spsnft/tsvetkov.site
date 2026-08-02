@@ -18,65 +18,40 @@ const DEFAULT_ITEMS = [
   {
     pain: "24/7 MANUAL UPDATES",
     endValue: "Instant Sync",
-    desc: "**Cloud PMS & Channel Manager** integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
+    desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
   },
   {
     pain: "15–20% OTA COMMISSIONS",
     endValue: "100% Direct Revenue",
-    desc: "**Zero-commission booking engine** with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
+    desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
   },
   {
     pain: "FULL OTA DEPENDENCY",
     endValue: "Predictable Scale",
-    desc: "**Local SEO optimization** to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
+    desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
   }
 ];
 
 const renderFormattedText = (text: string) => {
   if (!text) return null;
 
-  let processed = text
+  const processed = text
     .replace(/Agoda & 300\+ OTAs/g, 'Agoda <span class="nobr">& 300+ OTAs</span>')
     .replace(/keep all revenue in-house/g, '<span class="nobr">keep all revenue in-house</span>')
     .replace(/past stays into lifetime revenue/g, '<span class="nobr">past stays into lifetime revenue</span>')
     .replace(/guest retention loops/g, '<span class="nobr">guest retention loops</span>');
 
-  const parts = processed.split(/\*\*(.*?)\*\*/g);
+  const parts = processed.split(/<span class="nobr">(.*?)<\/span>/g);
 
   return parts.map((part, index) => {
-    const isBold = index % 2 === 1;
-    
-    if (part.includes('<span class="nobr">')) {
-      const subParts = part.split(/<span class="nobr">(.*?)<\/span>/g);
+    if (index % 2 === 1) {
       return (
-        <React.Fragment key={index}>
-          {subParts.map((sub, sIdx) => {
-            if (sIdx % 2 === 1) {
-              return (
-                <span key={sIdx} className="nobr" style={isBold ? { color: '#ffffff', fontWeight: 600 } : undefined}>
-                  {sub}
-                </span>
-              );
-            }
-            return isBold ? (
-              <strong key={sIdx} style={{ color: '#ffffff', fontWeight: 600 }}>
-                {sub}
-              </strong>
-            ) : (
-              sub
-            );
-          })}
-        </React.Fragment>
+        <span key={index} className="nobr">
+          {part}
+        </span>
       );
     }
-
-    return isBold ? (
-      <strong key={index} style={{ color: '#ffffff', fontWeight: 600 }}>
-        {part}
-      </strong>
-    ) : (
-      part
-    );
+    return part;
   });
 };
 
@@ -114,10 +89,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         .scale-title {
           font-size: 2.4rem;
-          font-weight: 700;
+          font-weight: 800;
           color: #ffffff;
           margin: 0 0 0.75rem 0;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.03em;
           line-height: 1.2;
         }
 
@@ -153,6 +128,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             );
           border: 1px solid rgba(255, 255, 255, 0.05);
           border-radius: 16px;
+          backdrop-filter: blur(4px) saturate(140%);
+          -webkit-backdrop-filter: blur(4px) saturate(140%);
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -188,9 +165,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: #FF6B6B;
-          background: rgba(255, 107, 107, 0.08);
-          border: 1px solid rgba(255, 107, 107, 0.2);
+          color: ${T.red};
+          background: ${T.red08};
+          border: 1px solid ${T.red20};
           padding: 0.25rem 0.75rem;
           border-radius: 9999px;
         }

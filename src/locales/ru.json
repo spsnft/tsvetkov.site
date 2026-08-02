@@ -226,18 +226,5 @@
     "emailLabel": "Email для связи",
     "websiteLabel": "Сайт или соцсети",
     "submitBtn": "Отправить заявку на аудит"
-  },
-  "hms": {
-    "badge": "Решения для роста в HoReCa",
-    "heroTitle": "Хватит платить 15–20% комиссии Booking.com и Agoda",
-    "heroSub1": "Подключите объект напрямую к гостям\nНикаких ошибок и двойных броней по вине человека",
-    "heroSub2": "Оставляйте 100% прибыли себе",
-    "btnAudit": "Получить бесплатный аудит",
-    "syncBadge": "СИНХРОНИЗАЦИЯ ПРЯМЫХ БРОНЕЙ",
-    "otaSavedLabel": "Сэкономленная маржа OTA",
-    "statDirectRevenue": "Прямая выручка",
-    "statMarginGuest": "Маржа на гостя",
-    "statGoogleTraffic": "Трафик из Google",
-    "statRepeatBookings": "Повторные брони"
   }
 }
