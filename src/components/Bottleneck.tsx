@@ -278,6 +278,20 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
           text-wrap: pretty;
         }
 
+        @media (min-width: 1024px) {
+          .card {
+            padding: 2rem 1.4rem 1.75rem 1.4rem;
+          }
+
+          .grid {
+            gap: 1.15rem;
+          }
+
+          .card-desc {
+            font-size: 0.85rem;
+          }
+        }
+
         .impact-footer {
           padding-top: 0.9rem;
           border-top: 1px dashed rgba(255, 255, 255, 0.09);
