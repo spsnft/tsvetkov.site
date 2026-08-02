@@ -40,6 +40,7 @@ export const Expertise = ({ dict }: ExpertiseProps) => {
           padding: ${T.section.topPad} 0 ${T.section.bottomPad} 0;
           background: transparent;
           z-index: 5;
+          scroll-margin-top: 80px;
         }
 
         .header-box {

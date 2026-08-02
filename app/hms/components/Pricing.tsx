@@ -15,13 +15,14 @@ const cleanText = (str?: string) => {
 
 export default function Pricing({ t }: PricingProps) {
   return (
-    <section className="pricing-section">
+    <section id="pricing" className="pricing-section">
       <style jsx>{`
         .pricing-section {
           width: 100%;
           /* Верх: 0 | Низ: 80px (5rem) */
-          padding: 0 0 5rem 0; 
+          padding: 0 0 5rem 0;
           background: transparent;
+          scroll-margin-top: 80px;
         }
         
         .pricing-header {

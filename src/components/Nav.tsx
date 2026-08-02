@@ -1,12 +1,47 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useTransition } from 'react';
 import { motion } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 import { Logo } from '@/src/ui/Logo';
 import { onCalendlyReady } from '@/src/components/CalendlyScript';
 import { contentData as hmsContentData } from '@/app/hms/constants';
+
+function NavLink({ href, label, isActive }: { href: string; label: string; isActive: boolean }) {
+  return (
+    <a
+      href={href}
+      style={{
+        position: 'relative',
+        color: isActive ? '#fff' : T.sub,
+        textDecoration: 'none',
+        fontSize: '0.85rem',
+        fontWeight: isActive ? 700 : 500,
+        paddingBottom: 6,
+        transition: 'color .2s',
+      }}
+    >
+      {label}
+      {isActive && (
+        <motion.div
+          layoutId="nav-underline"
+          transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 2,
+            borderRadius: 2,
+            background: T.accent,
+            boxShadow: `0 0 8px ${T.accent}`,
+          }}
+        />
+      )}
+    </a>
+  );
+}
 
 interface NavProps {
   lang: string;
@@ -32,6 +67,8 @@ export const Nav = ({ lang, dict }: NavProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [calendlyReady, setCalendlyReady] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const [isPending, startTransition] = useTransition();
 
   const pathname = usePathname();
   const router = useRouter();
@@ -67,12 +104,31 @@ export const Nav = ({ lang, dict }: NavProps) => {
     onCalendlyReady(() => setCalendlyReady(true));
   }, []);
 
+  // Подсветка активного пункта навигации по скроллу
+  useEffect(() => {
+    const ids = isHms ? ['how-it-works', 'pricing', 'faq'] : ['expertise', 'services', 'cases'];
+    const handleScrollSpy = () => {
+      const scrollPos = window.scrollY + window.innerHeight * 0.35;
+      let current = '';
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollPos) current = id;
+      }
+      setActiveSection(current);
+    };
+    handleScrollSpy();
+    window.addEventListener('scroll', handleScrollSpy, { passive: true });
+    return () => window.removeEventListener('scroll', handleScrollSpy);
+  }, [isHms]);
+
   // Функция для переключения языка с сохранением текущего пути
   const switchLang = (newLang: string) => {
-    if (!pathname) return;
+    if (!pathname || newLang === lang) return;
     const segments = pathname.split('/');
     segments[1] = newLang; // Заменяем /en на /ru или /th
-    router.push(segments.join('/'));
+    startTransition(() => {
+      router.push(segments.join('/'));
+    });
   };
 
   const handleCalendlyPopup = (e: React.MouseEvent) => {
@@ -108,16 +164,20 @@ export const Nav = ({ lang, dict }: NavProps) => {
       {/* ОСНОВНАЯ НАВИГАЦИЯ */}
       {!isMobile && (
         isHms ? (
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
             <a href={`/${lang}`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>
               {BACK_LABEL[lang] ?? BACK_LABEL.en}
             </a>
+            <span style={{ width: 1, height: 16, background: T.border }} />
+            <NavLink href="#how-it-works" label={hmsT.navHowItWorks} isActive={activeSection === 'how-it-works'} />
+            <NavLink href="#pricing" label={hmsT.navPricing} isActive={activeSection === 'pricing'} />
+            <NavLink href="#faq" label={hmsT.navFaq} isActive={activeSection === 'faq'} />
           </div>
         ) : (
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-            <a href={`/${lang}#expertise`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.expertise}</a>
-            <a href={`/${lang}#services`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.services}</a>
-            <a href={`/${lang}#cases`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>{t.work}</a>
+            <NavLink href={`/${lang}#expertise`} label={t.expertise} isActive={activeSection === 'expertise'} />
+            <NavLink href={`/${lang}#services`} label={t.services} isActive={activeSection === 'services'} />
+            <NavLink href={`/${lang}#cases`} label={t.work} isActive={activeSection === 'cases'} />
 
             <a
               href={`/${lang}/hms`}
@@ -165,30 +225,49 @@ export const Nav = ({ lang, dict }: NavProps) => {
             padding: 2,
             gap: 2,
             backdropFilter: 'blur(8px)',
+            opacity: isPending ? 0.6 : 1,
+            pointerEvents: isPending ? 'none' : 'auto',
+            transition: 'opacity .2s ease',
           }}
         >
           {['en', 'ru', 'th'].map((l) => {
             const isActive = lang === l;
             return (
-              <button
+              <motion.button
                 key={l}
                 onClick={() => switchLang(l)}
+                whileTap={{ scale: 0.92 }}
                 style={{
+                  position: 'relative',
                   padding: '0.35rem 0.75rem',
                   borderRadius: 26,
-                  border: isActive ? `1px solid ${T.accent25}` : '1px solid transparent',
-                  background: isActive ? T.accent10 : 'transparent',
+                  border: '1px solid transparent',
+                  background: 'transparent',
                   color: isActive ? T.accent : T.muted,
                   fontWeight: isActive ? 700 : 500,
                   fontSize: '0.72rem',
                   textTransform: 'uppercase',
                   letterSpacing: '0.02em',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease',
+                  transition: 'color .2s ease',
                 }}
               >
+                {isActive && (
+                  <motion.div
+                    layoutId="lang-pill"
+                    transition={{ type: 'spring', stiffness: 500, damping: 32 }}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: 26,
+                      background: T.accent10,
+                      border: `1px solid ${T.accent25}`,
+                      zIndex: -1,
+                    }}
+                  />
+                )}
                 {l}
-              </button>
+              </motion.button>
             );
           })}
         </div>
