@@ -16,12 +16,13 @@ export default function FAQ({ t }: FAQProps) {
   };
 
   return (
-    <section className="faq-section">
+    <section id="faq" className="faq-section">
       <style jsx>{`
         .faq-section {
           width: 100%;
           padding: 0 0 5rem 0;
           background: transparent;
+          scroll-margin-top: 80px;
         }
 
         .faq-container {

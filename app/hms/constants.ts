@@ -8,6 +8,11 @@ export const contentData = {
     btnChat: "WhatsApp",
     btnLine: "Line",
 
+    // --- NAV ---
+    navHowItWorks: "How It Works",
+    navPricing: "Pricing",
+    navFaq: "FAQ",
+
     // Hero Bento Widget Text
     syncBadge: "CLIENT OUTCOMES",
     statDirectRevenue: "Direct Revenue",
@@ -146,6 +151,11 @@ export const contentData = {
     btnChat: "WhatsApp",
     btnLine: "Line",
 
+    // --- NAV ---
+    navHowItWorks: "Как это работает",
+    navPricing: "Тарифы",
+    navFaq: "Вопросы",
+
     // Hero Bento Widget Text
     syncBadge: "РЕЗУЛЬТАТЫ КЛИЕНТОВ",
     statDirectRevenue: "Прямая выручка",
@@ -283,6 +293,11 @@ export const contentData = {
     btnAudit: "นัดหมายตรวจสอบระบบฟรี",
     btnChat: "WhatsApp",
     btnLine: "Line",
+
+    // --- NAV ---
+    navHowItWorks: "วิธีการทำงาน",
+    navPricing: "ราคา",
+    navFaq: "คำถาม",
 
     // Hero Bento Widget Text
     syncBadge: "ผลลัพธ์ของลูกค้า",

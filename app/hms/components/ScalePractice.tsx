@@ -74,12 +74,13 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
   };
 
   return (
-    <section className="scale-section">
+    <section id="how-it-works" className="scale-section">
       <style jsx>{`
         .scale-section {
           width: 100%;
           padding: 3rem 0 3.5rem 0;
           background: transparent;
+          scroll-margin-top: 80px;
         }
 
         .scale-header {
