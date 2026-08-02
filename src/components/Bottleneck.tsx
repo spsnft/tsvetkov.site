@@ -172,7 +172,6 @@ export const Bottleneck = ({ dict }: BottleneckProps) => {
         @media (min-width: 768px) {
           .grid {
             grid-template-columns: repeat(3, 1fr);
-            align-items: start;
           }
         }
 
