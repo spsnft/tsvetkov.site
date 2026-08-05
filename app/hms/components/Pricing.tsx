@@ -123,6 +123,7 @@ export default function Pricing({ t }: PricingProps) {
           gap: 0.4rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.03);
           padding-bottom: 1.5rem;
+          min-height: 20.5rem;
         }
         
         .price {
@@ -336,6 +337,9 @@ export default function Pricing({ t }: PricingProps) {
             <div className="price-block">
               <span className="price">{t?.tier3Price || "Custom"}</span>
               <span className="price-desc">{t?.tier3Desc || "For hotel chains & management firms"}</span>
+              <p className="price-disclaimer">
+                <span>{t?.priceDisclaimerEnterprise || "Scope and price confirmed on your free audit"}</span>
+              </p>
             </div>
             <ul className="features-list">
               <li className="feature-item">
