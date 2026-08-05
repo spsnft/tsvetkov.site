@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
     }
 
     const resend = new Resend(apiKey);
-    const fromAddress = process.env.RESEND_FROM_EMAIL || 'Tsvetkov Site <onboarding@resend.dev>';
+    const fromAddress = process.env.RESEND_FROM_EMAIL || 'Tsvetkov Site <noreply@tsvetkov.site>';
 
     const { error: sendError } = await resend.emails.send({
       from: fromAddress,
