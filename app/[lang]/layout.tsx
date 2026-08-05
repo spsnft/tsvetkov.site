@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import "../globals.css"; 
+import "../globals.css";
 import { CalendlyScript } from "@/src/components/CalendlyScript";
+import StyledJsxRegistry from "@/src/components/StyledJsxRegistry";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -69,8 +70,10 @@ export default async function RootLayout({ children, params }: LayoutProps) {
         <link rel="preconnect" href="https://assets.calendly.com" />
       </head>
       <body>
-        {children}
-        <CalendlyScript />
+        <StyledJsxRegistry>
+          {children}
+          <CalendlyScript />
+        </StyledJsxRegistry>
       </body>
     </html>
   );
