@@ -187,7 +187,7 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
             </button>
 
             <a
-              href="https://wa.me/66955183783"
+              href="https://wa.me/66650255229"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary-chat"

@@ -58,7 +58,7 @@ interface NavProps {
 }
 
 const BACK_LABEL: Record<string, string> = {
-  en: 'About',
+  en: 'About Us',
   ru: 'О нас',
   th: 'เกี่ยวกับเรา',
 };
