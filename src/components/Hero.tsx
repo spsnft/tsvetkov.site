@@ -181,6 +181,20 @@ export const Hero = ({ dict }: HeroProps) => {
           z-index: 2;
         }
 
+        /* На планшете правая колонка должна доходить до того же правого края,
+           что и контент остальных секций страницы, а не оставаться уже узкого 460px */
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .left-col {
+            flex: 1 1 0;
+            max-width: none;
+          }
+
+          .right-col {
+            flex: 1 1 0;
+            max-width: none;
+          }
+        }
+
         .hero-description {
           display: flex;
           flex-direction: column;

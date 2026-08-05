@@ -72,7 +72,7 @@ export default function About({ t = {} }: AboutProps) {
   const titleText = t.aboutTitle || "Systems. Optimization. Scale.";
   
   const firstSentence = t.aboutDescFirst || "We step into business to optimize them for maximum efficiency.";
-  const restText = t.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.";
+  const restText = t.aboutDescRest || "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue";
 
   const trustStats = [
     { num: t.stat1Num || "$1M+", name: t.stat1Name || "Saved Fees", sub: t.stat1Sub || "In OTA commissions" },
@@ -82,7 +82,7 @@ export default function About({ t = {} }: AboutProps) {
 
   const cases = [
     {
-      title: t.case1Title || "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
+      title: t.case1Title || "+$2,800/mo OTA savings | +42% Direct Bookings",
       badge: t.case1Badge || "Villa Resort",
       desc: t.case1Desc || "Replaced manual management with an automated Direct Engine"
     },

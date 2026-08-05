@@ -54,7 +54,7 @@ export const contentData = {
     // --- ABOUT & EXPERTISE SECTION ---
     aboutTitle: "Systems. Optimization. Scale.",
     aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
-    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue.",
+    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
 
     // Trust Stats
     stat1Num: "$1M+",
@@ -69,7 +69,7 @@ export const contentData = {
 
     // Cases & Results
     proofLabel: "Proven Results",
-    case1Title: "+$2,800/mo saved in OTA fees | +42% Direct Bookings",
+    case1Title: "+$2,800/mo OTA savings | +42% Direct Bookings",
     case1Badge: "Villa Resort",
     case1Desc: "Replaced manual management with an automated Direct Engine",
 
@@ -83,7 +83,6 @@ export const contentData = {
     pricePopular: "Popular",
     priceDisclaimerAudit: "Final price confirmed after your free audit",
     priceDisclaimerSub: "+ your PMS/channel manager subscription — billed directly by the provider",
-    priceDisclaimerEnterprise: "Scope and price confirmed on your free audit",
 
     tier1Title: "LITE (1-10 Rooms)",
     tier1Price: "From $1,200",
@@ -147,7 +146,7 @@ export const contentData = {
   ru: {
     // --- HERO SECTION ---
     heroTitle: "Хватит платить 15–20% комиссии Booking.com и Agoda",
-    heroSub1: "Подключите объект напрямую к гостям\nНикаких ошибок и двойных броней по вине человека",
+    heroSub1: "Подключите свой объект напрямую к гостям\nНикаких ошибок и двойных броней",
     heroSub2: "Оставляйте 100% прибыли себе",
     btnAudit: "Получить бесплатный аудит",
     btnChat: "WhatsApp",
@@ -182,7 +181,7 @@ export const contentData = {
       {
         pain: "ОБНОВЛЕНИЯ ВРУЧНУЮ 24/7",
         endValue: "Мгновенная синхронизация",
-        desc: "Интеграция Cloud PMS и Channel Manager. Каждое бронирование мгновенно блокирует номера во всех каналах — Booking.com, Agoda и 300+ других OTA"
+        desc: "Интеграция Cloud PMS и Channel Manager. Каждое бронирование мгновенно резервирует номера во всех каналах — Booking.com, Agoda и 300+ других OTA"
       },
       {
         pain: "КОМИССИЯ OTA 15–20%",
@@ -199,14 +198,14 @@ export const contentData = {
     // --- ABOUT & EXPERTISE SECTION ---
     aboutTitle: "Системы. Оптимизация. Масштаб.",
     aboutDescFirst: "Мы входим в бизнес, чтобы довести его эффективность до максимума.",
-    aboutDescRest: "Объединяя маркетинговые каналы, аналитику данных и автоматизацию процессов в единый механизм, мы устраняем операционный хаос и запускаем системный рост — превращая скрытые потери в предсказуемую, масштабируемую выручку.",
+    aboutDescRest: "Объединяя маркетинговые каналы, аналитику данных и автоматизацию процессов в единый механизм, мы устраняем операционный хаос и запускаем системный рост — превращая скрытые потери в предсказуемую, масштабируемую выручку",
 
     // Trust Stats
     stat1Num: "$1M+",
-    stat1Name: "Сэкономлено комиссий",
+    stat1Name: "Сэкономлено",
     stat1Sub: "На комиссиях OTA",
     stat2Num: "20+",
-    stat2Name: "Брендов масштабировано",
+    stat2Name: "Проектов масштабировано",
     stat2Sub: "B2B и прямые модели",
     stat3Num: "10+",
     stat3Name: "Лет опыта",
@@ -214,7 +213,7 @@ export const contentData = {
 
     // Cases & Results
     proofLabel: "Подтверждённые результаты",
-    case1Title: "+$2,800/мес экономии на OTA | +42% прямых броней",
+    case1Title: "+$2,800/мес экономии OTA | +42% прямых броней",
     case1Badge: "Вилла-резорт",
     case1Desc: "Заменили ручное управление на автоматизированный модуль прямых броней",
 
@@ -224,14 +223,13 @@ export const contentData = {
 
     // --- PRICING ---
     priceTitle: "Прозрачное внедрение. Постоянная независимость",
-    priceSub: "Разовая оплата внедрения. Ноль комиссии с прямых броней навсегда",
+    priceSub: "Разовая оплата. Ноль комиссии с прямых броней навсегда",
     pricePopular: "Популярный",
     priceDisclaimerAudit: "Финальная цена подтверждается после бесплатного аудита",
     priceDisclaimerSub: "+ подписка на PMS/channel manager — оплачивается напрямую провайдеру",
-    priceDisclaimerEnterprise: "Объём и стоимость обсуждаются индивидуально на бесплатном аудите",
 
     tier1Title: "LITE (1–10 номеров)",
-    tier1Price: "От $1,200",
+    tier1Price: "From $1,200",
     tier1Desc: "Для небольших вилл и гестхаусов",
     tier1F1: "Настройка Cloud PMS",
     tier1F2: "Система броней без комиссии",
@@ -239,22 +237,22 @@ export const contentData = {
     tier1F4: "Интеграция платежей",
 
     tier2Title: "STANDARD (10–30 номеров)",
-    tier2Price: "От $2,500",
+    tier2Price: "From $2,500",
     tier2Desc: "Для бутик-отелей и резортов",
     tier2F1: "Всё из тарифа ",
     tier2F1Badge: "LITE",
     tier2F2: "Подключение 300+ каналов OTA",
-    tier2F3: "Модуль продвижения прямых броней",
-    tier2F4: "Настройка маркетинговой аналитики",
+    tier2F3: "Продвижение прямых броней",
+    tier2F4: "Маркетинговая аналитика",
 
     tier3Title: "ENTERPRISE (30+ номеров)",
-    tier3Price: "Индивидуально",
+    tier3Price: "Custom",
     tier3Desc: "Для сетей отелей и управляющих компаний",
     tier3F1: "Всё из тарифа ",
     tier3F1Badge: "STANDARD",
     tier3F2: "Индивидуальная настройка CRM",
-    tier3F3: "Консолидированная отчётность по выручке",
-    tier3F4: "Дашборд для нескольких объектов",
+    tier3F3: "Консолидированная отчётность",
+    tier3F4: "Дашборд по объектам",
 
     // --- FAQ SECTION ---
     faqTitle: "Частые вопросы",
@@ -373,10 +371,9 @@ export const contentData = {
     pricePopular: "ยอดนิยม",
     priceDisclaimerAudit: "ราคาสุดท้ายยืนยันหลังการตรวจสอบฟรี",
     priceDisclaimerSub: "+ ค่าสมัครใช้งาน PMS/channel manager ชำระตรงกับผู้ให้บริการ",
-    priceDisclaimerEnterprise: "ขอบเขตงานและราคายืนยันหลังการตรวจสอบฟรี",
 
     tier1Title: "LITE (1-10 ห้อง)",
-    tier1Price: "เริ่มต้นที่ $1,200",
+    tier1Price: "From $1,200",
     tier1Desc: "สำหรับวิลล่าและเกสต์เฮาส์ขนาดเล็ก",
     tier1F1: "ระบบ Cloud PMS Setup",
     tier1F2: "ระบบจองตรงไม่เสียค่าคอม",
@@ -384,7 +381,7 @@ export const contentData = {
     tier1F4: "ระบบชำระเงินตรง",
 
     tier2Title: "STANDARD (10-30 ห้อง)",
-    tier2Price: "เริ่มต้นที่ $2,500",
+    tier2Price: "From $2,500",
     tier2Desc: "สำหรับบูติกโฮเทลและรีสอร์ท",
     tier2F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier2F1Badge: "LITE",
@@ -393,7 +390,7 @@ export const contentData = {
     tier2F4: "ตั้งค่าระบบวิเคราะห์การตลาด",
 
     tier3Title: "ENTERPRISE (30+ ห้อง)",
-    tier3Price: "ตามตกลง",
+    tier3Price: "Custom",
     tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
     tier3F1: "รวมทุกอย่างในแพ็กเกจ ",
     tier3F1Badge: "STANDARD",
