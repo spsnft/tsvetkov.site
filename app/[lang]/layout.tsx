@@ -27,17 +27,27 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   };
 
   const currentMeta = meta[lang as keyof typeof meta] || meta.en;
+  const locale = lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US';
 
   return {
+    metadataBase: new URL('https://www.tsvetkov.site'),
     title: currentMeta.title,
     description: currentMeta.desc,
+    alternates: {
+      canonical: `/${lang}`,
+    },
     openGraph: {
       title: currentMeta.title,
       description: currentMeta.desc,
-      url: `https://tsvetkov.site/${lang}`,
+      url: `https://www.tsvetkov.site/${lang}`,
       siteName: "Fedor Tsvetkov",
-      locale: lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US',
+      locale,
       type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title: currentMeta.title,
+      description: currentMeta.desc,
     },
   };
 }

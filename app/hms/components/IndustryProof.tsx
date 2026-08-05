@@ -146,6 +146,15 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           max-width: 180px;
         }
 
+        .proof-caption {
+          margin: 0.9rem 0 0;
+          padding-bottom: 0.25rem;
+          font-size: 0.72rem;
+          font-weight: 500;
+          color: ${T.sub};
+          text-align: center;
+        }
+
         /* --- МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) - Сетка 2x2 --- */
         @media (max-width: 768px) {
           .proof-section {
@@ -195,6 +204,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
             </div>
           ))}
         </div>
+        <p className="proof-caption">{t?.outcomesCaption || "Average across active engagements"}</p>
       </div>
     </section>
   );

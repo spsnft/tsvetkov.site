@@ -19,10 +19,28 @@ const META = {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const meta = META[lang as keyof typeof META] || META.en;
+  const locale = lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US';
+  const url = `https://www.tsvetkov.site/${lang}/hms`;
 
   return {
     title: meta.title,
     description: meta.description,
+    alternates: {
+      canonical: `/${lang}/hms`,
+    },
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url,
+      siteName: 'Fedor Tsvetkov',
+      locale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title: meta.title,
+      description: meta.description,
+    },
   };
 }
 
