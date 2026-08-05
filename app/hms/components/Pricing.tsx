@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { T } from '../../../src/theme/tokens';
 
 interface PricingProps {
@@ -14,47 +14,6 @@ const cleanText = (str?: string) => {
 };
 
 export default function Pricing({ t }: PricingProps) {
-  // Высчитываем реальную высоту самого высокого блока "цена + дисклеймер"
-  // среди трёх карточек и применяем её ко всем — без произвольного запаса
-  const priceBlockRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const [priceBlockMinHeight, setPriceBlockMinHeight] = useState<number | undefined>(undefined);
-
-  useEffect(() => {
-    const measure = () => {
-      const blocks = priceBlockRefs.current.filter((el): el is HTMLDivElement => !!el);
-      if (!blocks.length) return;
-
-      // На мобильном карточки идут в один столбец — выравнивать высоту не нужно
-      if (window.innerWidth < 768) {
-        setPriceBlockMinHeight(undefined);
-        return;
-      }
-
-      const heights = blocks.map((el) => {
-        const prevMinHeight = el.style.minHeight;
-        el.style.minHeight = '0px';
-        const height = el.getBoundingClientRect().height;
-        el.style.minHeight = prevMinHeight;
-        return height;
-      });
-
-      setPriceBlockMinHeight(Math.ceil(Math.max(...heights)));
-    };
-
-    measure();
-
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(measure, 150);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      clearTimeout(resizeTimeout);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [t]);
-
   return (
     <section id="pricing" className="pricing-section">
       <style jsx>{`
@@ -181,18 +140,19 @@ export default function Pricing({ t }: PricingProps) {
           color: ${T.sub};
         }
 
-        .price-disclaimer {
-          margin: 0.6rem 0 0 0;
+        .shared-disclaimer {
+          margin: 2rem auto 0;
+          max-width: 640px;
+          text-align: center;
           display: flex;
           flex-direction: column;
-          gap: 0.2rem;
+          gap: 0.3rem;
         }
 
-        .price-disclaimer span {
-          font-size: 0.72rem;
-          line-height: 1.4;
+        .shared-disclaimer span {
+          font-size: 0.8rem;
+          line-height: 1.5;
           color: ${T.muted};
-          overflow-wrap: break-word;
         }
 
         .features-list {
@@ -334,17 +294,9 @@ export default function Pricing({ t }: PricingProps) {
           {/* LITE */}
           <div className="card">
             <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
-            <div
-              className="price-block"
-              ref={(el) => { priceBlockRefs.current[0] = el; }}
-              style={priceBlockMinHeight ? { minHeight: priceBlockMinHeight } : undefined}
-            >
+            <div className="price-block">
               <span className="price">{t?.tier1Price || "From $1,200"}</span>
               <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
-              <p className="price-disclaimer">
-                <span>{t?.priceDisclaimerAudit || "Final price confirmed after your free audit"}</span>
-                <span>{t?.priceDisclaimerSub || "+ your PMS/channel manager subscription — billed directly by the provider"}</span>
-              </p>
             </div>
             <ul className="features-list">
               <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F1)}</li>
@@ -358,17 +310,9 @@ export default function Pricing({ t }: PricingProps) {
           <div className="card featured">
             <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
             <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
-            <div
-              className="price-block"
-              ref={(el) => { priceBlockRefs.current[1] = el; }}
-              style={priceBlockMinHeight ? { minHeight: priceBlockMinHeight } : undefined}
-            >
+            <div className="price-block">
               <span className="price">{t?.tier2Price || "From $2,500"}</span>
               <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
-              <p className="price-disclaimer">
-                <span>{t?.priceDisclaimerAudit || "Final price confirmed after your free audit"}</span>
-                <span>{t?.priceDisclaimerSub || "+ your PMS/channel manager subscription — billed directly by the provider"}</span>
-              </p>
             </div>
             <ul className="features-list">
               <li className="feature-item">
@@ -387,16 +331,9 @@ export default function Pricing({ t }: PricingProps) {
           {/* ENTERPRISE */}
           <div className="card">
             <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
-            <div
-              className="price-block"
-              ref={(el) => { priceBlockRefs.current[2] = el; }}
-              style={priceBlockMinHeight ? { minHeight: priceBlockMinHeight } : undefined}
-            >
+            <div className="price-block">
               <span className="price">{t?.tier3Price || "Custom"}</span>
               <span className="price-desc">{t?.tier3Desc || "For hotel chains & management firms"}</span>
-              <p className="price-disclaimer">
-                <span>{t?.priceDisclaimerEnterprise || "Scope and price confirmed on your free audit"}</span>
-              </p>
             </div>
             <ul className="features-list">
               <li className="feature-item">
@@ -412,6 +349,11 @@ export default function Pricing({ t }: PricingProps) {
             </ul>
           </div>
         </div>
+
+        <p className="shared-disclaimer">
+          <span>{t?.priceDisclaimerAudit || "Final price confirmed after your free audit"}</span>
+          <span>{t?.priceDisclaimerSub || "+ your PMS/channel manager subscription — billed directly by the provider"}</span>
+        </p>
       </div>
     </section>
   );

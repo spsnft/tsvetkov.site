@@ -13,6 +13,7 @@ interface ContactProps {
       titleLine1: string;
       titleLine2: string;
       desc: string;
+      desc2: string;
       callBtn: string;
       formTitle: string;
       nameLabel: string;
@@ -32,7 +33,8 @@ export const Contact = ({ dict }: ContactProps) => {
     badge: 'GET IN TOUCH',
     titleLine1: 'Ready to scale',
     titleLine2: 'your business?',
-    desc: 'Book a quick intro call or fill out the request form. We review your project and get back to you within 24h',
+    desc: 'Book a quick intro call or fill out the request form.',
+    desc2: 'We review your project and get back to you within 24h.',
     callBtn: 'Book a 15-Min Strategy Call',
     formTitle: 'Request an Audit',
     nameLabel: 'Your Name',
@@ -272,9 +274,14 @@ export const Contact = ({ dict }: ContactProps) => {
                 {t.titleLine2}
               </h2>
 
-              <p style={{ fontSize: '1rem', lineHeight: 1.6, color: T.sub, marginBottom: '2rem', maxWidth: '450px' }}>
-                {t.desc}
-              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '2rem', maxWidth: '450px' }}>
+                <p style={{ fontSize: '1rem', lineHeight: 1.6, color: T.sub, margin: 0 }}>
+                  {t.desc}
+                </p>
+                <p style={{ fontSize: '1rem', lineHeight: 1.6, color: T.sub, margin: 0 }}>
+                  {t.desc2}
+                </p>
+              </div>
             </div>
 
             <div className="quick-links-row">
