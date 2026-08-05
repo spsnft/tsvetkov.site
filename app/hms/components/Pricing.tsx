@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { T } from '../../../src/theme/tokens';
 
 interface PricingProps {
@@ -14,6 +14,47 @@ const cleanText = (str?: string) => {
 };
 
 export default function Pricing({ t }: PricingProps) {
+  // Высчитываем реальную высоту самого высокого блока "цена + дисклеймер"
+  // среди трёх карточек и применяем её ко всем — без произвольного запаса
+  const priceBlockRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [priceBlockMinHeight, setPriceBlockMinHeight] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    const measure = () => {
+      const blocks = priceBlockRefs.current.filter((el): el is HTMLDivElement => !!el);
+      if (!blocks.length) return;
+
+      // На мобильном карточки идут в один столбец — выравнивать высоту не нужно
+      if (window.innerWidth < 768) {
+        setPriceBlockMinHeight(undefined);
+        return;
+      }
+
+      const heights = blocks.map((el) => {
+        const prevMinHeight = el.style.minHeight;
+        el.style.minHeight = '0px';
+        const height = el.getBoundingClientRect().height;
+        el.style.minHeight = prevMinHeight;
+        return height;
+      });
+
+      setPriceBlockMinHeight(Math.ceil(Math.max(...heights)));
+    };
+
+    measure();
+
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(measure, 150);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [t]);
+
   return (
     <section id="pricing" className="pricing-section">
       <style jsx>{`
@@ -67,6 +108,8 @@ export default function Pricing({ t }: PricingProps) {
           display: flex;
           flex-direction: column;
           gap: 1.8rem;
+          /* Без этого grid-колонка растягивается под самое длинное неразрывное слово в фиче */
+          min-width: 0;
           transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
         }
 
@@ -123,7 +166,6 @@ export default function Pricing({ t }: PricingProps) {
           gap: 0.4rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.03);
           padding-bottom: 1.5rem;
-          min-height: 20.5rem;
         }
         
         .price {
@@ -150,6 +192,7 @@ export default function Pricing({ t }: PricingProps) {
           font-size: 0.72rem;
           line-height: 1.4;
           color: ${T.muted};
+          overflow-wrap: break-word;
         }
 
         .features-list {
@@ -168,6 +211,8 @@ export default function Pricing({ t }: PricingProps) {
           font-size: 0.95rem;
           color: rgba(255, 255, 255, 0.75);
           line-height: 1.4;
+          min-width: 0;
+          overflow-wrap: break-word;
         }
         
         .check-icon {
@@ -289,7 +334,11 @@ export default function Pricing({ t }: PricingProps) {
           {/* LITE */}
           <div className="card">
             <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
-            <div className="price-block">
+            <div
+              className="price-block"
+              ref={(el) => { priceBlockRefs.current[0] = el; }}
+              style={priceBlockMinHeight ? { minHeight: priceBlockMinHeight } : undefined}
+            >
               <span className="price">{t?.tier1Price || "From $1,200"}</span>
               <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
               <p className="price-disclaimer">
@@ -309,7 +358,11 @@ export default function Pricing({ t }: PricingProps) {
           <div className="card featured">
             <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
             <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
-            <div className="price-block">
+            <div
+              className="price-block"
+              ref={(el) => { priceBlockRefs.current[1] = el; }}
+              style={priceBlockMinHeight ? { minHeight: priceBlockMinHeight } : undefined}
+            >
               <span className="price">{t?.tier2Price || "From $2,500"}</span>
               <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
               <p className="price-disclaimer">
@@ -334,7 +387,11 @@ export default function Pricing({ t }: PricingProps) {
           {/* ENTERPRISE */}
           <div className="card">
             <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
-            <div className="price-block">
+            <div
+              className="price-block"
+              ref={(el) => { priceBlockRefs.current[2] = el; }}
+              style={priceBlockMinHeight ? { minHeight: priceBlockMinHeight } : undefined}
+            >
               <span className="price">{t?.tier3Price || "Custom"}</span>
               <span className="price-desc">{t?.tier3Desc || "For hotel chains & management firms"}</span>
               <p className="price-disclaimer">

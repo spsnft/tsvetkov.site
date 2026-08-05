@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 import { Logo } from '@/src/ui/Logo';
-import { onCalendlyReady } from '@/src/components/CalendlyScript';
+import { useCalendlyPopup } from '@/src/components/useCalendlyPopup';
 import { contentData as hmsContentData } from '@/app/hms/constants';
 
 function NavLink({ href, label, isActive }: { href: string; label: string; isActive: boolean }) {
@@ -66,7 +66,7 @@ const BACK_LABEL: Record<string, string> = {
 export const Nav = ({ lang, dict }: NavProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [calendlyReady, setCalendlyReady] = useState(false);
+  const { calendlyReady, popupLoading, openPopup } = useCalendlyPopup('https://calendly.com/fediatsvetkov/15min');
   const [activeSection, setActiveSection] = useState('');
   const [isPending, startTransition] = useTransition();
 
@@ -100,10 +100,6 @@ export const Nav = ({ lang, dict }: NavProps) => {
     };
   }, []);
 
-  useEffect(() => {
-    onCalendlyReady(() => setCalendlyReady(true));
-  }, []);
-
   // Подсветка активного пункта навигации по скроллу
   useEffect(() => {
     const ids = isHms ? ['how-it-works', 'pricing', 'faq'] : ['expertise', 'services', 'cases'];
@@ -129,13 +125,6 @@ export const Nav = ({ lang, dict }: NavProps) => {
     startTransition(() => {
       router.push(segments.join('/'));
     });
-  };
-
-  const handleCalendlyPopup = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/fediatsvetkov/15min' });
-    }
   };
 
   const langSwitcher = (
@@ -199,8 +188,8 @@ export const Nav = ({ lang, dict }: NavProps) => {
   const ctaElement = isHms ? (
     <motion.button
       type="button"
-      onClick={handleCalendlyPopup}
-      disabled={!calendlyReady}
+      onClick={openPopup}
+      disabled={!calendlyReady || popupLoading}
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
       style={{
@@ -208,11 +197,13 @@ export const Nav = ({ lang, dict }: NavProps) => {
         background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
         color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600, fontSize: '0.82rem',
         border: 'none', boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)',
-        opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady ? 'pointer' : 'not-allowed',
+        opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady && !popupLoading ? 'pointer' : 'not-allowed',
         whiteSpace: 'nowrap',
+        display: 'inline-flex', alignItems: 'center', gap: '8px',
       }}
     >
-      {calendlyReady ? (hmsT.btnAudit || "Book a Free Audit") : 'Loading…'}
+      {popupLoading && <span className="nav-btn-spinner" />}
+      {!calendlyReady ? 'Loading…' : popupLoading ? 'Opening…' : (hmsT.btnAudit || "Book a Free Audit")}
     </motion.button>
   ) : (
     <motion.a
@@ -251,6 +242,23 @@ export const Nav = ({ lang, dict }: NavProps) => {
         transition: 'background .3s, border-color .3s',
       }}
     >
+      <style jsx>{`
+        .nav-btn-spinner {
+          width: 12px;
+          height: 12px;
+          border: 2px solid rgba(10, 10, 12, 0.3);
+          border-top-color: #0a0a0c;
+          border-radius: 50%;
+          display: inline-block;
+          animation: navBtnSpin 0.7s linear infinite;
+        }
+        @keyframes navBtnSpin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
+
       {/* ЛОГОТИП */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <a href={`/${lang}`} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
