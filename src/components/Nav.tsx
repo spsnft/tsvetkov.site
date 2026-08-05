@@ -138,6 +138,99 @@ export const Nav = ({ lang, dict }: NavProps) => {
     }
   };
 
+  const langSwitcher = (
+    <div
+      style={{
+        display: 'flex',
+        background: 'rgba(255, 255, 255, 0.02)',
+        border: '1px solid rgba(255, 255, 255, 0.05)',
+        borderRadius: 30,
+        padding: 2,
+        gap: 2,
+        backdropFilter: 'blur(8px)',
+        opacity: isPending ? 0.6 : 1,
+        pointerEvents: isPending ? 'none' : 'auto',
+        transition: 'opacity .2s ease',
+      }}
+    >
+      {['en', 'ru', 'th'].map((l) => {
+        const isActive = lang === l;
+        return (
+          <motion.button
+            key={l}
+            onClick={() => switchLang(l)}
+            whileTap={{ scale: 0.92 }}
+            style={{
+              position: 'relative',
+              padding: '0.35rem 0.75rem',
+              borderRadius: 26,
+              border: '1px solid transparent',
+              background: 'transparent',
+              color: isActive ? T.accent : T.muted,
+              fontWeight: isActive ? 700 : 500,
+              fontSize: '0.72rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.02em',
+              cursor: 'pointer',
+              transition: 'color .2s ease',
+            }}
+          >
+            {isActive && (
+              <motion.div
+                layoutId="lang-pill"
+                transition={{ type: 'spring', stiffness: 500, damping: 32 }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: 26,
+                  background: T.accent10,
+                  border: `1px solid ${T.accent25}`,
+                  zIndex: -1,
+                }}
+              />
+            )}
+            {l}
+          </motion.button>
+        );
+      })}
+    </div>
+  );
+
+  const ctaElement = isHms ? (
+    <motion.button
+      type="button"
+      onClick={handleCalendlyPopup}
+      disabled={!calendlyReady}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
+      style={{
+        padding: '9px 18px', borderRadius: 10,
+        background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
+        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600, fontSize: '0.82rem',
+        border: 'none', boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)',
+        opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady ? 'pointer' : 'not-allowed',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {calendlyReady ? (hmsT.btnAudit || "Book a Free Audit") : 'Loading…'}
+    </motion.button>
+  ) : (
+    <motion.a
+      href={`/${lang}#contact`}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
+      style={{
+        padding: '9px 18px', borderRadius: 10,
+        background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
+        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600, fontSize: '0.82rem', textDecoration: 'none',
+        boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {t.letsTalk}
+    </motion.a>
+  );
+
   return (
     <motion.nav
       initial={{ opacity: 0, y: -14 }}
@@ -146,7 +239,11 @@ export const Nav = ({ lang, dict }: NavProps) => {
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         padding: '0 clamp(1rem,5vw,2.5rem)', height: 64,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        display: isMobile ? 'grid' : 'flex',
+        gridTemplateColumns: isMobile ? 'auto 1fr auto' : undefined,
+        columnGap: isMobile ? '0.75rem' : undefined,
+        alignItems: 'center',
+        justifyContent: isMobile ? undefined : 'space-between',
         background: scrolled ? 'rgba(10,10,12,0.85)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
@@ -161,8 +258,12 @@ export const Nav = ({ lang, dict }: NavProps) => {
         </a>
       </div>
 
-      {/* ОСНОВНАЯ НАВИГАЦИЯ */}
-      {!isMobile && (
+      {/* ОСНОВНАЯ НАВИГАЦИЯ (десктоп) / ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА, ОТЦЕНТРОВАННЫЙ (мобайл) */}
+      {isMobile ? (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {langSwitcher}
+        </div>
+      ) : (
         isHms ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
             <a href={`/${lang}`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>
@@ -185,13 +286,15 @@ export const Nav = ({ lang, dict }: NavProps) => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
-                padding: '0.35rem 0.8rem',
+                padding: '0.35rem 0.85rem',
                 borderRadius: '20px',
                 background: 'rgba(0, 229, 153, 0.06)',
                 border: '1px solid rgba(0, 229, 153, 0.25)',
                 color: T.accent,
-                fontSize: '0.78rem',
-                fontWeight: 700,
+                fontSize: '0.7rem',
+                fontWeight: 800,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
                 textDecoration: 'none',
                 transition: 'all 0.25s ease',
                 backdropFilter: 'blur(8px)',
@@ -214,97 +317,15 @@ export const Nav = ({ lang, dict }: NavProps) => {
         )
       )}
 
-      {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА И CTA-КНОПКА */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-        <div
-          style={{
-            display: 'flex',
-            background: 'rgba(255, 255, 255, 0.02)',
-            border: '1px solid rgba(255, 255, 255, 0.05)',
-            borderRadius: 30,
-            padding: 2,
-            gap: 2,
-            backdropFilter: 'blur(8px)',
-            opacity: isPending ? 0.6 : 1,
-            pointerEvents: isPending ? 'none' : 'auto',
-            transition: 'opacity .2s ease',
-          }}
-        >
-          {['en', 'ru', 'th'].map((l) => {
-            const isActive = lang === l;
-            return (
-              <motion.button
-                key={l}
-                onClick={() => switchLang(l)}
-                whileTap={{ scale: 0.92 }}
-                style={{
-                  position: 'relative',
-                  padding: '0.35rem 0.75rem',
-                  borderRadius: 26,
-                  border: '1px solid transparent',
-                  background: 'transparent',
-                  color: isActive ? T.accent : T.muted,
-                  fontWeight: isActive ? 700 : 500,
-                  fontSize: '0.72rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.02em',
-                  cursor: 'pointer',
-                  transition: 'color .2s ease',
-                }}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="lang-pill"
-                    transition={{ type: 'spring', stiffness: 500, damping: 32 }}
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      borderRadius: 26,
-                      background: T.accent10,
-                      border: `1px solid ${T.accent25}`,
-                      zIndex: -1,
-                    }}
-                  />
-                )}
-                {l}
-              </motion.button>
-            );
-          })}
+      {/* CTA-КНОПКА (мобайл) / ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА + CTA-КНОПКА (десктоп) */}
+      {isMobile ? (
+        ctaElement
+      ) : (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          {langSwitcher}
+          {ctaElement}
         </div>
-
-        {isHms ? (
-          <motion.button
-            type="button"
-            onClick={handleCalendlyPopup}
-            disabled={!calendlyReady}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            style={{
-              padding: '9px 18px', borderRadius: 10,
-              background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
-              color: '#0A0A0C', fontWeight: 800, fontSize: '0.82rem',
-              border: 'none', boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)',
-              opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady ? 'pointer' : 'not-allowed',
-            }}
-          >
-            {calendlyReady ? (hmsT.btnAudit || "Book a Free Audit") : 'Loading…'}
-          </motion.button>
-        ) : (
-          <motion.a
-            href={`/${lang}#contact`}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            style={{
-              padding: '9px 18px', borderRadius: 10,
-              background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
-              color: '#0A0A0C', fontWeight: 800, fontSize: '0.82rem', textDecoration: 'none',
-              boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)'
-            }}
-          >
-            {t.letsTalk}
-          </motion.a>
-        )}
-      </div>
+      )}
     </motion.nav>
   );
 };

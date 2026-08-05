@@ -83,6 +83,7 @@ export const contentData = {
     pricePopular: "Popular",
     priceDisclaimerAudit: "Final price confirmed after your free audit",
     priceDisclaimerSub: "+ your PMS/channel manager subscription — billed directly by the provider",
+    priceDisclaimerEnterprise: "Scope and price confirmed on your free audit",
 
     tier1Title: "LITE (1-10 Rooms)",
     tier1Price: "From $1,200",
@@ -227,6 +228,7 @@ export const contentData = {
     pricePopular: "Популярный",
     priceDisclaimerAudit: "Финальная цена подтверждается после бесплатного аудита",
     priceDisclaimerSub: "+ подписка на PMS/channel manager — оплачивается напрямую провайдеру",
+    priceDisclaimerEnterprise: "Объём и стоимость обсуждаются индивидуально на бесплатном аудите",
 
     tier1Title: "LITE (1–10 номеров)",
     tier1Price: "От $1,200",
@@ -371,6 +373,7 @@ export const contentData = {
     pricePopular: "ยอดนิยม",
     priceDisclaimerAudit: "ราคาสุดท้ายยืนยันหลังการตรวจสอบฟรี",
     priceDisclaimerSub: "+ ค่าสมัครใช้งาน PMS/channel manager ชำระตรงกับผู้ให้บริการ",
+    priceDisclaimerEnterprise: "ขอบเขตงานและราคายืนยันหลังการตรวจสอบฟรี",
 
     tier1Title: "LITE (1-10 ห้อง)",
     tier1Price: "เริ่มต้นที่ $1,200",
