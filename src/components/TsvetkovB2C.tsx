@@ -2,7 +2,7 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { useDictionary } from '@/src/locales/getDictionary';
+import type { getDictionary } from '@/src/locales/getDictionary';
 import { Nav } from '@/src/components/Nav';
 import { Hero } from '@/src/components/Hero';
 import { Bottleneck } from '@/src/components/Bottleneck';
@@ -18,11 +18,10 @@ const NetworkBackground = dynamic(
 
 interface TsvetkovB2CProps {
   lang: string;
+  dict: ReturnType<typeof getDictionary>;
 }
 
-export default function TsvetkovB2C({ lang }: TsvetkovB2CProps) {
-  const dict = useDictionary(lang);
-
+export default function TsvetkovB2C({ lang, dict }: TsvetkovB2CProps) {
   return (
     <main style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
       <NetworkBackground />

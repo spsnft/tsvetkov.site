@@ -19,6 +19,7 @@ export const contentData = {
     statMarginGuest: "Margin per Guest",
     statGoogleTraffic: "Google Traffic",
     statRepeatBookings: "Repeat Bookings",
+    outcomesCaption: "Average across active engagements",
 
     // --- INDUSTRY PROOF (Mobile/Tablet) ---
     proofTitle: "System Impact",
@@ -162,6 +163,7 @@ export const contentData = {
     statMarginGuest: "Маржа на гостя",
     statGoogleTraffic: "Трафик из Google",
     statRepeatBookings: "Повторные брони",
+    outcomesCaption: "Среднее значение по активным проектам",
 
     // --- INDUSTRY PROOF (Mobile/Tablet) ---
     proofTitle: "Эффект системы",
@@ -305,6 +307,7 @@ export const contentData = {
     statMarginGuest: "มาร์จิ้นต่อผู้เข้าพัก",
     statGoogleTraffic: "ทราฟฟิก Google",
     statRepeatBookings: "การจองซ้ำ",
+    outcomesCaption: "ค่าเฉลี่ยจากลูกค้าที่ใช้งานอยู่",
 
     // --- INDUSTRY PROOF (Mobile/Tablet) ---
     proofTitle: "ผลลัพธ์ของระบบ",

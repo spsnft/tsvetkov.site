@@ -14,6 +14,7 @@ interface HeroProps {
     statMarginGuest?: string;
     statGoogleTraffic?: string;
     statRepeatBookings?: string;
+    outcomesCaption?: string;
   };
 }
 
@@ -311,6 +312,14 @@ export default function Hero({ t }: HeroProps) {
           letter-spacing: 0.01em;
         }
 
+        .outcomes-caption {
+          margin: 0.9rem 0 0;
+          font-size: 0.72rem;
+          font-weight: 500;
+          color: #6B7688;
+          text-align: center;
+        }
+
         @keyframes pulse {
           0% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
           70% { box-shadow: 0 0 0 6px rgba(0, 225, 153, 0); }
@@ -423,6 +432,8 @@ export default function Hero({ t }: HeroProps) {
                     <div className="stat-label">{t.statRepeatBookings || "Repeat Bookings"}</div>
                   </div>
                 </div>
+
+                <p className="outcomes-caption">{t.outcomesCaption || "Average across active engagements"}</p>
               </div>
 
             </div>

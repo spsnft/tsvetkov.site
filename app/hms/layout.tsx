@@ -1,15 +1,27 @@
 import type { Metadata } from 'next';
 
+const TITLE = 'Hospitality Growth Solutions — Stop Paying 15-20% OTA Commissions';
+const DESCRIPTION = 'Connect your hotel or villa directly to guests. Cloud PMS, zero-commission booking engine, and direct revenue infrastructure.';
+
 export const metadata: Metadata = {
-  title: 'Hospitality Growth Solutions — Stop Paying 15-20% OTA Commissions',
-  description: 'Connect your hotel or villa directly to guests. Cloud PMS, zero-commission booking engine, and direct revenue infrastructure.',
+  metadataBase: new URL('https://www.tsvetkov.site'),
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: '/en/hms',
+  },
   openGraph: {
-    title: 'Hospitality Growth Solutions — Direct Booking Engines',
-    description: 'Keep 100% of your booking profits. Automated sync across 300+ OTAs without double-bookings.',
-    url: 'https://tsvetkov.site/hms',
+    title: TITLE,
+    description: DESCRIPTION,
+    url: 'https://www.tsvetkov.site/en/hms',
     siteName: 'Tsvetkov Portfolio',
     locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: TITLE,
+    description: DESCRIPTION,
   },
 };
 
