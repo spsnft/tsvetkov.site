@@ -317,6 +317,14 @@ export default function Hero({ t }: HeroProps) {
           100% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
         }
 
+        @media (min-width: 1025px) {
+          .sync-badge {
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 0.5rem 1.05rem;
+          }
+        }
+
         @media (max-width: 1024px) {
           .hero-section { padding-bottom: 2rem; }
           .hero-grid { grid-template-columns: 1fr; gap: 0; }
@@ -357,7 +365,7 @@ export default function Hero({ t }: HeroProps) {
               </button>
               
               <a 
-                href="https://wa.me/66955183783" 
+                href="https://wa.me/66650255229"
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="btn-secondary-chat"

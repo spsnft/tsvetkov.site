@@ -1,7 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const NOTIFY_EMAIL = 'fedor@tsvetkov.site';
 
 // Rate limit: простое решение через Map (на продакшене лучше Redis/Upstash)
 const rateLimit = new Map<string, number>();
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,7 +33,12 @@ export async function POST(request: NextRequest) {
 
     // --- Валидация ---
     const body = await request.json();
-    const { name, contact, website } = body;
+    const { name, contact, website, company } = body;
+
+    // --- Honeypot: скрытое поле, боты его заполняют, люди — нет ---
+    if (typeof company === 'string' && company.trim().length > 0) {
+      return NextResponse.json({ success: true });
+    }
 
     const errors: string[] = [];
 
@@ -46,25 +63,34 @@ export async function POST(request: NextRequest) {
       website: website.trim().slice(0, 300),
     };
 
-    // --- Отправка в webhook ---
-    const webhookUrl = process.env.WEBHOOK_URL;
+    // --- Отправка через Resend ---
+    const apiKey = process.env.RESEND_API_KEY;
 
-    if (!webhookUrl) {
-      console.error('WEBHOOK_URL is not set');
+    if (!apiKey) {
+      console.error('RESEND_API_KEY is not set');
       return NextResponse.json(
         { error: 'Server configuration error' },
         { status: 500 }
       );
     }
 
-    const webhookResponse = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(sanitized),
+    const resend = new Resend(apiKey);
+    const fromAddress = process.env.RESEND_FROM_EMAIL || 'Tsvetkov Site <onboarding@resend.dev>';
+
+    const { error: sendError } = await resend.emails.send({
+      from: fromAddress,
+      to: NOTIFY_EMAIL,
+      replyTo: sanitized.contact,
+      subject: `New Audit Request from ${sanitized.name}`,
+      html: `
+        <p><strong>Name:</strong> ${escapeHtml(sanitized.name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(sanitized.contact)}</p>
+        <p><strong>Website / Socials:</strong> ${escapeHtml(sanitized.website)}</p>
+      `,
     });
 
-    if (!webhookResponse.ok) {
-      console.error(`Webhook failed: ${webhookResponse.status}`);
+    if (sendError) {
+      console.error('Resend send failed:', sendError);
       return NextResponse.json(
         { error: 'Failed to submit form. Please try again.' },
         { status: 502 }
