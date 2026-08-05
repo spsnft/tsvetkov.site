@@ -126,7 +126,15 @@ export default function Pricing({ t }: PricingProps) {
           border-bottom: 1px solid rgba(255, 255, 255, 0.03);
           padding-bottom: 1.5rem;
         }
-        
+
+        /* Резервирует высоту двухстрочного ценника ("From" + "$X,XXX"),
+           чтобы однострочный "Custom" не сдвигал контент ниже по карточке */
+        .price-value {
+          display: flex;
+          align-items: flex-end;
+          min-height: 6.4rem;
+        }
+
         .price {
           font-size: 3.2rem;
           font-weight: 700;
@@ -227,6 +235,9 @@ export default function Pricing({ t }: PricingProps) {
           .price {
             font-size: 2.2rem;
           }
+          .price-value {
+            min-height: 4.4rem;
+          }
           .price-desc {
             font-size: 0.8rem;
           }
@@ -269,6 +280,9 @@ export default function Pricing({ t }: PricingProps) {
           .price {
             font-size: 2.6rem;
           }
+          .price-value {
+            min-height: 5.2rem;
+          }
           .features-list {
             gap: 0.85rem;
           }
@@ -295,7 +309,9 @@ export default function Pricing({ t }: PricingProps) {
           <div className="card">
             <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
             <div className="price-block">
-              <span className="price">{t?.tier1Price || "From $1,200"}</span>
+              <div className="price-value">
+                <span className="price">{t?.tier1Price || "From $1,200"}</span>
+              </div>
               <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
             </div>
             <ul className="features-list">
@@ -311,7 +327,9 @@ export default function Pricing({ t }: PricingProps) {
             <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
             <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
             <div className="price-block">
-              <span className="price">{t?.tier2Price || "From $2,500"}</span>
+              <div className="price-value">
+                <span className="price">{t?.tier2Price || "From $2,500"}</span>
+              </div>
               <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
             </div>
             <ul className="features-list">
@@ -332,7 +350,9 @@ export default function Pricing({ t }: PricingProps) {
           <div className="card">
             <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
             <div className="price-block">
-              <span className="price">{t?.tier3Price || "Custom"}</span>
+              <div className="price-value">
+                <span className="price">{t?.tier3Price || "Custom"}</span>
+              </div>
               <span className="price-desc">{t?.tier3Desc || "For hotel chains & management firms"}</span>
             </div>
             <ul className="features-list">
