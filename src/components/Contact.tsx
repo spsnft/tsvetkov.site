@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { T } from '@/src/theme/tokens';
-import { onCalendlyReady } from '@/src/components/CalendlyScript';
+import { useCalendlyPopup } from '@/src/components/useCalendlyPopup';
 
 const ACCENT = '#00E599';
 
@@ -26,7 +26,7 @@ interface ContactProps {
 export const Contact = ({ dict }: ContactProps) => {
   const [form, setForm] = useState({ name: '', contact: '', website: '', company: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [calendlyReady, setCalendlyReady] = useState(false);
+  const { calendlyReady, popupLoading, openPopup } = useCalendlyPopup('https://calendly.com/fediatsvetkov/15min');
 
   const t = dict?.contact ?? {
     badge: 'GET IN TOUCH',
@@ -40,10 +40,6 @@ export const Contact = ({ dict }: ContactProps) => {
     websiteLabel: 'Website or Socials',
     submitBtn: 'Submit Audit Request',
   };
-
-  useEffect(() => {
-    onCalendlyReady(() => setCalendlyReady(true));
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,15 +60,6 @@ export const Contact = ({ dict }: ContactProps) => {
       setStatus('success');
     } catch {
       setStatus('error');
-    }
-  };
-
-  const handleCalendlyPopup = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/fediatsvetkov/15min'
-      });
     }
   };
 
@@ -177,6 +164,20 @@ export const Contact = ({ dict }: ContactProps) => {
         .quick-link-icon {
           font-size: 0.9rem;
         }
+        .btn-spinner {
+          width: 13px;
+          height: 13px;
+          border: 2px solid rgba(0, 229, 153, 0.25);
+          border-top-color: ${ACCENT};
+          border-radius: 50%;
+          display: inline-block;
+          animation: btnSpin 0.7s linear infinite;
+        }
+        @keyframes btnSpin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
         .success-message {
           text-align: center;
           padding: 2rem;
@@ -279,18 +280,20 @@ export const Contact = ({ dict }: ContactProps) => {
             <div className="quick-links-row">
               <button
                 type="button"
-                onClick={handleCalendlyPopup}
+                onClick={openPopup}
                 className="quick-link-card"
-                disabled={!calendlyReady}
+                disabled={!calendlyReady || popupLoading}
                 style={{
                   borderColor: 'rgba(0, 229, 153, 0.3)',
                   background: 'rgba(0, 229, 153, 0.05)',
                   opacity: calendlyReady ? 1 : 0.6,
-                  cursor: calendlyReady ? 'pointer' : 'not-allowed',
+                  cursor: calendlyReady && !popupLoading ? 'pointer' : 'not-allowed',
                 }}
               >
-                <span className="quick-link-icon" style={{ color: ACCENT }}>→</span>
-                <span>{calendlyReady ? t.callBtn : "Loading…"}</span>
+                <span className="quick-link-icon" style={{ color: ACCENT }}>
+                  {popupLoading ? <span className="btn-spinner" /> : '→'}
+                </span>
+                <span>{!calendlyReady ? "Loading…" : popupLoading ? "Opening…" : t.callBtn}</span>
               </button>
 
               <a href="https://wa.me/66650255229" target="_blank" rel="noopener noreferrer" className="quick-link-card">

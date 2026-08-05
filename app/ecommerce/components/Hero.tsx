@@ -1,23 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { T } from '@/src/theme/tokens';
-import { onCalendlyReady } from '@/src/components/CalendlyScript';
+import { useCalendlyPopup } from '@/src/components/useCalendlyPopup';
 import { EcommerceContent } from '../constants';
 
 export default function Hero({ t }: { t: EcommerceContent }) {
-  const [calendlyReady, setCalendlyReady] = useState(false);
-
-  useEffect(() => {
-    onCalendlyReady(() => setCalendlyReady(true));
-  }, []);
-
-  const handleCalendlyPopup = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/fediatsvetkov/15min' });
-    }
-  };
+  const { calendlyReady, popupLoading, openPopup } = useCalendlyPopup('https://calendly.com/fediatsvetkov/15min');
 
   return (
     <section className="ecom-hero">
@@ -96,6 +85,22 @@ export default function Hero({ t }: { t: EcommerceContent }) {
           display: flex;
           align-items: center;
         }
+
+        .btn-spinner {
+          width: 14px;
+          height: 14px;
+          border: 2px solid rgba(10, 10, 12, 0.3);
+          border-top-color: #0a0a0c;
+          border-radius: 50%;
+          display: inline-block;
+          animation: btnSpin 0.7s linear infinite;
+        }
+
+        @keyframes btnSpin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
       `}</style>
 
       <div className="container">
@@ -119,12 +124,17 @@ export default function Hero({ t }: { t: EcommerceContent }) {
         <div className="cta-row">
           <button
             type="button"
-            onClick={handleCalendlyPopup}
+            onClick={openPopup}
             className="btn-premium-core"
-            disabled={!calendlyReady}
-            style={{ opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady ? 'pointer' : 'not-allowed' }}
+            disabled={!calendlyReady || popupLoading}
+            style={{
+              opacity: calendlyReady ? 1 : 0.6,
+              cursor: calendlyReady && !popupLoading ? 'pointer' : 'not-allowed',
+              gap: '8px',
+            }}
           >
-            {calendlyReady ? t.btnAudit : 'Loading…'}
+            {popupLoading && <span className="btn-spinner" />}
+            {!calendlyReady ? 'Loading…' : popupLoading ? 'Opening…' : t.btnAudit}
           </button>
         </div>
       </div>
