@@ -119,20 +119,25 @@ export default function Pricing({ t }: PricingProps) {
           -webkit-text-fill-color: transparent;
         }
         
-        .price-block {
+        /* Единая "шапка" карточки (label → цена → подзаголовок) фиксированной высоты,
+           одинаковой у всех тарифов на каждом брейкпоинте — с запасом под худший случай
+           (2-строчная цена + возможный перенос подзаголовка). Благодаря этому разделитель
+           и чеклист всегда стартуют на одной Y-координате у всех 3 карточек. */
+        .card-header {
           display: flex;
           flex-direction: column;
           gap: 0.4rem;
+          height: 11rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.03);
           padding-bottom: 1.5rem;
         }
 
-        /* Резервирует высоту двухстрочного ценника ("From" + "$X,XXX"),
-           чтобы однострочный "Custom" не сдвигал контент ниже по карточке */
+        /* Растягивается на всё свободное место шапки и центрирует цену по вертикали —
+           неважно, заняла она 1 строку ("Custom") или 2 ("From" + "$X,XXX") */
         .price-value {
+          flex: 1;
           display: flex;
-          align-items: flex-end;
-          min-height: 6.4rem;
+          align-items: center;
         }
 
         .price {
@@ -150,7 +155,7 @@ export default function Pricing({ t }: PricingProps) {
 
         .shared-disclaimer {
           margin: 2rem auto 0;
-          max-width: 640px;
+          max-width: 820px;
           text-align: center;
           display: flex;
           flex-direction: column;
@@ -158,7 +163,7 @@ export default function Pricing({ t }: PricingProps) {
         }
 
         .shared-disclaimer span {
-          font-size: 0.8rem;
+          font-size: 0.78rem;
           line-height: 1.5;
           color: ${T.muted};
         }
@@ -235,13 +240,11 @@ export default function Pricing({ t }: PricingProps) {
           .price {
             font-size: 2.2rem;
           }
-          .price-value {
-            min-height: 4.4rem;
-          }
           .price-desc {
             font-size: 0.8rem;
           }
-          .price-block {
+          .card-header {
+            height: 9.5rem;
             padding-bottom: 1rem;
           }
           .features-list {
@@ -280,8 +283,8 @@ export default function Pricing({ t }: PricingProps) {
           .price {
             font-size: 2.6rem;
           }
-          .price-value {
-            min-height: 5.2rem;
+          .card-header {
+            height: 11rem;
           }
           .features-list {
             gap: 0.85rem;
@@ -307,8 +310,8 @@ export default function Pricing({ t }: PricingProps) {
         <div className="pricing-grid">
           {/* LITE */}
           <div className="card">
-            <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
-            <div className="price-block">
+            <div className="card-header">
+              <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
               <div className="price-value">
                 <span className="price">{t?.tier1Price || "From $1,200"}</span>
               </div>
@@ -325,8 +328,8 @@ export default function Pricing({ t }: PricingProps) {
           {/* STANDARD */}
           <div className="card featured">
             <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
-            <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
-            <div className="price-block">
+            <div className="card-header">
+              <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
               <div className="price-value">
                 <span className="price">{t?.tier2Price || "From $2,500"}</span>
               </div>
@@ -348,12 +351,12 @@ export default function Pricing({ t }: PricingProps) {
 
           {/* ENTERPRISE */}
           <div className="card">
-            <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
-            <div className="price-block">
+            <div className="card-header">
+              <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
               <div className="price-value">
                 <span className="price">{t?.tier3Price || "Custom"}</span>
               </div>
-              <span className="price-desc">{t?.tier3Desc || "For hotel chains & management firms"}</span>
+              <span className="price-desc">{t?.tier3Desc || "For hotel chains & operators"}</span>
             </div>
             <ul className="features-list">
               <li className="feature-item">
@@ -371,8 +374,8 @@ export default function Pricing({ t }: PricingProps) {
         </div>
 
         <p className="shared-disclaimer">
-          <span>{t?.priceDisclaimerAudit || "Final price confirmed after your free audit"}</span>
-          <span>{t?.priceDisclaimerSub || "+ your PMS/channel manager subscription — billed directly by the provider"}</span>
+          <span>{t?.priceDisclaimerAudit || "Final price confirmed after your free audit. PMS/channel manager subscription billed separately by provider."}</span>
+          {t?.priceDisclaimerSub && <span>{t.priceDisclaimerSub}</span>}
         </p>
       </div>
     </section>

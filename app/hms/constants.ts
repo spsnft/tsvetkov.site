@@ -81,8 +81,7 @@ export const contentData = {
     priceTitle: "Transparent Integration. Permanent Independence",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever",
     pricePopular: "Popular",
-    priceDisclaimerAudit: "Final price confirmed after your free audit",
-    priceDisclaimerSub: "+ your PMS/channel manager subscription — billed directly by the provider",
+    priceDisclaimerAudit: "Final price confirmed after your free audit. PMS/channel manager subscription billed separately by provider.",
 
     tier1Title: "LITE (1-10 Rooms)",
     tier1Price: "From $1,200",
@@ -103,7 +102,7 @@ export const contentData = {
 
     tier3Title: "ENTERPRISE (30+ Rooms)",
     tier3Price: "Custom",
-    tier3Desc: "For hotel chains & management firms",
+    tier3Desc: "For hotel chains & operators",
     tier3F1: "Everything in ",
     tier3F1Badge: "STANDARD",
     tier3F2: "Custom CRM Setup",
@@ -225,8 +224,7 @@ export const contentData = {
     priceTitle: "Прозрачное внедрение. Постоянная независимость",
     priceSub: "Разовая оплата. Ноль комиссии с прямых броней навсегда",
     pricePopular: "Популярный",
-    priceDisclaimerAudit: "Финальная цена подтверждается после бесплатного аудита",
-    priceDisclaimerSub: "+ подписка на PMS/channel manager — оплачивается напрямую провайдеру",
+    priceDisclaimerAudit: "Финальная цена подтверждается после аудита. Подписка на PMS/channel manager — оплата напрямую провайдеру.",
 
     tier1Title: "LITE (1–10 номеров)",
     tier1Price: "From $1,200",
@@ -247,7 +245,7 @@ export const contentData = {
 
     tier3Title: "ENTERPRISE (30+ номеров)",
     tier3Price: "Custom",
-    tier3Desc: "Для сетей отелей и управляющих компаний",
+    tier3Desc: "Для сетей отелей и операторов",
     tier3F1: "Всё из тарифа ",
     tier3F1Badge: "STANDARD",
     tier3F2: "Индивидуальная настройка CRM",
