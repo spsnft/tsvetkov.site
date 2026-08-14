@@ -274,7 +274,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
       ) : (
         isHms ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-            <a href={`/${lang}`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>
+            <a href="#about" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>
               {BACK_LABEL[lang] ?? BACK_LABEL.en}
             </a>
             <span style={{ width: 1, height: 16, background: T.border }} />

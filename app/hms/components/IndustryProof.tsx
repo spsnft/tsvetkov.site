@@ -3,27 +3,33 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { T } from '../../../src/theme/tokens';
 
-interface MetricItem {
-  endValue: number;
-  prefix: string;
-  suffix: string;
-  label: string;
+interface OtaCostRow {
+  value: string;
+  unit: string;
+  detail: string;
 }
 
 interface IndustryProofProps {
   t: {
-    proofMetrics?: MetricItem[];
-    [key: string]: any;
+    otaCostBadge?: string;
+    otaCostRows?: OtaCostRow[];
+    otaCostCaption?: string;
   };
 }
 
-function ProofCounter({ end, duration, prefix, suffix, isVisible }: { 
-  end: number; 
-  duration: number; 
-  prefix: string; 
-  suffix: string; 
-  isVisible: boolean; 
+// "$18,000" -> { prefix: "$", amount: 18000 }
+function parseAmount(value: string) {
+  const digits = value.replace(/[^0-9]/g, '');
+  const prefix = value.slice(0, value.search(/[0-9]/) === -1 ? 0 : value.search(/[0-9]/));
+  return { prefix, amount: Number(digits) || 0 };
+}
+
+function CostCounter({ value, duration, isVisible }: {
+  value: string;
+  duration: number;
+  isVisible: boolean;
 }) {
+  const { prefix, amount } = parseAmount(value);
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
@@ -37,8 +43,8 @@ function ProofCounter({ end, duration, prefix, suffix, isVisible }: {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       const easeProgress = progress * (2 - progress);
-      
-      setCount(Math.floor(easeProgress * end));
+
+      setCount(Math.floor(easeProgress * amount));
 
       if (progress < 1) {
         requestAnimationFrame(animate);
@@ -46,11 +52,11 @@ function ProofCounter({ end, duration, prefix, suffix, isVisible }: {
     };
 
     requestAnimationFrame(animate);
-  }, [isVisible, end, duration]);
+  }, [isVisible, amount, duration]);
 
   return (
     <span>
-      {prefix}{count}{suffix}
+      {prefix}{count.toLocaleString('en-US')}
     </span>
   );
 }
@@ -76,13 +82,9 @@ export default function IndustryProof({ t }: IndustryProofProps) {
     return () => observer.disconnect();
   }, []);
 
-  // Метрики по умолчанию
-  const metrics = t?.proofMetrics || [
-    { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue" },
-    { endValue: 60, prefix: "+", suffix: "%", label: "Margin per Guest" },
-    { endValue: 300, prefix: "+", suffix: "%", label: "Google Traffic" },
-    { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Bookings" },
-  ];
+  const rows: OtaCostRow[] = t?.otaCostRows || [];
+
+  if (rows.length === 0) return null;
 
   return (
     <section ref={sectionRef} className="proof-section">
@@ -91,43 +93,72 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           width: 100%;
           background-color: transparent;
           /* Верхний отступ оставляем от Hero, нижний полностью убираем для стыковки с Marquee */
-          padding: 1.5rem 0 0 0; 
+          padding: 1.5rem 0 0 0;
         }
 
-        /* СКРЫВАЕМ НА ПК (от 1025px) */
+        /* СКРЫВАЕМ НА ПК (от 1025px) — там эти же цифры живут в карточке героя */
         @media (min-width: 1025px) {
           .proof-section {
             display: none !important;
           }
         }
 
-        /* --- ПЛАНШЕТЫ (Сетка 4x1) --- */
+        .proof-badge-row {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 1.25rem;
+        }
+
+        .proof-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          color: ${T.accent};
+          background: ${T.accent08};
+          padding: 0.35rem 0.75rem;
+          border-radius: 20px;
+          border: 1px solid ${T.accent25};
+        }
+
+        .pulse-dot {
+          width: 6px;
+          height: 6px;
+          background-color: ${T.accent};
+          border-radius: 50%;
+          box-shadow: 0 0 8px ${T.accent};
+          flex-shrink: 0;
+        }
+
+        /* Три строки в столбец на всех разрешениях */
         .proof-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          display: flex;
+          flex-direction: column;
           width: 100%;
           border-top: 1px solid ${T.border};
           border-bottom: 1px solid ${T.border};
         }
-        
+
         .proof-col {
-          padding: 2rem 1rem;
+          padding: 1.35rem 1rem;
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.2rem;
           text-align: center;
           align-items: center;
-          border-right: 1px solid ${T.border};
+          border-bottom: 1px solid ${T.border};
         }
 
         .proof-col:last-child {
-          border-right: none;
+          border-bottom: none;
         }
-        
+
         .metric-number {
-          font-size: clamp(2rem, 4vw, 2.8rem);
+          font-size: clamp(2rem, 6vw, 2.6rem);
           font-weight: 800;
-          line-height: 1.1; 
+          line-height: 1.1;
           letter-spacing: -0.03em;
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
@@ -136,75 +167,63 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           white-space: nowrap;
         }
 
-        .metric-label {
+        .metric-unit {
           color: ${T.sub};
           font-size: 0.85rem;
+          font-weight: 600;
           line-height: 1.3;
-          margin: 0 auto;
-          font-weight: 500;
+          margin: 0;
+        }
+
+        .metric-detail {
+          color: ${T.muted};
+          font-size: 0.75rem;
+          line-height: 1.35;
+          margin: 0;
           text-wrap: pretty;
-          max-width: 180px;
+          max-width: 320px;
         }
 
         .proof-caption {
           margin: 0.9rem 0 0;
           padding-bottom: 0.25rem;
           font-size: 0.72rem;
+          line-height: 1.45;
           font-weight: 500;
-          color: ${T.sub};
+          color: ${T.muted};
           text-align: center;
+          text-wrap: pretty;
         }
 
-        /* --- МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) - Сетка 2x2 --- */
         @media (max-width: 768px) {
           .proof-section {
-            padding: 1rem 0 0 0; /* Также 0 снизу */
+            padding: 1rem 0 0 0;
           }
-          
-          .proof-grid {
-            grid-template-columns: repeat(2, 1fr); 
-            border-bottom: none;
-          }
-          
           .proof-col {
-            padding: 1.5rem 0.5rem;
-            border-right: none;
-          }
-
-          /* Рамки для сетки 2x2 */
-          .proof-col:nth-child(odd) {
-            border-right: 1px solid ${T.border};
-          }
-          .proof-col:nth-child(1), .proof-col:nth-child(2) {
-            border-bottom: 1px solid ${T.border};
-          }
-          /* Низ 3-го и 4-го элементов подчёркиваем рамкой, чтобы отделить от Marquee */
-          .proof-col:nth-child(3), .proof-col:nth-child(4) {
-            border-bottom: 1px solid ${T.border};
+            padding: 1.15rem 0.5rem;
           }
         }
       `}</style>
 
       <div className="container">
+        <div className="proof-badge-row">
+          <span className="proof-badge">
+            <span className="pulse-dot" /> {t?.otaCostBadge}
+          </span>
+        </div>
+
         <div className="proof-grid">
-          {metrics.map((item, idx) => (
+          {rows.map((item, idx) => (
             <div key={idx} className="proof-col">
               <div className="metric-number">
-                <ProofCounter 
-                  end={item.endValue} 
-                  duration={1400} 
-                  prefix={item.prefix} 
-                  suffix={item.suffix} 
-                  isVisible={isVisible} 
-                />
+                <CostCounter value={item.value} duration={1400} isVisible={isVisible} />
               </div>
-              <p className="metric-label">
-                {item.label}
-              </p>
+              <p className="metric-unit">{item.unit}</p>
+              <p className="metric-detail">{item.detail}</p>
             </div>
           ))}
         </div>
-        <p className="proof-caption">{t?.outcomesCaption || "Average across active engagements"}</p>
+        <p className="proof-caption">{t?.otaCostCaption}</p>
       </div>
     </section>
   );

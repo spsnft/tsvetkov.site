@@ -1,65 +1,64 @@
 export const contentData = {
   en: {
     // --- HERO SECTION ---
+    heroLocation: "Direct booking systems for Phuket properties",
     heroTitle: "Stop Paying 15-20% Commissions to Booking.com & Agoda",
     heroSub1: "Connect your property directly to guests\nZero risk of human error and double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
-    btnAudit: "Book a Free Audit",
+    btnAudit: "Free 20-min Revenue Check",
+    btnAuditNote: "I'll show you exactly how much you pay OTAs every month",
     btnChat: "WhatsApp",
     btnLine: "Line",
 
     // --- NAV ---
+    navAbout: "About Us",
     navHowItWorks: "How It Works",
     navPricing: "Pricing",
     navFaq: "FAQ",
 
-    // Hero Bento Widget Text
-    syncBadge: "CLIENT OUTCOMES",
-    statDirectRevenue: "Direct Revenue",
-    statMarginGuest: "Margin per Guest",
-    statGoogleTraffic: "Google Traffic",
-    statRepeatBookings: "Repeat Bookings",
-    outcomesCaption: "Average across active engagements",
-
-    // --- INDUSTRY PROOF (Mobile/Tablet) ---
-    proofTitle: "System Impact",
-    proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue" },
-      { endValue: 60, prefix: "+", suffix: "%", label: "Margin per Guest" },
-      { endValue: 300, prefix: "+", suffix: "%", label: "Google Traffic" },
-      { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Bookings" }
+    // Hero Bento Widget — what OTA commissions cost the owner
+    otaCostBadge: "WHAT OTAs COST YOU",
+    otaCostRows: [
+      { value: "$18,000", unit: "per year", detail: "Guesthouse · 8 rooms · ADR $90" },
+      { value: "$67,000", unit: "per year", detail: "Boutique hotel · 20 rooms · ADR $120" },
+      { value: "$140,000", unit: "per year", detail: "Resort · 40 rooms · ADR $120" }
     ],
+    otaCostCaption: "Based on 17% average OTA commission, 65% occupancy, 70% of bookings via OTA channels",
+
+    // --- LOGO MARQUEE ---
+    marqueeLabel: "CHANNELS WE CONNECT",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Scale your property bookings",
     scaleSub: "Automate workflows so your team can focus on guest experience",
     scaleItems: [
       {
-        pain: "24/7 MANUAL UPDATES",
+        pain: "24/7 manual updates",
         endValue: "Instant Sync",
         desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
       },
       {
-        pain: "15–20% OTA COMMISSIONS",
+        pain: "15–20% commission on every booking",
         endValue: "100% Direct Revenue",
         desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
       },
       {
-        pain: "FULL OTA DEPENDENCY",
+        pain: "Full dependency on OTA traffic",
         endValue: "Predictable Scale",
         desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
       }
     ],
 
-    // --- ABOUT & EXPERTISE SECTION ---
-    aboutTitle: "Systems. Optimization. Scale.",
-    aboutDescFirst: "We step into business to optimize them for maximum efficiency.",
-    aboutDescRest: "By unifying marketing channels, data analytics, and workflow automation into a single engine, we eliminate operational chaos and unlock systemic growth — transforming hidden leakages into predictable, scalable revenue",
+    // --- WHO'S BEHIND THIS ---
+    aboutLabel: "WHO'S BEHIND THIS",
+    aboutName: "Fedor Tsvetkov",
+    aboutRole: "Founder, TSVETKOV · Phuket, Thailand",
+    aboutP1: "Performance marketing and growth systems agency. Ten years building acquisition channels, analytics and workflow automation for B2B and direct-to-consumer brands.",
+    aboutP2: "Hospitality is one vertical — the same systems approach applied to properties losing 15–20% of revenue to OTAs. I build the system, hand it over, and you own it. No lock-in, no revenue share.",
+    aboutLinkAgency: "More about the agency",
+    aboutLinkWhatsApp: "WhatsApp",
 
     // Trust Stats
-    stat1Num: "$1M+",
-    stat1Name: "Saved Fees",
-    stat1Sub: "In OTA commissions",
     stat2Num: "20+",
     stat2Name: "Brands Scaled",
     stat2Sub: "B2B & Direct models",
@@ -67,44 +66,33 @@ export const contentData = {
     stat3Name: "Years Experience",
     stat3Sub: "Growth & systems",
 
-    // Cases & Results
-    proofLabel: "Proven Results",
-    case1Title: "+$2,800/mo OTA savings | +42% Direct Bookings",
-    case1Badge: "Villa Resort",
-    case1Desc: "Replaced manual management with an automated Direct Engine",
-
-    case2Title: "+310% Google Traffic | Zero Double-Bookings",
-    case2Badge: "Boutique Hotel",
-    case2Desc: "Integrated Google Ads & Direct Engine, cutting Booking.com dependence",
-
     // --- PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever",
     pricePopular: "Popular",
     priceDisclaimerAudit: "Final price confirmed after your free audit. PMS/channel manager subscription billed separately by provider.",
 
-    tier1Title: "LITE (1-10 Rooms)",
+    tier1Title: "LITE",
     tier1Price: "From $1,200",
+    tier1Payback: "Typical payback: 3–4 months",
     tier1Desc: "For small villas & guesthouses",
     tier1F1: "Cloud PMS Setup",
     tier1F2: "0% Commission Engine",
     tier1F3: "Booking & Agoda Sync",
     tier1F4: "Payment Integration",
 
-    tier2Title: "STANDARD (10-30 Rooms)",
+    tier2Title: "STANDARD",
     tier2Price: "From $2,500",
+    tier2Payback: "Typical payback: 2–3 months",
     tier2Desc: "For boutique hotels & resorts",
-    tier2F1: "Everything in ",
-    tier2F1Badge: "LITE",
     tier2F2: "Connect 300+ OTA Channels",
     tier2F3: "Direct Promo Engine",
     tier2F4: "Marketing Analytics Setup",
 
-    tier3Title: "ENTERPRISE (30+ Rooms)",
+    tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
+    tier3Payback: "Typical payback: under 2 months",
     tier3Desc: "For hotel chains & operators",
-    tier3F1: "Everything in ",
-    tier3F1Badge: "STANDARD",
     tier3F2: "Custom CRM Setup",
     tier3F3: "Consolidated Revenue Reporting",
     tier3F4: "Multi-Property Dashboard",
@@ -139,70 +127,69 @@ export const contentData = {
     footerTitle: "Ready to maximize your revenue?",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Take full control of your direct bookings",
-    footerBtn: "Book a Free Audit"
+    footerBtn: "Free 20-min Revenue Check"
   },
 
   ru: {
     // --- HERO SECTION ---
+    heroLocation: "Системы прямых бронирований для отелей и вилл Пхукета",
     heroTitle: "Хватит платить 15–20% комиссии Booking.com и Agoda",
     heroSub1: "Подключите свой объект напрямую к гостям\nНикаких ошибок и двойных броней",
     heroSub2: "Оставляйте 100% прибыли себе",
-    btnAudit: "Получить бесплатный аудит",
+    btnAudit: "Бесплатный разбор, 20 минут",
+    btnAuditNote: "Покажу, сколько именно вы платите OTA каждый месяц",
     btnChat: "WhatsApp",
     btnLine: "Line",
 
     // --- NAV ---
+    navAbout: "О нас",
     navHowItWorks: "Как это работает",
     navPricing: "Тарифы",
     navFaq: "Вопросы",
 
-    // Hero Bento Widget Text
-    syncBadge: "РЕЗУЛЬТАТЫ КЛИЕНТОВ",
-    statDirectRevenue: "Прямая выручка",
-    statMarginGuest: "Маржа на гостя",
-    statGoogleTraffic: "Трафик из Google",
-    statRepeatBookings: "Повторные брони",
-    outcomesCaption: "Среднее значение по активным проектам",
-
-    // --- INDUSTRY PROOF (Mobile/Tablet) ---
-    proofTitle: "Эффект системы",
-    proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "Прямая выручка" },
-      { endValue: 60, prefix: "+", suffix: "%", label: "Маржа на гостя" },
-      { endValue: 300, prefix: "+", suffix: "%", label: "Трафик из Google" },
-      { endValue: 35, prefix: "+", suffix: "%", label: "Повторные брони" }
+    // Hero Bento Widget — сколько владелец отдаёт OTA
+    otaCostBadge: "СКОЛЬКО ВЫ ОТДАЁТЕ OTA",
+    otaCostRows: [
+      { value: "$18,000", unit: "в год", detail: "Гестхаус · 8 номеров · ADR $90" },
+      { value: "$67,000", unit: "в год", detail: "Бутик-отель · 20 номеров · ADR $120" },
+      { value: "$140,000", unit: "в год", detail: "Резорт · 40 номеров · ADR $120" }
     ],
+    otaCostCaption: "Расчёт при средней комиссии OTA 17%, загрузке 65%, доле OTA 70% от всех броней",
+
+    // --- LOGO MARQUEE ---
+    marqueeLabel: "КАНАЛЫ, КОТОРЫЕ МЫ ПОДКЛЮЧАЕМ",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Масштабируйте бронирования объекта",
     scaleSub: "Автоматизируйте процессы, чтобы команда фокусировалась на гостях",
     scaleItems: [
       {
-        pain: "ОБНОВЛЕНИЯ ВРУЧНУЮ 24/7",
+        pain: "Ручное обновление 24/7",
         endValue: "Мгновенная синхронизация",
         desc: "Интеграция Cloud PMS и Channel Manager. Каждое бронирование мгновенно резервирует номера во всех каналах — Booking.com, Agoda и 300+ других OTA"
       },
       {
-        pain: "КОМИССИЯ OTA 15–20%",
+        pain: "15–20% комиссии с каждой брони",
         endValue: "100% прямой выручки",
         desc: "Система прямых броней без комиссии с защищённым платёжным шлюзом. Принимайте оплату на своих условиях и оставляйте всю выручку себе"
       },
       {
-        pain: "ПОЛНАЯ ЗАВИСИМОСТЬ ОТ OTA",
+        pain: "Полная зависимость от трафика OTA",
         endValue: "Предсказуемый рост",
         desc: "Локальное SEO для привлечения целевого поискового трафика в связке с автоматическим удержанием гостей — превращаем прошлые заезды в постоянный доход"
       }
     ],
 
-    // --- ABOUT & EXPERTISE SECTION ---
-    aboutTitle: "Системы. Оптимизация. Масштаб.",
-    aboutDescFirst: "Мы входим в бизнес, чтобы довести его эффективность до максимума.",
-    aboutDescRest: "Объединяя маркетинговые каналы, аналитику данных и автоматизацию процессов в единый механизм, мы устраняем операционный хаос и запускаем системный рост — превращая скрытые потери в предсказуемую, масштабируемую выручку",
+    // --- WHO'S BEHIND THIS ---
+    aboutLabel: "КТО ЗА ЭТИМ СТОИТ",
+    aboutName: "Фёдор Цветков",
+    aboutRole: "Основатель TSVETKOV · Пхукет, Таиланд",
+    aboutP1: "Агентство перформанс-маркетинга и систем роста. Десять лет строю каналы привлечения, аналитику и автоматизацию процессов для B2B и прямых продаж.",
+    aboutP2: "Отели и виллы — одна из вертикалей: тот же системный подход для объектов, которые отдают OTA 15–20% выручки. Я собираю систему и передаю её вам. Без привязки и без процента с выручки.",
+    aboutLinkAgency: "Подробнее об агентстве",
+    aboutLinkWhatsApp: "WhatsApp",
 
     // Trust Stats
-    stat1Num: "$1M+",
-    stat1Name: "Сэкономлено",
-    stat1Sub: "На комиссиях OTA",
     stat2Num: "20+",
     stat2Name: "Проектов масштабировано",
     stat2Sub: "B2B и прямые модели",
@@ -210,44 +197,33 @@ export const contentData = {
     stat3Name: "Лет опыта",
     stat3Sub: "Рост и системы",
 
-    // Cases & Results
-    proofLabel: "Подтверждённые результаты",
-    case1Title: "+$2,800/мес экономии OTA | +42% прямых броней",
-    case1Badge: "Вилла-резорт",
-    case1Desc: "Заменили ручное управление на автоматизированный модуль прямых броней",
-
-    case2Title: "+310% трафика из Google | 0% двойных броней",
-    case2Badge: "Бутик-отель",
-    case2Desc: "Внедрили Google Ads и модуль прямых броней, снизив зависимость от Booking.com",
-
     // --- PRICING ---
     priceTitle: "Прозрачное внедрение. Постоянная независимость",
     priceSub: "Разовая оплата. Ноль комиссии с прямых броней навсегда",
     pricePopular: "Популярный",
     priceDisclaimerAudit: "Финальная цена подтверждается после аудита. Подписка на PMS/channel manager — оплата напрямую провайдеру.",
 
-    tier1Title: "LITE (1–10 номеров)",
+    tier1Title: "LITE",
     tier1Price: "From $1,200",
+    tier1Payback: "Окупаемость: 3–4 месяца",
     tier1Desc: "Для небольших вилл и гестхаусов",
     tier1F1: "Настройка Cloud PMS",
     tier1F2: "Система броней без комиссии",
     tier1F3: "Синхронизация с Booking и Agoda",
     tier1F4: "Интеграция платежей",
 
-    tier2Title: "STANDARD (10–30 номеров)",
+    tier2Title: "STANDARD",
     tier2Price: "From $2,500",
+    tier2Payback: "Окупаемость: 2–3 месяца",
     tier2Desc: "Для бутик-отелей и резортов",
-    tier2F1: "Всё из тарифа ",
-    tier2F1Badge: "LITE",
     tier2F2: "Подключение 300+ каналов OTA",
     tier2F3: "Продвижение прямых броней",
     tier2F4: "Маркетинговая аналитика",
 
-    tier3Title: "ENTERPRISE (30+ номеров)",
+    tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
+    tier3Payback: "Окупаемость: менее 2 месяцев",
     tier3Desc: "Для сетей отелей и операторов",
-    tier3F1: "Всё из тарифа ",
-    tier3F1Badge: "STANDARD",
     tier3F2: "Индивидуальная настройка CRM",
     tier3F3: "Консолидированная отчётность",
     tier3F4: "Дашборд по объектам",
@@ -282,86 +258,75 @@ export const contentData = {
     footerTitle: "Готовы увеличить выручку?",
     footerSub1: "Хватит терять 15–20% выручки",
     footerSub2: "Возьмите полный контроль над прямыми бронями",
-    footerBtn: "Получить бесплатный аудит"
+    footerBtn: "Бесплатный разбор, 20 минут"
   },
 
   th: {
     // --- HERO SECTION ---
+    heroLocation: "ระบบจองตรงสำหรับที่พักในภูเก็ต",
     heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15‑20% ให้ Booking.com และ Agoda",
     heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง\nไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
-    btnAudit: "นัดหมายตรวจสอบระบบฟรี",
+    btnAudit: "ตรวจสอบรายได้ฟรี 20 นาที",
+    btnAuditNote: "ผมจะแสดงให้เห็นว่าคุณจ่ายค่าคอมมิชชั่นให้ OTA เดือนละเท่าไหร่",
     btnChat: "WhatsApp",
     btnLine: "Line",
 
     // --- NAV ---
+    navAbout: "เกี่ยวกับเรา",
     navHowItWorks: "วิธีการทำงาน",
     navPricing: "ราคา",
     navFaq: "คำถาม",
 
-    // Hero Bento Widget Text
-    syncBadge: "ผลลัพธ์ของลูกค้า",
-    statDirectRevenue: "รายได้ตรง",
-    statMarginGuest: "มาร์จิ้นต่อผู้เข้าพัก",
-    statGoogleTraffic: "ทราฟฟิก Google",
-    statRepeatBookings: "การจองซ้ำ",
-    outcomesCaption: "ค่าเฉลี่ยจากลูกค้าที่ใช้งานอยู่",
-
-    // --- INDUSTRY PROOF (Mobile/Tablet) ---
-    proofTitle: "ผลลัพธ์ของระบบ",
-    proofMetrics: [
-      { endValue: 40, prefix: "+", suffix: "%", label: "รายได้ตรง" },
-      { endValue: 60, prefix: "+", suffix: "%", label: "มาร์จิ้นต่อผู้เข้าพัก" },
-      { endValue: 300, prefix: "+", suffix: "%", label: "ทราฟฟิก Google" },
-      { endValue: 35, prefix: "+", suffix: "%", label: "การจองซ้ำ" }
+    // Hero Bento Widget — ค่าคอมมิชชั่นที่เสียให้ OTA
+    otaCostBadge: "ค่าคอมมิชชั่นที่คุณเสียให้ OTA",
+    otaCostRows: [
+      { value: "$18,000", unit: "ต่อปี", detail: "เกสต์เฮาส์ · 8 ห้อง · ADR $90" },
+      { value: "$67,000", unit: "ต่อปี", detail: "โรงแรมบูทีค · 20 ห้อง · ADR $120" },
+      { value: "$140,000", unit: "ต่อปี", detail: "รีสอร์ท · 40 ห้อง · ADR $120" }
     ],
+    otaCostCaption: "คำนวณจากค่าคอมมิชชั่น OTA เฉลี่ย 17% อัตราเข้าพัก 65% และสัดส่วนการจองผ่าน OTA 70%",
+
+    // --- LOGO MARQUEE ---
+    marqueeLabel: "ช่องทางที่เราเชื่อมต่อให้",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
     scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
     scaleItems: [
       {
-        pain: "อัปเดตระบบด้วยมือ 24/7",
+        pain: "อัปเดตด้วยมือตลอด 24 ชม.",
         endValue: "ซิงค์ระบบทันที",
         desc: "ระบบ Cloud PMS & Channel Manager อัปเดตการจองแบบเรียลไทม์ ล็อกห้องพักทันทีบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
-        pain: "ค่าคอมมิชชั่น OTA 15–20%",
+        pain: "จ่ายค่าคอมมิชชั่น 15–20% ทุกการจอง",
         endValue: "รายได้ตรง 100%",
         desc: "ระบบจองตรง 0% ค่าคอมมิชชั่น พร้อมช่องทางชำระเงินที่ปลอดภัย รับและเก็บรายได้ทั้งหมดไว้กับคุณโดยไม่ต้องแบ่งใคร"
       },
       {
-        pain: "พึ่งพา OTA 100%",
+        pain: "พึ่งพาทราฟฟิกจาก OTA ทั้งหมด",
         endValue: "เติบโตอย่างมั่นคง",
         desc: "การทำ Local SEO เพื่อดึงดูดลูกค้าที่มีความต้องการจองสูง พร้อมระบบดึงดูดลูกค้าเก่าให้กลับมาจองซ้ำเพื่อเพิ่มรายได้ระยะยาว"
       }
     ],
 
-    // --- ABOUT & EXPERTISE SECTION ---
-    aboutTitle: "ระบบ. การเพิ่มประสิทธิภาพ. การขยายขนาด",
-    aboutDescFirst: "เราเข้าจัดการธุรกิจเพื่อเพิ่มประสิทธิภาพสูงสุด",
-    aboutDescRest: "ด้วยการรวมช่องทางการตลาด การวิเคราะห์ข้อมูล และระบบอัตโนมัติเข้าไว้ด้วยกันเป็นกลไกเดียว เราช่วยขจัดความวุ่นวายในการดำเนินงานและขับเคลื่อนการเติบโตอย่างเป็นระบบ เพื่อเปลี่ยนจุดรั่วไหลที่ซ่อนอยู่ให้เป็นรายได้ที่คาดการณ์และขยายตัวได้จริง",
+    // --- WHO'S BEHIND THIS ---
+    aboutLabel: "ใครอยู่เบื้องหลัง",
+    aboutName: "Fedor Tsvetkov",
+    aboutRole: "ผู้ก่อตั้ง TSVETKOV · ภูเก็ต ประเทศไทย",
+    aboutP1: "เอเจนซี่ด้านการตลาดเชิงผลลัพธ์และระบบการเติบโต ผมสร้างช่องทางหาลูกค้า ระบบวิเคราะห์ข้อมูล และระบบอัตโนมัติให้แบรนด์ B2B และแบรนด์ที่ขายตรงถึงผู้บริโภคมากว่าสิบปี",
+    aboutP2: "ธุรกิจที่พักเป็นหนึ่งในกลุ่มที่เราดูแล ใช้แนวคิดเชิงระบบเดียวกันกับที่พักที่ต้องเสียรายได้ 15–20% ให้ OTA ผมสร้างระบบให้แล้วส่งมอบให้คุณเป็นเจ้าของ ไม่มีสัญญาผูกมัด ไม่มีส่วนแบ่งรายได้",
+    aboutLinkAgency: "ดูข้อมูลเอเจนซี่เพิ่มเติม",
+    aboutLinkWhatsApp: "WhatsApp",
 
     // Trust Stats
-    stat1Num: "$1M+",
-    stat1Name: "ประหยัดค่าธรรมเนียม",
-    stat1Sub: "จากค่าคอมมิชชั่น OTA",
     stat2Num: "20+",
     stat2Name: "แบรนด์ที่ขยาย",
     stat2Sub: "โมเดล B2B & Direct",
     stat3Num: "10+",
     stat3Name: "ประสบการณ์ (ปี)",
     stat3Sub: "การเติบโตและระบบ",
-
-    // Cases & Results
-    proofLabel: "ผลลัพธ์ที่พิสูจน์แล้ว",
-    case1Title: "ประหยัดค่า OTA +$2,800/เดือน | ยอดจองตรง +42%",
-    case1Badge: "พูลวิลล่ารีสอร์ท",
-    case1Desc: "เปลี่ยนจากการจัดการด้วยมือมาใช้ระบบจองตรงอัตโนมัติ",
-
-    case2Title: "ทราฟฟิก Google +310% | ป้องกันการจองซ้ำซ้อน 100%",
-    case2Badge: "บูติกโฮเทล",
-    case2Desc: "เชื่อมต่อ Google Ads และระบบจองตรง ลดการพึ่งพา Booking.com",
 
     // --- PRICING ---
     priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
@@ -370,28 +335,27 @@ export const contentData = {
     priceDisclaimerAudit: "ราคาสุดท้ายยืนยันหลังการตรวจสอบฟรี",
     priceDisclaimerSub: "+ ค่าสมัครใช้งาน PMS/channel manager ชำระตรงกับผู้ให้บริการ",
 
-    tier1Title: "LITE (1-10 ห้อง)",
+    tier1Title: "LITE",
     tier1Price: "From $1,200",
+    tier1Payback: "คืนทุนโดยทั่วไป: 3–4 เดือน",
     tier1Desc: "สำหรับวิลล่าและเกสต์เฮาส์ขนาดเล็ก",
     tier1F1: "ระบบ Cloud PMS Setup",
     tier1F2: "ระบบจองตรงไม่เสียค่าคอม",
     tier1F3: "ซิงค์ปฏิทิน Booking & Agoda",
     tier1F4: "ระบบชำระเงินตรง",
 
-    tier2Title: "STANDARD (10-30 ห้อง)",
+    tier2Title: "STANDARD",
     tier2Price: "From $2,500",
+    tier2Payback: "คืนทุนโดยทั่วไป: 2–3 เดือน",
     tier2Desc: "สำหรับบูติกโฮเทลและรีสอร์ท",
-    tier2F1: "รวมทุกอย่างในแพ็กเกจ ",
-    tier2F1Badge: "LITE",
     tier2F2: "เชื่อมต่อช่องทางจองกว่า 300+ แห่ง",
     tier2F3: "ระบบโปรโมชั่นจองตรง",
     tier2F4: "ตั้งค่าระบบวิเคราะห์การตลาด",
 
-    tier3Title: "ENTERPRISE (30+ ห้อง)",
+    tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
+    tier3Payback: "คืนทุนโดยทั่วไป: ไม่ถึง 2 เดือน",
     tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
-    tier3F1: "รวมทุกอย่างในแพ็กเกจ ",
-    tier3F1Badge: "STANDARD",
     tier3F2: "ระบบ CRM แบบกำหนดเอง",
     tier3F3: "รายงานรายได้แบบรวมศูนย์",
     tier3F4: "แดชบอร์ดบริหารหลายสาขา",
@@ -426,6 +390,6 @@ export const contentData = {
     footerTitle: "พร้อมที่จะเพิ่มรายได้หรือยัง?",
     footerSub1: "เลิกเสียรายได้ 15–20% ไปกับค่าคอมมิชชั่น",
     footerSub2: "ควบคุมยอดจองตรงของคุณได้อย่างสมบูรณ์",
-    footerBtn: "นัดหมายตรวจสอบระบบฟรี"
+    footerBtn: "ตรวจสอบรายได้ฟรี 20 นาที"
   }
 };

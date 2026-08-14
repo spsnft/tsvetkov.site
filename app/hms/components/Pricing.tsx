@@ -14,6 +14,10 @@ const cleanText = (str?: string) => {
 };
 
 export default function Pricing({ t }: PricingProps) {
+  const liteFeatures = [t?.tier1F1, t?.tier1F2, t?.tier1F3, t?.tier1F4].map(cleanText).filter(Boolean);
+  const standardFeatures = [t?.tier2F2, t?.tier2F3, t?.tier2F4].map(cleanText).filter(Boolean);
+  const enterpriseFeatures = [t?.tier3F2, t?.tier3F3, t?.tier3F4].map(cleanText).filter(Boolean);
+
   return (
     <section id="pricing" className="pricing-section">
       <style jsx>{`
@@ -127,7 +131,7 @@ export default function Pricing({ t }: PricingProps) {
           display: flex;
           flex-direction: column;
           gap: 0.4rem;
-          height: 11rem;
+          height: 12.5rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.03);
           padding-bottom: 1.5rem;
         }
@@ -153,6 +157,12 @@ export default function Pricing({ t }: PricingProps) {
           color: ${T.sub};
         }
 
+        .price-payback {
+          font-size: 0.78rem;
+          line-height: 1.4;
+          color: ${T.muted};
+        }
+
         .shared-disclaimer {
           margin: 2rem auto 0;
           max-width: 820px;
@@ -168,6 +178,12 @@ export default function Pricing({ t }: PricingProps) {
           color: ${T.muted};
         }
 
+        .features-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 1.1rem;
+        }
+
         .features-list {
           list-style: none;
           padding: 0;
@@ -175,6 +191,23 @@ export default function Pricing({ t }: PricingProps) {
           display: flex;
           flex-direction: column;
           gap: 1.1rem;
+        }
+
+        /* Унаследованные пункты выводим явно, но приглушённо — чтобы не гонять
+           читателя вверх за составом младшего тарифа */
+        .features-list.inherited {
+          gap: 0.4rem;
+        }
+
+        .feature-item.inherited-item {
+          font-size: 0.85rem;
+          color: rgba(255, 255, 255, 0.4);
+          line-height: 1.3;
+        }
+
+        .inherited-marker {
+          color: rgba(255, 255, 255, 0.4);
+          flex-shrink: 0;
         }
         
         .feature-item {
@@ -198,15 +231,6 @@ export default function Pricing({ t }: PricingProps) {
           background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-        }
-
-        .tier-badge {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 0.15rem 0.4rem;
-          border-radius: 4px;
-          font-weight: 600;
-          font-size: 0.85rem;
-          color: #fff;
         }
 
         /* --- ПЛАНШЕТЫ (768px - 1024px): 3 В РЯД, КОМПАКТНО --- */
@@ -244,7 +268,7 @@ export default function Pricing({ t }: PricingProps) {
             font-size: 0.8rem;
           }
           .card-header {
-            height: 9.5rem;
+            height: 11rem;
             padding-bottom: 1rem;
           }
           .features-list {
@@ -253,6 +277,12 @@ export default function Pricing({ t }: PricingProps) {
           .feature-item {
             font-size: 0.82rem;
             gap: 0.5rem;
+          }
+          .feature-item.inherited-item {
+            font-size: 0.75rem;
+          }
+          .price-payback {
+            font-size: 0.72rem;
           }
         }
 
@@ -284,7 +314,7 @@ export default function Pricing({ t }: PricingProps) {
             font-size: 2.6rem;
           }
           .card-header {
-            height: 11rem;
+            height: 12.5rem;
           }
           .features-list {
             gap: 0.85rem;
@@ -311,65 +341,79 @@ export default function Pricing({ t }: PricingProps) {
           {/* LITE */}
           <div className="card">
             <div className="card-header">
-              <p className="package-title">{t?.tier1Title || "LITE (1-10 Rooms)"}</p>
+              <p className="package-title">{t?.tier1Title || "LITE"}</p>
               <div className="price-value">
                 <span className="price">{t?.tier1Price || "From $1,200"}</span>
               </div>
+              {t?.tier1Payback && <span className="price-payback">{t.tier1Payback}</span>}
               <span className="price-desc">{t?.tier1Desc || "For small villas & guesthouses"}</span>
             </div>
-            <ul className="features-list">
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F1)}</li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F2)}</li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F3)}</li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier1F4)}</li>
-            </ul>
+            <div className="features-wrapper">
+              <ul className="features-list">
+                {liteFeatures.map((f, i) => (
+                  <li className="feature-item" key={`own-${i}`}>
+                    <span className="check-icon">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* STANDARD */}
           <div className="card featured">
             <span className="popular-badge">{t?.pricePopular || "Popular"}</span>
             <div className="card-header">
-              <p className="package-title">{t?.tier2Title || "STANDARD (10-30 Rooms)"}</p>
+              <p className="package-title">{t?.tier2Title || "STANDARD"}</p>
               <div className="price-value">
                 <span className="price">{t?.tier2Price || "From $2,500"}</span>
               </div>
+              {t?.tier2Payback && <span className="price-payback">{t.tier2Payback}</span>}
               <span className="price-desc">{t?.tier2Desc || "For boutique hotels & resorts"}</span>
             </div>
-            <ul className="features-list">
-              <li className="feature-item">
-                <span className="check-icon">✓</span> 
-                <span>
-                  {cleanText(t?.tier2F1)}
-                  {t?.tier2F1Badge && <span className="tier-badge">{t.tier2F1Badge}</span>}
-                </span>
-              </li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F2)}</li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F3)}</li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier2F4)}</li>
-            </ul>
+            <div className="features-wrapper">
+              <ul className="features-list inherited">
+                {liteFeatures.map((f, i) => (
+                  <li className="feature-item inherited-item" key={`inh-${i}`}>
+                    <span className="inherited-marker" aria-hidden="true">·</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <ul className="features-list">
+                {standardFeatures.map((f, i) => (
+                  <li className="feature-item" key={`own-${i}`}>
+                    <span className="check-icon">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* ENTERPRISE */}
           <div className="card">
             <div className="card-header">
-              <p className="package-title">{t?.tier3Title || "ENTERPRISE (30+ Rooms)"}</p>
+              <p className="package-title">{t?.tier3Title || "ENTERPRISE"}</p>
               <div className="price-value">
                 <span className="price">{t?.tier3Price || "Custom"}</span>
               </div>
+              {t?.tier3Payback && <span className="price-payback">{t.tier3Payback}</span>}
               <span className="price-desc">{t?.tier3Desc || "For hotel chains & operators"}</span>
             </div>
-            <ul className="features-list">
-              <li className="feature-item">
-                <span className="check-icon">✓</span> 
-                <span>
-                  {cleanText(t?.tier3F1)}
-                  {t?.tier3F1Badge && <span className="tier-badge">{t.tier3F1Badge}</span>}
-                </span>
-              </li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F2)}</li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F3)}</li>
-              <li className="feature-item"><span className="check-icon">✓</span> {cleanText(t?.tier3F4)}</li>
-            </ul>
+            <div className="features-wrapper">
+              <ul className="features-list inherited">
+                {[...liteFeatures, ...standardFeatures].map((f, i) => (
+                  <li className="feature-item inherited-item" key={`inh-${i}`}>
+                    <span className="inherited-marker" aria-hidden="true">·</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <ul className="features-list">
+                {enterpriseFeatures.map((f, i) => (
+                  <li className="feature-item" key={`own-${i}`}>
+                    <span className="check-icon">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 

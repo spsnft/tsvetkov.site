@@ -2,8 +2,15 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { T } from '../../../src/theme/tokens';
 
-export default function LogoMarquee() {
+interface LogoMarqueeProps {
+  t?: {
+    marqueeLabel?: string;
+  };
+}
+
+export default function LogoMarquee({ t }: LogoMarqueeProps) {
   const logoSrcs = [
     '/logos/booking.svg',
     '/logos/airbnb.svg',
@@ -19,8 +26,24 @@ export default function LogoMarquee() {
   ];
 
   return (
-    <section className="marquee-wrapper">
+    <section className="marquee-block">
       <style jsx>{`
+        /* Отступ сверху разрывает визуальную связку ленты с цифрами героя */
+        .marquee-block {
+          width: 100%;
+          margin-top: 4rem;
+        }
+
+        .marquee-label {
+          margin: 0 0 1rem 0;
+          text-align: center;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: ${T.sub};
+          opacity: 0.8;
+        }
+
         .marquee-wrapper {
           width: 100%;
           max-width: 100%;
@@ -35,16 +58,16 @@ export default function LogoMarquee() {
           -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
           mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
         }
-        
+
         .marquee-track {
           display: flex;
           width: fit-content;
-          animation: scroll 35s linear infinite; 
+          animation: scroll 35s linear infinite;
           gap: 5rem;
           align-items: center;
           will-change: transform;
         }
-        
+
         .logo-item {
           display: flex;
           align-items: center;
@@ -60,6 +83,13 @@ export default function LogoMarquee() {
         }
 
         @media (max-width: 768px) {
+          .marquee-block {
+            margin-top: 3rem;
+          }
+          .marquee-label {
+            margin-bottom: 0.85rem;
+            font-size: 0.68rem;
+          }
           .marquee-wrapper {
             padding: 0.85rem 0;
           }
@@ -69,32 +99,40 @@ export default function LogoMarquee() {
         }
       `}</style>
 
-      <div className="marquee-track">
-        {[...logoSrcs, ...logoSrcs, ...logoSrcs].map((src, index) => {
-          // Вычисляем высоту для каждого логотипа (соответствует старым CSS-правилам)
-          const getHeight = (s: string) => {
-            if (s.includes('booking')) return 75;
-            if (s.includes('hostelworld') || s.includes('hotelbeds')) return 42;
-            if (s.includes('tripadvisor')) return 68;
-            if (s.includes('agoda') || s.includes('airbnb') || s.includes('traveloka')) return 55;
-            return 58;
-          };
-          const h = getHeight(src);
+      {t?.marqueeLabel && (
+        <div className="container">
+          <p className="marquee-label">{t.marqueeLabel}</p>
+        </div>
+      )}
 
-          return (
-            <div key={index} className="logo-item">
-              <Image 
-                src={src} 
-                alt="OTA Logo"
-                width={280}
-                height={h}
-                style={{ height: h, width: 'auto', maxWidth: 280, objectFit: 'contain' }}
-                loading="eager"
-                fetchPriority="high"
-              />
-            </div>
-          );
-        })}
+      <div className="marquee-wrapper">
+        <div className="marquee-track">
+          {[...logoSrcs, ...logoSrcs, ...logoSrcs].map((src, index) => {
+            // Вычисляем высоту для каждого логотипа (соответствует старым CSS-правилам)
+            const getHeight = (s: string) => {
+              if (s.includes('booking')) return 75;
+              if (s.includes('hostelworld') || s.includes('hotelbeds')) return 42;
+              if (s.includes('tripadvisor')) return 68;
+              if (s.includes('agoda') || s.includes('airbnb') || s.includes('traveloka')) return 55;
+              return 58;
+            };
+            const h = getHeight(src);
+
+            return (
+              <div key={index} className="logo-item">
+                <Image
+                  src={src}
+                  alt="OTA Logo"
+                  width={280}
+                  height={h}
+                  style={{ height: h, width: 'auto', maxWidth: 280, objectFit: 'contain' }}
+                  loading="eager"
+                  fetchPriority="high"
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

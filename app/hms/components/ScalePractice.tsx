@@ -14,19 +14,27 @@ const CARD_ASSETS = [
   '/assets/growth.webp'
 ];
 
+// Те же два цвета палитры, сдвинуты точки градиента — три заголовка подряд
+// перестают читаться как один повторённый оттенок
+const TITLE_GRADIENTS = [
+  'linear-gradient(135deg, #00E599 0%, #00A3FF 115%)',
+  'linear-gradient(135deg, #00E599 30%, #00A3FF 100%)',
+  'linear-gradient(120deg, #00E599 -25%, #00A3FF 78%)'
+];
+
 const DEFAULT_ITEMS = [
   {
-    pain: "24/7 MANUAL UPDATES",
+    pain: "24/7 manual updates",
     endValue: "Instant Sync",
     desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
   },
   {
-    pain: "15–20% OTA COMMISSIONS",
+    pain: "15–20% commission on every booking",
     endValue: "100% Direct Revenue",
     desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
   },
   {
-    pain: "FULL OTA DEPENDENCY",
+    pain: "Full dependency on OTA traffic",
     endValue: "Predictable Scale",
     desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
   }
@@ -152,25 +160,35 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             );
         }
 
+        /* Строка «до»: снимаемая проблема, а не характеристика карточки —
+           без рамки и фона, приглушённый красный, ширина по контенту */
         .pain-wrapper {
           display: flex;
           justify-content: center;
           margin-bottom: 1.25rem;
         }
 
-        .pain-badge {
+        .pain-line {
           display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 0.75rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: ${T.red};
-          background: ${T.red08};
-          border: 1px solid ${T.red20};
-          padding: 0.25rem 0.75rem;
-          border-radius: 9999px;
+          align-items: baseline;
+          gap: 0.45rem;
+          font-size: 0.9rem;
+          font-weight: 500;
+          line-height: 1.4;
+          color: #8B5A5A;
+          text-align: center;
+        }
+
+        .pain-x {
+          flex-shrink: 0;
+          font-size: 0.85rem;
+          line-height: 1;
+        }
+
+        .pain-text {
+          text-decoration: line-through;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
         }
 
         .image-wrapper {
@@ -229,6 +247,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           line-height: 1.6;
           margin: 0;
           text-wrap: pretty;
+          text-align: left;
+          align-self: stretch;
         }
 
         :global(.nobr) {
@@ -260,9 +280,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .pain-wrapper {
             margin-bottom: 0.85rem;
           }
-          .pain-badge {
-            font-size: 0.65rem;
-            padding: 0.2rem 0.55rem;
+          .pain-line {
+            font-size: 0.8rem;
           }
           .image-wrapper {
             height: 100px;
@@ -329,7 +348,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
               <div className="scale-card" key={idx}>
                 {item.pain && (
                   <div className="pain-wrapper">
-                    <span className="pain-badge">{item.pain}</span>
+                    <span className="pain-line">
+                      <span className="pain-x" aria-hidden="true">✕</span>
+                      <span className="pain-text">{item.pain}</span>
+                    </span>
                   </div>
                 )}
 
@@ -344,7 +366,12 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                 </div>
 
                 <div className="card-content">
-                  <h3 className="focus-metric">{metricTitle}</h3>
+                  <h3
+                    className="focus-metric"
+                    style={{ backgroundImage: TITLE_GRADIENTS[idx % TITLE_GRADIENTS.length] }}
+                  >
+                    {metricTitle}
+                  </h3>
                   <p className="card-description">
                     {renderFormattedText(item.desc)}
                   </p>

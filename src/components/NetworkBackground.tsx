@@ -121,7 +121,7 @@ export const NetworkBackground = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < connectionDist) {
-            const alpha = (1 - dist / connectionDist) * 0.10;
+            const alpha = (1 - dist / connectionDist) * 0.065;
             ctx.beginPath();
             ctx.moveTo(n1.x, n1.y);
             ctx.lineTo(n2.x, n2.y);
@@ -132,15 +132,18 @@ export const NetworkBackground = () => {
         }
       }
 
+      // Точки приглушены, чтобы не садиться на глифы заголовков
+      ctx.globalAlpha = 0.65;
       nodes.forEach((node) => {
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
         ctx.fillStyle = node.color;
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 5;
         ctx.shadowColor = node.color;
         ctx.fill();
         ctx.shadowBlur = 0;
       });
+      ctx.globalAlpha = 1;
 
       animationFrameId = requestAnimationFrame(render);
     };

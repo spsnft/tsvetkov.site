@@ -87,9 +87,12 @@ export default function FAQ({ t }: FAQProps) {
           outline: none;
         }
 
+        /* Тап-зона 44x44 при неизменном визуальном размере иконки:
+           отрицательные поля гасят прирост бокса в потоке */
         .faq-icon {
-          width: 24px;
-          height: 24px;
+          width: 44px;
+          height: 44px;
+          margin: -10px -10px -10px 0;
           flex-shrink: 0;
           position: relative;
           display: flex;
