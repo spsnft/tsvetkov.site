@@ -157,6 +157,30 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
           color: rgba(255, 255, 255, 0.6);
         }
 
+        /* На узких экранах длинный текст CTA не умещается рядом с WhatsApp —
+           складываем в столбец, как в герое */
+        @media (max-width: 480px) {
+          .cta-actions {
+            flex-direction: column;
+            width: 100%;
+            gap: 0.75rem;
+          }
+          .cta-actions :global(.btn-premium-core) {
+            width: 100%;
+            padding: 0 1rem;
+          }
+          .btn-secondary-chat {
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 360px) {
+          .cta-actions :global(.btn-premium-core) {
+            padding: 0 0.7rem;
+            font-size: 0.95rem;
+          }
+        }
+
         @media (max-width: 768px) {
           .footer-cta-section {
             padding: 0 0 4.5rem 0;

@@ -24,17 +24,17 @@ const TITLE_GRADIENTS = [
 
 const DEFAULT_ITEMS = [
   {
-    pain: "24/7 manual updates",
+    pain: "Updating rates and availability by hand, around the clock",
     endValue: "Instant Sync",
     desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
   },
   {
-    pain: "15–20% commission on every booking",
+    pain: "15–20% of every booking goes to the platform",
     endValue: "100% Direct Revenue",
     desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
   },
   {
-    pain: "Full dependency on OTA traffic",
+    pain: "Every guest arrives through a channel you don't control",
     endValue: "Predictable Scale",
     desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
   }
@@ -65,6 +65,7 @@ const renderFormattedText = (text: string) => {
 
 export default function ScalePractice({ t }: ScalePracticeProps) {
   const items = t?.scaleItems || DEFAULT_ITEMS;
+  const nowLabel = t?.scaleNowLabel || 'NOW';
   const subtitleText = t?.scaleSub || "Automate workflows so your team can focus on guest experience";
 
   const renderSubtitle = (sub: string) => {
@@ -126,6 +127,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
 
         .scale-card {
+          position: relative;
           isolation: isolate;
           -webkit-tap-highlight-color: transparent;
           background: 
@@ -143,7 +145,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          padding: 2rem;
           transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
         }
 
@@ -160,35 +161,63 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             );
         }
 
-        /* Строка «до»: снимаемая проблема, а не характеристика карточки —
-           без рамки и фона, приглушённый красный, ширина по контенту */
-        .pain-wrapper {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 1.25rem;
+        /* Панель «сейчас» — утопленная в карточку, отделена границей и
+           стрелкой перехода к решению */
+        .now-panel {
+          position: relative;
+          width: 100%;
+          box-sizing: border-box;
+          background: #0B0C0D;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 16px 16px 0 0;
+          padding: 16px 20px 18px;
+          text-align: left;
         }
 
-        .pain-line {
-          display: inline-flex;
-          align-items: baseline;
-          gap: 0.45rem;
-          font-size: 0.9rem;
+        .now-label {
+          margin: 0 0 0.4rem 0;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #4E545C;
+        }
+
+        .now-text {
+          margin: 0;
+          font-size: 14px;
           font-weight: 500;
           line-height: 1.4;
-          color: #8B5A5A;
-          text-align: center;
+          color: #7B818A;
+          text-wrap: pretty;
         }
 
-        .pain-x {
-          flex-shrink: 0;
-          font-size: 0.85rem;
+        .now-arrow {
+          position: absolute;
+          left: 50%;
+          bottom: -13px;
+          transform: translateX(-50%);
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #101215;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: ${T.mint};
+          font-size: 12px;
           line-height: 1;
+          z-index: 1;
         }
 
-        .pain-text {
-          text-decoration: line-through;
-          text-decoration-thickness: 1px;
-          text-underline-offset: 2px;
+        .card-body {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          box-sizing: border-box;
+          padding: 2.25rem 2rem 2rem;
         }
 
         .image-wrapper {
@@ -247,12 +276,19 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           line-height: 1.6;
           margin: 0;
           text-wrap: pretty;
-          text-align: left;
-          align-self: stretch;
+          text-align: center;
         }
 
         :global(.nobr) {
           white-space: nowrap;
+        }
+
+        /* В сетке 3-в-ряд панели должны быть одной высоты, иначе иконки
+           и заголовки карточек разъезжаются по вертикали */
+        @media (min-width: 768px) {
+          .now-text {
+            min-height: 2.8em;
+          }
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
@@ -274,14 +310,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             grid-template-columns: repeat(3, 1fr);
             gap: 0.85rem;
           }
-          .scale-card {
-            padding: 1.25rem 0.85rem;
+          .card-body {
+            padding: 1.5rem 0.85rem 1.25rem;
           }
-          .pain-wrapper {
-            margin-bottom: 0.85rem;
+          .now-panel {
+            padding: 12px 14px 14px;
           }
-          .pain-line {
-            font-size: 0.8rem;
+          .now-text {
+            font-size: 12.5px;
           }
           .image-wrapper {
             height: 100px;
@@ -321,8 +357,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             max-width: 480px;
             margin: 0 auto;
           }
-          .scale-card {
-            padding: 1.5rem 1.25rem;
+          .card-body {
+            padding: 1.85rem 1.25rem 1.5rem;
           }
           .image-wrapper {
             height: 120px;
@@ -347,34 +383,35 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             return (
               <div className="scale-card" key={idx}>
                 {item.pain && (
-                  <div className="pain-wrapper">
-                    <span className="pain-line">
-                      <span className="pain-x" aria-hidden="true">✕</span>
-                      <span className="pain-text">{item.pain}</span>
-                    </span>
+                  <div className="now-panel">
+                    <p className="now-label">{nowLabel}</p>
+                    <p className="now-text">{item.pain}</p>
+                    <span className="now-arrow" aria-hidden="true">↓</span>
                   </div>
                 )}
 
-                <div className="image-wrapper">
-                  <Image 
-                    src={CARD_ASSETS[idx] || CARD_ASSETS[0]} 
-                    alt={`${metricTitle} visual`} 
-                    className="visual-asset"
-                    width={280}
-                    height={140}
-                  />
-                </div>
+                <div className="card-body">
+                  <div className="image-wrapper">
+                    <Image 
+                      src={CARD_ASSETS[idx] || CARD_ASSETS[0]} 
+                      alt={`${metricTitle} visual`} 
+                      className="visual-asset"
+                      width={280}
+                      height={140}
+                    />
+                  </div>
 
-                <div className="card-content">
-                  <h3
-                    className="focus-metric"
-                    style={{ backgroundImage: TITLE_GRADIENTS[idx % TITLE_GRADIENTS.length] }}
-                  >
-                    {metricTitle}
-                  </h3>
-                  <p className="card-description">
-                    {renderFormattedText(item.desc)}
-                  </p>
+                  <div className="card-content">
+                    <h3
+                      className="focus-metric"
+                      style={{ backgroundImage: TITLE_GRADIENTS[idx % TITLE_GRADIENTS.length] }}
+                    >
+                      {metricTitle}
+                    </h3>
+                    <p className="card-description">
+                      {renderFormattedText(item.desc)}
+                    </p>
+                  </div>
                 </div>
               </div>
             );

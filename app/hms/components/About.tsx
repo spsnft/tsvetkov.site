@@ -8,6 +8,7 @@ interface AboutProps {
     aboutLabel?: string;
     aboutName?: string;
     aboutRole?: string;
+    aboutLocation?: string;
     aboutP1?: string;
     aboutP2?: string;
     aboutLinkAgency?: string;
@@ -66,9 +67,18 @@ export default function About({ t = {} }: AboutProps) {
 
         .about-role {
           font-size: 0.95rem;
-          color: ${T.sub};
+          color: ${T.body};
           margin: 0.5rem 0 0 0;
           line-height: 1.45;
+        }
+
+        .about-location {
+          font-size: 0.88rem;
+          color: ${T.muted};
+          margin: 0.35rem 0 0 0;
+          line-height: 1.45;
+          text-wrap: pretty;
+          max-width: 560px;
         }
 
         .about-text {
@@ -192,6 +202,9 @@ export default function About({ t = {} }: AboutProps) {
           .about-role {
             font-size: 0.88rem;
           }
+          .about-location {
+            font-size: 0.8rem;
+          }
           .about-text {
             margin-top: 1.6rem;
           }
@@ -235,7 +248,8 @@ export default function About({ t = {} }: AboutProps) {
           {t.aboutLabel && <p className="about-label">{t.aboutLabel}</p>}
 
           <h3 className="about-name">{t.aboutName || "Fedor Tsvetkov"}</h3>
-          <p className="about-role">{t.aboutRole || "Founder, TSVETKOV · Phuket, Thailand"}</p>
+          <p className="about-role">{t.aboutRole || "Founder & Managing Director, FT Agency"}</p>
+          {t.aboutLocation && <p className="about-location">{t.aboutLocation}</p>}
 
           <div className="about-text">
             <p className="about-paragraph">{t.aboutP1}</p>
@@ -259,7 +273,7 @@ export default function About({ t = {} }: AboutProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {t.aboutLinkAgency || "More about the agency"} →
+              {t.aboutLinkAgency || "More about FT Agency"} →
             </a>
             <a
               className="about-link"

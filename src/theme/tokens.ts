@@ -16,6 +16,10 @@ export const T = {
   // Brand accent — green
   accent: '#00E599',
   acc2:   '#00A3FF',
+
+  // Softer pair of the same accent — data viz, comparison bars, table checkmarks
+  mint:   '#6EE7A8',
+  sky:    '#5BB8F0',
   
   // Accent with opacity
   accent05: 'rgba(0,229,153,0.05)',

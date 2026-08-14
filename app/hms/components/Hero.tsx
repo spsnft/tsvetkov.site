@@ -2,12 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useCalendlyPopup } from '@/src/components/useCalendlyPopup';
-
-interface OtaCostRow {
-  value: string;
-  unit: string;
-  detail: string;
-}
+import RevenueCalc, { type CalcCopy } from './RevenueCalc';
 
 interface HeroProps {
   t: {
@@ -19,9 +14,7 @@ interface HeroProps {
     btnAuditNote?: string;
     btnChat?: string;
     otaCostBadge?: string;
-    otaCostRows?: OtaCostRow[];
-    otaCostCaption?: string;
-  };
+  } & CalcCopy;
 }
 
 export default function Hero({ t }: HeroProps) {
@@ -47,7 +40,16 @@ export default function Hero({ t }: HeroProps) {
     line2 = rawSub.substring(dotIndex + 2);
   }
 
-  const costRows: OtaCostRow[] = t.otaCostRows || [];
+  // Единственный градиентный акцент в заголовке — фрагмент «15-20%»
+  const titleParts = (() => {
+    const match = /1\s?5\s?[-\u2010\u2011\u2012\u2013\u2014]\s?2\s?0\s?%/.exec(t.heroTitle || '');
+    if (!match) return null;
+    return {
+      before: t.heroTitle.slice(0, match.index),
+      accent: match[0],
+      after: t.heroTitle.slice(match.index + match[0].length)
+    };
+  })();
 
   return (
     <section
@@ -101,6 +103,12 @@ export default function Hero({ t }: HeroProps) {
           color: #fff;
           text-wrap: balance;
           width: 100%;
+        }
+
+        .title-accent {
+          background: linear-gradient(100deg, #6EE7A8, #5BB8F0);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .subtitles-block {
@@ -296,70 +304,10 @@ export default function Hero({ t }: HeroProps) {
           flex-shrink: 0;
         }
 
-        /* Три строки в столбец — подписи стали длиннее и не помещаются в половину карточки */
-        .bento-rows {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          margin-top: 1.2rem;
-          gap: 0.75rem;
-        }
-
-        .bento-row {
-          background: rgba(255, 255, 255, 0.025);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 14px;
-          padding: 0.9rem 1rem;
+        .bento-body {
           display: flex;
           flex: 1;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          gap: 0.15rem;
-          min-width: 0;
-          transition: border-color 0.25s ease, background 0.25s ease;
-          cursor: default;
-        }
-
-        .bento-row:hover {
-          background: rgba(255, 255, 255, 0.04);
-          border-color: rgba(0, 229, 153, 0.3);
-        }
-
-        .cost-value {
-          font-size: clamp(1.85rem, 2.9vw, 2.35rem);
-          font-weight: 800;
-          line-height: 1.1;
-          letter-spacing: -0.03em;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .cost-unit {
-          font-size: 0.82rem;
-          color: #94A3B8;
-          font-weight: 600;
-          letter-spacing: 0.01em;
-        }
-
-        .cost-detail {
-          font-size: 0.72rem;
-          line-height: 1.35;
-          color: #6B7688;
-          font-weight: 500;
-          text-wrap: pretty;
-        }
-
-        .outcomes-caption {
-          margin: 0.9rem 0 0;
-          font-size: 0.7rem;
-          line-height: 1.45;
-          font-weight: 500;
-          color: #6B7688;
-          text-align: center;
-          text-wrap: pretty;
+          margin-top: 1.4rem;
         }
 
         @keyframes pulse {
@@ -400,6 +348,28 @@ export default function Hero({ t }: HeroProps) {
           .visual-column { display: none !important; }
         }
 
+        /* На 320px длинный русский текст не влезает в кнопку при обычном паддинге */
+        @media (max-width: 360px) {
+          .cta-container :global(.btn-premium-core) {
+            padding: 0 0.7rem;
+            font-size: 0.95rem;
+          }
+        }
+
+        /* Поджимаем ритм первого экрана, чтобы подстрочник под кнопкой
+           помещался над фолдом на 390px */
+        @media (max-width: 480px) {
+          .title {
+            line-height: 1.06;
+          }
+          .subtitles-block {
+            margin-bottom: 18px;
+          }
+          .utp-highlight {
+            margin-bottom: 22px;
+          }
+        }
+
         /* Мобилка: обе кнопки в столбец, каждая на всю ширину */
         @media (max-width: 767px) {
           .cta-container {
@@ -419,7 +389,15 @@ export default function Hero({ t }: HeroProps) {
           <div className="text-column">
             {t.heroLocation && <p className="location-line">{t.heroLocation}</p>}
 
-            <h1 className="title">{t.heroTitle}</h1>
+            <h1 className="title">
+              {titleParts ? (
+                <>
+                  {titleParts.before}
+                  <span className="title-accent">{titleParts.accent}</span>
+                  {titleParts.after}
+                </>
+              ) : t.heroTitle}
+            </h1>
 
             <div className="subtitles-block">
               <div className="sub-line-1">{line1}</div>
@@ -474,17 +452,9 @@ export default function Hero({ t }: HeroProps) {
                   </div>
                 </div>
 
-                <div className="bento-rows">
-                  {costRows.map((row, idx) => (
-                    <div className="bento-row" key={idx}>
-                      <div className="cost-value">{row.value}</div>
-                      <div className="cost-unit">{row.unit}</div>
-                      <div className="cost-detail">{row.detail}</div>
-                    </div>
-                  ))}
+                <div className="bento-body">
+                  <RevenueCalc t={t} />
                 </div>
-
-                <p className="outcomes-caption">{t.otaCostCaption}</p>
               </div>
 
             </div>

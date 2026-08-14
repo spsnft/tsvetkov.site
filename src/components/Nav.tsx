@@ -66,6 +66,13 @@ const BACK_LABEL: Record<string, string> = {
 export const Nav = ({ lang, dict }: NavProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  // На узких экранах шапке не хватает ширины на полный текст CTA
+  const [isNarrow, setIsNarrow] = useState(false);
+  // До 1024px в шапке помещается только короткий вариант — полный остаётся
+  // на кнопке героя и в финальной CTA-секции
+  const [shortCta, setShortCta] = useState(false);
+  // 320px + длинный русский текст — самый узкий случай, ужимаем сильнее
+  const [isTiny, setIsTiny] = useState(false);
   const { calendlyReady, popupLoading, openPopup } = useCalendlyPopup('https://calendly.com/fediatsvetkov/15min');
   const [activeSection, setActiveSection] = useState('');
   const [isPending, startTransition] = useTransition();
@@ -87,7 +94,12 @@ export const Nav = ({ lang, dict }: NavProps) => {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsNarrow(window.innerWidth <= 480);
+      setShortCta(window.innerWidth < 1024);
+      setIsTiny(window.innerWidth <= 360);
+    };
 
     handleScroll();
     handleResize();
@@ -135,7 +147,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
         border: '1px solid rgba(255, 255, 255, 0.05)',
         borderRadius: 30,
         padding: 2,
-        gap: 2,
+        gap: isNarrow ? 0 : 2,
         backdropFilter: 'blur(8px)',
         opacity: isPending ? 0.6 : 1,
         pointerEvents: isPending ? 'none' : 'auto',
@@ -151,13 +163,13 @@ export const Nav = ({ lang, dict }: NavProps) => {
             whileTap={{ scale: 0.92 }}
             style={{
               position: 'relative',
-              padding: '0.35rem 0.75rem',
+              padding: isTiny ? '0.28rem 0.38rem' : isNarrow ? '0.3rem 0.5rem' : '0.35rem 0.75rem',
               borderRadius: 26,
               border: '1px solid transparent',
               background: 'transparent',
               color: isActive ? T.accent : T.muted,
               fontWeight: isActive ? 700 : 500,
-              fontSize: '0.72rem',
+              fontSize: isTiny ? '0.62rem' : isNarrow ? '0.66rem' : '0.72rem',
               textTransform: 'uppercase',
               letterSpacing: '0.02em',
               cursor: 'pointer',
@@ -193,17 +205,23 @@ export const Nav = ({ lang, dict }: NavProps) => {
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
       style={{
-        padding: '9px 18px', borderRadius: 10,
+        padding: isTiny ? '9px 9px' : isNarrow ? '9px 12px' : '9px 18px', borderRadius: 10,
         background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
-        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600, fontSize: '0.82rem',
+        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600, fontSize: isTiny ? '0.7rem' : isNarrow ? '0.76rem' : '0.82rem',
         border: 'none', boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)',
         opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady && !popupLoading ? 'pointer' : 'not-allowed',
-        whiteSpace: 'nowrap',
+        whiteSpace: 'nowrap', minWidth: 0,
         display: 'inline-flex', alignItems: 'center', gap: '8px',
       }}
     >
       {popupLoading && <span className="nav-btn-spinner" />}
-      {!calendlyReady ? 'Loading…' : popupLoading ? 'Opening…' : (hmsT.btnAudit || "Book a Free Audit")}
+      {!calendlyReady
+        ? 'Loading…'
+        : popupLoading
+          ? 'Opening…'
+          : shortCta
+            ? (hmsT.btnAuditShort || hmsT.btnAudit)
+            : hmsT.btnAudit}
     </motion.button>
   ) : (
     <motion.a
@@ -229,10 +247,10 @@ export const Nav = ({ lang, dict }: NavProps) => {
       transition={{ duration: 0.6 }}
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: '0 clamp(1rem,5vw,2.5rem)', height: 64,
+        padding: isNarrow ? '0 0.75rem' : '0 clamp(1rem,5vw,2.5rem)', height: 64,
         display: isMobile ? 'grid' : 'flex',
         gridTemplateColumns: isMobile ? 'auto 1fr auto' : undefined,
-        columnGap: isMobile ? '0.75rem' : undefined,
+        columnGap: isMobile ? (isNarrow ? '0.4rem' : '0.75rem') : undefined,
         alignItems: 'center',
         justifyContent: isMobile ? undefined : 'space-between',
         background: scrolled ? 'rgba(10,10,12,0.85)' : 'transparent',
