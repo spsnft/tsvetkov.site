@@ -438,7 +438,7 @@ export const Contact = ({ dict }: ContactProps) => {
           fontSize: '0.75rem',
           color: 'rgba(255, 255, 255, 0.35)',
         }}>
-          <div>© 2026 TSVETKOV. All rights reserved.</div>
+          <div>© 2026 FT Agency. All rights reserved.</div>
           <div>
             <a href="/privacy" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>
               Privacy Policy

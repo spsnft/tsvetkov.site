@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 import { Logo } from '@/src/ui/Logo';
-import { useCalendlyPopup } from '@/src/components/useCalendlyPopup';
 import { contentData as hmsContentData } from '@/app/hms/constants';
+import { waHref, WhatsAppIcon } from '@/app/hms/components/WhatsAppCta';
 
 function NavLink({ href, label, isActive }: { href: string; label: string; isActive: boolean }) {
   return (
@@ -68,12 +68,8 @@ export const Nav = ({ lang, dict }: NavProps) => {
   const [isMobile, setIsMobile] = useState(false);
   // На узких экранах шапке не хватает ширины на полный текст CTA
   const [isNarrow, setIsNarrow] = useState(false);
-  // До 1024px в шапке помещается только короткий вариант — полный остаётся
-  // на кнопке героя и в финальной CTA-секции
-  const [shortCta, setShortCta] = useState(false);
   // 320px + длинный русский текст — самый узкий случай, ужимаем сильнее
   const [isTiny, setIsTiny] = useState(false);
-  const { calendlyReady, popupLoading, openPopup } = useCalendlyPopup('https://calendly.com/fediatsvetkov/15min');
   const [activeSection, setActiveSection] = useState('');
   const [isPending, startTransition] = useTransition();
 
@@ -97,7 +93,6 @@ export const Nav = ({ lang, dict }: NavProps) => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
       setIsNarrow(window.innerWidth <= 480);
-      setShortCta(window.innerWidth < 1024);
       setIsTiny(window.innerWidth <= 360);
     };
 
@@ -197,32 +192,30 @@ export const Nav = ({ lang, dict }: NavProps) => {
     </div>
   );
 
+  // Размеры и вариант текста задаются медиазапросами, а не состоянием: кнопка
+  // приходит в серверной разметке уже в габаритах, которые помещаются в экран
   const ctaElement = isHms ? (
-    <motion.button
-      type="button"
-      onClick={openPopup}
-      disabled={!calendlyReady || popupLoading}
+    <motion.a
+      className="nav-cta"
+      href={waHref(hmsT.waMessage)}
+      target="_blank"
+      rel="noopener"
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
       style={{
-        padding: isTiny ? '9px 9px' : isNarrow ? '9px 12px' : '9px 18px', borderRadius: 10,
+        borderRadius: 10,
         background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
-        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600, fontSize: isTiny ? '0.7rem' : isNarrow ? '0.76rem' : '0.82rem',
+        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600,
         border: 'none', boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)',
-        opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady && !popupLoading ? 'pointer' : 'not-allowed',
+        textDecoration: 'none', cursor: 'pointer',
         whiteSpace: 'nowrap', minWidth: 0,
-        display: 'inline-flex', alignItems: 'center', gap: '8px',
+        display: 'inline-flex', alignItems: 'center', gap: '10px',
       }}
     >
-      {popupLoading && <span className="nav-btn-spinner" />}
-      {!calendlyReady
-        ? 'Loading…'
-        : popupLoading
-          ? 'Opening…'
-          : shortCta
-            ? (hmsT.btnAuditShort || hmsT.btnAudit)
-            : hmsT.btnAudit}
-    </motion.button>
+      <WhatsAppIcon size={15} />
+      <span className="nav-cta-full">{hmsT.btnAudit}</span>
+      <span className="nav-cta-short">{hmsT.btnAuditShort || hmsT.btnAudit}</span>
+    </motion.a>
   ) : (
     <motion.a
       href={`/${lang}#contact`}
@@ -261,18 +254,43 @@ export const Nav = ({ lang, dict }: NavProps) => {
       }}
     >
       <style jsx>{`
-        .nav-btn-spinner {
-          width: 12px;
-          height: 12px;
-          border: 2px solid rgba(10, 10, 12, 0.3);
-          border-top-color: #0a0a0c;
-          border-radius: 50%;
-          display: inline-block;
-          animation: navBtnSpin 0.7s linear infinite;
+        :global(.nav-cta) {
+          padding: 9px 18px;
+          font-size: 0.82rem;
         }
-        @keyframes navBtnSpin {
-          to {
-            transform: rotate(360deg);
+        :global(.nav-cta-short) {
+          display: none;
+        }
+
+        /* До 1024px в шапке помещается только короткий вариант — полный
+           остаётся на кнопке героя и в финальной CTA-секции */
+        @media (max-width: 1023px) {
+          :global(.nav-cta-full) {
+            display: none;
+          }
+          :global(.nav-cta-short) {
+            display: inline;
+          }
+        }
+
+        @media (max-width: 480px) {
+          :global(.nav-cta) {
+            padding: 9px 12px;
+            font-size: 0.76rem;
+            gap: 8px !important;
+          }
+        }
+
+        /* 320px + длинный русский текст — самый узкий случай, ужимаем сильнее */
+        @media (max-width: 360px) {
+          :global(.nav-cta) {
+            padding: 9px 9px;
+            font-size: 0.7rem;
+            gap: 6px !important;
+          }
+          :global(.nav-cta svg) {
+            width: 13px;
+            height: 13px;
           }
         }
       `}</style>

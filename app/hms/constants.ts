@@ -15,18 +15,22 @@ export const FEATURE_NAMES = [
 // Сколько пунктов из FEATURE_NAMES принадлежит каждому тарифу нарастающим итогом
 export const TIER_FEATURE_COUNTS = [4, 7, 10] as const;
 
+// Единственная точка контакта — WhatsApp с преднабранным текстом
+export const WHATSAPP_PHONE = "66650255229";
+
 export const contentData = {
   en: {
     // --- HERO SECTION ---
-    heroLocation: "Direct booking systems for Phuket properties",
     heroTitle: "Stop Paying 15-20% Commissions to Booking.com & Agoda",
-    heroSub1: "Connect your property directly to guests\nZero risk of human error and double-bookings",
+    heroSub1: "Connect your Phuket property directly to guests\nZero risk of human error and double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
     btnAudit: "Free 20-min Revenue Check",
     btnAuditShort: "Revenue Check",
-    btnAuditNote: "I'll show you exactly how much you pay OTAs every month",
-    btnChat: "WhatsApp",
-    btnLine: "Line",
+    btnAuditNote: "20 minutes. We'll calculate what you're actually paying OTAs.",
+
+    // Преднабранный текст для WhatsApp: общий и для кнопок в тарифах
+    waMessage: "Hi! I'd like a free 20-min revenue check for my property.",
+    waMessageQuote: "Hi! I'd like a quote for the {tier} package.",
 
     // --- NAV ---
     navAbout: "About Us",
@@ -36,19 +40,15 @@ export const contentData = {
 
     // Hero calculation card — one booking, then the same loss per month and per year
     otaCostBadge: "WHAT OTAs COST YOU",
-    calcUnitLabel: "ONE $200 BOOKING",
-    calcDirectName: "Direct",
-    calcDirectAmount: "$200",
-    calcDirectInner: "you keep all of it",
-    calcOtaName: "Via Booking.com",
-    calcOtaAmount: "$166",
-    calcOtaKeep: "you keep $166",
-    calcOtaLoss: "−$34",
+    calcUnitLabel: "ONE $100 BOOKING",
+    calcKeepInline: "you keep $83",
+    calcLossInline: "−$17",
+    calcFullMark: "Direct: $100",
     calcMonthLabel: "Every month",
-    calcMonthValue: "$5,570",
+    calcMonthValue: "$2,790",
     calcYearLabel: "Every year",
-    calcYearValue: "$66,800",
-    calcFootnote: "12 units · 65% occupancy · 70% of bookings via OTA · 17% average commission",
+    calcYearValue: "$33,400",
+    calcFootnote: "12 units · 65% occupancy · 70% via OTA · 17% commission",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "CHANNELS WE CONNECT",
@@ -56,20 +56,21 @@ export const contentData = {
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Scale your property bookings",
     scaleSub: "Automate workflows so your team can focus on guest experience",
-    scaleNowLabel: "NOW",
+    // Слово выделяется цветом внутри строки «Replaces …» под заголовком карточки
+    scaleReplacesWord: "Replaces",
     scaleItems: [
       {
-        pain: "Updating rates and availability by hand, around the clock",
+        replaces: "Replaces manual rate updates, around the clock",
         endValue: "Instant Sync",
         desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
       },
       {
-        pain: "15–20% of every booking goes to the platform",
+        replaces: "Replaces 15–20% platform commission on every booking",
         endValue: "100% Direct Revenue",
         desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
       },
       {
-        pain: "Every guest arrives through a channel you don't control",
+        replaces: "Replaces dependency on channels you don't control",
         endValue: "Predictable Scale",
         desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
       }
@@ -79,11 +80,10 @@ export const contentData = {
     aboutLabel: "WHO'S BEHIND THIS",
     aboutName: "Fedor Tsvetkov",
     aboutRole: "Founder & Managing Director, FT Agency",
-    aboutLocation: "Boutique growth agency · Currently based in Phuket, working with clients worldwide",
+    aboutLocation: "Currently based in Phuket",
     aboutP1: "We build acquisition and automation systems for businesses that sell directly to their customers — and we run them end to end, not as one-off projects.",
     aboutP2: "Hospitality is where that translates most directly: properties handing 15–20% of revenue to platforms they don't control. We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share.",
     aboutLinkAgency: "More about FT Agency",
-    aboutLinkWhatsApp: "WhatsApp",
 
     // Trust Stats
     stat2Num: "20+",
@@ -152,15 +152,16 @@ export const contentData = {
 
   ru: {
     // --- HERO SECTION ---
-    heroLocation: "Системы прямых бронирований для отелей и вилл Пхукета",
     heroTitle: "Хватит платить 15–20% комиссии Booking.com и Agoda",
-    heroSub1: "Подключите свой объект напрямую к гостям\nНикаких ошибок и двойных броней",
+    heroSub1: "Подключите свой объект на Пхукете напрямую к гостям\nНикаких ошибок и двойных броней",
     heroSub2: "Оставляйте 100% прибыли себе",
     btnAudit: "Бесплатный разбор, 20 минут",
     btnAuditShort: "Бесплатный разбор",
-    btnAuditNote: "Покажу, сколько именно вы платите OTA каждый месяц",
-    btnChat: "WhatsApp",
-    btnLine: "Line",
+    btnAuditNote: "20 минут. Посчитаем, сколько вы на самом деле платите OTA.",
+
+    // Преднабранный текст для WhatsApp: общий и для кнопок в тарифах
+    waMessage: "Здравствуйте! Хочу бесплатный разбор по прямым бронированиям.",
+    waMessageQuote: "Здравствуйте! Хочу расчёт по тарифу {tier}.",
 
     // --- NAV ---
     navAbout: "О нас",
@@ -170,19 +171,17 @@ export const contentData = {
 
     // Карточка расчёта в герое — одна бронь, затем та же потеря за месяц и за год
     otaCostBadge: "СКОЛЬКО ВЫ ОТДАЁТЕ OTA",
-    calcUnitLabel: "ОДНА БРОНЬ НА $200",
-    calcDirectName: "Напрямую",
-    calcDirectAmount: "$200",
-    calcDirectInner: "всё остаётся у вас",
-    calcOtaName: "Через Booking.com",
-    calcOtaAmount: "$166",
-    calcOtaKeep: "вам — $166",
-    calcOtaLoss: "−$34",
+    calcUnitLabel: "ОДНА БРОНЬ НА $100",
+    calcKeepInline: "вам — $83",
+    calcLossInline: "−$17",
+    calcFullMark: "Напрямую: $100",
     calcMonthLabel: "Каждый месяц",
-    calcMonthValue: "$5,570",
+    calcMonthValue: "$2,790",
     calcYearLabel: "Каждый год",
-    calcYearValue: "$66,800",
-    calcFootnote: "12 номеров · загрузка 65% · 70% броней через OTA · средняя комиссия 17%",
+    calcYearValue: "$33,400",
+    // Сегмент «70% через OTA» снят: русская строка — самая длинная, в одну
+    // строку на 320px она не помещается даже на нижней границе кегля
+    calcFootnote: "12 номеров · загрузка 65% · комиссия 17%",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "КАНАЛЫ, КОТОРЫЕ МЫ ПОДКЛЮЧАЕМ",
@@ -190,20 +189,21 @@ export const contentData = {
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Масштабируйте бронирования объекта",
     scaleSub: "Автоматизируйте процессы, чтобы команда фокусировалась на гостях",
-    scaleNowLabel: "СЕЙЧАС",
+    // Слово выделяется цветом внутри строки «Заменяет …» под заголовком карточки
+    scaleReplacesWord: "Заменяет",
     scaleItems: [
       {
-        pain: "Цены и доступность обновляются вручную и круглосуточно",
+        replaces: "Заменяет ручное обновление цен круглые сутки",
         endValue: "Мгновенная синхронизация",
         desc: "Интеграция Cloud PMS и Channel Manager. Каждое бронирование мгновенно резервирует номера во всех каналах — Booking.com, Agoda и 300+ других OTA"
       },
       {
-        pain: "15–20% с каждой брони уходит платформе",
+        replaces: "Заменяет 15–20% комиссии платформе с каждой брони",
         endValue: "100% прямой выручки",
         desc: "Система прямых броней без комиссии с защищённым платёжным шлюзом. Принимайте оплату на своих условиях и оставляйте всю выручку себе"
       },
       {
-        pain: "Каждый гость приходит через канал, который вам не принадлежит",
+        replaces: "Заменяет зависимость от чужих каналов",
         endValue: "Предсказуемый рост",
         desc: "Локальное SEO для привлечения целевого поискового трафика в связке с автоматическим удержанием гостей — превращаем прошлые заезды в постоянный доход"
       }
@@ -213,11 +213,10 @@ export const contentData = {
     aboutLabel: "КТО ЗА ЭТИМ СТОИТ",
     aboutName: "Фёдор Цветков",
     aboutRole: "Основатель и управляющий директор, FT Agency",
-    aboutLocation: "Бутиковое агентство роста · Сейчас базируемся на Пхукете, работаем с клиентами по всему миру",
+    aboutLocation: "Сейчас базируемся на Пхукете",
     aboutP1: "Мы строим системы привлечения и автоматизации для бизнесов, которые продают напрямую своим клиентам, и ведём их от начала до конца, а не разовыми проектами.",
     aboutP2: "В отелях и виллах это работает нагляднее всего: объекты отдают 15–20% выручки платформам, которые им не принадлежат. Мы собираем систему прямых бронирований, передаём её вам в полную собственность и остаёмся на поддержке. Без привязки и без процента с выручки.",
     aboutLinkAgency: "Подробнее об FT Agency",
-    aboutLinkWhatsApp: "WhatsApp",
 
     // Trust Stats
     stat2Num: "20+",
@@ -286,15 +285,16 @@ export const contentData = {
 
   th: {
     // --- HERO SECTION ---
-    heroLocation: "ระบบจองตรงสำหรับที่พักในภูเก็ต",
     heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15‑20% ให้ Booking.com และ Agoda",
-    heroSub1: "เชื่อมต่อที่พักของคุณกับลูกค้าโดยตรง\nไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
+    heroSub1: "เชื่อมต่อที่พักของคุณในภูเก็ตกับผู้เข้าพักโดยตรง\nไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnAudit: "ตรวจสอบรายได้ฟรี 20 นาที",
     btnAuditShort: "ตรวจสอบรายได้ฟรี",
-    btnAuditNote: "ผมจะแสดงให้เห็นว่าคุณจ่ายค่าคอมมิชชั่นให้ OTA เดือนละเท่าไหร่",
-    btnChat: "WhatsApp",
-    btnLine: "Line",
+    btnAuditNote: "20 นาที เราจะคำนวณให้ว่าคุณจ่ายให้ OTA จริง ๆ เท่าไหร่",
+
+    // Преднабранный текст для WhatsApp: общий и для кнопок в тарифах
+    waMessage: "สวัสดีครับ สนใจตรวจสอบรายได้ฟรี 20 นาที สำหรับที่พักครับ",
+    waMessageQuote: "สวัสดีครับ ขอใบเสนอราคาสำหรับแพ็กเกจ {tier} ครับ",
 
     // --- NAV ---
     navAbout: "เกี่ยวกับเรา",
@@ -304,19 +304,15 @@ export const contentData = {
 
     // การ์ดคำนวณในฮีโร่ — การจองหนึ่งครั้ง แล้วขยายเป็นต่อเดือนและต่อปี
     otaCostBadge: "ค่าคอมมิชชั่นที่คุณเสียให้ OTA",
-    calcUnitLabel: "การจองหนึ่งครั้ง $200",
-    calcDirectName: "จองตรง",
-    calcDirectAmount: "$200",
-    calcDirectInner: "คุณได้เต็มจำนวน",
-    calcOtaName: "ผ่าน Booking.com",
-    calcOtaAmount: "$166",
-    calcOtaKeep: "คุณได้ $166",
-    calcOtaLoss: "−$34",
+    calcUnitLabel: "การจองหนึ่งครั้ง $100",
+    calcKeepInline: "คุณได้ $83",
+    calcLossInline: "−$17",
+    calcFullMark: "จองตรง: $100",
     calcMonthLabel: "ต่อเดือน",
-    calcMonthValue: "$5,570",
+    calcMonthValue: "$2,790",
     calcYearLabel: "ต่อปี",
-    calcYearValue: "$66,800",
-    calcFootnote: "12 ห้อง · อัตราเข้าพัก 65% · จองผ่าน OTA 70% · ค่าคอมมิชชั่นเฉลี่ย 17%",
+    calcYearValue: "$33,400",
+    calcFootnote: "12 ห้อง · เข้าพัก 65% · ผ่าน OTA 70% · คอมมิชชั่น 17%",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "ช่องทางที่เราเชื่อมต่อให้",
@@ -324,20 +320,21 @@ export const contentData = {
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
     scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
-    scaleNowLabel: "ตอนนี้",
+    // Слово выделяется цветом внутри строки «แทนที่ …» под заголовком карточки
+    scaleReplacesWord: "แทนที่",
     scaleItems: [
       {
-        pain: "อัปเดตราคาและห้องว่างด้วยมือตลอดเวลา",
+        replaces: "แทนที่การอัปเดตราคาด้วยมือตลอดเวลา",
         endValue: "ซิงค์ระบบทันที",
         desc: "ระบบ Cloud PMS & Channel Manager อัปเดตการจองแบบเรียลไทม์ ล็อกห้องพักทันทีบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
-        pain: "ทุกการจองเสียให้แพลตฟอร์ม 15–20%",
+        replaces: "แทนที่ค่าคอมมิชชั่น 15–20% ทุกการจอง",
         endValue: "รายได้ตรง 100%",
         desc: "ระบบจองตรง 0% ค่าคอมมิชชั่น พร้อมช่องทางชำระเงินที่ปลอดภัย รับและเก็บรายได้ทั้งหมดไว้กับคุณโดยไม่ต้องแบ่งใคร"
       },
       {
-        pain: "ลูกค้าทุกคนมาจากช่องทางที่คุณควบคุมไม่ได้",
+        replaces: "แทนที่การพึ่งพาช่องทางที่คุณควบคุมไม่ได้",
         endValue: "เติบโตอย่างมั่นคง",
         desc: "การทำ Local SEO เพื่อดึงดูดลูกค้าที่มีความต้องการจองสูง พร้อมระบบดึงดูดลูกค้าเก่าให้กลับมาจองซ้ำเพื่อเพิ่มรายได้ระยะยาว"
       }
@@ -347,11 +344,10 @@ export const contentData = {
     aboutLabel: "ใครอยู่เบื้องหลัง",
     aboutName: "Fedor Tsvetkov",
     aboutRole: "ผู้ก่อตั้งและกรรมการผู้จัดการ FT Agency",
-    aboutLocation: "เอเจนซี่ด้านการเติบโตขนาดกะทัดรัด · ปัจจุบันอยู่ที่ภูเก็ต ทำงานกับลูกค้าทั่วโลก",
+    aboutLocation: "ปัจจุบันอยู่ที่ภูเก็ต",
     aboutP1: "เราสร้างระบบหาลูกค้าและระบบอัตโนมัติให้ธุรกิจที่ขายตรงถึงลูกค้า และดูแลตั้งแต่ต้นจนจบ ไม่ใช่งานครั้งเดียวจบ",
     aboutP2: "ธุรกิจที่พักคือกลุ่มที่เห็นผลชัดที่สุด — ที่พักที่ต้องยกรายได้ 15–20% ให้แพลตฟอร์มที่ตัวเองควบคุมไม่ได้ เราสร้างระบบจองตรง ส่งมอบความเป็นเจ้าของให้คุณทั้งหมด และดูแลต่อหลังส่งมอบ ไม่มีสัญญาผูกมัด ไม่มีส่วนแบ่งรายได้",
     aboutLinkAgency: "ดูข้อมูล FT Agency เพิ่มเติม",
-    aboutLinkWhatsApp: "WhatsApp",
 
     // Trust Stats
     stat2Num: "20+",

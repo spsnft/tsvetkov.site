@@ -24,17 +24,17 @@ const TITLE_GRADIENTS = [
 
 const DEFAULT_ITEMS = [
   {
-    pain: "Updating rates and availability by hand, around the clock",
+    replaces: "Replaces manual rate updates, around the clock",
     endValue: "Instant Sync",
     desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
   },
   {
-    pain: "15–20% of every booking goes to the platform",
+    replaces: "Replaces 15–20% platform commission on every booking",
     endValue: "100% Direct Revenue",
     desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
   },
   {
-    pain: "Every guest arrives through a channel you don't control",
+    replaces: "Replaces dependency on channels you don't control",
     endValue: "Predictable Scale",
     desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
   }
@@ -65,8 +65,19 @@ const renderFormattedText = (text: string) => {
 
 export default function ScalePractice({ t }: ScalePracticeProps) {
   const items = t?.scaleItems || DEFAULT_ITEMS;
-  const nowLabel = t?.scaleNowLabel || 'NOW';
+  const replacesWord = t?.scaleReplacesWord || 'Replaces';
   const subtitleText = t?.scaleSub || "Automate workflows so your team can focus on guest experience";
+
+  // Первое слово строки («Replaces» и его переводы) выделяется цветом
+  const renderReplaces = (text: string) => {
+    if (!text.startsWith(replacesWord)) return text;
+    return (
+      <>
+        <span className="replaces-word">{replacesWord}</span>
+        {text.slice(replacesWord.length)}
+      </>
+    );
+  };
 
   const renderSubtitle = (sub: string) => {
     const target = "so your team";
@@ -161,56 +172,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             );
         }
 
-        /* Панель «сейчас» — утопленная в карточку, отделена границей и
-           стрелкой перехода к решению */
-        .now-panel {
-          position: relative;
-          width: 100%;
-          box-sizing: border-box;
-          background: #0B0C0D;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 16px 16px 0 0;
-          padding: 16px 20px 18px;
-          text-align: left;
-        }
-
-        .now-label {
-          margin: 0 0 0.4rem 0;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: #4E545C;
-        }
-
-        .now-text {
-          margin: 0;
-          font-size: 14px;
-          font-weight: 500;
-          line-height: 1.4;
-          color: #7B818A;
-          text-wrap: pretty;
-        }
-
-        .now-arrow {
-          position: absolute;
-          left: 50%;
-          bottom: -13px;
-          transform: translateX(-50%);
-          width: 26px;
-          height: 26px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: #101215;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          color: ${T.mint};
-          font-size: 12px;
-          line-height: 1;
-          z-index: 1;
-        }
-
         .card-body {
           display: flex;
           flex-direction: column;
@@ -253,9 +214,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .card-content {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
           align-items: center;
           text-align: center;
+          width: 100%;
         }
 
         .focus-metric {
@@ -270,6 +231,30 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           line-height: 1.3;
         }
 
+        /* Что заменяет решение — одна строка под заголовком, вместо панели «сейчас» */
+        .replaces-line {
+          margin: 10px 0 14px;
+          font-size: 13px;
+          line-height: 1.45;
+          font-weight: 400;
+          color: #868C95;
+          text-align: center;
+          text-wrap: pretty;
+        }
+
+        :global(.replaces-word) {
+          color: #6EE7A8;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+        }
+
+        .replaces-divider {
+          width: 48px;
+          height: 1px;
+          margin: 0 auto 14px;
+          background: rgba(255, 255, 255, 0.07);
+        }
+
         .card-description {
           color: ${T.sub};
           font-size: 0.95rem;
@@ -281,14 +266,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         :global(.nobr) {
           white-space: nowrap;
-        }
-
-        /* В сетке 3-в-ряд панели должны быть одной высоты, иначе иконки
-           и заголовки карточек разъезжаются по вертикали */
-        @media (min-width: 768px) {
-          .now-text {
-            min-height: 2.8em;
-          }
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
@@ -313,11 +290,12 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .card-body {
             padding: 1.5rem 0.85rem 1.25rem;
           }
-          .now-panel {
-            padding: 12px 14px 14px;
+          .replaces-line {
+            font-size: 12px;
+            margin: 8px 0 12px;
           }
-          .now-text {
-            font-size: 12.5px;
+          .replaces-divider {
+            margin-bottom: 12px;
           }
           .image-wrapper {
             height: 100px;
@@ -382,14 +360,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             
             return (
               <div className="scale-card" key={idx}>
-                {item.pain && (
-                  <div className="now-panel">
-                    <p className="now-label">{nowLabel}</p>
-                    <p className="now-text">{item.pain}</p>
-                    <span className="now-arrow" aria-hidden="true">↓</span>
-                  </div>
-                )}
-
                 <div className="card-body">
                   <div className="image-wrapper">
                     <Image 
@@ -408,6 +378,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                     >
                       {metricTitle}
                     </h3>
+
+                    {item.replaces && (
+                      <>
+                        <p className="replaces-line">{renderReplaces(item.replaces)}</p>
+                        <span className="replaces-divider" aria-hidden="true" />
+                      </>
+                    )}
+
                     <p className="card-description">
                       {renderFormattedText(item.desc)}
                     </p>

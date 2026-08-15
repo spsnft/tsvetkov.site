@@ -5,13 +5,9 @@ import { T } from '../../../src/theme/tokens';
 
 export interface CalcCopy {
   calcUnitLabel?: string;
-  calcDirectName?: string;
-  calcDirectAmount?: string;
-  calcDirectInner?: string;
-  calcOtaName?: string;
-  calcOtaAmount?: string;
-  calcOtaKeep?: string;
-  calcOtaLoss?: string;
+  calcKeepInline?: string;
+  calcLossInline?: string;
+  calcFullMark?: string;
   calcMonthLabel?: string;
   calcMonthValue?: string;
   calcYearLabel?: string;
@@ -19,7 +15,7 @@ export interface CalcCopy {
   calcFootnote?: string;
 }
 
-// "$5,570" -> { prefix: "$", amount: 5570 }
+// "$2,790" -> { prefix: "$", amount: 2790 }
 function parseAmount(value: string) {
   const firstDigit = value.search(/[0-9]/);
   return {
@@ -55,20 +51,32 @@ function CountUp({ value }: { value: string }) {
 }
 
 export default function RevenueCalc({ t }: { t: CalcCopy }) {
-  const [inView, setInView] = useState(false);
-  const [animate, setAnimate] = useState(false);
+  const [countUp, setCountUp] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
+  // Конечные значения — состояние по умолчанию разметки: так карточка
+  // выглядит и на сервере, и при prefers-reduced-motion, и без JS.
+  // Анимация только отматывает трек в стартовое положение и отпускает.
   useEffect(() => {
-    // prefers-reduced-motion: конечные значения показываем сразу, без count-up и роста баров
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    const track = trackRef.current;
+    if (!track) return;
+    track.classList.add('is-start');
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-        setInView(true);
-        if (!reduced) setAnimate(true);
         observer.disconnect();
+        // Даём кадр на отрисовку стартовой ширины, иначе transition не сыграет
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => {
+            track.classList.remove('is-start');
+            setCountUp(true);
+          })
+        );
       },
       { threshold: 0.25 }
     );
@@ -98,46 +106,41 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
           color: ${T.muted};
         }
 
-        .bars {
+        /* Место сверху занимает отметка полной суммы, вынесенная над треком */
+        .track-wrap {
+          position: relative;
+          padding-top: 30px;
+        }
+
+        /* Докуда доходила бы полоса без комиссии */
+        .full-mark {
+          position: absolute;
+          right: 0;
+          top: 0;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          align-items: flex-end;
+          pointer-events: none;
         }
 
-        .bar-head {
-          display: flex;
-          align-items: baseline;
-          justify-content: space-between;
-          gap: 0.75rem;
-          margin-bottom: 0.4rem;
-          font-size: 0.82rem;
-          font-weight: 600;
-          min-width: 0;
-        }
-
-        .bar-name {
-          color: #CBD5E1;
-          overflow: hidden;
-          text-overflow: ellipsis;
+        .full-mark-label {
+          font-size: 11px;
+          line-height: 1.2;
+          font-weight: 500;
           white-space: nowrap;
-        }
-
-        .bar-amount {
-          font-weight: 700;
-          flex-shrink: 0;
-        }
-
-        .bar-amount.keep {
-          color: ${T.mint};
-        }
-
-        .bar-amount.lost {
           color: ${T.muted};
+        }
+
+        .full-mark-line {
+          width: 0;
+          height: 12px;
+          margin-top: 4px;
+          border-right: 1px dashed rgba(255, 255, 255, 0.25);
         }
 
         .track {
           display: flex;
-          height: 34px;
+          height: 40px;
           border-radius: 8px;
           overflow: hidden;
         }
@@ -145,47 +148,40 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
         .seg {
           display: flex;
           align-items: center;
-          justify-content: center;
           height: 100%;
           min-width: 0;
           box-sizing: border-box;
-          font-size: 0.7rem;
-          font-weight: 600;
+          font-size: 12.5px;
+          font-weight: 700;
           white-space: nowrap;
           overflow: hidden;
           transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* Заполненная часть — главный цветовой акцент карточки, сплошная заливка */
         .seg-keep {
-          background: linear-gradient(100deg, rgba(110, 231, 168, 0.22), rgba(91, 184, 240, 0.22));
-          border: 1px solid rgba(110, 231, 168, 0.3);
-          color: ${T.mint};
-        }
-
-        .track-direct .seg-keep {
-          border-radius: 8px;
-          width: 100%;
-        }
-
-        .track-ota .seg-keep {
+          width: 83%;
+          justify-content: flex-start;
+          padding-left: 12px;
           border-radius: 8px 0 0 8px;
-          border-right: none;
+          background: linear-gradient(100deg, #6EE7A8, #5BB8F0);
+          color: #06210F;
         }
 
-        /* Потеря — штриховка на нейтральном сером, без тревожного цвета */
+        /* Хвост — штриховка на нейтральном фоне, без тревожного цвета */
         .seg-lost {
+          width: 17%;
+          justify-content: center;
           border-radius: 0 8px 8px 0;
-          background-color: rgba(255, 255, 255, 0.05);
+          background-color: rgba(255, 255, 255, 0.02);
           background-image: repeating-linear-gradient(
-            45deg,
-            rgba(255, 255, 255, 0.08) 0,
-            rgba(255, 255, 255, 0.08) 3px,
-            transparent 3px,
-            transparent 7px
+            115deg,
+            rgba(255, 255, 255, 0.06) 0 5px,
+            transparent 5px 10px
           );
           border: 1px solid rgba(255, 255, 255, 0.12);
-          color: ${T.sub};
-          font-size: 0.68rem;
+          border-left: none;
+          color: #868C95;
         }
 
         .totals {
@@ -214,15 +210,25 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
           -webkit-text-fill-color: transparent;
         }
 
+        /* Сноска держится в одну строку на всех ширинах вплоть до 320px */
         .footnote {
           margin: 1.1rem 0 0 0;
           padding-top: 0.9rem;
           border-top: 1px solid rgba(255, 255, 255, 0.08);
-          font-size: 0.7rem;
+          font-size: clamp(8.5px, 2.6vw, 11.5px);
           line-height: 1.5;
           font-weight: 500;
           color: ${T.muted};
-          text-wrap: pretty;
+          white-space: nowrap;
+        }
+
+        /* Стартовое положение анимации: вся сумма ещё у объекта */
+        .track.is-start .seg-keep {
+          width: 100%;
+        }
+
+        .track.is-start .seg-lost {
+          width: 0%;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -230,46 +236,19 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
             transition: none;
           }
         }
-
-        @media (max-width: 480px) {
-          .bar-head {
-            font-size: 0.78rem;
-          }
-          .seg {
-            font-size: 0.66rem;
-          }
-          .seg-lost {
-            font-size: 0.62rem;
-          }
-        }
       `}</style>
 
       <p className="unit-label">{t.calcUnitLabel}</p>
 
-      <div className="bars">
-        <div>
-          <div className="bar-head">
-            <span className="bar-name">{t.calcDirectName}</span>
-            <span className="bar-amount keep">{t.calcDirectAmount}</span>
-          </div>
-          <div className="track track-direct">
-            <div className="seg seg-keep">{t.calcDirectInner}</div>
-          </div>
+      <div className="track-wrap">
+        <div className="full-mark" aria-hidden="true">
+          <span className="full-mark-label">{t.calcFullMark}</span>
+          <span className="full-mark-line" />
         </div>
 
-        <div>
-          <div className="bar-head">
-            <span className="bar-name">{t.calcOtaName}</span>
-            <span className="bar-amount lost">{t.calcOtaAmount}</span>
-          </div>
-          <div className="track track-ota">
-            <div className="seg seg-keep" style={{ width: animate || inView ? '83%' : '100%' }}>
-              {t.calcOtaKeep}
-            </div>
-            <div className="seg seg-lost" style={{ width: animate || inView ? '17%' : '0%' }}>
-              {t.calcOtaLoss}
-            </div>
-          </div>
+        <div className="track" ref={trackRef}>
+          <div className="seg seg-keep">{t.calcKeepInline}</div>
+          <div className="seg seg-lost">{t.calcLossInline}</div>
         </div>
       </div>
 
@@ -277,7 +256,7 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
         <div>
           <p className="total-label">{t.calcMonthLabel}</p>
           <div className="total-value">
-            {animate
+            {countUp
               ? <CountUp value={t.calcMonthValue || ''} />
               : t.calcMonthValue}
           </div>
@@ -285,7 +264,7 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
         <div>
           <p className="total-label">{t.calcYearLabel}</p>
           <div className="total-value">
-            {animate
+            {countUp
               ? <CountUp value={t.calcYearValue || ''} />
               : t.calcYearValue}
           </div>

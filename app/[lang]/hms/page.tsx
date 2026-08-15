@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import HospitalityB2BClient from '@/app/hms/HospitalityB2BClient';
+import { SITE_URL } from '@/src/lib/siteUrl';
 
 const META = {
   en: {
@@ -20,9 +21,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params;
   const meta = META[lang as keyof typeof META] || META.en;
   const locale = lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US';
-  const url = `https://www.tsvetkov.site/${lang}/hms`;
+  const url = `${SITE_URL}/${lang}/hms`;
 
   return {
+    // Явный metadataBase: og:image и прочие относительные URL резолвятся от
+    // продакшен-домена, а не от адреса превью-деплоя
+    metadataBase: new URL(SITE_URL),
     title: meta.title,
     description: meta.description,
     alternates: {

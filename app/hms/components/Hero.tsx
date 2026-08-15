@@ -1,30 +1,22 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useCalendlyPopup } from '@/src/components/useCalendlyPopup';
+import React from 'react';
 import RevenueCalc, { type CalcCopy } from './RevenueCalc';
+import WhatsAppCta from './WhatsAppCta';
 
 interface HeroProps {
   t: {
-    heroLocation?: string;
     heroTitle: string;
     heroSub1: string;
     heroSub2: string;
     btnAudit?: string;
     btnAuditNote?: string;
-    btnChat?: string;
+    waMessage?: string;
     otaCostBadge?: string;
   } & CalcCopy;
 }
 
 export default function Hero({ t }: HeroProps) {
-  const [isMounted, setIsMounted] = useState(false);
-  const { calendlyReady, popupLoading, openPopup } = useCalendlyPopup('https://calendly.com/fediatsvetkov/15min');
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   // Универсальное деление подзаголовка
   const rawSub = t.heroSub1 || '';
   let line1 = rawSub;
@@ -52,13 +44,9 @@ export default function Hero({ t }: HeroProps) {
   })();
 
   return (
-    <section
-      className="hero-section"
-      style={{
-        opacity: isMounted ? 1 : 0,
-        transition: 'opacity 0.4s ease-out'
-      }}
-    >
+    // Секция рендерится сразу, без фейда по монтированию: первый экран
+    // должен приходить с рабочим CTA ещё до гидрации
+    <section className="hero-section">
       <style jsx>{`
         .hero-section {
           width: 100%;
@@ -84,14 +72,6 @@ export default function Hero({ t }: HeroProps) {
           display: flex;
           flex-direction: column;
           justify-content: center;
-        }
-
-        .location-line {
-          font-size: 0.85rem;
-          line-height: 1.4;
-          font-weight: 500;
-          color: #94A3B8;
-          margin: 0 0 0.75rem 0;
         }
 
         .title {
@@ -139,19 +119,22 @@ export default function Hero({ t }: HeroProps) {
           display: block;
         }
 
+        /* Одна кнопка: на десктопе по контенту, на мобильном — на всю ширину */
         .cta-container {
           display: flex;
           align-items: stretch;
-          gap: 0.85rem;
-          flex-wrap: nowrap;
           width: 100%;
           max-width: 620px;
         }
 
         .cta-container :global(.btn-premium-core) {
-          flex: 3 1 0;
+          flex: 0 1 auto;
           min-width: 0;
-          padding: 0 1.25rem;
+          max-width: 100%;
+        }
+
+        .cta-container :global(.btn-premium-core svg) {
+          flex-shrink: 0;
         }
 
         .cta-note {
@@ -160,67 +143,6 @@ export default function Hero({ t }: HeroProps) {
           line-height: 1.45;
           color: #6B7688;
           max-width: 620px;
-        }
-
-        .btn-secondary-chat {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.55rem;
-          flex: 2 1 0;
-          min-width: 0;
-          height: 52px;
-          padding: 0 1.25rem;
-          border-radius: 12px;
-          background: rgba(0, 229, 153, 0.06);
-          border: 1px solid rgba(0, 229, 153, 0.25);
-          backdrop-filter: blur(8px);
-          color: #00E599;
-          font-size: 1rem;
-          font-weight: 700;
-          letter-spacing: 0.01em;
-          white-space: nowrap;
-          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-          box-shadow: 0 4px 15px rgba(0, 229, 153, 0.1);
-          box-sizing: border-box;
-          cursor: pointer;
-          text-decoration: none;
-        }
-
-        .btn-secondary-chat:hover {
-          transform: translateY(-2px);
-          background: rgba(0, 229, 153, 0.15);
-          border-color: rgba(0, 229, 153, 0.5);
-          box-shadow: 0 6px 25px rgba(0, 229, 153, 0.3);
-          color: #00E599;
-        }
-
-        .btn-secondary-chat svg {
-          width: 22px;
-          height: 22px;
-          display: block;
-          flex-shrink: 0;
-          transition: transform 0.25s ease;
-        }
-
-        .btn-secondary-chat:hover svg {
-          transform: scale(1.08);
-        }
-
-        .btn-spinner {
-          width: 14px;
-          height: 14px;
-          border: 2px solid rgba(10, 10, 12, 0.3);
-          border-top-color: #0a0a0c;
-          border-radius: 50%;
-          display: inline-block;
-          animation: btnSpin 0.7s linear infinite;
-        }
-
-        @keyframes btnSpin {
-          to {
-            transform: rotate(360deg);
-          }
         }
 
         .visual-column {
@@ -334,10 +256,7 @@ export default function Hero({ t }: HeroProps) {
           .hero-grid { grid-template-columns: 1fr; gap: 0; }
           .text-column { text-align: center; align-items: center; }
           .cta-container {
-            flex-direction: row;
             justify-content: center;
-            align-items: stretch;
-            gap: 0.85rem;
             width: 100%;
             max-width: 520px;
           }
@@ -370,15 +289,13 @@ export default function Hero({ t }: HeroProps) {
           }
         }
 
-        /* Мобилка: обе кнопки в столбец, каждая на всю ширину */
+        /* Мобилка: кнопка на всю ширину контейнера */
         @media (max-width: 767px) {
           .cta-container {
-            flex-direction: column;
             max-width: 100%;
           }
-          .cta-container :global(.btn-premium-core),
-          .btn-secondary-chat {
-            flex: 0 0 auto;
+          .cta-container :global(.btn-premium-core) {
+            flex: 1 1 auto;
             width: 100%;
           }
         }
@@ -387,8 +304,6 @@ export default function Hero({ t }: HeroProps) {
       <div className="container">
         <div className="hero-grid">
           <div className="text-column">
-            {t.heroLocation && <p className="location-line">{t.heroLocation}</p>}
-
             <h1 className="title">
               {titleParts ? (
                 <>
@@ -409,33 +324,10 @@ export default function Hero({ t }: HeroProps) {
             </div>
 
             <div className="cta-container">
-              <button
-                onClick={openPopup}
-                className="btn-premium-core"
-                disabled={!calendlyReady || popupLoading}
-                style={{
-                  opacity: calendlyReady ? 1 : 0.6,
-                  cursor: calendlyReady && !popupLoading ? 'pointer' : 'not-allowed',
-                  gap: '8px',
-                }}
-              >
-                {popupLoading && <span className="btn-spinner" />}
-                {!calendlyReady ? "Loading…" : popupLoading ? "Opening…" : (t.btnAudit || "Free 20-min Revenue Check")}
-              </button>
-
-              <a
-                href="https://wa.me/66650255229"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary-chat"
-                title="WhatsApp"
-                aria-label="WhatsApp"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                </svg>
-                {t.btnChat || "WhatsApp"}
-              </a>
+              <WhatsAppCta
+                label={t.btnAudit || "Free 20-min Revenue Check"}
+                message={t.waMessage}
+              />
             </div>
 
             {t.btnAuditNote && <p className="cta-note">{t.btnAuditNote}</p>}

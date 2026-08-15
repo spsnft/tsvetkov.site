@@ -12,7 +12,6 @@ interface AboutProps {
     aboutP1?: string;
     aboutP2?: string;
     aboutLinkAgency?: string;
-    aboutLinkWhatsApp?: string;
     stat2Num?: string;
     stat2Name?: string;
     stat2Sub?: string;
@@ -56,8 +55,11 @@ export default function About({ t = {} }: AboutProps) {
           margin: 0 0 0.9rem 0;
         }
 
+        /* Та же дисплейная гарнитура и то же начертание, что у заголовков
+           секций, ступенью мельче — имя не должно выпадать из страницы */
         .about-name {
-          font-size: 2.4rem;
+          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-size: clamp(26px, 4vw, 36px);
           font-weight: 800;
           color: #ffffff;
           margin: 0;
@@ -183,9 +185,6 @@ export default function About({ t = {} }: AboutProps) {
           .about-section {
             padding: 0 0 3rem 0;
           }
-          .about-name {
-            font-size: 2rem;
-          }
           .about-paragraph {
             font-size: 0.98rem;
             line-height: 1.6;
@@ -195,9 +194,6 @@ export default function About({ t = {} }: AboutProps) {
         @media (max-width: 767px) {
           .about-section {
             padding: 0 0 2.5rem 0;
-          }
-          .about-name {
-            font-size: 1.75rem;
           }
           .about-role {
             font-size: 0.88rem;
@@ -274,14 +270,6 @@ export default function About({ t = {} }: AboutProps) {
               rel="noopener noreferrer"
             >
               {t.aboutLinkAgency || "More about FT Agency"} →
-            </a>
-            <a
-              className="about-link"
-              href="https://wa.me/66650255229"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t.aboutLinkWhatsApp || "WhatsApp"} →
             </a>
           </div>
         </div>

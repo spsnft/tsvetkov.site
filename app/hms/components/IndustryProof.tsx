@@ -76,6 +76,14 @@ export default function IndustryProof({ t }: IndustryProofProps) {
             border-radius: 16px;
           }
         }
+
+        /* На 320px боковые паддинги карточки — это те самые пиксели, которых
+           не хватает сноске, чтобы уместиться в одну строку */
+        @media (max-width: 360px) {
+          .proof-card {
+            padding: 1.1rem 0.7rem;
+          }
+        }
       `}</style>
 
       <div className="container">

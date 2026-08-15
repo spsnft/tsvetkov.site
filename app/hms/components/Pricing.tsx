@@ -3,7 +3,7 @@
 import React from 'react';
 import { T } from '../../../src/theme/tokens';
 import { FEATURE_NAMES, TIER_FEATURE_COUNTS } from '../constants';
-import { useCalendlyPopup } from '@/src/components/useCalendlyPopup';
+import { waHref, waQuoteMessage, WhatsAppIcon } from './WhatsAppCta';
 
 interface PricingProps {
   t?: {
@@ -15,6 +15,7 @@ interface PricingProps {
     priceMore3?: string;
     priceDisclaimerAudit?: string;
     priceDisclaimerSub?: string;
+    waMessageQuote?: string;
     tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Desc?: string;
     tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Desc?: string;
     tier3Title?: string; tier3Price?: string; tier3Payback?: string; tier3Desc?: string;
@@ -22,10 +23,7 @@ interface PricingProps {
 }
 
 export default function Pricing({ t }: PricingProps) {
-  const { calendlyReady, popupLoading, openPopup } = useCalendlyPopup('https://calendly.com/fediatsvetkov/15min');
-
-  const btnLabel = !calendlyReady ? 'Loading…' : popupLoading ? 'Opening…' : (t?.priceBtn || 'Get a quote');
-  const btnDisabled = !calendlyReady || popupLoading;
+  const btnLabel = t?.priceBtn || 'Get a quote';
 
   const names: string[] = [...FEATURE_NAMES];
 
@@ -148,13 +146,16 @@ export default function Pricing({ t }: PricingProps) {
           box-shadow: 0 5px 15px rgba(0, 229, 153, 0.2);
         }
 
+        /* Кнопка прижата к низу карточки — три кнопки на одной горизонтали
+           независимо от количества пунктов */
         .tier-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          gap: 10px;
           width: 100%;
-          height: 44px;
-          margin-top: 1.1rem;
+          min-height: 44px;
+          margin-top: auto;
           padding: 0 1rem;
           border-radius: 10px;
           font-family: inherit;
@@ -162,6 +163,7 @@ export default function Pricing({ t }: PricingProps) {
           font-weight: 700;
           letter-spacing: 0.01em;
           white-space: nowrap;
+          text-decoration: none;
           cursor: pointer;
           box-sizing: border-box;
           background: transparent;
@@ -170,7 +172,7 @@ export default function Pricing({ t }: PricingProps) {
           transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
         }
 
-        .tier-btn:hover:not(:disabled) {
+        .tier-btn:hover {
           border-color: ${T.accent35};
           background: rgba(255, 255, 255, 0.03);
         }
@@ -182,123 +184,69 @@ export default function Pricing({ t }: PricingProps) {
           box-shadow: 0 6px 18px rgba(0, 229, 153, 0.2);
         }
 
-        .tier-btn.primary:hover:not(:disabled) {
+        .tier-btn.primary:hover {
           transform: translateY(-1px);
         }
 
-        .tier-btn:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
+        .tier-btn :global(svg) {
+          flex-shrink: 0;
         }
 
-        /* ---------- ТАБЛИЦА СРАВНЕНИЯ (≥900px) ---------- */
-        .pricing-table {
-          display: none;
-        }
-
+        /* ---------- КАРТОЧКИ НА ВСЕХ РАЗРЕШЕНИЯХ ---------- */
         .pricing-cards {
           display: grid;
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
-          max-width: 480px;
-          margin: 0 auto;
+          align-items: stretch;
         }
 
-        @media (min-width: 900px) {
-          .pricing-table {
-            display: table;
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-          }
-          .pricing-cards {
-            display: none;
-          }
-          /* Цена в колонке таблицы не переносится, а payback и «для кого»
-             держат две строки — иначе шапки колонок разъезжаются */
-          .head-cell .price {
-            font-size: clamp(1.35rem, 2.1vw, 2rem);
+        /* В три колонки шапки карточек должны стоять на одной высоте: цена не
+           переносится, а окупаемость и «для кого» держат по две строки */
+        @media (min-width: 600px) {
+          .price {
             white-space: nowrap;
           }
-          .head-cell .price-payback {
-            min-height: 2.2em;
-          }
-          .head-cell .price-desc {
+          .price-payback,
+          .price-desc {
             min-height: 2.8em;
           }
         }
 
-        .head-cell {
-          vertical-align: bottom;
-          text-align: center;
-          padding: 0 1rem 1.6rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        /* Планшет: те же три колонки, кегль и паддинги мельче */
+        @media (min-width: 600px) and (max-width: 899px) {
+          .pricing-cards {
+            gap: 0.85rem;
+          }
+          .card {
+            padding: 1.35rem 1rem;
+          }
+          .price {
+            font-size: clamp(1.15rem, 3.4vw, 1.75rem);
+          }
+          .price-payback {
+            font-size: 0.72rem;
+          }
+          .price-desc {
+            font-size: 0.82rem;
+          }
+          .card-features li {
+            font-size: 0.82rem;
+          }
+          .tier-btn {
+            font-size: 0.78rem;
+            padding: 0 0.6rem;
+          }
         }
 
-        .head-cell.featured {
-          background: rgba(255, 255, 255, 0.02);
-          border-top: 1px solid rgba(0, 229, 153, 0.25);
-          border-left: 1px solid rgba(0, 229, 153, 0.25);
-          border-right: 1px solid rgba(0, 229, 153, 0.25);
-          border-radius: 12px 12px 0 0;
+        /* Мобилка: один столбец */
+        @media (max-width: 599px) {
+          .pricing-cards {
+            grid-template-columns: 1fr;
+            max-width: 480px;
+            margin: 0 auto;
+          }
         }
 
-        .head-empty {
-          padding: 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-        }
-
-        .badge-slot {
-          height: 2rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .feature-cell {
-          padding: 0.85rem 0.75rem 0.85rem 0;
-          font-size: 0.92rem;
-          font-weight: 400;
-          line-height: 1.35;
-          text-align: left;
-          color: rgba(255, 255, 255, 0.75);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .mark-cell {
-          padding: 0.85rem 1rem;
-          text-align: center;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .mark-cell.featured {
-          background: rgba(255, 255, 255, 0.02);
-          border-left: 1px solid rgba(0, 229, 153, 0.25);
-          border-right: 1px solid rgba(0, 229, 153, 0.25);
-        }
-
-        .feature-row:hover .feature-cell,
-        .feature-row:hover .mark-cell {
-          background: rgba(255, 255, 255, 0.018);
-        }
-
-        .feature-row:last-child .mark-cell.featured {
-          border-bottom: 1px solid rgba(0, 229, 153, 0.25);
-          border-radius: 0 0 12px 12px;
-        }
-
-        .yes {
-          color: ${T.mint};
-          font-size: 17px;
-          font-weight: 700;
-        }
-
-        .no {
-          color: #33373C;
-          font-size: 15px;
-        }
-
-        /* ---------- КАРТОЧКИ (<900px) ---------- */
         .card {
           background: rgba(255, 255, 255, 0.01);
           border: 1px solid rgba(255, 255, 255, 0.04);
@@ -417,18 +365,18 @@ export default function Pricing({ t }: PricingProps) {
         }
 
         @media (min-width: 900px) and (max-width: 1100px) {
-          .feature-cell {
-            font-size: 0.85rem;
+          .price {
+            font-size: 2rem;
           }
           .price-desc {
-            font-size: 0.82rem;
+            font-size: 0.85rem;
           }
           .price-payback {
-            font-size: 0.72rem;
+            font-size: 0.74rem;
           }
           .tier-btn {
-            font-size: 0.78rem;
-            padding: 0 0.6rem;
+            font-size: 0.8rem;
+            padding: 0 0.7rem;
           }
         }
 
@@ -463,55 +411,6 @@ export default function Pricing({ t }: PricingProps) {
           )}
         </div>
 
-        {/* ---------- ДЕСКТОП: таблица сравнения ---------- */}
-        <table className="pricing-table">
-          <colgroup>
-            <col style={{ width: '38%' }} />
-            <col style={{ width: '20.6%' }} />
-            <col style={{ width: '20.6%' }} />
-            <col style={{ width: '20.6%' }} />
-          </colgroup>
-          <thead>
-            <tr>
-              <td className="head-empty" />
-              {tiers.map((tier) => (
-                <th className={`head-cell${tier.featured ? ' featured' : ''}`} key={tier.title} scope="col">
-                  <div className="badge-slot">
-                    {tier.featured && <span className="popular-badge">{t?.pricePopular || 'Popular'}</span>}
-                  </div>
-                  <p className={`package-title${tier.featured ? ' accent' : ''}`}>{tier.title}</p>
-                  <span className="price">{tier.price}</span>
-                  {tier.payback && <span className="price-payback">{tier.payback}</span>}
-                  <span className="price-desc">{tier.desc}</span>
-                  <button
-                    type="button"
-                    onClick={openPopup}
-                    disabled={btnDisabled}
-                    className={`tier-btn${tier.featured ? ' primary' : ''}`}
-                  >
-                    {btnLabel}
-                  </button>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {names.map((name, i) => (
-              <tr className="feature-row" key={name}>
-                <th className="feature-cell" scope="row">{name}</th>
-                {TIER_FEATURE_COUNTS.map((count, tierIdx) => (
-                  <td className={`mark-cell${tierIdx === 1 ? ' featured' : ''}`} key={tierIdx}>
-                    {i < count
-                      ? <span className="yes">✓</span>
-                      : <span className="no">—</span>}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {/* ---------- МОБИЛКА И ПЛАНШЕТ: карточки ---------- */}
         <div className="pricing-cards">
           {tiers.map((tier) => (
             <div className={`card${tier.featured ? ' featured' : ''}`} key={tier.title}>
@@ -545,14 +444,15 @@ export default function Pricing({ t }: PricingProps) {
                 </details>
               )}
 
-              <button
-                type="button"
-                onClick={openPopup}
-                disabled={btnDisabled}
+              <a
+                href={waHref(waQuoteMessage(t?.waMessageQuote, tier.title))}
+                target="_blank"
+                rel="noopener"
                 className={`tier-btn${tier.featured ? ' primary' : ''}`}
               >
-                {btnLabel}
-              </button>
+                <WhatsAppIcon size={16} />
+                <span>{btnLabel}</span>
+              </a>
             </div>
           ))}
         </div>
