@@ -8,26 +8,31 @@ export interface CalcCopy {
   calcKeepInline?: string;
   calcLossInline?: string;
   calcFullMark?: string;
-  calcMonthLabel?: string;
+  calcPayLabel?: string;
   calcMonthValue?: string;
-  calcYearLabel?: string;
   calcYearValue?: string;
+  calcRecoverLabel?: string;
+  calcRecoverValue?: string;
+  calcRecoverHint?: string;
+  calcRecoverHintAria?: string;
   calcFootnote?: string;
 }
 
-// "$2,790" -> { prefix: "$", amount: 2790 }
+// "$2,790/mo" -> { prefix: "$", amount: 2790, suffix: "/mo" }
 function parseAmount(value: string) {
-  const firstDigit = value.search(/[0-9]/);
+  const match = /^([^0-9]*)([0-9][0-9,.\s ]*)(.*)$/.exec(value);
+  if (!match) return { prefix: value, amount: 0, suffix: '' };
   return {
-    prefix: firstDigit === -1 ? '' : value.slice(0, firstDigit),
-    amount: Number(value.replace(/[^0-9]/g, '')) || 0
+    prefix: match[1],
+    amount: Number(match[2].replace(/[^0-9]/g, '')) || 0,
+    suffix: match[3]
   };
 }
 
 // Монтируется только когда анимация разрешена — при reduced-motion значение
 // выводится статикой, поэтому здесь не нужен путь «без анимации»
 function CountUp({ value }: { value: string }) {
-  const { prefix, amount } = parseAmount(value);
+  const { prefix, amount, suffix } = parseAmount(value);
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
@@ -47,13 +52,35 @@ function CountUp({ value }: { value: string }) {
     return () => cancelAnimationFrame(frame);
   }, [amount]);
 
-  return <span>{prefix}{count.toLocaleString('en-US')}</span>;
+  return <span>{prefix}{count.toLocaleString('en-US')}{suffix}</span>;
 }
 
 export default function RevenueCalc({ t }: { t: CalcCopy }) {
   const [countUp, setCountUp] = useState(false);
+  const [hintOpen, setHintOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const hintRef = useRef<HTMLDivElement>(null);
+
+  // Подсказка открывается по тапу/клику, а не по ховеру: на телефоне ховера
+  // нет. Закрывается тапом мимо и Escape
+  useEffect(() => {
+    if (!hintOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (!hintRef.current?.contains(event.target as Node)) setHintOpen(false);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setHintOpen(false);
+    };
+
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [hintOpen]);
 
   // Конечные значения — состояние по умолчанию разметки: так карточка
   // выглядит и на сервере, и при prefers-reduced-motion, и без JS.
@@ -193,21 +220,123 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        /* Суммы не переносятся, поэтому колонка обязана уметь сжиматься:
+           иначе на 320px её минимальная ширина растягивает всю карточку */
+        .totals > div {
+          min-width: 0;
+        }
+
+        /* Обе подписи держат две строки: правая длиннее левой, и без общей
+           высоты суммы в колонках встают на разных уровнях */
         .total-label {
           margin: 0 0 0.3rem 0;
+          min-height: 2.7em;
           font-size: 0.72rem;
           font-weight: 600;
+          line-height: 1.35;
           color: ${T.sub};
+          text-wrap: pretty;
         }
 
         .total-value {
-          font-size: clamp(26px, 5vw, 34px);
+          font-size: clamp(18px, 6vw, 32px);
           font-weight: 800;
           line-height: 1.05;
           letter-spacing: -0.02em;
+          white-space: nowrap;
           background: linear-gradient(100deg, ${T.mint}, ${T.sky});
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+        }
+
+        /* Годовая сумма — та же величина, шаг мельче: главная цифра одна */
+        .total-value.year {
+          font-size: clamp(14px, 4.2vw, 22px);
+          margin-top: 0.35rem;
+        }
+
+        /* Возврат — уточнение, а не главная цифра: без градиента и мельче */
+        .recover {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+        }
+
+        .recover-value {
+          font-size: clamp(14px, 4.2vw, 22px);
+          font-weight: 700;
+          line-height: 1.15;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+          color: ${T.body};
+        }
+
+        /* Обёртка подсказки: кнопка визуально 18px, тап-зона — 44×44 */
+        .hint {
+          position: relative;
+          flex: none;
+          margin: -13px;
+        }
+
+        .hint-btn {
+          width: 44px;
+          height: 44px;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: none;
+          border: none;
+          color: ${T.muted};
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+          transition: color 0.2s ease;
+        }
+
+        .hint-btn:hover,
+        .hint-btn[aria-expanded='true'] {
+          color: ${T.accent};
+        }
+
+        .hint-btn:focus-visible {
+          outline: 2px solid ${T.accent};
+          outline-offset: -10px;
+          border-radius: 50%;
+        }
+
+        .hint-icon {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          border: 1px solid currentColor;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          font-weight: 700;
+          font-style: italic;
+          line-height: 1;
+        }
+
+        /* Всплывает над иконкой: под карточкой уже нет места на мобильном */
+        .hint-pop {
+          position: absolute;
+          right: 0;
+          bottom: calc(100% - 8px);
+          z-index: 30;
+          width: 268px;
+          max-width: calc(100vw - 3rem);
+          padding: 0.85rem 0.9rem;
+          border-radius: 12px;
+          background: #14171C;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+          font-size: 12.5px;
+          line-height: 1.5;
+          font-weight: 400;
+          color: ${T.body};
+          text-align: left;
+          text-wrap: pretty;
         }
 
         /* Сноска держится в одну строку на всех ширинах вплоть до 320px */
@@ -254,19 +383,39 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
 
       <div className="totals">
         <div>
-          <p className="total-label">{t.calcMonthLabel}</p>
+          <p className="total-label">{t.calcPayLabel}</p>
           <div className="total-value">
             {countUp
               ? <CountUp value={t.calcMonthValue || ''} />
               : t.calcMonthValue}
           </div>
+          <div className="total-value year">{t.calcYearValue}</div>
         </div>
+
         <div>
-          <p className="total-label">{t.calcYearLabel}</p>
-          <div className="total-value">
-            {countUp
-              ? <CountUp value={t.calcYearValue || ''} />
-              : t.calcYearValue}
+          <p className="total-label">{t.calcRecoverLabel}</p>
+          <div className="recover">
+            <span className="recover-value">{t.calcRecoverValue}</span>
+
+            {t.calcRecoverHint && (
+              <div className="hint" ref={hintRef}>
+                <button
+                  type="button"
+                  className="hint-btn"
+                  aria-expanded={hintOpen}
+                  aria-label={t.calcRecoverHintAria || 'How we get this number'}
+                  onClick={() => setHintOpen((open) => !open)}
+                >
+                  <span className="hint-icon" aria-hidden="true">i</span>
+                </button>
+
+                {hintOpen && (
+                  <div className="hint-pop" role="tooltip">
+                    {t.calcRecoverHint}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

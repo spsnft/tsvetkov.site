@@ -36,27 +36,31 @@ export const contentData = {
     navPricing: "Pricing",
     navFaq: "FAQ",
 
-    // Hero calculation card — one booking, then the same loss per month and per year
+    // Hero calculation card — one booking, then the same loss per month and per year.
+    // Вторая колонка снимает главное возражение: не все 100% возвращаются,
+    // возврат первого года — доля объёма OTA, которую можно забрать себе
     otaCostBadge: "WHAT OTAs COST YOU",
     calcUnitLabel: "ONE $100 BOOKING",
     calcKeepInline: "you keep $83",
     calcLossInline: "−$17",
     calcFullMark: "Direct: $100",
-    calcMonthLabel: "Every month",
-    calcMonthValue: "$2,790",
-    calcYearLabel: "Every year",
-    calcYearValue: "$33,400",
+    calcPayLabel: "You pay OTAs",
+    calcMonthValue: "$2,790/mo",
+    calcYearValue: "$33,400/yr",
+    calcRecoverLabel: "Realistic recovery, year one",
+    calcRecoverValue: "~$560/mo",
+    calcRecoverHintAria: "How we get this number",
+    calcRecoverHint: "Direct booking systems typically shift 15–25% of OTA volume to your own channel in the first year. We use 20% here. The rest keeps coming through OTAs — you don't leave them, you stop paying commission on the share you can own.",
     calcFootnote: "12 units · 65% occupancy · 70% via OTA · 17% commission",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "CHANNELS WE CONNECT",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
-    scaleTitle: "Scale your property bookings",
-    scaleSub: "Automate workflows so your team can focus on guest experience",
+    scaleTitle: "Where your revenue leaks",
 
-    // Полоса сравнения над карточками: контраст «было → стало» рассказывается
-    // здесь один раз, поэтому карточки ниже несут только решения
+    // Полоса сравнения — единственное место, где на странице проговаривается
+    // «было → стало». Иллюстрации из удалённых карточек живут здесь иконками
     scaleCmpNowLabel: "WITHOUT A DIRECT SYSTEM",
     scaleCmpAfterLabel: "WITH FT AGENCY",
     scaleCmpNow: [
@@ -65,24 +69,9 @@ export const contentData = {
       "Every guest arrives through a channel you don't own"
     ],
     scaleCmpAfter: [
-      "One inventory grid, synced across 300+ channels",
+      "One room calendar, synced across 300+ channels",
       "Direct bookings at zero commission, forever",
       "Your own search traffic and returning guests"
-    ],
-
-    scaleItems: [
-      {
-        endValue: "Instant Sync",
-        desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
-      },
-      {
-        endValue: "100% Direct Revenue",
-        desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
-      },
-      {
-        endValue: "Predictable Scale",
-        desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
-      }
     ],
 
     // --- WHO'S BEHIND THIS ---
@@ -93,8 +82,10 @@ export const contentData = {
     aboutName: "Fedor Tsvetkov",
     aboutRole: "Founder & Managing Director",
     aboutLocation: "Currently based in Phuket",
-    aboutP1: "We build acquisition and automation systems for businesses that sell directly to their customers — and we run them end to end, not as one-off projects.",
-    aboutP2: "Hospitality is where that translates most directly: properties handing 15–20% of revenue to platforms they don't control. We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share.",
+    // Первым идёт то, что решает: условия сделки и владение системой.
+    // Общее описание агентства — вторым
+    aboutP1: "We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share. Hospitality is where that matters most: properties hand 15–20% of revenue to platforms they don't control.",
+    aboutP2: "We build acquisition and automation systems for businesses that sell directly to their customers — and we run them end to end, not as one-off projects.",
     aboutLinkAgency: "More about FT Agency",
 
     // Trust Stats
@@ -109,23 +100,46 @@ export const contentData = {
     priceTitle: "Transparent Integration. Permanent Independence",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever",
     pricePopular: "Popular",
-    priceDisclaimerAudit: "Final price confirmed after your free audit. PMS/channel manager subscription billed separately by provider.",
+    priceDisclaimerAudit: "Final price confirmed after your free revenue check. PMS and channel manager (one calendar that updates every platform at once) are billed separately by the provider.",
     priceMore2: "+ 4 from Lite",
     priceMore3: "+ 7 from Standard",
+
+    // Первое появление термина на странице объясняется человеческим языком;
+    // подсказка показывается только в собственном списке тарифа, не в свёрнутом
+    featureHints: {
+      "Cloud PMS Setup": "all your bookings in one place, not in a spreadsheet",
+      "0% Commission Engine": "the page where guests book on your own site",
+      "Direct Promo Engine": "direct-only offers and discounts",
+      "Marketing Analytics Setup": "tracking that shows where your bookings come from"
+    } as Record<string, string>,
+
+    // Диапазоны — ориентир, а не правило: реальная сегментация идёт по ADR
+    pricePaybackNote: "Payback varies with property size and ADR — the example above uses a 12-unit property.",
+    priceFitHint: "Not sure which fits? Two questions on the check answers it.",
+
+    // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия
+    riskTitle: "50% upfront, 50% on launch.",
+    riskText: "Not live in 14 days — you don't pay the second half.",
+
+    // Микрокопия под каждой главной кнопкой — что произойдёт после нажатия
+    ctaNote: "Opens WhatsApp. We reply within a few hours, usually the same day.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
     tier1Payback: "Typical payback: 3–4 months",
+    tier1Fit: "Typical fit: 1–9 units",
     tier1Desc: "For small villas & guesthouses",
 
     tier2Title: "STANDARD",
     tier2Price: "From $2,500",
     tier2Payback: "Typical payback: 2–3 months",
+    tier2Fit: "Typical fit: 10–29 units",
     tier2Desc: "For boutique hotels & resorts",
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
     tier3Payback: "Typical payback: under 2 months",
+    tier3Fit: "Multi-property and operators",
     tier3Desc: "For hotel chains & operators",
 
     // --- FAQ SECTION ---
@@ -138,7 +152,7 @@ export const contentData = {
       },
       {
         q: "Will my team be able to manage the system easily?",
-        a: "Yes — modern Cloud PMS platforms are as intuitive as a smartphone app and need zero technical background. If your team wants custom operational handbooks, checklists, or hands-on staff onboarding, that's available as a tailored add-on — we'll scope it together on your audit call."
+        a: "Yes — modern Cloud PMS platforms are as intuitive as a smartphone app and need zero technical background. If your team wants custom operational handbooks, checklists, or hands-on staff onboarding, that's available as a tailored add-on — we'll scope it together on your revenue check call."
       },
       {
         q: "How long does the setup take, and will it interrupt my daily bookings?",
@@ -184,10 +198,13 @@ export const contentData = {
     calcKeepInline: "вам — $83",
     calcLossInline: "−$17",
     calcFullMark: "Напрямую: $100",
-    calcMonthLabel: "Каждый месяц",
-    calcMonthValue: "$2,790",
-    calcYearLabel: "Каждый год",
-    calcYearValue: "$33,400",
+    calcPayLabel: "Вы платите OTA",
+    calcMonthValue: "$2,790/мес",
+    calcYearValue: "$33,400/год",
+    calcRecoverLabel: "Реально вернёте за первый год",
+    calcRecoverValue: "~$560/мес",
+    calcRecoverHintAria: "Откуда эта цифра",
+    calcRecoverHint: "За первый год система прямых броней обычно переводит на ваш канал 15–25% объёма OTA. Здесь взяли 20%. Остальное продолжает идти через площадки: вы от них не уходите, а перестаёте платить комиссию с той доли, которую можете забрать себе.",
     // Сегмент «70% через OTA» снят: русская строка — самая длинная, в одну
     // строку на 320px она не помещается даже на нижней границе кегля
     calcFootnote: "12 номеров · загрузка 65% · комиссия 17%",
@@ -196,11 +213,10 @@ export const contentData = {
     marqueeLabel: "КАНАЛЫ, КОТОРЫЕ МЫ ПОДКЛЮЧАЕМ",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
-    scaleTitle: "Масштабируйте бронирования объекта",
-    scaleSub: "Автоматизируйте процессы, чтобы команда фокусировалась на гостях",
+    scaleTitle: "Где утекает ваша выручка",
 
-    // Полоса сравнения над карточками: контраст «было → стало» рассказывается
-    // здесь один раз, поэтому карточки ниже несут только решения
+    // Полоса сравнения — единственное место, где на странице проговаривается
+    // «было → стало». Иллюстрации из удалённых карточек живут здесь иконками
     scaleCmpNowLabel: "КАК ЕСТЬ СЕЙЧАС",
     scaleCmpAfterLabel: "С FT AGENCY",
     scaleCmpNow: [
@@ -209,24 +225,9 @@ export const contentData = {
       "Каждый гость приходит через чужой канал"
     ],
     scaleCmpAfter: [
-      "Один номерной фонд, синхронный с 300+ каналами",
+      "Один календарь номеров, синхронный с 300+ каналами",
       "Прямые брони без комиссии — навсегда",
       "Собственный поисковый трафик и возвраты гостей"
-    ],
-
-    scaleItems: [
-      {
-        endValue: "Мгновенная синхронизация",
-        desc: "Интеграция Cloud PMS и Channel Manager. Каждое бронирование мгновенно резервирует номера во всех каналах — Booking.com, Agoda и 300+ других OTA"
-      },
-      {
-        endValue: "100% прямой выручки",
-        desc: "Система прямых броней без комиссии с защищённым платёжным шлюзом. Принимайте оплату на своих условиях и оставляйте всю выручку себе"
-      },
-      {
-        endValue: "Предсказуемый рост",
-        desc: "Локальное SEO для привлечения целевого поискового трафика в связке с автоматическим удержанием гостей — превращаем прошлые заезды в постоянный доход"
-      }
     ],
 
     // --- WHO'S BEHIND THIS ---
@@ -237,8 +238,10 @@ export const contentData = {
     aboutName: "Фёдор Цветков",
     aboutRole: "основатель и управляющий директор",
     aboutLocation: "Сейчас базируемся на Пхукете",
-    aboutP1: "Мы строим системы привлечения и автоматизации для бизнесов, которые продают напрямую своим клиентам, и ведём их от начала до конца, а не разовыми проектами.",
-    aboutP2: "В отелях и виллах это работает нагляднее всего: объекты отдают 15–20% выручки платформам, которые им не принадлежат. Мы собираем систему прямых бронирований, передаём её вам в полную собственность и остаёмся на поддержке. Без привязки и без процента с выручки.",
+    // Первым идёт то, что решает: условия сделки и владение системой.
+    // Общее описание агентства — вторым
+    aboutP1: "Мы собираем систему прямых бронирований, передаём её вам в полную собственность и остаёмся на поддержке. Без привязки и без процента с выручки. В отелях и виллах это нужнее всего: объекты отдают 15–20% выручки платформам, которые им не принадлежат.",
+    aboutP2: "Мы строим системы привлечения и автоматизации для бизнесов, которые продают напрямую своим клиентам, и ведём их от начала до конца, а не разовыми проектами.",
     aboutLinkAgency: "Подробнее об FT Agency",
 
     // Trust Stats
@@ -253,23 +256,46 @@ export const contentData = {
     priceTitle: "Прозрачное внедрение. Постоянная независимость",
     priceSub: "Разовая оплата. Ноль комиссии с прямых броней навсегда",
     pricePopular: "Популярный",
-    priceDisclaimerAudit: "Финальная цена подтверждается после аудита. Подписка на PMS/channel manager — оплата напрямую провайдеру.",
+    priceDisclaimerAudit: "Финальная цена подтверждается после бесплатного разбора. Подписку на PMS и channel manager (один календарь, который обновляет все площадки разом) вы оплачиваете напрямую провайдеру.",
     priceMore2: "+ 4 из Lite",
     priceMore3: "+ 7 из Standard",
+
+    // Первое появление термина на странице объясняется человеческим языком;
+    // подсказка показывается только в собственном списке тарифа, не в свёрнутом
+    featureHints: {
+      "Cloud PMS Setup": "все брони в одном месте, а не в таблице",
+      "0% Commission Engine": "страница, на которой гость бронирует у вас на сайте",
+      "Direct Promo Engine": "акции и скидки только для прямых броней",
+      "Marketing Analytics Setup": "видно, откуда приходят брони"
+    } as Record<string, string>,
+
+    // Диапазоны — ориентир, а не правило: реальная сегментация идёт по ADR
+    pricePaybackNote: "Окупаемость зависит от размера объекта и цены за ночь — в примере выше объект на 12 номеров.",
+    priceFitHint: "Не знаете, какой ваш? На разборе это решают два вопроса.",
+
+    // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия
+    riskTitle: "50% на старте, 50% при запуске.",
+    riskText: "Не запустили за 14 дней — вторую половину вы не платите.",
+
+    // Микрокопия под каждой главной кнопкой — что произойдёт после нажатия
+    ctaNote: "Откроется WhatsApp. Отвечаем за несколько часов, обычно в тот же день.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
     tier1Payback: "Окупаемость: 3–4 месяца",
+    tier1Fit: "Обычно подходит: 1–9 номеров",
     tier1Desc: "Для небольших вилл и гестхаусов",
 
     tier2Title: "STANDARD",
     tier2Price: "From $2,500",
     tier2Payback: "Окупаемость: 2–3 месяца",
+    tier2Fit: "Обычно подходит: 10–29 номеров",
     tier2Desc: "Для бутик-отелей и резортов",
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
     tier3Payback: "Окупаемость: менее 2 месяцев",
+    tier3Fit: "Несколько объектов и управляющие компании",
     tier3Desc: "Для сетей отелей и операторов",
 
     // --- FAQ SECTION ---
@@ -282,7 +308,7 @@ export const contentData = {
       },
       {
         q: "Сможет ли моя команда легко управлять системой?",
-        a: "Да — современные Cloud PMS так же интуитивны, как приложение на смартфоне, и не требуют технической подготовки. Если команде нужны индивидуальные инструкции, чек-листы или практическое обучение персонала — это доступно как отдельная опция, детали обсудим на аудите"
+        a: "Да — современные Cloud PMS так же интуитивны, как приложение на смартфоне, и не требуют технической подготовки. Если команде нужны индивидуальные инструкции, чек-листы или практическое обучение персонала — это доступно как отдельная опция, детали обсудим на разборе"
       },
       {
         q: "Сколько занимает внедрение и повлияет ли это на текущие брони?",
@@ -328,21 +354,23 @@ export const contentData = {
     calcKeepInline: "คุณได้ $83",
     calcLossInline: "−$17",
     calcFullMark: "จองตรง: $100",
-    calcMonthLabel: "ต่อเดือน",
-    calcMonthValue: "$2,790",
-    calcYearLabel: "ต่อปี",
-    calcYearValue: "$33,400",
+    calcPayLabel: "คุณจ่ายให้ OTA",
+    calcMonthValue: "$2,790/เดือน",
+    calcYearValue: "$33,400/ปี",
+    calcRecoverLabel: "ที่ได้คืนจริงในปีแรก",
+    calcRecoverValue: "~$560/เดือน",
+    calcRecoverHintAria: "ตัวเลขนี้มาจากไหน",
+    calcRecoverHint: "ในปีแรก ระบบจองตรงมักดึงยอดจองจาก OTA มาที่ช่องทางของคุณเองได้ 15–25% ที่นี่เราคิดไว้ที่ 20% ส่วนที่เหลือยังมาทาง OTA ต่อไป คุณไม่ได้เลิกใช้ OTA แต่หยุดจ่ายค่าคอมมิชชั่นในส่วนที่เป็นของคุณได้",
     calcFootnote: "12 ห้อง · เข้าพัก 65% · ผ่าน OTA 70% · คอมมิชชั่น 17%",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "ช่องทางที่เราเชื่อมต่อให้",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
-    scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
-    scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
+    scaleTitle: "รายได้ของคุณรั่วไหลตรงไหน",
 
-    // Полоса сравнения над карточками: контраст «было → стало» рассказывается
-    // здесь один раз, поэтому карточки ниже несут только решения
+    // Полоса сравнения — единственное место, где на странице проговаривается
+    // «было → стало». Иллюстрации из удалённых карточек живут здесь иконками
     scaleCmpNowLabel: "เมื่อยังไม่มีระบบจองตรง",
     scaleCmpAfterLabel: "เมื่อทำงานกับ FT Agency",
     scaleCmpNow: [
@@ -351,24 +379,9 @@ export const contentData = {
       "ลูกค้าทุกคนมาจากช่องทางที่ไม่ใช่ของคุณ"
     ],
     scaleCmpAfter: [
-      "ห้องพักชุดเดียว ซิงค์กับกว่า 300 ช่องทาง",
+      "ปฏิทินห้องพักชุดเดียว ซิงค์กับกว่า 300 ช่องทาง",
       "จองตรงโดยไม่เสียค่าคอมมิชชั่น ตลอดไป",
       "ทราฟฟิกค้นหาของคุณเองและลูกค้าที่กลับมาซ้ำ"
-    ],
-
-    scaleItems: [
-      {
-        endValue: "ซิงค์ระบบทันที",
-        desc: "ระบบ Cloud PMS & Channel Manager อัปเดตการจองแบบเรียลไทม์ ล็อกห้องพักทันทีบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
-      },
-      {
-        endValue: "รายได้ตรง 100%",
-        desc: "ระบบจองตรง 0% ค่าคอมมิชชั่น พร้อมช่องทางชำระเงินที่ปลอดภัย รับและเก็บรายได้ทั้งหมดไว้กับคุณโดยไม่ต้องแบ่งใคร"
-      },
-      {
-        endValue: "เติบโตอย่างมั่นคง",
-        desc: "การทำ Local SEO เพื่อดึงดูดลูกค้าที่มีความต้องการจองสูง พร้อมระบบดึงดูดลูกค้าเก่าให้กลับมาจองซ้ำเพื่อเพิ่มรายได้ระยะยาว"
-      }
     ],
 
     // --- WHO'S BEHIND THIS ---
@@ -379,8 +392,10 @@ export const contentData = {
     aboutName: "Fedor Tsvetkov",
     aboutRole: "ผู้ก่อตั้งและกรรมการผู้จัดการ",
     aboutLocation: "ปัจจุบันอยู่ที่ภูเก็ต",
-    aboutP1: "เราสร้างระบบหาลูกค้าและระบบอัตโนมัติให้ธุรกิจที่ขายตรงถึงลูกค้า และดูแลตั้งแต่ต้นจนจบ ไม่ใช่งานครั้งเดียวจบ",
-    aboutP2: "ธุรกิจที่พักคือกลุ่มที่เห็นผลชัดที่สุด — ที่พักที่ต้องยกรายได้ 15–20% ให้แพลตฟอร์มที่ตัวเองควบคุมไม่ได้ เราสร้างระบบจองตรง ส่งมอบความเป็นเจ้าของให้คุณทั้งหมด และดูแลต่อหลังส่งมอบ ไม่มีสัญญาผูกมัด ไม่มีส่วนแบ่งรายได้",
+    // Первым идёт то, что решает: условия сделки и владение системой.
+    // Общее описание агентства — вторым
+    aboutP1: "เราสร้างระบบจองตรง ส่งมอบความเป็นเจ้าของให้คุณทั้งหมด และดูแลต่อหลังส่งมอบ ไม่มีสัญญาผูกมัด ไม่มีส่วนแบ่งรายได้ ธุรกิจที่พักคือกลุ่มที่เรื่องนี้สำคัญที่สุด — ที่พักต้องยกรายได้ 15–20% ให้แพลตฟอร์มที่ตัวเองควบคุมไม่ได้",
+    aboutP2: "เราสร้างระบบหาลูกค้าและระบบอัตโนมัติให้ธุรกิจที่ขายตรงถึงลูกค้า และดูแลตั้งแต่ต้นจนจบ ไม่ใช่งานครั้งเดียวจบ",
     aboutLinkAgency: "ดูข้อมูล FT Agency เพิ่มเติม",
 
     // Trust Stats
@@ -395,24 +410,47 @@ export const contentData = {
     priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
     priceSub: "จ่ายค่าติดตั้งครั้งเดียว ไม่มีค่าคอมมิชชั่นจากการจองตรงตลอดไป",
     pricePopular: "ยอดนิยม",
-    priceDisclaimerAudit: "ราคาสุดท้ายยืนยันหลังการตรวจสอบฟรี",
+    priceDisclaimerAudit: "ราคาสุดท้ายยืนยันหลังตรวจสอบรายได้ฟรี",
     priceMore2: "+ อีก 4 รายการจาก Lite",
     priceMore3: "+ อีก 7 รายการจาก Standard",
-    priceDisclaimerSub: "+ ค่าสมัครใช้งาน PMS/channel manager ชำระตรงกับผู้ให้บริการ",
+    priceDisclaimerSub: "+ ค่าสมัครใช้งาน PMS และ channel manager (ปฏิทินเดียวที่อัปเดตทุกแพลตฟอร์มพร้อมกัน) ชำระตรงกับผู้ให้บริการ",
+
+    // Первое появление термина на странице объясняется человеческим языком;
+    // подсказка показывается только в собственном списке тарифа, не в свёрнутом
+    featureHints: {
+      "Cloud PMS Setup": "การจองทั้งหมดอยู่ที่เดียว ไม่ใช่ในไฟล์ตาราง",
+      "0% Commission Engine": "หน้าที่ลูกค้าจองบนเว็บไซต์ของคุณเอง",
+      "Direct Promo Engine": "โปรโมชั่นและส่วนลดเฉพาะการจองตรง",
+      "Marketing Analytics Setup": "ดูได้ว่ายอดจองมาจากช่องทางไหน"
+    } as Record<string, string>,
+
+    // Диапазоны — ориентир, а не правило: реальная сегментация идёт по ADR
+    pricePaybackNote: "ระยะคืนทุนขึ้นอยู่กับขนาดที่พักและราคาห้องเฉลี่ย — ตัวอย่างด้านบนคือที่พัก 12 ห้อง",
+    priceFitHint: "ไม่แน่ใจว่าแพ็กเกจไหนใช่? สองคำถามตอนตรวจสอบก็รู้แล้ว",
+
+    // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия
+    riskTitle: "จ่าย 50% ตอนเริ่ม อีก 50% ตอนระบบเปิดใช้งาน",
+    riskText: "ถ้าระบบไม่เปิดใช้งานใน 14 วัน คุณไม่ต้องจ่ายครึ่งหลัง",
+
+    // Микрокопия под каждой главной кнопкой — что произойдёт после нажатия
+    ctaNote: "จะเปิดแชต WhatsApp เราตอบกลับภายในไม่กี่ชั่วโมง ส่วนใหญ่ตอบภายในวันเดียวกัน",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
     tier1Payback: "คืนทุนโดยทั่วไป: 3–4 เดือน",
+    tier1Fit: "เหมาะกับ: 1–9 ห้อง",
     tier1Desc: "สำหรับวิลล่าและเกสต์เฮาส์ขนาดเล็ก",
 
     tier2Title: "STANDARD",
     tier2Price: "From $2,500",
     tier2Payback: "คืนทุนโดยทั่วไป: 2–3 เดือน",
+    tier2Fit: "เหมาะกับ: 10–29 ห้อง",
     tier2Desc: "สำหรับบูติกโฮเทลและรีสอร์ท",
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
     tier3Payback: "คืนทุนโดยทั่วไป: ไม่ถึง 2 เดือน",
+    tier3Fit: "หลายที่พักและบริษัทจัดการ",
     tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
 
     // --- FAQ SECTION ---

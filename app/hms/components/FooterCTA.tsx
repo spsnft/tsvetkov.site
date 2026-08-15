@@ -22,7 +22,7 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
   const titleText = t.footerTitle || "Ready to maximize your revenue?";
   const sub1Text = t.footerSub1 || t.footerSub || "Stop leaving 15–20% on the table";
   const sub2Text = t.footerSub2 || "Take full control of your direct bookings";
-  const btnText = t.footerBtn || t.btnAudit || "Book a Free Audit";
+  const btnText = t.footerBtn || t.btnAudit || "Free 20-min Revenue Check";
 
   return (
     <section className="footer-cta-section">
@@ -79,6 +79,16 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
 
         .cta-actions :global(.btn-premium-core svg) {
           flex-shrink: 0;
+        }
+
+        /* Что произойдёт после нажатия — тише кнопки, сразу под ней */
+        .cta-note {
+          margin: -0.6rem 0 0 0;
+          font-size: 0.8rem;
+          line-height: 1.45;
+          color: rgba(255, 255, 255, 0.45);
+          max-width: 420px;
+          text-wrap: pretty;
         }
 
         .legal-footer {
@@ -144,6 +154,8 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
           <div className="cta-actions">
             <WhatsAppCta label={btnText} message={t.waMessage} />
           </div>
+
+          {t.ctaNote && <p className="cta-note">{t.ctaNote}</p>}
         </div>
 
         <div className="legal-footer">

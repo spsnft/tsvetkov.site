@@ -14,22 +14,29 @@ interface PricingProps {
     priceMore3?: string;
     priceDisclaimerAudit?: string;
     priceDisclaimerSub?: string;
+    pricePaybackNote?: string;
+    priceFitHint?: string;
+    riskTitle?: string;
+    riskText?: string;
+    featureHints?: Record<string, string>;
     btnAudit?: string;
     waMessage?: string;
-    tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Desc?: string;
-    tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Desc?: string;
-    tier3Title?: string; tier3Price?: string; tier3Payback?: string; tier3Desc?: string;
+    tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Fit?: string; tier1Desc?: string;
+    tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Fit?: string; tier2Desc?: string;
+    tier3Title?: string; tier3Price?: string; tier3Payback?: string; tier3Fit?: string; tier3Desc?: string;
   };
 }
 
 export default function Pricing({ t }: PricingProps) {
   const names: string[] = [...FEATURE_NAMES];
+  const hints = t?.featureHints || {};
 
   const tiers = [
     {
       title: t?.tier1Title || 'LITE',
       price: t?.tier1Price || 'From $1,200',
       payback: t?.tier1Payback,
+      fit: t?.tier1Fit || 'Typical fit: 1–9 units',
       desc: t?.tier1Desc || 'For small villas & guesthouses',
       featured: false,
       own: names.slice(0, TIER_FEATURE_COUNTS[0]),
@@ -40,6 +47,7 @@ export default function Pricing({ t }: PricingProps) {
       title: t?.tier2Title || 'STANDARD',
       price: t?.tier2Price || 'From $2,500',
       payback: t?.tier2Payback,
+      fit: t?.tier2Fit || 'Typical fit: 10–29 units',
       desc: t?.tier2Desc || 'For boutique hotels & resorts',
       featured: true,
       own: names.slice(TIER_FEATURE_COUNTS[0], TIER_FEATURE_COUNTS[1]),
@@ -50,6 +58,7 @@ export default function Pricing({ t }: PricingProps) {
       title: t?.tier3Title || 'ENTERPRISE',
       price: t?.tier3Price || 'Custom',
       payback: t?.tier3Payback,
+      fit: t?.tier3Fit || 'Multi-property and operators',
       desc: t?.tier3Desc || 'For hotel chains & operators',
       featured: false,
       own: names.slice(TIER_FEATURE_COUNTS[1], TIER_FEATURE_COUNTS[2]),
@@ -123,12 +132,29 @@ export default function Pricing({ t }: PricingProps) {
           color: ${T.muted};
         }
 
+        /* Ориентир по числу номеров — то, по чему владелец узнаёт свой тариф,
+           поэтому он ярче существующей подписи «для кого» */
+        .price-fit {
+          display: block;
+          margin-top: 0.55rem;
+          font-size: 0.86rem;
+          font-weight: 600;
+          line-height: 1.4;
+          color: rgba(255, 255, 255, 0.9);
+        }
+
         .price-desc {
           display: block;
-          margin-top: 0.35rem;
+          margin-top: 0.2rem;
           font-size: 0.9rem;
           line-height: 1.4;
           color: ${T.sub};
+        }
+
+        /* Пояснение к термину при первом появлении — тише самого названия */
+        .feature-hint {
+          color: ${T.muted};
+          font-weight: 400;
         }
 
         .popular-badge {
@@ -144,12 +170,63 @@ export default function Pricing({ t }: PricingProps) {
           box-shadow: 0 5px 15px rgba(0, 229, 153, 0.2);
         }
 
+        /* Развязка калькулятора и окупаемости: пример в герое — 12 номеров,
+           окупаемость в карточках — объекты разного размера */
+        .payback-note {
+          margin: 18px auto 0;
+          max-width: 720px;
+          text-align: center;
+          font-size: 0.78rem;
+          line-height: 1.5;
+          color: ${T.muted};
+          text-wrap: pretty;
+        }
+
+        .fit-hint {
+          margin: 10px auto 0;
+          max-width: 720px;
+          text-align: center;
+          font-size: 0.92rem;
+          line-height: 1.5;
+          color: ${T.sub};
+          text-wrap: pretty;
+        }
+
+        /* Реверс риска: заметен, но тише кнопки — главный элемент экрана
+           остаётся один */
+        .risk-box {
+          margin: 24px auto 0;
+          max-width: 520px;
+          padding: 16px 20px;
+          border: 1px solid rgba(0, 229, 153, 0.28);
+          border-radius: 14px;
+          background: rgba(0, 229, 153, 0.05);
+          text-align: center;
+        }
+
+        .risk-title {
+          margin: 0;
+          font-size: 1.02rem;
+          font-weight: 700;
+          line-height: 1.4;
+          color: #ffffff;
+          text-wrap: pretty;
+        }
+
+        .risk-text {
+          margin: 6px 0 0;
+          font-size: 0.92rem;
+          line-height: 1.5;
+          color: ${T.sub};
+          text-wrap: pretty;
+        }
+
         /* Одна кнопка под блоком тарифов вместо трёх в карточках: ширина по
            контенту на десктопе, на всю ширину на мобильном */
         .pricing-cta {
           display: flex;
           justify-content: center;
-          margin-top: 32px;
+          margin-top: 24px;
         }
 
         .pricing-cta :global(.btn-premium-core) {
@@ -185,6 +262,7 @@ export default function Pricing({ t }: PricingProps) {
             white-space: nowrap;
           }
           .price-payback,
+          .price-fit,
           .price-desc {
             min-height: 2.8em;
           }
@@ -203,6 +281,9 @@ export default function Pricing({ t }: PricingProps) {
           }
           .price-payback {
             font-size: 0.72rem;
+          }
+          .price-fit {
+            font-size: 0.8rem;
           }
           .price-desc {
             font-size: 0.82rem;
@@ -345,6 +426,9 @@ export default function Pricing({ t }: PricingProps) {
           .price-desc {
             font-size: 0.85rem;
           }
+          .price-fit {
+            font-size: 0.82rem;
+          }
           .price-payback {
             font-size: 0.74rem;
           }
@@ -392,11 +476,18 @@ export default function Pricing({ t }: PricingProps) {
               <p className={`package-title${tier.featured ? ' accent' : ''}`}>{tier.title}</p>
               <span className="price">{tier.price}</span>
               {tier.payback && <span className="price-payback">{tier.payback}</span>}
+              <span className="price-fit">{tier.fit}</span>
               <span className="price-desc">{tier.desc}</span>
 
               <ul className="card-features">
                 {tier.own.map((f) => (
-                  <li key={f}><span className="check-icon">✓</span> {f}</li>
+                  <li key={f}>
+                    <span className="check-icon">✓</span>
+                    <span>
+                      {f}
+                      {hints[f] && <span className="feature-hint"> ({hints[f]})</span>}
+                    </span>
+                  </li>
                 ))}
               </ul>
 
@@ -416,6 +507,23 @@ export default function Pricing({ t }: PricingProps) {
             </div>
           ))}
         </div>
+
+        {t?.pricePaybackNote && (
+          <p className="payback-note">{t.pricePaybackNote}</p>
+        )}
+
+        {t?.priceFitHint && (
+          <p className="fit-hint">{t.priceFitHint}</p>
+        )}
+
+        {/* Реверс риска стоит до кнопки: читатель проходит снятие риска
+            раньше, чем доходит до нажатия. Рамка приглушённее кнопки */}
+        {t?.riskTitle && (
+          <div className="risk-box">
+            <p className="risk-title">{t.riskTitle}</p>
+            {t.riskText && <p className="risk-text">{t.riskText}</p>}
+          </div>
+        )}
 
         <div className="pricing-cta">
           <WhatsAppCta
