@@ -25,12 +25,10 @@ export const contentData = {
     heroSub1: "Connect your Phuket property directly to guests\nZero risk of human error and double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
     btnAudit: "Free 20-min Revenue Check",
-    btnAuditShort: "Revenue Check",
-    btnAuditNote: "20 minutes. We'll calculate what you're actually paying OTAs.",
+    btnAuditShort: "Free Check",
 
-    // Преднабранный текст для WhatsApp: общий и для кнопок в тарифах
+    // Единственный преднабранный текст WhatsApp — тариф человек называет сам
     waMessage: "Hi! I'd like a free 20-min revenue check for my property.",
-    waMessageQuote: "Hi! I'd like a quote for the {tier} package.",
 
     // --- NAV ---
     navAbout: "About Us",
@@ -56,30 +54,43 @@ export const contentData = {
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Scale your property bookings",
     scaleSub: "Automate workflows so your team can focus on guest experience",
-    // Слово выделяется цветом внутри строки «Replaces …» под заголовком карточки
-    scaleReplacesWord: "Replaces",
+
+    // Полоса сравнения над карточками: контраст «было → стало» рассказывается
+    // здесь один раз, поэтому карточки ниже несут только решения
+    scaleCmpNowLabel: "WITHOUT A DIRECT SYSTEM",
+    scaleCmpAfterLabel: "WITH FT AGENCY",
+    scaleCmpNow: [
+      "Rates and availability updated by hand, around the clock",
+      "15–20% of every booking goes to the platform",
+      "Every guest arrives through a channel you don't own"
+    ],
+    scaleCmpAfter: [
+      "One inventory grid, synced across 300+ channels",
+      "Direct bookings at zero commission, forever",
+      "Your own search traffic and returning guests"
+    ],
+
     scaleItems: [
       {
-        replaces: "Replaces manual rate updates, around the clock",
         endValue: "Instant Sync",
         desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
       },
       {
-        replaces: "Replaces 15–20% platform commission on every booking",
         endValue: "100% Direct Revenue",
         desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
       },
       {
-        replaces: "Replaces dependency on channels you don't control",
         endValue: "Predictable Scale",
         desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
       }
     ],
 
     // --- WHO'S BEHIND THIS ---
+    // Повествование блока идёт от «мы», поэтому заголовок — агентство,
+    // а человек становится подписью под ним
     aboutLabel: "WHO'S BEHIND THIS",
-    aboutName: "Fedor Tsvetkov",
-    aboutRole: "Founder & Managing Director, FT Agency",
+    aboutAgency: "FT Agency",
+    aboutRole: "Fedor Tsvetkov · Founder & Managing Director",
     aboutLocation: "Currently based in Phuket",
     aboutP1: "We build acquisition and automation systems for businesses that sell directly to their customers — and we run them end to end, not as one-off projects.",
     aboutP2: "Hospitality is where that translates most directly: properties handing 15–20% of revenue to platforms they don't control. We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share.",
@@ -98,7 +109,6 @@ export const contentData = {
     priceSub: "One-time setup fee. Zero commission on direct bookings forever",
     pricePopular: "Popular",
     priceDisclaimerAudit: "Final price confirmed after your free audit. PMS/channel manager subscription billed separately by provider.",
-    priceBtn: "Get a quote",
     priceMore2: "+ 4 from Lite",
     priceMore3: "+ 7 from Standard",
 
@@ -157,11 +167,9 @@ export const contentData = {
     heroSub2: "Оставляйте 100% прибыли себе",
     btnAudit: "Бесплатный разбор, 20 минут",
     btnAuditShort: "Бесплатный разбор",
-    btnAuditNote: "20 минут. Посчитаем, сколько вы на самом деле платите OTA.",
 
-    // Преднабранный текст для WhatsApp: общий и для кнопок в тарифах
+    // Единственный преднабранный текст WhatsApp — тариф человек называет сам
     waMessage: "Здравствуйте! Хочу бесплатный разбор по прямым бронированиям.",
-    waMessageQuote: "Здравствуйте! Хочу расчёт по тарифу {tier}.",
 
     // --- NAV ---
     navAbout: "О нас",
@@ -189,30 +197,43 @@ export const contentData = {
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "Масштабируйте бронирования объекта",
     scaleSub: "Автоматизируйте процессы, чтобы команда фокусировалась на гостях",
-    // Слово выделяется цветом внутри строки «Заменяет …» под заголовком карточки
-    scaleReplacesWord: "Заменяет",
+
+    // Полоса сравнения над карточками: контраст «было → стало» рассказывается
+    // здесь один раз, поэтому карточки ниже несут только решения
+    scaleCmpNowLabel: "КАК ЕСТЬ СЕЙЧАС",
+    scaleCmpAfterLabel: "С FT AGENCY",
+    scaleCmpNow: [
+      "Цены и доступность обновляются вручную и круглые сутки",
+      "15–20% с каждой брони уходит платформе",
+      "Каждый гость приходит через чужой канал"
+    ],
+    scaleCmpAfter: [
+      "Один номерной фонд, синхронный с 300+ каналами",
+      "Прямые брони без комиссии — навсегда",
+      "Собственный поисковый трафик и возвраты гостей"
+    ],
+
     scaleItems: [
       {
-        replaces: "Заменяет ручное обновление цен круглые сутки",
         endValue: "Мгновенная синхронизация",
         desc: "Интеграция Cloud PMS и Channel Manager. Каждое бронирование мгновенно резервирует номера во всех каналах — Booking.com, Agoda и 300+ других OTA"
       },
       {
-        replaces: "Заменяет 15–20% комиссии платформе с каждой брони",
         endValue: "100% прямой выручки",
         desc: "Система прямых броней без комиссии с защищённым платёжным шлюзом. Принимайте оплату на своих условиях и оставляйте всю выручку себе"
       },
       {
-        replaces: "Заменяет зависимость от чужих каналов",
         endValue: "Предсказуемый рост",
         desc: "Локальное SEO для привлечения целевого поискового трафика в связке с автоматическим удержанием гостей — превращаем прошлые заезды в постоянный доход"
       }
     ],
 
     // --- WHO'S BEHIND THIS ---
+    // Повествование блока идёт от «мы», поэтому заголовок — агентство,
+    // а человек становится подписью под ним
     aboutLabel: "КТО ЗА ЭТИМ СТОИТ",
-    aboutName: "Фёдор Цветков",
-    aboutRole: "Основатель и управляющий директор, FT Agency",
+    aboutAgency: "FT Agency",
+    aboutRole: "Фёдор Цветков · основатель и управляющий директор",
     aboutLocation: "Сейчас базируемся на Пхукете",
     aboutP1: "Мы строим системы привлечения и автоматизации для бизнесов, которые продают напрямую своим клиентам, и ведём их от начала до конца, а не разовыми проектами.",
     aboutP2: "В отелях и виллах это работает нагляднее всего: объекты отдают 15–20% выручки платформам, которые им не принадлежат. Мы собираем систему прямых бронирований, передаём её вам в полную собственность и остаёмся на поддержке. Без привязки и без процента с выручки.",
@@ -231,7 +252,6 @@ export const contentData = {
     priceSub: "Разовая оплата. Ноль комиссии с прямых броней навсегда",
     pricePopular: "Популярный",
     priceDisclaimerAudit: "Финальная цена подтверждается после аудита. Подписка на PMS/channel manager — оплата напрямую провайдеру.",
-    priceBtn: "Запросить расчёт",
     priceMore2: "+ 4 из Lite",
     priceMore3: "+ 7 из Standard",
 
@@ -289,12 +309,10 @@ export const contentData = {
     heroSub1: "เชื่อมต่อที่พักของคุณในภูเก็ตกับผู้เข้าพักโดยตรง\nไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
     btnAudit: "ตรวจสอบรายได้ฟรี 20 นาที",
-    btnAuditShort: "ตรวจสอบรายได้ฟรี",
-    btnAuditNote: "20 นาที เราจะคำนวณให้ว่าคุณจ่ายให้ OTA จริง ๆ เท่าไหร่",
+    btnAuditShort: "ตรวจสอบฟรี",
 
-    // Преднабранный текст для WhatsApp: общий и для кнопок в тарифах
+    // Единственный преднабранный текст WhatsApp — тариф человек называет сам
     waMessage: "สวัสดีครับ สนใจตรวจสอบรายได้ฟรี 20 นาที สำหรับที่พักครับ",
-    waMessageQuote: "สวัสดีครับ ขอใบเสนอราคาสำหรับแพ็กเกจ {tier} ครับ",
 
     // --- NAV ---
     navAbout: "เกี่ยวกับเรา",
@@ -320,30 +338,43 @@ export const contentData = {
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     scaleTitle: "ขยายยอดจองโรงแรมของคุณ",
     scaleSub: "จัดการระบบหลังบ้านอัตโนมัติ เพื่อให้ทีมงานของคุณโฟกัสกับการบริการลูกค้าได้อย่างเต็มที่",
-    // Слово выделяется цветом внутри строки «แทนที่ …» под заголовком карточки
-    scaleReplacesWord: "แทนที่",
+
+    // Полоса сравнения над карточками: контраст «было → стало» рассказывается
+    // здесь один раз, поэтому карточки ниже несут только решения
+    scaleCmpNowLabel: "เมื่อยังไม่มีระบบจองตรง",
+    scaleCmpAfterLabel: "เมื่อทำงานกับ FT Agency",
+    scaleCmpNow: [
+      "อัปเดตราคาและห้องว่างด้วยมือตลอดเวลา",
+      "ทุกการจองเสียให้แพลตฟอร์ม 15–20%",
+      "ลูกค้าทุกคนมาจากช่องทางที่ไม่ใช่ของคุณ"
+    ],
+    scaleCmpAfter: [
+      "ห้องพักชุดเดียว ซิงค์กับกว่า 300 ช่องทาง",
+      "จองตรงโดยไม่เสียค่าคอมมิชชั่น ตลอดไป",
+      "ทราฟฟิกค้นหาของคุณเองและลูกค้าที่กลับมาซ้ำ"
+    ],
+
     scaleItems: [
       {
-        replaces: "แทนที่การอัปเดตราคาด้วยมือตลอดเวลา",
         endValue: "ซิงค์ระบบทันที",
         desc: "ระบบ Cloud PMS & Channel Manager อัปเดตการจองแบบเรียลไทม์ ล็อกห้องพักทันทีบน Booking.com, Agoda และ OTA กว่า 300+ แห่ง"
       },
       {
-        replaces: "แทนที่ค่าคอมมิชชั่น 15–20% ทุกการจอง",
         endValue: "รายได้ตรง 100%",
         desc: "ระบบจองตรง 0% ค่าคอมมิชชั่น พร้อมช่องทางชำระเงินที่ปลอดภัย รับและเก็บรายได้ทั้งหมดไว้กับคุณโดยไม่ต้องแบ่งใคร"
       },
       {
-        replaces: "แทนที่การพึ่งพาช่องทางที่คุณควบคุมไม่ได้",
         endValue: "เติบโตอย่างมั่นคง",
         desc: "การทำ Local SEO เพื่อดึงดูดลูกค้าที่มีความต้องการจองสูง พร้อมระบบดึงดูดลูกค้าเก่าให้กลับมาจองซ้ำเพื่อเพิ่มรายได้ระยะยาว"
       }
     ],
 
     // --- WHO'S BEHIND THIS ---
+    // Повествование блока идёт от «мы», поэтому заголовок — агентство,
+    // а человек становится подписью под ним
     aboutLabel: "ใครอยู่เบื้องหลัง",
-    aboutName: "Fedor Tsvetkov",
-    aboutRole: "ผู้ก่อตั้งและกรรมการผู้จัดการ FT Agency",
+    aboutAgency: "FT Agency",
+    aboutRole: "Fedor Tsvetkov · ผู้ก่อตั้งและกรรมการผู้จัดการ",
     aboutLocation: "ปัจจุบันอยู่ที่ภูเก็ต",
     aboutP1: "เราสร้างระบบหาลูกค้าและระบบอัตโนมัติให้ธุรกิจที่ขายตรงถึงลูกค้า และดูแลตั้งแต่ต้นจนจบ ไม่ใช่งานครั้งเดียวจบ",
     aboutP2: "ธุรกิจที่พักคือกลุ่มที่เห็นผลชัดที่สุด — ที่พักที่ต้องยกรายได้ 15–20% ให้แพลตฟอร์มที่ตัวเองควบคุมไม่ได้ เราสร้างระบบจองตรง ส่งมอบความเป็นเจ้าของให้คุณทั้งหมด และดูแลต่อหลังส่งมอบ ไม่มีสัญญาผูกมัด ไม่มีส่วนแบ่งรายได้",
@@ -362,7 +393,6 @@ export const contentData = {
     priceSub: "จ่ายค่าติดตั้งครั้งเดียว ไม่มีค่าคอมมิชชั่นจากการจองตรงตลอดไป",
     pricePopular: "ยอดนิยม",
     priceDisclaimerAudit: "ราคาสุดท้ายยืนยันหลังการตรวจสอบฟรี",
-    priceBtn: "ขอใบเสนอราคา",
     priceMore2: "+ อีก 4 รายการจาก Lite",
     priceMore3: "+ อีก 7 รายการจาก Standard",
     priceDisclaimerSub: "+ ค่าสมัครใช้งาน PMS/channel manager ชำระตรงกับผู้ให้บริการ",

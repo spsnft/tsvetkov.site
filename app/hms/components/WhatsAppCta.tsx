@@ -13,12 +13,6 @@ export function waHref(message?: string) {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-// Подставляет название тарифа в шаблон вида "…for the {tier} package."
-export function waQuoteMessage(template: string | undefined, tier: string) {
-  if (!template) return `Hi! I'd like a quote for the ${tier} package.`;
-  return template.replace('{tier}', tier);
-}
-
 export function WhatsAppIcon({ size = 22 }: { size?: number }) {
   return (
     <svg

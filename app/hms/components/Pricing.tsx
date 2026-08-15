@@ -3,19 +3,19 @@
 import React from 'react';
 import { T } from '../../../src/theme/tokens';
 import { FEATURE_NAMES, TIER_FEATURE_COUNTS } from '../constants';
-import { waHref, waQuoteMessage, WhatsAppIcon } from './WhatsAppCta';
+import WhatsAppCta from './WhatsAppCta';
 
 interface PricingProps {
   t?: {
     priceTitle?: string;
     priceSub?: string;
     pricePopular?: string;
-    priceBtn?: string;
     priceMore2?: string;
     priceMore3?: string;
     priceDisclaimerAudit?: string;
     priceDisclaimerSub?: string;
-    waMessageQuote?: string;
+    btnAudit?: string;
+    waMessage?: string;
     tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Desc?: string;
     tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Desc?: string;
     tier3Title?: string; tier3Price?: string; tier3Payback?: string; tier3Desc?: string;
@@ -23,8 +23,6 @@ interface PricingProps {
 }
 
 export default function Pricing({ t }: PricingProps) {
-  const btnLabel = t?.priceBtn || 'Get a quote';
-
   const names: string[] = [...FEATURE_NAMES];
 
   const tiers = [
@@ -146,50 +144,30 @@ export default function Pricing({ t }: PricingProps) {
           box-shadow: 0 5px 15px rgba(0, 229, 153, 0.2);
         }
 
-        /* Кнопка прижата к низу карточки — три кнопки на одной горизонтали
-           независимо от количества пунктов */
-        .tier-btn {
-          display: inline-flex;
-          align-items: center;
+        /* Одна кнопка под блоком тарифов вместо трёх в карточках: ширина по
+           контенту на десктопе, на всю ширину на мобильном */
+        .pricing-cta {
+          display: flex;
           justify-content: center;
-          gap: 10px;
-          width: 100%;
-          min-height: 44px;
-          margin-top: auto;
-          padding: 0 1rem;
-          border-radius: 10px;
-          font-family: inherit;
-          font-size: 0.85rem;
-          font-weight: 700;
-          letter-spacing: 0.01em;
-          white-space: nowrap;
-          text-decoration: none;
-          cursor: pointer;
-          box-sizing: border-box;
-          background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.14);
-          color: #ffffff;
-          transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+          margin-top: 32px;
         }
 
-        .tier-btn:hover {
-          border-color: ${T.accent35};
-          background: rgba(255, 255, 255, 0.03);
+        .pricing-cta :global(.btn-premium-core) {
+          flex: 0 1 auto;
+          max-width: 100%;
         }
 
-        .tier-btn.primary {
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          border-color: transparent;
-          color: #0A0A0C;
-          box-shadow: 0 6px 18px rgba(0, 229, 153, 0.2);
+        @media (max-width: 599px) {
+          .pricing-cta :global(.btn-premium-core) {
+            width: 100%;
+          }
         }
 
-        .tier-btn.primary:hover {
-          transform: translateY(-1px);
-        }
-
-        .tier-btn :global(svg) {
-          flex-shrink: 0;
+        @media (max-width: 360px) {
+          .pricing-cta :global(.btn-premium-core) {
+            padding: 0 0.7rem;
+            font-size: 0.95rem;
+          }
         }
 
         /* ---------- КАРТОЧКИ НА ВСЕХ РАЗРЕШЕНИЯХ ---------- */
@@ -231,10 +209,6 @@ export default function Pricing({ t }: PricingProps) {
           }
           .card-features li {
             font-size: 0.82rem;
-          }
-          .tier-btn {
-            font-size: 0.78rem;
-            padding: 0 0.6rem;
           }
         }
 
@@ -350,7 +324,7 @@ export default function Pricing({ t }: PricingProps) {
         }
 
         .shared-disclaimer {
-          margin: 2.5rem auto 0;
+          margin: 20px auto 0;
           max-width: 820px;
           text-align: center;
           display: flex;
@@ -373,10 +347,6 @@ export default function Pricing({ t }: PricingProps) {
           }
           .price-payback {
             font-size: 0.74rem;
-          }
-          .tier-btn {
-            font-size: 0.8rem;
-            padding: 0 0.7rem;
           }
         }
 
@@ -443,18 +413,15 @@ export default function Pricing({ t }: PricingProps) {
                   </ul>
                 </details>
               )}
-
-              <a
-                href={waHref(waQuoteMessage(t?.waMessageQuote, tier.title))}
-                target="_blank"
-                rel="noopener"
-                className={`tier-btn${tier.featured ? ' primary' : ''}`}
-              >
-                <WhatsAppIcon size={16} />
-                <span>{btnLabel}</span>
-              </a>
             </div>
           ))}
+        </div>
+
+        <div className="pricing-cta">
+          <WhatsAppCta
+            label={t?.btnAudit || "Free 20-min Revenue Check"}
+            message={t?.waMessage}
+          />
         </div>
 
         <p className="shared-disclaimer">

@@ -66,6 +66,8 @@ const BACK_LABEL: Record<string, string> = {
 export const Nav = ({ lang, dict }: NavProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  // До 1024px в шапку помещается только короткий вариант текста CTA
+  const [isCompactCta, setIsCompactCta] = useState(false);
   // На узких экранах шапке не хватает ширины на полный текст CTA
   const [isNarrow, setIsNarrow] = useState(false);
   // 320px + длинный русский текст — самый узкий случай, ужимаем сильнее
@@ -92,6 +94,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
+      setIsCompactCta(window.innerWidth <= 1023);
       setIsNarrow(window.innerWidth <= 480);
       setIsTiny(window.innerWidth <= 360);
     };
@@ -192,8 +195,9 @@ export const Nav = ({ lang, dict }: NavProps) => {
     </div>
   );
 
-  // Размеры и вариант текста задаются медиазапросами, а не состоянием: кнопка
-  // приходит в серверной разметке уже в габаритах, которые помещаются в экран
+  // Габариты кнопки задаются медиазапросами, а вариант текста — состоянием:
+  // в разметке должен быть ровно один текст, иначе скринридер читает оба,
+  // а в поисковую выдачу попадает склейка
   const ctaElement = isHms ? (
     <motion.a
       className="nav-cta"
@@ -213,8 +217,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
       }}
     >
       <WhatsAppIcon size={15} />
-      <span className="nav-cta-full">{hmsT.btnAudit}</span>
-      <span className="nav-cta-short">{hmsT.btnAuditShort || hmsT.btnAudit}</span>
+      <span>{isCompactCta ? (hmsT.btnAuditShort || hmsT.btnAudit) : hmsT.btnAudit}</span>
     </motion.a>
   ) : (
     <motion.a
@@ -257,20 +260,6 @@ export const Nav = ({ lang, dict }: NavProps) => {
         :global(.nav-cta) {
           padding: 9px 18px;
           font-size: 0.82rem;
-        }
-        :global(.nav-cta-short) {
-          display: none;
-        }
-
-        /* До 1024px в шапке помещается только короткий вариант — полный
-           остаётся на кнопке героя и в финальной CTA-секции */
-        @media (max-width: 1023px) {
-          :global(.nav-cta-full) {
-            display: none;
-          }
-          :global(.nav-cta-short) {
-            display: inline;
-          }
         }
 
         @media (max-width: 480px) {

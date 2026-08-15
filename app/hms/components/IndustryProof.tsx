@@ -18,10 +18,12 @@ export default function IndustryProof({ t }: IndustryProofProps) {
   return (
     <section className="proof-section">
       <style jsx>{`
+        /* Бейдж переехал внутрь карточки, освободившееся место отдано
+           отступу от кнопки героя */
         .proof-section {
           width: 100%;
           background-color: transparent;
-          padding: 1.5rem 0 0 0;
+          padding: 2.75rem 0 0 0;
         }
 
         @media (min-width: 1025px) {
@@ -30,10 +32,11 @@ export default function IndustryProof({ t }: IndustryProofProps) {
           }
         }
 
+        /* Бейдж в верхнем левом углу карточки, 20px до подписи расчёта */
         .proof-badge-row {
           display: flex;
-          justify-content: center;
-          margin-bottom: 1.1rem;
+          justify-content: flex-start;
+          margin-bottom: 20px;
         }
 
         .proof-badge {
@@ -69,7 +72,7 @@ export default function IndustryProof({ t }: IndustryProofProps) {
 
         @media (max-width: 480px) {
           .proof-section {
-            padding: 1rem 0 0 0;
+            padding: 2.25rem 0 0 0;
           }
           .proof-card {
             padding: 1.25rem 1.1rem;
@@ -87,13 +90,13 @@ export default function IndustryProof({ t }: IndustryProofProps) {
       `}</style>
 
       <div className="container">
-        <div className="proof-badge-row">
-          <span className="proof-badge">
-            <span className="pulse-dot" /> {t?.otaCostBadge}
-          </span>
-        </div>
-
         <div className="proof-card">
+          <div className="proof-badge-row">
+            <span className="proof-badge">
+              <span className="pulse-dot" /> {t?.otaCostBadge}
+            </span>
+          </div>
+
           <RevenueCalc t={t} />
         </div>
       </div>

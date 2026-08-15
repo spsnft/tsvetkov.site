@@ -24,20 +24,31 @@ const TITLE_GRADIENTS = [
 
 const DEFAULT_ITEMS = [
   {
-    replaces: "Replaces manual rate updates, around the clock",
     endValue: "Instant Sync",
     desc: "Cloud PMS & Channel Manager integration. Every reservation instantly locks your inventory grid across Booking.com, Agoda & 300+ OTAs"
   },
   {
-    replaces: "Replaces 15–20% platform commission on every booking",
     endValue: "100% Direct Revenue",
     desc: "Zero-commission booking engine with a secure payment gateway. Process bookings on your own terms and keep all revenue in-house"
   },
   {
-    replaces: "Replaces dependency on channels you don't control",
     endValue: "Predictable Scale",
     desc: "Local SEO optimization to capture high-intent search traffic, paired with automated guest retention loops to turn past stays into lifetime revenue"
   }
+];
+
+// Полоса сравнения над карточками — единственное место, где на странице
+// проговаривается «было → стало»
+const DEFAULT_CMP_NOW = [
+  "Rates and availability updated by hand, around the clock",
+  "15–20% of every booking goes to the platform",
+  "Every guest arrives through a channel you don't own"
+];
+
+const DEFAULT_CMP_AFTER = [
+  "One inventory grid, synced across 300+ channels",
+  "Direct bookings at zero commission, forever",
+  "Your own search traffic and returning guests"
 ];
 
 const renderFormattedText = (text: string) => {
@@ -65,19 +76,9 @@ const renderFormattedText = (text: string) => {
 
 export default function ScalePractice({ t }: ScalePracticeProps) {
   const items = t?.scaleItems || DEFAULT_ITEMS;
-  const replacesWord = t?.scaleReplacesWord || 'Replaces';
   const subtitleText = t?.scaleSub || "Automate workflows so your team can focus on guest experience";
-
-  // Первое слово строки («Replaces» и его переводы) выделяется цветом
-  const renderReplaces = (text: string) => {
-    if (!text.startsWith(replacesWord)) return text;
-    return (
-      <>
-        <span className="replaces-word">{replacesWord}</span>
-        {text.slice(replacesWord.length)}
-      </>
-    );
-  };
+  const cmpNow: string[] = t?.scaleCmpNow || DEFAULT_CMP_NOW;
+  const cmpAfter: string[] = t?.scaleCmpAfter || DEFAULT_CMP_AFTER;
 
   const renderSubtitle = (sub: string) => {
     const target = "so your team";
@@ -128,6 +129,170 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         :global(.sub-break) {
           display: inline;
+        }
+
+        /* ---- ПОЛОСА СРАВНЕНИЯ ----
+           Единственный брейкпоинт полосы — 760px, и все её правила собраны
+           здесь: остальная секция ломается на 767/768, и если смешать сетки,
+           в диапазоне 760–767px обе раскладки применяются разом. */
+        .cmp {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 12px;
+          margin-bottom: 40px;
+        }
+
+        .cmp-col {
+          background: #101214;
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          border-radius: 16px;
+          padding: 22px;
+          min-width: 0;
+        }
+
+        .cmp-col.now {
+          background: #0B0C0D;
+        }
+
+        .cmp-col.after {
+          border-color: rgba(110, 231, 168, 0.22);
+        }
+
+        .cmp-h {
+          font-size: 10.5px;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          font-weight: 700;
+          margin: 0 0 16px 0;
+        }
+
+        .cmp-h.now {
+          color: #5A6069;
+        }
+
+        .cmp-h.after {
+          color: ${T.mint};
+        }
+
+        .cmp-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .cmp-list li {
+          display: flex;
+          gap: 10px;
+          align-items: flex-start;
+          font-size: 14.5px;
+          line-height: 1.45;
+          padding: 11px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+          text-wrap: pretty;
+        }
+
+        .cmp-list li:last-child {
+          border-bottom: none;
+        }
+
+        .cmp-col.now .cmp-list li {
+          color: #7B818A;
+        }
+
+        .cmp-col.after .cmp-list li {
+          color: #F2F4F6;
+          font-weight: 500;
+        }
+
+        .mk {
+          flex: none;
+          width: 16px;
+          text-align: center;
+          line-height: 1.45;
+        }
+
+        .cmp-col.now .mk {
+          color: #41464D;
+        }
+
+        .cmp-col.after .mk {
+          color: ${T.mint};
+        }
+
+        .cmp-mid {
+          display: none;
+        }
+
+        /* Мобилка: колонки друг под другом, серая сверху, стрелка скрыта */
+        @media (max-width: 759px) {
+          .cmp {
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .cmp-col {
+            padding: 18px 16px;
+          }
+          .cmp-list li {
+            font-size: 14px;
+          }
+        }
+
+        /* Десктоп: две равные колонки, сшитые круглой стрелкой по стыку */
+        @media (min-width: 760px) {
+          .cmp {
+            grid-template-columns: 1fr auto 1fr;
+            gap: 0;
+            align-items: stretch;
+          }
+          /* Внутренние границы убраны — полоса читается как единый элемент */
+          .cmp-col.now {
+            border-radius: 16px 0 0 16px;
+            border-right: none;
+          }
+          .cmp-col.after {
+            border-radius: 0 16px 16px 0;
+            border-left: none;
+          }
+          /* Пункты выравниваются попарно: строка держит высоту двух строк
+             текста плюс вертикальные паддинги, поэтому однострочный пункт не
+             сдвигает соседний столбец */
+          .cmp-list li {
+            min-height: calc(2.9em + 22px);
+          }
+          .cmp-mid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            position: relative;
+            z-index: 2;
+          }
+          .cmp-arrow {
+            width: 38px;
+            height: 38px;
+            border-radius: 99px;
+            background: ${T.bg0};
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: ${T.mint};
+            font-size: 15px;
+            line-height: 1;
+          }
+        }
+
+        /* Нижний край двухколоночной раскладки: колонка сужается до ~330px, и
+           самый длинный пункт (русский) уходит в третью строку — кегль на
+           полпункта мельче возвращает его в две, сохраняя парность строк */
+        @media (min-width: 760px) and (max-width: 899px) {
+          .cmp-col {
+            padding: 20px 18px;
+          }
+          .cmp-list li {
+            font-size: 13.5px;
+          }
         }
 
         .scale-grid {
@@ -231,35 +396,11 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           line-height: 1.3;
         }
 
-        /* Что заменяет решение — одна строка под заголовком, вместо панели «сейчас» */
-        .replaces-line {
-          margin: 10px 0 14px;
-          font-size: 13px;
-          line-height: 1.45;
-          font-weight: 400;
-          color: #868C95;
-          text-align: center;
-          text-wrap: pretty;
-        }
-
-        :global(.replaces-word) {
-          color: #6EE7A8;
-          font-weight: 600;
-          letter-spacing: 0.02em;
-        }
-
-        .replaces-divider {
-          width: 48px;
-          height: 1px;
-          margin: 0 auto 14px;
-          background: rgba(255, 255, 255, 0.07);
-        }
-
         .card-description {
           color: ${T.sub};
           font-size: 0.95rem;
           line-height: 1.6;
-          margin: 0;
+          margin: 12px 0 0;
           text-wrap: pretty;
           text-align: center;
         }
@@ -289,13 +430,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
           .card-body {
             padding: 1.5rem 0.85rem 1.25rem;
-          }
-          .replaces-line {
-            font-size: 12px;
-            margin: 8px 0 12px;
-          }
-          .replaces-divider {
-            margin-bottom: 12px;
           }
           .image-wrapper {
             height: 100px;
@@ -352,6 +486,36 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           </p>
         </div>
 
+        <div className="cmp">
+          <div className="cmp-col now">
+            <p className="cmp-h now">{t?.scaleCmpNowLabel || "WITHOUT A DIRECT SYSTEM"}</p>
+            <ul className="cmp-list">
+              {cmpNow.map((line, i) => (
+                <li key={i}>
+                  <span className="mk" aria-hidden="true">—</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="cmp-mid" aria-hidden="true">
+            <div className="cmp-arrow">→</div>
+          </div>
+
+          <div className="cmp-col after">
+            <p className="cmp-h after">{t?.scaleCmpAfterLabel || "WITH FT AGENCY"}</p>
+            <ul className="cmp-list">
+              {cmpAfter.map((line, i) => (
+                <li key={i}>
+                  <span className="mk" aria-hidden="true">✓</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         <div className="scale-grid">
           {items.map((item: any, idx: number) => {
             const metricTitle = item.endValue
@@ -378,13 +542,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
                     >
                       {metricTitle}
                     </h3>
-
-                    {item.replaces && (
-                      <>
-                        <p className="replaces-line">{renderReplaces(item.replaces)}</p>
-                        <span className="replaces-divider" aria-hidden="true" />
-                      </>
-                    )}
 
                     <p className="card-description">
                       {renderFormattedText(item.desc)}

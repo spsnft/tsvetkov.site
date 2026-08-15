@@ -10,7 +10,6 @@ interface HeroProps {
     heroSub1: string;
     heroSub2: string;
     btnAudit?: string;
-    btnAuditNote?: string;
     waMessage?: string;
     otaCostBadge?: string;
   } & CalcCopy;
@@ -75,11 +74,11 @@ export default function Hero({ t }: HeroProps) {
         }
 
         .title {
-          font-size: clamp(2.4rem, 4.4vw, 3.9rem);
+          font-size: clamp(30px, 5.8vw, 58px);
           font-weight: 800;
           line-height: 1.12;
           letter-spacing: -0.03em;
-          margin: 0 0 1.5rem 0;
+          margin: 0 0 24px 0;
           color: #fff;
           text-wrap: balance;
           width: 100%;
@@ -91,8 +90,10 @@ export default function Hero({ t }: HeroProps) {
           -webkit-text-fill-color: transparent;
         }
 
+        /* Два подзаголовка читаются как пара: между собой 6px, до следующей
+           строки — 20px */
         .subtitles-block {
-          margin-bottom: 1.5rem;
+          margin-bottom: 20px;
           display: block !important;
         }
 
@@ -107,14 +108,14 @@ export default function Hero({ t }: HeroProps) {
           white-space: pre-line;
         }
         .sub-line-2 {
-          margin-top: 0.4rem;
+          margin-top: 6px;
         }
 
         .utp-highlight {
           font-size: clamp(1.25rem, 2.1vw, 1.45rem);
           font-weight: 700;
           color: #00E599;
-          margin-bottom: 2.2rem;
+          margin-bottom: 26px;
           letter-spacing: -0.01em;
           display: block;
         }
@@ -135,14 +136,6 @@ export default function Hero({ t }: HeroProps) {
 
         .cta-container :global(.btn-premium-core svg) {
           flex-shrink: 0;
-        }
-
-        .cta-note {
-          margin: 0.85rem 0 0;
-          font-size: 0.8rem;
-          line-height: 1.45;
-          color: #6B7688;
-          max-width: 620px;
         }
 
         .visual-column {
@@ -260,10 +253,6 @@ export default function Hero({ t }: HeroProps) {
             width: 100%;
             max-width: 520px;
           }
-          .cta-note {
-            text-align: center;
-            max-width: 520px;
-          }
           .visual-column { display: none !important; }
         }
 
@@ -272,20 +261,6 @@ export default function Hero({ t }: HeroProps) {
           .cta-container :global(.btn-premium-core) {
             padding: 0 0.7rem;
             font-size: 0.95rem;
-          }
-        }
-
-        /* Поджимаем ритм первого экрана, чтобы подстрочник под кнопкой
-           помещался над фолдом на 390px */
-        @media (max-width: 480px) {
-          .title {
-            line-height: 1.06;
-          }
-          .subtitles-block {
-            margin-bottom: 18px;
-          }
-          .utp-highlight {
-            margin-bottom: 22px;
           }
         }
 
@@ -329,8 +304,6 @@ export default function Hero({ t }: HeroProps) {
                 message={t.waMessage}
               />
             </div>
-
-            {t.btnAuditNote && <p className="cta-note">{t.btnAuditNote}</p>}
           </div>
 
           <div className="visual-column">

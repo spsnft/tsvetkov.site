@@ -6,7 +6,7 @@ import { T } from '../../../src/theme/tokens';
 interface AboutProps {
   t?: {
     aboutLabel?: string;
-    aboutName?: string;
+    aboutAgency?: string;
     aboutRole?: string;
     aboutLocation?: string;
     aboutP1?: string;
@@ -56,8 +56,8 @@ export default function About({ t = {} }: AboutProps) {
         }
 
         /* Та же дисплейная гарнитура и то же начертание, что у заголовков
-           секций, ступенью мельче — имя не должно выпадать из страницы */
-        .about-name {
+           секций, ступенью мельче — агентство не должно выпадать из страницы */
+        .about-agency {
           font-family: 'Space Grotesk', system-ui, sans-serif;
           font-size: clamp(26px, 4vw, 36px);
           font-weight: 800;
@@ -67,15 +67,17 @@ export default function About({ t = {} }: AboutProps) {
           line-height: 1.2;
         }
 
+        /* Человек — подпись к агентству, а не объект блока */
         .about-role {
-          font-size: 0.95rem;
+          font-size: 1rem;
           color: ${T.body};
           margin: 0.5rem 0 0 0;
           line-height: 1.45;
+          text-wrap: pretty;
         }
 
         .about-location {
-          font-size: 0.88rem;
+          font-size: 0.875rem;
           color: ${T.muted};
           margin: 0.35rem 0 0 0;
           line-height: 1.45;
@@ -196,10 +198,10 @@ export default function About({ t = {} }: AboutProps) {
             padding: 0 0 2.5rem 0;
           }
           .about-role {
-            font-size: 0.88rem;
+            font-size: 0.94rem;
           }
           .about-location {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
           }
           .about-text {
             margin-top: 1.6rem;
@@ -243,8 +245,8 @@ export default function About({ t = {} }: AboutProps) {
         <div className="about-block">
           {t.aboutLabel && <p className="about-label">{t.aboutLabel}</p>}
 
-          <h3 className="about-name">{t.aboutName || "Fedor Tsvetkov"}</h3>
-          <p className="about-role">{t.aboutRole || "Founder & Managing Director, FT Agency"}</p>
+          <h3 className="about-agency">{t.aboutAgency || "FT Agency"}</h3>
+          <p className="about-role">{t.aboutRole || "Fedor Tsvetkov · Founder & Managing Director"}</p>
           {t.aboutLocation && <p className="about-location">{t.aboutLocation}</p>}
 
           <div className="about-text">
