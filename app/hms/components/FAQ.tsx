@@ -126,14 +126,23 @@ export default function FAQ({ t }: FAQProps) {
           overflow: hidden;
         }
 
+        /* Ответ может состоять из нескольких абзацев: рамка и внешние отступы
+           живут на контейнере, чтобы у каждого абзаца не появлялась своя линия */
         .faq-answer-text {
-          padding: 0 1.5rem 1.5rem 1.5rem;
+          padding: 1rem 1.5rem 1.5rem 1.5rem;
           margin: 0;
           color: ${T.body};
           font-size: 0.95rem;
           line-height: 1.6;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
-          padding-top: 1rem;
+        }
+
+        .faq-answer-text p {
+          margin: 0;
+        }
+
+        .faq-answer-text p + p {
+          margin-top: 0.85rem;
         }
 
         /* --- ПЛАНШЕТЫ (768px - 1024px) --- */
@@ -151,8 +160,7 @@ export default function FAQ({ t }: FAQProps) {
           .faq-title { font-size: 1.8rem; }
           .faq-button { font-size: 1rem; padding: 1.2rem; }
           
-          /* Было: padding: 0 1.2rem... Стало: padding: 1rem 1.2rem... */
-          .faq-answer-text { padding: 1rem 1.2rem 1.2rem 1.2rem; font-size: 0.9rem; } 
+          .faq-answer-text { padding: 1rem 1.2rem 1.2rem 1.2rem; font-size: 0.9rem; }
         }
       `}</style>
 
@@ -188,7 +196,11 @@ export default function FAQ({ t }: FAQProps) {
                   }}
                 >
                   <div className="faq-answer-inner">
-                    <p className="faq-answer-text">{item.a}</p>
+                    <div className="faq-answer-text">
+                      {String(item.a).split('\n\n').map((para: string, i: number) => (
+                        <p key={i}>{para}</p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

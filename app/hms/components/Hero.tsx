@@ -311,7 +311,7 @@ export default function Hero({ t }: HeroProps) {
 
             <div className="cta-container">
               <WhatsAppCta
-                label={t.btnAudit || "Free 20-min Revenue Check"}
+                label={t.btnAudit || "Free Revenue Check"}
                 message={t.waMessage}
               />
             </div>

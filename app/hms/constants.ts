@@ -24,11 +24,13 @@ export const contentData = {
     heroTitle: "Stop Paying 15-20% Commissions to Booking.com & Agoda",
     heroSub1: "Connect your Phuket property directly to guests\nZero risk of human error and double-bookings",
     heroSub2: "Keep 100% of the profit in your pocket",
-    btnAudit: "Free 20-min Revenue Check",
+    // Обещание держится на результате, а не на длительности: календаря и созвона
+    // на странице нет, конверсия ведёт в WhatsApp
+    btnAudit: "Free Revenue Check",
     btnAuditShort: "Free Check",
 
     // Единственный преднабранный текст WhatsApp — тариф человек называет сам
-    waMessage: "Hi! I'd like a free 20-min revenue check for my property.",
+    waMessage: "Hi! I'd like a free revenue check for my property.",
 
     // --- NAV ---
     navAbout: "About Us",
@@ -121,8 +123,8 @@ export const contentData = {
     riskTitle: "50% upfront, 50% on launch.",
     riskText: "Not live in 14 days — you don't pay the second half.",
 
-    // Микрокопия под каждой главной кнопкой — что произойдёт после нажатия
-    ctaNote: "Opens WhatsApp. We reply within a few hours, usually the same day.",
+    // Микрокопия под каждой главной кнопкой — что человек даёт и что получает
+    ctaNote: "Send us your property name. We reply with what OTAs are costing you — your numbers, not an example.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -144,27 +146,33 @@ export const contentData = {
 
     // --- FAQ SECTION ---
     faqTitle: "Frequently Asked Questions",
-    faqSub: "Everything you need to know about pricing, setup, and system ownership",
+    faqSub: "The questions owners actually ask",
+    // Порядок вопросов идёт от главного возражения (уход с OTA) к механике
+    // сделки. Пустая строка внутри `a` разбивает ответ на абзацы при рендере
     faqItems: [
       {
-        q: "Are there any hidden fees or commissions?",
-        a: "Zero commission from us — you pay our one-time setup fee and keep 100% of direct booking revenue. The only separate expense is the third-party software subscription, paid directly to providers without any agent markups"
+        q: "Do I have to leave Booking.com and Agoda?",
+        a: "No. You keep every channel you use today. A direct booking system doesn't replace OTAs — it adds a channel you own. Most properties still get 70–85% of bookings through OTAs in year one. The difference is that the bookings that come direct cost you 0% instead of 15–20%."
       },
       {
-        q: "Will my team be able to manage the system easily?",
-        a: "Yes — modern Cloud PMS platforms are as intuitive as a smartphone app and need zero technical background. If your team wants custom operational handbooks, checklists, or hands-on staff onboarding, that's available as a tailored add-on — we'll scope it together on your revenue check call."
+        q: "Will Booking.com penalise me for taking direct bookings?",
+        a: "Direct bookings themselves are never a problem — every property on Booking.com also sells directly. What OTA contracts do restrict is showing a lower public price on your own site: break that and the response isn't a fine, it's quieter — a drop in ranking, loss of Preferred status. Most owners find that out the hard way.\n\nWe set your system up so it never happens. Your public rates stay aligned, you simply stop paying commission on the bookings that come direct. And when you do want to reward direct guests, there are ways the contracts allow — member rates behind an email signup, breakfast, late checkout. We configure those correctly."
       },
       {
-        q: "How long does the setup take, and will it interrupt my daily bookings?",
-        a: "Most properties are fully integrated in 7 to 14 days — larger or multi-property portfolios are scoped individually. All technical configuration, payment testing, and channel syncing happen in the background, so your existing reservations and daily operations run smoothly without downtime."
+        q: "Are there any hidden fees, and what does the software cost each month?",
+        a: "Zero commission from us, ever. You pay our one-time setup fee and keep 100% of direct booking revenue. The one ongoing cost is the software subscription, paid directly to the provider — typically $30–100/month depending on platform and property size. No markup from us, no agent fees. We'll confirm the exact figure for your property before you commit to anything."
       },
       {
-        q: "What support do you offer after the system goes live?",
-        a: "We don't disappear after setup. Every project includes 14 days of dedicated post-launch monitoring to fine-tune operations and ensure everything runs flawlessly. After that, you can manage it independently or opt for our monthly maintenance package"
+        q: "Who owns the system if we stop working together?",
+        a: "You do — the accounts, the data, the guest list, the booking engine. Everything is set up in your name from day one. There's no lock-in and no revenue share. If you want to run it alone after launch, you can. If you want us on monthly support, that's optional and separate."
+      },
+      {
+        q: "What happens after I send a message?",
+        a: "You send your property name. We reply — usually the same day — with what OTAs are costing you based on your actual listings: your rates, your room count, your channel mix. Your numbers, not an example.\n\nIf it looks worth doing, we scope the setup: most properties are live in 7–14 days, with configuration and testing running in the background so your current bookings are never interrupted. Payment is 50% upfront, 50% on launch — and if it's not live in 14 days, you don't pay the second half."
       },
       {
         q: "How do guests pay, and how fast do I get my money?",
-        a: "We connect secure payment gateways directly to your direct booking engine. Guest payments go into your corporate bank account without middleman delays"
+        a: "Guests pay through a secure payment gateway connected to your own booking engine. The money goes to your business bank account directly — no middleman holding it, no waiting for a platform payout cycle. The gateway is in your name, not ours."
       }
     ],
 
@@ -172,7 +180,7 @@ export const contentData = {
     footerTitle: "Ready to maximize your revenue?",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Take full control of your direct bookings",
-    footerBtn: "Free 20-min Revenue Check"
+    footerBtn: "Free Revenue Check"
   },
 
   ru: {
@@ -277,8 +285,10 @@ export const contentData = {
     riskTitle: "50% на старте, 50% при запуске.",
     riskText: "Не запустили за 14 дней — вторую половину вы не платите.",
 
-    // Микрокопия под каждой главной кнопкой — что произойдёт после нажатия
-    ctaNote: "Откроется WhatsApp. Отвечаем за несколько часов, обычно в тот же день.",
+    // Микрокопия под каждой главной кнопкой — что человек даёт и что получает
+    // TODO(i18n): временно английский — языковой проход по RU идёт отдельной
+    // задачей, полуперевод намеренно не делаем
+    ctaNote: "Send us your property name. We reply with what OTAs are costing you — your numbers, not an example.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -300,27 +310,33 @@ export const contentData = {
 
     // --- FAQ SECTION ---
     faqTitle: "Частые вопросы",
-    faqSub: "Всё, что нужно знать о цене, внедрении и владении системой",
+    // TODO(i18n): весь блок FAQ временно на английском — тексты будут писаться
+    // от смысла в отдельной языковой задаче, а не переводиться дословно
+    faqSub: "The questions owners actually ask",
     faqItems: [
       {
-        q: "Есть ли скрытые платежи или комиссии?",
-        a: "С нашей стороны — ноль комиссии: вы платите разовую стоимость внедрения и оставляете 100% выручки с прямых броней себе. Единственный отдельный расход — подписка на стороннее ПО, которая оплачивается напрямую провайдеру без каких-либо наценок с нашей стороны"
+        q: "Do I have to leave Booking.com and Agoda?",
+        a: "No. You keep every channel you use today. A direct booking system doesn't replace OTAs — it adds a channel you own. Most properties still get 70–85% of bookings through OTAs in year one. The difference is that the bookings that come direct cost you 0% instead of 15–20%."
       },
       {
-        q: "Сможет ли моя команда легко управлять системой?",
-        a: "Да — современные Cloud PMS так же интуитивны, как приложение на смартфоне, и не требуют технической подготовки. Если команде нужны индивидуальные инструкции, чек-листы или практическое обучение персонала — это доступно как отдельная опция, детали обсудим на разборе"
+        q: "Will Booking.com penalise me for taking direct bookings?",
+        a: "Direct bookings themselves are never a problem — every property on Booking.com also sells directly. What OTA contracts do restrict is showing a lower public price on your own site: break that and the response isn't a fine, it's quieter — a drop in ranking, loss of Preferred status. Most owners find that out the hard way.\n\nWe set your system up so it never happens. Your public rates stay aligned, you simply stop paying commission on the bookings that come direct. And when you do want to reward direct guests, there are ways the contracts allow — member rates behind an email signup, breakfast, late checkout. We configure those correctly."
       },
       {
-        q: "Сколько занимает внедрение и повлияет ли это на текущие брони?",
-        a: "Для большинства объектов внедрение занимает 7–14 дней — для крупных или мультиобъектных портфелей сроки оцениваются индивидуально. Вся техническая настройка, тестирование платежей и синхронизация каналов проходят в фоне, поэтому текущие брони и ежедневная работа не прерываются"
+        q: "Are there any hidden fees, and what does the software cost each month?",
+        a: "Zero commission from us, ever. You pay our one-time setup fee and keep 100% of direct booking revenue. The one ongoing cost is the software subscription, paid directly to the provider — typically $30–100/month depending on platform and property size. No markup from us, no agent fees. We'll confirm the exact figure for your property before you commit to anything."
       },
       {
-        q: "Какая поддержка есть после запуска системы?",
-        a: "Мы не исчезаем после внедрения. Каждый проект включает 14 дней сопровождения после запуска — донастраиваем процессы и следим, чтобы всё работало без сбоев. После этого можно управлять системой самостоятельно или перейти на ежемесячный пакет сопровождения"
+        q: "Who owns the system if we stop working together?",
+        a: "You do — the accounts, the data, the guest list, the booking engine. Everything is set up in your name from day one. There's no lock-in and no revenue share. If you want to run it alone after launch, you can. If you want us on monthly support, that's optional and separate."
       },
       {
-        q: "Как гости оплачивают и как быстро я получаю деньги?",
-        a: "Мы подключаем защищённые платёжные шлюзы напрямую к системе прямых броней. Оплата от гостей поступает на ваш корпоративный счёт без задержек посредников"
+        q: "What happens after I send a message?",
+        a: "You send your property name. We reply — usually the same day — with what OTAs are costing you based on your actual listings: your rates, your room count, your channel mix. Your numbers, not an example.\n\nIf it looks worth doing, we scope the setup: most properties are live in 7–14 days, with configuration and testing running in the background so your current bookings are never interrupted. Payment is 50% upfront, 50% on launch — and if it's not live in 14 days, you don't pay the second half."
+      },
+      {
+        q: "How do guests pay, and how fast do I get my money?",
+        a: "Guests pay through a secure payment gateway connected to your own booking engine. The money goes to your business bank account directly — no middleman holding it, no waiting for a platform payout cycle. The gateway is in your name, not ours."
       }
     ],
 
@@ -433,7 +449,9 @@ export const contentData = {
     riskText: "ถ้าระบบไม่เปิดใช้งานใน 14 วัน คุณไม่ต้องจ่ายครึ่งหลัง",
 
     // Микрокопия под каждой главной кнопкой — что произойдёт после нажатия
-    ctaNote: "จะเปิดแชต WhatsApp เราตอบกลับภายในไม่กี่ชั่วโมง ส่วนใหญ่ตอบภายในวันเดียวกัน",
+    // TODO(i18n): временно английский — языковой проход по TH идёт отдельной
+    // задачей, полуперевод намеренно не делаем
+    ctaNote: "Send us your property name. We reply with what OTAs are costing you — your numbers, not an example.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -455,27 +473,35 @@ export const contentData = {
 
     // --- FAQ SECTION ---
     faqTitle: "คำถามที่พบบ่อย",
-    faqSub: "ทุกเรื่องที่คุณต้องรู้เกี่ยวกับราคา การติดตั้ง และการครอบครองระบบ",
+    // TODO(i18n): весь блок FAQ временно на английском — тексты будут писаться
+    // от смысла в отдельной языковой задаче, а не переводиться дословно
+    faqSub: "The questions owners actually ask",
+    // Порядок вопросов идёт от главного возражения (уход с OTA) к механике
+    // сделки. Пустая строка внутри `a` разбивает ответ на абзацы при рендере
     faqItems: [
       {
-        q: "มีค่าธรรมเนียมแอบแฝงหรือค่าคอมมิชชั่นหรือไม่?",
-        a: "ไม่มีค่าคอมมิชชั่นจากเรา — คุณจ่ายเพียงค่าตั้งค่าระบบครั้งเดียวและรับรายได้จากการจองตรง 100% โดยมีเพียงค่าสมัครใช้งานซอฟต์แวร์ภายนอกที่ชำระตรงกับผู้ให้บริการโดยไม่มีการบวกเพิ่ม"
+        q: "Do I have to leave Booking.com and Agoda?",
+        a: "No. You keep every channel you use today. A direct booking system doesn't replace OTAs — it adds a channel you own. Most properties still get 70–85% of bookings through OTAs in year one. The difference is that the bookings that come direct cost you 0% instead of 15–20%."
       },
       {
-        q: "ทีมงานของเราจะสามารถดูแลระบบได้ง่ายหรือไม่?",
-        a: "แน่นอนครับ ระบบ Cloud PMS สมัยใหม่ถูกออกแบบให้ใช้งานง่ายเหมือนแอปบนมือถือ ไม่จำเป็นต้องมีความรู้ทางเทคนิค หากทีมของคุณต้องการคู่มือการทำงาน (SOP) เช็กลิสต์ หรือการฝึกอบรมทีมงานแบบเจาะลึก เราจัดให้ได้เป็นออปชันเสริมเฉพาะทาง — พูดคุยรายละเอียดกันได้ในคอลตรวจสอบฟรี"
+        q: "Will Booking.com penalise me for taking direct bookings?",
+        a: "Direct bookings themselves are never a problem — every property on Booking.com also sells directly. What OTA contracts do restrict is showing a lower public price on your own site: break that and the response isn't a fine, it's quieter — a drop in ranking, loss of Preferred status. Most owners find that out the hard way.\n\nWe set your system up so it never happens. Your public rates stay aligned, you simply stop paying commission on the bookings that come direct. And when you do want to reward direct guests, there are ways the contracts allow — member rates behind an email signup, breakfast, late checkout. We configure those correctly."
       },
       {
-        q: "การติดตั้งใช้เวลานานเท่าใด และจะกระทบต่อการจองประจำวันหรือไม่?",
-        a: "สำหรับที่พักส่วนใหญ่ การติดตั้งระบบใช้เวลา 7 ถึง 14 วัน ส่วนพอร์ตโฟลิโอขนาดใหญ่หรือหลายสาขาจะประเมินระยะเวลาเฉพาะราย การเชื่อมต่อระบบ การทดสอบชำระเงิน และการซิงค์ปฏิทินทั้งหมดจะทำอยู่หลังบ้าน ทำให้การจองที่มีอยู่และการทำงานประจำวันของคุณดำเนินไปได้อย่างต่อเนื่องโดยไม่มีชะงัก"
+        q: "Are there any hidden fees, and what does the software cost each month?",
+        a: "Zero commission from us, ever. You pay our one-time setup fee and keep 100% of direct booking revenue. The one ongoing cost is the software subscription, paid directly to the provider — typically $30–100/month depending on platform and property size. No markup from us, no agent fees. We'll confirm the exact figure for your property before you commit to anything."
       },
       {
-        q: "มีการดูแลอย่างไรหลังจากเปิดใช้งานระบบแล้ว?",
-        a: "เราไม่ทิ้งคุณหลังตั้งค่าเสร็จ ทุกโครงการรวมการดูแลและติดตามผลหลังเปิดใช้งาน 14 วันเพื่อปรับแต่งระบบให้สมบูรณ์แบบ หลังจากนั้นคุณสามารถดูแลระบบเอง หรือเลือกใช้บริการดูแลและติดตามผลรายเดือนจากเราได้"
+        q: "Who owns the system if we stop working together?",
+        a: "You do — the accounts, the data, the guest list, the booking engine. Everything is set up in your name from day one. There's no lock-in and no revenue share. If you want to run it alone after launch, you can. If you want us on monthly support, that's optional and separate."
       },
       {
-        q: "ผู้เข้าพักชำระเงินอย่างไร และเราจะได้รับเงินเร็วแค่ไหน?",
-        a: "เราเชื่อมต่อระบบชำระเงินที่ปลอดภัยเข้ากับระบบจองตรงของคุณโดยตรง เงินจากผู้เข้าพักจะโอนเข้าบัญชีธนาคารของคุณโดยตรงโดยไม่มีการล่าช้าจากคนกลาง"
+        q: "What happens after I send a message?",
+        a: "You send your property name. We reply — usually the same day — with what OTAs are costing you based on your actual listings: your rates, your room count, your channel mix. Your numbers, not an example.\n\nIf it looks worth doing, we scope the setup: most properties are live in 7–14 days, with configuration and testing running in the background so your current bookings are never interrupted. Payment is 50% upfront, 50% on launch — and if it's not live in 14 days, you don't pay the second half."
+      },
+      {
+        q: "How do guests pay, and how fast do I get my money?",
+        a: "Guests pay through a secure payment gateway connected to your own booking engine. The money goes to your business bank account directly — no middleman holding it, no waiting for a platform payout cycle. The gateway is in your name, not ours."
       }
     ],
 

@@ -22,7 +22,7 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
   const titleText = t.footerTitle || "Ready to maximize your revenue?";
   const sub1Text = t.footerSub1 || t.footerSub || "Stop leaving 15–20% on the table";
   const sub2Text = t.footerSub2 || "Take full control of your direct bookings";
-  const btnText = t.footerBtn || t.btnAudit || "Free 20-min Revenue Check";
+  const btnText = t.footerBtn || t.btnAudit || "Free Revenue Check";
 
   return (
     <section className="footer-cta-section">
