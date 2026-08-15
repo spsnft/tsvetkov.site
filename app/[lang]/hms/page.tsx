@@ -23,8 +23,21 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const locale = lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US';
   const url = `${SITE_URL}/${lang}/hms`;
 
+  // Картинка объявлена абсолютным URL, а не оставлена на файловую конвенцию
+  // opengraph-image.tsx. Для картинок соцсетей Next подменяет metadataBase на
+  // адрес превью-деплоя (getSocialImageMetadataBaseFallback: при
+  // VERCEL_ENV=preview выигрывает VERCEL_BRANCH_URL, даже если metadataBase
+  // задан явно) — именно поэтому в мету уезжал *-git-*.vercel.app. Абсолютный
+  // URL резолвер пропускает как есть, без всякой базы.
+  const ogImage = {
+    url: `${SITE_URL}/${lang}/hms/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: meta.title,
+  };
+
   return {
-    // Явный metadataBase: og:image и прочие относительные URL резолвятся от
+    // Явный metadataBase: canonical и прочие относительные URL резолвятся от
     // продакшен-домена, а не от адреса превью-деплоя
     metadataBase: new URL(SITE_URL),
     title: meta.title,
@@ -39,11 +52,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       siteName: 'Fedor Tsvetkov',
       locale,
       type: 'website',
+      images: [ogImage],
     },
     twitter: {
       card: 'summary',
       title: meta.title,
       description: meta.description,
+      images: [ogImage.url],
     },
   };
 }

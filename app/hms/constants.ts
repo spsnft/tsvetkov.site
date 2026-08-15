@@ -90,7 +90,8 @@ export const contentData = {
     // а человек становится подписью под ним
     aboutLabel: "WHO'S BEHIND THIS",
     aboutAgency: "FT Agency",
-    aboutRole: "Fedor Tsvetkov · Founder & Managing Director",
+    aboutName: "Fedor Tsvetkov",
+    aboutRole: "Founder & Managing Director",
     aboutLocation: "Currently based in Phuket",
     aboutP1: "We build acquisition and automation systems for businesses that sell directly to their customers — and we run them end to end, not as one-off projects.",
     aboutP2: "Hospitality is where that translates most directly: properties handing 15–20% of revenue to platforms they don't control. We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share.",
@@ -233,7 +234,8 @@ export const contentData = {
     // а человек становится подписью под ним
     aboutLabel: "КТО ЗА ЭТИМ СТОИТ",
     aboutAgency: "FT Agency",
-    aboutRole: "Фёдор Цветков · основатель и управляющий директор",
+    aboutName: "Фёдор Цветков",
+    aboutRole: "основатель и управляющий директор",
     aboutLocation: "Сейчас базируемся на Пхукете",
     aboutP1: "Мы строим системы привлечения и автоматизации для бизнесов, которые продают напрямую своим клиентам, и ведём их от начала до конца, а не разовыми проектами.",
     aboutP2: "В отелях и виллах это работает нагляднее всего: объекты отдают 15–20% выручки платформам, которые им не принадлежат. Мы собираем систему прямых бронирований, передаём её вам в полную собственность и остаёмся на поддержке. Без привязки и без процента с выручки.",
@@ -374,7 +376,8 @@ export const contentData = {
     // а человек становится подписью под ним
     aboutLabel: "ใครอยู่เบื้องหลัง",
     aboutAgency: "FT Agency",
-    aboutRole: "Fedor Tsvetkov · ผู้ก่อตั้งและกรรมการผู้จัดการ",
+    aboutName: "Fedor Tsvetkov",
+    aboutRole: "ผู้ก่อตั้งและกรรมการผู้จัดการ",
     aboutLocation: "ปัจจุบันอยู่ที่ภูเก็ต",
     aboutP1: "เราสร้างระบบหาลูกค้าและระบบอัตโนมัติให้ธุรกิจที่ขายตรงถึงลูกค้า และดูแลตั้งแต่ต้นจนจบ ไม่ใช่งานครั้งเดียวจบ",
     aboutP2: "ธุรกิจที่พักคือกลุ่มที่เห็นผลชัดที่สุด — ที่พักที่ต้องยกรายได้ 15–20% ให้แพลตฟอร์มที่ตัวเองควบคุมไม่ได้ เราสร้างระบบจองตรง ส่งมอบความเป็นเจ้าของให้คุณทั้งหมด และดูแลต่อหลังส่งมอบ ไม่มีสัญญาผูกมัด ไม่มีส่วนแบ่งรายได้",

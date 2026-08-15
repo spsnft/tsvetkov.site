@@ -2,36 +2,44 @@
  * Канонический хост продакшена.
  *
  * Абсолютные URL в мете (og:image в том числе) строятся только от него: без
- * явного metadataBase Next.js подставляет VERCEL_URL, и на превью-деплое в
- * og:image уезжает адрес вида *-git-*.vercel.app, который потом кешируется
- * мессенджерами.
+ * явного metadataBase Next.js подставляет VERCEL_URL, и в og:image уезжает
+ * адрес вида *-git-*.vercel.app, который потом кешируется мессенджерами.
  *
- * Одного metadataBase оказалось мало: NEXT_PUBLIC_SITE_URL в окружении сборки
- * сам содержал адрес превью-деплоя, поэтому подменённая база всё равно
- * приводила к *.vercel.app. Теперь любой хост на vercel.app отбрасывается —
- * какой бы ни была переменная, в мету попадает продакшен-домен. Локальные
- * хосты (localhost и собственные домены) переопределение по-прежнему проходят.
+ * Одного metadataBase оказалось мало: NEXT_PUBLIC_SITE_URL в окружении
+ * задеплоенного проекта сам содержал адрес превью-домена, поэтому подстановка
+ * возвращалась через переменную. Ниже переменная не просто читается, а
+ * проверяется: всё, что резолвится в *.vercel.app, localhost или в невалидный
+ * URL, отбрасывается в пользу продакшен-домена. Переопределить хост
+ * переменной по-прежнему можно — но только на реальный домен.
  */
-const CANONICAL = 'https://www.tsvetkov.site';
+const PRODUCTION_URL = 'https://www.tsvetkov.site';
 
-function resolveSiteUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (!raw) return CANONICAL;
+function resolveSiteUrl(raw: string | undefined): string {
+  if (!raw) return PRODUCTION_URL;
+
+  const trimmed = raw.trim().replace(/\/+$/, '');
+  if (!trimmed) return PRODUCTION_URL;
+
+  // Переменную окружения задают и без схемы («www.tsvetkov.site»)
+  const withScheme = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 
   let host: string;
   try {
-    host = new URL(raw).hostname;
+    host = new URL(withScheme).hostname.toLowerCase();
   } catch {
-    // Значение не является абсолютным URL — доверять ему нельзя
-    return CANONICAL;
+    return PRODUCTION_URL;
   }
 
-  // Превью- и продакшен-деплои Vercel: og:image должен указывать на домен сайта
-  if (host === 'vercel.app' || host.endsWith('.vercel.app')) return CANONICAL;
+  // Превью- и локальные хосты в каноническую мету попадать не должны
+  const isEphemeral =
+    host.endsWith('.vercel.app') ||
+    host === 'localhost' ||
+    host.endsWith('.localhost') ||
+    host === '127.0.0.1';
 
-  return raw.replace(/\/+$/, '');
+  return isEphemeral ? PRODUCTION_URL : withScheme;
 }
 
-export const SITE_URL = resolveSiteUrl();
+export const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const siteUrl = (path = '/') => new URL(path, `${SITE_URL}/`).toString();

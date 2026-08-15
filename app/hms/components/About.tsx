@@ -7,6 +7,7 @@ interface AboutProps {
   t?: {
     aboutLabel?: string;
     aboutAgency?: string;
+    aboutName?: string;
     aboutRole?: string;
     aboutLocation?: string;
     aboutP1?: string;
@@ -246,7 +247,9 @@ export default function About({ t = {} }: AboutProps) {
           {t.aboutLabel && <p className="about-label">{t.aboutLabel}</p>}
 
           <h3 className="about-agency">{t.aboutAgency || "FT Agency"}</h3>
-          <p className="about-role">{t.aboutRole || "Fedor Tsvetkov · Founder & Managing Director"}</p>
+          <p className="about-role">
+            {t.aboutName || "Fedor Tsvetkov"} · {t.aboutRole || "Founder & Managing Director"}
+          </p>
           {t.aboutLocation && <p className="about-location">{t.aboutLocation}</p>}
 
           <div className="about-text">
