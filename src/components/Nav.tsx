@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 import { Logo } from '@/src/ui/Logo';
-import { useCalendlyPopup } from '@/src/components/useCalendlyPopup';
 import { contentData as hmsContentData } from '@/app/hms/constants';
+import { waHref, WhatsAppIcon } from '@/app/hms/components/WhatsAppCta';
 
 function NavLink({ href, label, isActive }: { href: string; label: string; isActive: boolean }) {
   return (
@@ -66,7 +66,12 @@ const BACK_LABEL: Record<string, string> = {
 export const Nav = ({ lang, dict }: NavProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { calendlyReady, popupLoading, openPopup } = useCalendlyPopup('https://calendly.com/fediatsvetkov/15min');
+  // До 1024px в шапку помещается только короткий вариант текста CTA
+  const [isCompactCta, setIsCompactCta] = useState(false);
+  // На узких экранах шапке не хватает ширины на полный текст CTA
+  const [isNarrow, setIsNarrow] = useState(false);
+  // 320px + длинный русский текст — самый узкий случай, ужимаем сильнее
+  const [isTiny, setIsTiny] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isPending, startTransition] = useTransition();
 
@@ -87,7 +92,12 @@ export const Nav = ({ lang, dict }: NavProps) => {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsCompactCta(window.innerWidth <= 1023);
+      setIsNarrow(window.innerWidth <= 480);
+      setIsTiny(window.innerWidth <= 360);
+    };
 
     handleScroll();
     handleResize();
@@ -135,7 +145,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
         border: '1px solid rgba(255, 255, 255, 0.05)',
         borderRadius: 30,
         padding: 2,
-        gap: 2,
+        gap: isNarrow ? 0 : 2,
         backdropFilter: 'blur(8px)',
         opacity: isPending ? 0.6 : 1,
         pointerEvents: isPending ? 'none' : 'auto',
@@ -151,13 +161,13 @@ export const Nav = ({ lang, dict }: NavProps) => {
             whileTap={{ scale: 0.92 }}
             style={{
               position: 'relative',
-              padding: '0.35rem 0.75rem',
+              padding: isTiny ? '0.28rem 0.38rem' : isNarrow ? '0.3rem 0.5rem' : '0.35rem 0.75rem',
               borderRadius: 26,
               border: '1px solid transparent',
               background: 'transparent',
               color: isActive ? T.accent : T.muted,
               fontWeight: isActive ? 700 : 500,
-              fontSize: '0.72rem',
+              fontSize: isTiny ? '0.62rem' : isNarrow ? '0.66rem' : '0.72rem',
               textTransform: 'uppercase',
               letterSpacing: '0.02em',
               cursor: 'pointer',
@@ -185,26 +195,30 @@ export const Nav = ({ lang, dict }: NavProps) => {
     </div>
   );
 
+  // Габариты кнопки задаются медиазапросами, а вариант текста — состоянием:
+  // в разметке должен быть ровно один текст, иначе скринридер читает оба,
+  // а в поисковую выдачу попадает склейка
   const ctaElement = isHms ? (
-    <motion.button
-      type="button"
-      onClick={openPopup}
-      disabled={!calendlyReady || popupLoading}
+    <motion.a
+      className="nav-cta"
+      href={waHref(hmsT.waMessage)}
+      target="_blank"
+      rel="noopener"
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
       style={{
-        padding: '9px 18px', borderRadius: 10,
+        borderRadius: 10,
         background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
-        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600, fontSize: '0.82rem',
+        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600,
         border: 'none', boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)',
-        opacity: calendlyReady ? 1 : 0.6, cursor: calendlyReady && !popupLoading ? 'pointer' : 'not-allowed',
-        whiteSpace: 'nowrap',
-        display: 'inline-flex', alignItems: 'center', gap: '8px',
+        textDecoration: 'none', cursor: 'pointer',
+        whiteSpace: 'nowrap', minWidth: 0,
+        display: 'inline-flex', alignItems: 'center', gap: '10px',
       }}
     >
-      {popupLoading && <span className="nav-btn-spinner" />}
-      {!calendlyReady ? 'Loading…' : popupLoading ? 'Opening…' : (hmsT.btnAudit || "Book a Free Audit")}
-    </motion.button>
+      <WhatsAppIcon size={15} />
+      <span>{isCompactCta ? (hmsT.btnAuditShort || hmsT.btnAudit) : hmsT.btnAudit}</span>
+    </motion.a>
   ) : (
     <motion.a
       href={`/${lang}#contact`}
@@ -229,10 +243,10 @@ export const Nav = ({ lang, dict }: NavProps) => {
       transition={{ duration: 0.6 }}
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: '0 clamp(1rem,5vw,2.5rem)', height: 64,
+        padding: isNarrow ? '0 0.75rem' : '0 clamp(1rem,5vw,2.5rem)', height: 64,
         display: isMobile ? 'grid' : 'flex',
         gridTemplateColumns: isMobile ? 'auto 1fr auto' : undefined,
-        columnGap: isMobile ? '0.75rem' : undefined,
+        columnGap: isMobile ? (isNarrow ? '0.4rem' : '0.75rem') : undefined,
         alignItems: 'center',
         justifyContent: isMobile ? undefined : 'space-between',
         background: scrolled ? 'rgba(10,10,12,0.85)' : 'transparent',
@@ -243,18 +257,29 @@ export const Nav = ({ lang, dict }: NavProps) => {
       }}
     >
       <style jsx>{`
-        .nav-btn-spinner {
-          width: 12px;
-          height: 12px;
-          border: 2px solid rgba(10, 10, 12, 0.3);
-          border-top-color: #0a0a0c;
-          border-radius: 50%;
-          display: inline-block;
-          animation: navBtnSpin 0.7s linear infinite;
+        :global(.nav-cta) {
+          padding: 9px 18px;
+          font-size: 0.82rem;
         }
-        @keyframes navBtnSpin {
-          to {
-            transform: rotate(360deg);
+
+        @media (max-width: 480px) {
+          :global(.nav-cta) {
+            padding: 9px 12px;
+            font-size: 0.76rem;
+            gap: 8px !important;
+          }
+        }
+
+        /* 320px + длинный русский текст — самый узкий случай, ужимаем сильнее */
+        @media (max-width: 360px) {
+          :global(.nav-cta) {
+            padding: 9px 9px;
+            font-size: 0.7rem;
+            gap: 6px !important;
+          }
+          :global(.nav-cta svg) {
+            width: 13px;
+            height: 13px;
           }
         }
       `}</style>
@@ -274,7 +299,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
       ) : (
         isHms ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-            <a href={`/${lang}`} style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>
+            <a href="#about" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>
               {BACK_LABEL[lang] ?? BACK_LABEL.en}
             </a>
             <span style={{ width: 1, height: 16, background: T.border }} />

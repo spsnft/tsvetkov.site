@@ -1,210 +1,104 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { T } from '../../../src/theme/tokens';
-
-interface MetricItem {
-  endValue: number;
-  prefix: string;
-  suffix: string;
-  label: string;
-}
+import RevenueCalc, { type CalcCopy } from './RevenueCalc';
 
 interface IndustryProofProps {
   t: {
-    proofMetrics?: MetricItem[];
-    [key: string]: any;
-  };
+    otaCostBadge?: string;
+  } & CalcCopy;
 }
 
-function ProofCounter({ end, duration, prefix, suffix, isVisible }: { 
-  end: number; 
-  duration: number; 
-  prefix: string; 
-  suffix: string; 
-  isVisible: boolean; 
-}) {
-  const [count, setCount] = useState<number>(0);
-
-  useEffect(() => {
-    if (!isVisible) {
-      setCount(0);
-      return;
-    }
-
-    let startTime: number | null = null;
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const easeProgress = progress * (2 - progress);
-      
-      setCount(Math.floor(easeProgress * end));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, [isVisible, end, duration]);
-
-  return (
-    <span>
-      {prefix}{count}{suffix}
-    </span>
-  );
-}
-
+/**
+ * Мобильный и планшетный близнец карточки расчёта из героя.
+ * На десктопе (≥1025px) скрыт — там тот же расчёт живёт в bento-карточке.
+ */
 export default function IndustryProof({ t }: IndustryProofProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Метрики по умолчанию
-  const metrics = t?.proofMetrics || [
-    { endValue: 40, prefix: "+", suffix: "%", label: "Direct Revenue" },
-    { endValue: 60, prefix: "+", suffix: "%", label: "Margin per Guest" },
-    { endValue: 300, prefix: "+", suffix: "%", label: "Google Traffic" },
-    { endValue: 35, prefix: "+", suffix: "%", label: "Repeat Bookings" },
-  ];
-
   return (
-    <section ref={sectionRef} className="proof-section">
+    <section className="proof-section">
       <style jsx>{`
+        /* Бейдж переехал внутрь карточки, освободившееся место отдано
+           отступу от кнопки героя */
         .proof-section {
           width: 100%;
           background-color: transparent;
-          /* Верхний отступ оставляем от Hero, нижний полностью убираем для стыковки с Marquee */
-          padding: 1.5rem 0 0 0; 
+          padding: 2.75rem 0 0 0;
         }
 
-        /* СКРЫВАЕМ НА ПК (от 1025px) */
         @media (min-width: 1025px) {
           .proof-section {
             display: none !important;
           }
         }
 
-        /* --- ПЛАНШЕТЫ (Сетка 4x1) --- */
-        .proof-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          width: 100%;
-          border-top: 1px solid ${T.border};
-          border-bottom: 1px solid ${T.border};
-        }
-        
-        .proof-col {
-          padding: 2rem 1rem;
+        /* Бейдж в верхнем левом углу карточки, 20px до подписи расчёта */
+        .proof-badge-row {
           display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          text-align: center;
+          justify-content: flex-start;
+          margin-bottom: 20px;
+        }
+
+        .proof-badge {
+          display: inline-flex;
           align-items: center;
-          border-right: 1px solid ${T.border};
+          gap: 0.45rem;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          color: ${T.accent};
+          background: ${T.accent08};
+          padding: 0.35rem 0.75rem;
+          border-radius: 20px;
+          border: 1px solid ${T.accent25};
         }
 
-        .proof-col:last-child {
-          border-right: none;
-        }
-        
-        .metric-number {
-          font-size: clamp(2rem, 4vw, 2.8rem);
-          font-weight: 800;
-          line-height: 1.1; 
-          letter-spacing: -0.03em;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          display: inline-block;
-          white-space: nowrap;
+        .pulse-dot {
+          width: 6px;
+          height: 6px;
+          background-color: ${T.accent};
+          border-radius: 50%;
+          box-shadow: 0 0 8px ${T.accent};
+          flex-shrink: 0;
         }
 
-        .metric-label {
-          color: ${T.sub};
-          font-size: 0.85rem;
-          line-height: 1.3;
-          margin: 0 auto;
-          font-weight: 500;
-          text-wrap: pretty;
-          max-width: 180px;
+        .proof-card {
+          background: rgba(12, 14, 20, 0.85);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          padding: 1.5rem 1.35rem;
+          box-sizing: border-box;
         }
 
-        .proof-caption {
-          margin: 0.9rem 0 0;
-          padding-bottom: 0.25rem;
-          font-size: 0.72rem;
-          font-weight: 500;
-          color: ${T.sub};
-          text-align: center;
-        }
-
-        /* --- МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) - Сетка 2x2 --- */
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
           .proof-section {
-            padding: 1rem 0 0 0; /* Также 0 снизу */
+            padding: 2.25rem 0 0 0;
           }
-          
-          .proof-grid {
-            grid-template-columns: repeat(2, 1fr); 
-            border-bottom: none;
+          .proof-card {
+            padding: 1.25rem 1.1rem;
+            border-radius: 16px;
           }
-          
-          .proof-col {
-            padding: 1.5rem 0.5rem;
-            border-right: none;
-          }
+        }
 
-          /* Рамки для сетки 2x2 */
-          .proof-col:nth-child(odd) {
-            border-right: 1px solid ${T.border};
-          }
-          .proof-col:nth-child(1), .proof-col:nth-child(2) {
-            border-bottom: 1px solid ${T.border};
-          }
-          /* Низ 3-го и 4-го элементов подчёркиваем рамкой, чтобы отделить от Marquee */
-          .proof-col:nth-child(3), .proof-col:nth-child(4) {
-            border-bottom: 1px solid ${T.border};
+        /* На 320px боковые паддинги карточки — это те самые пиксели, которых
+           не хватает сноске, чтобы уместиться в одну строку */
+        @media (max-width: 360px) {
+          .proof-card {
+            padding: 1.1rem 0.7rem;
           }
         }
       `}</style>
 
       <div className="container">
-        <div className="proof-grid">
-          {metrics.map((item, idx) => (
-            <div key={idx} className="proof-col">
-              <div className="metric-number">
-                <ProofCounter 
-                  end={item.endValue} 
-                  duration={1400} 
-                  prefix={item.prefix} 
-                  suffix={item.suffix} 
-                  isVisible={isVisible} 
-                />
-              </div>
-              <p className="metric-label">
-                {item.label}
-              </p>
-            </div>
-          ))}
+        <div className="proof-card">
+          <div className="proof-badge-row">
+            <span className="proof-badge">
+              <span className="pulse-dot" /> {t?.otaCostBadge}
+            </span>
+          </div>
+
+          <RevenueCalc t={t} />
         </div>
-        <p className="proof-caption">{t?.outcomesCaption || "Average across active engagements"}</p>
       </div>
     </section>
   );

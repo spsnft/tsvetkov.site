@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { CalendlyScript } from "@/src/components/CalendlyScript";
 import StyledJsxRegistry from "@/src/components/StyledJsxRegistry";
+import { SITE_URL } from "@/src/lib/siteUrl";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   const locale = lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US';
 
   return {
-    metadataBase: new URL('https://www.tsvetkov.site'),
+    metadataBase: new URL(SITE_URL),
     title: currentMeta.title,
     description: currentMeta.desc,
     alternates: {
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     openGraph: {
       title: currentMeta.title,
       description: currentMeta.desc,
-      url: `https://www.tsvetkov.site/${lang}`,
+      url: `${SITE_URL}/${lang}`,
       siteName: "Fedor Tsvetkov",
       locale,
       type: "website",
