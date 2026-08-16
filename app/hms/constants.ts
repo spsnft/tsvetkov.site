@@ -21,9 +21,9 @@ export const WHATSAPP_PHONE = "66650255229";
 export const contentData = {
   en: {
     // --- HERO SECTION ---
-    heroTitle: "Stop Paying 15-20% Commissions to Booking.com & Agoda",
-    heroSub1: "Connect your Phuket property directly to guests\nZero risk of human error and double-bookings",
-    heroSub2: "Keep 100% of the profit in your pocket",
+    // Ровно пять элементов: H1, подзаголовок, калькулятор, кнопка, микрокопия
+    heroTitle: "Stop Paying 15–20% Commissions to Booking.com & Agoda",
+    heroSubtitle: "We set up the booking system your property runs on, then hand you the keys.",
     // Обещание держится на результате, а не на длительности: календаря и созвона
     // на странице нет, конверсия ведёт в WhatsApp
     btnAudit: "Free Revenue Check",
@@ -38,22 +38,15 @@ export const contentData = {
     navPricing: "Pricing",
     navFaq: "FAQ",
 
-    // Hero calculation card — one booking, then the same loss per month and per year.
-    // Вторая колонка снимает главное возражение: не все 100% возвращаются,
-    // возврат первого года — доля объёма OTA, которую можно забрать себе
-    otaCostBadge: "WHAT OTAs COST YOU",
-    calcUnitLabel: "On every $100 booking",
-    calcKeepInline: "you keep $83",
-    calcLossInline: "−$17",
-    calcFullMark: "Direct: $100",
-    calcPayLabel: "You pay OTAs",
-    calcMonthValue: "$2,790/mo",
-    calcYearValue: "$33,400/yr",
-    calcRecoverLabel: "Realistic recovery, year one",
-    calcRecoverValue: "~$560/mo",
-    calcRecoverHintAria: "How we get this number",
-    calcRecoverHint: "Direct booking systems typically shift 15–25% of OTA volume to your own channel in the first year. We use 20% here. The rest keeps coming through OTAs — you don't leave them, you stop paying commission on the share you can own.",
-    calcFootnote: "12 units · 65% occupancy · 70% via OTA · 17% commission",
+    // Интерактивный калькулятор в герое отвечает на один вопрос — сколько
+    // владелец отдаёт OTA в год. Без возврата и окупаемости: это предмет
+    // бесплатного Revenue Check, а не бесплатная часть страницы
+    calcUnitsLabel: "Rooms or villas",
+    calcAdrLabel: "Average nightly rate",
+    calcOutputLabel: "You pay OTAs",
+    calcYearLabel: "/ year",
+    calcMonthLabel: "/ month",
+    calcAssumptions: "Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "CHANNELS WE CONNECT",
@@ -80,7 +73,6 @@ export const contentData = {
     // Первым идёт то, что решает: условия сделки и владение системой.
     // Общее описание агентства — вторым
     aboutP1: "We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share. Hospitality is where that matters most: properties hand 15–20% of revenue to platforms they don't control.",
-    aboutP2: "We build acquisition and automation systems for businesses that sell directly to their customers — and we run them end to end, not as one-off projects.",
     aboutLinkAgency: "More about FT Agency",
 
     // Trust Stats
@@ -114,8 +106,9 @@ export const contentData = {
     seeSystemDisclaimer: "Demo property. Your system is built on the platform that fits your property.",
 
     // --- PRICING ---
-    priceTitle: "Transparent Integration. Permanent Independence",
-    priceSub: "One-time setup fee. Zero commission on direct bookings forever",
+    // Заголовок секции — раньше H2 + подзаголовок; подзаголовок поднят на
+    // место H2, старый заголовок (Transparent Integration...) убран
+    priceTitle: "One-time setup fee. Zero commission on direct bookings forever",
     pricePopular: "Popular",
     priceMore2: "+ 4 from Lite",
     priceMore3: "+ 7 from Standard",
@@ -129,9 +122,10 @@ export const contentData = {
       "Marketing Analytics Setup": "see which channel each booking came from"
     } as Record<string, string>,
 
-    // Единственная строка под сеткой тарифов — раньше их было две
-    // (окупаемость + итоговая цена/PMS отдельно после CTA)
-    pricePaybackNote: "Payback varies with property size and ADR. Final price confirmed after your revenue check. PMS and channel manager are billed separately by the provider — typically $30–100/month.",
+    // Единственная строка под сеткой тарифов. Раньше их было две (окупаемость
+    // + итоговая цена/PMS отдельно после CTA); фраза про окупаемость снята —
+    // страница больше не называет сроки payback ни в одном месте
+    pricePaybackNote: "Final price confirmed after your revenue check. PMS and channel manager are billed separately by the provider — typically $30–100/month.",
 
     // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия
     riskTitle: "50% upfront, 50% on launch.",
@@ -143,17 +137,14 @@ export const contentData = {
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
-    tier1Payback: "Payback: 4–6 months",
     tier1Desc: "For small villas & guesthouses (1–9 units)",
 
     tier2Title: "STANDARD",
     tier2Price: "From $2,500",
-    tier2Payback: "Payback: 4–5 months",
     tier2Desc: "For boutique hotels & resorts (10–29 units)",
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Payback: "Payback: 2–3 months",
     tier3Desc: "For hotel chains & operators (multi-property)",
 
     // --- FAQ SECTION ---
@@ -189,7 +180,7 @@ export const contentData = {
     ],
 
     // --- FOOTER CTA ---
-    footerTitle: "Ready to maximize your revenue?",
+    footerTitle: "See what OTAs actually cost you",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Take full control of your direct bookings",
     footerBtn: "Free Revenue Check"

@@ -254,7 +254,7 @@ export default function About({ t = {} }: AboutProps) {
 
           <div className="about-text">
             <p className="about-paragraph">{t.aboutP1}</p>
-            <p className="about-paragraph dimmed">{t.aboutP2}</p>
+            {t.aboutP2 && <p className="about-paragraph dimmed">{t.aboutP2}</p>}
           </div>
 
           <div className="trust-stats-grid">

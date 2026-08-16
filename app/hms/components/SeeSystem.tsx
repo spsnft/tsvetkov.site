@@ -28,7 +28,7 @@ interface SeeSystemProps {
 // Десктоп (≥1024px): одна перекрывающаяся сцена — дашборд снизу, телефон и
 // письмо поверх. Мобилка (<1024px): горизонтальная карусель с peek и
 // пошаговым индикатором. Обе разметки лежат в DOM одновременно и
-// переключаются media-запросом (тот же приём, что в IndustryProof/Hero).
+// переключаются media-запросом.
 export default function SeeSystem({ t = {} }: SeeSystemProps) {
   // Short forms — used only by the clickable step pills in the mobile nav,
   // which don't have room for the full label + benefit line
