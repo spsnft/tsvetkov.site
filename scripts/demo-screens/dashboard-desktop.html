@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>dashboard-desktop</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+  body {
+    width: 1280px;
+    height: 800px;
+  }
+
+  .page {
+    padding: 28px 32px 0 32px;
+    height: 800px;
+  }
+
+  /* ---- header ---- */
+  .dash-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .dash-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .dash-sub {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ---- metrics ---- */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  .metric-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+  }
+  .metric-card.accent {
+    background: var(--accent08);
+    border: 1px solid var(--accent25);
+  }
+  .metric-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .metric-value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1;
+  }
+  .metric-card.accent .metric-value {
+    background: linear-gradient(100deg, var(--mint), var(--sky));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .metric-caption {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--sub);
+    font-weight: 500;
+  }
+
+  /* ---- calendar card ---- */
+  .cal-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px 18px 20px;
+  }
+
+  .cal-month {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .cal-body {
+    display: grid;
+    grid-template-columns: 138px 1fr;
+  }
+
+  .cal-label-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .cal-grid-col {
+    position: relative;
+  }
+
+  .cal-date-header {
+    display: flex;
+    height: 26px;
+  }
+  .cal-date-header .label-spacer {
+    /* placeholder to align, not rendered — header lives only in grid col */
+  }
+  .cal-date-cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .cal-date-cell.weekend {
+    color: var(--sub);
+  }
+
+  .cal-label-header {
+    height: 26px;
+  }
+
+  .cal-type-row {
+    display: flex;
+    align-items: center;
+    height: 22px;
+    padding-left: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--sub);
+  }
+  .cal-type-spacer {
+    height: 22px;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .cal-unit-row {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    padding-left: 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--sub);
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .cal-grid-row {
+    position: relative;
+    height: 44px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent calc(100% / 16)
+    );
+  }
+
+  .bar {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 10.5px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .bar.booking { background: var(--ch-booking); color: #fff; }
+  .bar.agoda { background: var(--ch-agoda); color: #fff; }
+  .bar.direct { background: var(--ch-direct); color: #06210F; }
+
+  /* ---- legend ---- */
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 14px;
+    padding-left: 4px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .legend-item.direct {
+    color: var(--accent);
+  }
+  .legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .legend-dot.booking { background: var(--ch-booking); }
+  .legend-dot.agoda { background: var(--ch-agoda); }
+  .legend-dot.direct { background: var(--ch-direct); box-shadow: 0 0 6px var(--accent); }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="dash-header">
+      <span class="dash-title">Baan Sirin Villa</span>
+      <span class="dash-sub">Owner dashboard</span>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="metric-label">Occupancy</div>
+        <div class="metric-value">82%</div>
+        <div class="metric-caption">December 2026</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Direct bookings</div>
+        <div class="metric-value">38%</div>
+        <div class="metric-caption">12 of 31 bookings</div>
+      </div>
+      <div class="metric-card accent">
+        <div class="metric-label">Commission saved</div>
+        <div class="metric-value">USD 1,926</div>
+        <div class="metric-caption">this month</div>
+      </div>
+    </div>
+
+    <div class="cal-card">
+      <div class="cal-month">DEC 2026</div>
+
+      <div class="cal-body">
+        <div class="cal-label-col">
+          <div class="cal-label-header"></div>
+
+          <div class="cal-type-row">Garden Studio</div>
+          <div class="cal-unit-row">Room 1</div>
+          <div class="cal-unit-row">Room 2</div>
+          <div class="cal-unit-row">Room 3</div>
+          <div class="cal-unit-row">Room 4</div>
+
+          <div class="cal-type-row">Pool Access Suite</div>
+          <div class="cal-unit-row">Room 1</div>
+          <div class="cal-unit-row">Room 2</div>
+          <div class="cal-unit-row">Room 3</div>
+
+          <div class="cal-type-row">Two-Bedroom Villa</div>
+          <div class="cal-unit-row">Room 1</div>
+          <div class="cal-unit-row">Room 2</div>
+        </div>
+
+        <div class="cal-grid-col">
+          <div class="cal-date-header" id="dateHeader"></div>
+
+          <div class="cal-type-spacer"></div>
+
+          <div class="cal-grid-row">
+            <div class="bar booking" style="left:6.25%;width:18.75%">Booking.com</div>
+            <div class="bar direct" style="left:50%;width:18.75%">Direct</div>
+            <div class="bar agoda" style="left:75%;width:18.75%">Agoda</div>
+          </div>
+          <div class="cal-grid-row">
+            <div class="bar agoda" style="left:0;width:18.75%">Agoda</div>
+            <div class="bar booking" style="left:31.25%;width:25%">Booking.com</div>
+            <div class="bar direct" style="left:75%;width:18.75%">Direct</div>
+          </div>
+          <div class="cal-grid-row">
+            <div class="bar direct" style="left:0;width:12.5%">Direct</div>
+            <div class="bar booking" style="left:25%;width:31.25%">Booking.com</div>
+            <div class="bar agoda" style="left:68.75%;width:18.75%">Agoda</div>
+          </div>
+          <div class="cal-grid-row">
+            <div class="bar booking" style="left:18.75%;width:31.25%">Booking.com</div>
+            <div class="bar direct" style="left:56.25%;width:18.75%">Direct</div>
+          </div>
+
+          <div class="cal-type-spacer"></div>
+
+          <div class="cal-grid-row">
+            <div class="bar booking" style="left:0;width:37.5%">Booking.com</div>
+            <div class="bar direct" style="left:50%;width:12.5%">Direct</div>
+            <div class="bar agoda" style="left:75%;width:18.75%">Agoda</div>
+          </div>
+          <div class="cal-grid-row">
+            <div class="bar direct" style="left:6.25%;width:18.75%">Direct</div>
+            <div class="bar agoda" style="left:37.5%;width:31.25%">Agoda</div>
+            <div class="bar booking" style="left:81.25%;width:12.5%">Booking.com</div>
+          </div>
+          <div class="cal-grid-row">
+            <div class="bar booking" style="left:12.5%;width:37.5%">Booking.com</div>
+            <div class="bar direct" style="left:62.5%;width:18.75%">Direct</div>
+          </div>
+
+          <div class="cal-type-spacer"></div>
+
+          <div class="cal-grid-row">
+            <div class="bar agoda" style="left:0;width:25%">Agoda</div>
+            <div class="bar direct" style="left:43.75%;width:18.75%">Direct</div>
+            <div class="bar booking" style="left:75%;width:18.75%">Booking.com</div>
+          </div>
+          <div class="cal-grid-row">
+            <div class="bar booking" style="left:6.25%;width:43.75%">Booking.com</div>
+            <div class="bar direct" style="left:68.75%;width:25%">Direct</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot booking"></span>Booking.com −15%</span>
+      <span class="legend-item"><span class="legend-dot agoda"></span>Agoda −18%</span>
+      <span class="legend-item direct"><span class="legend-dot direct"></span>Direct 0%</span>
+    </div>
+  </div>
+
+  <script>
+    // Day-column headers: Dec 2026 starts on a Tuesday, 16 days shown.
+    const start = new Date(Date.UTC(2026, 11, 1));
+    const header = document.getElementById('dateHeader');
+    const wk = ['S','M','T','W','T','F','S'];
+    for (let i = 0; i < 16; i++) {
+      const d = new Date(start);
+      d.setUTCDate(start.getUTCDate() + i);
+      const day = d.getUTCDay();
+      const cell = document.createElement('div');
+      cell.className = 'cal-date-cell' + (day === 0 || day === 6 ? ' weekend' : '');
+      cell.textContent = d.getUTCDate();
+      header.appendChild(cell);
+    }
+  </script>
+</body>
+</html>

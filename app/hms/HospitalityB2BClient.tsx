@@ -11,6 +11,7 @@ import IndustryProof from './components/IndustryProof';
 import LogoMarquee from './components/LogoMarquee';
 import ScalePractice from './components/ScalePractice';
 import About from './components/About';
+import SeeSystem from './components/SeeSystem';
 import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import FooterCTA from './components/FooterCTA';
@@ -37,38 +38,7 @@ export default function HospitalityB2BClient({ lang }: { lang: 'en' | 'ru' | 'th
         <LogoMarquee t={t} />
         <ScalePractice t={t} />
         <About t={t} />
-
-        {/*
-          ЗАРЕЗЕРВИРОВАНО ПОД ДЕМО-СТЕНД. На странице сейчас ничего не
-          отображается: пока нет живого кейса, пустой слот только рекламирует
-          его отсутствие. Раскомментировать, когда будут готовы ссылка и ролик;
-          тексты заголовка и подписей завести в constants.ts на все три локали.
-
-          <section id="demo" className="demo-section">
-            <div className="container">
-              -- Заголовок секции: t.demoTitle («See it working»)
-              <h2 className="demo-title">{t.demoTitle}</h2>
-
-              -- Ссылка на живую страницу бронирования, новой вкладкой
-              <a
-                className="demo-link"
-                href="DEMO_BOOKING_URL"
-                target="_blank"
-                rel="noopener"
-              >
-                {t.demoLinkLabel}
-              </a>
-
-              -- Встроенное видео 60–90 сек: постер, без автоплея,
-                 preload="none", чтобы не тянуть вес в первый экран
-              <div className="demo-video">
-                <video controls preload="none" poster="DEMO_POSTER_URL" playsInline>
-                  <source src="DEMO_VIDEO_URL" type="video/mp4" />
-                </video>
-              </div>
-            </div>
-          </section>
-        */}
+        <SeeSystem t={t} />
 
         <Pricing t={t} />
         <FAQ t={t} />

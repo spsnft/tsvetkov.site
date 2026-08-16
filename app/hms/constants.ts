@@ -98,6 +98,19 @@ export const contentData = {
     stat3Name: "Years Experience",
     stat3Sub: "Growth & systems",
 
+    // --- SEE THE SYSTEM ---
+    // Три демо-экрана — не скриншоты Little Hotelier/Beds24/Cloudbeds
+    // (клиентам подключаются разные платформы), а нейтральный интерфейс в
+    // дизайн-системе сайта. Демо-объект: Baan Sirin Villa, Rawai, Phuket.
+    seeSystemTitle: "See how it works end to end",
+    seeSystemCaption1: "What your guest sees",
+    seeSystemMoney1: "Your rooms, your rates, your page. No commission on the booking.",
+    seeSystemCaption2: "What you see",
+    seeSystemMoney2: "Every booking from every channel in one calendar — and what each one costs you.",
+    seeSystemCaption3: "What your guest gets",
+    seeSystemMoney3: "The confirmation comes from you. The guest is yours, not the platform's.",
+    seeSystemDisclaimer: "Interface shown for illustration. The actual platform is selected per property.",
+
     // --- PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever",
@@ -260,6 +273,18 @@ export const contentData = {
     stat3Name: "Лет опыта",
     stat3Sub: "Рост и системы",
 
+    // --- SEE THE SYSTEM ---
+    // Экраны внутри — на английском во всех локалях (см. constants.ts EN);
+    // локализуются только подписи вокруг них
+    seeSystemTitle: "Как это работает — от брони до заезда",
+    seeSystemCaption1: "Что видит гость",
+    seeSystemMoney1: "Ваши номера, ваши цены, ваша страница. Без комиссии с брони.",
+    seeSystemCaption2: "Что видите вы",
+    seeSystemMoney2: "Все брони со всех каналов в одном календаре — и сколько стоит каждая.",
+    seeSystemCaption3: "Что получает гость",
+    seeSystemMoney3: "Подтверждение приходит от вас. Гость — ваш, а не платформы.",
+    seeSystemDisclaimer: "Интерфейс показан для примера. Реальная платформа подбирается под объект.",
+
     // --- PRICING ---
     priceTitle: "Прозрачное внедрение. Постоянная независимость",
     priceSub: "Разовая оплата. Ноль комиссии с прямых броней навсегда",
@@ -421,6 +446,16 @@ export const contentData = {
     stat3Num: "10+",
     stat3Name: "ประสบการณ์ (ปี)",
     stat3Sub: "การเติบโตและระบบ",
+
+    // --- SEE THE SYSTEM ---
+    seeSystemTitle: "ระบบทำงานอย่างไรตั้งแต่ต้นจนจบ",
+    seeSystemCaption1: "สิ่งที่แขกเห็น",
+    seeSystemMoney1: "ห้องของคุณ ราคาของคุณ หน้าเว็บของคุณ ไม่มีค่าคอมมิชชั่นจากการจอง",
+    seeSystemCaption2: "สิ่งที่คุณเห็น",
+    seeSystemMoney2: "ทุกการจองจากทุกช่องทางในปฏิทินเดียว พร้อมต้นทุนของแต่ละรายการ",
+    seeSystemCaption3: "สิ่งที่แขกได้รับ",
+    seeSystemMoney3: "อีเมลยืนยันมาจากคุณโดยตรง แขกเป็นของคุณ ไม่ใช่ของแพลตฟอร์ม",
+    seeSystemDisclaimer: "อินเทอร์เฟซที่แสดงเป็นเพียงตัวอย่างประกอบ แพลตฟอร์มจริงจะเลือกตามแต่ละที่พัก",
 
     // --- PRICING ---
     priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",
