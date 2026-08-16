@@ -1,18 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { T } from '../../../src/theme/tokens';
 
 interface SeeSystemProps {
   t?: {
     seeSystemTitle?: string;
-    seeSystemCaption1?: string;
-    seeSystemMoney1?: string;
-    seeSystemCaption2?: string;
-    seeSystemMoney2?: string;
-    seeSystemCaption3?: string;
-    seeSystemMoney3?: string;
+    seeSystemStep1?: string;
+    seeSystemStep2?: string;
+    seeSystemStep3?: string;
+    seeSystemCaption?: string;
     seeSystemDisclaimer?: string;
   };
 }
@@ -20,7 +18,56 @@ interface SeeSystemProps {
 // Три условных демо-экрана — не скриншоты Little Hotelier/Beds24/Cloudbeds
 // (клиентам подключаются разные платформы), а нейтральный интерфейс,
 // свёрстанный в дизайн-системе сайта. См. /scripts/demo-screens.
+//
+// Десктоп (≥1024px): одна перекрывающаяся сцена — дашборд снизу, телефон и
+// письмо поверх. Мобилка (<1024px): горизонтальная карусель с peek и
+// пошаговым индикатором. Обе разметки лежат в DOM одновременно и
+// переключаются media-запросом (тот же приём, что в IndustryProof/Hero).
 export default function SeeSystem({ t = {} }: SeeSystemProps) {
+  const steps = [
+    t.seeSystemStep1 || 'Guest books',
+    t.seeSystemStep2 || 'You see it',
+    t.seeSystemStep3 || 'Guest gets this',
+  ];
+
+  const slides = [
+    { src: '/hms/screens/guest-booking.png', alt: 'Direct booking page for Baan Sirin Villa' },
+    { src: '/hms/screens/dashboard-mobile.png', alt: 'Owner dashboard and channel calendar for Baan Sirin Villa' },
+    { src: '/hms/screens/confirmation-email.png', alt: 'Booking confirmation email from Baan Sirin Villa' },
+  ];
+
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    const els = slideRefs.current.filter((el): el is HTMLDivElement => Boolean(el));
+    if (!scroller || !els.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+            const idx = els.indexOf(entry.target as HTMLDivElement);
+            if (idx !== -1) setActive(idx);
+          }
+        });
+      },
+      { root: scroller, threshold: [0.6] }
+    );
+
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const goTo = (i: number) => {
+    const slide = slideRefs.current[i];
+    const scroller = scrollerRef.current;
+    if (!slide || !scroller) return;
+    scroller.scrollTo({ left: slide.offsetLeft - 20, behavior: 'smooth' });
+  };
+
   return (
     <section id="see-system" className="see-section">
       <style jsx>{`
@@ -31,85 +78,224 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           scroll-margin-top: 80px;
         }
 
-        .see-inner {
-          max-width: 640px;
-          margin: 0 auto;
-        }
-
         .see-title {
           text-align: center;
           font-size: 2.4rem;
           font-weight: 800;
           color: #ffffff;
-          margin: 0 0 3.5rem 0;
+          margin: 0 0 3rem 0;
           letter-spacing: -0.03em;
           line-height: 1.2;
           text-wrap: balance;
         }
 
-        .see-block {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-bottom: 4rem;
-        }
-
-        .see-block:last-of-type {
-          margin-bottom: 1.75rem;
-        }
-
-        .see-caption {
+        .see-step {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 0.4rem;
           font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-size: 0.82rem;
           font-weight: 700;
-          font-size: 1.2rem;
-          color: #ffffff;
-          margin: 0 0 1.35rem 0;
-          text-align: center;
-          letter-spacing: -0.01em;
+          color: ${T.muted};
+          white-space: nowrap;
+        }
+        .see-step .step-num {
+          color: ${T.accent};
         }
 
-        .see-frame {
-          position: relative;
-          width: 100%;
-          border-radius: ${T.radius.xl};
-          overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-          background: ${T.bg0};
+        /* ================= DESKTOP: overlapping scene ================= */
+        .see-stage-wrap {
+          display: none;
         }
 
-        .see-frame :global(img) {
-          display: block;
-          width: 100%;
-          height: auto;
-        }
+        @media (min-width: 1024px) {
+          .see-stage-wrap {
+            display: block;
+            max-width: 980px;
+            margin: 44px auto 0 auto;
+          }
 
-        .see-frame-portrait {
-          max-width: 340px;
-        }
+          .see-stage {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 700;
+          }
 
-        .see-frame-dashboard {
-          aspect-ratio: 390 / 844;
-        }
+          .see-layer {
+            position: absolute;
+          }
+          .see-layer :global(img) {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          }
 
-        @media (min-width: 900px) {
-          .see-frame-dashboard {
-            aspect-ratio: 1280 / 800;
+          /* Base layer. Positioned low enough that the phone/email overlap
+             only grazes its header, never the metric numbers. */
+          .see-layer-dashboard {
+            left: 30%;
+            top: 30%;
+            width: 64%;
+            z-index: 1;
+          }
+          .see-layer-dashboard :global(img) {
+            border-radius: 18px;
+            box-shadow: 0 24px 55px rgba(0, 0, 0, 0.4);
+          }
+          .see-layer-dashboard .see-step {
+            position: absolute;
+            left: 2px;
+            bottom: -32px;
+          }
+
+          .see-layer-phone {
+            left: 18%;
+            top: 24%;
+            width: 15.5%;
+            z-index: 2;
+          }
+          .see-layer-phone :global(img) {
+            box-shadow: 0 30px 55px rgba(0, 0, 0, 0.55), 0 10px 22px rgba(0, 0, 0, 0.4);
+          }
+          .see-layer-phone .see-step {
+            position: absolute;
+            left: 2px;
+            top: -30px;
+          }
+
+          .see-layer-email {
+            left: 84%;
+            top: 1%;
+            width: 11%;
+            z-index: 3;
+          }
+          .see-layer-email :global(img) {
+            box-shadow: 0 30px 55px rgba(0, 0, 0, 0.55), 0 10px 22px rgba(0, 0, 0, 0.4);
+          }
+          .see-layer-email .see-step {
+            position: absolute;
+            left: 2px;
+            top: -30px;
           }
         }
 
-        .see-money {
-          margin: 1.15rem 0 0 0;
+        /* ================= MOBILE: carousel ================= */
+        .see-carousel-wrap {
+          margin-top: 0.5rem;
+        }
+
+        .see-carousel {
+          position: relative;
+          display: flex;
+          gap: 14px;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          padding: 0 0 6px 0;
+          scrollbar-width: none;
+        }
+        .see-carousel::-webkit-scrollbar {
+          display: none;
+        }
+
+        .see-slide {
+          flex: 0 0 84%;
+          scroll-snap-align: start;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .see-slide .see-step {
+          margin: 0 0 0.75rem 2px;
+        }
+
+        .see-slide-frame {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 390 / 844;
+          max-height: 78vh;
+          border-radius: 18px;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+          background: ${T.bg0};
+        }
+        .see-slide-frame :global(img) {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top center;
+        }
+        .see-slide-frame::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 64px;
+          background: linear-gradient(to bottom, transparent, ${T.bg0});
+          pointer-events: none;
+        }
+
+        .see-steps-nav {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 0.2rem 0.5rem;
+          margin-top: 1.35rem;
+        }
+        .see-step-btn {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 0.32rem;
+          background: none;
+          border: none;
+          padding: 0.4rem 0.1rem;
+          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-size: 0.76rem;
+          font-weight: 700;
+          color: ${T.muted};
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .see-step-btn .step-num {
+          color: ${T.muted};
+          font-weight: 800;
+        }
+        .see-step-btn.active,
+        .see-step-btn.active .step-num {
+          color: ${T.accent};
+        }
+        .see-step-sep {
+          color: ${T.muted};
+          opacity: 0.5;
+          font-size: 0.85rem;
+        }
+
+        @media (min-width: 1024px) {
+          .see-carousel-wrap {
+            display: none;
+          }
+        }
+
+        /* ================= shared: caption + disclaimer ================= */
+        .see-caption {
+          margin: 2.5rem auto 0 auto;
           max-width: 460px;
           text-align: center;
-          font-size: 0.98rem;
-          line-height: 1.55;
-          color: ${T.sub};
+          font-size: 1rem;
+          font-weight: 600;
+          line-height: 1.5;
+          color: #ffffff;
           text-wrap: pretty;
         }
 
         .see-disclaimer {
-          margin: 0;
+          margin: 0.9rem 0 0 0;
           text-align: center;
           font-size: 0.78rem;
           line-height: 1.5;
@@ -123,78 +309,114 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           }
           .see-title {
             font-size: 1.9rem;
-            margin-bottom: 2.75rem;
-          }
-          .see-caption {
-            font-size: 1.05rem;
-          }
-          .see-block {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
           }
         }
       `}</style>
 
       <div className="container">
-        <div className="see-inner">
-          <h2 className="see-title">{t.seeSystemTitle || 'See how it works end to end'}</h2>
+        <h2 className="see-title">{t.seeSystemTitle || 'See how it works end to end'}</h2>
 
-          <div className="see-block">
-            <p className="see-caption">{t.seeSystemCaption1 || 'What your guest sees'}</p>
-            <div className="see-frame see-frame-portrait">
+        {/* Desktop scene */}
+        <div className="see-stage-wrap">
+          <div className="see-stage">
+            <div className="see-layer see-layer-dashboard">
+              <Image
+                src="/hms/screens/dashboard-desktop.png"
+                alt="Owner dashboard and channel calendar for Baan Sirin Villa"
+                width={1280}
+                height={800}
+                loading="lazy"
+              />
+              <span className="see-step">
+                <span className="step-num">2</span>
+                {steps[1]}
+              </span>
+            </div>
+            <div className="see-layer see-layer-phone">
               <Image
                 src="/hms/screens/guest-booking.png"
-                alt="Direct booking page for Baan Sirin Villa, shown on a phone"
+                alt="Direct booking page for Baan Sirin Villa"
                 width={390}
                 height={844}
                 loading="lazy"
               />
+              <span className="see-step">
+                <span className="step-num">1</span>
+                {steps[0]}
+              </span>
             </div>
-            <p className="see-money">
-              {t.seeSystemMoney1 || 'Your rooms, your rates, your page. No commission on the booking.'}
-            </p>
-          </div>
-
-          <div className="see-block">
-            <p className="see-caption">{t.seeSystemCaption2 || 'What you see'}</p>
-            <div className="see-frame see-frame-dashboard">
-              <picture>
-                <source media="(min-width: 900px)" srcSet="/hms/screens/dashboard-desktop.png" />
-                <img
-                  src="/hms/screens/dashboard-mobile.png"
-                  alt="Owner dashboard: occupancy, direct bookings, commission saved, and a channel calendar for Baan Sirin Villa"
-                  width={390}
-                  height={844}
-                  loading="lazy"
-                />
-              </picture>
-            </div>
-            <p className="see-money">
-              {t.seeSystemMoney2 ||
-                'Every booking from every channel in one calendar — and what each one costs you.'}
-            </p>
-          </div>
-
-          <div className="see-block">
-            <p className="see-caption">{t.seeSystemCaption3 || 'What your guest gets'}</p>
-            <div className="see-frame see-frame-portrait">
+            <div className="see-layer see-layer-email">
               <Image
                 src="/hms/screens/confirmation-email.png"
-                alt="Booking confirmation email sent directly from Baan Sirin Villa"
+                alt="Booking confirmation email from Baan Sirin Villa"
                 width={390}
                 height={844}
                 loading="lazy"
               />
+              <span className="see-step">
+                <span className="step-num">3</span>
+                {steps[2]}
+              </span>
             </div>
-            <p className="see-money">
-              {t.seeSystemMoney3 || "The confirmation comes from you. The guest is yours, not the platform's."}
-            </p>
+          </div>
+        </div>
+
+        {/* Mobile carousel */}
+        <div className="see-carousel-wrap">
+          <div className="see-carousel" ref={scrollerRef}>
+            {slides.map((slide, i) => (
+              <div
+                key={slide.src}
+                className="see-slide"
+                ref={(el) => {
+                  slideRefs.current[i] = el;
+                }}
+              >
+                <span className="see-step">
+                  <span className="step-num">{i + 1}</span>
+                  {steps[i]}
+                </span>
+                <div className="see-slide-frame">
+                  <Image
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    sizes="84vw"
+                    loading="lazy"
+                    style={{ objectFit: 'cover', objectPosition: 'top center' }}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
 
-          <p className="see-disclaimer">
-            {t.seeSystemDisclaimer ||
-              'Interface shown for illustration. The actual platform is selected per property.'}
-          </p>
+          <div className="see-steps-nav" role="tablist" aria-label="Screens">
+            {steps.map((label, i) => (
+              <React.Fragment key={label}>
+                {i > 0 && <span className="see-step-sep" aria-hidden="true">·</span>}
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={active === i}
+                  className={`see-step-btn${active === i ? ' active' : ''}`}
+                  onClick={() => goTo(i)}
+                >
+                  <span className="step-num">{i + 1}</span>
+                  {label}
+                </button>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
+
+        <p className="see-caption">
+          {t.seeSystemCaption || 'From booking to confirmation — without the commission.'}
+        </p>
+        <p className="see-disclaimer">
+          {t.seeSystemDisclaimer ||
+            'Interface shown for illustration. The actual platform is selected per property.'}
+        </p>
       </div>
     </section>
   );

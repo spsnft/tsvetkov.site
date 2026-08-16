@@ -103,12 +103,10 @@ export const contentData = {
     // (клиентам подключаются разные платформы), а нейтральный интерфейс в
     // дизайн-системе сайта. Демо-объект: Baan Sirin Villa, Rawai, Phuket.
     seeSystemTitle: "See how it works end to end",
-    seeSystemCaption1: "What your guest sees",
-    seeSystemMoney1: "Your rooms, your rates, your page. No commission on the booking.",
-    seeSystemCaption2: "What you see",
-    seeSystemMoney2: "Every booking from every channel in one calendar — and what each one costs you.",
-    seeSystemCaption3: "What your guest gets",
-    seeSystemMoney3: "The confirmation comes from you. The guest is yours, not the platform's.",
+    seeSystemStep1: "Guest books",
+    seeSystemStep2: "You see it",
+    seeSystemStep3: "Guest gets this",
+    seeSystemCaption: "From booking to confirmation — without the commission.",
     seeSystemDisclaimer: "Interface shown for illustration. The actual platform is selected per property.",
 
     // --- PRICING ---
@@ -277,12 +275,10 @@ export const contentData = {
     // Экраны внутри — на английском во всех локалях (см. constants.ts EN);
     // локализуются только подписи вокруг них
     seeSystemTitle: "Как это работает — от брони до заезда",
-    seeSystemCaption1: "Что видит гость",
-    seeSystemMoney1: "Ваши номера, ваши цены, ваша страница. Без комиссии с брони.",
-    seeSystemCaption2: "Что видите вы",
-    seeSystemMoney2: "Все брони со всех каналов в одном календаре — и сколько стоит каждая.",
-    seeSystemCaption3: "Что получает гость",
-    seeSystemMoney3: "Подтверждение приходит от вас. Гость — ваш, а не платформы.",
+    seeSystemStep1: "Гость бронирует",
+    seeSystemStep2: "Вы это видите",
+    seeSystemStep3: "Гость получает",
+    seeSystemCaption: "От брони до подтверждения — без комиссии.",
     seeSystemDisclaimer: "Интерфейс показан для примера. Реальная платформа подбирается под объект.",
 
     // --- PRICING ---
@@ -449,12 +445,10 @@ export const contentData = {
 
     // --- SEE THE SYSTEM ---
     seeSystemTitle: "ระบบทำงานอย่างไรตั้งแต่ต้นจนจบ",
-    seeSystemCaption1: "สิ่งที่แขกเห็น",
-    seeSystemMoney1: "ห้องของคุณ ราคาของคุณ หน้าเว็บของคุณ ไม่มีค่าคอมมิชชั่นจากการจอง",
-    seeSystemCaption2: "สิ่งที่คุณเห็น",
-    seeSystemMoney2: "ทุกการจองจากทุกช่องทางในปฏิทินเดียว พร้อมต้นทุนของแต่ละรายการ",
-    seeSystemCaption3: "สิ่งที่แขกได้รับ",
-    seeSystemMoney3: "อีเมลยืนยันมาจากคุณโดยตรง แขกเป็นของคุณ ไม่ใช่ของแพลตฟอร์ม",
+    seeSystemStep1: "แขกจอง",
+    seeSystemStep2: "คุณเห็นเลย",
+    seeSystemStep3: "แขกได้รับ",
+    seeSystemCaption: "จากการจองถึงการยืนยัน — ไม่มีค่าคอมมิชชั่น",
     seeSystemDisclaimer: "อินเทอร์เฟซที่แสดงเป็นเพียงตัวอย่างประกอบ แพลตฟอร์มจริงจะเลือกตามแต่ละที่พัก",
 
     // --- PRICING ---

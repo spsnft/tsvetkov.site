@@ -10,18 +10,21 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(__dirname, '../../public/hms/screens');
 fs.mkdirSync(outDir, { recursive: true });
 
+// Mobile screens capture their natural content height (fullPage) — the
+// carousel in SeeSystem.tsx unifies slide heights and fades overflow via
+// CSS, so the PNGs themselves don't need to be pre-cropped to 844px.
 const SCREENS = [
   {
     name: 'guest-booking',
     file: 'guest-booking.html',
     viewport: { width: 390, height: 844 },
-    fullPage: false,
+    fullPage: true,
   },
   {
     name: 'dashboard-mobile',
     file: 'dashboard-mobile.html',
     viewport: { width: 390, height: 844 },
-    fullPage: false,
+    fullPage: true,
   },
   {
     name: 'dashboard-desktop',
@@ -33,7 +36,7 @@ const SCREENS = [
     name: 'confirmation-email',
     file: 'confirmation-email.html',
     viewport: { width: 390, height: 844 },
-    fullPage: false,
+    fullPage: true,
   },
 ];
 

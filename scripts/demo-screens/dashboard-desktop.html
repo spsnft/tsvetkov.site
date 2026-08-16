@@ -176,9 +176,9 @@
 
   .bar {
     position: absolute;
-    top: 6px;
-    bottom: 6px;
-    border-radius: 6px;
+    top: 9px;
+    bottom: 9px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     padding: 0 8px;
@@ -190,6 +190,15 @@
   .bar.booking { background: var(--ch-booking); color: #fff; }
   .bar.agoda { background: var(--ch-agoda); color: #fff; }
   .bar.direct { background: var(--ch-direct); color: #06210F; }
+
+  /* The one booking that ties this screen to the guest-booking and email
+     screens: same dates, same guest. A touch brighter, thin light outline —
+     no glow, this is a working calendar, not an infographic. */
+  .bar.hero {
+    filter: brightness(1.08) saturate(1.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.65);
+    box-sizing: border-box;
+  }
 
   /* ---- legend ---- */
   .legend {
@@ -218,7 +227,7 @@
   }
   .legend-dot.booking { background: var(--ch-booking); }
   .legend-dot.agoda { background: var(--ch-agoda); }
-  .legend-dot.direct { background: var(--ch-direct); box-shadow: 0 0 6px var(--accent); }
+  .legend-dot.direct { background: var(--ch-direct); }
 </style>
 </head>
 <body>
@@ -275,67 +284,68 @@
           <div class="cal-type-spacer"></div>
 
           <div class="cal-grid-row">
-            <div class="bar booking" style="left:6.25%;width:18.75%">Booking.com</div>
-            <div class="bar direct" style="left:50%;width:18.75%">Direct</div>
-            <div class="bar agoda" style="left:75%;width:18.75%">Agoda</div>
+            <div class="bar booking" style="left:0%;width:18.75%">M. Oliveira</div>
+            <div class="bar direct hero" style="left:37.5%;width:18.75%">A. Lindgren</div>
+            <div class="bar agoda" style="left:68.75%;width:18.75%">K. Boateng</div>
           </div>
           <div class="cal-grid-row">
-            <div class="bar agoda" style="left:0;width:18.75%">Agoda</div>
-            <div class="bar booking" style="left:31.25%;width:25%">Booking.com</div>
-            <div class="bar direct" style="left:75%;width:18.75%">Direct</div>
+            <div class="bar agoda" style="left:0%;width:12.5%">S.D.</div>
+            <div class="bar booking" style="left:25%;width:31.25%">W. Zhang</div>
+            <div class="bar direct" style="left:75%;width:18.75%">P. Kovacs</div>
           </div>
           <div class="cal-grid-row">
-            <div class="bar direct" style="left:0;width:12.5%">Direct</div>
-            <div class="bar booking" style="left:25%;width:31.25%">Booking.com</div>
-            <div class="bar agoda" style="left:68.75%;width:18.75%">Agoda</div>
+            <div class="bar direct" style="left:6.25%;width:12.5%">K.B.</div>
+            <div class="bar booking" style="left:31.25%;width:31.25%">S. Delaney</div>
+            <div class="bar agoda" style="left:75%;width:18.75%">W. Zhang</div>
           </div>
           <div class="cal-grid-row">
-            <div class="bar booking" style="left:18.75%;width:31.25%">Booking.com</div>
-            <div class="bar direct" style="left:56.25%;width:18.75%">Direct</div>
-          </div>
-
-          <div class="cal-type-spacer"></div>
-
-          <div class="cal-grid-row">
-            <div class="bar booking" style="left:0;width:37.5%">Booking.com</div>
-            <div class="bar direct" style="left:50%;width:12.5%">Direct</div>
-            <div class="bar agoda" style="left:75%;width:18.75%">Agoda</div>
-          </div>
-          <div class="cal-grid-row">
-            <div class="bar direct" style="left:6.25%;width:18.75%">Direct</div>
-            <div class="bar agoda" style="left:37.5%;width:31.25%">Agoda</div>
-            <div class="bar booking" style="left:81.25%;width:12.5%">Booking.com</div>
-          </div>
-          <div class="cal-grid-row">
-            <div class="bar booking" style="left:12.5%;width:37.5%">Booking.com</div>
-            <div class="bar direct" style="left:62.5%;width:18.75%">Direct</div>
+            <div class="bar booking" style="left:12.5%;width:31.25%">P. Kovacs</div>
+            <div class="bar direct" style="left:56.25%;width:18.75%">M. Oliveira</div>
           </div>
 
           <div class="cal-type-spacer"></div>
 
           <div class="cal-grid-row">
-            <div class="bar agoda" style="left:0;width:25%">Agoda</div>
-            <div class="bar direct" style="left:43.75%;width:18.75%">Direct</div>
-            <div class="bar booking" style="left:75%;width:18.75%">Booking.com</div>
+            <div class="bar booking" style="left:0%;width:37.5%">S. Delaney</div>
+            <div class="bar direct" style="left:50%;width:12.5%">K.B.</div>
+            <div class="bar agoda" style="left:75%;width:18.75%">W. Zhang</div>
           </div>
           <div class="cal-grid-row">
-            <div class="bar booking" style="left:6.25%;width:43.75%">Booking.com</div>
-            <div class="bar direct" style="left:68.75%;width:25%">Direct</div>
+            <div class="bar direct" style="left:6.25%;width:18.75%">P. Kovacs</div>
+            <div class="bar agoda" style="left:37.5%;width:31.25%">M. Oliveira</div>
+            <div class="bar booking" style="left:81.25%;width:12.5%">S.D.</div>
+          </div>
+          <div class="cal-grid-row">
+            <div class="bar booking" style="left:12.5%;width:37.5%">K. Boateng</div>
+            <div class="bar direct" style="left:62.5%;width:18.75%">W. Zhang</div>
+          </div>
+
+          <div class="cal-type-spacer"></div>
+
+          <div class="cal-grid-row">
+            <div class="bar agoda" style="left:0%;width:25%">P. Kovacs</div>
+            <div class="bar direct" style="left:43.75%;width:18.75%">S. Delaney</div>
+            <div class="bar booking" style="left:75%;width:18.75%">M. Oliveira</div>
+          </div>
+          <div class="cal-grid-row">
+            <div class="bar booking" style="left:6.25%;width:43.75%">K. Boateng</div>
+            <div class="bar direct" style="left:68.75%;width:25%">W. Zhang</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="legend">
-      <span class="legend-item"><span class="legend-dot booking"></span>Booking.com −15%</span>
-      <span class="legend-item"><span class="legend-dot agoda"></span>Agoda −18%</span>
-      <span class="legend-item direct"><span class="legend-dot direct"></span>Direct 0%</span>
+      <span class="legend-item"><span class="legend-dot booking"></span>Booking.com</span>
+      <span class="legend-item"><span class="legend-dot agoda"></span>Agoda</span>
+      <span class="legend-item direct"><span class="legend-dot direct"></span>Direct</span>
     </div>
   </div>
 
   <script>
-    // Day-column headers: Dec 2026 starts on a Tuesday, 16 days shown.
-    const start = new Date(Date.UTC(2026, 11, 1));
+    // Day-column headers: 16 days from Mon 14 Dec 2026, so the 20-23 Dec
+    // A. Lindgren booking (Garden Studio · Room 1) sits inside the window.
+    const start = new Date(Date.UTC(2026, 11, 14));
     const header = document.getElementById('dateHeader');
     const wk = ['S','M','T','W','T','F','S'];
     for (let i = 0; i < 16; i++) {

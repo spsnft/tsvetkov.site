@@ -7,7 +7,6 @@
 <style>
   body {
     width: 390px;
-    min-height: 844px;
   }
 
   .page {
@@ -174,13 +173,28 @@
 
   .bar {
     position: absolute;
-    top: 9px;
-    bottom: 9px;
-    border-radius: 6px;
+    top: 11px;
+    bottom: 11px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    font-size: 9.5px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
   }
-  .bar.booking { background: var(--ch-booking); }
-  .bar.agoda { background: var(--ch-agoda); }
-  .bar.direct { background: var(--ch-direct); box-shadow: 0 0 8px rgba(0, 229, 153, 0.35); }
+  .bar.booking { background: var(--ch-booking); color: #fff; }
+  .bar.agoda { background: var(--ch-agoda); color: #fff; }
+  .bar.direct { background: var(--ch-direct); color: #06210F; }
+
+  /* Same booking as the guest-booking and email screens: 20-23 Dec,
+     Garden Studio · Room 1. Brighter, thin light outline — no glow. */
+  .bar.hero {
+    filter: brightness(1.08) saturate(1.05);
+    border: 1.25px solid rgba(255, 255, 255, 0.65);
+    box-sizing: border-box;
+  }
 
   /* ---- legend ---- */
   .legend {
@@ -210,7 +224,7 @@
   }
   .legend-dot.booking { background: var(--ch-booking); }
   .legend-dot.agoda { background: var(--ch-agoda); }
-  .legend-dot.direct { background: var(--ch-direct); box-shadow: 0 0 6px var(--accent); }
+  .legend-dot.direct { background: var(--ch-direct); }
 </style>
 </head>
 <body>
@@ -259,37 +273,37 @@
 
           <div class="cal-type-spacer"></div>
           <div class="cal-grid-row">
-            <div class="bar booking" style="left:14.28%;width:28.57%"></div>
-            <div class="bar direct" style="left:71.43%;width:28.57%"></div>
+            <div class="bar direct hero" style="left:28.57%;width:42.86%">A. Lindgren</div>
           </div>
           <div class="cal-grid-row">
-            <div class="bar agoda" style="left:0;width:28.57%"></div>
-            <div class="bar booking" style="left:42.86%;width:42.86%"></div>
+            <div class="bar booking" style="left:0%;width:28.57%">W.Z.</div>
+            <div class="bar agoda" style="left:57.14%;width:42.86%">S. Delaney</div>
           </div>
 
           <div class="cal-type-spacer"></div>
           <div class="cal-grid-row">
-            <div class="bar booking" style="left:0;width:57.14%"></div>
-            <div class="bar direct" style="left:71.43%;width:28.57%"></div>
+            <div class="bar booking" style="left:0%;width:42.86%">P. Kovacs</div>
+            <div class="bar direct" style="left:71.43%;width:28.57%">M.O.</div>
           </div>
           <div class="cal-grid-row">
-            <div class="bar direct" style="left:14.28%;width:28.57%"></div>
-            <div class="bar agoda" style="left:57.14%;width:42.86%"></div>
+            <div class="bar agoda" style="left:14.28%;width:42.86%">K. Boateng</div>
+            <div class="bar booking" style="left:71.43%;width:28.57%">W.Z.</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="legend">
-      <span class="legend-item"><span class="legend-dot booking"></span>Booking.com −15%</span>
-      <span class="legend-item"><span class="legend-dot agoda"></span>Agoda −18%</span>
-      <span class="legend-item direct"><span class="legend-dot direct"></span>Direct 0%</span>
+      <span class="legend-item"><span class="legend-dot booking"></span>Booking.com</span>
+      <span class="legend-item"><span class="legend-dot agoda"></span>Agoda</span>
+      <span class="legend-item direct"><span class="legend-dot direct"></span>Direct</span>
     </div>
   </div>
 
   <script>
-    // Dec 2026 starts on a Tuesday — 7 days shown (one full week).
-    const start = new Date(Date.UTC(2026, 11, 1));
+    // 7 days from Fri 18 Dec 2026, so the 20-23 Dec A. Lindgren booking
+    // (Garden Studio · Room 1) sits inside the window.
+    const start = new Date(Date.UTC(2026, 11, 18));
     const header = document.getElementById('dateHeader');
     for (let i = 0; i < 7; i++) {
       const d = new Date(start);
