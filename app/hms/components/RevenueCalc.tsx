@@ -124,12 +124,13 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
           min-width: 0;
         }
 
+        /* Лейбл полоски разбивки, не отдельный заголовок — прижат к треку */
         .unit-label {
-          margin: 0 0 1.1rem 0;
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
+          margin: 0 0 0.5rem 0;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0;
+          text-transform: none;
           color: ${T.muted};
         }
 
@@ -363,6 +364,64 @@ export default function RevenueCalc({ t }: { t: CalcCopy }) {
         @media (prefers-reduced-motion: reduce) {
           .seg {
             transition: none;
+          }
+        }
+
+        /* Только Hero-версия карточки (bento, ≥1025px) видна на этой ширине —
+           карточка внутри IndustryProof скрыта своим же родителем на
+           ≥1025px, так что этот брейкпоинт не задевает мобильный стек */
+        @media (min-width: 1025px) {
+          .calc {
+            display: grid;
+            /* Трек нуждается в больше места, чем колонка сумм: у сумм текст
+               короче и переносится, а «−$17» в узкой колонке обрезается */
+            grid-template-columns: 1.4fr 1fr;
+            grid-template-areas:
+              "label    totals"
+              "track    totals"
+              "footnote footnote";
+            column-gap: 2rem;
+            align-items: start;
+          }
+
+          .unit-label {
+            grid-area: label;
+          }
+
+          .track-wrap {
+            grid-area: track;
+          }
+
+          .seg {
+            font-size: 11px;
+          }
+
+          .seg-keep {
+            padding-left: 10px;
+          }
+
+          .totals {
+            grid-area: totals;
+            grid-template-columns: 1fr;
+            gap: 1.1rem;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+          }
+
+          .total-label {
+            min-height: 0;
+          }
+
+          /* Одна узкая колонка вместо половины неразделённой карточки —
+             $2,790/mo обрезался при базовом clamp(…, 32px) */
+          .total-value {
+            font-size: 24px;
+          }
+
+          .footnote {
+            grid-area: footnote;
+            margin-top: 1.4rem;
           }
         }
       `}</style>

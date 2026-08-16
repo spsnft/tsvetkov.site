@@ -42,7 +42,7 @@ export const contentData = {
     // Вторая колонка снимает главное возражение: не все 100% возвращаются,
     // возврат первого года — доля объёма OTA, которую можно забрать себе
     otaCostBadge: "WHAT OTAs COST YOU",
-    calcUnitLabel: "ONE $100 BOOKING",
+    calcUnitLabel: "On every $100 booking",
     calcKeepInline: "you keep $83",
     calcLossInline: "−$17",
     calcFullMark: "Direct: $100",
@@ -59,22 +59,15 @@ export const contentData = {
     marqueeLabel: "CHANNELS WE CONNECT",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
-    scaleTitle: "Where your revenue leaks",
-
-    // Полоса сравнения — единственное место, где на странице проговаривается
-    // «было → стало». Иллюстрации из удалённых карточек живут здесь иконками
-    scaleCmpNowLabel: "WITHOUT A DIRECT SYSTEM",
-    scaleCmpAfterLabel: "WITH FT AGENCY",
-    scaleCmpNow: [
-      "Rates and availability updated by hand, around the clock",
-      "15–20% of every booking goes to the platform",
-      "Every guest arrives through a channel you don't own"
-    ],
-    scaleCmpAfter: [
-      "One room calendar, synced across 300+ channels",
-      "Direct bookings at zero commission, forever",
-      "Your own search traffic and returning guests"
-    ],
+    // Три пары проблема→решение, деньги первыми, операционка последней.
+    // Заменяет прежнюю двухколоночную полосу сравнения (WITHOUT/WITH).
+    scaleTitle: "What it costs you — and what changes",
+    scalePair1Problem: "15–20% of every booking goes to the platform",
+    scalePair1Solution: "Direct bookings at 0% commission — forever",
+    scalePair2Problem: "Every guest arrives through a channel you don't own",
+    scalePair2Solution: "Your own search traffic and returning guests",
+    scalePair3Problem: "Rates and availability updated by hand, around the clock",
+    scalePair3Solution: "One room calendar, synced across 300+ channels",
 
     // --- WHO'S BEHIND THIS ---
     // Повествование блока идёт от «мы», поэтому заголовок — агентство,
@@ -102,18 +95,28 @@ export const contentData = {
     // Три демо-экрана — не скриншоты Little Hotelier/Beds24/Cloudbeds
     // (клиентам подключаются разные платформы), а нейтральный интерфейс в
     // дизайн-системе сайта. Демо-объект: Baan Sirin Villa, Rawai, Phuket.
+    // Сквозная бронь на всех трёх экранах: Klaus Müller, Pool Villa 2,
+    // 18–24 Dec, ฿4,000/night, ฿24,000 total, Direct, booked 21:47.
     seeSystemTitle: "See how it works end to end",
+    // Короткие версии — только для кликабельных шагов-пилюль в карусели
     seeSystemStep1: "Guest books",
     seeSystemStep2: "You see it",
     seeSystemStep3: "Guest gets this",
-    seeSystemCaption: "From booking to confirmation — without the commission.",
-    seeSystemDisclaimer: "Interface shown for illustration. The actual platform is selected per property.",
+    // Полные лейблы + строка выгоды — подписи у самих экранов
+    seeSystemLabel1: "Guest books on your site",
+    seeSystemBenefit1: "Not on Booking.com. Zero commission on this one.",
+    seeSystemLabel2: "You see it instantly",
+    seeSystemBenefit2: "Every channel in one calendar. The room closes everywhere automatically.",
+    seeSystemLabel3: "Guest gets confirmed",
+    seeSystemBenefit3: "Sent automatically, in your name. You do nothing.",
+    // ฿24,000 × 0.83 (та же 17%-комиссия, что в калькуляторе героя) ≈ ฿19,900
+    seeSystemCaption: "This booking: ฿24,000 direct. Through Booking.com you'd have kept ฿19,900.",
+    seeSystemDisclaimer: "Demo property. Your system is built on the platform that fits your property.",
 
     // --- PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever",
     pricePopular: "Popular",
-    priceDisclaimerAudit: "Final price confirmed after your free revenue check. PMS and channel manager (one calendar that updates every platform at once) are billed separately by the provider.",
     priceMore2: "+ 4 from Lite",
     priceMore3: "+ 7 from Standard",
 
@@ -121,39 +124,37 @@ export const contentData = {
     // подсказка показывается только в собственном списке тарифа, не в свёрнутом
     featureHints: {
       "Cloud PMS Setup": "all your bookings in one place, not in a spreadsheet",
-      "0% Commission Engine": "the page where guests book on your own site",
+      "0% Commission Engine": "booking page on your own site",
       "Direct Promo Engine": "direct-only offers and discounts",
-      "Marketing Analytics Setup": "tracking that shows where your bookings come from"
+      "Marketing Analytics Setup": "see which channel each booking came from"
     } as Record<string, string>,
 
-    // Диапазоны — ориентир, а не правило: реальная сегментация идёт по ADR
-    pricePaybackNote: "Payback varies with property size and ADR — the example above uses a 12-unit property.",
-    priceFitHint: "Not sure which fits? Two questions on the check answers it.",
+    // Единственная строка под сеткой тарифов — раньше их было две
+    // (окупаемость + итоговая цена/PMS отдельно после CTA)
+    pricePaybackNote: "Payback varies with property size and ADR. Final price confirmed after your revenue check. PMS and channel manager are billed separately by the provider — typically $30–100/month.",
 
     // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия
     riskTitle: "50% upfront, 50% on launch.",
     riskText: "Not live in 14 days — you don't pay the second half.",
 
-    // Микрокопия под каждой главной кнопкой — что человек даёт и что получает
+    // Микрокопия под кнопкой в финальном CTA-блоке (FooterCTA). В героя эта
+    // строка больше не выводится — там она дублировала эту же
     ctaNote: "Send us your property name. We reply with what OTAs are costing you — your numbers, not an example.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
-    tier1Payback: "Typical payback: 3–4 months",
-    tier1Fit: "Typical fit: 1–9 units",
-    tier1Desc: "For small villas & guesthouses",
+    tier1Payback: "Payback: 4–6 months",
+    tier1Desc: "For small villas & guesthouses (1–9 units)",
 
     tier2Title: "STANDARD",
     tier2Price: "From $2,500",
-    tier2Payback: "Typical payback: 2–3 months",
-    tier2Fit: "Typical fit: 10–29 units",
-    tier2Desc: "For boutique hotels & resorts",
+    tier2Payback: "Payback: 4–5 months",
+    tier2Desc: "For boutique hotels & resorts (10–29 units)",
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Payback: "Typical payback: under 2 months",
-    tier3Fit: "Multi-property and operators",
-    tier3Desc: "For hotel chains & operators",
+    tier3Payback: "Payback: 2–3 months",
+    tier3Desc: "For hotel chains & operators (multi-property)",
 
     // --- FAQ SECTION ---
     faqTitle: "Frequently Asked Questions",

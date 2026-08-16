@@ -88,7 +88,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
     letsTalk: "Let's talk",
   };
 
-  const hmsT = (hmsContentData as Record<string, typeof hmsContentData.en>)[lang] ?? hmsContentData.en;
+  const hmsT = hmsContentData[lang as keyof typeof hmsContentData] ?? hmsContentData.en;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);

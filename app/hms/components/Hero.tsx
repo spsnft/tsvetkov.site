@@ -12,7 +12,6 @@ interface HeroProps {
     btnAudit?: string;
     waMessage?: string;
     otaCostBadge?: string;
-    ctaNote?: string;
   } & CalcCopy;
 }
 
@@ -137,16 +136,6 @@ export default function Hero({ t }: HeroProps) {
 
         .cta-container :global(.btn-premium-core svg) {
           flex-shrink: 0;
-        }
-
-        /* Что произойдёт после нажатия — тише кнопки, но в её колонке */
-        .cta-note {
-          margin: 10px 0 0 0;
-          font-size: 0.8rem;
-          line-height: 1.45;
-          color: rgba(255, 255, 255, 0.45);
-          max-width: 420px;
-          text-wrap: pretty;
         }
 
         .visual-column {
@@ -315,8 +304,6 @@ export default function Hero({ t }: HeroProps) {
                 message={t.waMessage}
               />
             </div>
-
-            {t.ctaNote && <p className="cta-note">{t.ctaNote}</p>}
           </div>
 
           <div className="visual-column">

@@ -10,6 +10,12 @@ interface SeeSystemProps {
     seeSystemStep1?: string;
     seeSystemStep2?: string;
     seeSystemStep3?: string;
+    seeSystemLabel1?: string;
+    seeSystemBenefit1?: string;
+    seeSystemLabel2?: string;
+    seeSystemBenefit2?: string;
+    seeSystemLabel3?: string;
+    seeSystemBenefit3?: string;
     seeSystemCaption?: string;
     seeSystemDisclaimer?: string;
   };
@@ -24,10 +30,24 @@ interface SeeSystemProps {
 // пошаговым индикатором. Обе разметки лежат в DOM одновременно и
 // переключаются media-запросом (тот же приём, что в IndustryProof/Hero).
 export default function SeeSystem({ t = {} }: SeeSystemProps) {
+  // Short forms — used only by the clickable step pills in the mobile nav,
+  // which don't have room for the full label + benefit line
   const steps = [
     t.seeSystemStep1 || 'Guest books',
     t.seeSystemStep2 || 'You see it',
     t.seeSystemStep3 || 'Guest gets this',
+  ];
+
+  // Full label + benefit line — the actual caption shown at each screen
+  const labels = [
+    t.seeSystemLabel1 || 'Guest books on your site',
+    t.seeSystemLabel2 || 'You see it instantly',
+    t.seeSystemLabel3 || 'Guest gets confirmed',
+  ];
+  const benefits = [
+    t.seeSystemBenefit1 || 'Not on Booking.com. Zero commission on this one.',
+    t.seeSystemBenefit2 || 'Every channel in one calendar. The room closes everywhere automatically.',
+    t.seeSystemBenefit3 || 'Sent automatically, in your name. You do nothing.',
   ];
 
   const slides = [
@@ -103,6 +123,16 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           color: ${T.accent};
         }
 
+        /* Тише лейбла — тот же муted, но ниже непрозрачность */
+        .see-benefit {
+          margin: 0.3rem 0 0 0;
+          font-size: 0.76rem;
+          line-height: 1.45;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.32);
+          text-wrap: pretty;
+        }
+
         /* ================= DESKTOP: overlapping scene ================= */
         .see-stage-wrap {
           display: none;
@@ -144,10 +174,12 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
             border-radius: 18px;
             box-shadow: 0 24px 55px rgba(0, 0, 0, 0.4);
           }
-          .see-layer-dashboard .see-step {
+          .see-layer-dashboard .see-cap-block {
             position: absolute;
             left: 2px;
-            bottom: -32px;
+            top: 100%;
+            margin-top: 14px;
+            max-width: 380px;
           }
 
           .see-layer-phone {
@@ -159,10 +191,12 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           .see-layer-phone :global(img) {
             box-shadow: 0 30px 55px rgba(0, 0, 0, 0.55), 0 10px 22px rgba(0, 0, 0, 0.4);
           }
-          .see-layer-phone .see-step {
+          .see-layer-phone .see-cap-block {
             position: absolute;
             left: 2px;
-            top: -30px;
+            bottom: 100%;
+            margin-bottom: 10px;
+            width: 210px;
           }
 
           .see-layer-email {
@@ -174,10 +208,12 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           .see-layer-email :global(img) {
             box-shadow: 0 30px 55px rgba(0, 0, 0, 0.55), 0 10px 22px rgba(0, 0, 0, 0.4);
           }
-          .see-layer-email .see-step {
+          .see-layer-email .see-cap-block {
             position: absolute;
             left: 2px;
-            top: -30px;
+            bottom: 100%;
+            margin-bottom: 10px;
+            width: 190px;
           }
         }
 
@@ -207,7 +243,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           flex-direction: column;
         }
 
-        .see-slide .see-step {
+        .see-slide .see-cap-block {
           margin: 0 0 0.75rem 2px;
         }
 
@@ -282,14 +318,17 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           }
         }
 
-        /* ================= shared: caption + disclaimer ================= */
+        /* ================= shared: money line + disclaimer ================= */
+        /* Единственная цифра в секции — это аргумент, не сноска, поэтому
+           кегль заметно крупнее обычной подписи */
         .see-caption {
-          margin: 2.5rem auto 0 auto;
-          max-width: 460px;
+          margin: 2.75rem auto 0 auto;
+          max-width: 560px;
           text-align: center;
-          font-size: 1rem;
-          font-weight: 600;
-          line-height: 1.5;
+          font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+          font-weight: 700;
+          line-height: 1.4;
+          letter-spacing: -0.01em;
           color: #ffffff;
           text-wrap: pretty;
         }
@@ -328,10 +367,13 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
                 height={800}
                 loading="lazy"
               />
-              <span className="see-step">
-                <span className="step-num">2</span>
-                {steps[1]}
-              </span>
+              <div className="see-cap-block">
+                <span className="see-step">
+                  <span className="step-num">2</span>
+                  {labels[1]}
+                </span>
+                <p className="see-benefit">{benefits[1]}</p>
+              </div>
             </div>
             <div className="see-layer see-layer-phone">
               <Image
@@ -341,10 +383,13 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
                 height={844}
                 loading="lazy"
               />
-              <span className="see-step">
-                <span className="step-num">1</span>
-                {steps[0]}
-              </span>
+              <div className="see-cap-block">
+                <span className="see-step">
+                  <span className="step-num">1</span>
+                  {labels[0]}
+                </span>
+                <p className="see-benefit">{benefits[0]}</p>
+              </div>
             </div>
             <div className="see-layer see-layer-email">
               <Image
@@ -354,10 +399,13 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
                 height={844}
                 loading="lazy"
               />
-              <span className="see-step">
-                <span className="step-num">3</span>
-                {steps[2]}
-              </span>
+              <div className="see-cap-block">
+                <span className="see-step">
+                  <span className="step-num">3</span>
+                  {labels[2]}
+                </span>
+                <p className="see-benefit">{benefits[2]}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -373,10 +421,13 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
                   slideRefs.current[i] = el;
                 }}
               >
-                <span className="see-step">
-                  <span className="step-num">{i + 1}</span>
-                  {steps[i]}
-                </span>
+                <div className="see-cap-block">
+                  <span className="see-step">
+                    <span className="step-num">{i + 1}</span>
+                    {labels[i]}
+                  </span>
+                  <p className="see-benefit">{benefits[i]}</p>
+                </div>
                 <div className="see-slide-frame">
                   <Image
                     src={slide.src}

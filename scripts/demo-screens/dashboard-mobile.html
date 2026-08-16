@@ -196,6 +196,30 @@
     box-sizing: border-box;
   }
 
+  .latest-booking {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+    padding-left: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .latest-booking .guest {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .latest-booking .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
   /* ---- legend ---- */
   .legend {
     display: flex;
@@ -263,7 +287,7 @@
           <div class="cal-unit-row">Room 1</div>
           <div class="cal-unit-row">Room 2</div>
 
-          <div class="cal-type-row">Pool Access</div>
+          <div class="cal-type-row">Pool Villa</div>
           <div class="cal-unit-row">Room 1</div>
           <div class="cal-unit-row">Room 2</div>
         </div>
@@ -272,9 +296,7 @@
           <div class="cal-date-header" id="dateHeader"></div>
 
           <div class="cal-type-spacer"></div>
-          <div class="cal-grid-row">
-            <div class="bar direct hero" style="left:28.57%;width:42.86%">A. Lindgren</div>
-          </div>
+          <div class="cal-grid-row"></div>
           <div class="cal-grid-row">
             <div class="bar booking" style="left:0%;width:28.57%">W.Z.</div>
             <div class="bar agoda" style="left:57.14%;width:42.86%">S. Delaney</div>
@@ -286,8 +308,7 @@
             <div class="bar direct" style="left:71.43%;width:28.57%">M.O.</div>
           </div>
           <div class="cal-grid-row">
-            <div class="bar agoda" style="left:14.28%;width:42.86%">K. Boateng</div>
-            <div class="bar booking" style="left:71.43%;width:28.57%">W.Z.</div>
+            <div class="bar direct hero" style="left:0%;width:85.71%">K. Müller</div>
           </div>
         </div>
       </div>
@@ -298,11 +319,16 @@
       <span class="legend-item"><span class="legend-dot agoda"></span>Agoda</span>
       <span class="legend-item direct"><span class="legend-dot direct"></span>Direct</span>
     </div>
+
+    <div class="latest-booking">
+      <span class="dot"></span>
+      Latest: <span class="guest">K. Müller</span> · Pool Villa 2 · 18–24 Dec · 21:47
+    </div>
   </div>
 
   <script>
-    // 7 days from Fri 18 Dec 2026, so the 20-23 Dec A. Lindgren booking
-    // (Garden Studio · Room 1) sits inside the window.
+    // 7 days from Fri 18 Dec 2026 — exactly the window of the 18-24 Dec
+    // K. Müller booking (Pool Villa · Room 2).
     const start = new Date(Date.UTC(2026, 11, 18));
     const header = document.getElementById('dateHeader');
     for (let i = 0; i < 7; i++) {

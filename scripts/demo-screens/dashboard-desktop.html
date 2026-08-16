@@ -11,7 +11,7 @@
   }
 
   .page {
-    padding: 28px 32px 0 32px;
+    padding: 20px 32px 0 32px;
     height: 800px;
   }
 
@@ -20,7 +20,7 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .dash-title {
     font-family: var(--font-display);
@@ -201,6 +201,28 @@
   }
 
   /* ---- legend ---- */
+  .latest-booking {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 16px;
+    padding-left: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .latest-booking .guest {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .latest-booking .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
   .legend {
     display: flex;
     align-items: center;
@@ -268,7 +290,7 @@
           <div class="cal-unit-row">Room 3</div>
           <div class="cal-unit-row">Room 4</div>
 
-          <div class="cal-type-row">Pool Access Suite</div>
+          <div class="cal-type-row">Pool Villa</div>
           <div class="cal-unit-row">Room 1</div>
           <div class="cal-unit-row">Room 2</div>
           <div class="cal-unit-row">Room 3</div>
@@ -285,7 +307,6 @@
 
           <div class="cal-grid-row">
             <div class="bar booking" style="left:0%;width:18.75%">M. Oliveira</div>
-            <div class="bar direct hero" style="left:37.5%;width:18.75%">A. Lindgren</div>
             <div class="bar agoda" style="left:68.75%;width:18.75%">K. Boateng</div>
           </div>
           <div class="cal-grid-row">
@@ -312,7 +333,7 @@
           </div>
           <div class="cal-grid-row">
             <div class="bar direct" style="left:6.25%;width:18.75%">P. Kovacs</div>
-            <div class="bar agoda" style="left:37.5%;width:31.25%">M. Oliveira</div>
+            <div class="bar direct hero" style="left:25%;width:37.5%">K. Müller</div>
             <div class="bar booking" style="left:81.25%;width:12.5%">S.D.</div>
           </div>
           <div class="cal-grid-row">
@@ -339,6 +360,11 @@
       <span class="legend-item"><span class="legend-dot booking"></span>Booking.com</span>
       <span class="legend-item"><span class="legend-dot agoda"></span>Agoda</span>
       <span class="legend-item direct"><span class="legend-dot direct"></span>Direct</span>
+    </div>
+
+    <div class="latest-booking">
+      <span class="dot"></span>
+      Latest: <span class="guest">K. Müller</span> · Pool Villa 2 · 18–24 Dec · booked 21:47
     </div>
   </div>
 
