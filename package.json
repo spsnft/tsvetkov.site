@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "demo-screens": "node scripts/demo-screens/capture.mjs",
     "push": "powershell -ExecutionPolicy Bypass -File push.ps1",
     "push:linux": "bash push.sh"
   },
@@ -23,6 +24,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "playwright": "^1.56.1",
     "typescript": "^5"
   }
 }

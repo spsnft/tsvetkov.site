@@ -98,6 +98,17 @@ export const contentData = {
     stat3Name: "Years Experience",
     stat3Sub: "Growth & systems",
 
+    // --- SEE THE SYSTEM ---
+    // Три демо-экрана — не скриншоты Little Hotelier/Beds24/Cloudbeds
+    // (клиентам подключаются разные платформы), а нейтральный интерфейс в
+    // дизайн-системе сайта. Демо-объект: Baan Sirin Villa, Rawai, Phuket.
+    seeSystemTitle: "See how it works end to end",
+    seeSystemStep1: "Guest books",
+    seeSystemStep2: "You see it",
+    seeSystemStep3: "Guest gets this",
+    seeSystemCaption: "From booking to confirmation — without the commission.",
+    seeSystemDisclaimer: "Interface shown for illustration. The actual platform is selected per property.",
+
     // --- PRICING ---
     priceTitle: "Transparent Integration. Permanent Independence",
     priceSub: "One-time setup fee. Zero commission on direct bookings forever",
@@ -260,6 +271,16 @@ export const contentData = {
     stat3Name: "Лет опыта",
     stat3Sub: "Рост и системы",
 
+    // --- SEE THE SYSTEM ---
+    // Экраны внутри — на английском во всех локалях (см. constants.ts EN);
+    // локализуются только подписи вокруг них
+    seeSystemTitle: "Как это работает — от брони до заезда",
+    seeSystemStep1: "Гость бронирует",
+    seeSystemStep2: "Вы это видите",
+    seeSystemStep3: "Гость получает",
+    seeSystemCaption: "От брони до подтверждения — без комиссии.",
+    seeSystemDisclaimer: "Интерфейс показан для примера. Реальная платформа подбирается под объект.",
+
     // --- PRICING ---
     priceTitle: "Прозрачное внедрение. Постоянная независимость",
     priceSub: "Разовая оплата. Ноль комиссии с прямых броней навсегда",
@@ -421,6 +442,14 @@ export const contentData = {
     stat3Num: "10+",
     stat3Name: "ประสบการณ์ (ปี)",
     stat3Sub: "การเติบโตและระบบ",
+
+    // --- SEE THE SYSTEM ---
+    seeSystemTitle: "ระบบทำงานอย่างไรตั้งแต่ต้นจนจบ",
+    seeSystemStep1: "แขกจอง",
+    seeSystemStep2: "คุณเห็นเลย",
+    seeSystemStep3: "แขกได้รับ",
+    seeSystemCaption: "จากการจองถึงการยืนยัน — ไม่มีค่าคอมมิชชั่น",
+    seeSystemDisclaimer: "อินเทอร์เฟซที่แสดงเป็นเพียงตัวอย่างประกอบ แพลตฟอร์มจริงจะเลือกตามแต่ละที่พัก",
 
     // --- PRICING ---
     priceTitle: "วางระบบโปร่งใส เป็นอิสระจากแพลตฟอร์มถาวร",

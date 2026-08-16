@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>guest-booking</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+  body {
+    width: 390px;
+  }
+
+  .page {
+    padding: 32px 20px 28px 20px;
+  }
+
+  /* ---- header ---- */
+  .prop-header {
+    margin-bottom: 22px;
+  }
+  .prop-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    line-height: 1.15;
+  }
+  .prop-location {
+    margin-top: 5px;
+    font-size: 13.5px;
+    color: var(--sub);
+    font-weight: 500;
+  }
+
+  /* ---- date / guest row ---- */
+  .date-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+  }
+  .date-row-main {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #fff;
+    min-width: 0;
+    white-space: nowrap;
+  }
+  .date-row-main .arrow {
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .date-row-main .sep {
+    color: var(--muted);
+    font-weight: 500;
+    margin: 0 1px;
+  }
+  .date-row-main .nights {
+    color: var(--sub);
+    font-weight: 500;
+  }
+  .guests {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--body);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .guests svg { flex-shrink: 0; }
+
+  /* ---- room card ---- */
+  .rooms {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .room-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .room-photo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #12100D;
+  }
+  .room-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .room-body {
+    padding: 18px 18px 20px 18px;
+  }
+
+  .room-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 21px;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .room-features {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px 13px;
+    margin-top: 11px;
+  }
+  .room-features li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--sub);
+    white-space: nowrap;
+  }
+  .room-features svg {
+    flex-shrink: 0;
+    color: var(--mint);
+  }
+
+  .room-desc {
+    margin-top: 13px;
+    font-size: 13.5px;
+    line-height: 1.52;
+    color: var(--sub);
+    text-wrap: pretty;
+  }
+
+  .room-price-row {
+    margin-top: 17px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .price-block {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+  }
+  .price-main {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .price-unit {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .price-total {
+    margin-top: 4px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .book-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--acc2) 100%);
+    color: #06210F;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: -0.005em;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 229, 153, 0.2);
+  }
+
+  /* ---- second room: thin continuation row, not a full card ---- */
+  .room-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 18px;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .room-row-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .room-row-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .room-row-price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14.5px;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .room-row-price .price-unit {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .room-row-chevron {
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="prop-header">
+      <h1 class="prop-name">Baan Sirin Villa</h1>
+      <p class="prop-location">Rawai, Phuket</p>
+    </header>
+
+    <div class="date-row">
+      <div class="date-row-main">
+        <span>Su 20 Dec</span>
+        <span class="arrow">→</span>
+        <span>We 23 Dec</span>
+        <span class="sep">·</span>
+        <span class="nights">3 nights</span>
+      </div>
+      <span class="guests">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        2 guests
+      </span>
+    </div>
+
+    <div class="rooms">
+      <article class="room-card">
+        <div class="room-photo">
+          <img src="../../public/hms/screens/room-garden-studio.jpg" alt="" />
+        </div>
+        <div class="room-body">
+          <h2 class="room-title">Garden Studio</h2>
+
+          <ul class="room-features">
+            <li>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+              32 m²
+            </li>
+            <li>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
+              Sleeps 2
+            </li>
+            <li>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+              Free Wi-Fi
+            </li>
+            <li>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+              Breakfast included
+            </li>
+          </ul>
+
+          <p class="room-desc">Open-plan studio facing the garden, with a queen bed and outdoor rain shower. Five minutes on foot to Rawai Beach.</p>
+
+          <div class="room-price-row">
+            <div class="price-block">
+              <span class="price-main">USD 110<span class="price-unit">per night</span></span>
+              <span class="price-total">USD 330 total · 3 nights</span>
+            </div>
+            <div class="book-btn">Book now</div>
+          </div>
+        </div>
+      </article>
+
+      <div class="room-row">
+        <span class="room-row-name">Pool Access Suite</span>
+        <span class="room-row-right">
+          <span class="room-row-price">USD 165 <span class="price-unit">per night</span></span>
+          <svg class="room-row-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
