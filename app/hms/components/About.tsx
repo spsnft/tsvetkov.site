@@ -12,6 +12,7 @@ interface AboutProps {
     aboutLocation?: string;
     aboutP1?: string;
     aboutP2?: string;
+    aboutDirectLine?: string;
     aboutLinkAgency?: string;
     stat2Num?: string;
     stat2Name?: string;
@@ -137,14 +138,15 @@ export default function About({ t = {} }: AboutProps) {
           border-color: ${T.accent35};
         }
 
+        /* Зелёно-синий градиент здесь снят: он закреплён за деньгами
+           владельца (CTA, калькулятор, маркеры решений), а не за
+           регалиями агентства */
         .stat-num {
           font-size: 1.65rem;
           font-weight: 800;
           letter-spacing: -0.02em;
           line-height: 1;
-          background: linear-gradient(135deg, #00E599 0%, #00A3FF 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          color: #ffffff;
         }
 
         .stat-name {
@@ -169,10 +171,12 @@ export default function About({ t = {} }: AboutProps) {
           margin-top: 1.75rem;
         }
 
+        /* Ссылка уводит со страницы прямо перед прайсингом — не должна
+           читаться как основное действие блока */
         .about-link {
-          font-size: 0.92rem;
+          font-size: 0.82rem;
           font-weight: 600;
-          color: ${T.accent};
+          color: ${T.sub};
           text-decoration: none;
           transition: opacity 0.2s ease;
           white-space: nowrap;
@@ -255,6 +259,7 @@ export default function About({ t = {} }: AboutProps) {
           <div className="about-text">
             <p className="about-paragraph">{t.aboutP1}</p>
             {t.aboutP2 && <p className="about-paragraph dimmed">{t.aboutP2}</p>}
+            {t.aboutDirectLine && <p className="about-paragraph">{t.aboutDirectLine}</p>}
           </div>
 
           <div className="trust-stats-grid">

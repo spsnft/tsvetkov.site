@@ -15,15 +15,15 @@ interface ScalePracticeProps {
 const DEFAULT_PAIRS = [
   {
     problem: "15–20% of every booking goes to the platform",
-    solution: "Direct bookings at 0% commission — forever",
+    solution: "Direct bookings at 0% commission, forever",
   },
   {
-    problem: "Every guest arrives through a channel you don't own",
-    solution: "Your own search traffic and returning guests",
+    problem: "Your guests belong to the platform",
+    solution: "Your own traffic and returning guests",
   },
   {
-    problem: "Rates and availability updated by hand, around the clock",
-    solution: "One room calendar, synced across 300+ channels",
+    problem: "Rates updated by hand, around the clock",
+    solution: "One calendar, synced across 300+ channels",
   },
 ];
 
@@ -64,31 +64,47 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
 
         .pair {
-          padding: 22px 0;
+          padding: 10px 0;
         }
 
         .pair + .pair {
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        .row {
+          display: flex;
+          align-items: baseline;
+          gap: 8px;
+        }
+
+        .marker {
+          flex: 0 0 6px;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #5DCAA5;
+        }
+
+        .marker.empty {
+          background: transparent;
+        }
+
+        /* Проблема — тише решения: мельче, легче, приглушённый красный
+           поверх констелляции на фоне */
         .problem {
-          margin: 0 0 14px 0;
-          font-size: 1.1rem;
-          font-weight: 600;
+          margin: 0 0 7px 0;
+          font-size: 13px;
+          font-weight: 400;
           line-height: 1.45;
-          /* Приглушённый красный: тот же акцент, что и у Bottleneck-раздела,
-             но на пониженной непрозрачности, чтобы не читаться как алерт */
-          color: rgba(255, 85, 85, 0.72);
-          text-wrap: pretty;
+          color: #C97B74;
         }
 
         .solution {
           margin: 0;
-          font-size: 1.1rem;
-          font-weight: 700;
-          line-height: 1.45;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 1.4;
           color: #ffffff;
-          text-wrap: pretty;
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
@@ -113,15 +129,13 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .scale-title {
             font-size: 1.75rem;
           }
-          .pair {
-            padding: 18px 0;
-          }
-          .problem {
-            font-size: 1rem;
-            margin-bottom: 11px;
-          }
+          /* 18px переносит две из трёх строк на 390px — на мобильном чуть
+             мельче, чтобы соблюсти «ни одна строка не переносится» */
           .solution {
-            font-size: 1rem;
+            font-size: 15px;
+          }
+          .row {
+            gap: 6px;
           }
         }
       `}</style>
@@ -134,8 +148,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         <div className="pairs">
           {pairs.map((pair, i) => (
             <div className="pair" key={i}>
-              <p className="problem">{pair.problem}</p>
-              <p className="solution">{pair.solution}</p>
+              <div className="row">
+                <span className="marker empty" aria-hidden="true" />
+                <p className="problem">{pair.problem}</p>
+              </div>
+              <div className="row">
+                <span className="marker" aria-hidden="true" />
+                <p className="solution">{pair.solution}</p>
+              </div>
             </div>
           ))}
         </div>

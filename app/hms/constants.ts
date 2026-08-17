@@ -58,11 +58,11 @@ export const contentData = {
     // Заменяет прежнюю двухколоночную полосу сравнения (WITHOUT/WITH).
     scaleTitle: "What it costs you — and what changes",
     scalePair1Problem: "15–20% of every booking goes to the platform",
-    scalePair1Solution: "Direct bookings at 0% commission — forever",
-    scalePair2Problem: "Every guest arrives through a channel you don't own",
-    scalePair2Solution: "Your own search traffic and returning guests",
-    scalePair3Problem: "Rates and availability updated by hand, around the clock",
-    scalePair3Solution: "One room calendar, synced across 300+ channels",
+    scalePair1Solution: "Direct bookings at 0% commission, forever",
+    scalePair2Problem: "Your guests belong to the platform",
+    scalePair2Solution: "Your own traffic and returning guests",
+    scalePair3Problem: "Rates updated by hand, around the clock",
+    scalePair3Solution: "One calendar, synced across 300+ channels",
 
     // --- WHO'S BEHIND THIS ---
     // Повествование блока идёт от «мы», поэтому заголовок — агентство,
@@ -70,11 +70,13 @@ export const contentData = {
     aboutLabel: "WHO'S BEHIND THIS",
     aboutAgency: "FT Agency",
     aboutName: "Fedor Tsvetkov",
-    aboutRole: "Founder & Managing Director",
-    aboutLocation: "Currently based in Phuket",
+    aboutRole: "Founder · 10 years in growth & systems",
+    aboutLocation: "Working worldwide — on the ground in Phuket",
     // Первым идёт то, что решает: условия сделки и владение системой.
-    // Общее описание агентства — вторым
-    aboutP1: "We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share. Hospitality is where that matters most: properties hand 15–20% of revenue to platforms they don't control.",
+    aboutP1: "We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share.",
+    // Отдельной строкой, тем же стилем — объясняет, почему единственный
+    // контакт на странице WhatsApp, а не форма или колл-центр
+    aboutDirectLine: "You'll be talking to me directly, not a support queue.",
     aboutLinkAgency: "More about FT Agency",
 
     // Trust Stats
