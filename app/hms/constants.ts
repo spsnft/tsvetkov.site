@@ -67,12 +67,13 @@ export const contentData = {
     // Заменяет прежнюю двухколоночную полосу сравнения (WITHOUT/WITH).
     scaleLabel: "WHAT CHANGES",
     scaleTitle: "What changes when bookings come direct",
-    // Общие для desktop (шапка колонок) и mobile (инлайн-метка в каждой
-    // паре) — раньше были Today/With your own system и TODAY/DIRECT
-    // отдельно, теперь один и тот же короткий лейбл на обоих брейкпоинтах:
-    // пара про канал (OTA vs direct), а не про время (см. ТЗ №4, п. 3.2)
-    scaleLabelToday: "ON OTAS",
-    scaleLabelDirect: "DIRECT",
+    // Один и тот же лейбл на обоих брейкпоинтах — пара про канал
+    // (OTA vs direct), а не про время (см. ТЗ №4, п. 3.2). Строчные:
+    // регистр не несёт смысла, различие — в цвете и весе, не в капсе
+    // (см. ТЗ №5, п. 2.3). "OTAs" — аббревиатура, капитализация внутри
+    // слова не трогается
+    scaleLabelToday: "on OTAs",
+    scaleLabelDirect: "direct",
     scalePair1Problem: "15–20% of every booking goes to the platform",
     scalePair1Solution: "Direct bookings at 0% commission, forever",
     scalePair2Problem: "Your guests belong to the platform",
@@ -134,9 +135,11 @@ export const contentData = {
     // THB-строка переведена по фиксированному демо-курсу ~32.5 THB/USD (не
     // живой курс, только чтобы показать масштаб в батах): $117 × 32.5 ≈
     // ฿3,800. seeSystemDisclaimer для EN намеренно не задан — компонент
-    // рендерит его только если пришёл (см. ТЗ №3, п. 4.1)
-    seeSystemCaption: "You keep $117 more than Booking.com would have",
-    seeSystemCaptionSub: "≈ ฿3,800 on a single stay — at 17% commission",
+    // рендерит его только если пришёл (см. ТЗ №3, п. 4.1). Первая строка
+    // короче прежней — укладывается в одну линию на любом экране, без
+    // некрасивого переноса (см. ТЗ №5, п. 3)
+    seeSystemCaption: "You keep $117 more on this booking",
+    seeSystemCaptionSub: "≈ ฿3,800 — Booking.com would have taken 17%",
 
     // --- PRICING ---
     // Заголовок секции получает eyebrow и укорачивается — старый вариант
@@ -150,11 +153,14 @@ export const contentData = {
 
     // Первое появление термина на странице объясняется человеческим языком;
     // подсказка показывается только в собственном списке тарифа, не в свёрнутом
+    // "0% Commission Engine": было "bookings on your site" — дублировало
+    // "bookings" со строкой Cloud PMS Setup выше. "Marketing Analytics":
+    // "where bookings come from" короче на одну строку (см. ТЗ №5, п. 5)
     featureHints: {
       "Cloud PMS Setup": "all bookings in one place",
-      "0% Commission Engine": "bookings on your site",
+      "0% Commission Engine": "on your own site",
       "Promo Engine": "direct-only offers",
-      "Marketing Analytics": "see where bookings come from"
+      "Marketing Analytics": "where bookings come from"
     } as Record<string, string>,
 
     // Вторая (мелкая, приглушённая) строка объединённого risk-box — не

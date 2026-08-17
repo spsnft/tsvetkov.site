@@ -34,8 +34,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
     solution: t?.[`scalePair${i + 1}Solution`] || fallback.solution,
   }));
 
-  const labelOn = t?.scaleLabelToday || 'ON OTAS';
-  const labelDirect = t?.scaleLabelDirect || 'DIRECT';
+  const labelOn = t?.scaleLabelToday || 'on OTAs';
+  const labelDirect = t?.scaleLabelDirect || 'direct';
 
   return (
     <section id="how-it-works" className="scale-section">
@@ -72,98 +72,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           text-wrap: balance;
         }
 
-        /* ================= DESKTOP: stacked pairs + shared column header ================= */
-        .pairs-desktop {
-          max-width: 640px;
-          margin: 0 auto;
-        }
-
-        /* Шапка колонок — один раз над первой парой, тем же паттерном
-           «маркер + строка», что и сами пары, только мельче: это подпись
-           к двум сторонам стопки, а не полноценная третья пара */
-        .col-headers {
-          padding-bottom: 10px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          margin-bottom: 10px;
-        }
-
-        .col-headers .row + .row {
-          margin-top: 5px;
-        }
-
-        .col-header {
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-        }
-
-        .col-header.today {
-          color: ${T.muted};
-        }
-
-        /* DIRECT — фирменный градиент, единственное цветное пятно в блоке.
-           Всё остальное (маркеры, разделитель) — нейтральный серый, не
-           градиент (см. ТЗ №4, п. 3.4) */
-        .col-header.direct {
-          background: ${T.linearGradient};
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .pair {
-          position: relative;
-          padding: 10px 0;
-        }
-
-        .pair + .pair::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 1px;
-          background: rgba(255, 255, 255, 0.08);
-        }
-
-        .row {
-          display: flex;
-          align-items: baseline;
-          gap: 8px;
-        }
-
-        .marker {
-          flex: 0 0 6px;
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.3);
-        }
-
-        .marker.empty {
-          background: transparent;
-        }
-
-        /* On OTAs — приглушённая колонка, без акцентного цвета */
-        .problem {
-          margin: 0 0 7px 0;
-          font-size: 13px;
-          font-weight: 400;
-          line-height: 1.45;
-          color: ${T.muted};
-        }
-
-        /* Direct — почти белый, высокий контраст. Плоский зелёный на
-           тексте убран — градиент живёт только на самом лейбле DIRECT */
-        .solution {
-          margin: 0;
-          font-size: 18px;
-          font-weight: 500;
-          line-height: 1.4;
-          color: rgba(255, 255, 255, 0.92);
-        }
-
         @media (min-width: 768px) and (max-width: 1024px) {
           .scale-header {
             margin-bottom: 2.5rem;
@@ -173,9 +81,78 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
         }
 
-        /* ================= MOBILE: без рамок, метки инлайново ================= */
-        .pairs-mobile {
-          display: none;
+        /* Один вариант вёрстки на обоих брейкпоинтах — раньше desktop был
+           колонками с общей шапкой, mobile парами с инлайн-метками;
+           колоночный вариант убран целиком (см. ТЗ №5, п. 2.1). Без
+           рамок и подложек — группировка держится на воздухе между
+           парами и hairline снизу (см. ТЗ №4, п. 3.1) */
+        .pairs {
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+          max-width: 640px;
+          margin: 0 auto;
+        }
+
+        .pair:not(:last-child) {
+          padding-bottom: 20px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Метка — колонка фиксированной ширины: текст всех шести строк
+           стартует с одной вертикальной оси, а не «пляшет» по ширине
+           лейбла (см. ТЗ №5, п. 2.2) */
+        .pair-row {
+          display: flex;
+          align-items: baseline;
+          gap: 0;
+        }
+
+        .pair-row + .pair-row {
+          margin-top: 8px;
+        }
+
+        .micro-label {
+          flex: 0 0 88px;
+          width: 88px;
+        }
+
+        /* Регистр не несёт смысла — различие держится на цвете и весе
+           (см. ТЗ №5, п. 2.3) */
+        .micro-label.today {
+          font-weight: 500;
+          color: ${T.muted};
+        }
+
+        .micro-label.direct {
+          font-weight: 700;
+          background: ${T.linearGradient};
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        /* on OTAs — приглушённая строка, без акцентного цвета */
+        .problem {
+          flex: 1 1 auto;
+          min-width: 0;
+          margin: 0;
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 1.45;
+          color: ${T.muted};
+        }
+
+        /* direct — почти белый, высокий контраст. Плоский зелёный на
+           тексте убран — градиент живёт только на самом лейбле direct */
+        .solution {
+          flex: 1 1 auto;
+          min-width: 0;
+          margin: 0;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 1.4;
+          color: rgba(255, 255, 255, 0.92);
         }
 
         @media (max-width: 767px) {
@@ -188,54 +165,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .scale-title {
             font-size: 1.75rem;
           }
+          /* 18px переносит две из трёх строк на 390px — на мобильном чуть
+             мельче, чтобы соблюсти «ни одна строка не переносится» */
           .solution {
             font-size: 15px;
-          }
-
-          /* Колонок на мобиле нет — общая шапка над шестью оторванными
-             строками не читается (см. ТЗ №3, п. 3.1). Вместо неё три пары
-             без рамок и подложек: группировка держится на воздухе между
-             парами и hairline снизу, не на контуре (см. ТЗ №4, п. 3.1) */
-          .pairs-desktop {
-            display: none;
-          }
-
-          .pairs-mobile {
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-            max-width: 480px;
-            margin: 0 auto;
-          }
-
-          .pair-card:not(:last-child) {
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          }
-
-          .problem {
-            margin: 0 0 8px 0;
-          }
-
-          /* Метка — инлайновый префикс перед текстом строки, в одну
-             строку с ним, а не блок над ней (см. ТЗ №4, п. 3.3) */
-          .micro-label {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-right: 6px;
-          }
-
-          .micro-label.today {
-            color: ${T.muted};
-          }
-
-          .micro-label.direct {
-            background: ${T.linearGradient};
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
           }
         }
       `}</style>
@@ -246,43 +179,17 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           <h2 className="scale-title">{t?.scaleTitle || "What changes when bookings come direct"}</h2>
         </div>
 
-        <div className="pairs-desktop">
-          <div className="col-headers" aria-hidden="true">
-            <div className="row">
-              <span className="marker empty" />
-              <span className="col-header today">{labelOn}</span>
-            </div>
-            <div className="row">
-              <span className="marker" />
-              <span className="col-header direct">{labelDirect}</span>
-            </div>
-          </div>
-
+        <div className="pairs">
           {pairs.map((pair, i) => (
             <div className="pair" key={i}>
-              <div className="row">
-                <span className="marker empty" aria-hidden="true" />
+              <div className="pair-row">
+                <span className="micro-label today">{labelOn}</span>
                 <p className="problem">{pair.problem}</p>
               </div>
-              <div className="row">
-                <span className="marker" aria-hidden="true" />
+              <div className="pair-row">
+                <span className="micro-label direct">{labelDirect}</span>
                 <p className="solution">{pair.solution}</p>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="pairs-mobile">
-          {pairs.map((pair, i) => (
-            <div className="pair-card" key={i}>
-              <p className="problem">
-                <span className="micro-label today">{labelOn}</span>
-                {pair.problem}
-              </p>
-              <p className="solution">
-                <span className="micro-label direct">{labelDirect}</span>
-                {pair.solution}
-              </p>
             </div>
           ))}
         </div>

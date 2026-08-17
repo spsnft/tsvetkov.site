@@ -55,9 +55,10 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
     { num: t.stat3Num || "10+", name: t.stat3Name || "Years Experience", sub: t.stat3Sub || "Growth & systems" }
   ];
 
-  // EN: заголовок блока — человек, агентство и локация уходят в подпись.
-  // RU/TH: старая вёрстка (агентство заголовком) остаётся нетронутой —
-  // копирайт под неё пока не переписан (см. ТЗ, п. «Чего не делать»)
+  // EN: заголовок блока — человек, весь блок выровнен по левому краю, фото
+  // в шапке (top-right на desktop, в строке с именем на mobile), статистика
+  // без рамок. RU/TH: старая центрированная вёрстка с карточками остаётся
+  // нетронутой — копирайт под неё пока не переписан (см. ТЗ, п. «Чего не делать»)
   const isPersonLed = lang === 'en';
 
   return (
@@ -77,6 +78,14 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           flex-direction: column;
           align-items: center;
           text-align: center;
+        }
+
+        /* EN: один левый край на весь блок — раньше eyebrow/фото/имя были
+           центрированы, а абзацы прижаты влево, отсюда ощущение дыры
+           справа (см. ТЗ №5, п. 4.1) */
+        .about-block.left {
+          align-items: stretch;
+          text-align: left;
         }
 
         .about-label {
@@ -118,13 +127,21 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           max-width: 560px;
         }
 
-        /* EN: фото + имя в шапке блока — рядом на desktop, друг под другом
-           на mobile (см. ТЗ №2) */
+        /* EN: фото + имя в одной строке. justify-content: space-between
+           растягивает строку на всю ширину блока — на широком desktop это
+           и даёт «фото в правом верхнем углу», на узком mobile колонка
+           с именем и фото естественно сжимаются друг к другу и читаются
+           как одна строка (см. ТЗ №5, п. 4.2) — один и тот же flex-ряд
+           без брейкпоинтов */
         .about-header {
           display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 20px;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 16px;
+        }
+
+        .about-header-text {
+          text-align: left;
         }
 
         /* Скруглённый прямоугольник — консистентно с карточками/кнопками
@@ -132,9 +149,9 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
            нигде на странице. Заливка держится, даже если <img> 404-ит */
         .about-photo {
           flex: 0 0 auto;
-          width: 84px;
-          height: 84px;
-          border-radius: 18px;
+          width: 72px;
+          height: 72px;
+          border-radius: 16px;
           border: 1px solid rgba(255, 255, 255, 0.12);
           background: rgba(255, 255, 255, 0.06);
           overflow: hidden;
@@ -146,10 +163,6 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           height: 100%;
           object-fit: cover;
           display: block;
-        }
-
-        .about-header-text {
-          text-align: left;
         }
 
         .about-name {
@@ -190,6 +203,7 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           color: ${T.sub};
         }
 
+        /* RU/TH: карточки с рамками, как раньше */
         .trust-stats-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -220,26 +234,62 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           border-color: ${T.accent35};
         }
 
-        /* Зелёно-синий градиент здесь снят: он закреплён за деньгами
-           владельца (CTA, калькулятор, маркеры решений), а не за
-           регалиями агентства */
-        .stat-num {
+        /* EN: строка без подложек, границ и обработчиков нажатия — число
+           не кликабельно и никуда не ведёт, рамка тут читалась бы как
+           сломанная кнопка (см. ТЗ №5, п. 4.3). Вертикальный hairline
+           между парами, как в калькуляторе и «What changes» */
+        .stats-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.5rem 2rem;
+          width: 100%;
+          margin: 2.25rem 0 0 0;
+        }
+
+        /* Префикс row- отличает эти классы от .stat-num/.stat-name/.stat-sub
+           внутри .trust-stat-card (RU/TH) ниже — иначе два правила с
+           одинаковым именем класса конфликтуют, и более позднее (здесь —
+           градиент) перебивает белый цвет цифр в RU/TH-карточках */
+        .row-stat {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          flex: 1 1 auto;
+          min-width: 180px;
+        }
+
+        .row-stat + .row-stat {
+          border-left: 1px solid rgba(255, 255, 255, 0.1);
+          padding-left: 2rem;
+        }
+
+        .row-stat-text {
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* Зелёно-синий градиент — только на самих цифрах (см. ТЗ №5, п. 4.3) */
+        .row-stat-num {
+          flex: 0 0 auto;
           font-size: 1.65rem;
           font-weight: 800;
           letter-spacing: -0.02em;
-          line-height: 1;
-          color: #ffffff;
+          line-height: 1.2;
+          background: ${T.linearGradient};
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
-        .stat-name {
-          font-size: 0.82rem;
+        .row-stat-name {
+          font-size: 0.88rem;
           font-weight: 700;
           color: #ffffff;
-          margin-top: 0.2rem;
         }
 
-        .stat-sub {
-          font-size: 0.7rem;
+        .row-stat-sub {
+          margin-top: 2px;
+          font-size: 0.76rem;
           color: ${T.sub};
           line-height: 1.3;
         }
@@ -251,6 +301,10 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           align-items: center;
           gap: 0.6rem 2rem;
           margin-top: 1.75rem;
+        }
+
+        .about-links.left {
+          justify-content: flex-start;
         }
 
         /* Ссылка уводит со страницы прямо перед прайсингом — не должна
@@ -288,15 +342,9 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
             font-size: 0.82rem;
           }
           .about-photo {
-            width: 88px;
-            height: 88px;
-          }
-          .about-header {
-            flex-direction: column;
-            gap: 14px;
-          }
-          .about-header-text {
-            text-align: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
           }
           .about-text {
             margin-top: 1.6rem;
@@ -326,6 +374,16 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
             line-height: 1.2;
             opacity: 0.85;
           }
+          .stats-row {
+            flex-direction: column;
+            gap: 1.25rem;
+          }
+          .row-stat + .row-stat {
+            border-left: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: 0;
+            padding-top: 1.25rem;
+          }
           .about-links {
             gap: 0.75rem 1.5rem;
             margin-top: 1.5rem;
@@ -337,11 +395,15 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
       `}</style>
 
       <div className="container">
-        <div className="about-block">
+        <div className={`about-block${isPersonLed ? ' left' : ''}`}>
           {t.aboutLabel && <p className="about-label">{t.aboutLabel}</p>}
 
           {isPersonLed ? (
             <div className="about-header">
+              <div className="about-header-text">
+                <h2 className="about-name">{t.aboutName || "Fedor Tsvetkov"}</h2>
+                {t.aboutRole && <p className="about-meta">{t.aboutRole}</p>}
+              </div>
               <span className="about-photo">
                 {!photoBroken && (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -353,10 +415,6 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
                   />
                 )}
               </span>
-              <div className="about-header-text">
-                <h2 className="about-name">{t.aboutName || "Fedor Tsvetkov"}</h2>
-                {t.aboutRole && <p className="about-meta">{t.aboutRole}</p>}
-              </div>
             </div>
           ) : (
             <>
@@ -383,17 +441,31 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
             )}
           </div>
 
-          <div className="trust-stats-grid">
-            {trustStats.map((stat, i) => (
-              <div className="trust-stat-card" key={i}>
-                <span className="stat-num">{stat.num}</span>
-                <span className="stat-name">{stat.name}</span>
-                <span className="stat-sub">{stat.sub}</span>
-              </div>
-            ))}
-          </div>
+          {isPersonLed ? (
+            <div className="stats-row">
+              {trustStats.map((stat, i) => (
+                <div className="row-stat" key={i}>
+                  <span className="row-stat-num">{stat.num}</span>
+                  <div className="row-stat-text">
+                    <span className="row-stat-name">{stat.name}</span>
+                    <span className="row-stat-sub">{stat.sub}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="trust-stats-grid">
+              {trustStats.map((stat, i) => (
+                <div className="trust-stat-card" key={i}>
+                  <span className="stat-num">{stat.num}</span>
+                  <span className="stat-name">{stat.name}</span>
+                  <span className="stat-sub">{stat.sub}</span>
+                </div>
+              ))}
+            </div>
+          )}
 
-          <div className="about-links">
+          <div className={`about-links${isPersonLed ? ' left' : ''}`}>
             <a
               className="about-link"
               href="https://tsvetkov.site"

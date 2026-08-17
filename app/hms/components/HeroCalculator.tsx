@@ -221,8 +221,8 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
         }
 
         .output-group {
-          flex: 1 1 auto;
-          min-width: 150px;
+          flex: 1 1 0;
+          min-width: 130px;
         }
 
         /* Разделитель между группами — вертикальный hairline, как раньше
@@ -325,27 +325,14 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           margin: 0;
         }
 
-        .output-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-        }
-
-        .output-col {
-          display: flex;
-          flex-direction: column;
-          min-width: 0;
-        }
-
-        .output-col.second {
-          border-left: 1px solid rgba(255, 255, 255, 0.1);
-          padding-left: 1.1rem;
-          margin-left: 1.1rem;
-        }
-
+        /* Одна цифра на группу — месячная сумма ушла в строку-подпись
+           (см. ТЗ №5, п. 1.2). clamp() держит семизначные суммы на
+           предельных значениях слайдеров (60 юнитов × $500) в одной
+           строке — минимум кегля заметно ниже прежнего на этот случай */
         .output-value {
           font-family: 'Space Grotesk', system-ui, sans-serif;
           font-weight: 800;
-          font-size: clamp(1.5rem, 4.5vw, 2rem);
+          font-size: clamp(1.15rem, 4vw, 2rem);
           letter-spacing: -0.02em;
           line-height: 1.1;
           color: #ffffff;
@@ -354,7 +341,7 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
         }
 
         /* Правая группа — акцентный цвет (градиент), левая — обычный
-           текст. Тот же кегль, что у $33,900 (см. ТЗ №4, п. 2.2/2.3) */
+           текст. Тот же кегль, что у $101,600 (см. ТЗ №4, п. 2.2/2.3) */
         .output-value.accent {
           background: ${T.linearGradient};
           -webkit-background-clip: text;
@@ -367,6 +354,7 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           font-size: 0.76rem;
           font-weight: 600;
           color: ${T.muted};
+          text-wrap: pretty;
         }
 
         @keyframes calc-pop {
@@ -470,19 +458,11 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           <div className="output-row">
             <div className="output-group pay">
               <p className="group-label">{t.calcOutputLabel || 'You pay OTAs'}</p>
-              <div className="output-grid">
-                <div className="output-col">
-                  <div className="output-value" key={`y-${annualUsd}`}>
-                    ${fmt(annualUsd)}
-                  </div>
-                  <div className="output-sublabel">{t.calcYearLabel || 'per year'}</div>
-                </div>
-                <div className="output-col second">
-                  <div className="output-value" key={`m-${monthlyUsd}`}>
-                    ${fmt(monthlyUsd)}
-                  </div>
-                  <div className="output-sublabel">{t.calcMonthLabel || 'per month'}</div>
-                </div>
+              <div className="output-value" key={`y-${annualUsd}`}>
+                ${fmt(annualUsd)}
+              </div>
+              <div className="output-sublabel">
+                {t.calcYearLabel || 'per year'} · ${fmt(monthlyUsd)} {t.calcMonthLabel || 'per month'}
               </div>
             </div>
 
@@ -507,6 +487,7 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
               <div className="output-value accent" key={`r-${recoveryUsd}`}>
                 ~${fmt(recoveryUsd)}
               </div>
+              <div className="output-sublabel">{t.calcYearLabel || 'per year'}</div>
             </div>
           </div>
 

@@ -380,16 +380,21 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
            читается как аргумент, поэтому кегль заметно крупнее подписи.
            Отступ по умолчанию — 0, гэп от hairline даёт .see-demo-footer;
            .tight — когда перед ней уже стоит дисклеймер (RU/TH) */
+        /* Не переносится ни на одном экране (см. ТЗ №5, п. 3). calc()
+           внутри clamp() найден бинарным поиском по фактической ширине
+           текста в браузере (не на глаз) на 320-414px, с ~10% запасом —
+           чистый vw-коэффициент тут не годится: ширина бокса растёт как
+           (vw - 40px паддинга контейнера), а не пропорционально vw */
         .see-caption {
           margin: 0 auto;
           max-width: 560px;
           text-align: center;
-          font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+          font-size: clamp(0.7rem, calc(4.4vw - 1.6px), 1.55rem);
           font-weight: 700;
-          line-height: 1.4;
+          line-height: 1.35;
           letter-spacing: -0.01em;
           color: #ffffff;
-          text-wrap: pretty;
+          white-space: nowrap;
         }
 
         .see-caption.tight {
@@ -538,7 +543,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
               <p className="see-disclaimer">{t.seeSystemDisclaimer}</p>
             )}
             <p className={`see-caption${t.seeSystemDisclaimer ? ' tight' : ''}`}>
-              {t.seeSystemCaption || 'From booking to confirmation — without the commission.'}
+              {t.seeSystemCaption || 'You keep $117 more on this booking'}
             </p>
             {t.seeSystemCaptionSub && (
               <p className="see-caption-sub">{t.seeSystemCaptionSub}</p>
