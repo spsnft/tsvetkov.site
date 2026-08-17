@@ -25,10 +25,10 @@ interface AboutProps {
   lang?: 'en' | 'ru' | 'th';
 }
 
-// Путь заложен на реальный файл (см. ТЗ №2), которого пока нет — до его
-// появления <img> 404-ит и прячет себя, оставляя нейтральную заливку
-// контейнера как плейсхолдер (без иконок-человечков, без текста)
-const PHOTO_SRC = '/hms/fedor.jpg';
+// Реальный файл — public/hms/fedor.webp (см. ТЗ №4, п. 1). onError ниже
+// остаётся как safety net: если файл когда-нибудь пропадёт, плейсхолдер
+// (нейтральная заливка контейнера) возьмёт на себя показ вместо 404
+const PHOTO_SRC = '/hms/fedor.webp';
 const PHOTO_ALT = 'Fedor Tsvetkov, founder of FT Agency';
 
 export default function About({ t = {}, lang = 'en' }: AboutProps) {

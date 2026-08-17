@@ -52,9 +52,9 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
     t.seeSystemLabel3 || 'Guest gets confirmed',
   ];
   const benefits = [
-    t.seeSystemBenefit1 || 'Your page, your rates. No commission on this booking.',
-    t.seeSystemBenefit2 || 'Every channel in one calendar. Rooms close everywhere automatically.',
-    t.seeSystemBenefit3 || 'Sent automatically, in your name. You do nothing.',
+    t.seeSystemBenefit1 || 'Your page, your rates. No commission on this booking',
+    t.seeSystemBenefit2 || 'Every channel in one calendar. Rooms close everywhere automatically',
+    t.seeSystemBenefit3 || 'Sent automatically, in your name. You do nothing',
   ];
 
   const slides = [
@@ -346,12 +346,27 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           }
         }
 
-        /* ================= shared: disclaimer + money line ================= */
+        /* ================= shared: демо-карточка + подвал ================= */
+        /* Один контейнер на композицию (desktop-сцену или mobile-карусель
+           + строку шагов) и денежную строку — подвал держится на hairline
+           и общих отступах контейнера, а не висит отдельным текстом под
+           плотной композицией (см. ТЗ №4, п. 5.2) */
+        .see-demo-card {
+          max-width: 980px;
+          margin: 0 auto;
+        }
+
+        .see-demo-footer {
+          margin-top: 2rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
         /* Для EN больше не задаётся (см. ТЗ №3, п. 4.1) — рендерится
            только если t.seeSystemDisclaimer пришёл, поэтому у RU/TH
            стиль остаётся рабочим, а EN просто ничего не показывает */
         .see-disclaimer {
-          margin: 2.75rem auto 0 auto;
+          margin: 0 auto;
           max-width: 220px;
           text-align: center;
           font-size: 0.72rem;
@@ -363,11 +378,10 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
 
         /* Денежная строка закрывает секцию — единственная цифра здесь
            читается как аргумент, поэтому кегль заметно крупнее подписи.
-           Отступ по умолчанию рассчитан на то, что она идёт первой после
-           сцены (EN, без дисклеймера); .tight — когда перед ней уже стоит
-           дисклеймер (RU/TH) */
+           Отступ по умолчанию — 0, гэп от hairline даёт .see-demo-footer;
+           .tight — когда перед ней уже стоит дисклеймер (RU/TH) */
         .see-caption {
-          margin: 2.75rem auto 0 auto;
+          margin: 0 auto;
           max-width: 560px;
           text-align: center;
           font-size: clamp(1.15rem, 2.4vw, 1.55rem);
@@ -402,6 +416,10 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
             font-size: 1.9rem;
             margin-bottom: 2rem;
           }
+          .see-demo-footer {
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
+          }
         }
       `}</style>
 
@@ -409,120 +427,124 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
         {t.seeSystemEyebrow && <p className="see-eyebrow">{t.seeSystemEyebrow}</p>}
         <h2 className="see-title">{t.seeSystemTitle || 'See how it works end to end'}</h2>
 
-        {/* Desktop scene */}
-        <div className="see-stage-wrap">
-          <div className="see-stage">
-            <div className="see-layer see-layer-dashboard">
-              <Image
-                src="/hms/screens/dashboard-desktop.png"
-                alt="Owner dashboard and channel calendar for Baan Sirin Villa"
-                width={1280}
-                height={800}
-                loading="lazy"
-              />
-              <div className="see-cap-block">
-                <span className="see-step">
-                  <span className="step-num">2</span>
-                  {labels[1]}
-                </span>
-                <p className="see-benefit">{benefits[1]}</p>
-              </div>
-            </div>
-            <div className="see-layer see-layer-phone">
-              <Image
-                src="/hms/screens/guest-booking.png"
-                alt="Direct booking page for Baan Sirin Villa"
-                width={390}
-                height={844}
-                loading="lazy"
-              />
-              <div className="see-cap-block">
-                <span className="see-step">
-                  <span className="step-num">1</span>
-                  {labels[0]}
-                </span>
-                <p className="see-benefit">{benefits[0]}</p>
-              </div>
-            </div>
-            <div className="see-layer see-layer-email">
-              <Image
-                src="/hms/screens/confirmation-email.png"
-                alt="Booking confirmation email from Baan Sirin Villa"
-                width={390}
-                height={844}
-                loading="lazy"
-              />
-              <div className="see-cap-block">
-                <span className="see-step">
-                  <span className="step-num">3</span>
-                  {labels[2]}
-                </span>
-                <p className="see-benefit">{benefits[2]}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile carousel */}
-        <div className="see-carousel-wrap">
-          <div className="see-carousel" ref={scrollerRef}>
-            {slides.map((slide, i) => (
-              <div
-                key={slide.src}
-                className="see-slide"
-                ref={(el) => {
-                  slideRefs.current[i] = el;
-                }}
-              >
+        <div className="see-demo-card">
+          {/* Desktop scene */}
+          <div className="see-stage-wrap">
+            <div className="see-stage">
+              <div className="see-layer see-layer-dashboard">
+                <Image
+                  src="/hms/screens/dashboard-desktop.png"
+                  alt="Owner dashboard and channel calendar for Baan Sirin Villa"
+                  width={1280}
+                  height={800}
+                  loading="lazy"
+                />
                 <div className="see-cap-block">
                   <span className="see-step">
-                    <span className="step-num">{i + 1}</span>
-                    {labels[i]}
+                    <span className="step-num">2</span>
+                    {labels[1]}
                   </span>
-                  <p className="see-benefit">{benefits[i]}</p>
-                </div>
-                <div className="see-slide-frame">
-                  <Image
-                    src={slide.src}
-                    alt={slide.alt}
-                    fill
-                    sizes="84vw"
-                    loading="lazy"
-                    style={{ objectFit: 'cover', objectPosition: 'top center' }}
-                  />
+                  <p className="see-benefit">{benefits[1]}</p>
                 </div>
               </div>
-            ))}
+              <div className="see-layer see-layer-phone">
+                <Image
+                  src="/hms/screens/guest-booking.png"
+                  alt="Direct booking page for Baan Sirin Villa"
+                  width={390}
+                  height={844}
+                  loading="lazy"
+                />
+                <div className="see-cap-block">
+                  <span className="see-step">
+                    <span className="step-num">1</span>
+                    {labels[0]}
+                  </span>
+                  <p className="see-benefit">{benefits[0]}</p>
+                </div>
+              </div>
+              <div className="see-layer see-layer-email">
+                <Image
+                  src="/hms/screens/confirmation-email.png"
+                  alt="Booking confirmation email from Baan Sirin Villa"
+                  width={390}
+                  height={844}
+                  loading="lazy"
+                />
+                <div className="see-cap-block">
+                  <span className="see-step">
+                    <span className="step-num">3</span>
+                    {labels[2]}
+                  </span>
+                  <p className="see-benefit">{benefits[2]}</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="see-steps-nav" role="tablist" aria-label="Screens">
-            {steps.map((label, i) => (
-              <React.Fragment key={label}>
-                {i > 0 && <span className="see-step-sep" aria-hidden="true">·</span>}
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={active === i}
-                  className={`see-step-btn${active === i ? ' active' : ''}`}
-                  onClick={() => goTo(i)}
+          {/* Mobile carousel */}
+          <div className="see-carousel-wrap">
+            <div className="see-carousel" ref={scrollerRef}>
+              {slides.map((slide, i) => (
+                <div
+                  key={slide.src}
+                  className="see-slide"
+                  ref={(el) => {
+                    slideRefs.current[i] = el;
+                  }}
                 >
-                  <span className="step-num">{i + 1}</span>
-                  {label}
-                </button>
-              </React.Fragment>
-            ))}
+                  <div className="see-cap-block">
+                    <span className="see-step">
+                      <span className="step-num">{i + 1}</span>
+                      {labels[i]}
+                    </span>
+                    <p className="see-benefit">{benefits[i]}</p>
+                  </div>
+                  <div className="see-slide-frame">
+                    <Image
+                      src={slide.src}
+                      alt={slide.alt}
+                      fill
+                      sizes="84vw"
+                      loading="lazy"
+                      style={{ objectFit: 'cover', objectPosition: 'top center' }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="see-steps-nav" role="tablist" aria-label="Screens">
+              {steps.map((label, i) => (
+                <React.Fragment key={label}>
+                  {i > 0 && <span className="see-step-sep" aria-hidden="true">·</span>}
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={active === i}
+                    className={`see-step-btn${active === i ? ' active' : ''}`}
+                    onClick={() => goTo(i)}
+                  >
+                    <span className="step-num">{i + 1}</span>
+                    {label}
+                  </button>
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+
+          <div className="see-demo-footer">
+            {t.seeSystemDisclaimer && (
+              <p className="see-disclaimer">{t.seeSystemDisclaimer}</p>
+            )}
+            <p className={`see-caption${t.seeSystemDisclaimer ? ' tight' : ''}`}>
+              {t.seeSystemCaption || 'From booking to confirmation — without the commission.'}
+            </p>
+            {t.seeSystemCaptionSub && (
+              <p className="see-caption-sub">{t.seeSystemCaptionSub}</p>
+            )}
           </div>
         </div>
-
-        {t.seeSystemDisclaimer && (
-          <p className="see-disclaimer">{t.seeSystemDisclaimer}</p>
-        )}
-        <p className={`see-caption${t.seeSystemDisclaimer ? ' tight' : ''}`}>
-          {t.seeSystemCaption || 'From booking to confirmation — without the commission.'}
-        </p>
-        {t.seeSystemCaptionSub && (
-          <p className="see-caption-sub">{t.seeSystemCaptionSub}</p>
-        )}
       </div>
     </section>
   );

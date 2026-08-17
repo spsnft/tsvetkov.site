@@ -42,24 +42,22 @@ export const contentData = {
     navPricing: "Pricing",
     navFaq: "FAQ",
 
-    // Калькулятор показывает потерю и — вторым, заметно тише — сколько из
-    // неё реально возвращается в первый год. Окупаемости (сроков в
-    // месяцах) по-прежнему нет нигде на странице, это предмет бесплатного
-    // Revenue Check (см. ТЗ №2, п. 3.6 — не возвращать payback в тарифы)
+    // Калькулятор — один ряд, две группы: расход («you pay») слева,
+    // возврат («you keep») справа — расход первым, иначе «~$6,800» без
+    // якоря «$33,900» не читается. Оба процента/примечания, которые раньше
+    // стояли в самом ряду, теперь только в общей сноске calcAssumptions
+    // (см. ТЗ №4, п. 2.2/2.4). Окупаемости (сроков в месяцах) по-прежнему
+    // нет нигде на странице, это предмет бесплатного Revenue Check
     calcUnitsLabel: "Rooms or villas",
     calcAdrLabel: "Average nightly rate",
     calcOutputLabel: "You pay OTAs",
     calcYearLabel: "per year",
     calcMonthLabel: "per month",
-    calcAssumptions: "Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.",
+    calcAssumptions: "Based on 65% occupancy, 70% of bookings through OTAs, and 17% average commission. The first-year figure assumes about 20% of your OTA volume moves to direct — conservative for a property starting with no direct channel. Year two and beyond, 30–40% is realistic.",
     calcAssumptionsAria: "Show calculation assumptions",
-    // Уровень 2 — возврат, акцентный цвет, годовые (не /mo — см. ТЗ №2, п. 3.4)
-    calcRecoveryLabel: "You keep back in year one",
-    // {pct} подставляется из константы YEAR_ONE_RECOVERY_RATE в HeroCalculator.tsx
-    calcRecoveryPctLabel: "≈ {pct}% of what you pay now",
-    // Уровень 3 — статичная строка, проценты не считаются
-    calcRecoveryNote: "Year two and beyond, 30–40% is realistic once direct traffic builds.",
-    calcRecoveryTooltip: "Assumes about 20% of your OTA volume moves to direct bookings in year one — a conservative figure for a property starting with no direct channel. The shift builds over time, so year one is the slowest.",
+    // Параллельно с calcOutputLabel — «you pay» / «you keep» одного стиля
+    // и кегля, читаются как одно предложение (см. ТЗ №4, п. 2.3)
+    calcRecoveryLabel: "You keep — year one",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "CHANNELS WE CONNECT",
@@ -69,12 +67,12 @@ export const contentData = {
     // Заменяет прежнюю двухколоночную полосу сравнения (WITHOUT/WITH).
     scaleLabel: "WHAT CHANGES",
     scaleTitle: "What changes when bookings come direct",
-    scaleColToday: "Today",
-    scaleColWith: "With your own system",
-    // Мобильные карточки: короткие лейблы внутри каждой пары, не колонки
-    // (см. ТЗ №3, п. 3.3)
-    scaleCardToday: "TODAY",
-    scaleCardDirect: "DIRECT",
+    // Общие для desktop (шапка колонок) и mobile (инлайн-метка в каждой
+    // паре) — раньше были Today/With your own system и TODAY/DIRECT
+    // отдельно, теперь один и тот же короткий лейбл на обоих брейкпоинтах:
+    // пара про канал (OTA vs direct), а не про время (см. ТЗ №4, п. 3.2)
+    scaleLabelToday: "ON OTAS",
+    scaleLabelDirect: "DIRECT",
     scalePair1Problem: "15–20% of every booking goes to the platform",
     scalePair1Solution: "Direct bookings at 0% commission, forever",
     scalePair2Problem: "Your guests belong to the platform",
@@ -120,11 +118,13 @@ export const contentData = {
     seeSystemStep3: "Guest confirmed",
     // Полные лейблы + строка выгоды — подписи у самих экранов
     seeSystemLabel1: "Guest books on your site",
-    seeSystemBenefit1: "Your page, your rates. No commission on this booking.",
+    // Без финальной точки — внутренние точки (после "your rates" и т.п.)
+    // остаются (см. ТЗ №4, п. 4)
+    seeSystemBenefit1: "Your page, your rates. No commission on this booking",
     seeSystemLabel2: "You see it instantly",
-    seeSystemBenefit2: "Every channel in one calendar. Rooms close everywhere automatically.",
+    seeSystemBenefit2: "Every channel in one calendar. Rooms close everywhere automatically",
     seeSystemLabel3: "Guest gets confirmed",
-    seeSystemBenefit3: "Sent automatically, in your name. You do nothing.",
+    seeSystemBenefit3: "Sent automatically, in your name. You do nothing",
     // Высота блока описания фиксируется в две строки для EN — при
     // локализации RU/TH это число может понадобиться увеличить отдельно,
     // строки там длиннее (см. SeeSystem.tsx)

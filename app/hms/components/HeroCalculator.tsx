@@ -44,17 +44,29 @@ export interface HeroCalculatorCopy {
   calcAssumptions?: string;
   calcAssumptionsAria?: string;
   calcRecoveryLabel?: string;
-  calcRecoveryPctLabel?: string;
-  calcRecoveryNote?: string;
-  calcRecoveryTooltip?: string;
 }
 
 export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
   const [units, setUnits] = useState(UNITS_DEFAULT);
   const [adr, setAdr] = useState(ADR_DEFAULT);
   const [infoOpen, setInfoOpen] = useState(false);
+  // Хавер работает только там, где он реально есть — на тач-устройствах
+  // (hover: none) иконка живёт исключительно по тапу (см. ТЗ №4, п. 2.5).
+  // Начальное значение читается лениво в инициализаторе (не в эффекте) —
+  // isTouch не влияет на разметку, только на то, вешать ли hover-обработчики,
+  // так что расхождение между SSR и клиентом здесь не создаёт мисматча
+  const [isTouch, setIsTouch] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(hover: none)').matches : false
+  );
   const tooltipId = useId();
   const infoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: none)');
+    const handler = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   useEffect(() => {
     if (!infoOpen) return;
@@ -79,11 +91,6 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
       recoveryUsd: roundTo(usd * YEAR_ONE_RECOVERY_RATE, 100),
     };
   }, [units, adr]);
-
-  // Процент — сама константа, а не отношение двух независимо округлённых
-  // сумм: иначе округление могло бы показать «19%» или «21%» вместо
-  // заявленной ставки
-  const recoveryPct = Math.round(YEAR_ONE_RECOVERY_RATE * 100);
 
   const unitsPct = ((units - UNITS_MIN) / (UNITS_MAX - UNITS_MIN)) * 100;
   const adrPct = ((adr - ADR_MIN) / (ADR_MAX - ADR_MIN)) * 100;
@@ -198,16 +205,50 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .output-head {
+        /* Обёртка нужна, чтобы (a) абсолютно спозиционированная подсказка
+           на десктопе якорилась на весь ряд, а не только на одну группу,
+           и (b) mouseleave закрывал её только когда курсор реально ушёл
+           за пределы ряда+подсказки, а не при переходе с ряда на подсказку */
+        .output-row-wrap {
           position: relative;
-          display: flex;
-          align-items: center;
-          gap: 0.15rem;
-          margin-bottom: 0.9rem;
         }
 
-        .output-label {
-          margin: 0;
+        .output-row {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          gap: 1.25rem 1.5rem;
+        }
+
+        .output-group {
+          flex: 1 1 auto;
+          min-width: 150px;
+        }
+
+        /* Разделитель между группами — вертикальный hairline, как раньше
+           между «per year» и «per month». На узких экранах группы
+           переносятся, и он должен стать горизонтальным (см. ТЗ №4, п. 2.2) */
+        .output-group.keep {
+          border-left: 1px solid rgba(255, 255, 255, 0.1);
+          padding-left: 1.25rem;
+        }
+
+        @media (max-width: 480px) {
+          .output-row {
+            flex-direction: column;
+          }
+          .output-group.keep {
+            border-left: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: 0;
+            padding-top: 1rem;
+          }
+        }
+
+        /* Оба лейбла одного стиля и кегля — «you pay» / «you keep» читаются
+           как одно предложение (см. ТЗ №4, п. 2.3) */
+        .group-label {
+          margin: 0 0 0.55rem 0;
           font-size: 0.72rem;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -215,10 +256,23 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           color: ${T.muted};
         }
 
+        .group-label-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.4rem;
+        }
+
+        .group-label-row .group-label {
+          margin: 0;
+        }
+
+        /* Одна общая иконка на весь ряд — справа от группы «you keep»,
+           которая и стоит крайней справа (см. ТЗ №4, п. 2.5) */
         .info-btn {
-          width: 44px;
-          height: 44px;
-          margin: -14px -14px -14px -8px;
+          width: 32px;
+          height: 32px;
+          margin: -8px -8px -8px 0;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -239,9 +293,12 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           display: block;
         }
 
+        /* Десктоп: плавающая подсказка под всем рядом, как раньше.
+           Тач: панель в потоке, а не поверх контента — плавающий тултип на
+           ховере на тач-устройствах не открыть (см. ТЗ №4, п. 2.5) */
         .tooltip {
           position: absolute;
-          top: calc(100% + 4px);
+          top: calc(100% + 10px);
           left: 0;
           right: 0;
           background: rgba(20, 22, 30, 0.98);
@@ -256,12 +313,16 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           text-wrap: pretty;
         }
 
-        .tooltip p {
-          margin: 0;
+        @media (hover: none) {
+          .tooltip {
+            position: static;
+            margin-top: 14px;
+            box-shadow: none;
+          }
         }
 
-        .tooltip p + p {
-          margin-top: 0.6rem;
+        .tooltip p {
+          margin: 0;
         }
 
         .output-grid {
@@ -292,57 +353,20 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           white-space: nowrap;
         }
 
+        /* Правая группа — акцентный цвет (градиент), левая — обычный
+           текст. Тот же кегль, что у $33,900 (см. ТЗ №4, п. 2.2/2.3) */
+        .output-value.accent {
+          background: ${T.linearGradient};
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
         .output-sublabel {
           margin-top: 0.4rem;
           font-size: 0.76rem;
           font-weight: 600;
           color: ${T.muted};
-        }
-
-        /* Уровень 2 — заметно меньше уровня 1, акцентный цвет: возврат,
-           а не потеря. Годовые, той же единицей, что и «You pay OTAs» —
-           не смешивать с /mo, иначе аргумент читается как «33 тысячи
-           против пятисот» (см. ТЗ №2, п. 3.4) */
-        .recovery {
-          margin-top: 1.1rem;
-          padding-top: 1rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .recovery-label {
-          margin: 0 0 0.35rem 0;
-          font-size: 0.72rem;
-          font-weight: 700;
-          letter-spacing: 0.04em;
-          color: ${T.muted};
-        }
-
-        .recovery-value {
-          font-family: 'Space Grotesk', system-ui, sans-serif;
-          font-weight: 800;
-          font-size: clamp(1.1rem, 3.2vw, 1.35rem);
-          letter-spacing: -0.02em;
-          line-height: 1.1;
-          color: ${T.accent};
-          animation: calc-pop 180ms ease-out;
-        }
-
-        .recovery-pct {
-          margin: 0.3rem 0 0 0;
-          font-size: 0.74rem;
-          font-weight: 600;
-          color: ${T.accent};
-          opacity: 0.75;
-        }
-
-        /* Уровень 3 — статичная микро-строка, самая тихая на карточке */
-        .recovery-note {
-          margin: 0.75rem 0 0 0;
-          font-size: 0.7rem;
-          line-height: 1.45;
-          color: ${T.muted};
-          opacity: 0.75;
-          text-wrap: pretty;
         }
 
         @keyframes calc-pop {
@@ -437,68 +461,64 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
       </div>
 
       <div className="output">
-        <div className="output-head" ref={infoRef}>
-          <p className="output-label">{t.calcOutputLabel || 'You pay OTAs'}</p>
-          <button
-            type="button"
-            className="info-btn"
-            aria-expanded={infoOpen}
-            aria-controls={tooltipId}
-            aria-label={t.calcAssumptionsAria || 'Show calculation assumptions'}
-            onClick={() => setInfoOpen((o) => !o)}
-          >
-            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.4" />
-              <path d="M10 9v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              <circle cx="10" cy="6.4" r="1" fill="currentColor" />
-            </svg>
-          </button>
+        <div
+          className="output-row-wrap"
+          ref={infoRef}
+          onMouseEnter={() => { if (!isTouch) setInfoOpen(true); }}
+          onMouseLeave={() => { if (!isTouch) setInfoOpen(false); }}
+        >
+          <div className="output-row">
+            <div className="output-group pay">
+              <p className="group-label">{t.calcOutputLabel || 'You pay OTAs'}</p>
+              <div className="output-grid">
+                <div className="output-col">
+                  <div className="output-value" key={`y-${annualUsd}`}>
+                    ${fmt(annualUsd)}
+                  </div>
+                  <div className="output-sublabel">{t.calcYearLabel || 'per year'}</div>
+                </div>
+                <div className="output-col second">
+                  <div className="output-value" key={`m-${monthlyUsd}`}>
+                    ${fmt(monthlyUsd)}
+                  </div>
+                  <div className="output-sublabel">{t.calcMonthLabel || 'per month'}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="output-group keep">
+              <div className="group-label-row">
+                <p className="group-label">{t.calcRecoveryLabel || 'You keep — year one'}</p>
+                <button
+                  type="button"
+                  className="info-btn"
+                  aria-expanded={infoOpen}
+                  aria-controls={tooltipId}
+                  aria-label={t.calcAssumptionsAria || 'Show calculation assumptions'}
+                  onClick={() => setInfoOpen((o) => !o)}
+                >
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.4" />
+                    <path d="M10 9v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                    <circle cx="10" cy="6.4" r="1" fill="currentColor" />
+                  </svg>
+                </button>
+              </div>
+              <div className="output-value accent" key={`r-${recoveryUsd}`}>
+                ~${fmt(recoveryUsd)}
+              </div>
+            </div>
+          </div>
+
           {infoOpen && (
             <div className="tooltip" id={tooltipId} role="tooltip">
               <p>
                 {t.calcAssumptions ||
-                  'Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.'}
-              </p>
-              <p>
-                {t.calcRecoveryTooltip ||
-                  'Assumes about 20% of your OTA volume moves to direct bookings in year one — a conservative figure for a property starting with no direct channel. The shift builds over time, so year one is the slowest.'}
+                  'Based on 65% occupancy, 70% of bookings through OTAs, and 17% average commission. The first-year figure assumes about 20% of your OTA volume moves to direct — conservative for a property starting with no direct channel. Year two and beyond, 30–40% is realistic.'}
               </p>
             </div>
           )}
         </div>
-
-        <div className="output-grid">
-          <div className="output-col">
-            <div className="output-value" key={`y-${annualUsd}`}>
-              ${fmt(annualUsd)}
-            </div>
-            <div className="output-sublabel">{t.calcYearLabel || 'per year'}</div>
-          </div>
-          <div className="output-col second">
-            <div className="output-value" key={`m-${monthlyUsd}`}>
-              ${fmt(monthlyUsd)}
-            </div>
-            <div className="output-sublabel">{t.calcMonthLabel || 'per month'}</div>
-          </div>
-        </div>
-
-        <div className="recovery">
-          <p className="recovery-label">{t.calcRecoveryLabel || 'You keep back in year one'}</p>
-          <div className="recovery-value" key={`r-${recoveryUsd}`}>
-            ~${fmt(recoveryUsd)}
-          </div>
-          <p className="recovery-pct">
-            {(t.calcRecoveryPctLabel || '≈ {pct}% of what you pay now').replace(
-              '{pct}',
-              String(recoveryPct)
-            )}
-          </p>
-        </div>
-
-        <p className="recovery-note">
-          {t.calcRecoveryNote ||
-            'Year two and beyond, 30–40% is realistic once direct traffic builds.'}
-        </p>
       </div>
     </div>
   );

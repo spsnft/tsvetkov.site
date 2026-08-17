@@ -34,6 +34,9 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
     solution: t?.[`scalePair${i + 1}Solution`] || fallback.solution,
   }));
 
+  const labelOn = t?.scaleLabelToday || 'ON OTAS';
+  const labelDirect = t?.scaleLabelDirect || 'DIRECT';
+
   return (
     <section id="how-it-works" className="scale-section">
       <style jsx>{`
@@ -99,9 +102,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           color: ${T.muted};
         }
 
-        /* Градиент — указатель (маркер/разделитель/микро-лейбл), не текст
-           решения: он живёт на самом .solution ниже как почти-белый */
-        .col-header.with {
+        /* DIRECT — фирменный градиент, единственное цветное пятно в блоке.
+           Всё остальное (маркеры, разделитель) — нейтральный серый, не
+           градиент (см. ТЗ №4, п. 3.4) */
+        .col-header.direct {
           background: ${T.linearGradient};
           -webkit-background-clip: text;
           background-clip: text;
@@ -120,8 +124,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           left: 0;
           right: 0;
           height: 1px;
-          background: ${T.linearGradient};
-          opacity: 0.3;
+          background: rgba(255, 255, 255, 0.08);
         }
 
         .row {
@@ -135,14 +138,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: ${T.linearGradient};
+          background: rgba(255, 255, 255, 0.3);
         }
 
         .marker.empty {
           background: transparent;
         }
 
-        /* Today — приглушённая колонка, без акцентного цвета */
+        /* On OTAs — приглушённая колонка, без акцентного цвета */
         .problem {
           margin: 0 0 7px 0;
           font-size: 13px;
@@ -151,9 +154,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           color: ${T.muted};
         }
 
-        /* With your own system — почти белый, высокий контраст. Плоский
-           зелёный на тексте убран (см. ТЗ №3, п. 3.4) — градиент остаётся
-           только на маркере / разделителе / микро-лейбле */
+        /* Direct — почти белый, высокий контраст. Плоский зелёный на
+           тексте убран — градиент живёт только на самом лейбле DIRECT */
         .solution {
           margin: 0;
           font-size: 18px;
@@ -171,7 +173,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
         }
 
-        /* ================= MOBILE: одна карточка на пару ================= */
+        /* ================= MOBILE: без рамок, метки инлайново ================= */
         .pairs-mobile {
           display: none;
         }
@@ -190,10 +192,10 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
             font-size: 15px;
           }
 
-          /* Колонок на мобиле нет — общая шапка Today/With your own system
-             не влезает в связку с шестью оторванными строками (см. ТЗ №3,
-             п. 3.1). Вместо неё три самостоятельные карточки, лейблы живут
-             внутри каждой */
+          /* Колонок на мобиле нет — общая шапка над шестью оторванными
+             строками не читается (см. ТЗ №3, п. 3.1). Вместо неё три пары
+             без рамок и подложек: группировка держится на воздухе между
+             парами и hairline снизу, не на контуре (см. ТЗ №4, п. 3.1) */
           .pairs-desktop {
             display: none;
           }
@@ -201,29 +203,28 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           .pairs-mobile {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 28px;
             max-width: 480px;
             margin: 0 auto;
           }
 
-          .pair-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 14px 16px;
+          .pair-card:not(:last-child) {
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           }
 
-          .card-row + .card-row {
-            margin-top: 12px;
+          .problem {
+            margin: 0 0 8px 0;
           }
 
+          /* Метка — инлайновый префикс перед текстом строки, в одну
+             строку с ним, а не блок над ней (см. ТЗ №4, п. 3.3) */
           .micro-label {
-            display: block;
-            margin: 0 0 4px 0;
             font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
+            margin-right: 6px;
           }
 
           .micro-label.today {
@@ -249,11 +250,11 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           <div className="col-headers" aria-hidden="true">
             <div className="row">
               <span className="marker empty" />
-              <span className="col-header today">{t?.scaleColToday || "Today"}</span>
+              <span className="col-header today">{labelOn}</span>
             </div>
             <div className="row">
               <span className="marker" />
-              <span className="col-header with">{t?.scaleColWith || "With your own system"}</span>
+              <span className="col-header direct">{labelDirect}</span>
             </div>
           </div>
 
@@ -274,14 +275,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         <div className="pairs-mobile">
           {pairs.map((pair, i) => (
             <div className="pair-card" key={i}>
-              <div className="card-row">
-                <span className="micro-label today">{t?.scaleCardToday || "TODAY"}</span>
-                <p className="problem">{pair.problem}</p>
-              </div>
-              <div className="card-row">
-                <span className="micro-label direct">{t?.scaleCardDirect || "DIRECT"}</span>
-                <p className="solution">{pair.solution}</p>
-              </div>
+              <p className="problem">
+                <span className="micro-label today">{labelOn}</span>
+                {pair.problem}
+              </p>
+              <p className="solution">
+                <span className="micro-label direct">{labelDirect}</span>
+                {pair.solution}
+              </p>
             </div>
           ))}
         </div>
