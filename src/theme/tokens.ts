@@ -74,6 +74,15 @@ export const T = {
     titleGap: '3rem',
   },
 
+  // /hms page — shared rhythm for the unified eyebrow+H2 section pattern
+  // (ScalePractice, SeeSystem, About, Pricing, FAQ). Hero (H1 case) and
+  // FooterCTA (left untouched by design) don't use this.
+  hms: {
+    sectionPad: 'clamp(2.5rem, 5vw, 3.5rem)',
+    tint: 'rgba(18, 18, 20, 0.55)',
+    eyebrowGap: '8px',
+  },
+
   // Breakpoint standard: Mobile <768px / Tablet 768–1023px / Desktop ≥1024px
 
   // Gradients

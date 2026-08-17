@@ -6,6 +6,7 @@ import { T } from '../../../src/theme/tokens';
 
 interface SeeSystemProps {
   t?: {
+    seeSystemEyebrow?: string;
     seeSystemTitle?: string;
     seeSystemStep1?: string;
     seeSystemStep2?: string;
@@ -50,7 +51,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
     t.seeSystemLabel3 || 'Guest gets confirmed',
   ];
   const benefits = [
-    t.seeSystemBenefit1 || 'Zero commission.',
+    t.seeSystemBenefit1 || 'Your page, your rates. No commission on this booking.',
     t.seeSystemBenefit2 || 'Every channel in one calendar. Rooms close everywhere automatically.',
     t.seeSystemBenefit3 || 'Sent automatically, in your name. You do nothing.',
   ];
@@ -102,9 +103,20 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
       <style jsx>{`
         .see-section {
           width: 100%;
-          padding: 3rem 0 3.5rem 0;
+          padding: ${T.hms.sectionPad} 0;
           background: transparent;
           scroll-margin-top: 80px;
+        }
+
+        .see-eyebrow {
+          text-align: center;
+          margin: 0 0 ${T.hms.eyebrowGap} 0;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: ${T.sub};
+          opacity: 0.8;
         }
 
         .see-title {
@@ -333,11 +345,24 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           }
         }
 
-        /* ================= shared: money line + disclaimer ================= */
-        /* Единственная цифра в секции — это аргумент, не сноска, поэтому
-           кегль заметно крупнее обычной подписи */
-        .see-caption {
+        /* ================= shared: disclaimer + money line ================= */
+        /* Микро-дисклеймер — первым, тише всего на странице: сноска к
+           демо, а не аргумент */
+        .see-disclaimer {
           margin: 2.75rem auto 0 auto;
+          max-width: 220px;
+          text-align: center;
+          font-size: 0.72rem;
+          line-height: 1.5;
+          color: ${T.muted};
+          opacity: 0.85;
+          text-wrap: pretty;
+        }
+
+        /* Денежная строка закрывает секцию — единственная цифра здесь
+           читается как аргумент, поэтому кегль заметно крупнее подписи */
+        .see-caption {
+          margin: 10px auto 0 auto;
           max-width: 560px;
           text-align: center;
           font-size: clamp(1.15rem, 2.4vw, 1.55rem);
@@ -348,25 +373,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           text-wrap: pretty;
         }
 
-        /* Строка с цифрами — вывод, дисклеймер — сноска к нему: разносим
-           зазором заметно больше обычного межстрочного, иначе читаются как
-           один абзац в два предложения. Ширина подобрана так, чтобы перенос
-           шёл после «built on», а не разрывал «the platform / that fits
-           your property» */
-        .see-disclaimer {
-          margin: 14px auto 0 auto;
-          max-width: 250px;
-          text-align: center;
-          font-size: 0.78rem;
-          line-height: 1.5;
-          color: ${T.muted};
-          text-wrap: pretty;
-        }
-
         @media (max-width: 767px) {
-          .see-section {
-            padding: 2.5rem 0 2.75rem 0;
-          }
           .see-title {
             font-size: 1.9rem;
             margin-bottom: 2rem;
@@ -375,6 +382,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
       `}</style>
 
       <div className="container">
+        {t.seeSystemEyebrow && <p className="see-eyebrow">{t.seeSystemEyebrow}</p>}
         <h2 className="see-title">{t.seeSystemTitle || 'See how it works end to end'}</h2>
 
         {/* Desktop scene */}
@@ -482,12 +490,11 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           </div>
         </div>
 
+        <p className="see-disclaimer">
+          {t.seeSystemDisclaimer || 'Demo property, built for this page.'}
+        </p>
         <p className="see-caption">
           {t.seeSystemCaption || 'From booking to confirmation — without the commission.'}
-        </p>
-        <p className="see-disclaimer">
-          {t.seeSystemDisclaimer ||
-            'Interface shown for illustration. The actual platform is selected per property.'}
         </p>
       </div>
     </section>

@@ -24,7 +24,7 @@ export const contentData = {
     // Три элемента: H1, подзаголовок, кнопка. Калькулятор — отдельный блок
     // сразу под хиро (CalculatorSection), не часть хиро
     heroTitle: "Stop Paying 15–20% Commissions to Booking.com & Agoda",
-    heroSubtitle: "Direct bookings on your own site, every channel in one calendar — and you own it.",
+    heroSubtitle: "Guests book direct on your site. Every channel stays in one calendar. Everything is in your name.",
     // Обещание держится на результате, а не на длительности: календаря и созвона
     // на странице нет, конверсия ведёт в WhatsApp
     btnAudit: "Free Revenue Check",
@@ -56,27 +56,28 @@ export const contentData = {
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     // Три пары проблема→решение, деньги первыми, операционка последней.
     // Заменяет прежнюю двухколоночную полосу сравнения (WITHOUT/WITH).
-    scaleTitle: "What it costs you — and what changes",
+    scaleLabel: "WHAT CHANGES",
+    scaleTitle: "What changes when bookings come direct",
+    scaleColToday: "Today",
+    scaleColWith: "With your own system",
     scalePair1Problem: "15–20% of every booking goes to the platform",
     scalePair1Solution: "Direct bookings at 0% commission, forever",
     scalePair2Problem: "Your guests belong to the platform",
-    scalePair2Solution: "Your own traffic and returning guests",
+    scalePair2Solution: "Your guest list belongs to you",
     scalePair3Problem: "Rates updated by hand, around the clock",
     scalePair3Solution: "One calendar, synced across 300+ channels",
 
     // --- WHO'S BEHIND THIS ---
-    // Повествование блока идёт от «мы», поэтому заголовок — агентство,
-    // а человек становится подписью под ним
+    // Повествование блока теперь идёт от человека, а не агентства: заголовок —
+    // имя, agентство и локация — подпись под ним. aboutAgency намеренно не
+    // задаётся для EN — по его отсутствию About.tsx выбирает новую вёрстку
+    // (см. компонент); RU/TH задают aboutAgency и остаются на старой.
     aboutLabel: "WHO'S BEHIND THIS",
-    aboutAgency: "FT Agency",
     aboutName: "Fedor Tsvetkov",
-    aboutRole: "Founder · 10 years in growth & systems",
-    aboutLocation: "Working worldwide — on the ground in Phuket",
-    // Первым идёт то, что решает: условия сделки и владение системой.
-    aboutP1: "We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share.",
-    // Отдельной строкой, тем же стилем — объясняет, почему единственный
-    // контакт на странице WhatsApp, а не форма или колл-центр
-    aboutDirectLine: "You'll be talking to me directly, not a support queue.",
+    aboutRole: "Founder, FT Agency · Phuket",
+    aboutP1: "FT Agency builds customer acquisition systems — sites, analytics, CRM, outreach — for companies that sell directly to their customers. B2B, e-commerce, services: 20+ brands over 10 years.",
+    aboutP2: "Hospitality is that same problem at its sharpest — the property does all the work, and the platform owns the guest.",
+    aboutP3: "I founded the agency and I run these projects myself. From your first message to launch you're dealing with me, not a support queue.",
     aboutLinkAgency: "More about FT Agency",
 
     // Trust Stats
@@ -93,6 +94,7 @@ export const contentData = {
     // дизайн-системе сайта. Демо-объект: Baan Sirin Villa, Rawai, Phuket.
     // Сквозная бронь на всех трёх экранах: Klaus Müller, Pool Villa 2,
     // 18–24 Dec, ฿4,000/night, ฿24,000 total, Direct, booked 21:47.
+    seeSystemEyebrow: "HOW IT WORKS",
     seeSystemTitle: "See how it works end to end",
     // Короткие версии — только для кликабельных шагов-пилюль в карусели.
     // Формулировка шага 3 синхронизирована с заголовком слайда (seeSystemLabel3)
@@ -101,7 +103,7 @@ export const contentData = {
     seeSystemStep3: "Guest confirmed",
     // Полные лейблы + строка выгоды — подписи у самих экранов
     seeSystemLabel1: "Guest books on your site",
-    seeSystemBenefit1: "Zero commission.",
+    seeSystemBenefit1: "Your page, your rates. No commission on this booking.",
     seeSystemLabel2: "You see it instantly",
     seeSystemBenefit2: "Every channel in one calendar. Rooms close everywhere automatically.",
     seeSystemLabel3: "Guest gets confirmed",
@@ -113,12 +115,14 @@ export const contentData = {
     // ฿24,000 ≈ $690 direct; при 17%-комиссии (то же допущение, что в
     // калькуляторе героя) через Booking.com осталось бы $573
     seeSystemCaption: "This booking: $690 direct. Through Booking.com you'd have kept $573.",
-    seeSystemDisclaimer: "Demo property. Your system is built on the platform that fits your property.",
+    seeSystemDisclaimer: "Demo property, built for this page.",
 
     // --- PRICING ---
-    // Заголовок секции — раньше H2 + подзаголовок; подзаголовок поднят на
-    // место H2, старый заголовок (Transparent Integration...) убран
-    priceTitle: "One-time setup fee. Zero commission on direct bookings forever",
+    // Заголовок секции получает eyebrow и укорачивается — старый вариант
+    // (One-time setup fee. Zero commission on direct bookings forever) был
+    // без eyebrow и длиннее необходимого
+    priceLabel: "PRICING",
+    priceTitle: "One-time setup. Zero commission forever",
     pricePopular: "Popular",
     priceMore2: "+ 4 from Lite",
     priceMore3: "+ 7 from Standard",
@@ -158,7 +162,10 @@ export const contentData = {
     tier3Desc: "For hotel chains & operators (multi-property)",
 
     // --- FAQ SECTION ---
-    faqTitle: "Frequently Asked Questions",
+    // faqTitle снят для EN — FAQ.tsx для lang==='en' поднимает faqSub на
+    // место H2 и добавляет eyebrow faqLabel. RU/TH сохраняют старую пару
+    // faqTitle (H2) + faqSub (подзаголовок), см. FAQ.tsx
+    faqLabel: "FAQ",
     faqSub: "The questions owners actually ask",
     // Порядок вопросов идёт от главного возражения (уход с OTA) к механике
     // сделки. Пустая строка внутри `a` разбивает ответ на абзацы при рендере

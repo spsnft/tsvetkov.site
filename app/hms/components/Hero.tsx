@@ -132,7 +132,7 @@ export default function Hero({ t }: HeroProps) {
 
           <p className="subtitle">
             {t.heroSubtitle ||
-              'Direct bookings on your own site, every channel in one calendar — and you own it.'}
+              'Guests book direct on your site. Every channel stays in one calendar. Everything is in your name.'}
           </p>
 
           <div className="cta-container">

@@ -35,14 +35,16 @@ export default function LogoMarquee({ t }: LogoMarqueeProps) {
           width: 100%;
         }
 
+        /* Подпись ленты — не section eyebrow (см. About/ScalePractice/...):
+           заметно мельче и глуше, чтобы не читаться как заголовок секции */
         .marquee-label {
           margin: 0 0 1rem 0;
           text-align: center;
-          font-size: 0.72rem;
+          font-size: 0.62rem;
           font-weight: 700;
           letter-spacing: 0.12em;
           color: ${T.sub};
-          opacity: 0.8;
+          opacity: 0.55;
         }
 
         .marquee-wrapper {
@@ -86,7 +88,7 @@ export default function LogoMarquee({ t }: LogoMarqueeProps) {
         @media (max-width: 768px) {
           .marquee-label {
             margin-bottom: 0.85rem;
-            font-size: 0.68rem;
+            font-size: 0.6rem;
           }
           .marquee-wrapper {
             padding: 0.85rem 0;

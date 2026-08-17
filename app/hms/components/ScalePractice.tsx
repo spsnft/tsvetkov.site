@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { T } from '../../../src/theme/tokens';
 
 interface ScalePracticeProps {
   // t is the full page contentData blob, same pattern as sibling sections
@@ -19,7 +20,7 @@ const DEFAULT_PAIRS = [
   },
   {
     problem: "Your guests belong to the platform",
-    solution: "Your own traffic and returning guests",
+    solution: "Your guest list belongs to you",
   },
   {
     problem: "Rates updated by hand, around the clock",
@@ -38,14 +39,24 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <style jsx>{`
         .scale-section {
           width: 100%;
-          padding: 3rem 0 3.5rem 0;
-          background: transparent;
+          padding: ${T.hms.sectionPad} 0;
+          background: ${T.hms.tint};
           scroll-margin-top: 80px;
         }
 
         .scale-header {
           text-align: center;
           margin-bottom: 3.5rem;
+        }
+
+        .scale-eyebrow {
+          margin: 0 0 ${T.hms.eyebrowGap} 0;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: ${T.sub};
+          opacity: 0.8;
         }
 
         .scale-title {
@@ -61,6 +72,34 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .pairs {
           max-width: 640px;
           margin: 0 auto;
+        }
+
+        /* Шапка колонок — один раз над первой парой, тем же паттерном
+           «маркер + строка», что и сами пары, только мельче: это подпись
+           к двум сторонам стопки, а не полноценная третья пара */
+        .col-headers {
+          padding-bottom: 10px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          margin-bottom: 10px;
+        }
+
+        .col-headers .row + .row {
+          margin-top: 5px;
+        }
+
+        .col-header {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .col-header.today {
+          color: ${T.muted};
+        }
+
+        .col-header.with {
+          color: ${T.accent};
         }
 
         .pair {
@@ -82,35 +121,32 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: #5DCAA5;
+          background: ${T.accent};
         }
 
         .marker.empty {
           background: transparent;
         }
 
-        /* Проблема — тише решения: мельче, легче, приглушённый красный
-           поверх констелляции на фоне */
+        /* Today — приглушённая колонка, без акцентного цвета */
         .problem {
           margin: 0 0 7px 0;
           font-size: 13px;
           font-weight: 400;
           line-height: 1.45;
-          color: #C97B74;
+          color: ${T.muted};
         }
 
+        /* With your own system — акцентный цвет дизайн-системы */
         .solution {
           margin: 0;
           font-size: 18px;
           font-weight: 500;
           line-height: 1.4;
-          color: #ffffff;
+          color: ${T.accent};
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
-          .scale-section {
-            padding: 2.5rem 0 3rem 0;
-          }
           .scale-header {
             margin-bottom: 2.5rem;
           }
@@ -120,9 +156,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
 
         @media (max-width: 767px) {
-          .scale-section {
-            padding: 2.25rem 0 2.75rem 0;
-          }
           .scale-header {
             margin-bottom: 2.25rem;
           }
@@ -142,10 +175,22 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
       <div className="container">
         <div className="scale-header">
-          <h2 className="scale-title">{t?.scaleTitle || "What it costs you — and what changes"}</h2>
+          {t?.scaleLabel && <p className="scale-eyebrow">{t.scaleLabel}</p>}
+          <h2 className="scale-title">{t?.scaleTitle || "What changes when bookings come direct"}</h2>
         </div>
 
         <div className="pairs">
+          <div className="col-headers" aria-hidden="true">
+            <div className="row">
+              <span className="marker empty" />
+              <span className="col-header today">{t?.scaleColToday || "Today"}</span>
+            </div>
+            <div className="row">
+              <span className="marker" />
+              <span className="col-header with">{t?.scaleColWith || "With your own system"}</span>
+            </div>
+          </div>
+
           {pairs.map((pair, i) => (
             <div className="pair" key={i}>
               <div className="row">

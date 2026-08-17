@@ -7,6 +7,7 @@ import WhatsAppCta from './WhatsAppCta';
 
 interface PricingProps {
   t?: {
+    priceLabel?: string;
     priceTitle?: string;
     priceSub?: string;
     pricePopular?: string;
@@ -69,7 +70,7 @@ export default function Pricing({ t }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          padding: 0 0 5rem 0;
+          padding: ${T.hms.sectionPad} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -77,6 +78,16 @@ export default function Pricing({ t }: PricingProps) {
         .pricing-header {
           text-align: center;
           margin-bottom: 3.5rem;
+        }
+
+        .pricing-eyebrow {
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: ${T.sub};
+          opacity: 0.8;
+          margin: 0 0 ${T.hms.eyebrowGap} 0;
         }
 
         .pricing-title {
@@ -416,9 +427,6 @@ export default function Pricing({ t }: PricingProps) {
         }
 
         @media (max-width: 767px) {
-          .pricing-section {
-            padding: 0 0 3rem 0;
-          }
           .pricing-header {
             margin-bottom: 2rem;
           }
@@ -436,8 +444,9 @@ export default function Pricing({ t }: PricingProps) {
 
       <div className="container">
         <div className="pricing-header">
+          {t?.priceLabel && <p className="pricing-eyebrow">{t.priceLabel}</p>}
           <h2 className="pricing-title">
-            {t?.priceTitle || "Transparent Integration. Permanent Independence"}
+            {t?.priceTitle || "One-time setup. Zero commission forever"}
           </h2>
           {t?.priceSub && (
             <p className="pricing-subtitle">

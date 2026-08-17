@@ -37,11 +37,11 @@ export default function HospitalityB2BClient({ lang }: { lang: 'en' | 'ru' | 'th
         <CalculatorSection t={t} />
         <LogoMarquee t={t} />
         <ScalePractice t={t} />
-        <About t={t} />
         <SeeSystem t={t} />
+        <About t={t} lang={lang} />
 
         <Pricing t={t} />
-        <FAQ t={t} />
+        <FAQ t={t} lang={lang} />
         <FooterCTA t={t} />
       </main>
     </div>

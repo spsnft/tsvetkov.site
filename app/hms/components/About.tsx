@@ -12,6 +12,7 @@ interface AboutProps {
     aboutLocation?: string;
     aboutP1?: string;
     aboutP2?: string;
+    aboutP3?: string;
     aboutDirectLine?: string;
     aboutLinkAgency?: string;
     stat2Num?: string;
@@ -21,21 +22,39 @@ interface AboutProps {
     stat3Name?: string;
     stat3Sub?: string;
   };
+  lang?: 'en' | 'ru' | 'th';
 }
 
-export default function About({ t = {} }: AboutProps) {
+// Заглушка на месте фото — реальный файл придёт отдельно (см. ТЗ)
+function PhotoPlaceholder() {
+  return (
+    <span className="about-photo" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+      </svg>
+    </span>
+  );
+}
+
+export default function About({ t = {}, lang = 'en' }: AboutProps) {
   const trustStats = [
     { num: t.stat2Num || "20+", name: t.stat2Name || "Brands Scaled", sub: t.stat2Sub || "B2B & Direct models" },
     { num: t.stat3Num || "10+", name: t.stat3Name || "Years Experience", sub: t.stat3Sub || "Growth & systems" }
   ];
+
+  // EN: заголовок блока — человек, агентство и локация уходят в подпись.
+  // RU/TH: старая вёрстка (агентство заголовком) остаётся нетронутой —
+  // копирайт под неё пока не переписан (см. ТЗ, п. «Чего не делать»)
+  const isPersonLed = lang === 'en';
 
   return (
     <section id="about" className="about-section">
       <style jsx>{`
         .about-section {
           width: 100%;
-          padding: 0 0 3.5rem 0;
-          background: transparent;
+          padding: ${T.hms.sectionPad} 0;
+          background: ${T.hms.tint};
           scroll-margin-top: 80px;
         }
 
@@ -54,7 +73,7 @@ export default function About({ t = {} }: AboutProps) {
           letter-spacing: 0.12em;
           color: ${T.sub};
           opacity: 0.8;
-          margin: 0 0 0.9rem 0;
+          margin: 0 0 ${T.hms.eyebrowGap} 0;
         }
 
         /* Та же дисплейная гарнитура и то же начертание, что у заголовков
@@ -69,7 +88,7 @@ export default function About({ t = {} }: AboutProps) {
           line-height: 1.2;
         }
 
-        /* Человек — подпись к агентству, а не объект блока */
+        /* Человек — подпись к агентству, а не объект блока (RU/TH) */
         .about-role {
           font-size: 1rem;
           color: ${T.body};
@@ -85,6 +104,49 @@ export default function About({ t = {} }: AboutProps) {
           line-height: 1.45;
           text-wrap: pretty;
           max-width: 560px;
+        }
+
+        /* EN: фото + имя в одну шапку блока */
+        .about-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .about-photo {
+          flex: 0 0 auto;
+          width: 76px;
+          height: 76px;
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: rgba(255, 255, 255, 0.04);
+          color: ${T.muted};
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .about-header-text {
+          text-align: left;
+        }
+
+        .about-name {
+          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-size: clamp(26px, 4vw, 36px);
+          font-weight: 800;
+          color: #ffffff;
+          margin: 0;
+          letter-spacing: -0.03em;
+          line-height: 1.2;
+        }
+
+        .about-meta {
+          font-size: 0.9rem;
+          color: ${T.sub};
+          margin: 0.3rem 0 0 0;
+          line-height: 1.4;
         }
 
         .about-text {
@@ -189,9 +251,6 @@ export default function About({ t = {} }: AboutProps) {
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
-          .about-section {
-            padding: 0 0 3rem 0;
-          }
           .about-paragraph {
             font-size: 0.98rem;
             line-height: 1.6;
@@ -199,14 +258,18 @@ export default function About({ t = {} }: AboutProps) {
         }
 
         @media (max-width: 767px) {
-          .about-section {
-            padding: 0 0 2.5rem 0;
-          }
           .about-role {
             font-size: 0.94rem;
           }
           .about-location {
             font-size: 0.82rem;
+          }
+          .about-photo {
+            width: 64px;
+            height: 64px;
+          }
+          .about-header {
+            gap: 12px;
           }
           .about-text {
             margin-top: 1.6rem;
@@ -250,16 +313,37 @@ export default function About({ t = {} }: AboutProps) {
         <div className="about-block">
           {t.aboutLabel && <p className="about-label">{t.aboutLabel}</p>}
 
-          <h3 className="about-agency">{t.aboutAgency || "FT Agency"}</h3>
-          <p className="about-role">
-            {t.aboutName || "Fedor Tsvetkov"} · {t.aboutRole || "Founder & Managing Director"}
-          </p>
-          {t.aboutLocation && <p className="about-location">{t.aboutLocation}</p>}
+          {isPersonLed ? (
+            <div className="about-header">
+              <PhotoPlaceholder />
+              <div className="about-header-text">
+                <h2 className="about-name">{t.aboutName || "Fedor Tsvetkov"}</h2>
+                {t.aboutRole && <p className="about-meta">{t.aboutRole}</p>}
+              </div>
+            </div>
+          ) : (
+            <>
+              <h3 className="about-agency">{t.aboutAgency || "FT Agency"}</h3>
+              <p className="about-role">
+                {t.aboutName || "Fedor Tsvetkov"} · {t.aboutRole || "Founder & Managing Director"}
+              </p>
+              {t.aboutLocation && <p className="about-location">{t.aboutLocation}</p>}
+            </>
+          )}
 
           <div className="about-text">
             <p className="about-paragraph">{t.aboutP1}</p>
-            {t.aboutP2 && <p className="about-paragraph dimmed">{t.aboutP2}</p>}
-            {t.aboutDirectLine && <p className="about-paragraph">{t.aboutDirectLine}</p>}
+            {isPersonLed ? (
+              <>
+                {t.aboutP2 && <p className="about-paragraph">{t.aboutP2}</p>}
+                {t.aboutP3 && <p className="about-paragraph">{t.aboutP3}</p>}
+              </>
+            ) : (
+              <>
+                {t.aboutP2 && <p className="about-paragraph dimmed">{t.aboutP2}</p>}
+                {t.aboutDirectLine && <p className="about-paragraph">{t.aboutDirectLine}</p>}
+              </>
+            )}
           </div>
 
           <div className="trust-stats-grid">
