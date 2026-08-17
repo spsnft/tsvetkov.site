@@ -209,6 +209,7 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
            выключка по формату здесь дала бы «реки» между словами
            (см. ТЗ №6, п. 3.1) */
         .about-paragraph.hyphenate {
+          -webkit-hyphens: auto;
           hyphens: auto;
           text-wrap: pretty;
         }
