@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { T } from '../../../src/theme/tokens';
 
 // Единственный вопрос, на который отвечает калькулятор: сколько владелец
@@ -9,10 +9,6 @@ import { T } from '../../../src/theme/tokens';
 const OCCUPANCY = 0.65;
 const OTA_SHARE = 0.70;
 const COMMISSION = 0.17;
-
-// Курс зафиксирован константой — вынесен в одно место для лёгкой правки,
-// без похода в API
-const THB_PER_USD = 36;
 
 const UNITS_MIN = 1;
 const UNITS_MAX = 60;
@@ -41,19 +37,36 @@ export interface HeroCalculatorCopy {
   calcYearLabel?: string;
   calcMonthLabel?: string;
   calcAssumptions?: string;
+  calcAssumptionsAria?: string;
 }
 
 export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
   const [units, setUnits] = useState(UNITS_DEFAULT);
   const [adr, setAdr] = useState(ADR_DEFAULT);
+  const [infoOpen, setInfoOpen] = useState(false);
+  const tooltipId = useId();
+  const infoRef = useRef<HTMLDivElement>(null);
 
-  const { annualUsd, annualThb, monthlyThb } = useMemo(() => {
+  useEffect(() => {
+    if (!infoOpen) return;
+    const handler = (e: MouseEvent | TouchEvent) => {
+      if (infoRef.current && !infoRef.current.contains(e.target as Node)) {
+        setInfoOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    document.addEventListener('touchstart', handler);
+    return () => {
+      document.removeEventListener('mousedown', handler);
+      document.removeEventListener('touchstart', handler);
+    };
+  }, [infoOpen]);
+
+  const { annualUsd, monthlyUsd } = useMemo(() => {
     const usd = units * 365 * OCCUPANCY * OTA_SHARE * adr * COMMISSION;
-    const thbRaw = usd * THB_PER_USD;
     return {
       annualUsd: roundTo(usd, 100),
-      annualThb: roundTo(thbRaw, 10000),
-      monthlyThb: roundTo(thbRaw / 12, 1000),
+      monthlyUsd: roundTo(usd / 12, 25),
     };
   }, [units, adr]);
 
@@ -170,8 +183,16 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        .output-head {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 0.15rem;
+          margin-bottom: 0.9rem;
+        }
+
         .output-label {
-          margin: 0 0 0.5rem 0;
+          margin: 0;
           font-size: 0.72rem;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -179,38 +200,80 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           color: ${T.muted};
         }
 
-        .output-thb {
-          font-family: 'Space Grotesk', system-ui, sans-serif;
-          font-weight: 800;
-          font-size: clamp(1.7rem, 4.2vw, 2.35rem);
-          letter-spacing: -0.02em;
-          line-height: 1.1;
-          background: linear-gradient(100deg, ${T.mint}, ${T.sky});
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: calc-pop 180ms ease-out;
+        .info-btn {
+          width: 44px;
+          height: 44px;
+          margin: -14px -14px -14px -8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: none;
+          border: none;
+          padding: 0;
+          color: ${T.muted};
+          cursor: pointer;
+          flex-shrink: 0;
         }
-        .output-thb .unit {
-          font-size: 0.5em;
-          font-weight: 600;
-          -webkit-text-fill-color: ${T.sub};
-        }
-
-        .output-usd {
-          margin-top: 0.3rem;
-          font-size: 0.98rem;
-          font-weight: 600;
+        .info-btn:hover,
+        .info-btn[aria-expanded='true'] {
           color: ${T.sub};
         }
-
-        .output-month {
-          margin-top: 0.65rem;
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: ${T.muted};
+        .info-btn :global(svg) {
+          width: 15px;
+          height: 15px;
+          display: block;
         }
-        .output-month .unit {
-          font-weight: 500;
+
+        .tooltip {
+          position: absolute;
+          top: calc(100% + 4px);
+          left: 0;
+          right: 0;
+          background: rgba(20, 22, 30, 0.98);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 10px;
+          padding: 0.75rem 0.9rem;
+          font-size: 0.76rem;
+          line-height: 1.5;
+          color: ${T.sub};
+          box-shadow: 0 16px 34px rgba(0, 0, 0, 0.55);
+          z-index: 30;
+          text-wrap: pretty;
+        }
+
+        .output-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .output-col {
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+        }
+
+        .output-col.second {
+          border-left: 1px solid rgba(255, 255, 255, 0.1);
+          padding-left: 1.1rem;
+          margin-left: 1.1rem;
+        }
+
+        .output-value {
+          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-weight: 800;
+          font-size: clamp(1.5rem, 4.5vw, 2rem);
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+          color: #ffffff;
+          animation: calc-pop 180ms ease-out;
+          white-space: nowrap;
+        }
+
+        .output-sublabel {
+          margin-top: 0.4rem;
+          font-size: 0.76rem;
+          font-weight: 600;
+          color: ${T.muted};
         }
 
         @keyframes calc-pop {
@@ -225,17 +288,9 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .output-thb {
+          .output-value {
             animation: none;
           }
-        }
-
-        .assumptions {
-          margin: 1rem 0 0 0;
-          font-size: 0.74rem;
-          line-height: 1.5;
-          color: ${T.muted};
-          text-wrap: pretty;
         }
 
         @media (max-width: 480px) {
@@ -313,20 +368,45 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
       </div>
 
       <div className="output">
-        <p className="output-label">{t.calcOutputLabel || 'You pay OTAs'}</p>
-        <div className="output-thb" key={annualThb}>
-          ฿{fmt(annualThb)} <span className="unit">{t.calcYearLabel || '/ year'}</span>
+        <div className="output-head" ref={infoRef}>
+          <p className="output-label">{t.calcOutputLabel || 'You pay OTAs'}</p>
+          <button
+            type="button"
+            className="info-btn"
+            aria-expanded={infoOpen}
+            aria-controls={tooltipId}
+            aria-label={t.calcAssumptionsAria || 'Show calculation assumptions'}
+            onClick={() => setInfoOpen((o) => !o)}
+          >
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.4" />
+              <path d="M10 9v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <circle cx="10" cy="6.4" r="1" fill="currentColor" />
+            </svg>
+          </button>
+          {infoOpen && (
+            <div className="tooltip" id={tooltipId} role="tooltip">
+              {t.calcAssumptions ||
+                'Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.'}
+            </div>
+          )}
         </div>
-        <div className="output-usd">≈ ${fmt(annualUsd)}</div>
-        <div className="output-month">
-          ฿{fmt(monthlyThb)} <span className="unit">{t.calcMonthLabel || '/ month'}</span>
+
+        <div className="output-grid">
+          <div className="output-col">
+            <div className="output-value" key={`y-${annualUsd}`}>
+              ${fmt(annualUsd)}
+            </div>
+            <div className="output-sublabel">{t.calcYearLabel || 'per year'}</div>
+          </div>
+          <div className="output-col second">
+            <div className="output-value" key={`m-${monthlyUsd}`}>
+              ${fmt(monthlyUsd)}
+            </div>
+            <div className="output-sublabel">{t.calcMonthLabel || 'per month'}</div>
+          </div>
         </div>
       </div>
-
-      <p className="assumptions">
-        {t.calcAssumptions ||
-          'Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.'}
-      </p>
     </div>
   );
 }

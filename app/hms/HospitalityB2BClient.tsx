@@ -7,6 +7,7 @@ import { Nav } from '@/src/components/Nav';
 import { contentData } from './constants';
 
 import Hero from './components/Hero';
+import CalculatorSection from './components/CalculatorSection';
 import GuaranteeStrip from './components/GuaranteeStrip';
 import LogoMarquee from './components/LogoMarquee';
 import ScalePractice from './components/ScalePractice';
@@ -34,6 +35,7 @@ export default function HospitalityB2BClient({ lang }: { lang: 'en' | 'ru' | 'th
 
       <main style={{ width: '100%', position: 'relative', zIndex: 10 }}>
         <Hero t={t} />
+        <CalculatorSection t={t} />
         <GuaranteeStrip t={t} />
         <LogoMarquee t={t} />
         <ScalePractice t={t} />

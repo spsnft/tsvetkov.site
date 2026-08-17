@@ -21,9 +21,10 @@ export const WHATSAPP_PHONE = "66650255229";
 export const contentData = {
   en: {
     // --- HERO SECTION ---
-    // Ровно пять элементов: H1, подзаголовок, калькулятор, кнопка, микрокопия
+    // Три элемента: H1, подзаголовок, кнопка. Калькулятор — отдельный блок
+    // сразу под хиро (CalculatorSection), не часть хиро
     heroTitle: "Stop Paying 15–20% Commissions to Booking.com & Agoda",
-    heroSubtitle: "We set up the booking system your property runs on, then hand you the keys.",
+    heroSubtitle: "Direct bookings on your own site, every channel in one calendar — and you own it.",
     // Обещание держится на результате, а не на длительности: календаря и созвона
     // на странице нет, конверсия ведёт в WhatsApp
     btnAudit: "Free Revenue Check",
@@ -38,15 +39,16 @@ export const contentData = {
     navPricing: "Pricing",
     navFaq: "FAQ",
 
-    // Интерактивный калькулятор в герое отвечает на один вопрос — сколько
-    // владелец отдаёт OTA в год. Без возврата и окупаемости: это предмет
-    // бесплатного Revenue Check, а не бесплатная часть страницы
+    // Калькулятор отвечает на один вопрос — сколько владелец отдаёт OTA
+    // в год. Без возврата и окупаемости: это предмет бесплатного Revenue
+    // Check, а не бесплатная часть страницы
     calcUnitsLabel: "Rooms or villas",
     calcAdrLabel: "Average nightly rate",
     calcOutputLabel: "You pay OTAs",
-    calcYearLabel: "/ year",
-    calcMonthLabel: "/ month",
+    calcYearLabel: "per year",
+    calcMonthLabel: "per month",
     calcAssumptions: "Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.",
+    calcAssumptionsAria: "Show calculation assumptions",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "CHANNELS WE CONNECT",

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import HeroCalculator, { type HeroCalculatorCopy } from './HeroCalculator';
 import WhatsAppCta from './WhatsAppCta';
 
 interface HeroProps {
@@ -10,12 +9,13 @@ interface HeroProps {
     heroSubtitle?: string;
     btnAudit?: string;
     waMessage?: string;
-    ctaNote?: string;
-  } & HeroCalculatorCopy;
+  };
 }
 
 export default function Hero({ t }: HeroProps) {
-  // Единственный градиентный акцент в заголовке — фрагмент «15–20%»
+  // Число не красим (было — сняли зелёный: комиссия не должна читаться как
+  // деньги владельца), но всё ещё держим «15–20%» на одной строке — иначе
+  // перенос ровно по en dash на глаз превращается в дефис
   const titleParts = (() => {
     const match = /1\s?5\s?[-‐‑‒–—]\s?2\s?0\s?%/.exec(t.heroTitle || '');
     if (!match) return null;
@@ -33,13 +33,13 @@ export default function Hero({ t }: HeroProps) {
       <style jsx>{`
         .hero-section {
           width: 100%;
-          padding: clamp(5.25rem, 8vw, 8rem) 0 3.5rem 0;
+          padding: clamp(4.5rem, 7vw, 8rem) 0 2rem 0;
           position: relative;
           z-index: 10;
         }
 
-        /* Ровно пять элементов друг под другом: H1, подзаголовок,
-           калькулятор, кнопка, микрокопия — без боковой колонки */
+        /* Три элемента друг под другом: H1, подзаголовок, кнопка —
+           калькулятор теперь отдельный блок ниже по странице */
         .hero-inner {
           max-width: 720px;
           margin: 0 auto;
@@ -60,12 +60,7 @@ export default function Hero({ t }: HeroProps) {
           width: 100%;
         }
 
-        .title-accent {
-          background: linear-gradient(100deg, #6EE7A8, #5BB8F0);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          /* без этого браузер переносит строку прямо на en dash,
-             и на глаз это снова превращается в дефис */
+        .title-nowrap {
           white-space: nowrap;
         }
 
@@ -77,12 +72,6 @@ export default function Hero({ t }: HeroProps) {
           font-weight: 400;
           text-wrap: pretty;
           max-width: 560px;
-        }
-
-        .calc-wrap {
-          width: 100%;
-          max-width: 480px;
-          margin: 0 0 2rem 0;
         }
 
         .cta-container {
@@ -103,21 +92,24 @@ export default function Hero({ t }: HeroProps) {
           flex-shrink: 0;
         }
 
-        /* Что произойдёт после нажатия — тише кнопки, сразу под ней */
-        .cta-note {
-          margin: 14px 0 0 0;
-          font-size: 0.8rem;
-          line-height: 1.45;
-          color: rgba(255, 255, 255, 0.45);
-          max-width: 420px;
-          text-wrap: pretty;
-        }
-
         /* На 320px длинный русский текст не влезает в кнопку при обычном паддинге */
         @media (max-width: 360px) {
           .cta-container :global(.btn-premium-core) {
             padding: 0 0.7rem;
             font-size: 0.95rem;
+          }
+        }
+
+        /* На мобильном хиро занимает почти весь экран и центрирует контент
+           по вертикали — тогда его нижний край стабильно упирается в сгиб
+           независимо от длины заголовка, и карточка калькулятора сразу
+           под ним закономерно выглядывает на фиксированную величину */
+        @media (max-width: 767px) {
+          .hero-section {
+            min-height: calc(100dvh - 50px);
+            display: flex;
+            align-items: center;
+            padding: 1.5rem 0;
           }
         }
       `}</style>
@@ -128,7 +120,7 @@ export default function Hero({ t }: HeroProps) {
             {titleParts ? (
               <>
                 {titleParts.before}
-                <span className="title-accent">{titleParts.accent}</span>
+                <span className="title-nowrap">{titleParts.accent}</span>
                 {titleParts.after}
               </>
             ) : t.heroTitle}
@@ -136,12 +128,8 @@ export default function Hero({ t }: HeroProps) {
 
           <p className="subtitle">
             {t.heroSubtitle ||
-              'We set up the booking system your property runs on, then hand you the keys.'}
+              'Direct bookings on your own site, every channel in one calendar — and you own it.'}
           </p>
-
-          <div className="calc-wrap">
-            <HeroCalculator t={t} />
-          </div>
 
           <div className="cta-container">
             <WhatsAppCta
@@ -149,8 +137,6 @@ export default function Hero({ t }: HeroProps) {
               message={t.waMessage}
             />
           </div>
-
-          {t.ctaNote && <p className="cta-note">{t.ctaNote}</p>}
         </div>
       </div>
     </section>
