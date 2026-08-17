@@ -94,19 +94,25 @@ export const contentData = {
     // Сквозная бронь на всех трёх экранах: Klaus Müller, Pool Villa 2,
     // 18–24 Dec, ฿4,000/night, ฿24,000 total, Direct, booked 21:47.
     seeSystemTitle: "See how it works end to end",
-    // Короткие версии — только для кликабельных шагов-пилюль в карусели
+    // Короткие версии — только для кликабельных шагов-пилюль в карусели.
+    // Формулировка шага 3 синхронизирована с заголовком слайда (seeSystemLabel3)
     seeSystemStep1: "Guest books",
     seeSystemStep2: "You see it",
-    seeSystemStep3: "Guest gets this",
+    seeSystemStep3: "Guest confirmed",
     // Полные лейблы + строка выгоды — подписи у самих экранов
     seeSystemLabel1: "Guest books on your site",
-    seeSystemBenefit1: "Not on Booking.com. Zero commission on this one.",
+    seeSystemBenefit1: "Zero commission.",
     seeSystemLabel2: "You see it instantly",
-    seeSystemBenefit2: "Every channel in one calendar. The room closes everywhere automatically.",
+    seeSystemBenefit2: "Every channel in one calendar. Rooms close everywhere automatically.",
     seeSystemLabel3: "Guest gets confirmed",
     seeSystemBenefit3: "Sent automatically, in your name. You do nothing.",
-    // ฿24,000 × 0.83 (та же 17%-комиссия, что в калькуляторе героя) ≈ ฿19,900
-    seeSystemCaption: "This booking: ฿24,000 direct. Through Booking.com you'd have kept ฿19,900.",
+    // Высота блока описания фиксируется в две строки для EN — при
+    // локализации RU/TH это число может понадобиться увеличить отдельно,
+    // строки там длиннее (см. SeeSystem.tsx)
+    seeSystemBenefitLines: 2,
+    // ฿24,000 ≈ $690 direct; при 17%-комиссии (то же допущение, что в
+    // калькуляторе героя) через Booking.com осталось бы $573
+    seeSystemCaption: "This booking: $690 direct. Through Booking.com you'd have kept $573.",
     seeSystemDisclaimer: "Demo property. Your system is built on the platform that fits your property.",
 
     // --- PRICING ---

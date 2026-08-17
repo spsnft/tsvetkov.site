@@ -18,6 +18,7 @@ interface SeeSystemProps {
     seeSystemBenefit3?: string;
     seeSystemCaption?: string;
     seeSystemDisclaimer?: string;
+    seeSystemBenefitLines?: number;
   };
 }
 
@@ -35,8 +36,12 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
   const steps = [
     t.seeSystemStep1 || 'Guest books',
     t.seeSystemStep2 || 'You see it',
-    t.seeSystemStep3 || 'Guest gets this',
+    t.seeSystemStep3 || 'Guest confirmed',
   ];
+
+  // Высота блока описания фиксируется в строках, а не в px, чтобы
+  // RU/TH-локализация могла задать своё число строк без правки CSS
+  const benefitLines = t.seeSystemBenefitLines || 2;
 
   // Full label + benefit line — the actual caption shown at each screen
   const labels = [
@@ -45,8 +50,8 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
     t.seeSystemLabel3 || 'Guest gets confirmed',
   ];
   const benefits = [
-    t.seeSystemBenefit1 || 'Not on Booking.com. Zero commission on this one.',
-    t.seeSystemBenefit2 || 'Every channel in one calendar. The room closes everywhere automatically.',
+    t.seeSystemBenefit1 || 'Zero commission.',
+    t.seeSystemBenefit2 || 'Every channel in one calendar. Rooms close everywhere automatically.',
     t.seeSystemBenefit3 || 'Sent automatically, in your name. You do nothing.',
   ];
 
@@ -89,7 +94,11 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
   };
 
   return (
-    <section id="see-system" className="see-section">
+    <section
+      id="see-system"
+      className="see-section"
+      style={{ '--benefit-lines': benefitLines } as React.CSSProperties}
+    >
       <style jsx>{`
         .see-section {
           width: 100%;
@@ -123,14 +132,20 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           color: ${T.accent};
         }
 
-        /* Тише лейбла — тот же муted, но ниже непрозрачность */
+        /* Тише лейбла — тот же муted, но ниже непрозрачность. Высота
+           фиксирована в N строк текущего кегля (--benefit-lines), текст
+           прижат к верху — иначе слайды с одно- и двухстрочным описанием
+           стартуют с разного Y и при свайпе картинка дребезжит */
         .see-benefit {
           margin: 0.3rem 0 0 0;
+          min-height: calc(0.76rem * 1.45 * var(--benefit-lines, 2));
           font-size: 0.76rem;
           line-height: 1.45;
           font-weight: 500;
           color: rgba(255, 255, 255, 0.32);
           text-wrap: pretty;
+          display: flex;
+          align-items: flex-start;
         }
 
         /* ================= DESKTOP: overlapping scene ================= */
@@ -333,8 +348,14 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           text-wrap: pretty;
         }
 
+        /* Строка с цифрами — вывод, дисклеймер — сноска к нему: разносим
+           зазором заметно больше обычного межстрочного, иначе читаются как
+           один абзац в два предложения. Ширина подобрана так, чтобы перенос
+           шёл после «built on», а не разрывал «the platform / that fits
+           your property» */
         .see-disclaimer {
-          margin: 0.9rem 0 0 0;
+          margin: 14px auto 0 auto;
+          max-width: 250px;
           text-align: center;
           font-size: 0.78rem;
           line-height: 1.5;
