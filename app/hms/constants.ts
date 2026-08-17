@@ -75,11 +75,11 @@ export const contentData = {
     scaleLabelToday: "on OTAs",
     scaleLabelDirect: "direct",
     scalePair1Problem: "15–20% of every booking goes to the platform",
-    scalePair1Solution: "Direct bookings at 0% commission, forever",
+    scalePair1Solution: "Bookings at 0% commission, forever",
     scalePair2Problem: "Your guests belong to the platform",
     scalePair2Solution: "Your guest list belongs to you",
     scalePair3Problem: "Rates updated by hand, around the clock",
-    scalePair3Solution: "One calendar, synced across 300+ channels",
+    scalePair3Solution: "One calendar for 300+ channels",
 
     // --- WHO'S BEHIND THIS ---
     // Повествование блока теперь идёт от человека, а не агентства: заголовок —
@@ -160,7 +160,7 @@ export const contentData = {
       "Cloud PMS Setup": "all bookings in one place",
       "0% Commission Engine": "on your own site",
       "Promo Engine": "direct-only offers",
-      "Marketing Analytics": "where bookings come from"
+      "Marketing Analytics": "booking sources"
     } as Record<string, string>,
 
     // Вторая (мелкая, приглушённая) строка объединённого risk-box — не

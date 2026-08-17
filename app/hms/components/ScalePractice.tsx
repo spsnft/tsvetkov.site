@@ -168,7 +168,14 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           /* 18px переносит две из трёх строк на 390px — на мобильном чуть
              мельче, чтобы соблюсти «ни одна строка не переносится» */
           .solution {
-            font-size: 15px;
+            font-size: 14px;
+          }
+          /* Чуть уже, но по-прежнему шире самого длинного лейбла
+             («on OTAs», ~65px) — освобождённая ширина уходит строке
+             решения (см. ТЗ №6, п. 2, «одна строка на 375px») */
+          .micro-label {
+            flex-basis: 72px;
+            width: 72px;
           }
         }
       `}</style>

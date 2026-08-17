@@ -213,36 +213,43 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           position: relative;
         }
 
+        /* CSS grid, две равные колонки на любой ширине — сетка никогда не
+           схлопывается в одну колонку, переносится только содержимое
+           внутри колонки (см. ТЗ №6, п. 1.2/1.3) */
         .output-row {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: flex-start;
-          gap: 1.25rem 1.5rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-items: stretch;
+          gap: 1.25rem;
         }
 
         .output-group {
-          flex: 1 1 0;
-          min-width: 130px;
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
         }
 
-        /* Разделитель между группами — вертикальный hairline, как раньше
-           между «per year» и «per month». На узких экранах группы
-           переносятся, и он должен стать горизонтальным (см. ТЗ №4, п. 2.2) */
+        /* Разделитель между колонками — вертикальный hairline на всех
+           размерах экрана, без брейкпоинта, меняющего его ориентацию
+           (см. ТЗ №6, п. 1.2) */
         .output-group.keep {
           border-left: 1px solid rgba(255, 255, 255, 0.1);
           padding-left: 1.25rem;
         }
 
-        @media (max-width: 480px) {
-          .output-row {
-            flex-direction: column;
-          }
-          .output-group.keep {
-            border-left: none;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-left: 0;
-            padding-top: 1rem;
-          }
+        /* Колонка растянута на всю высоту ряда (align-items: stretch), а
+           value-block прижат книзу margin-top: auto — подписи обеих
+           колонок оказываются на общей нижней линии независимо от того,
+           сколько строк занял лейбл сверху (см. ТЗ №6, п. 1.5) */
+        .value-block {
+          margin-top: auto;
+        }
+
+        .output-value-row {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: baseline;
+          column-gap: 0.35em;
         }
 
         /* Оба лейбла одного стиля и кегля — «you pay» / «you keep» читаются
@@ -349,12 +356,29 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           -webkit-text-fill-color: transparent;
         }
 
+        /* «per year» — мелкий и приглушённый, в одной строке с суммой;
+           переносится под неё, если строке не хватает ширины
+           (см. ТЗ №6, п. 1.3/1.4) */
+        .output-unit {
+          font-size: 0.76rem;
+          font-weight: 600;
+          color: ${T.muted};
+          white-space: nowrap;
+        }
+
         .output-sublabel {
           margin-top: 0.4rem;
           font-size: 0.76rem;
           font-weight: 600;
           color: ${T.muted};
           text-wrap: pretty;
+        }
+
+        /* Само число красится как основная сумма — читается как число, а
+           не как часть служебной подписи. Кегль не меняется, меняется
+           только цвет (см. ТЗ №6, п. 1.4) */
+        .output-sublabel .figure {
+          color: #ffffff;
         }
 
         @keyframes calc-pop {
@@ -458,11 +482,16 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           <div className="output-row">
             <div className="output-group pay">
               <p className="group-label">{t.calcOutputLabel || 'You pay OTAs'}</p>
-              <div className="output-value" key={`y-${annualUsd}`}>
-                ${fmt(annualUsd)}
-              </div>
-              <div className="output-sublabel">
-                {t.calcYearLabel || 'per year'} · ${fmt(monthlyUsd)} {t.calcMonthLabel || 'per month'}
+              <div className="value-block">
+                <div className="output-value-row">
+                  <span className="output-value" key={`y-${annualUsd}`}>
+                    ${fmt(annualUsd)}
+                  </span>
+                  <span className="output-unit">{t.calcYearLabel || 'per year'}</span>
+                </div>
+                <div className="output-sublabel">
+                  · <span className="figure">${fmt(monthlyUsd)}</span> {t.calcMonthLabel || 'per month'}
+                </div>
               </div>
             </div>
 
@@ -484,10 +513,14 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
                   </svg>
                 </button>
               </div>
-              <div className="output-value accent" key={`r-${recoveryUsd}`}>
-                ~${fmt(recoveryUsd)}
+              <div className="value-block">
+                <div className="output-value-row">
+                  <span className="output-value accent" key={`r-${recoveryUsd}`}>
+                    ~${fmt(recoveryUsd)}
+                  </span>
+                  <span className="output-unit">{t.calcYearLabel || 'per year'}</span>
+                </div>
               </div>
-              <div className="output-sublabel">{t.calcYearLabel || 'per year'}</div>
             </div>
           </div>
 

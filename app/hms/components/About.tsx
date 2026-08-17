@@ -203,6 +203,16 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           color: ${T.sub};
         }
 
+        /* EN-only: длинные слова («acquisition», «Hospitality», «directly»)
+           рвали правый край короче возможного. hyphens вместе с
+           text-wrap: pretty убирают эффект без text-align: justify —
+           выключка по формату здесь дала бы «реки» между словами
+           (см. ТЗ №6, п. 3.1) */
+        .about-paragraph.hyphenate {
+          hyphens: auto;
+          text-wrap: pretty;
+        }
+
         /* RU/TH: карточки с рамками, как раньше */
         .trust-stats-grid {
           display: grid;
@@ -236,11 +246,14 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
 
         /* EN: строка без подложек, границ и обработчиков нажатия — число
            не кликабельно и никуда не ведёт, рамка тут читалась бы как
-           сломанная кнопка (см. ТЗ №5, п. 4.3). Вертикальный hairline
-           между парами, как в калькуляторе и «What changes» */
+           сломанная кнопка (см. ТЗ №5, п. 4.3). Grid, а не flex-wrap —
+           две равные колонки в одну строку на любой ширине, число над
+           подписью, а не слева от неё: на ~350px «20+» рядом с «Brands
+           Scaled» не помещается и уводит блок в две строки
+           (см. ТЗ №6, п. 3.3) */
         .stats-row {
-          display: flex;
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
           gap: 1.5rem 2rem;
           width: 100%;
           margin: 2.25rem 0 0 0;
@@ -252,25 +265,20 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
            градиент) перебивает белый цвет цифр в RU/TH-карточках */
         .row-stat {
           display: flex;
-          align-items: flex-start;
-          gap: 10px;
-          flex: 1 1 auto;
-          min-width: 180px;
+          flex-direction: column;
+          min-width: 0;
         }
 
         .row-stat + .row-stat {
           border-left: 1px solid rgba(255, 255, 255, 0.1);
-          padding-left: 2rem;
+          padding-left: 1.5rem;
         }
 
-        .row-stat-text {
-          display: flex;
-          flex-direction: column;
-        }
-
-        /* Зелёно-синий градиент — только на самих цифрах (см. ТЗ №5, п. 4.3) */
+        /* Зелёно-синий градиент — только на самих цифрах (см. ТЗ №5, п. 4.3).
+           Число стоит над подписью, а не слева от неё (см. ТЗ №6, п. 3.3) */
         .row-stat-num {
           flex: 0 0 auto;
+          margin-bottom: 0.3rem;
           font-size: 1.65rem;
           font-weight: 800;
           letter-spacing: -0.02em;
@@ -375,14 +383,10 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
             opacity: 0.85;
           }
           .stats-row {
-            flex-direction: column;
-            gap: 1.25rem;
+            gap: 1rem 1.25rem;
           }
           .row-stat + .row-stat {
-            border-left: none;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-left: 0;
-            padding-top: 1.25rem;
+            padding-left: 1.25rem;
           }
           .about-links {
             gap: 0.75rem 1.5rem;
@@ -427,11 +431,11 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           )}
 
           <div className="about-text">
-            <p className="about-paragraph">{t.aboutP1}</p>
+            <p className={`about-paragraph${isPersonLed ? ' hyphenate' : ''}`}>{t.aboutP1}</p>
             {isPersonLed ? (
               <>
-                {t.aboutP2 && <p className="about-paragraph">{t.aboutP2}</p>}
-                {t.aboutP3 && <p className="about-paragraph">{t.aboutP3}</p>}
+                {t.aboutP2 && <p className="about-paragraph hyphenate">{t.aboutP2}</p>}
+                {t.aboutP3 && <p className="about-paragraph hyphenate">{t.aboutP3}</p>}
               </>
             ) : (
               <>
@@ -446,10 +450,8 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
               {trustStats.map((stat, i) => (
                 <div className="row-stat" key={i}>
                   <span className="row-stat-num">{stat.num}</span>
-                  <div className="row-stat-text">
-                    <span className="row-stat-name">{stat.name}</span>
-                    <span className="row-stat-sub">{stat.sub}</span>
-                  </div>
+                  <span className="row-stat-name">{stat.name}</span>
+                  <span className="row-stat-sub">{stat.sub}</span>
                 </div>
               ))}
             </div>

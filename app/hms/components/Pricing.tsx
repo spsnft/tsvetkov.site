@@ -448,6 +448,18 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
             font-size: 2.2rem;
           }
         }
+
+        /* card-features li чуть мельче на мобиле — иначе «Marketing
+           Analytics (booking sources)» переносится на 375px (см. ТЗ №6,
+           п. 4). Стоит последним в файле нарочно: у безусловного правила
+           .card-features li та же специфичность и более позднее место в
+           каскаде, так что более ранний @media (max-width: 599px) его не
+           перебивает */
+        @media (max-width: 599px) {
+          .card-features li {
+            font-size: 0.85rem;
+          }
+        }
       `}</style>
 
       <div className="container">
