@@ -4,7 +4,7 @@ import { SITE_URL } from '@/src/lib/siteUrl';
 
 const META = {
   en: {
-    title: 'Hospitality Growth Solutions — Stop Paying 15-20% OTA Commissions',
+    title: 'Hospitality Growth Solutions — Stop Paying 15–20% OTA Commissions',
     description: 'Connect your hotel or villa directly to guests. Cloud PMS, zero-commission booking engine, and direct revenue infrastructure.',
   },
   ru: {
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       images: [ogImage],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
       images: [ogImage.url],

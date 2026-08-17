@@ -21,9 +21,10 @@ export const WHATSAPP_PHONE = "66650255229";
 export const contentData = {
   en: {
     // --- HERO SECTION ---
-    heroTitle: "Stop Paying 15-20% Commissions to Booking.com & Agoda",
-    heroSub1: "Connect your Phuket property directly to guests\nZero risk of human error and double-bookings",
-    heroSub2: "Keep 100% of the profit in your pocket",
+    // Три элемента: H1, подзаголовок, кнопка. Калькулятор — отдельный блок
+    // сразу под хиро (CalculatorSection), не часть хиро
+    heroTitle: "Stop Paying 15–20% Commissions to Booking.com & Agoda",
+    heroSubtitle: "Direct bookings on your own site, every channel in one calendar — and you own it.",
     // Обещание держится на результате, а не на длительности: календаря и созвона
     // на странице нет, конверсия ведёт в WhatsApp
     btnAudit: "Free Revenue Check",
@@ -38,43 +39,30 @@ export const contentData = {
     navPricing: "Pricing",
     navFaq: "FAQ",
 
-    // Hero calculation card — one booking, then the same loss per month and per year.
-    // Вторая колонка снимает главное возражение: не все 100% возвращаются,
-    // возврат первого года — доля объёма OTA, которую можно забрать себе
-    otaCostBadge: "WHAT OTAs COST YOU",
-    calcUnitLabel: "ONE $100 BOOKING",
-    calcKeepInline: "you keep $83",
-    calcLossInline: "−$17",
-    calcFullMark: "Direct: $100",
-    calcPayLabel: "You pay OTAs",
-    calcMonthValue: "$2,790/mo",
-    calcYearValue: "$33,400/yr",
-    calcRecoverLabel: "Realistic recovery, year one",
-    calcRecoverValue: "~$560/mo",
-    calcRecoverHintAria: "How we get this number",
-    calcRecoverHint: "Direct booking systems typically shift 15–25% of OTA volume to your own channel in the first year. We use 20% here. The rest keeps coming through OTAs — you don't leave them, you stop paying commission on the share you can own.",
-    calcFootnote: "12 units · 65% occupancy · 70% via OTA · 17% commission",
+    // Калькулятор отвечает на один вопрос — сколько владелец отдаёт OTA
+    // в год. Без возврата и окупаемости: это предмет бесплатного Revenue
+    // Check, а не бесплатная часть страницы
+    calcUnitsLabel: "Rooms or villas",
+    calcAdrLabel: "Average nightly rate",
+    calcOutputLabel: "You pay OTAs",
+    calcYearLabel: "per year",
+    calcMonthLabel: "per month",
+    calcAssumptions: "Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.",
+    calcAssumptionsAria: "Show calculation assumptions",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "CHANNELS WE CONNECT",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
-    scaleTitle: "Where your revenue leaks",
-
-    // Полоса сравнения — единственное место, где на странице проговаривается
-    // «было → стало». Иллюстрации из удалённых карточек живут здесь иконками
-    scaleCmpNowLabel: "WITHOUT A DIRECT SYSTEM",
-    scaleCmpAfterLabel: "WITH FT AGENCY",
-    scaleCmpNow: [
-      "Rates and availability updated by hand, around the clock",
-      "15–20% of every booking goes to the platform",
-      "Every guest arrives through a channel you don't own"
-    ],
-    scaleCmpAfter: [
-      "One room calendar, synced across 300+ channels",
-      "Direct bookings at zero commission, forever",
-      "Your own search traffic and returning guests"
-    ],
+    // Три пары проблема→решение, деньги первыми, операционка последней.
+    // Заменяет прежнюю двухколоночную полосу сравнения (WITHOUT/WITH).
+    scaleTitle: "What it costs you — and what changes",
+    scalePair1Problem: "15–20% of every booking goes to the platform",
+    scalePair1Solution: "Direct bookings at 0% commission, forever",
+    scalePair2Problem: "Your guests belong to the platform",
+    scalePair2Solution: "Your own traffic and returning guests",
+    scalePair3Problem: "Rates updated by hand, around the clock",
+    scalePair3Solution: "One calendar, synced across 300+ channels",
 
     // --- WHO'S BEHIND THIS ---
     // Повествование блока идёт от «мы», поэтому заголовок — агентство,
@@ -82,12 +70,13 @@ export const contentData = {
     aboutLabel: "WHO'S BEHIND THIS",
     aboutAgency: "FT Agency",
     aboutName: "Fedor Tsvetkov",
-    aboutRole: "Founder & Managing Director",
-    aboutLocation: "Currently based in Phuket",
+    aboutRole: "Founder · 10 years in growth & systems",
+    aboutLocation: "Working worldwide — on the ground in Phuket",
     // Первым идёт то, что решает: условия сделки и владение системой.
-    // Общее описание агентства — вторым
-    aboutP1: "We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share. Hospitality is where that matters most: properties hand 15–20% of revenue to platforms they don't control.",
-    aboutP2: "We build acquisition and automation systems for businesses that sell directly to their customers — and we run them end to end, not as one-off projects.",
+    aboutP1: "We build the direct booking system, transfer full ownership to you, and stay on for support. No lock-in, no revenue share.",
+    // Отдельной строкой, тем же стилем — объясняет, почему единственный
+    // контакт на странице WhatsApp, а не форма или колл-центр
+    aboutDirectLine: "You'll be talking to me directly, not a support queue.",
     aboutLinkAgency: "More about FT Agency",
 
     // Trust Stats
@@ -102,18 +91,35 @@ export const contentData = {
     // Три демо-экрана — не скриншоты Little Hotelier/Beds24/Cloudbeds
     // (клиентам подключаются разные платформы), а нейтральный интерфейс в
     // дизайн-системе сайта. Демо-объект: Baan Sirin Villa, Rawai, Phuket.
+    // Сквозная бронь на всех трёх экранах: Klaus Müller, Pool Villa 2,
+    // 18–24 Dec, ฿4,000/night, ฿24,000 total, Direct, booked 21:47.
     seeSystemTitle: "See how it works end to end",
+    // Короткие версии — только для кликабельных шагов-пилюль в карусели.
+    // Формулировка шага 3 синхронизирована с заголовком слайда (seeSystemLabel3)
     seeSystemStep1: "Guest books",
     seeSystemStep2: "You see it",
-    seeSystemStep3: "Guest gets this",
-    seeSystemCaption: "From booking to confirmation — without the commission.",
-    seeSystemDisclaimer: "Interface shown for illustration. The actual platform is selected per property.",
+    seeSystemStep3: "Guest confirmed",
+    // Полные лейблы + строка выгоды — подписи у самих экранов
+    seeSystemLabel1: "Guest books on your site",
+    seeSystemBenefit1: "Zero commission.",
+    seeSystemLabel2: "You see it instantly",
+    seeSystemBenefit2: "Every channel in one calendar. Rooms close everywhere automatically.",
+    seeSystemLabel3: "Guest gets confirmed",
+    seeSystemBenefit3: "Sent automatically, in your name. You do nothing.",
+    // Высота блока описания фиксируется в две строки для EN — при
+    // локализации RU/TH это число может понадобиться увеличить отдельно,
+    // строки там длиннее (см. SeeSystem.tsx)
+    seeSystemBenefitLines: 2,
+    // ฿24,000 ≈ $690 direct; при 17%-комиссии (то же допущение, что в
+    // калькуляторе героя) через Booking.com осталось бы $573
+    seeSystemCaption: "This booking: $690 direct. Through Booking.com you'd have kept $573.",
+    seeSystemDisclaimer: "Demo property. Your system is built on the platform that fits your property.",
 
     // --- PRICING ---
-    priceTitle: "Transparent Integration. Permanent Independence",
-    priceSub: "One-time setup fee. Zero commission on direct bookings forever",
+    // Заголовок секции — раньше H2 + подзаголовок; подзаголовок поднят на
+    // место H2, старый заголовок (Transparent Integration...) убран
+    priceTitle: "One-time setup fee. Zero commission on direct bookings forever",
     pricePopular: "Popular",
-    priceDisclaimerAudit: "Final price confirmed after your free revenue check. PMS and channel manager (one calendar that updates every platform at once) are billed separately by the provider.",
     priceMore2: "+ 4 from Lite",
     priceMore3: "+ 7 from Standard",
 
@@ -121,39 +127,35 @@ export const contentData = {
     // подсказка показывается только в собственном списке тарифа, не в свёрнутом
     featureHints: {
       "Cloud PMS Setup": "all your bookings in one place, not in a spreadsheet",
-      "0% Commission Engine": "the page where guests book on your own site",
+      "0% Commission Engine": "booking page on your own site",
       "Direct Promo Engine": "direct-only offers and discounts",
-      "Marketing Analytics Setup": "tracking that shows where your bookings come from"
+      "Marketing Analytics Setup": "see which channel each booking came from"
     } as Record<string, string>,
 
-    // Диапазоны — ориентир, а не правило: реальная сегментация идёт по ADR
-    pricePaybackNote: "Payback varies with property size and ADR — the example above uses a 12-unit property.",
-    priceFitHint: "Not sure which fits? Two questions on the check answers it.",
+    // Единственная строка под сеткой тарифов. Раньше их было две (окупаемость
+    // + итоговая цена/PMS отдельно после CTA); фраза про окупаемость снята —
+    // страница больше не называет сроки payback ни в одном месте
+    pricePaybackNote: "Final price confirmed after your revenue check. PMS and channel manager are billed separately by the provider — typically $30–100/month.",
 
     // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия
     riskTitle: "50% upfront, 50% on launch.",
     riskText: "Not live in 14 days — you don't pay the second half.",
 
-    // Микрокопия под каждой главной кнопкой — что человек даёт и что получает
+    // Микрокопия под кнопкой в финальном CTA-блоке (FooterCTA). В героя эта
+    // строка больше не выводится — там она дублировала эту же
     ctaNote: "Send us your property name. We reply with what OTAs are costing you — your numbers, not an example.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
-    tier1Payback: "Typical payback: 3–4 months",
-    tier1Fit: "Typical fit: 1–9 units",
-    tier1Desc: "For small villas & guesthouses",
+    tier1Desc: "For small villas & guesthouses (1–9 units)",
 
     tier2Title: "STANDARD",
     tier2Price: "From $2,500",
-    tier2Payback: "Typical payback: 2–3 months",
-    tier2Fit: "Typical fit: 10–29 units",
-    tier2Desc: "For boutique hotels & resorts",
+    tier2Desc: "For boutique hotels & resorts (10–29 units)",
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Payback: "Typical payback: under 2 months",
-    tier3Fit: "Multi-property and operators",
-    tier3Desc: "For hotel chains & operators",
+    tier3Desc: "For hotel chains & operators (multi-property)",
 
     // --- FAQ SECTION ---
     faqTitle: "Frequently Asked Questions",
@@ -188,7 +190,7 @@ export const contentData = {
     ],
 
     // --- FOOTER CTA ---
-    footerTitle: "Ready to maximize your revenue?",
+    footerTitle: "See what OTAs actually cost you",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Take full control of your direct bookings",
     footerBtn: "Free Revenue Check"

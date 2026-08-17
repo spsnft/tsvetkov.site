@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-const TITLE = 'Hospitality Growth Solutions — Stop Paying 15-20% OTA Commissions';
+const TITLE = 'Hospitality Growth Solutions — Stop Paying 15–20% OTA Commissions';
 const DESCRIPTION = 'Connect your hotel or villa directly to guests. Cloud PMS, zero-commission booking engine, and direct revenue infrastructure.';
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
   },

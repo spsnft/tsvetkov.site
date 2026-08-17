@@ -28,10 +28,11 @@ export default function LogoMarquee({ t }: LogoMarqueeProps) {
   return (
     <section className="marquee-block">
       <style jsx>{`
-        /* Отступ сверху разрывает визуальную связку ленты с цифрами героя */
+        /* Без своего отступа сверху — зазор до предыдущей секции уже
+           задаёт её собственный нижний паддинг (calc-section), свой
+           margin-top здесь задваивал бы разрыв */
         .marquee-block {
           width: 100%;
-          margin-top: 4rem;
         }
 
         .marquee-label {
@@ -83,9 +84,6 @@ export default function LogoMarquee({ t }: LogoMarqueeProps) {
         }
 
         @media (max-width: 768px) {
-          .marquee-block {
-            margin-top: 3rem;
-          }
           .marquee-label {
             margin-bottom: 0.85rem;
             font-size: 0.68rem;

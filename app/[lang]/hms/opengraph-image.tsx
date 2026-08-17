@@ -4,10 +4,10 @@ import { loadGoogleFont } from '@/src/lib/ogFont';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-// Mirrors the "Stop Paying 15-20% OTA Commissions" clause already
+// Mirrors the "Stop Paying 15–20% OTA Commissions" clause already
 // localized and shipped in app/[lang]/hms/page.tsx's og:title
 const TITLE: Record<string, string> = {
-  en: 'Stop Paying 15-20% OTA Commissions',
+  en: 'Stop Paying 15–20% OTA Commissions',
   ru: 'Хватит платить 15-20% комиссии OTA',
   th: 'หยุดจ่ายค่าคอมมิชชั่น 15-20%',
 };

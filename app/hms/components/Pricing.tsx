@@ -21,9 +21,9 @@ interface PricingProps {
     featureHints?: Record<string, string>;
     btnAudit?: string;
     waMessage?: string;
-    tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Fit?: string; tier1Desc?: string;
-    tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Fit?: string; tier2Desc?: string;
-    tier3Title?: string; tier3Price?: string; tier3Payback?: string; tier3Fit?: string; tier3Desc?: string;
+    tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Desc?: string;
+    tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Desc?: string;
+    tier3Title?: string; tier3Price?: string; tier3Payback?: string; tier3Desc?: string;
   };
 }
 
@@ -36,8 +36,7 @@ export default function Pricing({ t }: PricingProps) {
       title: t?.tier1Title || 'LITE',
       price: t?.tier1Price || 'From $1,200',
       payback: t?.tier1Payback,
-      fit: t?.tier1Fit || 'Typical fit: 1–9 units',
-      desc: t?.tier1Desc || 'For small villas & guesthouses',
+      desc: t?.tier1Desc || 'For small villas & guesthouses (1–9 units)',
       featured: false,
       own: names.slice(0, TIER_FEATURE_COUNTS[0]),
       inherited: [] as string[],
@@ -47,8 +46,7 @@ export default function Pricing({ t }: PricingProps) {
       title: t?.tier2Title || 'STANDARD',
       price: t?.tier2Price || 'From $2,500',
       payback: t?.tier2Payback,
-      fit: t?.tier2Fit || 'Typical fit: 10–29 units',
-      desc: t?.tier2Desc || 'For boutique hotels & resorts',
+      desc: t?.tier2Desc || 'For boutique hotels & resorts (10–29 units)',
       featured: true,
       own: names.slice(TIER_FEATURE_COUNTS[0], TIER_FEATURE_COUNTS[1]),
       inherited: names.slice(0, TIER_FEATURE_COUNTS[0]),
@@ -58,8 +56,7 @@ export default function Pricing({ t }: PricingProps) {
       title: t?.tier3Title || 'ENTERPRISE',
       price: t?.tier3Price || 'Custom',
       payback: t?.tier3Payback,
-      fit: t?.tier3Fit || 'Multi-property and operators',
-      desc: t?.tier3Desc || 'For hotel chains & operators',
+      desc: t?.tier3Desc || 'For hotel chains & operators (multi-property)',
       featured: false,
       own: names.slice(TIER_FEATURE_COUNTS[1], TIER_FEATURE_COUNTS[2]),
       inherited: names.slice(0, TIER_FEATURE_COUNTS[1]),
@@ -132,20 +129,11 @@ export default function Pricing({ t }: PricingProps) {
           color: ${T.muted};
         }
 
-        /* Ориентир по числу номеров — то, по чему владелец узнаёт свой тариф,
-           поэтому он ярче существующей подписи «для кого» */
-        .price-fit {
-          display: block;
-          margin-top: 0.55rem;
-          font-size: 0.86rem;
-          font-weight: 600;
-          line-height: 1.4;
-          color: rgba(255, 255, 255, 0.9);
-        }
-
+        /* Единственная строка позиционирования тарифа: «для кого» + число
+           номеров в скобках — раньше это были две отдельные строки */
         .price-desc {
           display: block;
-          margin-top: 0.2rem;
+          margin-top: 0.55rem;
           font-size: 0.9rem;
           line-height: 1.4;
           color: ${T.sub};
@@ -262,7 +250,6 @@ export default function Pricing({ t }: PricingProps) {
             white-space: nowrap;
           }
           .price-payback,
-          .price-fit,
           .price-desc {
             min-height: 2.8em;
           }
@@ -281,9 +268,6 @@ export default function Pricing({ t }: PricingProps) {
           }
           .price-payback {
             font-size: 0.72rem;
-          }
-          .price-fit {
-            font-size: 0.8rem;
           }
           .price-desc {
             font-size: 0.82rem;
@@ -426,9 +410,6 @@ export default function Pricing({ t }: PricingProps) {
           .price-desc {
             font-size: 0.85rem;
           }
-          .price-fit {
-            font-size: 0.82rem;
-          }
           .price-payback {
             font-size: 0.74rem;
           }
@@ -476,7 +457,6 @@ export default function Pricing({ t }: PricingProps) {
               <p className={`package-title${tier.featured ? ' accent' : ''}`}>{tier.title}</p>
               <span className="price">{tier.price}</span>
               {tier.payback && <span className="price-payback">{tier.payback}</span>}
-              <span className="price-fit">{tier.fit}</span>
               <span className="price-desc">{tier.desc}</span>
 
               <ul className="card-features">
@@ -532,10 +512,12 @@ export default function Pricing({ t }: PricingProps) {
           />
         </div>
 
-        <p className="shared-disclaimer">
-          <span>{t?.priceDisclaimerAudit || "Final price confirmed after your free audit. PMS/channel manager subscription billed separately by provider."}</span>
-          {t?.priceDisclaimerSub && <span>{t.priceDisclaimerSub}</span>}
-        </p>
+        {t?.priceDisclaimerAudit && (
+          <p className="shared-disclaimer">
+            <span>{t.priceDisclaimerAudit}</span>
+            {t?.priceDisclaimerSub && <span>{t.priceDisclaimerSub}</span>}
+          </p>
+        )}
       </div>
     </section>
   );

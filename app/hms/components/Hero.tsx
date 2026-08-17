@@ -1,40 +1,23 @@
 'use client';
 
 import React from 'react';
-import RevenueCalc, { type CalcCopy } from './RevenueCalc';
 import WhatsAppCta from './WhatsAppCta';
 
 interface HeroProps {
   t: {
     heroTitle: string;
-    heroSub1: string;
-    heroSub2: string;
+    heroSubtitle?: string;
     btnAudit?: string;
     waMessage?: string;
-    otaCostBadge?: string;
-    ctaNote?: string;
-  } & CalcCopy;
+  };
 }
 
 export default function Hero({ t }: HeroProps) {
-  // Универсальное деление подзаголовка
-  const rawSub = t.heroSub1 || '';
-  let line1 = rawSub;
-  let line2 = '';
-
-  if (rawSub.includes('\n')) {
-    const parts = rawSub.split('\n');
-    line1 = parts[0];
-    line2 = parts.slice(1).join(' ');
-  } else if (rawSub.includes('. ')) {
-    const dotIndex = rawSub.indexOf('. ');
-    line1 = rawSub.substring(0, dotIndex);
-    line2 = rawSub.substring(dotIndex + 2);
-  }
-
-  // Единственный градиентный акцент в заголовке — фрагмент «15-20%»
+  // Число не красим (было — сняли зелёный: комиссия не должна читаться как
+  // деньги владельца), но всё ещё держим «15–20%» на одной строке — иначе
+  // перенос ровно по en dash на глаз превращается в дефис
   const titleParts = (() => {
-    const match = /1\s?5\s?[-\u2010\u2011\u2012\u2013\u2014]\s?2\s?0\s?%/.exec(t.heroTitle || '');
+    const match = /1\s?5\s?[-‐‑‒–—]\s?2\s?0\s?%/.exec(t.heroTitle || '');
     if (!match) return null;
     return {
       before: t.heroTitle.slice(0, match.index),
@@ -50,221 +33,63 @@ export default function Hero({ t }: HeroProps) {
       <style jsx>{`
         .hero-section {
           width: 100%;
-          padding: clamp(5.25rem, 8vw, 8rem) 0 4rem 0;
+          padding: clamp(4.5rem, 7vw, 8rem) 0 2rem 0;
           position: relative;
           z-index: 10;
         }
 
-        .hero-grid {
-          display: grid;
-          grid-template-columns: 58fr 42fr;
-          gap: 2.5rem;
-          align-items: stretch;
-          position: relative;
-          box-sizing: border-box;
-        }
-
-        .text-column {
-          text-align: left;
-          position: relative;
-          z-index: 10;
-          min-width: 0;
+        /* Три элемента друг под другом: H1, подзаголовок, кнопка —
+           калькулятор теперь отдельный блок ниже по странице */
+        .hero-inner {
+          max-width: 720px;
+          margin: 0 auto;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          align-items: center;
+          text-align: center;
         }
 
         .title {
-          font-size: clamp(30px, 5.8vw, 58px);
+          font-size: clamp(30px, 5.4vw, 54px);
           font-weight: 800;
-          line-height: 1.12;
+          line-height: 1.14;
           letter-spacing: -0.03em;
-          margin: 0 0 24px 0;
+          margin: 0 0 18px 0;
           color: #fff;
           text-wrap: balance;
           width: 100%;
         }
 
-        .title-accent {
-          background: linear-gradient(100deg, #6EE7A8, #5BB8F0);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        .title-nowrap {
+          white-space: nowrap;
         }
 
-        /* Два подзаголовка читаются как пара: между собой 6px, до следующей
-           строки — 20px */
-        .subtitles-block {
-          margin-bottom: 20px;
-          display: block !important;
-        }
-
-        .sub-line-1, .sub-line-2 {
-          display: block !important;
+        .subtitle {
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.55;
-          margin: 0;
+          margin: 0 0 2rem 0;
           color: #CBD5E1;
           font-weight: 400;
           text-wrap: pretty;
-          white-space: pre-line;
-        }
-        .sub-line-2 {
-          margin-top: 6px;
+          max-width: 560px;
         }
 
-        .utp-highlight {
-          font-size: clamp(1.25rem, 2.1vw, 1.45rem);
-          font-weight: 700;
-          color: #00E599;
-          margin-bottom: 26px;
-          letter-spacing: -0.01em;
-          display: block;
-        }
-
-        /* Одна кнопка: на десктопе по контенту, на мобильном — на всю ширину */
         .cta-container {
           display: flex;
           align-items: stretch;
+          justify-content: center;
           width: 100%;
-          max-width: 620px;
+          max-width: 480px;
         }
 
         .cta-container :global(.btn-premium-core) {
-          flex: 0 1 auto;
+          flex: 1 1 auto;
           min-width: 0;
-          max-width: 100%;
+          width: 100%;
         }
 
         .cta-container :global(.btn-premium-core svg) {
           flex-shrink: 0;
-        }
-
-        /* Что произойдёт после нажатия — тише кнопки, но в её колонке */
-        .cta-note {
-          margin: 10px 0 0 0;
-          font-size: 0.8rem;
-          line-height: 1.45;
-          color: rgba(255, 255, 255, 0.45);
-          max-width: 420px;
-          text-wrap: pretty;
-        }
-
-        .visual-column {
-          position: relative;
-          width: 100%;
-          display: flex;
-          height: 100%;
-          min-width: 0;
-        }
-
-        .bento-card-wrapper {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          display: flex;
-        }
-
-        .bento-glow {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(circle, rgba(0, 229, 153, 0.14) 0%, rgba(0, 163, 255, 0.08) 55%, transparent 80%);
-          filter: blur(50px);
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        .bento-card {
-          position: relative;
-          z-index: 2;
-          width: 100%;
-          height: 100%;
-          background: rgba(12, 14, 20, 0.85);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 20px;
-          padding: 1.8rem;
-          box-shadow:
-            0 30px 60px rgba(0, 0, 0, 0.6),
-            inset 0 1px 1px rgba(255, 255, 255, 0.12);
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          box-sizing: border-box;
-        }
-
-        .bento-header {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          padding-bottom: 1.2rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          gap: 0.5rem;
-        }
-
-        .sync-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.05em;
-          color: #00E599;
-          background: rgba(0, 229, 153, 0.08);
-          padding: 0.35rem 0.75rem;
-          border-radius: 20px;
-          border: 1px solid rgba(0, 229, 153, 0.25);
-          backdrop-filter: blur(12px);
-        }
-
-        .pulse-dot {
-          width: 6px;
-          height: 6px;
-          background-color: #00E599;
-          border-radius: 50%;
-          box-shadow: 0 0 8px #00E599;
-          animation: pulse 2s infinite;
-          flex-shrink: 0;
-        }
-
-        .bento-body {
-          display: flex;
-          flex: 1;
-          margin-top: 1.4rem;
-        }
-
-        @keyframes pulse {
-          0% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
-          70% { box-shadow: 0 0 0 6px rgba(0, 225, 153, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(0, 225, 153, 0.6); }
-        }
-
-        @media (min-width: 1025px) {
-          .sync-badge {
-            font-size: 0.8rem;
-            font-weight: 800;
-            padding: 0.5rem 1rem;
-          }
-          /* Отступ до ленты каналов задаётся самой лентой (4rem), чтобы цифры героя
-             и логотипы OTA не читались как один блок */
-          .hero-section {
-            padding-bottom: 0;
-          }
-        }
-
-        @media (max-width: 1024px) {
-          .hero-section { padding-bottom: 2rem; }
-          .hero-grid { grid-template-columns: 1fr; gap: 0; }
-          .text-column { text-align: center; align-items: center; }
-          .cta-container {
-            justify-content: center;
-            width: 100%;
-            max-width: 520px;
-          }
-          .visual-column { display: none !important; }
         }
 
         /* На 320px длинный русский текст не влезает в кнопку при обычном паддинге */
@@ -275,67 +100,46 @@ export default function Hero({ t }: HeroProps) {
           }
         }
 
-        /* Мобилка: кнопка на всю ширину контейнера */
+        /* Хиро + калькулятор должны целиком помещаться на 390×844 без
+           скролла — воздух над H1 и под кнопкой отсюда убран до
+           минимума, по фиксированному бюджету отступов, а не clamp().
+           Nav — position:fixed высотой 64px и не участвует в потоке,
+           поэтому «низ шапки → H1: 28px» = 64px нава + сам зазор */
         @media (max-width: 767px) {
-          .cta-container {
-            max-width: 100%;
+          .hero-section {
+            padding: calc(64px + 28px) 0 32px 0;
           }
-          .cta-container :global(.btn-premium-core) {
-            flex: 1 1 auto;
-            width: 100%;
+          .title {
+            margin-bottom: 12px;
+          }
+          .subtitle {
+            margin-bottom: 24px;
           }
         }
       `}</style>
 
       <div className="container">
-        <div className="hero-grid">
-          <div className="text-column">
-            <h1 className="title">
-              {titleParts ? (
-                <>
-                  {titleParts.before}
-                  <span className="title-accent">{titleParts.accent}</span>
-                  {titleParts.after}
-                </>
-              ) : t.heroTitle}
-            </h1>
+        <div className="hero-inner">
+          <h1 className="title">
+            {titleParts ? (
+              <>
+                {titleParts.before}
+                <span className="title-nowrap">{titleParts.accent}</span>
+                {titleParts.after}
+              </>
+            ) : t.heroTitle}
+          </h1>
 
-            <div className="subtitles-block">
-              <div className="sub-line-1">{line1}</div>
-              {line2 && <div className="sub-line-2">{line2}</div>}
-            </div>
+          <p className="subtitle">
+            {t.heroSubtitle ||
+              'Direct bookings on your own site, every channel in one calendar — and you own it.'}
+          </p>
 
-            <div className="utp-highlight">
-              {t.heroSub2}
-            </div>
-
-            <div className="cta-container">
-              <WhatsAppCta
-                label={t.btnAudit || "Free Revenue Check"}
-                message={t.waMessage}
-              />
-            </div>
-
-            {t.ctaNote && <p className="cta-note">{t.ctaNote}</p>}
-          </div>
-
-          <div className="visual-column">
-            <div className="bento-card-wrapper">
-              <div className="bento-glow"></div>
-
-              <div className="bento-card">
-                <div className="bento-header">
-                  <div className="sync-badge">
-                    <div className="pulse-dot"></div> {t.otaCostBadge || "WHAT OTAs COST YOU"}
-                  </div>
-                </div>
-
-                <div className="bento-body">
-                  <RevenueCalc t={t} />
-                </div>
-              </div>
-
-            </div>
+          <div className="cta-container">
+            <WhatsAppCta
+              label={t.btnAudit || "Free Revenue Check"}
+              message={t.waMessage}
+            />
           </div>
         </div>
       </div>
