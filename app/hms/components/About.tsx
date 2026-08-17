@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { T } from '../../../src/theme/tokens';
 
 interface AboutProps {
@@ -25,19 +25,31 @@ interface AboutProps {
   lang?: 'en' | 'ru' | 'th';
 }
 
-// Заглушка на месте фото — реальный файл придёт отдельно (см. ТЗ)
-function PhotoPlaceholder() {
-  return (
-    <span className="about-photo" aria-hidden="true">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-      </svg>
-    </span>
-  );
-}
+// Путь заложен на реальный файл (см. ТЗ №2), которого пока нет — до его
+// появления <img> 404-ит и прячет себя, оставляя нейтральную заливку
+// контейнера как плейсхолдер (без иконок-человечков, без текста)
+const PHOTO_SRC = '/hms/fedor.jpg';
+const PHOTO_ALT = 'Fedor Tsvetkov, founder of FT Agency';
 
 export default function About({ t = {}, lang = 'en' }: AboutProps) {
+  // Живёт в About, а не в отдельном компоненте: styled-jsx скоупит классы
+  // только по элементам, написанным прямо в теле функции с <style jsx>, —
+  // вынесенный компонент их не получит и отрисуется без стилей вовсе
+  const [photoBroken, setPhotoBroken] = useState(false);
+  const photoRef = useRef<HTMLImageElement>(null);
+
+  // React's onError на SSR'нутом <img> ненадёжен: 404 на localhost часто
+  // прилетает раньше гидратации и обработчик React его просто не увидит.
+  // Проверяем img.complete/naturalWidth сразу после маунта — если к этому
+  // моменту загрузка уже провалилась, событие error не понадобится
+  useEffect(() => {
+    const img = photoRef.current;
+    if (!img) return;
+    if (img.complete && img.naturalWidth === 0) {
+      setPhotoBroken(true);
+    }
+  }, []);
+
   const trustStats = [
     { num: t.stat2Num || "20+", name: t.stat2Name || "Brands Scaled", sub: t.stat2Sub || "B2B & Direct models" },
     { num: t.stat3Num || "10+", name: t.stat3Name || "Years Experience", sub: t.stat3Sub || "Growth & systems" }
@@ -106,26 +118,34 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           max-width: 560px;
         }
 
-        /* EN: фото + имя в одну шапку блока */
+        /* EN: фото + имя в шапке блока — рядом на desktop, друг под другом
+           на mobile (см. ТЗ №2) */
         .about-header {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 16px;
-          flex-wrap: wrap;
+          gap: 20px;
         }
 
+        /* Скруглённый прямоугольник — консистентно с карточками/кнопками
+           дизайн-системы (12-20px), а не с чем-то не встречающимся больше
+           нигде на странице. Заливка держится, даже если <img> 404-ит */
         .about-photo {
           flex: 0 0 auto;
-          width: 76px;
-          height: 76px;
-          border-radius: 50%;
+          width: 84px;
+          height: 84px;
+          border-radius: 18px;
           border: 1px solid rgba(255, 255, 255, 0.12);
-          background: rgba(255, 255, 255, 0.04);
-          color: ${T.muted};
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          background: rgba(255, 255, 255, 0.06);
+          overflow: hidden;
+          display: block;
+        }
+
+        .about-photo :global(img) {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
         }
 
         .about-header-text {
@@ -265,11 +285,15 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
             font-size: 0.82rem;
           }
           .about-photo {
-            width: 64px;
-            height: 64px;
+            width: 88px;
+            height: 88px;
           }
           .about-header {
-            gap: 12px;
+            flex-direction: column;
+            gap: 14px;
+          }
+          .about-header-text {
+            text-align: center;
           }
           .about-text {
             margin-top: 1.6rem;
@@ -315,7 +339,17 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
 
           {isPersonLed ? (
             <div className="about-header">
-              <PhotoPlaceholder />
+              <span className="about-photo">
+                {!photoBroken && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    ref={photoRef}
+                    src={PHOTO_SRC}
+                    alt={PHOTO_ALT}
+                    onError={() => setPhotoBroken(true)}
+                  />
+                )}
+              </span>
               <div className="about-header-text">
                 <h2 className="about-name">{t.aboutName || "Fedor Tsvetkov"}</h2>
                 {t.aboutRole && <p className="about-meta">{t.aboutRole}</p>}

@@ -7,6 +7,7 @@ import WhatsAppCta from './WhatsAppCta';
 
 interface FooterCTAProps {
   t?: {
+    footerLabel?: string;
     footerTitle?: string;
     footerSub1?: string;
     footerSub2?: string;
@@ -43,7 +44,27 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
           align-items: center;
           gap: 1.5rem;
         }
-        
+
+        /* Единственная секция без eyebrow приведена к общему правилу —
+           тот же паттерн (8px, мельче и глуше H2), что и в остальных
+           секциях страницы. Обёртка нужна, чтобы 8px-зазор не потерялся
+           в общем gap: 1.5rem у .cta-box */
+        .cta-header {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .footer-eyebrow {
+          margin: 0 0 ${T.hms.eyebrowGap} 0;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: ${T.sub};
+          opacity: 0.8;
+        }
+
         .main-title {
           font-size: clamp(2.2rem, 3.8vw, 3rem);
           font-weight: 800;
@@ -144,7 +165,10 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
 
       <div className="container">
         <div className="cta-box">
-          <h2 className="main-title">{titleText}</h2>
+          <div className="cta-header">
+            {t.footerLabel && <p className="footer-eyebrow">{t.footerLabel}</p>}
+            <h2 className="main-title">{titleText}</h2>
+          </div>
 
           <div className="subtitle-box">
             <p className="subtitle">{sub1Text}</p>

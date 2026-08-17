@@ -299,11 +299,11 @@ export const Nav = ({ lang, dict }: NavProps) => {
       ) : (
         isHms ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <NavLink href="#how-it-works" label={hmsT.navHowItWorks} isActive={activeSection === 'how-it-works'} />
+            <span style={{ width: 1, height: 16, background: T.border }} />
             <a href="#about" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>
               {BACK_LABEL[lang] ?? BACK_LABEL.en}
             </a>
-            <span style={{ width: 1, height: 16, background: T.border }} />
-            <NavLink href="#how-it-works" label={hmsT.navHowItWorks} isActive={activeSection === 'how-it-works'} />
             <NavLink href="#pricing" label={hmsT.navPricing} isActive={activeSection === 'pricing'} />
             <NavLink href="#faq" label={hmsT.navFaq} isActive={activeSection === 'faq'} />
           </div>

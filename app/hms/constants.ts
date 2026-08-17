@@ -39,9 +39,10 @@ export const contentData = {
     navPricing: "Pricing",
     navFaq: "FAQ",
 
-    // Калькулятор отвечает на один вопрос — сколько владелец отдаёт OTA
-    // в год. Без возврата и окупаемости: это предмет бесплатного Revenue
-    // Check, а не бесплатная часть страницы
+    // Калькулятор показывает потерю и — вторым, заметно тише — сколько из
+    // неё реально возвращается в первый год. Окупаемости (сроков в
+    // месяцах) по-прежнему нет нигде на странице, это предмет бесплатного
+    // Revenue Check (см. ТЗ №2, п. 3.6 — не возвращать payback в тарифы)
     calcUnitsLabel: "Rooms or villas",
     calcAdrLabel: "Average nightly rate",
     calcOutputLabel: "You pay OTAs",
@@ -49,6 +50,13 @@ export const contentData = {
     calcMonthLabel: "per month",
     calcAssumptions: "Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.",
     calcAssumptionsAria: "Show calculation assumptions",
+    // Уровень 2 — возврат, акцентный цвет, годовые (не /mo — см. ТЗ №2, п. 3.4)
+    calcRecoveryLabel: "You keep back in year one",
+    // {pct} подставляется из константы YEAR_ONE_RECOVERY_RATE в HeroCalculator.tsx
+    calcRecoveryPctLabel: "≈ {pct}% of what you pay now",
+    // Уровень 3 — статичная строка, проценты не считаются
+    calcRecoveryNote: "Year two and beyond, 30–40% is realistic once direct traffic builds.",
+    calcRecoveryTooltip: "Assumes about 20% of your OTA volume moves to direct bookings in year one — a conservative figure for a property starting with no direct channel. The shift builds over time, so year one is the slowest.",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "CHANNELS WE CONNECT",
@@ -197,6 +205,8 @@ export const contentData = {
     ],
 
     // --- FOOTER CTA ---
+    // Единственная секция без eyebrow — приведена к общему правилу (см. ТЗ №2, п. 4)
+    footerLabel: "GET STARTED",
     footerTitle: "See what OTAs actually cost you",
     footerSub1: "Stop leaving 15–20% on the table",
     footerSub2: "Take full control of your direct bookings",

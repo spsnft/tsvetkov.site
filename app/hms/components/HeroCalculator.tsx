@@ -10,6 +10,11 @@ const OCCUPANCY = 0.65;
 const OTA_SHARE = 0.70;
 const COMMISSION = 0.17;
 
+// Доля OTA-объёма, которая реально переходит на прямой канал в первый год —
+// консервативная оценка для объекта, стартующего без прямого канала. Будет
+// уточняться по факту первых клиентов (см. ТЗ №2, п. 3.3)
+const YEAR_ONE_RECOVERY_RATE = 0.20;
+
 const UNITS_MIN = 1;
 const UNITS_MAX = 60;
 const UNITS_DEFAULT = 12;
@@ -38,6 +43,10 @@ export interface HeroCalculatorCopy {
   calcMonthLabel?: string;
   calcAssumptions?: string;
   calcAssumptionsAria?: string;
+  calcRecoveryLabel?: string;
+  calcRecoveryPctLabel?: string;
+  calcRecoveryNote?: string;
+  calcRecoveryTooltip?: string;
 }
 
 export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
@@ -62,13 +71,19 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
     };
   }, [infoOpen]);
 
-  const { annualUsd, monthlyUsd } = useMemo(() => {
+  const { annualUsd, monthlyUsd, recoveryUsd } = useMemo(() => {
     const usd = units * 365 * OCCUPANCY * OTA_SHARE * adr * COMMISSION;
     return {
       annualUsd: roundTo(usd, 100),
       monthlyUsd: roundTo(usd / 12, 25),
+      recoveryUsd: roundTo(usd * YEAR_ONE_RECOVERY_RATE, 100),
     };
   }, [units, adr]);
+
+  // Процент — сама константа, а не отношение двух независимо округлённых
+  // сумм: иначе округление могло бы показать «19%» или «21%» вместо
+  // заявленной ставки
+  const recoveryPct = Math.round(YEAR_ONE_RECOVERY_RATE * 100);
 
   const unitsPct = ((units - UNITS_MIN) / (UNITS_MAX - UNITS_MIN)) * 100;
   const adrPct = ((adr - ADR_MIN) / (ADR_MAX - ADR_MIN)) * 100;
@@ -241,6 +256,14 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           text-wrap: pretty;
         }
 
+        .tooltip p {
+          margin: 0;
+        }
+
+        .tooltip p + p {
+          margin-top: 0.6rem;
+        }
+
         .output-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -274,6 +297,52 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           font-size: 0.76rem;
           font-weight: 600;
           color: ${T.muted};
+        }
+
+        /* Уровень 2 — заметно меньше уровня 1, акцентный цвет: возврат,
+           а не потеря. Годовые, той же единицей, что и «You pay OTAs» —
+           не смешивать с /mo, иначе аргумент читается как «33 тысячи
+           против пятисот» (см. ТЗ №2, п. 3.4) */
+        .recovery {
+          margin-top: 1.1rem;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .recovery-label {
+          margin: 0 0 0.35rem 0;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          color: ${T.muted};
+        }
+
+        .recovery-value {
+          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-weight: 800;
+          font-size: clamp(1.1rem, 3.2vw, 1.35rem);
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+          color: ${T.accent};
+          animation: calc-pop 180ms ease-out;
+        }
+
+        .recovery-pct {
+          margin: 0.3rem 0 0 0;
+          font-size: 0.74rem;
+          font-weight: 600;
+          color: ${T.accent};
+          opacity: 0.75;
+        }
+
+        /* Уровень 3 — статичная микро-строка, самая тихая на карточке */
+        .recovery-note {
+          margin: 0.75rem 0 0 0;
+          font-size: 0.7rem;
+          line-height: 1.45;
+          color: ${T.muted};
+          opacity: 0.75;
+          text-wrap: pretty;
         }
 
         @keyframes calc-pop {
@@ -386,8 +455,14 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           </button>
           {infoOpen && (
             <div className="tooltip" id={tooltipId} role="tooltip">
-              {t.calcAssumptions ||
-                'Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.'}
+              <p>
+                {t.calcAssumptions ||
+                  'Based on 65% occupancy, 70% of bookings via OTA, 17% average commission.'}
+              </p>
+              <p>
+                {t.calcRecoveryTooltip ||
+                  'Assumes about 20% of your OTA volume moves to direct bookings in year one — a conservative figure for a property starting with no direct channel. The shift builds over time, so year one is the slowest.'}
+              </p>
             </div>
           )}
         </div>
@@ -406,6 +481,24 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
             <div className="output-sublabel">{t.calcMonthLabel || 'per month'}</div>
           </div>
         </div>
+
+        <div className="recovery">
+          <p className="recovery-label">{t.calcRecoveryLabel || 'You keep back in year one'}</p>
+          <div className="recovery-value" key={`r-${recoveryUsd}`}>
+            ~${fmt(recoveryUsd)}
+          </div>
+          <p className="recovery-pct">
+            {(t.calcRecoveryPctLabel || '≈ {pct}% of what you pay now').replace(
+              '{pct}',
+              String(recoveryPct)
+            )}
+          </p>
+        </div>
+
+        <p className="recovery-note">
+          {t.calcRecoveryNote ||
+            'Year two and beyond, 30–40% is realistic once direct traffic builds.'}
+        </p>
       </div>
     </div>
   );
