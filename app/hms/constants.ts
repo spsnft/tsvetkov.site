@@ -35,8 +35,8 @@ export const contentData = {
     // текст свой, не переиспользует btnAudit (тот остаётся во всех местах,
     // где раньше — Pricing, FooterCTA, Nav). "my" вместо "your" — решение
     // читается как собственное (см. ТЗ №7, п. 3.1)
-    heroCtaLabel: "Get my free revenue check",
-    heroCtaNote: "One message. No commitment.",
+    heroCtaLabel: "Ask for my revenue check",
+    heroCtaNote: "One WhatsApp message. No commitment.",
     // Текст кнопки в хедере — свой, короче и без "free" (см. ТЗ №7, п. 4.1):
     // "free" уже есть в главной кнопке, дублировать на одном экране незачем
     navCtaLabel: "Revenue check",
@@ -68,8 +68,10 @@ export const contentData = {
     calcAssumptions: "Based on 65% occupancy, 70% of bookings through OTAs, and 17% average commission. The first-year figure assumes about 20% of your OTA volume moves to direct — conservative for a property starting with no direct channel. Year two and beyond, 30–40% is realistic.",
     calcAssumptionsAria: "Show calculation assumptions",
     // Параллельно с calcOutputLabel — «you pay» / «you keep» одного стиля
-    // и кегля, читаются как одно предложение (см. ТЗ №4, п. 2.3)
-    calcRecoveryLabel: "You keep — year one",
+    // и кегля, читаются как одно предложение (см. ТЗ №4, п. 2.3).
+    // "Year 1" вместо "year one" — на 375px лейбл переносился на две
+    // строки и ломал выравнивание сумм из ТЗ №6 (см. ТЗ №8, п. 1.1)
+    calcRecoveryLabel: "You keep — Year 1",
 
     // --- LOGO MARQUEE ---
     marqueeLabel: "CHANNELS WE CONNECT",

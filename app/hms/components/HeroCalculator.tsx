@@ -107,7 +107,7 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           background: rgba(12, 14, 20, 0.85);
           backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 20px;
+          border-radius: ${T.radius.card};
           padding: 1.75rem 1.75rem 1.5rem 1.75rem;
           box-shadow:
             0 30px 60px rgba(0, 0, 0, 0.5),
@@ -237,12 +237,17 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           padding-left: 1.25rem;
         }
 
-        /* Колонка растянута на всю высоту ряда (align-items: stretch), а
-           value-block прижат книзу margin-top: auto — подписи обеих
-           колонок оказываются на общей нижней линии независимо от того,
-           сколько строк занял лейбл сверху (см. ТЗ №6, п. 1.5) */
+        /* Обычный поток, без прижатия книзу: оба лейбла теперь гарантированно
+           в одну строку («You keep — Year 1» умещается на 375px), так что
+           value-block стартует на одной высоте в обеих колонках без
+           дополнительных трюков — суммы выравниваются сами
+           (см. ТЗ №8, п. 1.1/4). Прежний margin-top: auto (ТЗ №6, п. 1.5)
+           решал это через прижатие к общему низу колонки, но ломался,
+           как только у одной колонки появлялась вторая строка в
+           value-block (строка «$X per month»), а у другой — нет: тогда
+           бы более короткий блок всё равно съезжал вниз */
         .value-block {
-          margin-top: auto;
+          margin-top: 0;
         }
 
         .output-value-row {
@@ -263,23 +268,16 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           color: ${T.muted};
         }
 
-        .group-label-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.4rem;
-        }
-
-        .group-label-row .group-label {
-          margin: 0;
-        }
-
-        /* Одна общая иконка на весь ряд — справа от группы «you keep»,
-           которая и стоит крайней справа (см. ТЗ №4, п. 2.5) */
+        /* Иконка больше не делит строку с лейблом «you keep» — на 375px
+           им двоим там не хватало места ни при каком тексте. Абсолютно
+           спозиционирована в паддинг-зазоре над рядом, единая на весь
+           ряд, как и было задумано (см. ТЗ №4, п. 2.5; ТЗ №8, п. 1.1) */
         .info-btn {
+          position: absolute;
+          top: -28px;
+          right: -4px;
           width: 32px;
           height: 32px;
-          margin: -8px -8px -8px 0;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -402,6 +400,22 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           .hero-calc {
             padding: 1.4rem 1.25rem 1.25rem 1.25rem;
           }
+          /* Ниже ~440px «You keep — Year 1» не помещается в одну строку
+             даже после сокращения текста — колонка физически уже, чем
+             нужно этому тексту при базовом кегле. На 320px и меньшего
+             кегля отдельно не хватает: отвоёвываем ширину у зазора сетки
+             и отступа hairline, а не только сжимаем шрифт до нечитаемого
+             (см. ТЗ №8, п. 1.1) */
+          .output-row {
+            gap: 0.75rem;
+          }
+          .output-group.keep {
+            padding-left: 0.75rem;
+          }
+          .group-label {
+            font-size: 0.5rem;
+            letter-spacing: 0.02em;
+          }
         }
       `}</style>
 
@@ -479,6 +493,21 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           onMouseEnter={() => { if (!isTouch) setInfoOpen(true); }}
           onMouseLeave={() => { if (!isTouch) setInfoOpen(false); }}
         >
+          <button
+            type="button"
+            className="info-btn"
+            aria-expanded={infoOpen}
+            aria-controls={tooltipId}
+            aria-label={t.calcAssumptionsAria || 'Show calculation assumptions'}
+            onClick={() => setInfoOpen((o) => !o)}
+          >
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.4" />
+              <path d="M10 9v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <circle cx="10" cy="6.4" r="1" fill="currentColor" />
+            </svg>
+          </button>
+
           <div className="output-row">
             <div className="output-group pay">
               <p className="group-label">{t.calcOutputLabel || 'You pay OTAs'}</p>
@@ -490,29 +519,13 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
                   <span className="output-unit">{t.calcYearLabel || 'per year'}</span>
                 </div>
                 <div className="output-sublabel">
-                  · <span className="figure">${fmt(monthlyUsd)}</span> {t.calcMonthLabel || 'per month'}
+                  <span className="figure">${fmt(monthlyUsd)}</span> {t.calcMonthLabel || 'per month'}
                 </div>
               </div>
             </div>
 
             <div className="output-group keep">
-              <div className="group-label-row">
-                <p className="group-label">{t.calcRecoveryLabel || 'You keep — year one'}</p>
-                <button
-                  type="button"
-                  className="info-btn"
-                  aria-expanded={infoOpen}
-                  aria-controls={tooltipId}
-                  aria-label={t.calcAssumptionsAria || 'Show calculation assumptions'}
-                  onClick={() => setInfoOpen((o) => !o)}
-                >
-                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.4" />
-                    <path d="M10 9v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                    <circle cx="10" cy="6.4" r="1" fill="currentColor" />
-                  </svg>
-                </button>
-              </div>
+              <p className="group-label">{t.calcRecoveryLabel || 'You keep — Year 1'}</p>
               <div className="value-block">
                 <div className="output-value-row">
                   <span className="output-value accent" key={`r-${recoveryUsd}`}>

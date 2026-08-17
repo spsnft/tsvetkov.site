@@ -43,15 +43,18 @@ export default function CalculatorSection({ t = {}, lang = 'en' }: CalculatorSec
         /* Высота/форма/кегль — свои для этой кнопки, не трогают базовый
            .btn-premium-core (он используется в Pricing/FooterCTA/ecommerce).
            Двойной класс поднимает специфичность выше базовых правил
-           (см. ТЗ №7, п. 3.2/3.3) */
+           (см. ТЗ №7, п. 3.2/3.3). Радиус — общий с карточкой калькулятора,
+           один токен на обоих (см. ТЗ №8, п. 2.4) */
         :global(.hero-primary-cta.btn-premium-core) {
           width: 100%;
           height: 56px;
-          border-radius: 16px;
+          border-radius: ${T.radius.card};
           font-size: 17px;
           font-weight: 600;
-          /* Свечения нет — мягкая тёмная тень вместо неонового бокс-шэдоу */
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+          /* Свечения нет. Внешняя тень одна не читалась на почти чёрном
+             фоне — добавлена светлая внутренняя кромка сверху, она даёт
+             объём без свечения (см. ТЗ №8, п. 2.3) */
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 24px rgba(0, 0, 0, 0.4);
           transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
         }
 
@@ -72,12 +75,22 @@ export default function CalculatorSection({ t = {}, lang = 'en' }: CalculatorSec
             width: auto;
             max-width: 420px;
           }
+          /* Та же ширина, что у кнопки — иначе text-align: center
+             центрирует строку по всей колонке калькулятора, а не по
+             кнопке, которая на десктопе уже колонки (см. ТЗ №8, п. 2.2) */
+          .cta-note {
+            max-width: 420px;
+          }
         }
 
+        /* Кнопка отцентрована сама по тексту (inline-flex + justify-content
+           в .btn-premium-core), микрокопия под ней теперь тоже по центру —
+           одно выравнивание на оба узла (см. ТЗ №8, п. 2.2) */
         .cta-note {
           margin: 12px 0 0 0;
           font-size: 0.82rem;
           color: ${T.muted};
+          text-align: center;
         }
       `}</style>
 
