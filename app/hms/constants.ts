@@ -24,10 +24,22 @@ export const WHATSAPP_PHONE = "66650255229";
 export const contentData = {
   en: {
     // --- HERO SECTION ---
-    // Три элемента: H1, подзаголовок, кнопка. Калькулятор — отдельный блок
-    // сразу под хиро (CalculatorSection), не часть хиро
-    heroTitle: "Stop Paying 15–20% Commissions to Booking.com & Agoda",
+    // Порядок: H1 → подзаголовок → калькулятор → кнопка → микрокопия
+    // (см. ТЗ №7, п. 2) — калькулятор рендерится между ними в
+    // CalculatorSection, кнопка Hero больше не рисует. "\n" — жёсткий
+    // перенос между двумя предложениями H1, не на усмотрение браузера
+    // (см. ТЗ №7, п. 1.4); внутри каждой строки перенос обычный
+    heroTitle: "Take bookings direct.\nKeep the 15–20%.",
     heroSubtitle: "Guests book direct on your site. Every channel stays in one calendar. Everything is in your name.",
+    // Главная кнопка первого экрана — переехала из Hero в CalculatorSection,
+    // текст свой, не переиспользует btnAudit (тот остаётся во всех местах,
+    // где раньше — Pricing, FooterCTA, Nav). "my" вместо "your" — решение
+    // читается как собственное (см. ТЗ №7, п. 3.1)
+    heroCtaLabel: "Get my free revenue check",
+    heroCtaNote: "One message. No commitment.",
+    // Текст кнопки в хедере — свой, короче и без "free" (см. ТЗ №7, п. 4.1):
+    // "free" уже есть в главной кнопке, дублировать на одном экране незачем
+    navCtaLabel: "Revenue check",
     // Обещание держится на результате, а не на длительности: календаря и созвона
     // на странице нет, конверсия ведёт в WhatsApp
     btnAudit: "Free Revenue Check",
