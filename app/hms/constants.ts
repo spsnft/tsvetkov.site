@@ -1,11 +1,13 @@
 // Названия компонентов системы не переводятся — одинаковы во всех локалях.
 // "Direct Promo Engine" → "Promo Engine" и "Marketing Analytics Setup" →
 // "Marketing Analytics" укорочены (см. ТЗ №3, п. 6) — featureHints в
-// каждой локали ниже переключены на новые ключи
+// каждой локали ниже переключены на новые ключи. "Booking & Agoda Sync" →
+// "Booking.com & Agoda sync" — площадка называется Booking.com, "Booking"
+// само по себе читается как «бронирование» (см. ТЗ №10, п. C3)
 export const FEATURE_NAMES = [
   "Cloud PMS Setup",
   "0% Commission Engine",
-  "Booking & Agoda Sync",
+  "Booking.com & Agoda sync",
   "Payment Integration",
   "Connect 300+ OTA Channels",
   "Promo Engine",
@@ -79,7 +81,9 @@ export const contentData = {
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
     // Три пары проблема→решение, деньги первыми, операционка последней.
     // Заменяет прежнюю двухколоночную полосу сравнения (WITHOUT/WITH).
-    scaleLabel: "WHAT CHANGES",
+    // Eyebrow больше не повторяет H2 дословно — «тема + утверждение», а не
+    // повтор (см. ТЗ №10, п. A1)
+    scaleLabel: "THE DIFFERENCE",
     scaleTitle: "What changes when bookings come direct",
     // Один и тот же лейбл на обоих брейкпоинтах — пара про канал
     // (OTA vs direct), а не про время (см. ТЗ №4, п. 3.2). Строчные:
@@ -93,7 +97,10 @@ export const contentData = {
     scalePair2Problem: "Your guests belong to the platform",
     scalePair2Solution: "Your guest list belongs to you",
     scalePair3Problem: "Rates updated by hand, around the clock",
-    scalePair3Solution: "One calendar for 300+ channels",
+    // Было "One calendar for 300+ channels" — отвечало не на то возражение
+    // (слева про ручной труд, справа про число каналов). Новая строка
+    // отвечает про труд, число каналов сохранено (см. ТЗ №10, п. A2)
+    scalePair3Solution: "Update once — 300+ channels follow",
 
     // --- WHO'S BEHIND THIS ---
     // Повествование блока теперь идёт от человека, а не агентства: заголовок —
@@ -107,7 +114,11 @@ export const contentData = {
     // 10 years») снято — дублирует блок статистики двумя абзацами ниже
     aboutP1: "FT Agency builds customer acquisition systems — sites, analytics, CRM, outreach — for companies that sell directly to their customers.",
     aboutP2: "Hospitality is that same problem at its sharpest — the property does all the work, and the platform owns the guest.",
-    aboutP3: "I founded the agency and I run these projects myself. From your first message to launch you're dealing with me, not a support queue.",
+    // Второе предложение вынесено в aboutClosingLine — отдельной строкой
+    // крупнее абзацев, между текстом и счётчиками. Формулировка не менялась,
+    // кроме пунктуации самой выносимой строки (см. ТЗ №10, п. B3)
+    aboutP3: "I founded the agency and I run these projects myself.",
+    aboutClosingLine: "From your first message to launch, you're dealing with me — not a support queue.",
     aboutLinkAgency: "More about FT Agency",
 
     // Trust Stats
@@ -188,9 +199,12 @@ export const contentData = {
     // срока (см. ТЗ №3, п. 7.2); riskText для EN больше не задаётся
     riskTitle: "50% upfront. The second half only when your system is live.",
 
-    // Микрокопия под кнопкой в финальном CTA-блоке (FooterCTA). В героя эта
-    // строка больше не выводится — там она дублировала эту же
-    ctaNote: "Send us your property name. We reply with what OTAs are costing you — your numbers, not an example.",
+    // Микрокопия под кнопкой в финальном CTA-блоке (FooterCTA). Часть
+    // смысла («your numbers, not an example») переехала в footerTitle,
+    // поэтому строка короче. Не переиспользует heroCtaNote — здесь
+    // конкретика про имя объекта работает лучше в точке решения
+    // (см. ТЗ №10, п. D4)
+    ctaNote: "Send us your property name. We reply within a day.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -244,9 +258,17 @@ export const contentData = {
     // --- FOOTER CTA ---
     // Единственная секция без eyebrow — приведена к общему правилу (см. ТЗ №2, п. 4)
     footerLabel: "GET STARTED",
-    footerTitle: "See what OTAs actually cost you",
-    footerSub1: "Stop leaving 15–20% on the table",
-    footerSub2: "Take full control of your direct bookings",
+    // Было "See what OTAs actually cost you" — дословно повторяло обещание
+    // первого экрана, к этому моменту читатель уже видел сумму в
+    // калькуляторе. Новый заголовок называет разницу между калькулятором
+    // (усреднённые допущения) и revenue check (реальные листинги)
+    // (см. ТЗ №10, п. D2)
+    footerTitle: "Your numbers, not an example",
+    // Одна строка вместо двух центрированных — обе старые были общими
+    // агентскими формулировками, "15–20%" звучало бы третий раз на странице.
+    // footerSub2 больше не задаётся — FooterCTA.tsx рендерит вторую строку
+    // только если она пришла (см. ТЗ №10, п. D3)
+    footerSub1: "The calculator runs on averages. The revenue check runs on your listings.",
     footerBtn: "Free Revenue Check"
   },
 

@@ -13,6 +13,7 @@ interface AboutProps {
     aboutP1?: string;
     aboutP2?: string;
     aboutP3?: string;
+    aboutClosingLine?: string;
     aboutDirectLine?: string;
     aboutLinkAgency?: string;
     stat2Num?: string;
@@ -127,12 +128,15 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           max-width: 560px;
         }
 
-        /* EN: фото + имя в одной строке. justify-content: space-between
-           растягивает строку на всю ширину блока — на широком desktop это
-           и даёт «фото в правом верхнем углу», на узком mobile колонка
-           с именем и фото естественно сжимаются друг к другу и читаются
-           как одна строка (см. ТЗ №5, п. 4.2) — один и тот же flex-ряд
-           без брейкпоинтов */
+        /* EN: фото + (eyebrow + имя) в одной строке. justify-content:
+           space-between растягивает строку на всю ширину блока — на
+           широком desktop это и даёт «фото в правом верхнем углу», на
+           узком mobile колонка с именем и фото естественно сжимаются друг
+           к другу и читаются как одна строка (см. ТЗ №5, п. 4.2) — один и
+           тот же flex-ряд без брейкпоинтов. Eyebrow теперь первая строка
+           текстовой колонки (не отдельный элемент над рядом) — так верх
+           фото (align-items: flex-start) оказывается на одной линии с
+           верхом eyebrow, а не с верхом имени (см. ТЗ №10, п. B2) */
         .about-header {
           display: flex;
           align-items: flex-start;
@@ -146,11 +150,13 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
 
         /* Скруглённый прямоугольник — консистентно с карточками/кнопками
            дизайн-системы (12-20px), а не с чем-то не встречающимся больше
-           нигде на странице. Заливка держится, даже если <img> 404-ит */
+           нигде на странице. Заливка держится, даже если <img> 404-ит.
+           112px — 64/72px читался как аватар в списке контактов, сигнал
+           «за этим стоит живой человек» на нём не работал (см. ТЗ №10, п. B1) */
         .about-photo {
           flex: 0 0 auto;
-          width: 72px;
-          height: 72px;
+          width: 112px;
+          height: 112px;
           border-radius: 16px;
           border: 1px solid rgba(255, 255, 255, 0.12);
           background: rgba(255, 255, 255, 0.06);
@@ -211,6 +217,19 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
         .about-paragraph.hyphenate {
           -webkit-hyphens: auto;
           hyphens: auto;
+          text-wrap: pretty;
+        }
+
+        /* Третий уровень типографики между прозой абзацев и цифрами
+           счётчиков — не рамка и не подложка, просто строка другого кегля.
+           ≈1.25× от 1.05rem основного текста, белая, не приглушённая
+           (см. ТЗ №10, п. B3) */
+        .about-closing-line {
+          margin: 24px 0 0 0;
+          font-size: 1.3125rem;
+          line-height: 1.45;
+          font-weight: 600;
+          color: #ffffff;
           text-wrap: pretty;
         }
 
@@ -338,6 +357,9 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
             font-size: 0.98rem;
             line-height: 1.6;
           }
+          .about-closing-line {
+            font-size: 1.225rem;
+          }
         }
 
         @media (max-width: 767px) {
@@ -350,10 +372,16 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           .about-location {
             font-size: 0.82rem;
           }
+          /* 112px не берём на мобиле — рядом с "Fedor Tsvetkov" на 375px
+             это зажимает имя в две строки (см. ТЗ №10, п. B1). Радиус —
+             без изменений */
           .about-photo {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             border-radius: 14px;
+          }
+          .about-closing-line {
+            font-size: 1.1875rem;
           }
           .about-text {
             margin-top: 1.6rem;
@@ -401,11 +429,16 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
 
       <div className="container">
         <div className={`about-block${isPersonLed ? ' left' : ''}`}>
-          {t.aboutLabel && <p className="about-label">{t.aboutLabel}</p>}
+          {/* RU/TH: eyebrow — отдельный элемент над шапкой, как раньше.
+              EN: eyebrow переехал в about-header-text — верх фото
+              выравнивается по верху eyebrow, а не по верху имени
+              (см. ТЗ №10, п. B2) */}
+          {!isPersonLed && t.aboutLabel && <p className="about-label">{t.aboutLabel}</p>}
 
           {isPersonLed ? (
             <div className="about-header">
               <div className="about-header-text">
+                {t.aboutLabel && <p className="about-label">{t.aboutLabel}</p>}
                 <h2 className="about-name">{t.aboutName || "Fedor Tsvetkov"}</h2>
                 {t.aboutRole && <p className="about-meta">{t.aboutRole}</p>}
               </div>
@@ -445,6 +478,10 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
               </>
             )}
           </div>
+
+          {isPersonLed && t.aboutClosingLine && (
+            <p className="about-closing-line">{t.aboutClosingLine}</p>
+          )}
 
           {isPersonLed ? (
             <div className="stats-row">

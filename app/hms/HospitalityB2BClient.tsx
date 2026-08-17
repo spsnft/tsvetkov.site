@@ -42,7 +42,7 @@ export default function HospitalityB2BClient({ lang }: { lang: 'en' | 'ru' | 'th
 
         <Pricing t={t} lang={lang} />
         <FAQ t={t} lang={lang} />
-        <FooterCTA t={t} />
+        <FooterCTA t={t} lang={lang} />
       </main>
     </div>
   );

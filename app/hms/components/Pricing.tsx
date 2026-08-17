@@ -4,6 +4,7 @@ import React from 'react';
 import { T } from '../../../src/theme/tokens';
 import { FEATURE_NAMES, TIER_FEATURE_COUNTS } from '../constants';
 import WhatsAppCta from './WhatsAppCta';
+import PrimaryCta from './PrimaryCta';
 
 interface PricingProps {
   lang?: 'en' | 'ru' | 'th';
@@ -22,6 +23,8 @@ interface PricingProps {
     riskText?: string;
     featureHints?: Record<string, string>;
     btnAudit?: string;
+    heroCtaLabel?: string;
+    heroCtaNote?: string;
     waMessage?: string;
     tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Desc?: string;
     tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Desc?: string;
@@ -226,7 +229,8 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
         }
 
         /* Одна кнопка под блоком тарифов вместо трёх в карточках: ширина по
-           контенту на десктопе, на всю ширину на мобильном */
+           контенту на десктопе, на всю ширину на мобильном. RU/TH-вариант —
+           старый стиль, без изменений */
         .pricing-cta {
           display: flex;
           justify-content: center;
@@ -249,6 +253,17 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
             padding: 0 0.7rem;
             font-size: 0.95rem;
           }
+        }
+
+        /* EN: отдельный класс, а не .pricing-cta — иначе правила выше
+           («width: 100%», меньший паддинг на 360px и т.п.) совпадают по
+           селектору с новой кнопкой PrimaryCta (она тоже несёт
+           .btn-premium-core) и цвет/паддинг могли бы разъехаться в
+           зависимости от порядка каскада (см. ТЗ №10, п. C1) */
+        .pricing-cta-primary {
+          display: flex;
+          justify-content: center;
+          margin-top: 24px;
         }
 
         /* ---------- КАРТОЧКИ НА ВСЕХ РАЗРЕШЕНИЯХ ---------- */
@@ -549,12 +564,23 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           </>
         )}
 
-        <div className="pricing-cta">
-          <WhatsAppCta
-            label={t?.btnAudit || "Free Revenue Check"}
-            message={t?.waMessage}
-          />
-        </div>
+        {isEn ? (
+          <div className="pricing-cta-primary">
+            <PrimaryCta
+              label={t?.heroCtaLabel || 'Ask for my revenue check'}
+              message={t?.waMessage}
+              note={t?.heroCtaNote || 'One WhatsApp message. No commitment.'}
+              align="center"
+            />
+          </div>
+        ) : (
+          <div className="pricing-cta">
+            <WhatsAppCta
+              label={t?.btnAudit || "Free Revenue Check"}
+              message={t?.waMessage}
+            />
+          </div>
+        )}
 
         {t?.priceDisclaimerAudit && (
           <p className="shared-disclaimer">
