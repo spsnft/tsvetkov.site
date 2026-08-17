@@ -15,9 +15,12 @@ export default function CalculatorSection({ t = {} }: CalculatorSectionProps) {
   return (
     <section className="calc-section">
       <style jsx>{`
+        /* Калькулятор → лейбл ленты: 32-40px — достаточно тесно, чтобы
+           «лейбл + лента» читались как завершение Hero, а не начало
+           следующей секции (см. ТЗ №3, п. 2.2) */
         .calc-section {
           width: 100%;
-          padding: 0 0 3rem 0;
+          padding: 0 0 36px 0;
         }
 
         .calc-inner {

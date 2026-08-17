@@ -75,11 +75,13 @@ export const T = {
   },
 
   // /hms page — shared rhythm for the unified eyebrow+H2 section pattern
-  // (ScalePractice, SeeSystem, About, Pricing, FAQ). Hero (H1 case) and
-  // FooterCTA (left untouched by design) don't use this.
+  // (ScalePractice, SeeSystem, About, Pricing, FAQ, FooterCTA). Hero (H1
+  // case, its own composition) is the only exception. One flat background
+  // across the page — section boundaries are padding + eyebrow/H2 only,
+  // no more alternating tint (see ТЗ №3, п. 1)
   hms: {
-    sectionPad: 'clamp(2.5rem, 5vw, 3.5rem)',
-    tint: 'rgba(18, 18, 20, 0.55)',
+    sectionPad: '120px',
+    sectionPadMobile: '72px',
     eyebrowGap: '8px',
   },
 

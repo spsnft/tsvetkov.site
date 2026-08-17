@@ -18,6 +18,7 @@ interface SeeSystemProps {
     seeSystemLabel3?: string;
     seeSystemBenefit3?: string;
     seeSystemCaption?: string;
+    seeSystemCaptionSub?: string;
     seeSystemDisclaimer?: string;
     seeSystemBenefitLines?: number;
   };
@@ -346,8 +347,9 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
         }
 
         /* ================= shared: disclaimer + money line ================= */
-        /* Микро-дисклеймер — первым, тише всего на странице: сноска к
-           демо, а не аргумент */
+        /* Для EN больше не задаётся (см. ТЗ №3, п. 4.1) — рендерится
+           только если t.seeSystemDisclaimer пришёл, поэтому у RU/TH
+           стиль остаётся рабочим, а EN просто ничего не показывает */
         .see-disclaimer {
           margin: 2.75rem auto 0 auto;
           max-width: 220px;
@@ -360,9 +362,12 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
         }
 
         /* Денежная строка закрывает секцию — единственная цифра здесь
-           читается как аргумент, поэтому кегль заметно крупнее подписи */
+           читается как аргумент, поэтому кегль заметно крупнее подписи.
+           Отступ по умолчанию рассчитан на то, что она идёт первой после
+           сцены (EN, без дисклеймера); .tight — когда перед ней уже стоит
+           дисклеймер (RU/TH) */
         .see-caption {
-          margin: 10px auto 0 auto;
+          margin: 2.75rem auto 0 auto;
           max-width: 560px;
           text-align: center;
           font-size: clamp(1.15rem, 2.4vw, 1.55rem);
@@ -373,7 +378,26 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           text-wrap: pretty;
         }
 
+        .see-caption.tight {
+          margin-top: 10px;
+        }
+
+        /* Вторая строка — баты и масштаб («одна бронь»), объясняет
+           происхождение цифры выше себя, тише и мельче */
+        .see-caption-sub {
+          margin: 8px auto 0 auto;
+          max-width: 480px;
+          text-align: center;
+          font-size: 0.82rem;
+          line-height: 1.5;
+          color: ${T.muted};
+          text-wrap: pretty;
+        }
+
         @media (max-width: 767px) {
+          .see-section {
+            padding: ${T.hms.sectionPadMobile} 0;
+          }
           .see-title {
             font-size: 1.9rem;
             margin-bottom: 2rem;
@@ -490,12 +514,15 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           </div>
         </div>
 
-        <p className="see-disclaimer">
-          {t.seeSystemDisclaimer || 'Demo property, built for this page.'}
-        </p>
-        <p className="see-caption">
+        {t.seeSystemDisclaimer && (
+          <p className="see-disclaimer">{t.seeSystemDisclaimer}</p>
+        )}
+        <p className={`see-caption${t.seeSystemDisclaimer ? ' tight' : ''}`}>
           {t.seeSystemCaption || 'From booking to confirmation — without the commission.'}
         </p>
+        {t.seeSystemCaptionSub && (
+          <p className="see-caption-sub">{t.seeSystemCaptionSub}</p>
+        )}
       </div>
     </section>
   );

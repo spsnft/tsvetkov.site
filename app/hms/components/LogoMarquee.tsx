@@ -36,11 +36,13 @@ export default function LogoMarquee({ t }: LogoMarqueeProps) {
         }
 
         /* Подпись ленты — не section eyebrow (см. About/ScalePractice/...):
-           заметно мельче и глуше, чтобы не читаться как заголовок секции */
+           ~0.7 от размера eyebrow остальных секций (0.72rem), не должна
+           конкурировать с WHAT CHANGES. Зазор до ленты — 12px, фиксирован
+           на обоих брейкпоинтах (см. ТЗ №3, п. 2.2) */
         .marquee-label {
-          margin: 0 0 1rem 0;
+          margin: 0 0 12px 0;
           text-align: center;
-          font-size: 0.62rem;
+          font-size: 0.5rem;
           font-weight: 700;
           letter-spacing: 0.12em;
           color: ${T.sub};
@@ -86,10 +88,6 @@ export default function LogoMarquee({ t }: LogoMarqueeProps) {
         }
 
         @media (max-width: 768px) {
-          .marquee-label {
-            margin-bottom: 0.85rem;
-            font-size: 0.6rem;
-          }
           .marquee-wrapper {
             padding: 0.85rem 0;
           }

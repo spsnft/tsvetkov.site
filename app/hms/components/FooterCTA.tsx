@@ -28,9 +28,12 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
   return (
     <section className="footer-cta-section">
       <style jsx>{`
+        /* Тот же вертикальный ритм, что у остальных секций (см. ТЗ №3, п. 1) —
+           теперь единственный маркер границы секции, раз чередование фона
+           убрано */
         .footer-cta-section {
           width: 100%;
-          padding: 0 0 7rem 0;
+          padding: ${T.hms.sectionPad} 0;
           text-align: center;
           position: relative;
           background: transparent;
@@ -153,7 +156,7 @@ export default function FooterCTA({ t = {} }: FooterCTAProps) {
 
         @media (max-width: 768px) {
           .footer-cta-section {
-            padding: 0 0 4.5rem 0;
+            padding: ${T.hms.sectionPadMobile} 0;
           }
           .legal-footer {
             justify-content: center;

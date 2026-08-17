@@ -40,7 +40,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         .scale-section {
           width: 100%;
           padding: ${T.hms.sectionPad} 0;
-          background: ${T.hms.tint};
+          background: transparent;
           scroll-margin-top: 80px;
         }
 
@@ -69,7 +69,8 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           text-wrap: balance;
         }
 
-        .pairs {
+        /* ================= DESKTOP: stacked pairs + shared column header ================= */
+        .pairs-desktop {
           max-width: 640px;
           margin: 0 auto;
         }
@@ -98,16 +99,29 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           color: ${T.muted};
         }
 
+        /* Градиент — указатель (маркер/разделитель/микро-лейбл), не текст
+           решения: он живёт на самом .solution ниже как почти-белый */
         .col-header.with {
-          color: ${T.accent};
+          background: ${T.linearGradient};
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .pair {
+          position: relative;
           padding: 10px 0;
         }
 
-        .pair + .pair {
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        .pair + .pair::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: ${T.linearGradient};
+          opacity: 0.3;
         }
 
         .row {
@@ -121,7 +135,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: ${T.accent};
+          background: ${T.linearGradient};
         }
 
         .marker.empty {
@@ -137,13 +151,15 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           color: ${T.muted};
         }
 
-        /* With your own system — акцентный цвет дизайн-системы */
+        /* With your own system — почти белый, высокий контраст. Плоский
+           зелёный на тексте убран (см. ТЗ №3, п. 3.4) — градиент остаётся
+           только на маркере / разделителе / микро-лейбле */
         .solution {
           margin: 0;
           font-size: 18px;
           font-weight: 500;
           line-height: 1.4;
-          color: ${T.accent};
+          color: rgba(255, 255, 255, 0.92);
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
@@ -155,20 +171,70 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           }
         }
 
+        /* ================= MOBILE: одна карточка на пару ================= */
+        .pairs-mobile {
+          display: none;
+        }
+
         @media (max-width: 767px) {
+          .scale-section {
+            padding: ${T.hms.sectionPadMobile} 0;
+          }
           .scale-header {
             margin-bottom: 2.25rem;
           }
           .scale-title {
             font-size: 1.75rem;
           }
-          /* 18px переносит две из трёх строк на 390px — на мобильном чуть
-             мельче, чтобы соблюсти «ни одна строка не переносится» */
           .solution {
             font-size: 15px;
           }
-          .row {
-            gap: 6px;
+
+          /* Колонок на мобиле нет — общая шапка Today/With your own system
+             не влезает в связку с шестью оторванными строками (см. ТЗ №3,
+             п. 3.1). Вместо неё три самостоятельные карточки, лейблы живут
+             внутри каждой */
+          .pairs-desktop {
+            display: none;
+          }
+
+          .pairs-mobile {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 480px;
+            margin: 0 auto;
+          }
+
+          .pair-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 14px 16px;
+          }
+
+          .card-row + .card-row {
+            margin-top: 12px;
+          }
+
+          .micro-label {
+            display: block;
+            margin: 0 0 4px 0;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+          }
+
+          .micro-label.today {
+            color: ${T.muted};
+          }
+
+          .micro-label.direct {
+            background: ${T.linearGradient};
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
           }
         }
       `}</style>
@@ -179,7 +245,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
           <h2 className="scale-title">{t?.scaleTitle || "What changes when bookings come direct"}</h2>
         </div>
 
-        <div className="pairs">
+        <div className="pairs-desktop">
           <div className="col-headers" aria-hidden="true">
             <div className="row">
               <span className="marker empty" />
@@ -199,6 +265,21 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
               </div>
               <div className="row">
                 <span className="marker" aria-hidden="true" />
+                <p className="solution">{pair.solution}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="pairs-mobile">
+          {pairs.map((pair, i) => (
+            <div className="pair-card" key={i}>
+              <div className="card-row">
+                <span className="micro-label today">{t?.scaleCardToday || "TODAY"}</span>
+                <p className="problem">{pair.problem}</p>
+              </div>
+              <div className="card-row">
+                <span className="micro-label direct">{t?.scaleCardDirect || "DIRECT"}</span>
                 <p className="solution">{pair.solution}</p>
               </div>
             </div>

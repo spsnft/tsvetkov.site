@@ -40,7 +40,7 @@ export default function HospitalityB2BClient({ lang }: { lang: 'en' | 'ru' | 'th
         <SeeSystem t={t} />
         <About t={t} lang={lang} />
 
-        <Pricing t={t} />
+        <Pricing t={t} lang={lang} />
         <FAQ t={t} lang={lang} />
         <FooterCTA t={t} />
       </main>

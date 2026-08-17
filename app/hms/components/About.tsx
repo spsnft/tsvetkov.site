@@ -66,7 +66,7 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
         .about-section {
           width: 100%;
           padding: ${T.hms.sectionPad} 0;
-          background: ${T.hms.tint};
+          background: transparent;
           scroll-margin-top: 80px;
         }
 
@@ -278,6 +278,9 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
         }
 
         @media (max-width: 767px) {
+          .about-section {
+            padding: ${T.hms.sectionPadMobile} 0;
+          }
           .about-role {
             font-size: 0.94rem;
           }

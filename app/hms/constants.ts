@@ -1,12 +1,15 @@
-// Названия компонентов системы не переводятся — одинаковы во всех локалях
+// Названия компонентов системы не переводятся — одинаковы во всех локалях.
+// "Direct Promo Engine" → "Promo Engine" и "Marketing Analytics Setup" →
+// "Marketing Analytics" укорочены (см. ТЗ №3, п. 6) — featureHints в
+// каждой локали ниже переключены на новые ключи
 export const FEATURE_NAMES = [
   "Cloud PMS Setup",
   "0% Commission Engine",
   "Booking & Agoda Sync",
   "Payment Integration",
   "Connect 300+ OTA Channels",
-  "Direct Promo Engine",
-  "Marketing Analytics Setup",
+  "Promo Engine",
+  "Marketing Analytics",
   "Custom CRM Setup",
   "Consolidated Revenue Reporting",
   "Multi-Property Dashboard"
@@ -68,6 +71,10 @@ export const contentData = {
     scaleTitle: "What changes when bookings come direct",
     scaleColToday: "Today",
     scaleColWith: "With your own system",
+    // Мобильные карточки: короткие лейблы внутри каждой пары, не колонки
+    // (см. ТЗ №3, п. 3.3)
+    scaleCardToday: "TODAY",
+    scaleCardDirect: "DIRECT",
     scalePair1Problem: "15–20% of every booking goes to the platform",
     scalePair1Solution: "Direct bookings at 0% commission, forever",
     scalePair2Problem: "Your guests belong to the platform",
@@ -83,7 +90,9 @@ export const contentData = {
     aboutLabel: "WHO'S BEHIND THIS",
     aboutName: "Fedor Tsvetkov",
     aboutRole: "Founder, FT Agency · Phuket",
-    aboutP1: "FT Agency builds customer acquisition systems — sites, analytics, CRM, outreach — for companies that sell directly to their customers. B2B, e-commerce, services: 20+ brands over 10 years.",
+    // Последнее предложение («B2B, e-commerce, services: 20+ brands over
+    // 10 years») снято — дублирует блок статистики двумя абзацами ниже
+    aboutP1: "FT Agency builds customer acquisition systems — sites, analytics, CRM, outreach — for companies that sell directly to their customers.",
     aboutP2: "Hospitality is that same problem at its sharpest — the property does all the work, and the platform owns the guest.",
     aboutP3: "I founded the agency and I run these projects myself. From your first message to launch you're dealing with me, not a support queue.",
     aboutLinkAgency: "More about FT Agency",
@@ -121,9 +130,13 @@ export const contentData = {
     // строки там длиннее (см. SeeSystem.tsx)
     seeSystemBenefitLines: 2,
     // ฿24,000 ≈ $690 direct; при 17%-комиссии (то же допущение, что в
-    // калькуляторе героя) через Booking.com осталось бы $573
-    seeSystemCaption: "This booking: $690 direct. Through Booking.com you'd have kept $573.",
-    seeSystemDisclaimer: "Demo property, built for this page.",
+    // калькуляторе героя) через Booking.com осталось бы $573 — разница $117.
+    // THB-строка переведена по фиксированному демо-курсу ~32.5 THB/USD (не
+    // живой курс, только чтобы показать масштаб в батах): $117 × 32.5 ≈
+    // ฿3,800. seeSystemDisclaimer для EN намеренно не задан — компонент
+    // рендерит его только если пришёл (см. ТЗ №3, п. 4.1)
+    seeSystemCaption: "You keep $117 more than Booking.com would have",
+    seeSystemCaptionSub: "≈ ฿3,800 on a single stay — at 17% commission",
 
     // --- PRICING ---
     // Заголовок секции получает eyebrow и укорачивается — старый вариант
@@ -138,20 +151,22 @@ export const contentData = {
     // Первое появление термина на странице объясняется человеческим языком;
     // подсказка показывается только в собственном списке тарифа, не в свёрнутом
     featureHints: {
-      "Cloud PMS Setup": "all your bookings in one place, not in a spreadsheet",
-      "0% Commission Engine": "booking page on your own site",
-      "Direct Promo Engine": "direct-only offers and discounts",
-      "Marketing Analytics Setup": "see which channel each booking came from"
+      "Cloud PMS Setup": "all bookings in one place",
+      "0% Commission Engine": "bookings on your site",
+      "Promo Engine": "direct-only offers",
+      "Marketing Analytics": "see where bookings come from"
     } as Record<string, string>,
 
-    // Единственная строка под сеткой тарифов. Раньше их было две (окупаемость
-    // + итоговая цена/PMS отдельно после CTA); фраза про окупаемость снята —
-    // страница больше не называет сроки payback ни в одном месте
-    pricePaybackNote: "Final price confirmed after your revenue check. PMS and channel manager are billed separately by the provider — typically $30–100/month.",
+    // Вторая (мелкая, приглушённая) строка объединённого risk-box — не
+    // отдельный элемент над рамкой, см. Pricing.tsx. $30–100/month снят
+    // отсюда, остаётся только в FAQ (там он снимает страх, а не пугает в
+    // момент выбора тарифа, см. ТЗ №3, п. 7.2)
+    pricePaybackNote: "Final price confirmed after your revenue check. PMS and channel manager subscriptions are billed by the provider, separately from our fee.",
 
-    // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия
-    riskTitle: "50% upfront, 50% on launch.",
-    riskText: "Not live in 14 days — you don't pay the second half.",
+    // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия.
+    // Обещание срока (14 дней) снято — гарантия результата без обещания
+    // срока (см. ТЗ №3, п. 7.2); riskText для EN больше не задаётся
+    riskTitle: "50% upfront. The second half only when your system is live.",
 
     // Микрокопия под кнопкой в финальном CTA-блоке (FooterCTA). В героя эта
     // строка больше не выводится — там она дублировала эту же
@@ -174,7 +189,7 @@ export const contentData = {
     // место H2 и добавляет eyebrow faqLabel. RU/TH сохраняют старую пару
     // faqTitle (H2) + faqSub (подзаголовок), см. FAQ.tsx
     faqLabel: "FAQ",
-    faqSub: "The questions owners actually ask",
+    faqSub: "Questions owners ask",
     // Порядок вопросов идёт от главного возражения (уход с OTA) к механике
     // сделки. Пустая строка внутри `a` разбивает ответ на абзацы при рендере
     faqItems: [
@@ -196,7 +211,9 @@ export const contentData = {
       },
       {
         q: "What happens after I send a message?",
-        a: "You send your property name. We reply — usually the same day — with what OTAs are costing you based on your actual listings: your rates, your room count, your channel mix. Your numbers, not an example.\n\nIf it looks worth doing, we scope the setup: most properties are live in 7–14 days, with configuration and testing running in the background so your current bookings are never interrupted. Payment is 50% upfront, 50% on launch — and if it's not live in 14 days, you don't pay the second half."
+        // Второй абзац переписан целиком — не дублировать обещание 14 дней
+        // из risk-box под тарифами (см. ТЗ №3, п. 8.2)
+        a: "You send your property name. We reply — usually the same day — with what OTAs are costing you based on your actual listings: your rates, your room count, your channel mix. Your numbers, not an example.\n\nMost setups take one to two weeks, depending on how fast we get access to your listings. Configuration and testing run in the background, so your current bookings are never interrupted. Payment is 50% upfront, and the second half only when your system is live."
       },
       {
         q: "How do guests pay, and how fast do I get my money?",
@@ -310,11 +327,13 @@ export const contentData = {
 
     // Первое появление термина на странице объясняется человеческим языком;
     // подсказка показывается только в собственном списке тарифа, не в свёрнутом
+    // Ключи синхронизированы с переименованием в FEATURE_NAMES (см. ТЗ №3,
+    // п. 6) — текст подсказок не менялся
     featureHints: {
       "Cloud PMS Setup": "все брони в одном месте, а не в таблице",
       "0% Commission Engine": "страница, на которой гость бронирует у вас на сайте",
-      "Direct Promo Engine": "акции и скидки только для прямых броней",
-      "Marketing Analytics Setup": "видно, откуда приходят брони"
+      "Promo Engine": "акции и скидки только для прямых броней",
+      "Marketing Analytics": "видно, откуда приходят брони"
     } as Record<string, string>,
 
     // Диапазоны — ориентир, а не правило: реальная сегментация идёт по ADR
@@ -481,11 +500,13 @@ export const contentData = {
 
     // Первое появление термина на странице объясняется человеческим языком;
     // подсказка показывается только в собственном списке тарифа, не в свёрнутом
+    // Ключи синхронизированы с переименованием в FEATURE_NAMES (см. ТЗ №3,
+    // п. 6) — текст подсказок не менялся
     featureHints: {
       "Cloud PMS Setup": "การจองทั้งหมดอยู่ที่เดียว ไม่ใช่ในไฟล์ตาราง",
       "0% Commission Engine": "หน้าที่ลูกค้าจองบนเว็บไซต์ของคุณเอง",
-      "Direct Promo Engine": "โปรโมชั่นและส่วนลดเฉพาะการจองตรง",
-      "Marketing Analytics Setup": "ดูได้ว่ายอดจองมาจากช่องทางไหน"
+      "Promo Engine": "โปรโมชั่นและส่วนลดเฉพาะการจองตรง",
+      "Marketing Analytics": "ดูได้ว่ายอดจองมาจากช่องทางไหน"
     } as Record<string, string>,
 
     // Диапазоны — ориентир, а не правило: реальная сегментация идёт по ADR

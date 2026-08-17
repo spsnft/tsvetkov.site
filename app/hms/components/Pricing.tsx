@@ -6,6 +6,7 @@ import { FEATURE_NAMES, TIER_FEATURE_COUNTS } from '../constants';
 import WhatsAppCta from './WhatsAppCta';
 
 interface PricingProps {
+  lang?: 'en' | 'ru' | 'th';
   t?: {
     priceLabel?: string;
     priceTitle?: string;
@@ -28,9 +29,13 @@ interface PricingProps {
   };
 }
 
-export default function Pricing({ t }: PricingProps) {
+export default function Pricing({ t, lang = 'en' }: PricingProps) {
   const names: string[] = [...FEATURE_NAMES];
   const hints = t?.featureHints || {};
+  // EN: payback-note + risk-box merge into one framed block (result
+  // guarantee, no time promise). RU/TH keep the previous separate
+  // elements — их 14-дневное обещание не трогаем (см. ТЗ №3, п. 7)
+  const isEn = lang === 'en';
 
   const tiers = [
     {
@@ -195,7 +200,7 @@ export default function Pricing({ t }: PricingProps) {
            остаётся один */
         .risk-box {
           margin: 24px auto 0;
-          max-width: 520px;
+          max-width: 560px;
           padding: 16px 20px;
           border: 1px solid rgba(0, 229, 153, 0.28);
           border-radius: 14px;
@@ -427,6 +432,9 @@ export default function Pricing({ t }: PricingProps) {
         }
 
         @media (max-width: 767px) {
+          .pricing-section {
+            padding: ${T.hms.sectionPadMobile} 0;
+          }
           .pricing-header {
             margin-bottom: 2rem;
           }
@@ -497,21 +505,36 @@ export default function Pricing({ t }: PricingProps) {
           ))}
         </div>
 
-        {t?.pricePaybackNote && (
-          <p className="payback-note">{t.pricePaybackNote}</p>
-        )}
+        {/* EN: один блок в рамке — гарантия результата (50% upfront...)
+            крупно + мелкая приглушённая строка про итоговую цену и
+            подписки, без обещания срока. RU/TH: прежние отдельные
+            элементы, их обещание 14 дней не трогаем (см. ТЗ №3, п. 7) */}
+        {isEn ? (
+          t?.riskTitle && (
+            <div className="risk-box">
+              <p className="risk-title">{t.riskTitle}</p>
+              {t.pricePaybackNote && <p className="risk-text">{t.pricePaybackNote}</p>}
+            </div>
+          )
+        ) : (
+          <>
+            {t?.pricePaybackNote && (
+              <p className="payback-note">{t.pricePaybackNote}</p>
+            )}
 
-        {t?.priceFitHint && (
-          <p className="fit-hint">{t.priceFitHint}</p>
-        )}
+            {t?.priceFitHint && (
+              <p className="fit-hint">{t.priceFitHint}</p>
+            )}
 
-        {/* Реверс риска стоит до кнопки: читатель проходит снятие риска
-            раньше, чем доходит до нажатия. Рамка приглушённее кнопки */}
-        {t?.riskTitle && (
-          <div className="risk-box">
-            <p className="risk-title">{t.riskTitle}</p>
-            {t.riskText && <p className="risk-text">{t.riskText}</p>}
-          </div>
+            {/* Реверс риска стоит до кнопки: читатель проходит снятие риска
+                раньше, чем доходит до нажатия. Рамка приглушённее кнопки */}
+            {t?.riskTitle && (
+              <div className="risk-box">
+                <p className="risk-title">{t.riskTitle}</p>
+                {t.riskText && <p className="risk-text">{t.riskText}</p>}
+              </div>
+            )}
+          </>
         )}
 
         <div className="pricing-cta">
