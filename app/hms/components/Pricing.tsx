@@ -260,10 +260,16 @@ export default function Pricing({ t }: PricingProps) {
           right: 20px;
         }
 
+        /* Было 1.25rem margin + 1.25rem padding (40px) — на тарифах с
+           однострочным price-desc (LITE: «For small villas...» не
+           переносится, хотя min-height выше держит место под 2 строки для
+           выравнивания чек-листов между колонками) это давало вдвое
+           больший зазор, чем задумано, поверх уже зарезервированной пустой
+           строки (см. ТЗ пакет 3, п. A7) */
         .card-features {
           list-style: none;
-          padding: 1.25rem 0 0;
-          margin: 1.25rem 0 0;
+          padding: 1rem 0 0;
+          margin: 0.75rem 0 0;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
           display: flex;
           flex-direction: column;

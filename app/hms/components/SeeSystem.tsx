@@ -194,7 +194,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
              to read as one collage, shallow enough to clear the metric
              numbers in its header (см. ТЗ раунд 2, №2) */
           .see-layer-dashboard {
-            left: 30%;
+            left: 23.5%;
             top: 19%;
             width: 64%;
             z-index: 1;
@@ -208,11 +208,18 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
             left: 2px;
             top: 100%;
             margin-top: 14px;
-            max-width: 380px;
+            /* 380px переносило EN-строку benefit2 («Every channel in one
+               calendar. Rooms close everywhere automatically», ~430px без
+               переноса) на второй ряд, хотя места под дашбордом хватает —
+               перенос был лишним (см. ТЗ пакет 3, п. A6). RU/TH-варианты
+               длиннее и всё равно переносятся на 2 строки, для них ничего
+               не меняется — высота блока по-прежнему держится на
+               --benefit-lines */
+            max-width: 440px;
           }
 
           .see-layer-phone {
-            left: 18%;
+            left: 11.5%;
             top: 13%;
             width: 15.5%;
             z-index: 2;
@@ -232,7 +239,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
              разрыв. Симметрично левой стороне: тот же top, что у phone,
              тот же глубокий нахлёст в верхний угол (см. ТЗ раунд 2, №2) */
           .see-layer-email {
-            left: 84%;
+            left: 77.5%;
             top: 13%;
             width: 11%;
             z-index: 3;
