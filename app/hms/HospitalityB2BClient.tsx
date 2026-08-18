@@ -33,16 +33,16 @@ export default function HospitalityB2BClient({ lang }: { lang: 'en' | 'ru' | 'th
       <Nav lang={lang} dict={null} />
 
       <main style={{ width: '100%', position: 'relative', zIndex: 10 }}>
-        <Hero t={t} />
-        <CalculatorSection t={t} />
+        <Hero t={t} lang={lang} />
+        <CalculatorSection t={t} lang={lang} />
         <LogoMarquee t={t} />
         <ScalePractice t={t} />
-        <About t={t} />
         <SeeSystem t={t} />
+        <About t={t} lang={lang} />
 
-        <Pricing t={t} />
-        <FAQ t={t} />
-        <FooterCTA t={t} />
+        <Pricing t={t} lang={lang} />
+        <FAQ t={t} lang={lang} />
+        <FooterCTA t={t} lang={lang} />
       </main>
     </div>
   );

@@ -4,9 +4,12 @@ import React from 'react';
 import { T } from '../../../src/theme/tokens';
 import { FEATURE_NAMES, TIER_FEATURE_COUNTS } from '../constants';
 import WhatsAppCta from './WhatsAppCta';
+import PrimaryCta from './PrimaryCta';
 
 interface PricingProps {
+  lang?: 'en' | 'ru' | 'th';
   t?: {
+    priceLabel?: string;
     priceTitle?: string;
     priceSub?: string;
     pricePopular?: string;
@@ -20,6 +23,8 @@ interface PricingProps {
     riskText?: string;
     featureHints?: Record<string, string>;
     btnAudit?: string;
+    heroCtaLabel?: string;
+    heroCtaNote?: string;
     waMessage?: string;
     tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Desc?: string;
     tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Desc?: string;
@@ -27,9 +32,13 @@ interface PricingProps {
   };
 }
 
-export default function Pricing({ t }: PricingProps) {
+export default function Pricing({ t, lang = 'en' }: PricingProps) {
   const names: string[] = [...FEATURE_NAMES];
   const hints = t?.featureHints || {};
+  // EN: payback-note + risk-box merge into one framed block (result
+  // guarantee, no time promise). RU/TH keep the previous separate
+  // elements — их 14-дневное обещание не трогаем (см. ТЗ №3, п. 7)
+  const isEn = lang === 'en';
 
   const tiers = [
     {
@@ -69,7 +78,7 @@ export default function Pricing({ t }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          padding: 0 0 5rem 0;
+          padding: ${T.hms.sectionPad} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -77,6 +86,16 @@ export default function Pricing({ t }: PricingProps) {
         .pricing-header {
           text-align: center;
           margin-bottom: 3.5rem;
+        }
+
+        .pricing-eyebrow {
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: ${T.sub};
+          opacity: 0.8;
+          margin: 0 0 ${T.hms.eyebrowGap} 0;
         }
 
         .pricing-title {
@@ -184,7 +203,7 @@ export default function Pricing({ t }: PricingProps) {
            остаётся один */
         .risk-box {
           margin: 24px auto 0;
-          max-width: 520px;
+          max-width: 560px;
           padding: 16px 20px;
           border: 1px solid rgba(0, 229, 153, 0.28);
           border-radius: 14px;
@@ -210,7 +229,8 @@ export default function Pricing({ t }: PricingProps) {
         }
 
         /* Одна кнопка под блоком тарифов вместо трёх в карточках: ширина по
-           контенту на десктопе, на всю ширину на мобильном */
+           контенту на десктопе, на всю ширину на мобильном. RU/TH-вариант —
+           старый стиль, без изменений */
         .pricing-cta {
           display: flex;
           justify-content: center;
@@ -233,6 +253,17 @@ export default function Pricing({ t }: PricingProps) {
             padding: 0 0.7rem;
             font-size: 0.95rem;
           }
+        }
+
+        /* EN: отдельный класс, а не .pricing-cta — иначе правила выше
+           («width: 100%», меньший паддинг на 360px и т.п.) совпадают по
+           селектору с новой кнопкой PrimaryCta (она тоже несёт
+           .btn-premium-core) и цвет/паддинг могли бы разъехаться в
+           зависимости от порядка каскада (см. ТЗ №10, п. C1) */
+        .pricing-cta-primary {
+          display: flex;
+          justify-content: center;
+          margin-top: 24px;
         }
 
         /* ---------- КАРТОЧКИ НА ВСЕХ РАЗРЕШЕНИЯХ ---------- */
@@ -417,7 +448,7 @@ export default function Pricing({ t }: PricingProps) {
 
         @media (max-width: 767px) {
           .pricing-section {
-            padding: 0 0 3rem 0;
+            padding: ${T.hms.sectionPadMobile} 0;
           }
           .pricing-header {
             margin-bottom: 2rem;
@@ -432,12 +463,25 @@ export default function Pricing({ t }: PricingProps) {
             font-size: 2.2rem;
           }
         }
+
+        /* card-features li чуть мельче на мобиле — иначе «Marketing
+           Analytics (booking sources)» переносится на 375px (см. ТЗ №6,
+           п. 4). Стоит последним в файле нарочно: у безусловного правила
+           .card-features li та же специфичность и более позднее место в
+           каскаде, так что более ранний @media (max-width: 599px) его не
+           перебивает */
+        @media (max-width: 599px) {
+          .card-features li {
+            font-size: 0.85rem;
+          }
+        }
       `}</style>
 
       <div className="container">
         <div className="pricing-header">
+          {t?.priceLabel && <p className="pricing-eyebrow">{t.priceLabel}</p>}
           <h2 className="pricing-title">
-            {t?.priceTitle || "Transparent Integration. Permanent Independence"}
+            {t?.priceTitle || "One-time setup. Zero commission forever"}
           </h2>
           {t?.priceSub && (
             <p className="pricing-subtitle">
@@ -488,29 +532,55 @@ export default function Pricing({ t }: PricingProps) {
           ))}
         </div>
 
-        {t?.pricePaybackNote && (
-          <p className="payback-note">{t.pricePaybackNote}</p>
+        {/* EN: один блок в рамке — гарантия результата (50% upfront...)
+            крупно + мелкая приглушённая строка про итоговую цену и
+            подписки, без обещания срока. RU/TH: прежние отдельные
+            элементы, их обещание 14 дней не трогаем (см. ТЗ №3, п. 7) */}
+        {isEn ? (
+          t?.riskTitle && (
+            <div className="risk-box">
+              <p className="risk-title">{t.riskTitle}</p>
+              {t.pricePaybackNote && <p className="risk-text">{t.pricePaybackNote}</p>}
+            </div>
+          )
+        ) : (
+          <>
+            {t?.pricePaybackNote && (
+              <p className="payback-note">{t.pricePaybackNote}</p>
+            )}
+
+            {t?.priceFitHint && (
+              <p className="fit-hint">{t.priceFitHint}</p>
+            )}
+
+            {/* Реверс риска стоит до кнопки: читатель проходит снятие риска
+                раньше, чем доходит до нажатия. Рамка приглушённее кнопки */}
+            {t?.riskTitle && (
+              <div className="risk-box">
+                <p className="risk-title">{t.riskTitle}</p>
+                {t.riskText && <p className="risk-text">{t.riskText}</p>}
+              </div>
+            )}
+          </>
         )}
 
-        {t?.priceFitHint && (
-          <p className="fit-hint">{t.priceFitHint}</p>
-        )}
-
-        {/* Реверс риска стоит до кнопки: читатель проходит снятие риска
-            раньше, чем доходит до нажатия. Рамка приглушённее кнопки */}
-        {t?.riskTitle && (
-          <div className="risk-box">
-            <p className="risk-title">{t.riskTitle}</p>
-            {t.riskText && <p className="risk-text">{t.riskText}</p>}
+        {isEn ? (
+          <div className="pricing-cta-primary">
+            <PrimaryCta
+              label={t?.heroCtaLabel || 'Ask for my revenue check'}
+              message={t?.waMessage}
+              note={t?.heroCtaNote || 'One WhatsApp message. No commitment.'}
+              align="center"
+            />
+          </div>
+        ) : (
+          <div className="pricing-cta">
+            <WhatsAppCta
+              label={t?.btnAudit || "Free Revenue Check"}
+              message={t?.waMessage}
+            />
           </div>
         )}
-
-        <div className="pricing-cta">
-          <WhatsAppCta
-            label={t?.btnAudit || "Free Revenue Check"}
-            message={t?.waMessage}
-          />
-        </div>
 
         {t?.priceDisclaimerAudit && (
           <p className="shared-disclaimer">

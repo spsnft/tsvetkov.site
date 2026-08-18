@@ -78,6 +78,11 @@ export const Nav = ({ lang, dict }: NavProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const isHms = pathname?.includes('/hms') ?? false;
+  // EN /hms only: хедер-кнопка ghost, пока виден Hero, заливка — после
+  // прокрутки за него (см. ТЗ №7, п. 4.2). RU/TH остаются на прежнем
+  // постоянно залитом варианте
+  const isHmsEn = isHms && lang === 'en';
+  const [heroVisible, setHeroVisible] = useState(true);
 
   const t = dict?.nav ?? {
     expertise: 'Expertise',
@@ -89,6 +94,20 @@ export const Nav = ({ lang, dict }: NavProps) => {
   };
 
   const hmsT = hmsContentData[lang as keyof typeof hmsContentData] ?? hmsContentData.en;
+
+  // Один IntersectionObserver на секцию Hero — переключает ghost/заливку
+  // кнопки хедера (см. ТЗ №7, п. 4.2)
+  useEffect(() => {
+    if (!isHmsEn) return;
+    const el = document.getElementById('hero-section');
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isHmsEn]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -197,7 +216,11 @@ export const Nav = ({ lang, dict }: NavProps) => {
 
   // Габариты кнопки задаются медиазапросами, а вариант текста — состоянием:
   // в разметке должен быть ровно один текст, иначе скринридер читает оба,
-  // а в поисковую выдачу попадает склейка
+  // а в поисковую выдачу попадает склейка. EN /hms: ghost, пока виден Hero,
+  // иначе заливка — размер кнопки в обоих состояниях одинаковый, меняется
+  // только оформление (см. ТЗ №7, п. 4.2)
+  const useGhostCta = isHmsEn && heroVisible;
+
   const ctaElement = isHms ? (
     <motion.a
       className="nav-cta"
@@ -208,16 +231,22 @@ export const Nav = ({ lang, dict }: NavProps) => {
       whileTap={{ scale: 0.96 }}
       style={{
         borderRadius: 10,
-        background: `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
-        color: '#0A0A0C', fontFamily: 'inherit', fontWeight: 600,
-        border: 'none', boxShadow: '0 4px 15px rgba(0, 229, 153, 0.2)',
+        background: useGhostCta ? 'transparent' : `linear-gradient(135deg, ${T.accent} 0%, ${T.acc2} 100%)`,
+        color: useGhostCta ? '#fff' : '#0A0A0C', fontFamily: 'inherit', fontWeight: 600,
+        border: useGhostCta ? `1px solid ${T.border}` : 'none',
+        boxShadow: useGhostCta ? 'none' : '0 4px 15px rgba(0, 229, 153, 0.2)',
         textDecoration: 'none', cursor: 'pointer',
         whiteSpace: 'nowrap', minWidth: 0,
         display: 'inline-flex', alignItems: 'center', gap: '10px',
+        transition: 'background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease',
       }}
     >
       <WhatsAppIcon size={15} />
-      <span>{isCompactCta ? (hmsT.btnAuditShort || hmsT.btnAudit) : hmsT.btnAudit}</span>
+      <span>
+        {isHmsEn
+          ? (hmsContentData.en.navCtaLabel || 'Revenue check')
+          : (isCompactCta ? (hmsT.btnAuditShort || hmsT.btnAudit) : hmsT.btnAudit)}
+      </span>
     </motion.a>
   ) : (
     <motion.a
@@ -299,11 +328,11 @@ export const Nav = ({ lang, dict }: NavProps) => {
       ) : (
         isHms ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <NavLink href="#how-it-works" label={hmsT.navHowItWorks} isActive={activeSection === 'how-it-works'} />
+            <span style={{ width: 1, height: 16, background: T.border }} />
             <a href="#about" style={{ color: T.sub, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500, transition: 'color .2s' }}>
               {BACK_LABEL[lang] ?? BACK_LABEL.en}
             </a>
-            <span style={{ width: 1, height: 16, background: T.border }} />
-            <NavLink href="#how-it-works" label={hmsT.navHowItWorks} isActive={activeSection === 'how-it-works'} />
             <NavLink href="#pricing" label={hmsT.navPricing} isActive={activeSection === 'pricing'} />
             <NavLink href="#faq" label={hmsT.navFaq} isActive={activeSection === 'faq'} />
           </div>

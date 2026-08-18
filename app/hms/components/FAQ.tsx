@@ -5,9 +5,10 @@ import { T } from '../../../src/theme/tokens';
 
 interface FAQProps {
   t: any;
+  lang?: 'en' | 'ru' | 'th';
 }
 
-export default function FAQ({ t }: FAQProps) {
+export default function FAQ({ t, lang = 'en' }: FAQProps) {
   // Первый вопрос (индекс 0) открыт по умолчанию
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -15,12 +16,17 @@ export default function FAQ({ t }: FAQProps) {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // EN: eyebrow + faqSub как H2, faqTitle убран (см. ТЗ). RU/TH: старая
+  // пара faqTitle (H2) + faqSub (подзаголовок) — их H2 локализован,
+  // трогать не нужно
+  const isEn = lang === 'en';
+
   return (
     <section id="faq" className="faq-section">
       <style jsx>{`
         .faq-section {
           width: 100%;
-          padding: 0 0 5rem 0;
+          padding: ${T.hms.sectionPad} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -34,6 +40,16 @@ export default function FAQ({ t }: FAQProps) {
         .faq-header {
           text-align: center;
           margin-bottom: 3rem;
+        }
+
+        .faq-eyebrow {
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: ${T.sub};
+          opacity: 0.8;
+          margin: 0 0 ${T.hms.eyebrowGap} 0;
         }
 
         .faq-title {
@@ -145,29 +161,29 @@ export default function FAQ({ t }: FAQProps) {
           margin-top: 0.85rem;
         }
 
-        /* --- ПЛАНШЕТЫ (768px - 1024px) --- */
-        @media (min-width: 768px) and (max-width: 1024px) {
-          .faq-section {
-            padding: 0 0 3.5rem 0;
-          }
-        }
-
         /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
         @media (max-width: 767px) {
-          .faq-section {
-            padding: 0 0 3rem 0;
-          }
+          .faq-section { padding: ${T.hms.sectionPadMobile} 0; }
           .faq-title { font-size: 1.8rem; }
           .faq-button { font-size: 1rem; padding: 1.2rem; }
-          
+
           .faq-answer-text { padding: 1rem 1.2rem 1.2rem 1.2rem; font-size: 0.9rem; }
         }
       `}</style>
 
       <div className="faq-container">
         <div className="faq-header">
-          <h2 className="faq-title">{t?.faqTitle}</h2>
-          <p className="faq-subtitle">{t?.faqSub}</p>
+          {isEn ? (
+            <>
+              <p className="faq-eyebrow">{t?.faqLabel || 'FAQ'}</p>
+              <h2 className="faq-title">{t?.faqSub}</h2>
+            </>
+          ) : (
+            <>
+              <h2 className="faq-title">{t?.faqTitle}</h2>
+              <p className="faq-subtitle">{t?.faqSub}</p>
+            </>
+          )}
         </div>
 
         <div className="faq-list">
