@@ -95,9 +95,16 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
   const unitsPct = ((units - UNITS_MIN) / (UNITS_MAX - UNITS_MIN)) * 100;
   const adrPct = ((adr - ADR_MIN) / (ADR_MAX - ADR_MIN)) * 100;
 
+  // Раньше был background прямо на <input> — в вебките сам инпут и есть
+  // видимая линия трека, поэтому высота .slider совпадала с толщиной
+  // линии (6px = вся тач-зона). Чтобы увеличить тач-зону, не меняя
+  // видимую толщину, трек красится через ::-webkit-slider-runnable-track
+  // (6px, из CSS), а инпут остаётся высоким и прозрачным — значение
+  // прокидывается через CSS-переменную, т.к. inline style не достаёт до
+  // псевдоэлементов (см. ТЗ пакет 6, п. 1)
   const trackStyle = (pct: number): React.CSSProperties => ({
-    background: `linear-gradient(to right, ${T.accent} 0%, ${T.accent} ${pct}%, rgba(255,255,255,0.12) ${pct}%, rgba(255,255,255,0.12) 100%)`,
-  });
+    '--track-fill': `linear-gradient(to right, ${T.accent} 0%, ${T.accent} ${pct}%, rgba(255,255,255,0.12) ${pct}%, rgba(255,255,255,0.12) 100%)`,
+  } as React.CSSProperties);
 
   return (
     <div className="hero-calc">
@@ -164,15 +171,43 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           margin: 0;
         }
 
+        /* Тач-зона увеличена паддингом вокруг 6px-линии, а не одной лишь
+           высотой инпута — паддинг физически расширяет hit-box (в отличие
+           от flex-центрирования, которое сдвигает всю коробку и рискует
+           перекрыть field-head выше). Несимметрично: сверху всего 7px
+           (над треком — только 8.8px margin-bottom у field-head, больше
+           неоткуда взять без наезда на лейбл/цифру), снизу 17px (там
+           чистый зазор 20px до следующего поля/output, до него ещё есть
+           запас). Итог — почти вдвое от диаметра точки (20px), но без
+           риска перехватить клик у соседнего элемента (см. ТЗ пакет 6,
+           п. 1; при первой попытке — flex + margin:-17px 0 — сверху
+           перекрывало field-head, клики у верхнего края хитбокса уходили
+           в лейбл вместо слайдера, проверено кликом и elementFromPoint).
+           Отрицательный margin, равный паддингу с той же стороны,
+           возвращает вклад элемента в поток к исходным 6px — соседние
+           поля и .output не раздвигает */
         .slider {
           -webkit-appearance: none;
           appearance: none;
           width: 100%;
           height: 6px;
-          border-radius: 999px;
+          padding: 7px 0 17px 0;
+          margin: -7px 0 -17px 0;
+          box-sizing: content-box;
+          background: transparent;
           outline: none;
           cursor: pointer;
           display: block;
+        }
+        .slider::-webkit-slider-runnable-track {
+          height: 6px;
+          border-radius: 999px;
+          background: var(--track-fill);
+        }
+        .slider::-moz-range-track {
+          height: 6px;
+          border-radius: 999px;
+          background: var(--track-fill);
         }
         .slider::-webkit-slider-thumb {
           -webkit-appearance: none;
@@ -183,6 +218,10 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           border: 2px solid #0a0a0c;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
           cursor: pointer;
+          /* Chrome выравнивает thumb по верху runnable-track, а не по
+             центру, когда их высоты отличаются — трек 6px, точка 20px,
+             сдвигаем на (6 - 20) / 2 */
+          margin-top: -7px;
         }
         .slider::-moz-range-thumb {
           width: 20px;
@@ -192,11 +231,6 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           border: 2px solid #0a0a0c;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
           cursor: pointer;
-        }
-        .slider::-moz-range-track {
-          height: 6px;
-          border-radius: 999px;
-          background: transparent;
         }
 
         .output {
