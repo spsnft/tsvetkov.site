@@ -216,7 +216,7 @@ export const contentData = {
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Desc: "For hotel chains & operators (multi-property)",
+    tier3Desc: "For hotel chains & operators",
 
     // --- FAQ SECTION ---
     // faqTitle снят для EN — FAQ.tsx для lang==='en' поднимает faqSub на
@@ -277,7 +277,7 @@ export const contentData = {
     // Структура один в один с EN: H1 в две строки через "\n", "15–20%" в
     // акцентном градиенте, кнопка — в CalculatorSection (см. ТЗ
     // «Синхронизировать RU/TH с EN»)
-    heroTitle: "Принимайте брони напрямую.\nОставьте себе 15–20%.",
+    heroTitle: "Принимайте брони напрямую.\nОставляйте себе 15–20%.",
     heroSubtitle: "Гости бронируют напрямую на вашем сайте. Все каналы — в одном календаре. Всё принадлежит вам.",
     heroCtaLabel: "Хочу разбор выручки",
     heroCtaNote: "Одно сообщение в WhatsApp. Никаких обязательств",
@@ -343,7 +343,7 @@ export const contentData = {
     // Экраны внутри — на английском во всех локалях (см. constants.ts EN);
     // локализуются только подписи вокруг них
     seeSystemEyebrow: "КАК ЭТО РАБОТАЕТ",
-    seeSystemTitle: "Как это работает — от брони до заезда",
+    seeSystemTitle: "От брони до заезда",
     seeSystemStep1: "Гость бронирует",
     seeSystemStep2: "Вы это видите",
     seeSystemStep3: "Гость получает",
@@ -391,7 +391,7 @@ export const contentData = {
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Desc: "Для сетей отелей и операторов (несколько объектов)",
+    tier3Desc: "Для сетей отелей и операторов",
 
     // --- FAQ SECTION ---
     faqLabel: "FAQ",
@@ -500,7 +500,10 @@ export const contentData = {
 
     // --- SEE THE SYSTEM ---
     seeSystemEyebrow: "วิธีการทำงาน",
-    seeSystemTitle: "ระบบทำงานอย่างไรตั้งแต่ต้นจนจบ",
+    // Черновик, не подтверждён — та же логика, что и у RU (не повторять
+    // eyebrow "วิธีการทำงาน" словами в заголовке), но формулировку нужно
+    // проверить с носителем тайского перед деплоем (см. ТЗ пакет 5, п. 2)
+    seeSystemTitle: "ตั้งแต่จองจนถึงเข้าพัก",
     seeSystemStep1: "แขกจอง",
     seeSystemStep2: "คุณเห็นเลย",
     seeSystemStep3: "แขกได้รับ",
@@ -546,7 +549,7 @@ export const contentData = {
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ (หลายที่พัก)",
+    tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
 
     // --- FAQ SECTION ---
     faqLabel: "FAQ",
