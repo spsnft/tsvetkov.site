@@ -176,7 +176,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           .see-stage {
             position: relative;
             width: 100%;
-            aspect-ratio: 1000 / 700;
+            aspect-ratio: 1000 / 620;
           }
 
           .see-layer {
@@ -195,7 +195,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
              numbers in its header (см. ТЗ раунд 2, №2) */
           .see-layer-dashboard {
             left: 30%;
-            top: 30%;
+            top: 19%;
             width: 64%;
             z-index: 1;
           }
@@ -213,7 +213,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
 
           .see-layer-phone {
             left: 18%;
-            top: 24%;
+            top: 13%;
             width: 15.5%;
             z-index: 2;
           }
@@ -233,7 +233,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
              тот же глубокий нахлёст в верхний угол (см. ТЗ раунд 2, №2) */
           .see-layer-email {
             left: 84%;
-            top: 24%;
+            top: 13%;
             width: 11%;
             z-index: 3;
           }

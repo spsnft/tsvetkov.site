@@ -97,7 +97,7 @@ export default function Hero({ t }: HeroProps) {
         <div className="hero-inner">
           <h1 className="title">
             {titleLines.map((line, i) => {
-              const m = /1\s?5\s?[-‐‑‒–—]\s?2\s?0\s?%/.exec(line);
+              const m = /1\s?5\s?[-‐‑‒–—]\s?2\s?0\s?%\.?/.exec(line);
               return (
                 <React.Fragment key={i}>
                   {i > 0 && <br />}

@@ -36,6 +36,16 @@ export default function CalculatorSection({ t = {} }: CalculatorSectionProps) {
         .calc-cta {
           margin-top: 20px;
         }
+
+        /* На десктопе кнопка сжимается до содержимого (см. PrimaryCta) и
+           без этого паддинга прижималась бы к внешнему краю карточки —
+           левее заголовков и цифр внутри неё, у которых есть свой
+           горизонтальный паддинг 1.75rem (см. HeroCalculator .hero-calc) */
+        @media (min-width: 768px) {
+          .calc-cta {
+            padding-left: 1.75rem;
+          }
+        }
       `}</style>
 
       <div className="container">

@@ -38,7 +38,7 @@ export const contentData = {
     // где раньше — Pricing, FooterCTA, Nav). "my" вместо "your" — решение
     // читается как собственное (см. ТЗ №7, п. 3.1)
     heroCtaLabel: "Ask for my revenue check",
-    heroCtaNote: "One WhatsApp message. No commitment.",
+    heroCtaNote: "One WhatsApp message. No commitment",
     // Текст кнопки в хедере — свой, короче и без "free" (см. ТЗ №7, п. 4.1):
     // "free" уже есть в главной кнопке, дублировать на одном экране незачем
     navCtaLabel: "Revenue check",
@@ -192,7 +192,7 @@ export const contentData = {
     // отдельный элемент над рамкой, см. Pricing.tsx. $30–100/month снят
     // отсюда, остаётся только в FAQ (там он снимает страх, а не пугает в
     // момент выбора тарифа, см. ТЗ №3, п. 7.2)
-    pricePaybackNote: "Final price confirmed after your revenue check. PMS and channel manager subscriptions are billed by the provider, separately from our fee.",
+    pricePaybackNote: "Final price confirmed after your revenue check. PMS and channel manager subscriptions are billed by the provider, separately from our fee",
 
     // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия.
     // Обещание срока (14 дней) снято — гарантия результата без обещания
@@ -204,7 +204,7 @@ export const contentData = {
     // поэтому строка короче. Не переиспользует heroCtaNote — здесь
     // конкретика про имя объекта работает лучше в точке решения
     // (см. ТЗ №10, п. D4)
-    ctaNote: "Send us your property name. We reply within a day.",
+    ctaNote: "Send us your property name. We reply within a day",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -277,10 +277,10 @@ export const contentData = {
     // Структура один в один с EN: H1 в две строки через "\n", "15–20%" в
     // акцентном градиенте, кнопка — в CalculatorSection (см. ТЗ
     // «Синхронизировать RU/TH с EN»)
-    heroTitle: "Принимайте брони напрямую.\nОставляйте себе 15–20%.",
+    heroTitle: "Принимайте брони напрямую.\nОставьте себе 15–20%.",
     heroSubtitle: "Гости бронируют напрямую на вашем сайте. Все каналы — в одном календаре. Всё принадлежит вам.",
-    heroCtaLabel: "Запросить разбор выручки",
-    heroCtaNote: "Одно сообщение в WhatsApp. Никаких обязательств.",
+    heroCtaLabel: "Хочу разбор выручки",
+    heroCtaNote: "Одно сообщение в WhatsApp. Никаких обязательств",
     navCtaLabel: "Разбор выручки",
     btnAudit: "Бесплатный разбор выручки",
     btnAuditShort: "Бесплатный разбор",
@@ -375,11 +375,11 @@ export const contentData = {
     // Единый блок в рамке — гарантия результата + мелкая строка про цену и
     // подписки, без обещания срока, как в EN (см. ТЗ «Синхронизировать
     // RU/TH с EN»)
-    pricePaybackNote: "Финальная цена подтверждается после бесплатного разбора. Подписки на PMS и channel manager оплачиваются провайдеру напрямую, отдельно от нашей комиссии.",
-    riskTitle: "50% на старте. Вторая половина — только когда система запущена.",
+    pricePaybackNote: "Финальная цена подтверждается после бесплатного разбора. Подписки на PMS и channel manager оплачиваются провайдеру напрямую, отдельно от нашей комиссии",
+    riskTitle: "50% на старте. Вторая половина — только после запуска",
 
     // Микрокопия под кнопкой в финальном CTA-блоке
-    ctaNote: "Напишите название объекта. Мы ответим, сколько вам стоят OTA — на ваших цифрах, а не на примере.",
+    ctaNote: "Напишите название объекта. Мы ответим, сколько вам стоят OTA — на ваших цифрах, а не на примере",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
