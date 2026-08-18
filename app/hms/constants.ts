@@ -192,7 +192,7 @@ export const contentData = {
     // отдельный элемент над рамкой, см. Pricing.tsx. $30–100/month снят
     // отсюда, остаётся только в FAQ (там он снимает страх, а не пугает в
     // момент выбора тарифа, см. ТЗ №3, п. 7.2)
-    pricePaybackNote: "Final price confirmed after your revenue check. PMS and channel manager subscriptions are billed by the provider, separately from our fee",
+    pricePaybackNote: "Final price confirmed after your revenue check. Software subscriptions are billed directly by the provider",
 
     // Реверс риска: стоит выше кнопки, чтобы снятие риска прошло до нажатия.
     // Обещание срока (14 дней) снято — гарантия результата без обещания
@@ -216,7 +216,7 @@ export const contentData = {
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Desc: "For hotel chains & operators (multi-property)",
+    tier3Desc: "For hotel chains & operators",
 
     // --- FAQ SECTION ---
     // faqTitle снят для EN — FAQ.tsx для lang==='en' поднимает faqSub на
@@ -277,7 +277,7 @@ export const contentData = {
     // Структура один в один с EN: H1 в две строки через "\n", "15–20%" в
     // акцентном градиенте, кнопка — в CalculatorSection (см. ТЗ
     // «Синхронизировать RU/TH с EN»)
-    heroTitle: "Принимайте брони напрямую.\nОставьте себе 15–20%.",
+    heroTitle: "Принимайте брони напрямую.\nОставляйте себе 15–20%.",
     heroSubtitle: "Гости бронируют напрямую на вашем сайте. Все каналы — в одном календаре. Всё принадлежит вам.",
     heroCtaLabel: "Хочу разбор выручки",
     heroCtaNote: "Одно сообщение в WhatsApp. Никаких обязательств",
@@ -317,7 +317,7 @@ export const contentData = {
     scalePair2Problem: "Ваши гости принадлежат платформе",
     scalePair2Solution: "База гостей принадлежит вам",
     scalePair3Problem: "Цены обновляются вручную, круглые сутки",
-    scalePair3Solution: "Одно обновление — синхронизация на 300+ каналах",
+    scalePair3Solution: "Автообновление на 300+ каналов",
 
     // --- WHO'S BEHIND THIS ---
     // Структура один в один с EN: заголовок — имя, агентство и локация —
@@ -343,7 +343,7 @@ export const contentData = {
     // Экраны внутри — на английском во всех локалях (см. constants.ts EN);
     // локализуются только подписи вокруг них
     seeSystemEyebrow: "КАК ЭТО РАБОТАЕТ",
-    seeSystemTitle: "Как это работает — от брони до заезда",
+    seeSystemTitle: "От брони до заезда",
     seeSystemStep1: "Гость бронирует",
     seeSystemStep2: "Вы это видите",
     seeSystemStep3: "Гость получает",
@@ -375,11 +375,11 @@ export const contentData = {
     // Единый блок в рамке — гарантия результата + мелкая строка про цену и
     // подписки, без обещания срока, как в EN (см. ТЗ «Синхронизировать
     // RU/TH с EN»)
-    pricePaybackNote: "Финальная цена подтверждается после бесплатного разбора. Подписки на PMS и channel manager оплачиваются провайдеру напрямую, отдельно от нашей комиссии",
+    pricePaybackNote: "Финальная цена подтверждается после бесплатного разбора. Подписки на софт оплачиваются провайдеру напрямую",
     riskTitle: "50% на старте. Вторая половина — только после запуска",
 
     // Микрокопия под кнопкой в финальном CTA-блоке
-    ctaNote: "Напишите название объекта. Мы ответим, сколько вам стоят OTA — на ваших цифрах, а не на примере",
+    ctaNote: "Напишите название объекта. Мы ответим в течение дня",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -391,7 +391,7 @@ export const contentData = {
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Desc: "Для сетей отелей и операторов (несколько объектов)",
+    tier3Desc: "Для сетей отелей и операторов",
 
     // --- FAQ SECTION ---
     faqLabel: "FAQ",
@@ -500,7 +500,10 @@ export const contentData = {
 
     // --- SEE THE SYSTEM ---
     seeSystemEyebrow: "วิธีการทำงาน",
-    seeSystemTitle: "ระบบทำงานอย่างไรตั้งแต่ต้นจนจบ",
+    // Черновик, не подтверждён — та же логика, что и у RU (не повторять
+    // eyebrow "วิธีการทำงาน" словами в заголовке), но формулировку нужно
+    // проверить с носителем тайского перед деплоем (см. ТЗ пакет 5, п. 2)
+    seeSystemTitle: "ตั้งแต่จองจนถึงเข้าพัก",
     seeSystemStep1: "แขกจอง",
     seeSystemStep2: "คุณเห็นเลย",
     seeSystemStep3: "แขกได้รับ",
@@ -530,11 +533,14 @@ export const contentData = {
 
     // Единый блок в рамке — гарантия результата + мелкая строка про цену и
     // подписки, без обещания срока, как в EN
-    pricePaybackNote: "ราคาสุดท้ายยืนยันหลังตรวจสอบรายได้ฟรี ค่าสมัครใช้งาน PMS และ channel manager ชำระตรงกับผู้ให้บริการ แยกจากค่าบริการของเรา",
+    pricePaybackNote: "ราคาสุดท้ายยืนยันหลังตรวจสอบรายได้ฟรี ค่าสมัครใช้งานซอฟต์แวร์ชำระตรงกับผู้ให้บริการ",
     riskTitle: "จ่าย 50% ตอนเริ่ม ส่วนที่เหลือจ่ายเมื่อระบบพร้อมใช้งานแล้วเท่านั้น",
 
     // Микрокопия под кнопкой в финальном CTA-блоке
-    ctaNote: "ส่งชื่อที่พักของคุณมา เราจะตอบกลับพร้อมตัวเลขว่า OTA เสียค่าใช้จ่ายให้คุณเท่าไหร่ — ตัวเลขจริงของคุณ ไม่ใช่ตัวอย่าง",
+    // Черновик, не подтверждён — подтянуто под уже укороченный паттерн
+    // EN/RU, но формулировку нужно проверить с носителем тайского перед
+    // деплоем (см. ТЗ пакет 6, п. 4)
+    ctaNote: "ส่งชื่อที่พักของคุณมา เราจะตอบกลับภายในหนึ่งวัน",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -546,7 +552,7 @@ export const contentData = {
 
     tier3Title: "ENTERPRISE",
     tier3Price: "Custom",
-    tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ (หลายที่พัก)",
+    tier3Desc: "สำหรับเครือโรงแรมและบริษัทจัดการ",
 
     // --- FAQ SECTION ---
     faqLabel: "FAQ",
