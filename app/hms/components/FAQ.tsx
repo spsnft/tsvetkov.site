@@ -8,18 +8,13 @@ interface FAQProps {
   lang?: 'en' | 'ru' | 'th';
 }
 
-export default function FAQ({ t, lang = 'en' }: FAQProps) {
+export default function FAQ({ t }: FAQProps) {
   // Первый вопрос (индекс 0) открыт по умолчанию
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-
-  // EN: eyebrow + faqSub как H2, faqTitle убран (см. ТЗ). RU/TH: старая
-  // пара faqTitle (H2) + faqSub (подзаголовок) — их H2 локализован,
-  // трогать не нужно
-  const isEn = lang === 'en';
 
   return (
     <section id="faq" className="faq-section">
@@ -59,12 +54,6 @@ export default function FAQ({ t, lang = 'en' }: FAQProps) {
           margin: 0 0 0.75rem 0;
           letter-spacing: -0.03em;
           line-height: 1.2;
-        }
-
-        .faq-subtitle {
-          color: ${T.sub};
-          font-size: 1.05rem;
-          margin: 0;
         }
 
         .faq-list {
@@ -173,17 +162,8 @@ export default function FAQ({ t, lang = 'en' }: FAQProps) {
 
       <div className="faq-container">
         <div className="faq-header">
-          {isEn ? (
-            <>
-              <p className="faq-eyebrow">{t?.faqLabel || 'FAQ'}</p>
-              <h2 className="faq-title">{t?.faqSub}</h2>
-            </>
-          ) : (
-            <>
-              <h2 className="faq-title">{t?.faqTitle}</h2>
-              <p className="faq-subtitle">{t?.faqSub}</p>
-            </>
-          )}
+          <p className="faq-eyebrow">{t?.faqLabel || 'FAQ'}</p>
+          <h2 className="faq-title">{t?.faqSub}</h2>
         </div>
 
         <div className="faq-list">

@@ -66,8 +66,6 @@ const BACK_LABEL: Record<string, string> = {
 export const Nav = ({ lang, dict }: NavProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  // До 1024px в шапку помещается только короткий вариант текста CTA
-  const [isCompactCta, setIsCompactCta] = useState(false);
   // На узких экранах шапке не хватает ширины на полный текст CTA
   const [isNarrow, setIsNarrow] = useState(false);
   // 320px + длинный русский текст — самый узкий случай, ужимаем сильнее
@@ -78,10 +76,8 @@ export const Nav = ({ lang, dict }: NavProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const isHms = pathname?.includes('/hms') ?? false;
-  // EN /hms only: хедер-кнопка ghost, пока виден Hero, заливка — после
-  // прокрутки за него (см. ТЗ №7, п. 4.2). RU/TH остаются на прежнем
-  // постоянно залитом варианте
-  const isHmsEn = isHms && lang === 'en';
+  // /hms: хедер-кнопка ghost, пока виден Hero, заливка — после прокрутки за
+  // него, одинаково для всех локалей (см. ТЗ №7, п. 4.2)
   const [heroVisible, setHeroVisible] = useState(true);
 
   const t = dict?.nav ?? {
@@ -98,7 +94,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
   // Один IntersectionObserver на секцию Hero — переключает ghost/заливку
   // кнопки хедера (см. ТЗ №7, п. 4.2)
   useEffect(() => {
-    if (!isHmsEn) return;
+    if (!isHms) return;
     const el = document.getElementById('hero-section');
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -107,13 +103,12 @@ export const Nav = ({ lang, dict }: NavProps) => {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [isHmsEn]);
+  }, [isHms]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      setIsCompactCta(window.innerWidth <= 1023);
       setIsNarrow(window.innerWidth <= 480);
       setIsTiny(window.innerWidth <= 360);
     };
@@ -216,10 +211,10 @@ export const Nav = ({ lang, dict }: NavProps) => {
 
   // Габариты кнопки задаются медиазапросами, а вариант текста — состоянием:
   // в разметке должен быть ровно один текст, иначе скринридер читает оба,
-  // а в поисковую выдачу попадает склейка. EN /hms: ghost, пока виден Hero,
+  // а в поисковую выдачу попадает склейка. /hms: ghost, пока виден Hero,
   // иначе заливка — размер кнопки в обоих состояниях одинаковый, меняется
   // только оформление (см. ТЗ №7, п. 4.2)
-  const useGhostCta = isHmsEn && heroVisible;
+  const useGhostCta = isHms && heroVisible;
 
   const ctaElement = isHms ? (
     <motion.a
@@ -242,11 +237,7 @@ export const Nav = ({ lang, dict }: NavProps) => {
       }}
     >
       <WhatsAppIcon size={15} />
-      <span>
-        {isHmsEn
-          ? (hmsContentData.en.navCtaLabel || 'Revenue check')
-          : (isCompactCta ? (hmsT.btnAuditShort || hmsT.btnAudit) : hmsT.btnAudit)}
-      </span>
+      <span>{hmsT.navCtaLabel || 'Revenue check'}</span>
     </motion.a>
   ) : (
     <motion.a
