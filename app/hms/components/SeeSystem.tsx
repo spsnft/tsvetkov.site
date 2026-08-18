@@ -24,6 +24,23 @@ interface SeeSystemProps {
   };
 }
 
+// Красит первое вхождение суммы (например "$117" или "฿3,800") в
+// фирменный градиент — тот же приём и класс ".accent", что и у "15–20%"
+// в Hero и "20+"/"10+" в Trust Stats (см. ТЗ пакет 4, п. A1). accentClass
+// позволяет добавить модификатор кегля только для основной строки, не
+// трогая сноску ниже неё
+function withAccentAmount(text: string, accentClass = 'accent') {
+  const m = /[$฿][\d,]+/.exec(text);
+  if (!m) return text;
+  return (
+    <>
+      {text.slice(0, m.index)}
+      <span className={accentClass}>{m[0]}</span>
+      {text.slice(m.index + m[0].length)}
+    </>
+  );
+}
+
 // Три условных демо-экрана — не скриншоты Little Hotelier/Beds24/Cloudbeds
 // (клиентам подключаются разные платформы), а нейтральный интерфейс,
 // свёрстанный в дизайн-системе сайта. См. /scripts/demo-screens.
@@ -412,6 +429,28 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           margin-top: 10px;
         }
 
+        /* Тот же градиент и приём (background-clip: text), что у "15–20%"
+           в Hero и "20+"/"10+" в Trust Stats — переиспользуем токен, не
+           заводим новый (см. ТЗ пакет 4, п. A1) */
+        .see-caption :global(.accent),
+        .see-caption-sub :global(.accent) {
+          background: ${T.linearGradient};
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        /* Крупнее окружающего текста — та же логика, что у "20+"/"10+"
+           поверх подписи под ними (см. ТЗ пакет 4, п. A2). Только на
+           десктопе: .see-caption на мобильном подобран бинарным поиском
+           впритык под 320-414px (см. комментарий выше), лишние ~30%
+           ширины на "$117" сломали бы этот бюджет и перенесли строку */
+        @media (min-width: 768px) {
+          .see-caption :global(.accent-lg) {
+            font-size: 1.3em;
+          }
+        }
+
         /* Вторая строка — баты и масштаб («одна бронь»), объясняет
            происхождение цифры выше себя, тише и мельче */
         .see-caption-sub {
@@ -554,10 +593,10 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
               <p className="see-disclaimer">{t.seeSystemDisclaimer}</p>
             )}
             <p className={`see-caption${t.seeSystemDisclaimer ? ' tight' : ''}`}>
-              {t.seeSystemCaption || 'You keep $117 more on this booking'}
+              {withAccentAmount(t.seeSystemCaption || 'You keep $117 more on this booking', 'accent accent-lg')}
             </p>
             {t.seeSystemCaptionSub && (
-              <p className="see-caption-sub">{t.seeSystemCaptionSub}</p>
+              <p className="see-caption-sub">{withAccentAmount(t.seeSystemCaptionSub)}</p>
             )}
           </div>
         </div>

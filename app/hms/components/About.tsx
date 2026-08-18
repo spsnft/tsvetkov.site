@@ -343,8 +343,15 @@ export default function About({ t = {} }: AboutProps) {
 
           <div className="about-text">
             <p className="about-paragraph hyphenate">{t.aboutP1}</p>
-            {t.aboutP2 && <p className="about-paragraph hyphenate">{t.aboutP2}</p>}
-            {t.aboutP3 && <p className="about-paragraph hyphenate">{t.aboutP3}</p>}
+            {/* aboutP2 и aboutP3 читаются одним непрерывным абзацем — .about-text
+                даёт 1rem-зазор между всеми детьми через flex gap, поэтому
+                объединяем их в один <p>, а не убираем зазор точечным
+                отрицательным margin (см. ТЗ пакет 4, п. B) */}
+            {(t.aboutP2 || t.aboutP3) && (
+              <p className="about-paragraph hyphenate">
+                {t.aboutP2}{t.aboutP2 && t.aboutP3 ? ' ' : ''}{t.aboutP3}
+              </p>
+            )}
           </div>
 
           {t.aboutClosingLine && (
