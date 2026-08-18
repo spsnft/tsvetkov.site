@@ -41,7 +41,7 @@ export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
            убрано */
         .footer-cta-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           text-align: center;
           position: relative;
           background: transparent;
@@ -185,7 +185,7 @@ export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
 
         @media (max-width: 768px) {
           .footer-cta-section {
-            padding: ${T.hms.sectionPadMobile} 0;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .legal-footer {
             justify-content: center;

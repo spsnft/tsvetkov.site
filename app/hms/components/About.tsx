@@ -67,7 +67,7 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
       <style jsx>{`
         .about-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -367,7 +367,7 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
 
         @media (max-width: 767px) {
           .about-section {
-            padding: ${T.hms.sectionPadMobile} 0;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .about-role {
             font-size: 0.94rem;

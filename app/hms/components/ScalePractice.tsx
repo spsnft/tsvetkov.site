@@ -42,7 +42,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <style jsx>{`
         .scale-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -172,7 +172,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         @media (max-width: 767px) {
           .scale-section {
-            padding: ${T.hms.sectionPadMobile} 0;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .scale-title {
             font-size: 1.75rem;

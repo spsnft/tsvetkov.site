@@ -58,8 +58,13 @@ export default function PrimaryCta({ label, message, note, align = 'left' }: Pri
           }
         }
 
-        .primary-cta.center :global(.primary-cta-btn.btn-premium-core) {
-          margin: 0 auto;
+        /* .btn-premium-core — inline-flex, margin: auto его не центрирует
+           (auto-margины центрируют только блочные боксы). Центрируем через
+           flex на обёртке вместо margin (см. ТЗ раунд 2, №4) */
+        .primary-cta.center {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .primary-cta-note {

@@ -26,7 +26,7 @@ export default function FAQ({ t, lang = 'en' }: FAQProps) {
       <style jsx>{`
         .faq-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -163,7 +163,7 @@ export default function FAQ({ t, lang = 'en' }: FAQProps) {
 
         /* --- МОБИЛЬНЫЕ (ДО 767px) --- */
         @media (max-width: 767px) {
-          .faq-section { padding: ${T.hms.sectionPadMobile} 0; }
+          .faq-section { padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0; }
           .faq-title { font-size: 1.8rem; }
           .faq-button { font-size: 1rem; padding: 1.2rem; }
 

@@ -104,7 +104,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
       <style jsx>{`
         .see-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -190,8 +190,9 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
             border: 1px solid rgba(255, 255, 255, 0.1);
           }
 
-          /* Base layer. Positioned low enough that the phone/email overlap
-             only grazes its header, never the metric numbers. */
+          /* Base layer. Phone/email tuck into its top corners — deep enough
+             to read as one collage, shallow enough to clear the metric
+             numbers in its header (см. ТЗ раунд 2, №2) */
           .see-layer-dashboard {
             left: 30%;
             top: 30%;
@@ -227,9 +228,12 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
             width: 210px;
           }
 
+          /* Было top: 1% — карточка почти не касалась дашборда, отсюда
+             разрыв. Симметрично левой стороне: тот же top, что у phone,
+             тот же глубокий нахлёст в верхний угол (см. ТЗ раунд 2, №2) */
           .see-layer-email {
             left: 84%;
-            top: 1%;
+            top: 24%;
             width: 11%;
             z-index: 3;
           }
@@ -238,7 +242,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           }
           .see-layer-email .see-cap-block {
             position: absolute;
-            left: 2px;
+            right: 2px;
             bottom: 100%;
             margin-bottom: 10px;
             width: 190px;
@@ -415,7 +419,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
 
         @media (max-width: 767px) {
           .see-section {
-            padding: ${T.hms.sectionPadMobile} 0;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .see-title {
             font-size: 1.9rem;

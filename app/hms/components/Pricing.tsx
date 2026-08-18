@@ -78,7 +78,7 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -451,7 +451,7 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
 
         @media (max-width: 767px) {
           .pricing-section {
-            padding: ${T.hms.sectionPadMobile} 0;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .pricing-title {
             font-size: 1.75rem;

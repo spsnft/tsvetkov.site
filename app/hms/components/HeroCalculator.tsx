@@ -44,7 +44,6 @@ export interface HeroCalculatorCopy {
   calcAssumptions?: string;
   calcAssumptionsAria?: string;
   calcRecoveryLabel?: string;
-  calcEstimateLabel?: string;
 }
 
 export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
@@ -392,17 +391,6 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           color: #ffffff;
         }
 
-        /* Единая пометка приблизительности для обоих чисел сразу — заменяет
-           тильду, которая раньше стояла только у recoveryUsd и читалась как
-           несогласованность с annualUsd (см. ТЗ №2) */
-        .estimate-note {
-          margin: 0.6rem 0 0 0;
-          font-size: 0.7rem;
-          font-weight: 600;
-          color: ${T.muted};
-          text-align: right;
-        }
-
         @keyframes calc-pop {
           from {
             opacity: 0.45;
@@ -499,6 +487,12 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
                 value={adr}
                 onChange={(e) => setAdr(clamp(Math.round(Number(e.target.value)), ADR_MIN, ADR_MAX))}
                 aria-label={t.calcAdrLabel || 'Average nightly rate'}
+                // Фиксированная 3.2ch-ширина оставляла пустой хвост слева от
+                // цифр при 2-значных значениях (30–99) — из-за text-align:
+                // right он визуально сливался с зазором после "$", как один
+                // большой отступ. Ширина по факту введённых цифр убирает
+                // этот хвост (см. ТЗ раунд 2, №3.2)
+                style={{ width: `${String(adr).length}ch` }}
               />
             </span>
           </div>
@@ -577,8 +571,6 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
             </div>
           )}
         </div>
-
-        <p className="estimate-note">{t.calcEstimateLabel || 'Estimated'}</p>
       </div>
     </div>
   );
