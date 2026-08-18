@@ -12,14 +12,11 @@ interface CalculatorSectionProps {
 }
 
 // Отдельный блок, а не часть хиро: карточка нарочно выглядывает из-за
-// сгиба на мобильном, чтобы подсказать про скролл. EN: кнопка и микрокопия
-// теперь тоже здесь, сразу под калькулятором — сильнейшим аргументом
-// страницы, а не до него (см. ТЗ №7, п. 2). Стиль кнопки — общий компонент
-// PrimaryCta, тот же, что в Pricing и финальном CTA (см. ТЗ №10, п. C1).
-// RU/TH: только калькулятор, кнопка остаётся в Hero
-export default function CalculatorSection({ t = {}, lang = 'en' }: CalculatorSectionProps) {
-  const isEn = lang === 'en';
-
+// сгиба на мобильном, чтобы подсказать про скролл. Кнопка и микрокопия —
+// сразу под калькулятором, сильнейшим аргументом страницы, а не до него
+// (см. ТЗ №7, п. 2), для всех локалей. Стиль кнопки — общий компонент
+// PrimaryCta, тот же, что в Pricing и финальном CTA (см. ТЗ №10, п. C1)
+export default function CalculatorSection({ t = {} }: CalculatorSectionProps) {
   return (
     <section className="calc-section">
       <style jsx>{`
@@ -45,16 +42,14 @@ export default function CalculatorSection({ t = {}, lang = 'en' }: CalculatorSec
         <div className="calc-inner">
           <HeroCalculator t={t} />
 
-          {isEn && (
-            <div className="calc-cta">
-              <PrimaryCta
-                label={t.heroCtaLabel || 'Ask for my revenue check'}
-                message={t.waMessage}
-                note={t.heroCtaNote || 'One WhatsApp message. No commitment.'}
-                align="left"
-              />
-            </div>
-          )}
+          <div className="calc-cta">
+            <PrimaryCta
+              label={t.heroCtaLabel || 'Ask for my revenue check'}
+              message={t.waMessage}
+              note={t.heroCtaNote || 'One WhatsApp message. No commitment.'}
+              align="center"
+            />
+          </div>
         </div>
       </div>
     </section>

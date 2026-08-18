@@ -8,10 +8,12 @@ interface PrimaryCtaProps {
   label: string;
   message?: string;
   note?: string;
-  // 'left' — Hero/CalculatorSection (кнопка у левого края узкой колонки
-  // калькулятора). 'center' — Pricing/FooterCTA, обе секции уже
-  // центрированы целиком. Радиус/тень/hover/active/переход одни на всех
-  // трёх мест, чтобы следующая правка не разошлась снова (см. ТЗ №10, п. C1)
+  // 'center' — все текущие места использования (Hero/CalculatorSection,
+  // Pricing, FooterCTA): кнопка центрируется относительно всего блока,
+  // а не прижимается к одному краю (см. ТЗ пакет 3, п. A2). 'left'
+  // остаётся доступным как опция компонента. Радиус/тень/hover/active/
+  // переход одни на всех местах, чтобы следующая правка не разошлась
+  // снова (см. ТЗ №10, п. C1)
   align?: 'left' | 'center';
 }
 
@@ -58,8 +60,13 @@ export default function PrimaryCta({ label, message, note, align = 'left' }: Pri
           }
         }
 
-        .primary-cta.center :global(.primary-cta-btn.btn-premium-core) {
-          margin: 0 auto;
+        /* .btn-premium-core — inline-flex, margin: auto его не центрирует
+           (auto-margины центрируют только блочные боксы). Центрируем через
+           flex на обёртке вместо margin (см. ТЗ раунд 2, №4) */
+        .primary-cta.center {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .primary-cta-note {

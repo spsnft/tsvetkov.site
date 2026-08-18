@@ -2,41 +2,22 @@
 
 import React from 'react';
 import { T } from '../../../src/theme/tokens';
-import WhatsAppCta from './WhatsAppCta';
 
 interface HeroProps {
   t: {
     heroTitle: string;
     heroSubtitle?: string;
-    btnAudit?: string;
-    waMessage?: string;
   };
   lang?: 'en' | 'ru' | 'th';
 }
 
-export default function Hero({ t, lang = 'en' }: HeroProps) {
-  // EN: H1 — два предложения на жёстко заданных строках, "15–20%" в
-  // фирменном градиенте, кнопка переехала в CalculatorSection и здесь
-  // больше не рисуется (см. ТЗ №7, п. 1/2). RU/TH: старая логика —
-  // однострочный заголовок с некрашеным «15–20%» без переноса — не трогаем
-  const isEn = lang === 'en';
-
-  // Число не красим (было — сняли зелёный: комиссия не должна читаться как
-  // деньги владельца), но всё ещё держим «15–20%» на одной строке — иначе
-  // перенос ровно по en dash на глаз превращается в дефис
-  const titleParts = (() => {
-    const match = /1\s?5\s?[-‐‑‒–—]\s?2\s?0\s?%/.exec(t.heroTitle || '');
-    if (!match) return null;
-    return {
-      before: t.heroTitle.slice(0, match.index),
-      accent: match[0],
-      after: t.heroTitle.slice(match.index + match[0].length)
-    };
-  })();
-
-  // EN-заголовок хранится как две строки через "\n" — перенос между ними
-  // жёсткий (не на усмотрение браузера), внутри строки перенос обычный
-  const enTitleLines = isEn ? (t.heroTitle || '').split('\n') : null;
+export default function Hero({ t }: HeroProps) {
+  // Заголовок хранится как две строки через "\n" — перенос между ними
+  // жёсткий (не на усмотрение браузера), внутри строки перенос обычный.
+  // Единая логика для всех локалей (см. ТЗ «Синхронизировать RU/TH с EN») —
+  // кнопка переехала в CalculatorSection и здесь больше не рисуется ни для
+  // одной локали
+  const titleLines = (t.heroTitle || '').split('\n');
 
   return (
     // Секция рендерится сразу, без фейда по монтированию: первый экран
@@ -52,9 +33,8 @@ export default function Hero({ t, lang = 'en' }: HeroProps) {
           z-index: 10;
         }
 
-        /* EN: H1, подзаголовок — кнопка теперь в CalculatorSection, после
-           калькулятора (см. ТЗ №7, п. 2). RU/TH: H1, подзаголовок, кнопка,
-           как раньше */
+        /* H1, подзаголовок — кнопка в CalculatorSection, после калькулятора,
+           для всех локалей (см. ТЗ №7, п. 2) */
         .hero-inner {
           max-width: 720px;
           margin: 0 auto;
@@ -75,10 +55,6 @@ export default function Hero({ t, lang = 'en' }: HeroProps) {
           width: 100%;
         }
 
-        .title-nowrap {
-          white-space: nowrap;
-        }
-
         /* Градиент маркирует то, что владелец получает — тот же приём,
            что у direct/~$6,800/20+ по всей странице (см. ТЗ №7, п. 1.3) */
         .accent {
@@ -91,37 +67,15 @@ export default function Hero({ t, lang = 'en' }: HeroProps) {
         .subtitle {
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.55;
-          margin: 0 0 2rem 0;
+          /* Подзаголовок → калькулятор — согласовано с заказчиком: было
+             64px (это margin-bottom + padding-bottom секции), убираем
+             margin здесь и оставляем только padding-bottom секции (32px),
+             чтобы Hero и калькулятор читались одним блоком (см. ТЗ №4) */
+          margin: 0;
           color: #CBD5E1;
           font-weight: 400;
           text-wrap: pretty;
           max-width: 560px;
-        }
-
-        .cta-container {
-          display: flex;
-          align-items: stretch;
-          justify-content: center;
-          width: 100%;
-          max-width: 480px;
-        }
-
-        .cta-container :global(.btn-premium-core) {
-          flex: 1 1 auto;
-          min-width: 0;
-          width: 100%;
-        }
-
-        .cta-container :global(.btn-premium-core svg) {
-          flex-shrink: 0;
-        }
-
-        /* На 320px длинный русский текст не влезает в кнопку при обычном паддинге */
-        @media (max-width: 360px) {
-          .cta-container :global(.btn-premium-core) {
-            padding: 0 0.7rem;
-            font-size: 0.95rem;
-          }
         }
 
         /* Хиро + калькулятор должны целиком помещаться на 390×844 без
@@ -136,57 +90,35 @@ export default function Hero({ t, lang = 'en' }: HeroProps) {
           .title {
             margin-bottom: 12px;
           }
-          .subtitle {
-            margin-bottom: 24px;
-          }
         }
       `}</style>
 
       <div className="container">
         <div className="hero-inner">
           <h1 className="title">
-            {isEn && enTitleLines
-              ? enTitleLines.map((line, i) => {
-                  const m = /1\s?5\s?[-‐‑‒–—]\s?2\s?0\s?%/.exec(line);
-                  return (
-                    <React.Fragment key={i}>
-                      {i > 0 && <br />}
-                      {m ? (
-                        <>
-                          {line.slice(0, m.index)}
-                          <span className="accent">{m[0]}</span>
-                          {line.slice(m.index + m[0].length)}
-                        </>
-                      ) : (
-                        line
-                      )}
-                    </React.Fragment>
-                  );
-                })
-              : titleParts
-              ? (
-                <>
-                  {titleParts.before}
-                  <span className="title-nowrap">{titleParts.accent}</span>
-                  {titleParts.after}
-                </>
-              )
-              : t.heroTitle}
+            {titleLines.map((line, i) => {
+              const m = /1\s?5\s?[-‐‑‒–—]\s?2\s?0\s?%\.?/.exec(line);
+              return (
+                <React.Fragment key={i}>
+                  {i > 0 && <br />}
+                  {m ? (
+                    <>
+                      {line.slice(0, m.index)}
+                      <span className="accent">{m[0]}</span>
+                      {line.slice(m.index + m[0].length)}
+                    </>
+                  ) : (
+                    line
+                  )}
+                </React.Fragment>
+              );
+            })}
           </h1>
 
           <p className="subtitle">
             {t.heroSubtitle ||
               'Guests book direct on your site. Every channel stays in one calendar. Everything is in your name.'}
           </p>
-
-          {!isEn && (
-            <div className="cta-container">
-              <WhatsAppCta
-                label={t.btnAudit || "Free Revenue Check"}
-                message={t.waMessage}
-              />
-            </div>
-          )}
         </div>
       </div>
     </section>

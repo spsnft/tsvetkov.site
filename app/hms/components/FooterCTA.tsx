@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { T } from '../../../src/theme/tokens';
-import WhatsAppCta from './WhatsAppCta';
 import PrimaryCta from './PrimaryCta';
 
 interface FooterCTAProps {
@@ -11,10 +10,7 @@ interface FooterCTAProps {
     footerLabel?: string;
     footerTitle?: string;
     footerSub1?: string;
-    footerSub2?: string;
     footerSub?: string;
-    footerBtn?: string;
-    btnAudit?: string;
     heroCtaLabel?: string;
     waMessage?: string;
     [key: string]: any;
@@ -22,16 +18,9 @@ interface FooterCTAProps {
   lang?: 'en' | 'ru' | 'th';
 }
 
-export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
-  const isEn = lang === 'en';
+export default function FooterCTA({ t = {} }: FooterCTAProps) {
   const titleText = t.footerTitle || "Ready to maximize your revenue?";
   const sub1Text = t.footerSub1 || t.footerSub || "Stop leaving 15–20% on the table";
-  // Второй строки для EN больше нет — footerSub2 не задаётся, значит
-  // undefined, и блок ниже её не рендерит (см. ТЗ №10, п. D3). Хардкод
-  // "Take full control..." убран: он никогда не срабатывал ни для одной
-  // локали — все три задают свой footerSub2 явно, кроме EN теперь
-  const sub2Text = t.footerSub2;
-  const btnText = t.footerBtn || t.btnAudit || "Free Revenue Check";
 
   return (
     <section className="footer-cta-section">
@@ -41,7 +30,7 @@ export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
            убрано */
         .footer-cta-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           text-align: center;
           position: relative;
           background: transparent;
@@ -91,6 +80,13 @@ export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
           flex-direction: column;
           gap: 0.3rem;
           margin-bottom: 0.8rem;
+          /* «48px, как в остальных секциях» здесь была неверная аналогия:
+             тот токен — для перехода «eyebrow+H2 → первый содержательный
+             блок секции» (Pricing/ScalePractice/FAQ), а title→subtitle —
+             это пара заголовок-подзаголовок, как в Hero (H1→subtitle —
+             18px). .cta-box уже даёт 24px через flex gap — этого
+             достаточно, второй раз добавлять не нужно (см. ТЗ пакет 3,
+             п. A7) */
         }
 
         .subtitle {
@@ -101,24 +97,8 @@ export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
           text-wrap: pretty;
         }
 
-        /* Одна кнопка: по контенту на десктопе, на всю ширину на мобильном.
-           RU/TH-вариант — старый стиль, без изменений */
-        .cta-actions {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-        }
-
-        .cta-actions :global(.btn-premium-core svg) {
-          flex-shrink: 0;
-        }
-
-        /* EN: отдельный класс, а не .cta-actions — иначе медиа-правила ниже
-           (width/padding для RU/TH-кнопки) совпадают по селектору с новой
-           PrimaryCta (та же .btn-premium-core) и могли бы неожиданно
-           перебить её собственные стили в зависимости от порядка каскада
-           (см. ТЗ №10, п. C1) */
+        /* Одна кнопка, ширина по контенту на десктопе, на всю ширину на
+           мобильном — задаёт сама PrimaryCta */
         .cta-actions-primary {
           display: flex;
           align-items: center;
@@ -164,23 +144,9 @@ export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
           color: rgba(255, 255, 255, 0.6);
         }
 
-        @media (max-width: 767px) {
-          .cta-actions :global(.btn-premium-core) {
-            width: 100%;
-            padding: 0 1rem;
-          }
-        }
-
-        @media (max-width: 360px) {
-          .cta-actions :global(.btn-premium-core) {
-            padding: 0 0.7rem;
-            font-size: 0.95rem;
-          }
-        }
-
         @media (max-width: 768px) {
           .footer-cta-section {
-            padding: ${T.hms.sectionPadMobile} 0;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .legal-footer {
             justify-content: center;
@@ -199,22 +165,15 @@ export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
 
           <div className="subtitle-box">
             <p className="subtitle">{sub1Text}</p>
-            {sub2Text && <p className="subtitle">{sub2Text}</p>}
           </div>
 
-          {isEn ? (
-            <div className="cta-actions-primary">
-              <PrimaryCta
-                label={t.heroCtaLabel || 'Ask for my revenue check'}
-                message={t.waMessage}
-                align="center"
-              />
-            </div>
-          ) : (
-            <div className="cta-actions">
-              <WhatsAppCta label={btnText} message={t.waMessage} />
-            </div>
-          )}
+          <div className="cta-actions-primary">
+            <PrimaryCta
+              label={t.heroCtaLabel || 'Ask for my revenue check'}
+              message={t.waMessage}
+              align="center"
+            />
+          </div>
 
           {t.ctaNote && <p className="cta-note">{t.ctaNote}</p>}
         </div>

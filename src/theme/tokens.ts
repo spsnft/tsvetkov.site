@@ -82,9 +82,18 @@ export const T = {
   // case, its own composition) is the only exception. One flat background
   // across the page — section boundaries are padding + eyebrow/H2 only,
   // no more alternating tint (see ТЗ №3, п. 1)
+  //
+  // Top/bottom are asymmetric on purpose: a symmetric 120/72px pad on every
+  // section compounded to 240px/144px at every boundary (each section's own
+  // bottom pad stacking with the next one's top pad) — read as dead space,
+  // not a section break (see ТЗ раунд 2, №1). Top carries most of the gap
+  // so the eyebrow still reads as "new section starts here"; bottom is
+  // trimmed since the heading above already does that job once combined.
   hms: {
-    sectionPad: '120px',
-    sectionPadMobile: '72px',
+    sectionPadTop: '88px',
+    sectionPadBottom: '32px',
+    sectionPadTopMobile: '56px',
+    sectionPadBottomMobile: '24px',
     eyebrowGap: '8px',
   },
 

@@ -42,14 +42,18 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
       <style jsx>{`
         .scale-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
 
         .scale-header {
           text-align: center;
-          margin-bottom: 3.5rem;
+          /* Единый отступ «заголовок секции → первый контент» на всей
+             странице — согласовано с заказчиком по итогам аудита (ТЗ №4):
+             было 3.5rem/56px, приводим к общему 48px вместе с
+             PRICING/HOW IT WORKS/FAQ/WHO'S BEHIND THIS/GET STARTED */
+          margin-bottom: 48px;
         }
 
         .scale-eyebrow {
@@ -73,9 +77,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
-          .scale-header {
-            margin-bottom: 2.5rem;
-          }
           .scale-title {
             font-size: 2rem;
           }
@@ -86,9 +87,16 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
            колоночный вариант убран целиком (см. ТЗ №5, п. 2.1). Без
            рамок и подложек — группировка держится на воздухе между
            парами и hairline снизу (см. ТЗ №4, п. 3.1) */
+        /* width: fit-content, не max-width — строки внутри пары левого
+           выравнивания (осознанное решение, не трогать), но сама колонка
+           не должна быть шире самой длинной реальной строки: иначе на
+           фиксированных 640px справа остаётся пустой хвост, и блок
+           читается смещённым влево от центра страницы, хотя его коробка
+           формально отцентрована (см. ТЗ пакет 3, п. A3) */
         .pairs {
           display: flex;
           flex-direction: column;
+          width: fit-content;
           max-width: 640px;
           margin: 0 auto;
         }
@@ -171,10 +179,7 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         @media (max-width: 767px) {
           .scale-section {
-            padding: ${T.hms.sectionPadMobile} 0;
-          }
-          .scale-header {
-            margin-bottom: 2.25rem;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .scale-title {
             font-size: 1.75rem;

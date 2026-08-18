@@ -24,6 +24,23 @@ interface SeeSystemProps {
   };
 }
 
+// Красит первое вхождение суммы (например "$117" или "฿3,800") в
+// фирменный градиент — тот же приём и класс ".accent", что и у "15–20%"
+// в Hero и "20+"/"10+" в Trust Stats (см. ТЗ пакет 4, п. A1). accentClass
+// позволяет добавить модификатор кегля только для основной строки, не
+// трогая сноску ниже неё
+function withAccentAmount(text: string, accentClass = 'accent') {
+  const m = /[$฿][\d,]+/.exec(text);
+  if (!m) return text;
+  return (
+    <>
+      {text.slice(0, m.index)}
+      <span className={accentClass}>{m[0]}</span>
+      {text.slice(m.index + m[0].length)}
+    </>
+  );
+}
+
 // Три условных демо-экрана — не скриншоты Little Hotelier/Beds24/Cloudbeds
 // (клиентам подключаются разные платформы), а нейтральный интерфейс,
 // свёрстанный в дизайн-системе сайта. См. /scripts/demo-screens.
@@ -104,7 +121,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
       <style jsx>{`
         .see-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
@@ -176,7 +193,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           .see-stage {
             position: relative;
             width: 100%;
-            aspect-ratio: 1000 / 700;
+            aspect-ratio: 1000 / 620;
           }
 
           .see-layer {
@@ -190,11 +207,12 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
             border: 1px solid rgba(255, 255, 255, 0.1);
           }
 
-          /* Base layer. Positioned low enough that the phone/email overlap
-             only grazes its header, never the metric numbers. */
+          /* Base layer. Phone/email tuck into its top corners — deep enough
+             to read as one collage, shallow enough to clear the metric
+             numbers in its header (см. ТЗ раунд 2, №2) */
           .see-layer-dashboard {
-            left: 30%;
-            top: 30%;
+            left: 23.5%;
+            top: 19%;
             width: 64%;
             z-index: 1;
           }
@@ -207,12 +225,19 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
             left: 2px;
             top: 100%;
             margin-top: 14px;
-            max-width: 380px;
+            /* 380px переносило EN-строку benefit2 («Every channel in one
+               calendar. Rooms close everywhere automatically», ~430px без
+               переноса) на второй ряд, хотя места под дашбордом хватает —
+               перенос был лишним (см. ТЗ пакет 3, п. A6). RU/TH-варианты
+               длиннее и всё равно переносятся на 2 строки, для них ничего
+               не меняется — высота блока по-прежнему держится на
+               --benefit-lines */
+            max-width: 440px;
           }
 
           .see-layer-phone {
-            left: 18%;
-            top: 24%;
+            left: 11.5%;
+            top: 13%;
             width: 15.5%;
             z-index: 2;
           }
@@ -227,9 +252,12 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
             width: 210px;
           }
 
+          /* Было top: 1% — карточка почти не касалась дашборда, отсюда
+             разрыв. Симметрично левой стороне: тот же top, что у phone,
+             тот же глубокий нахлёст в верхний угол (см. ТЗ раунд 2, №2) */
           .see-layer-email {
-            left: 84%;
-            top: 1%;
+            left: 77.5%;
+            top: 13%;
             width: 11%;
             z-index: 3;
           }
@@ -238,7 +266,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           }
           .see-layer-email .see-cap-block {
             position: absolute;
-            left: 2px;
+            right: 2px;
             bottom: 100%;
             margin-bottom: 10px;
             width: 190px;
@@ -401,6 +429,28 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
           margin-top: 10px;
         }
 
+        /* Тот же градиент и приём (background-clip: text), что у "15–20%"
+           в Hero и "20+"/"10+" в Trust Stats — переиспользуем токен, не
+           заводим новый (см. ТЗ пакет 4, п. A1) */
+        .see-caption :global(.accent),
+        .see-caption-sub :global(.accent) {
+          background: ${T.linearGradient};
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        /* Крупнее окружающего текста — та же логика, что у "20+"/"10+"
+           поверх подписи под ними (см. ТЗ пакет 4, п. A2). Только на
+           десктопе: .see-caption на мобильном подобран бинарным поиском
+           впритык под 320-414px (см. комментарий выше), лишние ~30%
+           ширины на "$117" сломали бы этот бюджет и перенесли строку */
+        @media (min-width: 768px) {
+          .see-caption :global(.accent-lg) {
+            font-size: 1.3em;
+          }
+        }
+
         /* Вторая строка — баты и масштаб («одна бронь»), объясняет
            происхождение цифры выше себя, тише и мельче */
         .see-caption-sub {
@@ -415,7 +465,7 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
 
         @media (max-width: 767px) {
           .see-section {
-            padding: ${T.hms.sectionPadMobile} 0;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .see-title {
             font-size: 1.9rem;
@@ -543,10 +593,10 @@ export default function SeeSystem({ t = {} }: SeeSystemProps) {
               <p className="see-disclaimer">{t.seeSystemDisclaimer}</p>
             )}
             <p className={`see-caption${t.seeSystemDisclaimer ? ' tight' : ''}`}>
-              {t.seeSystemCaption || 'You keep $117 more on this booking'}
+              {withAccentAmount(t.seeSystemCaption || 'You keep $117 more on this booking', 'accent accent-lg')}
             </p>
             {t.seeSystemCaptionSub && (
-              <p className="see-caption-sub">{t.seeSystemCaptionSub}</p>
+              <p className="see-caption-sub">{withAccentAmount(t.seeSystemCaptionSub)}</p>
             )}
           </div>
         </div>

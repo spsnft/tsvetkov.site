@@ -3,7 +3,6 @@
 import React from 'react';
 import { T } from '../../../src/theme/tokens';
 import { FEATURE_NAMES, TIER_FEATURE_COUNTS } from '../constants';
-import WhatsAppCta from './WhatsAppCta';
 import PrimaryCta from './PrimaryCta';
 
 interface PricingProps {
@@ -11,40 +10,29 @@ interface PricingProps {
   t?: {
     priceLabel?: string;
     priceTitle?: string;
-    priceSub?: string;
     pricePopular?: string;
     priceMore2?: string;
     priceMore3?: string;
-    priceDisclaimerAudit?: string;
-    priceDisclaimerSub?: string;
     pricePaybackNote?: string;
-    priceFitHint?: string;
     riskTitle?: string;
-    riskText?: string;
     featureHints?: Record<string, string>;
-    btnAudit?: string;
     heroCtaLabel?: string;
     heroCtaNote?: string;
     waMessage?: string;
-    tier1Title?: string; tier1Price?: string; tier1Payback?: string; tier1Desc?: string;
-    tier2Title?: string; tier2Price?: string; tier2Payback?: string; tier2Desc?: string;
-    tier3Title?: string; tier3Price?: string; tier3Payback?: string; tier3Desc?: string;
+    tier1Title?: string; tier1Price?: string; tier1Desc?: string;
+    tier2Title?: string; tier2Price?: string; tier2Desc?: string;
+    tier3Title?: string; tier3Price?: string; tier3Desc?: string;
   };
 }
 
-export default function Pricing({ t, lang = 'en' }: PricingProps) {
+export default function Pricing({ t }: PricingProps) {
   const names: string[] = [...FEATURE_NAMES];
   const hints = t?.featureHints || {};
-  // EN: payback-note + risk-box merge into one framed block (result
-  // guarantee, no time promise). RU/TH keep the previous separate
-  // elements — их 14-дневное обещание не трогаем (см. ТЗ №3, п. 7)
-  const isEn = lang === 'en';
 
   const tiers = [
     {
       title: t?.tier1Title || 'LITE',
       price: t?.tier1Price || 'From $1,200',
-      payback: t?.tier1Payback,
       desc: t?.tier1Desc || 'For small villas & guesthouses (1–9 units)',
       featured: false,
       own: names.slice(0, TIER_FEATURE_COUNTS[0]),
@@ -54,7 +42,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
     {
       title: t?.tier2Title || 'STANDARD',
       price: t?.tier2Price || 'From $2,500',
-      payback: t?.tier2Payback,
       desc: t?.tier2Desc || 'For boutique hotels & resorts (10–29 units)',
       featured: true,
       own: names.slice(TIER_FEATURE_COUNTS[0], TIER_FEATURE_COUNTS[1]),
@@ -64,7 +51,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
     {
       title: t?.tier3Title || 'ENTERPRISE',
       price: t?.tier3Price || 'Custom',
-      payback: t?.tier3Payback,
       desc: t?.tier3Desc || 'For hotel chains & operators (multi-property)',
       featured: false,
       own: names.slice(TIER_FEATURE_COUNTS[1], TIER_FEATURE_COUNTS[2]),
@@ -78,14 +64,17 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
       <style jsx>{`
         .pricing-section {
           width: 100%;
-          padding: ${T.hms.sectionPad} 0;
+          padding: ${T.hms.sectionPadTop} 0 ${T.hms.sectionPadBottom} 0;
           background: transparent;
           scroll-margin-top: 80px;
         }
 
         .pricing-header {
           text-align: center;
-          margin-bottom: 3.5rem;
+          /* Единый отступ «заголовок секции → первый контент» на всей
+             странице — согласовано с заказчиком по итогам аудита (ТЗ №4):
+             было 3.5rem/56px, приводим к общему 48px */
+          margin-bottom: 48px;
         }
 
         .pricing-eyebrow {
@@ -105,14 +94,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           margin: 0 0 0.75rem 0;
           letter-spacing: -0.03em;
           line-height: 1.2;
-          text-wrap: balance;
-        }
-
-        .pricing-subtitle {
-          color: ${T.sub};
-          font-size: 1.05rem;
-          line-height: 1.5;
-          margin: 0;
           text-wrap: balance;
         }
 
@@ -139,13 +120,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           letter-spacing: -0.02em;
           display: block;
           margin: 0.7rem 0 0.5rem;
-        }
-
-        .price-payback {
-          display: block;
-          font-size: 0.78rem;
-          line-height: 1.4;
-          color: ${T.muted};
         }
 
         /* Единственная строка позиционирования тарифа: «для кого» + число
@@ -177,28 +151,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           box-shadow: 0 5px 15px rgba(0, 229, 153, 0.2);
         }
 
-        /* Развязка калькулятора и окупаемости: пример в герое — 12 номеров,
-           окупаемость в карточках — объекты разного размера */
-        .payback-note {
-          margin: 18px auto 0;
-          max-width: 720px;
-          text-align: center;
-          font-size: 0.78rem;
-          line-height: 1.5;
-          color: ${T.muted};
-          text-wrap: pretty;
-        }
-
-        .fit-hint {
-          margin: 10px auto 0;
-          max-width: 720px;
-          text-align: center;
-          font-size: 0.92rem;
-          line-height: 1.5;
-          color: ${T.sub};
-          text-wrap: pretty;
-        }
-
         /* Реверс риска: заметен, но тише кнопки — главный элемент экрана
            остаётся один */
         .risk-box {
@@ -228,38 +180,8 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           text-wrap: pretty;
         }
 
-        /* Одна кнопка под блоком тарифов вместо трёх в карточках: ширина по
-           контенту на десктопе, на всю ширину на мобильном. RU/TH-вариант —
-           старый стиль, без изменений */
-        .pricing-cta {
-          display: flex;
-          justify-content: center;
-          margin-top: 24px;
-        }
-
-        .pricing-cta :global(.btn-premium-core) {
-          flex: 0 1 auto;
-          max-width: 100%;
-        }
-
-        @media (max-width: 599px) {
-          .pricing-cta :global(.btn-premium-core) {
-            width: 100%;
-          }
-        }
-
-        @media (max-width: 360px) {
-          .pricing-cta :global(.btn-premium-core) {
-            padding: 0 0.7rem;
-            font-size: 0.95rem;
-          }
-        }
-
-        /* EN: отдельный класс, а не .pricing-cta — иначе правила выше
-           («width: 100%», меньший паддинг на 360px и т.п.) совпадают по
-           селектору с новой кнопкой PrimaryCta (она тоже несёт
-           .btn-premium-core) и цвет/паддинг могли бы разъехаться в
-           зависимости от порядка каскада (см. ТЗ №10, п. C1) */
+        /* Одна кнопка под блоком тарифов: ширина по контенту на десктопе,
+           на всю ширину на мобильном — задаёт сама PrimaryCta */
         .pricing-cta-primary {
           display: flex;
           justify-content: center;
@@ -280,7 +202,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           .price {
             white-space: nowrap;
           }
-          .price-payback,
           .price-desc {
             min-height: 2.8em;
           }
@@ -296,9 +217,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           }
           .price {
             font-size: clamp(1.15rem, 3.4vw, 1.75rem);
-          }
-          .price-payback {
-            font-size: 0.72rem;
           }
           .price-desc {
             font-size: 0.82rem;
@@ -342,10 +260,16 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           right: 20px;
         }
 
+        /* Было 1.25rem margin + 1.25rem padding (40px) — на тарифах с
+           однострочным price-desc (LITE: «For small villas...» не
+           переносится, хотя min-height выше держит место под 2 строки для
+           выравнивания чек-листов между колонками) это давало вдвое
+           больший зазор, чем задумано, поверх уже зарезервированной пустой
+           строки (см. ТЗ пакет 3, п. A7) */
         .card-features {
           list-style: none;
-          padding: 1.25rem 0 0;
-          margin: 1.25rem 0 0;
+          padding: 1rem 0 0;
+          margin: 0.75rem 0 0;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
           display: flex;
           flex-direction: column;
@@ -419,21 +343,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           color: #5A6069;
         }
 
-        .shared-disclaimer {
-          margin: 20px auto 0;
-          max-width: 820px;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          gap: 0.3rem;
-        }
-
-        .shared-disclaimer span {
-          font-size: 0.78rem;
-          line-height: 1.5;
-          color: ${T.muted};
-        }
-
         @media (min-width: 900px) and (max-width: 1100px) {
           .price {
             font-size: 2rem;
@@ -441,23 +350,14 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           .price-desc {
             font-size: 0.85rem;
           }
-          .price-payback {
-            font-size: 0.74rem;
-          }
         }
 
         @media (max-width: 767px) {
           .pricing-section {
-            padding: ${T.hms.sectionPadMobile} 0;
-          }
-          .pricing-header {
-            margin-bottom: 2rem;
+            padding: ${T.hms.sectionPadTopMobile} 0 ${T.hms.sectionPadBottomMobile} 0;
           }
           .pricing-title {
             font-size: 1.75rem;
-          }
-          .pricing-subtitle {
-            font-size: 0.95rem;
           }
           .price {
             font-size: 2.2rem;
@@ -483,11 +383,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           <h2 className="pricing-title">
             {t?.priceTitle || "One-time setup. Zero commission forever"}
           </h2>
-          {t?.priceSub && (
-            <p className="pricing-subtitle">
-              {t.priceSub}
-            </p>
-          )}
         </div>
 
         <div className="pricing-cards">
@@ -500,7 +395,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
               )}
               <p className={`package-title${tier.featured ? ' accent' : ''}`}>{tier.title}</p>
               <span className="price">{tier.price}</span>
-              {tier.payback && <span className="price-payback">{tier.payback}</span>}
               <span className="price-desc">{tier.desc}</span>
 
               <ul className="card-features">
@@ -532,62 +426,24 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
           ))}
         </div>
 
-        {/* EN: один блок в рамке — гарантия результата (50% upfront...)
-            крупно + мелкая приглушённая строка про итоговую цену и
-            подписки, без обещания срока. RU/TH: прежние отдельные
-            элементы, их обещание 14 дней не трогаем (см. ТЗ №3, п. 7) */}
-        {isEn ? (
-          t?.riskTitle && (
-            <div className="risk-box">
-              <p className="risk-title">{t.riskTitle}</p>
-              {t.pricePaybackNote && <p className="risk-text">{t.pricePaybackNote}</p>}
-            </div>
-          )
-        ) : (
-          <>
-            {t?.pricePaybackNote && (
-              <p className="payback-note">{t.pricePaybackNote}</p>
-            )}
-
-            {t?.priceFitHint && (
-              <p className="fit-hint">{t.priceFitHint}</p>
-            )}
-
-            {/* Реверс риска стоит до кнопки: читатель проходит снятие риска
-                раньше, чем доходит до нажатия. Рамка приглушённее кнопки */}
-            {t?.riskTitle && (
-              <div className="risk-box">
-                <p className="risk-title">{t.riskTitle}</p>
-                {t.riskText && <p className="risk-text">{t.riskText}</p>}
-              </div>
-            )}
-          </>
-        )}
-
-        {isEn ? (
-          <div className="pricing-cta-primary">
-            <PrimaryCta
-              label={t?.heroCtaLabel || 'Ask for my revenue check'}
-              message={t?.waMessage}
-              note={t?.heroCtaNote || 'One WhatsApp message. No commitment.'}
-              align="center"
-            />
-          </div>
-        ) : (
-          <div className="pricing-cta">
-            <WhatsAppCta
-              label={t?.btnAudit || "Free Revenue Check"}
-              message={t?.waMessage}
-            />
+        {/* Один блок в рамке — гарантия результата (50% upfront...) крупно +
+            мелкая приглушённая строка про итоговую цену и подписки, без
+            обещания срока, для всех локалей (см. ТЗ №3, п. 7) */}
+        {t?.riskTitle && (
+          <div className="risk-box">
+            <p className="risk-title">{t.riskTitle}</p>
+            {t.pricePaybackNote && <p className="risk-text">{t.pricePaybackNote}</p>}
           </div>
         )}
 
-        {t?.priceDisclaimerAudit && (
-          <p className="shared-disclaimer">
-            <span>{t.priceDisclaimerAudit}</span>
-            {t?.priceDisclaimerSub && <span>{t.priceDisclaimerSub}</span>}
-          </p>
-        )}
+        <div className="pricing-cta-primary">
+          <PrimaryCta
+            label={t?.heroCtaLabel || 'Ask for my revenue check'}
+            message={t?.waMessage}
+            note={t?.heroCtaNote || 'One WhatsApp message. No commitment.'}
+            align="center"
+          />
+        </div>
       </div>
     </section>
   );
