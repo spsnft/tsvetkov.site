@@ -91,7 +91,11 @@ export default function Hero({ t, lang = 'en' }: HeroProps) {
         .subtitle {
           font-size: clamp(1.05rem, 1.7vw, 1.2rem);
           line-height: 1.55;
-          margin: 0 0 2rem 0;
+          /* Подзаголовок → калькулятор — согласовано с заказчиком: было
+             64px (это margin-bottom + padding-bottom секции), убираем
+             margin здесь и оставляем только padding-bottom секции (32px),
+             чтобы Hero и калькулятор читались одним блоком (см. ТЗ №4) */
+          margin: 0;
           color: #CBD5E1;
           font-weight: 400;
           text-wrap: pretty;
@@ -135,9 +139,6 @@ export default function Hero({ t, lang = 'en' }: HeroProps) {
           }
           .title {
             margin-bottom: 12px;
-          }
-          .subtitle {
-            margin-bottom: 24px;
           }
         }
       `}</style>

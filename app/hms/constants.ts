@@ -277,6 +277,10 @@ export const contentData = {
     heroTitle: "Хватит платить 15–20% комиссии Booking.com и Agoda",
     heroSub1: "Подключите свой объект на Пхукете напрямую к гостям\nНикаких ошибок и двойных броней",
     heroSub2: "Оставляйте 100% прибыли себе",
+    // Читается компонентом Hero для всех локалей одинаково (см. ТЗ №3, п. 3.1.1);
+    // heroSub1/heroSub2 выше больше не используются Hero.tsx, но оставлены —
+    // это данные, а не мёртвый код, могут понадобиться при возврате к старой вёрстке
+    heroSubtitle: "Гости бронируют напрямую на вашем сайте. Все каналы — в одном календаре. Всё оформлено на ваше имя.",
     btnAudit: "Бесплатный разбор, 20 минут",
     btnAuditShort: "Бесплатный разбор",
 
@@ -306,11 +310,36 @@ export const contentData = {
     // строку на 320px она не помещается даже на нижней границе кегля
     calcFootnote: "12 номеров · загрузка 65% · комиссия 17%",
 
+    // Калькулятор в HeroCalculator.tsx общий для всех локалей — читает эти
+    // ключи напрямую, без ветвления по lang (см. ТЗ №3, п. 3.1.2)
+    calcUnitsLabel: "Номера или виллы",
+    calcAdrLabel: "Средний тариф за ночь",
+    calcOutputLabel: "Вы платите OTA",
+    calcYearLabel: "в год",
+    calcMonthLabel: "в месяц",
+    calcAssumptions: "Расчёт на основе загрузки 65%, доли OTA-броней 70% и средней комиссии 17%. Цифра за первый год предполагает, что около 20% объёма OTA перейдёт на прямой канал — консервативная оценка для объекта, который только начинает работать без прямого канала. Со второго года реалистичный показатель — 30–40%.",
+    calcAssumptionsAria: "Показать допущения расчёта",
+    calcRecoveryLabel: "Вы вернёте — год 1",
+    calcEstimateLabel: "Оценка",
+
     // --- LOGO MARQUEE ---
     marqueeLabel: "КАНАЛЫ, КОТОРЫЕ МЫ ПОДКЛЮЧАЕМ",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
+    // scaleLabel/scaleLabelToday/scaleLabelDirect/scalePair* — читаются
+    // ScalePractice.tsx для всех локалей (см. ТЗ №3, п. 3.1.3); старые
+    // scaleCmpNow/scaleCmpAfter ниже больше не рендерятся этим компонентом,
+    // но оставлены как данные
+    scaleLabel: "РАЗНИЦА",
     scaleTitle: "Где утекает ваша выручка",
+    scaleLabelToday: "через OTA",
+    scaleLabelDirect: "напрямую",
+    scalePair1Problem: "15–20% с каждой брони уходит платформе",
+    scalePair1Solution: "Прямые брони с нулевой комиссией — навсегда",
+    scalePair2Problem: "Ваши гости принадлежат платформе",
+    scalePair2Solution: "База гостей принадлежит вам",
+    scalePair3Problem: "Цены обновляются вручную, круглые сутки",
+    scalePair3Solution: "Обновили один раз — синхронизировано на 300+ каналах",
 
     // Полоса сравнения — единственное место, где на странице проговаривается
     // «было → стало». Иллюстрации из удалённых карточек живут здесь иконками
@@ -352,10 +381,18 @@ export const contentData = {
     // --- SEE THE SYSTEM ---
     // Экраны внутри — на английском во всех локалях (см. constants.ts EN);
     // локализуются только подписи вокруг них
+    seeSystemEyebrow: "КАК ЭТО РАБОТАЕТ",
     seeSystemTitle: "Как это работает — от брони до заезда",
     seeSystemStep1: "Гость бронирует",
     seeSystemStep2: "Вы это видите",
     seeSystemStep3: "Гость получает",
+    // Полные лейблы + строка выгоды у каждого демо-экрана (см. ТЗ №3, п. 3.1.4)
+    seeSystemLabel1: "Гость бронирует у вас на сайте",
+    seeSystemBenefit1: "Ваша страница, ваши тарифы. Комиссии с этой брони нет",
+    seeSystemLabel2: "Вы видите это мгновенно",
+    seeSystemBenefit2: "Все каналы — в одном календаре. Номера закрываются везде автоматически",
+    seeSystemLabel3: "Гость получает подтверждение",
+    seeSystemBenefit3: "Отправляется автоматически, от вашего имени. Вам делать ничего не нужно",
     seeSystemCaption: "От брони до подтверждения — без комиссии.",
     seeSystemDisclaimer: "Интерфейс показан для примера. Реальная платформа подбирается под объект.",
 
@@ -387,9 +424,7 @@ export const contentData = {
     riskText: "Не запустили за 14 дней — вторую половину вы не платите.",
 
     // Микрокопия под каждой главной кнопкой — что человек даёт и что получает
-    // TODO(i18n): временно английский — языковой проход по RU идёт отдельной
-    // задачей, полуперевод намеренно не делаем
-    ctaNote: "Send us your property name. We reply with what OTAs are costing you — your numbers, not an example.",
+    ctaNote: "Напишите название объекта. Мы ответим, сколько вам стоят OTA — на ваших цифрах, а не на примере.",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -411,33 +446,31 @@ export const contentData = {
 
     // --- FAQ SECTION ---
     faqTitle: "Частые вопросы",
-    // TODO(i18n): весь блок FAQ временно на английском — тексты будут писаться
-    // от смысла в отдельной языковой задаче, а не переводиться дословно
-    faqSub: "The questions owners actually ask",
+    faqSub: "Вопросы, которые реально задают владельцы",
     faqItems: [
       {
-        q: "Do I have to leave Booking.com and Agoda?",
-        a: "No. You keep every channel you use today. A direct booking system doesn't replace OTAs — it adds a channel you own. Most properties still get 70–85% of bookings through OTAs in year one. The difference is that the bookings that come direct cost you 0% instead of 15–20%."
+        q: "Обязательно ли уходить с Booking.com и Agoda?",
+        a: "Нет. Все каналы, которыми вы пользуетесь сейчас, остаются у вас. Система прямых броней не заменяет OTA — она добавляет канал, которым владеете вы. У большинства объектов в первый год всё ещё 70–85% броней приходит через OTA. Разница в том, что прямые брони стоят вам 0%, а не 15–20%."
       },
       {
-        q: "Will Booking.com penalise me for taking direct bookings?",
-        a: "Direct bookings themselves are never a problem — every property on Booking.com also sells directly. What OTA contracts do restrict is showing a lower public price on your own site: break that and the response isn't a fine, it's quieter — a drop in ranking, loss of Preferred status. Most owners find that out the hard way.\n\nWe set your system up so it never happens. Your public rates stay aligned, you simply stop paying commission on the bookings that come direct. And when you do want to reward direct guests, there are ways the contracts allow — member rates behind an email signup, breakfast, late checkout. We configure those correctly."
+        q: "Booking.com не оштрафует меня за приём прямых броней?",
+        a: "Сами по себе прямые брони — не проблема: каждый объект на Booking.com тоже продаёт напрямую. Договоры с OTA ограничивают другое — показ более низкой цены на собственном сайте: нарушите это, и в ответ будет не штраф, а что-то тише — падение в рейтинге, потеря статуса Preferred. Большинство владельцев узнают об этом на своём опыте.\n\nМы настраиваем вашу систему так, чтобы этого не произошло. Публичные цены остаются согласованными, вы просто перестаёте платить комиссию с броней, которые приходят напрямую. А когда захотите поощрить гостей за прямое бронирование, есть способы, которые договоры разрешают — цены для подписчиков рассылки, завтрак, поздний выезд. Мы настраиваем это правильно."
       },
       {
-        q: "Are there any hidden fees, and what does the software cost each month?",
-        a: "Zero commission from us, ever. You pay our one-time setup fee and keep 100% of direct booking revenue. The one ongoing cost is the software subscription, paid directly to the provider — typically $30–100/month depending on platform and property size. No markup from us, no agent fees. We'll confirm the exact figure for your property before you commit to anything."
+        q: "Есть ли скрытые платежи и сколько стоит софт каждый месяц?",
+        a: "С нашей стороны — ноль комиссии, всегда. Вы платите разовую плату за настройку и оставляете себе 100% выручки с прямых броней. Единственный постоянный расход — подписка на софт, которую вы платите напрямую провайдеру, обычно $30–100 в месяц в зависимости от платформы и размера объекта. Никакой наценки с нашей стороны, никаких агентских комиссий. Мы подтвердим точную цифру для вашего объекта до того, как вы на что-то согласитесь."
       },
       {
-        q: "Who owns the system if we stop working together?",
-        a: "You do — the accounts, the data, the guest list, the booking engine. Everything is set up in your name from day one. There's no lock-in and no revenue share. If you want to run it alone after launch, you can. If you want us on monthly support, that's optional and separate."
+        q: "Кому принадлежит система, если мы перестанем работать вместе?",
+        a: "Вам — аккаунты, данные, база гостей, система бронирования. Всё настроено на ваше имя с первого дня. Никакой привязки и никакого процента с выручки. Хотите вести всё самостоятельно после запуска — пожалуйста. Хотите оставить нас на ежемесячной поддержке — это отдельная опция, по желанию."
       },
       {
-        q: "What happens after I send a message?",
-        a: "You send your property name. We reply — usually the same day — with what OTAs are costing you based on your actual listings: your rates, your room count, your channel mix. Your numbers, not an example.\n\nIf it looks worth doing, we scope the setup: most properties are live in 7–14 days, with configuration and testing running in the background so your current bookings are never interrupted. Payment is 50% upfront, 50% on launch — and if it's not live in 14 days, you don't pay the second half."
+        q: "Что происходит после того, как я отправлю сообщение?",
+        a: "Вы присылаете название объекта. Мы отвечаем — обычно в тот же день — сколько вам стоят OTA, исходя из ваших реальных объявлений: ваши тарифы, количество номеров, микс каналов. Ваши цифры, а не пример.\n\nЕсли это выглядит целесообразным, мы оцениваем объём настройки: большинство объектов запускаются за 7–14 дней, настройка и тестирование идут в фоне, поэтому текущие брони не прерываются ни на день. Оплата — 50% на старте, 50% при запуске, и если систему не запустили за 14 дней, вторую половину вы не платите."
       },
       {
-        q: "How do guests pay, and how fast do I get my money?",
-        a: "Guests pay through a secure payment gateway connected to your own booking engine. The money goes to your business bank account directly — no middleman holding it, no waiting for a platform payout cycle. The gateway is in your name, not ours."
+        q: "Как гости платят и как быстро я получаю деньги?",
+        a: "Гости платят через защищённый платёжный шлюз, подключённый к вашей собственной системе бронирования. Деньги идут напрямую на ваш бизнес-счёт — без посредника, который их держит, без ожидания цикла выплат от площадки. Шлюз оформлен на ваше имя, а не на наше."
       }
     ],
 
@@ -453,6 +486,8 @@ export const contentData = {
     heroTitle: "หยุดจ่ายค่าคอมมิชชั่น 15‑20% ให้ Booking.com และ Agoda",
     heroSub1: "เชื่อมต่อที่พักของคุณในภูเก็ตกับผู้เข้าพักโดยตรง\nไร้ความเสี่ยงจากความผิดพลาดและปัญหาการจองซ้ำ",
     heroSub2: "รับกำไรเต็ม 100% เข้ากระเป๋าคุณ",
+    // Читается компонентом Hero для всех локалей одинаково (см. ТЗ №3, п. 3.2.1)
+    heroSubtitle: "แขกจองตรงบนเว็บไซต์ของคุณ ทุกช่องทางอยู่ในปฏิทินเดียว ทุกอย่างอยู่ภายใต้ชื่อของคุณ",
     btnAudit: "ตรวจสอบรายได้ฟรี 20 นาที",
     btnAuditShort: "ตรวจสอบฟรี",
 
@@ -480,11 +515,34 @@ export const contentData = {
     calcRecoverHint: "ในปีแรก ระบบจองตรงมักดึงยอดจองจาก OTA มาที่ช่องทางของคุณเองได้ 15–25% ที่นี่เราคิดไว้ที่ 20% ส่วนที่เหลือยังมาทาง OTA ต่อไป คุณไม่ได้เลิกใช้ OTA แต่หยุดจ่ายค่าคอมมิชชั่นในส่วนที่เป็นของคุณได้",
     calcFootnote: "12 ห้อง · เข้าพัก 65% · ผ่าน OTA 70% · คอมมิชชั่น 17%",
 
+    // Калькулятор в HeroCalculator.tsx общий для всех локалей — читает эти
+    // ключи напрямую, без ветвления по lang (см. ТЗ №3, п. 3.2.2)
+    calcUnitsLabel: "จำนวนห้องหรือวิลล่า",
+    calcAdrLabel: "ราคาเฉลี่ยต่อคืน",
+    calcOutputLabel: "คุณจ่ายให้ OTA",
+    calcYearLabel: "ต่อปี",
+    calcMonthLabel: "ต่อเดือน",
+    calcAssumptions: "คำนวณจากอัตราการเข้าพัก 65% สัดส่วนการจองผ่าน OTA 70% และค่าคอมมิชชั่นเฉลี่ย 17% ตัวเลขปีแรกสมมติว่าประมาณ 20% ของยอดจอง OTA ย้ายมาเป็นการจองตรง ซึ่งเป็นตัวเลขระมัดระวังสำหรับที่พักที่เริ่มต้นโดยยังไม่มีช่องทางจองตรง ตั้งแต่ปีที่สองเป็นต้นไป ตัวเลขที่สมจริงคือ 30–40%",
+    calcAssumptionsAria: "แสดงสมมติฐานการคำนวณ",
+    calcRecoveryLabel: "คุณได้คืน — ปีแรก",
+    calcEstimateLabel: "ตัวเลขประมาณการ",
+
     // --- LOGO MARQUEE ---
     marqueeLabel: "ช่องทางที่เราเชื่อมต่อให้",
 
     // --- SCALE PRACTICE (PAIN & SOLUTION) ---
+    // scaleLabel/scaleLabelToday/scaleLabelDirect/scalePair* — читаются
+    // ScalePractice.tsx для всех локалей (см. ТЗ №3, п. 3.2.3)
+    scaleLabel: "ความแตกต่าง",
     scaleTitle: "รายได้ของคุณรั่วไหลตรงไหน",
+    scaleLabelToday: "ผ่าน OTA",
+    scaleLabelDirect: "จองตรง",
+    scalePair1Problem: "ทุกการจองเสียให้แพลตฟอร์ม 15–20%",
+    scalePair1Solution: "จองตรงไม่มีค่าคอมมิชชั่น ตลอดไป",
+    scalePair2Problem: "แขกของคุณเป็นของแพลตฟอร์ม",
+    scalePair2Solution: "รายชื่อแขกเป็นของคุณเอง",
+    scalePair3Problem: "อัปเดตราคาด้วยมือตลอดเวลา",
+    scalePair3Solution: "อัปเดตครั้งเดียว ซิงค์ครบกว่า 300 ช่องทาง",
 
     // Полоса сравнения — единственное место, где на странице проговаривается
     // «было → стало». Иллюстрации из удалённых карточек живут здесь иконками
@@ -524,10 +582,18 @@ export const contentData = {
     stat3Sub: "การเติบโตและระบบ",
 
     // --- SEE THE SYSTEM ---
+    seeSystemEyebrow: "วิธีการทำงาน",
     seeSystemTitle: "ระบบทำงานอย่างไรตั้งแต่ต้นจนจบ",
     seeSystemStep1: "แขกจอง",
     seeSystemStep2: "คุณเห็นเลย",
     seeSystemStep3: "แขกได้รับ",
+    // Полные лейблы + строка выгоды у каждого демо-экрана (см. ТЗ №3, п. 3.2.4)
+    seeSystemLabel1: "แขกจองบนเว็บไซต์ของคุณ",
+    seeSystemBenefit1: "หน้าของคุณ ราคาของคุณ ไม่มีค่าคอมมิชชั่นสำหรับการจองนี้",
+    seeSystemLabel2: "คุณเห็นทันที",
+    seeSystemBenefit2: "ทุกช่องทางอยู่ในปฏิทินเดียว ห้องพักปิดอัตโนมัติทุกที่",
+    seeSystemLabel3: "แขกได้รับการยืนยัน",
+    seeSystemBenefit3: "ส่งอัตโนมัติในนามของคุณ คุณไม่ต้องทำอะไรเลย",
     seeSystemCaption: "จากการจองถึงการยืนยัน — ไม่มีค่าคอมมิชชั่น",
     seeSystemDisclaimer: "อินเทอร์เฟซที่แสดงเป็นเพียงตัวอย่างประกอบ แพลตฟอร์มจริงจะเลือกตามแต่ละที่พัก",
 
@@ -560,9 +626,7 @@ export const contentData = {
     riskText: "ถ้าระบบไม่เปิดใช้งานใน 14 วัน คุณไม่ต้องจ่ายครึ่งหลัง",
 
     // Микрокопия под каждой главной кнопкой — что произойдёт после нажатия
-    // TODO(i18n): временно английский — языковой проход по TH идёт отдельной
-    // задачей, полуперевод намеренно не делаем
-    ctaNote: "Send us your property name. We reply with what OTAs are costing you — your numbers, not an example.",
+    ctaNote: "ส่งชื่อที่พักของคุณมา เราจะตอบกลับพร้อมตัวเลขว่า OTA เสียค่าใช้จ่ายให้คุณเท่าไหร่ — ตัวเลขจริงของคุณ ไม่ใช่ตัวอย่าง",
 
     tier1Title: "LITE",
     tier1Price: "From $1,200",
@@ -584,35 +648,33 @@ export const contentData = {
 
     // --- FAQ SECTION ---
     faqTitle: "คำถามที่พบบ่อย",
-    // TODO(i18n): весь блок FAQ временно на английском — тексты будут писаться
-    // от смысла в отдельной языковой задаче, а не переводиться дословно
-    faqSub: "The questions owners actually ask",
+    faqSub: "คำถามที่เจ้าของที่พักถามจริง ๆ",
     // Порядок вопросов идёт от главного возражения (уход с OTA) к механике
     // сделки. Пустая строка внутри `a` разбивает ответ на абзацы при рендере
     faqItems: [
       {
-        q: "Do I have to leave Booking.com and Agoda?",
-        a: "No. You keep every channel you use today. A direct booking system doesn't replace OTAs — it adds a channel you own. Most properties still get 70–85% of bookings through OTAs in year one. The difference is that the bookings that come direct cost you 0% instead of 15–20%."
+        q: "ต้องเลิกใช้ Booking.com และ Agoda หรือไม่",
+        a: "ไม่ต้อง คุณยังคงใช้ทุกช่องทางที่ใช้อยู่ในปัจจุบันได้เหมือนเดิม ระบบจองตรงไม่ได้มาแทนที่ OTA แต่เพิ่มช่องทางที่เป็นของคุณเองเข้ามา ที่พักส่วนใหญ่ในปีแรกยังคงมียอดจอง 70–85% ผ่าน OTA อยู่ ความแตกต่างคือการจองที่มาทางตรงไม่เสียค่าคอมมิชชั่นเลย แทนที่จะเสีย 15–20%"
       },
       {
-        q: "Will Booking.com penalise me for taking direct bookings?",
-        a: "Direct bookings themselves are never a problem — every property on Booking.com also sells directly. What OTA contracts do restrict is showing a lower public price on your own site: break that and the response isn't a fine, it's quieter — a drop in ranking, loss of Preferred status. Most owners find that out the hard way.\n\nWe set your system up so it never happens. Your public rates stay aligned, you simply stop paying commission on the bookings that come direct. And when you do want to reward direct guests, there are ways the contracts allow — member rates behind an email signup, breakfast, late checkout. We configure those correctly."
+        q: "Booking.com จะลงโทษถ้าฉันรับการจองตรงหรือไม่",
+        a: "การจองตรงเองไม่เคยเป็นปัญหา ทุกที่พักบน Booking.com ก็ขายตรงด้วยเช่นกัน สิ่งที่สัญญาของ OTA จำกัดไว้คือการแสดงราคาที่ต่ำกว่าบนเว็บไซต์ของคุณเอง หากทำผิดข้อนี้ ผลที่ตามมาจะไม่ใช่ค่าปรับ แต่เงียบกว่านั้น เช่น อันดับตกลง หรือเสียสถานะ Preferred เจ้าของที่พักส่วนใหญ่รู้เรื่องนี้จากประสบการณ์ตรงที่ไม่ดี\n\nเราวางระบบให้คุณเพื่อไม่ให้เกิดเหตุการณ์แบบนี้ ราคาสาธารณะของคุณยังคงสอดคล้องกันทุกช่องทาง คุณแค่หยุดจ่ายค่าคอมมิชชั่นสำหรับการจองที่มาทางตรง และเมื่อคุณต้องการมอบสิทธิพิเศษให้แขกที่จองตรง ก็มีวิธีที่สัญญาอนุญาตไว้ เช่น ราคาสมาชิกหลังสมัครรับอีเมล อาหารเช้า หรือเช็คเอาท์ล่าช้า เราตั้งค่าสิ่งเหล่านี้ให้ถูกต้อง"
       },
       {
-        q: "Are there any hidden fees, and what does the software cost each month?",
-        a: "Zero commission from us, ever. You pay our one-time setup fee and keep 100% of direct booking revenue. The one ongoing cost is the software subscription, paid directly to the provider — typically $30–100/month depending on platform and property size. No markup from us, no agent fees. We'll confirm the exact figure for your property before you commit to anything."
+        q: "มีค่าใช้จ่ายแอบแฝงไหม และซอฟต์แวร์มีค่าใช้จ่ายต่อเดือนเท่าไหร่",
+        a: "ไม่มีค่าคอมมิชชั่นจากเราเลย ไม่ว่าเวลาใด คุณจ่ายค่าติดตั้งครั้งเดียวและเก็บรายได้จากการจองตรง 100% ค่าใช้จ่ายต่อเนื่องอย่างเดียวคือค่าสมัครใช้งานซอฟต์แวร์ที่จ่ายตรงให้ผู้ให้บริการ โดยทั่วไปอยู่ที่ $30–100 ต่อเดือน ขึ้นอยู่กับแพลตฟอร์มและขนาดที่พัก เราไม่มีการบวกราคาเพิ่มและไม่มีค่านายหน้า เราจะยืนยันตัวเลขที่แน่นอนสำหรับที่พักของคุณก่อนที่คุณจะตัดสินใจทำอะไร"
       },
       {
-        q: "Who owns the system if we stop working together?",
-        a: "You do — the accounts, the data, the guest list, the booking engine. Everything is set up in your name from day one. There's no lock-in and no revenue share. If you want to run it alone after launch, you can. If you want us on monthly support, that's optional and separate."
+        q: "หากเลิกทำงานร่วมกัน ระบบจะเป็นของใคร",
+        a: "เป็นของคุณ ทั้งบัญชี ข้อมูล รายชื่อแขก และระบบจองห้องพัก ทุกอย่างตั้งค่าในนามของคุณตั้งแต่วันแรก ไม่มีข้อผูกมัดและไม่มีการแบ่งรายได้ หากต้องการดูแลระบบเองหลังเปิดใช้งานก็ทำได้ หรือหากต้องการให้เราซัพพอร์ตรายเดือน ก็เป็นตัวเลือกเสริมแยกต่างหาก"
       },
       {
-        q: "What happens after I send a message?",
-        a: "You send your property name. We reply — usually the same day — with what OTAs are costing you based on your actual listings: your rates, your room count, your channel mix. Your numbers, not an example.\n\nIf it looks worth doing, we scope the setup: most properties are live in 7–14 days, with configuration and testing running in the background so your current bookings are never interrupted. Payment is 50% upfront, 50% on launch — and if it's not live in 14 days, you don't pay the second half."
+        q: "หลังจากส่งข้อความไปแล้วจะเกิดอะไรขึ้น",
+        a: "คุณส่งชื่อที่พักมาให้เรา เราจะตอบกลับ โดยปกติภายในวันเดียวกัน พร้อมตัวเลขว่า OTA เสียค่าใช้จ่ายให้คุณเท่าไหร่ โดยอิงจากรายการที่พักจริงของคุณ ทั้งราคา จำนวนห้อง และสัดส่วนช่องทางการจอง เป็นตัวเลขของคุณจริง ๆ ไม่ใช่ตัวอย่าง\n\nหากดูแล้วคุ้มค่าที่จะทำ เราจะประเมินขอบเขตการติดตั้ง ที่พักส่วนใหญ่เปิดใช้งานได้ภายใน 7–14 วัน โดยการตั้งค่าและทดสอบทำงานอยู่เบื้องหลัง การจองปัจจุบันของคุณจึงไม่ถูกรบกวนเลย การชำระเงินคือ 50% ล่วงหน้า อีก 50% เมื่อระบบเปิดใช้งาน และหากยังไม่เปิดใช้งานภายใน 14 วัน คุณไม่ต้องจ่ายครึ่งหลัง"
       },
       {
-        q: "How do guests pay, and how fast do I get my money?",
-        a: "Guests pay through a secure payment gateway connected to your own booking engine. The money goes to your business bank account directly — no middleman holding it, no waiting for a platform payout cycle. The gateway is in your name, not ours."
+        q: "แขกชำระเงินอย่างไร และฉันจะได้รับเงินเร็วแค่ไหน",
+        a: "แขกชำระเงินผ่านช่องทางการชำระเงินที่ปลอดภัย ซึ่งเชื่อมต่อกับระบบจองห้องพักของคุณเอง เงินเข้าบัญชีธนาคารธุรกิจของคุณโดยตรง ไม่มีตัวกลางถือเงินไว้ ไม่ต้องรอรอบจ่ายเงินของแพลตฟอร์ม ช่องทางการชำระเงินนี้อยู่ในนามของคุณ ไม่ใช่ของเรา"
       }
     ],
 

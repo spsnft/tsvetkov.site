@@ -91,6 +91,11 @@ export default function FooterCTA({ t = {}, lang = 'en' }: FooterCTAProps) {
           flex-direction: column;
           gap: 0.3rem;
           margin-bottom: 0.8rem;
+          /* Единый отступ «заголовок секции → первый контент» на всей
+             странице — согласовано с заказчиком по итогам аудита (ТЗ №4).
+             .cta-box уже даёт 24px через flex gap, добавляем ещё 24px здесь,
+             чтобы итог был 48px, как в остальных секциях — было 24px */
+          margin-top: 24px;
         }
 
         .subtitle {

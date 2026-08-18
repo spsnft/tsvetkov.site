@@ -189,7 +189,10 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
         }
 
         .about-text {
-          margin: 2rem 0 0 0;
+          /* Единый отступ «заголовок секции → первый контент» на всей
+             странице — согласовано с заказчиком по итогам аудита (ТЗ №4):
+             было 2rem/32px, приводим к общему 48px */
+          margin: 48px 0 0 0;
           display: flex;
           flex-direction: column;
           gap: 1rem;
@@ -382,9 +385,6 @@ export default function About({ t = {}, lang = 'en' }: AboutProps) {
           }
           .about-closing-line {
             font-size: 1.1875rem;
-          }
-          .about-text {
-            margin-top: 1.6rem;
           }
           .about-paragraph {
             font-size: 0.95rem;

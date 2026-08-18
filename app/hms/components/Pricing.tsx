@@ -85,7 +85,10 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
 
         .pricing-header {
           text-align: center;
-          margin-bottom: 3.5rem;
+          /* Единый отступ «заголовок секции → первый контент» на всей
+             странице — согласовано с заказчиком по итогам аудита (ТЗ №4):
+             было 3.5rem/56px, приводим к общему 48px */
+          margin-bottom: 48px;
         }
 
         .pricing-eyebrow {
@@ -449,9 +452,6 @@ export default function Pricing({ t, lang = 'en' }: PricingProps) {
         @media (max-width: 767px) {
           .pricing-section {
             padding: ${T.hms.sectionPadMobile} 0;
-          }
-          .pricing-header {
-            margin-bottom: 2rem;
           }
           .pricing-title {
             font-size: 1.75rem;

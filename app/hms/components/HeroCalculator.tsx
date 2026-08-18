@@ -44,6 +44,7 @@ export interface HeroCalculatorCopy {
   calcAssumptions?: string;
   calcAssumptionsAria?: string;
   calcRecoveryLabel?: string;
+  calcEstimateLabel?: string;
 }
 
 export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
@@ -268,14 +269,26 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           color: ${T.muted};
         }
 
-        /* Иконка больше не делит строку с лейблом «you keep» — на 375px
-           им двоим там не хватало места ни при каком тексте. Абсолютно
-           спозиционирована в паддинг-зазоре над рядом, единая на весь
-           ряд, как и было задумано (см. ТЗ №4, п. 2.5; ТЗ №8, п. 1.1) */
+        /* Иконка сидит на строке лейбла «You keep — Year 1» — поясняет
+           методику расчёта калькулятора целиком, но визуально должна быть
+           привязана к конкретному элементу, а не «висеть» на разделителе
+           колонок. Абсолютно спозиционирована относительно самого лейбла,
+           поэтому не увеличивает высоту строки и не сдвигает value-block
+           вниз — колонки остаются выровненными по верху. white-space:nowrap
+           на лейбле + запас padding-right держат текст и иконку в одну
+           строку на 375px, не наезжая на сумму снизу. */
+        .label-with-info {
+          position: relative;
+          display: inline-block;
+          padding-right: 28px;
+          white-space: nowrap;
+        }
+
         .info-btn {
           position: absolute;
-          top: -28px;
+          top: 50%;
           right: -4px;
+          transform: translateY(-50%);
           width: 32px;
           height: 32px;
           display: flex;
@@ -379,6 +392,17 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           color: #ffffff;
         }
 
+        /* Единая пометка приблизительности для обоих чисел сразу — заменяет
+           тильду, которая раньше стояла только у recoveryUsd и читалась как
+           несогласованность с annualUsd (см. ТЗ №2) */
+        .estimate-note {
+          margin: 0.6rem 0 0 0;
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: ${T.muted};
+          text-align: right;
+        }
+
         @keyframes calc-pop {
           from {
             opacity: 0.45;
@@ -415,6 +439,12 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           .group-label {
             font-size: 0.5rem;
             letter-spacing: 0.02em;
+          }
+          /* На таком мелком кегле лейбла 32px-иконка вертикально по центру
+             перевешивает нижнюю границу строки и на 1-2px задевает сумму
+             снизу — даём этой строке чуть больше запаса (см. ТЗ №1) */
+          .label-with-info {
+            margin-bottom: calc(0.55rem + 4px);
           }
         }
       `}</style>
@@ -493,21 +523,6 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
           onMouseEnter={() => { if (!isTouch) setInfoOpen(true); }}
           onMouseLeave={() => { if (!isTouch) setInfoOpen(false); }}
         >
-          <button
-            type="button"
-            className="info-btn"
-            aria-expanded={infoOpen}
-            aria-controls={tooltipId}
-            aria-label={t.calcAssumptionsAria || 'Show calculation assumptions'}
-            onClick={() => setInfoOpen((o) => !o)}
-          >
-            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.4" />
-              <path d="M10 9v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              <circle cx="10" cy="6.4" r="1" fill="currentColor" />
-            </svg>
-          </button>
-
           <div className="output-row">
             <div className="output-group pay">
               <p className="group-label">{t.calcOutputLabel || 'You pay OTAs'}</p>
@@ -525,11 +540,27 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
             </div>
 
             <div className="output-group keep">
-              <p className="group-label">{t.calcRecoveryLabel || 'You keep — Year 1'}</p>
+              <p className="group-label label-with-info">
+                {t.calcRecoveryLabel || 'You keep — Year 1'}
+                <button
+                  type="button"
+                  className="info-btn"
+                  aria-expanded={infoOpen}
+                  aria-controls={tooltipId}
+                  aria-label={t.calcAssumptionsAria || 'Show calculation assumptions'}
+                  onClick={() => setInfoOpen((o) => !o)}
+                >
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.4" />
+                    <path d="M10 9v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                    <circle cx="10" cy="6.4" r="1" fill="currentColor" />
+                  </svg>
+                </button>
+              </p>
               <div className="value-block">
                 <div className="output-value-row">
                   <span className="output-value accent" key={`r-${recoveryUsd}`}>
-                    ~${fmt(recoveryUsd)}
+                    ${fmt(recoveryUsd)}
                   </span>
                   <span className="output-unit">{t.calcYearLabel || 'per year'}</span>
                 </div>
@@ -546,6 +577,8 @@ export default function HeroCalculator({ t = {} }: { t?: HeroCalculatorCopy }) {
             </div>
           )}
         </div>
+
+        <p className="estimate-note">{t.calcEstimateLabel || 'Estimated'}</p>
       </div>
     </div>
   );

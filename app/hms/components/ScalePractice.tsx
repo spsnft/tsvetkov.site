@@ -49,7 +49,11 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
 
         .scale-header {
           text-align: center;
-          margin-bottom: 3.5rem;
+          /* Единый отступ «заголовок секции → первый контент» на всей
+             странице — согласовано с заказчиком по итогам аудита (ТЗ №4):
+             было 3.5rem/56px, приводим к общему 48px вместе с
+             PRICING/HOW IT WORKS/FAQ/WHO'S BEHIND THIS/GET STARTED */
+          margin-bottom: 48px;
         }
 
         .scale-eyebrow {
@@ -73,9 +77,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
-          .scale-header {
-            margin-bottom: 2.5rem;
-          }
           .scale-title {
             font-size: 2rem;
           }
@@ -172,9 +173,6 @@ export default function ScalePractice({ t }: ScalePracticeProps) {
         @media (max-width: 767px) {
           .scale-section {
             padding: ${T.hms.sectionPadMobile} 0;
-          }
-          .scale-header {
-            margin-bottom: 2.25rem;
           }
           .scale-title {
             font-size: 1.75rem;
