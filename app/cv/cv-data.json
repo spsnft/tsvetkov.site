@@ -2,10 +2,15 @@
   "meta": {
     "name": "Fedor Tsvetkov",
     "title": "CHIEF MARKETING OFFICER / MARKETING DIRECTOR",
+    "location": "Phuket, Thailand \u00B7 Open to remote & on-site opportunities",
     "summary": [
-      "Marketing Executive with 10+ years of expertise in driving corporate digital transformation, scaling revenue, and architecting enterprise MarTech ecosystems.",
-      "Proven track record managing $500K+ annual media budgets with a focus on P&L optimization, unit economics, and end-to-end analytics.",
-      "Expert in turning business operations into automated, online growth engines that maximize efficiency. Accomplished leader of cross-functional agile teams across complex fintech, e-commerce, and enterprise SaaS platforms."
+      "Marketing executive with 8+ years scaling revenue and building MarTech infrastructure across e-commerce, health tech, and B2B. Proven track record architecting CRM/automation systems end-to-end and leading cross-functional teams to measurable growth outcomes."
+    ],
+    "key_achievements": [
+      "7x revenue growth in 18 months",
+      "$1M+ annual media budget managed",
+      "0 \u2192 1,000+ qualified leads/month",
+      "20-30+ markets scaled (Russia, CIS, EU, Africa)"
     ],
     "contacts": {
       "email": "fedor@tsvetkov.site",
@@ -21,10 +26,10 @@
       "role": "HEAD OF OPERATIONS & MARKETING",
       "period": "sep23-may26",
       "bullets": [
-        "Built performance marketing infrastructure from scratch. Scaled monthly revenue 7x within first 18 months.",
-        "Managed multi-channel digital campaigns across Google Ads and Meta Ads driving consistent inbound traffic.",
-        "Deployed AI-driven automation for lead processing, retention, and customer lifecycle management.",
-        "Integrated proprietary CRM with custom order management platform, increasing LTV and repeat purchase rates."
+        "Built performance marketing infrastructure from scratch; scaled monthly revenue 7x within first 18 months.",
+        "Grew inbound leads from ~2/day to ~15/day on a lean ~$2K/month ad budget.",
+        "Cut lead response time from an inconsistent ~30 min average to a sub-2-minute SLA via automation.",
+        "Established end-to-end LTV/retention infrastructure from scratch, consolidating 5+ channels into one system \u2014 enabling automated retention campaigns and promotions where none existed before."
       ]
     },
     {
@@ -34,9 +39,8 @@
       "role": "MARKETING STRATEGY LEAD",
       "period": "mar23-mar24",
       "bullets": [
-        "Managed user acquisition campaigns for iOS/Android app targeting US and EU markets.",
-        "Achieved CAC $3-5 in competitive English-speaking markets.",
-        "Led cross-functional agile team for GTM execution."
+        "Built go-to-market positioning and paid acquisition strategy from scratch for a new iOS/Android app; achieved CAC of $3\u20135 in competitive US/EU markets.",
+        "Led a cross-functional team of 5 (product/dev/growth) from go-to-market planning to public launch within ~4 months."
       ]
     },
     {
@@ -46,46 +50,11 @@
       "role": "CHIEF MARKETING OFFICER (CMO)",
       "period": "feb18-feb23",
       "bullets": [
-        "Managed $500K+ annual marketing budget across digital channels with consistent positive ROI.",
+        "Managed $1M+ annual marketing budget across digital channels for a B2B agricultural machinery manufacturer.",
         "Grew inbound lead generation from 0 to 1,000+ qualified leads/month via Google Ads, SEO, and content marketing.",
-        "Led SEO program: grew key product pages from 500+ positions to top 5-50 for primary queries.",
-        "Drove digital expansion across 40+ markets (Russia, CIS, EU, Africa) coordinating with European HQ.",
-        "Built structured dealer network across Russia and transitioned offline B2B business entirely into digital channels."
-      ]
-    },
-    {
-      "id": "independent_performance",
-      "company": "INDEPENDENT ENTREPRENEUR",
-      "location": "LOCAL / REMOTE",
-      "role": "PERFORMANCE MARKETER",
-      "period": "mar15-feb18",
-      "bullets": [
-        "Launched and operated a niche D2C e-commerce project, managing supply chain, local delivery, and digital sales.",
-        "Ran performance marketing and localized lead generation campaigns for real estate and retail clients via classifieds and social networks.",
-        "Built and monetized online communities across social platforms, growing organic traffic and audience engagement."
-      ]
-    },
-    {
-      "id": "operations_legal",
-      "company": "OPERATIONS & LEGAL CONSULTANT",
-      "location": "RUSSIA",
-      "role": "SYSTEMS & COMPLIANCE AUDITOR",
-      "period": "sep12-mar15",
-      "bullets": [
-        "Audited internal regulations and operational workflows to minimize organizational and compliance risks.",
-        "Drafted, reviewed, and negotiated commercial contracts and vendor agreements with external partners.",
-        "Implemented digital document management systems to streamline administrative workflows."
-      ]
-    },
-    {
-      "id": "web3_growth",
-      "company": "INDEPENDENT ENTREPRENEUR",
-      "location": "PHUKET",
-      "role": "WEB3 & GROWTH CONSULTANT",
-      "period": "parallel 2022-2026",
-      "bullets": [
-        "Organized competitive esports tournaments, handling digital marketing, sponsor relations, and event operations.",
-        "Developed and executed peer-to-peer liquidity and currency arbitrage models within digital asset platforms."
+        "Led SEO program: moved key product pages from 500+ positions to top 10 within ~12 months of sustained investment.",
+        "Drove digital expansion across 20-30+ markets (Russia, CIS, EU, Africa), coordinating with European HQ.",
+        "Built and managed structured network of 50+ dealers supporting B2B distribution."
       ]
     }
   ],
@@ -103,9 +72,8 @@
       "category": "MarTech Infrastructure & Automation",
       "items": [
         "B2B Business Digitization & Systems Design",
-        "Enterprise CRM Architecture",
+        "Enterprise CRM Architecture & Data Synchronization",
         "AI-Driven Marketing & Corporate Workflows",
-        "End-to-End Data & Analytics Synchronization",
         "Unit Economics & Customer LTV Optimization"
       ]
     },
@@ -114,7 +82,6 @@
       "items": [
         "P&L & Media Budget Management",
         "Team Scaling & Agile Leadership",
-        "Web3 Growth & Tokenomics Strategy",
         "OKR & KPI Frameworks Implementation"
       ]
     }
