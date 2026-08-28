@@ -150,7 +150,7 @@ export default function CVPage() {
                 text-transform: uppercase;
               }
 
-              .cv-list { margin: 0; padding-left: 4mm; }
+              .cv-list { list-style: disc; margin: 0; padding-left: 4mm; }
               .cv-list li { font-size: 10.5px; line-height: 1.35; margin-bottom: 1mm; }
               .cv-list li:last-child { margin-bottom: 0; }
 
@@ -190,6 +190,7 @@ export default function CVPage() {
                   padding: 0 !important;
                   display: block !important;
                 }
+                nav, footer, button, .no-print { display: none !important; }
                 .cv-page {
                   width: 210mm !important;
                   min-height: 0 !important;
@@ -198,6 +199,11 @@ export default function CVPage() {
                   box-shadow: none !important;
                   border-radius: 0 !important;
                   padding: 13mm !important;
+                  hyphens: none !important;
+                }
+                .cv-list {
+                  list-style: disc !important;
+                  padding-left: 12px !important;
                 }
                 .cv-name, .cv-role, .cv-loc, .cv-contacts,
                 .cv-section-title, .cv-job-title, .cv-job-meta,

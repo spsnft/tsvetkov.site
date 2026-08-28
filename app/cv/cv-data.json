@@ -7,61 +7,61 @@
       "email": "fedor@tsvetkov.site",
       "phone": "+66-95-518-37-83",
       "site": "tsvetkov.site",
-      "linkedin": "linkedin.com/in/tsvetkovmarketing"
+      "linkedin": "linkedin.com/in/tsvetkov-marketing"
     },
     "key_achievements": [
-      "10x monthly revenue growth in 18 months on a $2K/mo ad budget",
+      "10x monthly revenue growth in 18 months",
       "$1M+ annual media budget managed",
       "0 → 1,000+ qualified leads/month",
-      "20+ markets scaled (Russia, CIS, EU, Africa)"
+      "Built and managed a 50+ dealer network across 20+ markets"
     ],
     "summary": [
-      "Marketing executive with 8+ years scaling revenue and building marketing infrastructure across B2B manufacturing, D2C retail, and health tech. Builds CRM and automation systems end-to-end and leads cross-functional teams to measurable growth. Equally effective managing seven-figure budgets and building a channel from zero on a lean one."
+      "Marketing executive with 8+ years scaling revenue and building marketing infrastructure across B2B manufacturing, D2C retail, and health tech. Builds CRM, analytics, and automation infrastructure end-to-end — from seven-figure budgets at a manufacturer to zero-to-one channels at a startup."
     ]
   },
   "experience": [
     {
       "id": "ft_agency",
       "role": "FOUNDER — PRODUCT & GROWTH",
-      "period": "may26 – present",
+      "period": "May 2026 – Present",
       "company": "FT.Agency",
       "location": "Phuket",
       "industry": "",
       "bullets": [
         "Built and shipped a B2B SaaS for regulated retail: Next.js/Supabase, compliance tracking module, AI-assisted development.",
-        "Productized a direct-booking infrastructure service for hospitality: positioning, pricing, and acquisition funnel built end-to-end."
+        "Productized a direct-booking infrastructure service for hospitality: positioning, pricing, and acquisition funnel."
       ]
     },
     {
       "id": "bndretail",
       "role": "FOUNDING CMO",
-      "period": "sep23 – may26",
+      "period": "Sep 2023 – May 2026",
       "company": "BNDretail Ltd",
       "location": "Phuket",
       "industry": "D2C retail & delivery",
       "bullets": [
         "Scaled monthly revenue 10x within the first 18 months on a $2K/mo ad budget.",
         "Grew qualified inbound from 2 to 15 leads/day.",
-        "Cut lead response time from an inconsistent ~30 min average to a sub-2-minute SLA via automation.",
-        "Built LTV and retention infrastructure from scratch, consolidating 5+ channels into a single system and enabling automated retention campaigns where none existed."
+        "Cut average lead response time from ~30 minutes to under 2 minutes via automated routing.",
+        "Consolidated 5+ acquisition channels into a single CRM, enabling automated retention campaigns and LTV tracking that did not previously exist."
       ]
     },
     {
       "id": "setka",
       "role": "MARKETING STRATEGY LEAD — CONTRACT",
-      "period": "mar23 – mar24",
+      "period": "Mar 2023 – Mar 2024",
       "company": "Setka (HealthTech)",
       "location": "Remote",
       "industry": "",
       "bullets": [
-        "Built go-to-market positioning and paid acquisition from scratch for a new iOS/Android app; held CAC at $3–5 in competitive US/EU markets.",
+        "Built go-to-market positioning and paid acquisition for a new iOS/Android app, holding CAC at $3–5 in competitive US/EU markets.",
         "Led a cross-functional team of 5 from planning to public launch in ~4 months."
       ]
     },
     {
       "id": "metal_fach",
       "role": "CHIEF MARKETING OFFICER",
-      "period": "feb18 – feb23",
+      "period": "Feb 2018 – Feb 2023",
       "company": "Metal-Fach",
       "location": "Russia/Poland",
       "industry": "B2B agricultural machinery",
@@ -69,8 +69,8 @@
         "Managed $1M+ annual marketing budget across digital channels.",
         "Grew inbound lead generation from 0 to 1,000+ qualified leads/month via Google Ads, SEO, and content.",
         "Moved key product pages from 500+ positions to top 10 within ~12 months.",
-        "Drove digital expansion across 20+ markets (Russia, CIS, EU, Africa), coordinating with European HQ.",
-        "Built and managed a structured network of 50+ dealers supporting B2B distribution."
+        "Localized and launched digital campaigns across 20+ markets (Russia, CIS, EU, Africa) in coordination with European HQ.",
+        "Equipped a 50+ dealer network with shared marketing assets and lead distribution."
       ]
     }
   ],
@@ -87,9 +87,9 @@
     {
       "category": "MarTech & Automation",
       "items": [
+        "AI-assisted marketing workflows",
         "CRM architecture and data sync",
         "marketing automation",
-        "AI-assisted workflows",
         "unit economics and LTV"
       ]
     },
