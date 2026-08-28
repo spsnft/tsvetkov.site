@@ -1,106 +1,123 @@
 {
   "meta": {
     "name": "Fedor Tsvetkov",
-    "title": "CHIEF MARKETING OFFICER / MARKETING DIRECTOR",
-    "location": "Phuket, Thailand \u00B7 Open to remote & on-site opportunities",
-    "summary": [
-      "Marketing executive with 8+ years scaling revenue and building MarTech infrastructure across e-commerce, health tech, and B2B. Proven track record architecting CRM/automation systems end-to-end and leading cross-functional teams to measurable growth outcomes."
-    ],
-    "key_achievements": [
-      "7x revenue growth in 18 months",
-      "$1M+ annual media budget managed",
-      "0 \u2192 1,000+ qualified leads/month",
-      "20-30+ markets scaled (Russia, CIS, EU, Africa)"
-    ],
+    "title": "CHIEF MARKETING OFFICER / HEAD OF MARKETING",
+    "location": "Phuket, Thailand · Open to remote & on-site opportunities",
     "contacts": {
       "email": "fedor@tsvetkov.site",
       "phone": "+66-95-518-37-83",
-      "site": "tsvetkov.site"
-    }
+      "site": "tsvetkov.site",
+      "linkedin": "linkedin.com/in/tsvetkovmarketing"
+    },
+    "key_achievements": [
+      "10x monthly revenue growth in 18 months on a $2K/mo ad budget",
+      "$1M+ annual media budget managed",
+      "0 → 1,000+ qualified leads/month",
+      "20+ markets scaled (Russia, CIS, EU, Africa)"
+    ],
+    "summary": [
+      "Marketing executive with 8+ years scaling revenue and building marketing infrastructure across B2B manufacturing, D2C retail, and health tech. Builds CRM and automation systems end-to-end and leads cross-functional teams to measurable growth. Equally effective managing seven-figure budgets and building a channel from zero on a lean one."
+    ]
   },
-  "experience_pool": [
+  "experience": [
+    {
+      "id": "ft_agency",
+      "role": "FOUNDER — PRODUCT & GROWTH",
+      "period": "may26 – present",
+      "company": "FT.Agency",
+      "location": "Phuket",
+      "industry": "",
+      "bullets": [
+        "Built and shipped a B2B SaaS for regulated retail: Next.js/Supabase, compliance tracking module, AI-assisted development.",
+        "Productized a direct-booking infrastructure service for hospitality: positioning, pricing, and acquisition funnel built end-to-end."
+      ]
+    },
     {
       "id": "bndretail",
-      "company": "BNDRETAIL LTD",
-      "location": "THAILAND",
-      "role": "HEAD OF OPERATIONS & MARKETING",
-      "period": "sep23-may26",
+      "role": "FOUNDING CMO",
+      "period": "sep23 – may26",
+      "company": "BNDretail Ltd",
+      "location": "Phuket",
+      "industry": "D2C retail & delivery",
       "bullets": [
-        "Built performance marketing infrastructure from scratch; scaled monthly revenue 7x within first 18 months.",
-        "Grew inbound leads from ~2/day to ~15/day on a lean ~$2K/month ad budget.",
+        "Scaled monthly revenue 10x within the first 18 months on a $2K/mo ad budget.",
+        "Grew qualified inbound from 2 to 15 leads/day.",
         "Cut lead response time from an inconsistent ~30 min average to a sub-2-minute SLA via automation.",
-        "Established end-to-end LTV/retention infrastructure from scratch, consolidating 5+ channels into one system \u2014 enabling automated retention campaigns and promotions where none existed before."
+        "Built LTV and retention infrastructure from scratch, consolidating 5+ channels into a single system and enabling automated retention campaigns where none existed."
       ]
     },
     {
       "id": "setka",
-      "company": "SETKA (HEALTHTECH)",
-      "location": "REMOTE",
-      "role": "MARKETING STRATEGY LEAD",
-      "period": "mar23-mar24",
+      "role": "MARKETING STRATEGY LEAD — CONTRACT",
+      "period": "mar23 – mar24",
+      "company": "Setka (HealthTech)",
+      "location": "Remote",
+      "industry": "",
       "bullets": [
-        "Built go-to-market positioning and paid acquisition strategy from scratch for a new iOS/Android app; achieved CAC of $3\u20135 in competitive US/EU markets.",
-        "Led a cross-functional team of 5 (product/dev/growth) from go-to-market planning to public launch within ~4 months."
+        "Built go-to-market positioning and paid acquisition from scratch for a new iOS/Android app; held CAC at $3–5 in competitive US/EU markets.",
+        "Led a cross-functional team of 5 from planning to public launch in ~4 months."
       ]
     },
     {
       "id": "metal_fach",
-      "company": "METAL-FACH SP. Z O.O.",
-      "location": "RUSSIA/POLAND",
-      "role": "CHIEF MARKETING OFFICER (CMO)",
-      "period": "feb18-feb23",
+      "role": "CHIEF MARKETING OFFICER",
+      "period": "feb18 – feb23",
+      "company": "Metal-Fach",
+      "location": "Russia/Poland",
+      "industry": "B2B agricultural machinery",
       "bullets": [
-        "Managed $1M+ annual marketing budget across digital channels for a B2B agricultural machinery manufacturer.",
-        "Grew inbound lead generation from 0 to 1,000+ qualified leads/month via Google Ads, SEO, and content marketing.",
-        "Led SEO program: moved key product pages from 500+ positions to top 10 within ~12 months of sustained investment.",
-        "Drove digital expansion across 20-30+ markets (Russia, CIS, EU, Africa), coordinating with European HQ.",
-        "Built and managed structured network of 50+ dealers supporting B2B distribution."
+        "Managed $1M+ annual marketing budget across digital channels.",
+        "Grew inbound lead generation from 0 to 1,000+ qualified leads/month via Google Ads, SEO, and content.",
+        "Moved key product pages from 500+ positions to top 10 within ~12 months.",
+        "Drove digital expansion across 20+ markets (Russia, CIS, EU, Africa), coordinating with European HQ.",
+        "Built and managed a structured network of 50+ dealers supporting B2B distribution."
       ]
     }
   ],
   "skills_categories": [
     {
-      "category": "Marketing Strategy & Global Growth",
+      "category": "Strategy & Growth",
       "items": [
-        "Global Go-To-Market (GTM) Strategy & Execution",
-        "Performance Marketing Architecture",
-        "Global Market Expansion",
-        "User Acquisition Strategy"
+        "Go-to-Market strategy and execution",
+        "performance marketing",
+        "market expansion",
+        "user acquisition"
       ]
     },
     {
-      "category": "MarTech Infrastructure & Automation",
+      "category": "MarTech & Automation",
       "items": [
-        "B2B Business Digitization & Systems Design",
-        "Enterprise CRM Architecture & Data Synchronization",
-        "AI-Driven Marketing & Corporate Workflows",
-        "Unit Economics & Customer LTV Optimization"
+        "CRM architecture and data sync",
+        "marketing automation",
+        "AI-assisted workflows",
+        "unit economics and LTV"
       ]
     },
     {
-      "category": "Executive Leadership & Operations",
+      "category": "Leadership",
       "items": [
-        "P&L & Media Budget Management",
-        "Team Scaling & Agile Leadership",
-        "OKR & KPI Frameworks Implementation"
+        "P&L and media budget management",
+        "team scaling",
+        "OKR/KPI frameworks"
       ]
     }
   ],
-  "education_pool": [
+  "languages": "English C1 · Russian native",
+  "education": [
     {
-      "degree": "MARKETING MANAGEMENT",
+      "degree": "Marketing Management",
       "school": "Higher School of Economics",
-      "period": "2020-2021"
+      "period": "2020–2021"
     },
     {
-      "degree": "DIGITAL MARKETING SPECIALIST",
+      "degree": "Digital Marketing",
       "school": "Yandex Practicum",
-      "period": "2018-2019"
+      "period": "2018–2019"
     },
     {
-      "degree": "FAMILY LAW | MASTERS DEGREE",
-      "school": "TSU (Tver State University)",
-      "period": "2012-2018"
+      "degree": "Law, Master's Degree",
+      "school": "Tver State University",
+      "period": "2012–2018"
     }
   ]
 }
