@@ -154,7 +154,7 @@ export default function CVPage() {
               .cv-list li { font-size: 10.5px; line-height: 1.35; margin-bottom: 1mm; }
               .cv-list li:last-child { margin-bottom: 0; }
 
-              .cv-summary { font-size: 11px; line-height: 1.35; margin: 0; text-align: justify; }
+              .cv-summary { font-size: 11px; line-height: 1.35; margin: 0; text-align: left; }
 
               .cv-job { margin-top: 3.5mm; }
               .cv-job:first-of-type { margin-top: 0; }
@@ -227,6 +227,7 @@ export default function CVPage() {
                 .cv-loc { margin-top: 0.8mm !important; }
                 .cv-contacts { margin-top: 0.8mm !important; }
                 .cv-section { margin-bottom: 2.5mm !important; }
+                .cv-section-last { margin-bottom: 0 !important; }
                 .cv-section-title { margin-bottom: 1.5mm !important; }
                 .cv-job { margin-top: 1.6mm !important; }
                 .cv-job-list { margin-top: 0.5mm !important; }

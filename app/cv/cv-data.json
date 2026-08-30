@@ -28,7 +28,7 @@
       "location": "Phuket",
       "industry": "",
       "bullets": [
-        "Built and shipped a B2B SaaS for regulated retail: Next.js/Supabase, compliance tracking module, AI-assisted development.",
+        "Built and shipped a B2B retail SaaS: Next.js/Supabase, compliance tracking module, AI-assisted development.",
         "Productized a direct-booking infrastructure service for hospitality: positioning, pricing, and acquisition funnel."
       ]
     },
@@ -43,7 +43,7 @@
         "Scaled monthly revenue 10x within the first 18 months on a $2K/mo ad budget.",
         "Grew qualified inbound from 2 to 15 leads/day.",
         "Cut average lead response time from ~30 minutes to under 2 minutes via automated routing.",
-        "Consolidated 5+ acquisition channels into a single CRM, enabling automated retention campaigns and LTV tracking that did not previously exist."
+        "Consolidated 5+ acquisition channels into a single CRM, enabling automated retention campaigns and LTV tracking."
       ]
     },
     {
@@ -54,7 +54,7 @@
       "location": "Remote",
       "industry": "",
       "bullets": [
-        "Built go-to-market positioning and paid acquisition for a new iOS/Android app, holding CAC at $3–5 in competitive US/EU markets.",
+        "Built go-to-market positioning and paid acquisition for a new iOS/Android app, holding CAC at $3–5 in US/EU markets.",
         "Led a cross-functional team of 5 from planning to public launch in ~4 months."
       ]
     },
@@ -69,7 +69,7 @@
         "Managed $1M+ annual marketing budget across digital channels.",
         "Grew inbound lead generation from 0 to 1,000+ qualified leads/month via Google Ads, SEO, and content.",
         "Moved key product pages from 500+ positions to top 10 within ~12 months.",
-        "Localized and launched digital campaigns across 20+ markets (Russia, CIS, EU, Africa) in coordination with European HQ.",
+        "Launched digital campaigns across 20+ markets (Russia, CIS, EU, Africa) in coordination with European HQ.",
         "Equipped a 50+ dealer network with shared marketing assets and lead distribution."
       ]
     }
@@ -88,7 +88,7 @@
       "category": "MarTech & Automation",
       "items": [
         "AI-assisted marketing workflows",
-        "CRM architecture and data sync",
+        "CRM architecture",
         "marketing automation",
         "unit economics and LTV"
       ]
