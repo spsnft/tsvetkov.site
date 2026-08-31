@@ -110,6 +110,7 @@ export default function CVPage() {
                 justify-content: center;
               }
               .cv-page {
+                position: relative;
                 width: 210mm;
                 min-height: 297mm;
                 background: #f2efea;
@@ -140,7 +141,13 @@ export default function CVPage() {
               .cv-contacts { font-size: 11px; color: #4a5568; font-weight: 700; margin: 0.3rem 0 0 0; }
               .cv-contacts a { color: inherit; text-decoration: none; }
 
-              .cv-actions { display: flex; gap: 2mm; margin-bottom: 6mm; }
+              .cv-actions {
+                position: absolute;
+                top: 16mm;
+                right: 18mm;
+                display: flex;
+                gap: 2mm;
+              }
               .cv-btn {
                 display: inline-block;
                 appearance: none;
@@ -200,6 +207,11 @@ export default function CVPage() {
                   box-shadow: none;
                 }
                 .cv-name { font-size: 1.7rem; }
+                .cv-actions {
+                  position: static;
+                  justify-content: flex-end;
+                  margin-bottom: 4mm;
+                }
               }
 
               @page { size: A4; margin: 0; }
