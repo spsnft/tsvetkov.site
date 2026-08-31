@@ -1,4 +1,5 @@
 import cvData from './cv-data.json';
+import { CvActions } from './CvActions';
 
 // Single linear column, no sidebar, no CSS grid columns, no tables:
 // ATS parsers read the DOM top-to-bottom and can scramble text pulled
@@ -17,6 +18,8 @@ export default function CVPage() {
   return (
     <div className="cv-wrapper">
       <main className="cv-page">
+        <CvActions />
+
         <header className="cv-header">
           <h1 className="cv-name">{meta.name}</h1>
           <p className="cv-role">{meta.title}</p>
@@ -24,7 +27,7 @@ export default function CVPage() {
           <p className="cv-contacts">
             <a href={`mailto:${meta.contacts.email}`}>{meta.contacts.email}</a>
             {' | '}
-            <span>{meta.contacts.phone}</span>
+            <a href="tel:+66955183783">{meta.contacts.phone}</a>
             {' | '}
             <a href={`https://${meta.contacts.site}`} target="_blank" rel="noopener noreferrer">
               {meta.contacts.site}
@@ -135,7 +138,25 @@ export default function CVPage() {
               }
               .cv-loc { font-size: 11px; color: #2d3748; margin: 0.4rem 0 0 0; }
               .cv-contacts { font-size: 11px; color: #4a5568; font-weight: 700; margin: 0.3rem 0 0 0; }
-              .cv-contacts a { color: #1a1a1a; text-decoration: none; }
+              .cv-contacts a { color: inherit; text-decoration: none; }
+
+              .cv-actions { display: flex; gap: 2mm; margin-bottom: 6mm; }
+              .cv-btn {
+                display: inline-block;
+                appearance: none;
+                background: transparent;
+                border: 1px solid #1a1a1a;
+                color: #1a1a1a;
+                font-family: inherit;
+                font-size: 10.5px;
+                font-weight: 700;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                text-decoration: none;
+                padding: 2mm 4mm;
+                cursor: pointer;
+              }
+              .cv-btn:hover { background: #1a1a1a; color: #f2efea; }
 
               .cv-section { margin-bottom: 5mm; }
               .cv-section-last { margin-bottom: 0; }
