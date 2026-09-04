@@ -12,6 +12,8 @@
     "push:linux": "bash push.sh"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "framer-motion": "^11.0.0",
     "next": "16.2.9",
     "react": "19.2.4",
