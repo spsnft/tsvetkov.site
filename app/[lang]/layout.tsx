@@ -3,6 +3,8 @@ import "../globals.css";
 import { CalendlyScript } from "@/src/components/CalendlyScript";
 import StyledJsxRegistry from "@/src/components/StyledJsxRegistry";
 import { SITE_URL } from "@/src/lib/siteUrl";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -75,6 +77,8 @@ export default async function RootLayout({ children, params }: LayoutProps) {
           {children}
           <CalendlyScript />
         </StyledJsxRegistry>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
