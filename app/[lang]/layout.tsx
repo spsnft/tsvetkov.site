@@ -15,18 +15,20 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   // Await the params promise
   const { lang } = await params;
   
+  // Homepage v2 is English-only for now (RU/TH serve the English copy) —
+  // metadata matches that across all three locales.
   const meta = {
     en: {
-      title: "Fedor Tsvetkov — Growth Architect & Performance Marketer",
-      desc: "We build high-ticket growth engines. No fluff, just architecture that scales."
+      title: "Fedor Tsvetkov — I take marketing over and make it earn",
+      desc: "Different businesses. Same approach. Numbers, paid traffic, sales automation, AI and direct bookings — one system, one person accountable."
     },
     ru: {
-      title: "Фёдор Цветков — Growth Architect & Performance Marketer",
-      desc: "Создаем масштабируемые системы роста. Архитектура, CRM и маркетинг."
+      title: "Fedor Tsvetkov — I take marketing over and make it earn",
+      desc: "Different businesses. Same approach. Numbers, paid traffic, sales automation, AI and direct bookings — one system, one person accountable."
     },
     th: {
-      title: "Fedor Tsvetkov — สถาปนิกด้านการเติบโตและนักการตลาดประสิทธิภาพ",
-      desc: "เราสร้างกลไกการเติบโตที่มีมูลค่าสูง ไม่มีน้ำ มีแต่สถาปัตยกรรมที่ปรับขนาดได้"
+      title: "Fedor Tsvetkov — I take marketing over and make it earn",
+      desc: "Different businesses. Same approach. Numbers, paid traffic, sales automation, AI and direct bookings — one system, one person accountable."
     }
   };
 
@@ -67,6 +69,12 @@ export default async function RootLayout({ children, params }: LayoutProps) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        {/* Homepage v2 only (design/system-report-v2.md §5) — additive, the
+            Space Grotesk link above stays for /hms and /ecommerce. */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
           rel="stylesheet"
         />
         <link rel="preconnect" href="https://calendly.com" />

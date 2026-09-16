@@ -227,5 +227,78 @@
     "emailLabel": "อีเมลติดต่อ",
     "websiteLabel": "เว็บไซต์หรือโซเชียล",
     "submitBtn": "ส่งคำขอตรวจสอบ"
+  },
+  "home": {
+    "brand": "Fedor Tsvetkov",
+    "place": "Phuket, Thailand",
+    "waLink": "https://wa.me/66650255229",
+    "hero": {
+      "a": "I take marketing over",
+      "b": "and make it earn",
+      "cta": "WhatsApp me"
+    },
+    "proof": {
+      "slogan": "Different businesses. Same approach.",
+      "m1": { "value": "$10M", "note": "in sales over one year", "field": "Real estate" },
+      "m2": { "value": "7×", "note": "growth in 18 months", "field": "D2C retail" },
+      "m3": { "value": "1,000+", "note": "leads per month, from zero", "field": "B2B machinery" }
+    },
+    "services": {
+      "title": "What I do",
+      "items": [
+        {
+          "n": "01",
+          "title": "Numbers first",
+          "body": "Most of your ad spend works. You just don't know which part. I put every number in one system, so you do."
+        },
+        {
+          "n": "02",
+          "title": "Paid traffic",
+          "body": "Your budget is set up to buy cheap leads. I set it up to buy paying customers."
+        },
+        {
+          "n": "03",
+          "title": "Sales automation",
+          "body": "While your lead waits, a competitor is already talking to them. I set up the system that answers first, qualifies, and logs the deal itself."
+        },
+        {
+          "n": "04",
+          "title": "AI where it pays off",
+          "body": "Your team spends hours on reports, CRM entries and paperwork. AI does that in minutes. I find where it fits and put it there."
+        },
+        {
+          "n": "05",
+          "title": "Direct bookings",
+          "body": "Booking.com takes 15–20% of every reservation. I move that demand onto the property itself, so the money stays with the owner.",
+          "link": "/hms",
+          "linkLabel": "See the direct booking system"
+        }
+      ]
+    },
+    "how": {
+      "title": "How I work",
+      "items": [
+        {
+          "label": "How it starts",
+          "body": "It starts with a look at what you already have. Channels, numbers, tools. Then I tell you what I'd change and what it costs, and you decide whether to go ahead."
+        },
+        {
+          "label": "The team",
+          "body": "I run FT Agency. I put people from it on a project when it needs them. You don't manage them, you don't hire them, and you don't pay for anyone sitting idle. You deal with me throughout, and the result is on me."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Talk to me",
+      "sub": "I usually answer the same day.",
+      "channels": [
+        { "label": "WhatsApp", "href": "https://wa.me/66650255229" },
+        { "label": "Telegram", "href": "https://t.me/advertisment_th" },
+        { "label": "Line", "href": "https://line.me/ti/p/~ftagency_th" }
+      ],
+      "email": "fedor@tsvetkov.site",
+      "mailLink": "mailto:fedor@tsvetkov.site",
+      "copyright": "© 2026 Fedor Tsvetkov. All rights reserved."
+    }
   }
 }

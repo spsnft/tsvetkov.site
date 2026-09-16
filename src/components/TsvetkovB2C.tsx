@@ -1,20 +1,11 @@
-'use client';
-
-import React from 'react';
-import dynamic from 'next/dynamic';
 import type { getDictionary } from '@/src/locales/getDictionary';
-import { Nav } from '@/src/components/Nav';
+import { Header } from '@/src/components/home/Header';
 import { Hero } from '@/src/components/Hero';
-import { Bottleneck } from '@/src/components/Bottleneck';
-import { Expertise } from '@/src/components/Expertise';
+import { Proof } from '@/src/components/home/Proof';
 import { Services } from '@/src/components/Services';
-import { CaseStudies } from '@/src/components/CaseStudies';
+import { HowIWork } from '@/src/components/home/HowIWork';
 import { Contact } from '@/src/components/Contact';
-
-const NetworkBackground = dynamic(
-  () => import('@/src/components/NetworkBackground').then((mod) => mod.NetworkBackground),
-  { ssr: false }
-);
+import { Footer } from '@/src/components/home/Footer';
 
 interface TsvetkovB2CProps {
   lang: string;
@@ -22,19 +13,23 @@ interface TsvetkovB2CProps {
 }
 
 export default function TsvetkovB2C({ lang, dict }: TsvetkovB2CProps) {
-  return (
-    <main style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
-      <NetworkBackground />
+  const { home } = dict;
 
-      <div style={{ position: 'relative', zIndex: 10 }}>
-        <Nav lang={lang} dict={dict} />
-        <Hero lang={lang} dict={dict} />
-        <Bottleneck dict={dict} />
-        <Expertise dict={dict} />
-        <Services dict={dict} />
-        <CaseStudies dict={dict} />
-        <Contact dict={dict} />
-      </div>
+  return (
+    <main style={{ background: '#F5F3EE' }}>
+      <Header lang={lang} brand={home.brand} place={home.place} waLink={home.waLink} />
+      <Hero heroA={home.hero.a} heroB={home.hero.b} cta={home.hero.cta} waLink={home.waLink} />
+      <Proof metrics={[home.proof.m1, home.proof.m2, home.proof.m3]} slogan={home.proof.slogan} />
+      <Services title={home.services.title} items={home.services.items} />
+      <HowIWork title={home.how.title} items={[home.how.items[0], home.how.items[1]]} />
+      <Contact
+        title={home.contact.title}
+        sub={home.contact.sub}
+        channels={home.contact.channels}
+        email={home.contact.email}
+        mailLink={home.contact.mailLink}
+      />
+      <Footer copyright={home.contact.copyright} />
     </main>
   );
 }
