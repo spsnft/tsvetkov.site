@@ -1,54 +1,28 @@
 'use client';
 
-import { useEffect, useState, useTransition } from 'react';
+import { useTransition } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
+import { homePad0CSS } from '@/src/theme/homeContainer';
 
 const LOCALES = ['en', 'ru', 'th'] as const;
 
-const FlagThailand = () => (
-  <svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <rect width="18" height="12" fill={T.home.color.flagWhite} />
-    <rect width="18" height="2.4" fill={T.home.color.flagRed} />
-    <rect y="9.6" width="18" height="2.4" fill={T.home.color.flagRed} />
-    <rect y="3.6" width="18" height="4.8" fill={T.home.color.flagBlue} />
-  </svg>
-);
-
-function formatBangkokTime() {
-  return new Intl.DateTimeFormat('en-US', {
-    timeZone: 'Asia/Bangkok',
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-  }).format(new Date());
-}
-
-function useBangkokTime() {
-  const [time, setTime] = useState(formatBangkokTime);
-
-  useEffect(() => {
-    const id = setInterval(() => setTime(formatBangkokTime()), 30_000);
-    return () => clearInterval(id);
-  }, []);
-
-  return time;
+interface NavLink {
+  href: string;
+  label: string;
 }
 
 interface HeaderProps {
   lang: string;
   brand: string;
-  place: string;
   waLink: string;
+  navLinks: [NavLink, NavLink, NavLink];
 }
 
-// "WhatsApp" here is a hardcoded header CTA label, deliberately separate from
-// COPY.hero.cta ("WhatsApp me") — see design/system-report-v2.md §6.
-export const Header = ({ lang, brand, place, waLink }: HeaderProps) => {
+export const Header = ({ lang, brand, waLink, navLinks }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const time = useBangkokTime();
 
   const switchLang = (next: string) => {
     if (!pathname || next === lang) return;
@@ -61,27 +35,35 @@ export const Header = ({ lang, brand, place, waLink }: HeaderProps) => {
     <header className="home-header">
       <style jsx>{`
         .home-header {
-          /* Header padding is its own one-off (16px 32px desktop / 12px
-             12px mobile, §3) — not the shared section container formula. */
+          ${homePad0CSS()}
           display: flex;
-          align-items: center;
+          align-items: stretch;
           justify-content: space-between;
-          gap: 16px;
-          padding: 12px;
           background: ${T.home.color.bgLight};
           border-bottom: 1px solid ${T.home.color.ruleLight};
           font-family: ${T.home.font.sans};
         }
 
+        .logo-block {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px;
+          text-decoration: none;
+          color: ${T.home.color.textPrimary};
+          flex-shrink: 0;
+        }
+
         @media (min-width: 768px) {
-          .home-header {
+          .logo-block {
+            gap: 16px;
             padding: 16px 32px;
           }
         }
 
         .badge {
-          width: 30px;
-          height: 30px;
+          width: 28px;
+          height: 28px;
           flex-shrink: 0;
           display: flex;
           align-items: center;
@@ -91,126 +73,159 @@ export const Header = ({ lang, brand, place, waLink }: HeaderProps) => {
           font-family: ${T.home.font.mono};
           font-size: 11px;
           font-weight: 500;
-          border-radius: 6px;
         }
 
-        .brand-block {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          text-decoration: none;
-          color: ${T.home.color.textPrimary};
-          flex-shrink: 0;
+        @media (min-width: 768px) {
+          .badge {
+            width: 30px;
+            height: 30px;
+          }
         }
 
         .brand-name {
-          /* Badge + full name + locale switcher + CTA don't fit on one row
-             below ~480px — badge-only carries the brand there. */
-          display: none;
-          font-size: ${T.home.type.mobile.base};
+          font-size: 15px;
           font-weight: 600;
+          letter-spacing: -0.01em;
           white-space: nowrap;
-        }
-
-        @media (min-width: 480px) {
-          .brand-name {
-            display: inline;
-          }
         }
 
         @media (min-width: 768px) {
           .brand-name {
-            font-size: ${T.home.type.desktop.base};
+            font-size: 16px;
           }
         }
 
-        .status-line {
+        .nav-links {
           display: none;
           align-items: center;
-          gap: 8px;
-          font-family: ${T.home.font.mono};
-          font-size: ${T.home.type.desktop.label};
-          letter-spacing: 0.09em;
-          text-transform: uppercase;
-          color: ${T.home.color.textSecondary};
-          white-space: nowrap;
+          gap: 32px;
+          font-size: 16px;
+          font-weight: 400;
         }
 
-        @media (min-width: 1024px) {
-          .status-line {
+        @media (min-width: 768px) {
+          .nav-links {
             display: flex;
+          }
+        }
+
+        .nav-links :global(a) {
+          color: ${T.home.color.textSecondary};
+          text-decoration: none;
+        }
+
+        .nav-links :global(a:hover) {
+          color: ${T.home.color.accent};
+        }
+
+        .right {
+          display: flex;
+          align-items: stretch;
+          flex: 1;
+          justify-content: flex-end;
+        }
+
+        @media (min-width: 768px) {
+          .right {
+            flex: none;
           }
         }
 
         .locale-switch {
           display: flex;
-          gap: 4px;
+          align-items: center;
           font-family: ${T.home.font.mono};
+          font-size: 11px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        @media (min-width: 768px) {
+          .locale-switch {
+            letter-spacing: 0.1em;
+            margin-left: 24px;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          .locale-switch {
+            margin-left: 0;
+          }
         }
 
         .locale-btn {
           border: none;
           background: transparent;
           cursor: pointer;
-          padding: 4px 6px;
           font-family: inherit;
-          font-size: ${T.home.type.mobile.micro};
-          letter-spacing: 0.04em;
+          font-size: inherit;
+          letter-spacing: inherit;
+          text-transform: inherit;
+          padding: 0 6px;
           color: ${T.home.color.textSecondary};
           opacity: ${isPending ? 0.6 : 1};
         }
 
+        @media (min-width: 768px) {
+          .locale-btn {
+            padding: 0 8px;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          .locale-btn {
+            padding: 0 16px;
+          }
+        }
+
         .locale-btn.active {
           color: ${T.home.color.accent};
-          font-weight: 600;
+          font-weight: 500;
         }
 
-        .cta {
-          font-family: ${T.home.font.sans};
-          font-weight: 600;
-          font-size: ${T.home.type.mobile.base};
-          color: ${T.home.color.textOnDarkPrimary};
-          background: ${T.home.color.accent};
-          padding: 8px 16px;
-          border-radius: 6px;
-          text-decoration: none;
-          white-space: nowrap;
-          transition: background 0.15s ease;
-        }
-
-        @media (min-width: 768px) {
-          .cta {
-            font-size: ${T.home.type.desktop.base};
-          }
-        }
-
-        .cta:hover {
-          background: ${T.home.color.accentHoverLight};
-        }
-
-        .right {
+        .wa-link {
           display: flex;
           align-items: center;
-          gap: 12px;
+          font-family: ${T.home.font.sans};
+          font-weight: 600;
+          color: ${T.home.color.accent};
+          text-decoration: none;
+          white-space: nowrap;
+          font-size: 12px;
+          padding: 0 12px 0 18px;
         }
 
         @media (min-width: 768px) {
-          .right {
-            gap: 24px;
+          .wa-link {
+            font-size: 13px;
+            padding: 0 24px 0 16px;
           }
+        }
+
+        @media (min-width: 1280px) {
+          .wa-link {
+            border-left: 1px solid ${T.home.color.ruleLight};
+            padding: 0 28px;
+          }
+        }
+
+        .wa-link:hover {
+          color: ${T.home.color.accentHoverLight};
         }
       `}</style>
 
-      <a href={`/${lang}`} className="brand-block">
+      <a href={`/${lang}`} className="logo-block">
         <span className="badge">FT</span>
         <span className="brand-name">{brand}</span>
       </a>
 
-      <div className="status-line">
-        <FlagThailand />
-        <span>{place}</span>
-        {time && <span>{time}</span>}
-      </div>
+      <nav className="nav-links">
+        {navLinks.map((n) => (
+          <a key={n.href} href={n.href}>
+            {n.label}
+          </a>
+        ))}
+      </nav>
 
       <div className="right">
         <div className="locale-switch">
@@ -225,7 +240,7 @@ export const Header = ({ lang, brand, place, waLink }: HeaderProps) => {
             </button>
           ))}
         </div>
-        <a className="cta" href={waLink} target="_blank" rel="noopener">
+        <a className="wa-link" href={waLink} target="_blank" rel="noopener">
           WhatsApp
         </a>
       </div>

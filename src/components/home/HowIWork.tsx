@@ -1,7 +1,7 @@
 'use client';
 
 import { T } from '@/src/theme/tokens';
-import { homePadCSS } from '@/src/theme/homeContainer';
+import { homeGridVarsCSS } from '@/src/theme/homeContainer';
 
 interface HowItem {
   label: string;
@@ -15,24 +15,28 @@ interface HowIWorkProps {
 
 export const HowIWork = ({ title, items }: HowIWorkProps) => {
   return (
-    <section className="how">
+    <section className="how" id="process">
       <style jsx>{`
         .how {
-          ${homePadCSS()}
           background: ${T.home.color.bgLightAlt};
-          padding-top: 32px;
-          padding-bottom: 32px;
+        }
+
+        /* Mobile */
+        .mobile {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          padding: 32px 24px;
         }
 
         @media (min-width: 768px) {
-          .how {
-            padding-top: 64px;
-            padding-bottom: 64px;
+          .mobile {
+            display: none;
           }
         }
 
-        h2 {
-          margin: 0 0 16px;
+        h2.section-title-mobile {
+          margin: 0;
           font-family: ${T.home.font.sans};
           font-weight: 700;
           letter-spacing: -0.03em;
@@ -40,31 +44,80 @@ export const HowIWork = ({ title, items }: HowIWorkProps) => {
           font-size: ${T.home.type.mobile.h2};
         }
 
+        .col-mobile {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .label-mobile {
+          font-family: ${T.home.font.mono};
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          color: ${T.home.color.textSecondary};
+          font-size: ${T.home.type.desktop.label};
+        }
+
+        .body-mobile {
+          margin: 0;
+          font-family: ${T.home.font.sans};
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.mobile.body};
+          line-height: 1.55;
+        }
+
+        /* Tablet/desktop */
+        .wide {
+          display: none;
+        }
+
         @media (min-width: 768px) {
-          h2 {
-            margin-bottom: 32px;
-            font-size: ${T.home.type.desktop.h2};
+          .wide {
+            ${homeGridVarsCSS()}
+            display: grid;
+            grid-template-columns: var(--pad) minmax(0, 1fr) minmax(0, 1.1fr) var(--pad);
+            padding: 64px 0;
           }
         }
 
-        .columns {
+        h2.section-title-wide {
+          grid-column: 2 / 4;
+          margin: 0 0 32px 0;
+          font-family: ${T.home.font.sans};
+          font-weight: 700;
+          letter-spacing: -0.03em;
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.desktop.h2};
+        }
+
+        .col1 {
+          grid-column: 2 / 4;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          padding-right: 0;
+        }
+
+        @media (min-width: 1280px) {
+          .col1 {
+            grid-column: 2 / 3;
+            padding-right: 64px;
+          }
+        }
+
+        .col2 {
+          grid-column: 2 / 4;
+          margin-top: 32px;
           display: flex;
           flex-direction: column;
           gap: 16px;
         }
 
-        @media (min-width: 768px) {
-          .columns {
-            flex-direction: row;
-            gap: 32px;
+        @media (min-width: 1280px) {
+          .col2 {
+            grid-column: 3 / 4;
+            margin-top: 0;
           }
-        }
-
-        .col {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          flex: 1;
         }
 
         .label {
@@ -78,27 +131,35 @@ export const HowIWork = ({ title, items }: HowIWorkProps) => {
         .body {
           margin: 0;
           font-family: ${T.home.font.sans};
-          color: ${T.home.color.textSecondary};
-          font-size: ${T.home.type.mobile.body};
-          line-height: 1.55;
-        }
-
-        @media (min-width: 768px) {
-          .body {
-            font-size: ${T.home.type.desktop.body};
-            line-height: 1.45;
-          }
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.desktop.body};
+          line-height: 1.45;
+          max-width: 820px;
         }
       `}</style>
 
-      <h2>{title}</h2>
-      <div className="columns">
+      {/* Mobile */}
+      <div className="mobile">
+        <h2 className="section-title-mobile">{title}</h2>
         {items.map((item) => (
-          <div className="col" key={item.label}>
-            <div className="label">{item.label}</div>
-            <p className="body">{item.body}</p>
+          <div className="col-mobile" key={item.label}>
+            <span className="label-mobile">{item.label}</span>
+            <p className="body-mobile">{item.body}</p>
           </div>
         ))}
+      </div>
+
+      {/* Tablet/desktop */}
+      <div className="wide">
+        <h2 className="section-title-wide">{title}</h2>
+        <div className="col1">
+          <span className="label">{items[0].label}</span>
+          <p className="body">{items[0].body}</p>
+        </div>
+        <div className="col2">
+          <span className="label">{items[1].label}</span>
+          <p className="body">{items[1].body}</p>
+        </div>
       </div>
     </section>
   );

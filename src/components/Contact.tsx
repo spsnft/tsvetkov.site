@@ -2,6 +2,7 @@
 
 import { T } from '@/src/theme/tokens';
 import { homePadCSS } from '@/src/theme/homeContainer';
+import { WhatsAppIcon, TelegramIcon, LineIcon, MailIcon } from '@/src/components/home/Icons';
 
 interface Channel {
   label: string;
@@ -16,46 +17,53 @@ interface ContactProps {
   mailLink: string;
 }
 
+// Rendered by fixed index (never a component reference stored in a variable
+// or array) — some build in this environment pathologically hangs on the
+// `const Icon = list[i]; <Icon />` pattern, even with trivial components.
+function ChannelIcon({ index }: { index: number }) {
+  if (index === 0) return <WhatsAppIcon />;
+  if (index === 1) return <TelegramIcon />;
+  return <LineIcon />;
+}
+
 export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps) => {
   return (
     <section className="contact" id="contact">
       <style jsx>{`
         .contact {
-          ${homePadCSS()}
           background: ${T.home.color.dark};
-          padding-top: 32px;
-          padding-bottom: 48px;
+          color: ${T.home.color.textOnDarkPrimary};
+        }
+
+        /* Mobile */
+        .mobile {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+          padding: 32px 24px 48px 24px;
         }
 
         @media (min-width: 768px) {
-          .contact {
-            padding-top: 64px;
-            padding-bottom: 64px;
+          .mobile {
+            display: none;
           }
         }
 
-        @media (min-width: 1280px) {
-          .contact {
-            padding-bottom: 32px;
-          }
+        .header-mobile {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
         }
 
-        h2 {
-          margin: 0 0 16px;
+        h2.section-title-mobile {
+          margin: 0;
           font-family: ${T.home.font.sans};
           font-weight: 700;
           letter-spacing: -0.03em;
-          color: ${T.home.color.textOnDarkPrimary};
           font-size: ${T.home.type.mobile.h2};
         }
 
-        @media (min-width: 768px) {
-          h2 {
-            font-size: ${T.home.type.desktop.h2};
-          }
-        }
-
-        .sub {
+        .sub-mobile {
           margin: 0;
           font-family: ${T.home.font.sans};
           color: ${T.home.color.textOnDarkMuted};
@@ -63,109 +71,153 @@ export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps)
           font-size: ${T.home.type.mobile.base};
         }
 
-        @media (min-width: 768px) {
-          .sub {
-            font-size: ${T.home.type.desktop.base};
-          }
-        }
-
-        .columns {
+        .channels-mobile {
           display: flex;
           flex-direction: column;
-          gap: 24px;
-          margin-top: 32px;
+          width: max-content;
         }
 
-        @media (min-width: 768px) {
-          .columns {
-            flex-direction: row;
-            gap: 48px;
-          }
-        }
-
-        .channels {
+        .channel-mobile {
           display: flex;
-          flex-direction: column;
-          flex: 1;
-        }
-
-        .channel {
+          align-items: center;
+          gap: 14px;
+          padding: 24px 0;
+          color: ${T.home.color.textOnDarkPrimary};
+          text-decoration: none;
           font-family: ${T.home.font.sans};
           font-weight: 600;
           letter-spacing: -0.01em;
-          color: ${T.home.color.textOnDarkPrimary};
-          text-decoration: none;
-          padding: 24px 0;
           font-size: ${T.home.type.mobile.body};
         }
 
-        .channel:not(:first-child) {
+        .channel-mobile:first-child {
+          padding-top: 0;
+          border-top: none;
+        }
+
+        .channel-mobile:not(:first-child) {
           border-top: 1px solid ${T.home.color.darkBorder};
         }
 
-        @media (min-width: 768px) {
-          .channel {
-            font-size: ${T.home.type.desktop.body};
-            letter-spacing: -0.015em;
-          }
-        }
-
-        .channel:hover {
+        .channel-mobile:hover {
           color: ${T.home.color.accentHoverDark};
         }
 
-        .email-col {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          flex: 1;
-        }
-
-        .email-label {
-          font-family: ${T.home.font.mono};
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          color: ${T.home.color.textOnDarkMuted};
-          font-size: ${T.home.type.desktop.label};
-        }
-
-        .email-link {
-          font-family: ${T.home.font.sans};
-          font-weight: 600;
-          letter-spacing: -0.01em;
-          color: ${T.home.color.textOnDarkPrimary};
-          text-decoration: none;
-          font-size: ${T.home.type.mobile.body};
+        /* Tablet/desktop */
+        .wide {
+          display: none;
         }
 
         @media (min-width: 768px) {
-          .email-link {
-            font-size: ${T.home.type.desktop.body};
-            letter-spacing: -0.015em;
+          .wide {
+            ${homePadCSS()}
+            display: grid;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 48px;
+            align-items: center;
+            padding-top: 64px;
+            padding-bottom: 64px;
           }
         }
 
-        .email-link:hover {
+        @media (min-width: 1280px) {
+          .wide {
+            padding-bottom: 32px;
+          }
+        }
+
+        .header-wide {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        h2.section-title-wide {
+          margin: 0;
+          font-family: ${T.home.font.sans};
+          font-weight: 700;
+          letter-spacing: -0.03em;
+          font-size: ${T.home.type.desktop.h2};
+        }
+
+        .sub-wide {
+          margin: 0;
+          font-family: ${T.home.font.sans};
+          color: ${T.home.color.textOnDarkMuted};
+          line-height: 1.6;
+          max-width: 30ch;
+          font-size: ${T.home.type.desktop.base};
+        }
+
+        .channels-wide {
+          display: flex;
+          flex-direction: column;
+          width: max-content;
+        }
+
+        .channel-wide {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 24px 0;
+          color: ${T.home.color.textOnDarkPrimary};
+          text-decoration: none;
+          font-family: ${T.home.font.sans};
+          font-weight: 600;
+          letter-spacing: -0.015em;
+          font-size: ${T.home.type.desktop.body};
+        }
+
+        .channel-wide:first-child {
+          padding-top: 0;
+          border-top: none;
+        }
+
+        .channel-wide:not(:first-child) {
+          border-top: 1px solid ${T.home.color.darkBorder};
+        }
+
+        .channel-wide:hover {
           color: ${T.home.color.accentHoverDark};
         }
       `}</style>
 
-      <h2>{title}</h2>
-      <p className="sub">{sub}</p>
-
-      <div className="columns">
-        <div className="channels">
-          {channels.map((c) => (
-            <a className="channel" key={c.label} href={c.href} target="_blank" rel="noopener">
-              {c.label}
+      {/* Mobile */}
+      <div className="mobile">
+        <div className="header-mobile">
+          <h2 className="section-title-mobile">{title}</h2>
+          <p className="sub-mobile">{sub}</p>
+        </div>
+        <div className="channels-mobile">
+          {channels.map((c, i) => (
+            <a className="channel-mobile" key={c.label} href={c.href} target="_blank" rel="noopener">
+              <ChannelIcon index={i} />
+              <span>{c.label}</span>
             </a>
           ))}
+          <a className="channel-mobile" href={mailLink}>
+            <MailIcon />
+            <span>{email}</span>
+          </a>
         </div>
+      </div>
 
-        <div className="email-col">
-          <span className="email-label">Email</span>
-          <a className="email-link" href={mailLink}>
-            {email}
+      {/* Tablet/desktop */}
+      <div className="wide">
+        <div className="header-wide">
+          <h2 className="section-title-wide">{title}</h2>
+          <p className="sub-wide">{sub}</p>
+        </div>
+        <div className="channels-wide">
+          {channels.map((c, i) => (
+            <a className="channel-wide" key={c.label} href={c.href} target="_blank" rel="noopener">
+              <ChannelIcon index={i} />
+              <span>{c.label}</span>
+            </a>
+          ))}
+          <a className="channel-wide" href={mailLink}>
+            <MailIcon />
+            <span>{email}</span>
           </a>
         </div>
       </div>
