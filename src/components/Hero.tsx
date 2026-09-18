@@ -1,25 +1,22 @@
 'use client';
 
+import { Fragment } from 'react';
 import { T } from '@/src/theme/tokens';
 import { homeGridVarsCSS } from '@/src/theme/homeContainer';
 import { StatusLine } from '@/src/components/home/StatusLine';
 
 interface HeroProps {
+  lang: string;
   place: string;
   heroA: string;
   heroB: string;
+  mobileLines: string[];
   cta: string;
   waLink: string;
+  portraitAlt: string;
 }
 
-export const Hero = ({ place, heroA, heroB, cta, waLink }: HeroProps) => {
-  // Mobile-only manual line breaks: "I take / marketing over / and make it
-  // earn." (design/reference-v2.html renderVals: heroA.split(' ')).
-  const words = heroA.split(' ');
-  const heroM1 = words.slice(0, 2).join(' ');
-  const heroM2 = words.slice(2).join(' ');
-  const heroM3 = heroB;
-
+export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, portraitAlt }: HeroProps) => {
   return (
     <section className="hero">
       <style jsx>{`
@@ -169,14 +166,15 @@ export const Hero = ({ place, heroA, heroB, cta, waLink }: HeroProps) => {
       `}</style>
 
       {/* Mobile */}
-      <div className="portrait-mobile" aria-label="Portrait placeholder" />
+      <div className="portrait-mobile" aria-label={portraitAlt} />
       <div className="copy-mobile">
         <h1 className="mobile">
-          {heroM1}
-          <br />
-          {heroM2}
-          <br />
-          {heroM3}
+          {mobileLines.map((line, i) => (
+            <Fragment key={i}>
+              {i > 0 && <br />}
+              {line}
+            </Fragment>
+          ))}
           <span className="accent-dot">.</span>
         </h1>
         <div className="cta-row-mobile">
@@ -184,7 +182,7 @@ export const Hero = ({ place, heroA, heroB, cta, waLink }: HeroProps) => {
             {cta}
             <span>→</span>
           </a>
-          <StatusLine place={place} />
+          <StatusLine key={lang} lang={lang} place={place} />
         </div>
       </div>
 
@@ -192,7 +190,7 @@ export const Hero = ({ place, heroA, heroB, cta, waLink }: HeroProps) => {
       <div className="grid">
         <div className="copy">
           <div className="heading-block">
-            <StatusLine place={place} />
+            <StatusLine key={lang} lang={lang} place={place} />
             <h1 className="desktop">
               {heroA}
               <br />
@@ -204,7 +202,7 @@ export const Hero = ({ place, heroA, heroB, cta, waLink }: HeroProps) => {
             {cta} →
           </a>
         </div>
-        <div className="portrait" aria-label="Portrait placeholder" />
+        <div className="portrait" aria-label={portraitAlt} />
       </div>
     </section>
   );

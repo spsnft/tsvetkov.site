@@ -21,13 +21,23 @@ export default function TsvetkovB2C({ lang, dict }: TsvetkovB2CProps) {
         lang={lang}
         brand={home.brand}
         waLink={home.waLink}
+        whatsappLabel={home.header.whatsapp}
         navLinks={[
           { href: '#services', label: home.services.title },
           { href: '#process', label: home.how.title },
           { href: '#contact', label: home.contact.title },
         ]}
       />
-      <Hero place={home.place} heroA={home.hero.a} heroB={home.hero.b} cta={home.hero.cta} waLink={home.waLink} />
+      <Hero
+        lang={lang}
+        place={home.place}
+        heroA={home.hero.a}
+        heroB={home.hero.b}
+        mobileLines={home.hero.mobileLines}
+        cta={home.hero.cta}
+        waLink={home.waLink}
+        portraitAlt={home.hero.portraitAlt}
+      />
       <Proof metrics={[home.proof.m1, home.proof.m2, home.proof.m3]} slogan={home.proof.slogan} />
       <Services title={home.services.title} items={home.services.items} />
       <HowIWork title={home.how.title} items={[home.how.items[0], home.how.items[1]]} />

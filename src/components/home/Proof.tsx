@@ -163,6 +163,11 @@ export const Proof = ({ metrics, slogan }: ProofProps) => {
             letter-spacing: 0.049em;
           }
         }
+
+        :global(:lang(th)) .slogan-mobile,
+        :global(:lang(th)) .slogan {
+          letter-spacing: 0;
+        }
       `}</style>
 
       {/* Mobile */}

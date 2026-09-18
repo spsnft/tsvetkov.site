@@ -16,10 +16,11 @@ interface HeaderProps {
   lang: string;
   brand: string;
   waLink: string;
+  whatsappLabel: string;
   navLinks: [NavLink, NavLink, NavLink];
 }
 
-export const Header = ({ lang, brand, waLink, navLinks }: HeaderProps) => {
+export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -241,7 +242,7 @@ export const Header = ({ lang, brand, waLink, navLinks }: HeaderProps) => {
           ))}
         </div>
         <a className="wa-link" href={waLink} target="_blank" rel="noopener">
-          WhatsApp
+          {whatsappLabel}
         </a>
       </div>
     </header>

@@ -4,22 +4,32 @@ import { useEffect, useState } from 'react';
 import { T } from '@/src/theme/tokens';
 import { FlagThailand } from '@/src/components/home/Icons';
 
-function formatBangkokTime() {
-  return new Intl.DateTimeFormat('en-US', {
+const DATE_FORMAT_LOCALE: Record<string, string> = {
+  en: 'en-US',
+  ru: 'ru-RU',
+  th: 'th-TH',
+};
+
+function formatBangkokTime(lang: string) {
+  const locale = DATE_FORMAT_LOCALE[lang] ?? DATE_FORMAT_LOCALE.en;
+  return new Intl.DateTimeFormat(locale, {
     timeZone: 'Asia/Bangkok',
     hour: 'numeric',
     minute: '2-digit',
-    hour12: true,
+    hour12: lang === 'en',
   }).formatToParts(new Date());
 }
 
-function useBangkokTime() {
-  const [parts, setParts] = useState(formatBangkokTime);
+// `lang` is only read on mount (via the lazy initializer) and inside the
+// interval closure — the caller remounts this hook's component with
+// `key={lang}` when the locale changes, rather than resyncing state here.
+function useBangkokTime(lang: string) {
+  const [parts, setParts] = useState(() => formatBangkokTime(lang));
 
   useEffect(() => {
-    const id = setInterval(() => setParts(formatBangkokTime()), 30_000);
+    const id = setInterval(() => setParts(formatBangkokTime(lang)), 30_000);
     return () => clearInterval(id);
-  }, []);
+  }, [lang]);
 
   const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '';
   return { hh: get('hour'), mm: get('minute'), ampm: get('dayPeriod') };
@@ -27,8 +37,8 @@ function useBangkokTime() {
 
 // Mobile: 17×12 flag, 12px text, gap 8. Tablet/desktop: 19×13 flag, 13px
 // text, gap 24 (design/reference-v2.html Hero status line).
-export const StatusLine = ({ place }: { place: string }) => {
-  const { hh, mm, ampm } = useBangkokTime();
+export const StatusLine = ({ lang, place }: { lang: string; place: string }) => {
+  const { hh, mm, ampm } = useBangkokTime(lang);
 
   return (
     <div className="status-line">
@@ -48,6 +58,10 @@ export const StatusLine = ({ place }: { place: string }) => {
             gap: 24px;
             font-size: 13px;
           }
+        }
+
+        :global(:lang(th)) .status-line {
+          letter-spacing: 0;
         }
 
         .flag-place {

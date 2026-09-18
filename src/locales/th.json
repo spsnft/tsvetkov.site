@@ -230,67 +230,76 @@
   },
   "home": {
     "brand": "Fedor Tsvetkov",
-    "place": "Phuket, Thailand",
+    "place": "ภูเก็ต ประเทศไทย",
     "waLink": "https://wa.me/66650255229",
+    "meta": {
+      "title": "Fedor Tsvetkov — ผมรับช่วงการตลาดของคุณ และทำให้มันทำเงิน",
+      "description": "ธุรกิจต่างกัน แนวทางเดียวกัน ตัวเลข โฆษณาออนไลน์ ระบบขายอัตโนมัติ AI และการจองตรง ทั้งหมดในระบบเดียว มีคนรับผิดชอบคนเดียว"
+    },
+    "header": {
+      "whatsapp": "WhatsApp"
+    },
     "hero": {
-      "a": "I take marketing over",
-      "b": "and make it earn",
-      "cta": "WhatsApp me"
+      "a": "ผมรับช่วงการตลาดของคุณ",
+      "b": "และทำให้มันทำเงิน",
+      "mobileLines": ["ผมรับช่วง", "การตลาดของคุณ", "และทำให้มันทำเงิน"],
+      "cta": "ทักทาง WhatsApp",
+      "portraitAlt": "Fedor Tsvetkov"
     },
     "proof": {
-      "slogan": "Different businesses. Same approach.",
-      "m1": { "value": "$10M", "note": "in sales over one year", "field": "Real estate" },
-      "m2": { "value": "7×", "note": "growth in 18 months", "field": "D2C retail" },
-      "m3": { "value": "1,000+", "note": "leads per month, from zero", "field": "B2B machinery" }
+      "slogan": "ธุรกิจต่างกัน แนวทางเดียวกัน",
+      "m1": { "value": "$10M", "note": "ยอดขายภายในหนึ่งปี", "field": "อสังหาริมทรัพย์" },
+      "m2": { "value": "7×", "note": "เติบโตภายใน 18 เดือน", "field": "ค้าปลีก D2C" },
+      "m3": { "value": "1,000+", "note": "ลีดต่อเดือน เริ่มจากศูนย์", "field": "เครื่องจักร B2B" }
     },
     "services": {
-      "title": "What I do",
+      "title": "สิ่งที่ผมทำ",
       "items": [
         {
           "n": "01",
-          "title": "Numbers first",
-          "body": "Most of your ad spend works. You just don't know which part. I put every number in one system, so you do."
+          "title": "ตัวเลขมาก่อน",
+          "body": "งบโฆษณาส่วนใหญ่ของคุณได้ผล แค่คุณไม่รู้ว่าส่วนไหน ผมรวมทุกตัวเลขไว้ในระบบเดียว เพื่อให้คุณรู้"
         },
         {
           "n": "02",
-          "title": "Paid traffic",
-          "body": "Your budget is set up to buy cheap leads. I set it up to buy paying customers."
+          "title": "โฆษณาออนไลน์",
+          "body": "งบของคุณถูกตั้งไว้ให้ซื้อลีดราคาถูก ผมตั้งใหม่ให้ซื้อลูกค้าที่จ่ายเงินจริง"
         },
         {
           "n": "03",
-          "title": "Sales automation",
-          "body": "While your lead waits, a competitor is already talking to them. I set up the system that answers first, qualifies, and logs the deal itself."
+          "title": "ระบบขายอัตโนมัติ",
+          "body": "ระหว่างที่ลีดของคุณรอ คู่แข่งกำลังคุยกับเขาอยู่แล้ว ผมวางระบบที่ตอบก่อน คัดกรองลีด และบันทึกดีลให้เอง"
         },
         {
           "n": "04",
-          "title": "AI where it pays off",
-          "body": "Your team spends hours on reports, CRM entries and paperwork. AI does that in minutes. I find where it fits and put it there."
+          "title": "AI ในจุดที่คุ้มค่า",
+          "body": "ทีมของคุณเสียเวลาหลายชั่วโมงกับรายงาน การกรอก CRM และงานเอกสาร AI ทำงานเหล่านี้ได้ในไม่กี่นาที ผมหาจุดที่เหมาะ แล้วนำ AI ไปใช้ตรงนั้น"
         },
         {
           "n": "05",
-          "title": "Direct bookings",
-          "body": "Booking.com takes 15–20% of every reservation. I move that demand onto the property itself, so the money stays with the owner.",
+          "title": "การจองตรง",
+          "body": "Booking.com หักค่าคอมมิชชัน 15–20% จากทุกการจอง ผมย้ายดีมานด์นั้นมาที่ที่พักโดยตรง เงินจึงอยู่กับเจ้าของ",
           "link": "/hms",
-          "linkLabel": "See the direct booking system"
+          "linkLabel": "ดูระบบการจองตรง"
         }
       ]
     },
     "how": {
-      "title": "How I work",
+      "title": "วิธีการทำงานของผม",
       "items": [
         {
-          "label": "How it starts",
-          "body": "It starts with a look at what you already have. Channels, numbers, tools. Then I tell you what I'd change and what it costs, and you decide whether to go ahead."
+          "label": "เริ่มต้นอย่างไร",
+          "body": "เริ่มจากดูสิ่งที่คุณมีอยู่แล้ว ช่องทาง ตัวเลข เครื่องมือ จากนั้นผมจะบอกว่าควรเปลี่ยนอะไรและมีค่าใช้จ่ายเท่าไร แล้วคุณตัดสินใจว่าจะไปต่อหรือไม่"
         },
         {
-          "label": "The team",
-          "body": "I run FT Agency. I put people from it on a project when it needs them. You don't manage them, you don't hire them, and you don't pay for anyone sitting idle. You deal with me throughout, and the result is on me."
+          "label": "ทีมงาน",
+          "body": "ผมบริหาร FT Agency และดึงคนจากทีมเข้ามาในโปรเจกต์เมื่อจำเป็น คุณไม่ต้องบริหารหรือจ้างพวกเขาเอง และไม่ต้องจ่ายให้ใครที่นั่งว่าง คุณคุยกับผมตลอด และผมรับผิดชอบผลลัพธ์"
         }
       ]
     },
     "contact": {
-      "title": "Talk to me",
-      "sub": "I usually answer the same day.",
+      "title": "คุยกับผม",
+      "sub": "ปกติผมตอบภายในวันเดียวกัน",
       "channels": [
         { "label": "WhatsApp", "href": "https://wa.me/66650255229" },
         { "label": "Telegram", "href": "https://t.me/advertisment_th" },
@@ -298,7 +307,7 @@
       ],
       "email": "fedor@tsvetkov.site",
       "mailLink": "mailto:fedor@tsvetkov.site",
-      "copyright": "© 2026 Fedor Tsvetkov. All rights reserved."
+      "copyright": "© 2026 Fedor Tsvetkov สงวนลิขสิทธิ์"
     }
   }
 }

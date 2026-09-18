@@ -124,9 +124,14 @@ export const T = {
       flagBlue: '#2D2A4A',
     },
 
+    // Per-locale font stacks. The literal fallback here is the /en stack
+    // (Archivo/IBM Plex Mono, loaded unconditionally) — --home-font-sans/
+    // --home-font-mono are only defined for lang=ru/th, scoped via :lang()
+    // in app/[lang]/layout.tsx, so /en never resolves the var and never
+    // loads a font it doesn't use.
     font: {
-      sans: "'Archivo', system-ui, sans-serif",
-      mono: "'IBM Plex Mono', ui-monospace, monospace",
+      sans: "var(--home-font-sans, 'Archivo', system-ui, sans-serif)",
+      mono: "var(--home-font-mono, 'IBM Plex Mono', ui-monospace, monospace)",
     },
 
     // Type scale — 7 desktop steps / 6 mobile steps (design/system-report-v2.md

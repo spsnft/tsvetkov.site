@@ -3,6 +3,7 @@ import "../globals.css";
 import { CalendlyScript } from "@/src/components/CalendlyScript";
 import StyledJsxRegistry from "@/src/components/StyledJsxRegistry";
 import { SITE_URL } from "@/src/lib/siteUrl";
+import { getDictionary } from "@/src/locales/getDictionary";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -14,37 +15,20 @@ type LayoutProps = {
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
   // Await the params promise
   const { lang } = await params;
-  
-  // Homepage v2 is English-only for now (RU/TH serve the English copy) —
-  // metadata matches that across all three locales.
-  const meta = {
-    en: {
-      title: "Fedor Tsvetkov — I take marketing over and make it earn",
-      desc: "Different businesses. Same approach. Numbers, paid traffic, sales automation, AI and direct bookings — one system, one person accountable."
-    },
-    ru: {
-      title: "Fedor Tsvetkov — I take marketing over and make it earn",
-      desc: "Different businesses. Same approach. Numbers, paid traffic, sales automation, AI and direct bookings — one system, one person accountable."
-    },
-    th: {
-      title: "Fedor Tsvetkov — I take marketing over and make it earn",
-      desc: "Different businesses. Same approach. Numbers, paid traffic, sales automation, AI and direct bookings — one system, one person accountable."
-    }
-  };
 
-  const currentMeta = meta[lang as keyof typeof meta] || meta.en;
+  const { meta } = getDictionary(lang).home;
   const locale = lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US';
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: currentMeta.title,
-    description: currentMeta.desc,
+    title: meta.title,
+    description: meta.description,
     alternates: {
       canonical: `/${lang}`,
     },
     openGraph: {
-      title: currentMeta.title,
-      description: currentMeta.desc,
+      title: meta.title,
+      description: meta.description,
       url: `${SITE_URL}/${lang}`,
       siteName: "Fedor Tsvetkov",
       locale,
@@ -52,8 +36,8 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     },
     twitter: {
       card: "summary",
-      title: currentMeta.title,
-      description: currentMeta.desc,
+      title: meta.title,
+      description: meta.description,
     },
   };
 }
@@ -77,6 +61,32 @@ export default async function RootLayout({ children, params }: LayoutProps) {
           href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
           rel="stylesheet"
         />
+        {/* RU/TH locale fonts — loaded only on their own locale, /en loads
+            neither. Archivo has no cyrillic subset and neither Archivo nor
+            IBM Plex Mono has a thai subset, so each locale layers its own
+            font in front of the existing stack via --home-font-sans/-mono
+            (see src/theme/tokens.ts), scoped with :lang() below. */}
+        {lang === 'ru' && (
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+        )}
+        {lang === 'th' && (
+          <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+        )}
+        <style>{`
+          :lang(ru) {
+            --home-font-sans: 'Inter Tight', 'Archivo', system-ui, sans-serif;
+          }
+          :lang(th) {
+            --home-font-sans: 'Archivo', 'IBM Plex Sans Thai', system-ui, sans-serif;
+            --home-font-mono: 'IBM Plex Mono', 'IBM Plex Sans Thai', ui-monospace, monospace;
+          }
+        `}</style>
         <link rel="preconnect" href="https://calendly.com" />
         <link rel="preconnect" href="https://assets.calendly.com" />
       </head>

@@ -230,67 +230,76 @@
   },
   "home": {
     "brand": "Fedor Tsvetkov",
-    "place": "Phuket, Thailand",
+    "place": "Пхукет, Таиланд",
     "waLink": "https://wa.me/66650255229",
+    "meta": {
+      "title": "Fedor Tsvetkov — забираю маркетинг и делаю его прибыльным",
+      "description": "Разные бизнесы. Один подход. Цифры, платный трафик, автоматизация продаж, ИИ и прямые бронирования — одна система, один ответственный."
+    },
+    "header": {
+      "whatsapp": "WhatsApp"
+    },
     "hero": {
-      "a": "I take marketing over",
-      "b": "and make it earn",
-      "cta": "WhatsApp me"
+      "a": "Забираю маркетинг",
+      "b": "и делаю его прибыльным",
+      "mobileLines": ["Забираю", "маркетинг", "и делаю его", "прибыльным"],
+      "cta": "Написать в WhatsApp",
+      "portraitAlt": "Fedor Tsvetkov"
     },
     "proof": {
-      "slogan": "Different businesses. Same approach.",
-      "m1": { "value": "$10M", "note": "in sales over one year", "field": "Real estate" },
-      "m2": { "value": "7×", "note": "growth in 18 months", "field": "D2C retail" },
-      "m3": { "value": "1,000+", "note": "leads per month, from zero", "field": "B2B machinery" }
+      "slogan": "Разные бизнесы. Один подход.",
+      "m1": { "value": "$10M", "note": "продаж за один год", "field": "Недвижимость" },
+      "m2": { "value": "7×", "note": "рост за 18 месяцев", "field": "D2C-ритейл" },
+      "m3": { "value": "1 000+", "note": "лидов в месяц, с нуля", "field": "B2B-оборудование" }
     },
     "services": {
-      "title": "What I do",
+      "title": "Что я делаю",
       "items": [
         {
           "n": "01",
-          "title": "Numbers first",
-          "body": "Most of your ad spend works. You just don't know which part. I put every number in one system, so you do."
+          "title": "Сначала цифры",
+          "body": "Большая часть вашего рекламного бюджета работает. Вы просто не знаете, какая. Я свожу все цифры в одну систему, чтобы вы знали."
         },
         {
           "n": "02",
-          "title": "Paid traffic",
-          "body": "Your budget is set up to buy cheap leads. I set it up to buy paying customers."
+          "title": "Платный трафик",
+          "body": "Ваш бюджет настроен покупать дешёвые лиды. Я настраиваю его покупать платящих клиентов."
         },
         {
           "n": "03",
-          "title": "Sales automation",
-          "body": "While your lead waits, a competitor is already talking to them. I set up the system that answers first, qualifies, and logs the deal itself."
+          "title": "Автоматизация продаж",
+          "body": "Пока ваш лид ждёт, с ним уже говорит конкурент. Я настраиваю систему, которая отвечает первой, квалифицирует лида и сама фиксирует сделку."
         },
         {
           "n": "04",
-          "title": "AI where it pays off",
-          "body": "Your team spends hours on reports, CRM entries and paperwork. AI does that in minutes. I find where it fits and put it there."
+          "title": "ИИ там, где он окупается",
+          "body": "Ваша команда тратит часы на отчёты, записи в CRM и документы. ИИ делает это за минуты. Я нахожу, где он подходит, и внедряю его туда."
         },
         {
           "n": "05",
-          "title": "Direct bookings",
-          "body": "Booking.com takes 15–20% of every reservation. I move that demand onto the property itself, so the money stays with the owner.",
+          "title": "Прямые бронирования",
+          "body": "Booking.com забирает 15–20% с каждого бронирования. Я перевожу этот спрос на сайт самого объекта, и деньги остаются у владельца.",
           "link": "/hms",
-          "linkLabel": "See the direct booking system"
+          "linkLabel": "Смотреть систему прямых бронирований"
         }
       ]
     },
     "how": {
-      "title": "How I work",
+      "title": "Как я работаю",
       "items": [
         {
-          "label": "How it starts",
-          "body": "It starts with a look at what you already have. Channels, numbers, tools. Then I tell you what I'd change and what it costs, and you decide whether to go ahead."
+          "label": "С чего начинаем",
+          "body": "Начинаем с того, что у вас уже есть. Каналы, цифры, инструменты. Потом я говорю, что бы поменял и сколько это стоит, а вы решаете, идём ли дальше."
         },
         {
-          "label": "The team",
-          "body": "I run FT Agency. I put people from it on a project when it needs them. You don't manage them, you don't hire them, and you don't pay for anyone sitting idle. You deal with me throughout, and the result is on me."
+          "label": "Команда",
+          "body": "Я руковожу FT Agency. Когда проекту нужны люди, я подключаю их оттуда. Вы ими не управляете, не нанимаете их и не платите за простой. Всё время вы работаете со мной, и за результат отвечаю я."
         }
       ]
     },
     "contact": {
-      "title": "Talk to me",
-      "sub": "I usually answer the same day.",
+      "title": "Напишите мне",
+      "sub": "Обычно отвечаю в тот же день.",
       "channels": [
         { "label": "WhatsApp", "href": "https://wa.me/66650255229" },
         { "label": "Telegram", "href": "https://t.me/advertisment_th" },
@@ -298,7 +307,7 @@
       ],
       "email": "fedor@tsvetkov.site",
       "mailLink": "mailto:fedor@tsvetkov.site",
-      "copyright": "© 2026 Fedor Tsvetkov. All rights reserved."
+      "copyright": "© 2026 Fedor Tsvetkov. Все права защищены."
     }
   }
 }

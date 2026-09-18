@@ -232,10 +232,19 @@
     "brand": "Fedor Tsvetkov",
     "place": "Phuket, Thailand",
     "waLink": "https://wa.me/66650255229",
+    "meta": {
+      "title": "Fedor Tsvetkov — I take marketing over and make it earn",
+      "description": "Different businesses. Same approach. Numbers, paid traffic, sales automation, AI and direct bookings — one system, one person accountable."
+    },
+    "header": {
+      "whatsapp": "WhatsApp"
+    },
     "hero": {
       "a": "I take marketing over",
       "b": "and make it earn",
-      "cta": "WhatsApp me"
+      "mobileLines": ["I take", "marketing over", "and make it earn"],
+      "cta": "WhatsApp me",
+      "portraitAlt": "Fedor Tsvetkov"
     },
     "proof": {
       "slogan": "Different businesses. Same approach.",
