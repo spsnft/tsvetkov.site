@@ -79,7 +79,7 @@ export const Hero = ({ place, heroA, heroB, cta, waLink }: HeroProps) => {
         .portrait-mobile {
           height: 200px;
           background: ${T.home.color.dark};
-          border-top: 1px solid ${T.home.color.ruleLight};
+          border-bottom: 1px solid ${T.home.color.ruleLight};
         }
 
         @media (min-width: 768px) {
@@ -169,6 +169,7 @@ export const Hero = ({ place, heroA, heroB, cta, waLink }: HeroProps) => {
       `}</style>
 
       {/* Mobile */}
+      <div className="portrait-mobile" aria-label="Portrait placeholder" />
       <div className="copy-mobile">
         <h1 className="mobile">
           {heroM1}
@@ -186,7 +187,6 @@ export const Hero = ({ place, heroA, heroB, cta, waLink }: HeroProps) => {
           <StatusLine place={place} />
         </div>
       </div>
-      <div className="portrait-mobile" aria-label="Portrait placeholder" />
 
       {/* Tablet/desktop */}
       <div className="grid">

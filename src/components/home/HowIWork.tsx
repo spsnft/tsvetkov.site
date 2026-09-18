@@ -50,6 +50,13 @@ export const HowIWork = ({ title, items }: HowIWorkProps) => {
           gap: 8px;
         }
 
+        /* Two subsections read as one paragraph at the 16px flex gap alone
+           (continuous text, not a list — no divider) — match tablet's 32px
+           separation between them instead. */
+        .col-mobile + .col-mobile {
+          margin-top: 16px;
+        }
+
         .label-mobile {
           font-family: ${T.home.font.mono};
           text-transform: uppercase;
