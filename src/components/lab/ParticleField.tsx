@@ -15,12 +15,18 @@
 import { useEffect, useRef } from 'react';
 
 export interface ParticleFieldProps {
-  /** Canvas background color. */
+  /** Canvas background color. Accepts 'transparent'. */
   backgroundColor?: string;
   /** Palette particles are drawn from, cycled in order. */
   particleColors?: string[];
-  /** Number of particles. Defaults to 60 on desktop, 35 below 768px width. */
+  /**
+   * Particle count on viewports ≥768px wide. Defaults to 60.
+   * Below 768px, `mobileParticleCount` is used instead — always, even
+   * when this prop is set (they're independent, not a single override).
+   */
   particleCount?: number;
+  /** Particle count below 768px width. Defaults to 35. */
+  mobileParticleCount?: number;
   /** Multiplier applied to particle velocity. */
   speed?: number;
   /** Minimum particle radius, in px. */
@@ -52,6 +58,7 @@ export default function ParticleField({
   backgroundColor = '#0A0A0C',
   particleColors = DEFAULT_COLORS,
   particleCount,
+  mobileParticleCount = MOBILE_PARTICLE_COUNT,
   speed = 1,
   minSize = 1,
   maxSize = 2.5,
@@ -64,6 +71,9 @@ export default function ParticleField({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const parent = canvas.parentElement;
+    if (!parent) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -71,11 +81,12 @@ export default function ParticleField({
       '(prefers-reduced-motion: reduce)'
     ).matches;
 
+    // Below 768px, mobileParticleCount always applies — independent of
+    // particleCount, which only governs ≥768px.
     const resolvedCount =
-      particleCount ??
-      (window.innerWidth < MOBILE_BREAKPOINT
-        ? MOBILE_PARTICLE_COUNT
-        : DESKTOP_PARTICLE_COUNT);
+      window.innerWidth < MOBILE_BREAKPOINT
+        ? mobileParticleCount
+        : (particleCount ?? DESKTOP_PARTICLE_COUNT);
 
     let width = 0;
     let height = 0;
@@ -93,9 +104,7 @@ export default function ParticleField({
       }));
     };
 
-    const resize = () => {
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
+    const applyCanvasBackingSize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = width * dpr;
       canvas.height = height * dpr;
@@ -165,14 +174,48 @@ export default function ParticleField({
       }
     };
 
-    resize();
+    // Initial size comes from the parent's own box, read directly rather
+    // than via canvas.clientWidth/clientHeight — the canvas fills it via
+    // CSS 100%/100%, but we size the backing store from the source of
+    // truth so it doesn't depend on that CSS relationship at all.
+    const initialRect = parent.getBoundingClientRect();
+    width = Math.round(initialRect.width);
+    height = Math.round(initialRect.height);
+    applyCanvasBackingSize();
     createParticles();
     drawFrame();
 
-    const handleResize = () => {
-      resize();
+    // Resize never recreates particles — existing positions are rescaled
+    // proportionally to the new size so motion continues smoothly instead
+    // of jumping to a fresh random layout.
+    const handleResize = (newWidthRaw: number, newHeightRaw: number) => {
+      const newWidth = Math.round(newWidthRaw);
+      const newHeight = Math.round(newHeightRaw);
+      if (newWidth <= 0 || newHeight <= 0) return;
+      if (newWidth === width && newHeight === height) return;
+
+      if (width > 0 && height > 0) {
+        const scaleX = newWidth / width;
+        const scaleY = newHeight / height;
+        particles.forEach((p) => {
+          p.x *= scaleX;
+          p.y *= scaleY;
+        });
+      }
+
+      width = newWidth;
+      height = newHeight;
+      applyCanvasBackingSize();
+      drawFrame();
     };
-    window.addEventListener('resize', handleResize);
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      const { width: w, height: h } = entry.contentRect;
+      handleResize(w, h);
+    });
+    resizeObserver.observe(parent);
 
     let observer: IntersectionObserver | null = null;
 
@@ -194,13 +237,14 @@ export default function ParticleField({
 
     return () => {
       stopLoop();
-      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
       observer?.disconnect();
     };
   }, [
     backgroundColor,
     particleColors,
     particleCount,
+    mobileParticleCount,
     speed,
     minSize,
     maxSize,

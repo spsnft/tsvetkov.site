@@ -3,6 +3,9 @@
 import { T } from '@/src/theme/tokens';
 import { homePadCSS } from '@/src/theme/homeContainer';
 import { WhatsAppIcon, TelegramIcon, LineIcon, MailIcon } from '@/src/components/home/Icons';
+import ParticleField from '@/src/components/lab/ParticleField';
+
+const PARTICLE_COLORS = ['rgba(245, 243, 238, 0.35)', 'rgba(245, 243, 238, 0.18)'];
 
 interface Channel {
   label: string;
@@ -31,12 +34,23 @@ export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps)
     <section className="contact" id="contact">
       <style jsx>{`
         .contact {
+          position: relative;
+          overflow: hidden;
           background: ${T.home.color.dark};
           color: ${T.home.color.textOnDarkPrimary};
         }
 
+        .particle-bg {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+        }
+
         /* Mobile */
         .mobile {
+          position: relative;
+          z-index: 1;
           display: flex;
           flex-direction: column;
           gap: 24px;
@@ -105,6 +119,8 @@ export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps)
 
         /* Tablet/desktop */
         .wide {
+          position: relative;
+          z-index: 1;
           display: none;
         }
 
@@ -181,6 +197,16 @@ export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps)
           color: ${T.home.color.accentHoverDark};
         }
       `}</style>
+
+      <div className="particle-bg" aria-hidden="true">
+        <ParticleField
+          backgroundColor="transparent"
+          particleColors={PARTICLE_COLORS}
+          particleCount={30}
+          mobileParticleCount={16}
+          connectionLines={false}
+        />
+      </div>
 
       {/* Mobile */}
       <div className="mobile">
