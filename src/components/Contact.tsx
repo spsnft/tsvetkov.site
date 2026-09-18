@@ -214,6 +214,7 @@ export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps)
           linesNearPointerOnly
           lineAlpha={0.15}
           interactionTarget={sectionRef}
+          tapToggle
         />
       </div>
 

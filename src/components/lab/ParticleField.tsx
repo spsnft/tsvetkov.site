@@ -57,6 +57,20 @@ export interface ParticleFieldProps {
    * when the canvas is a non-interactive background layer instead.
    */
   interactionTarget?: RefObject<HTMLElement | null>;
+  /**
+   * Touch-only "tap sets target" mode. Mouse behavior is unaffected.
+   *
+   * A tap (movement under 10px, under 300ms) on empty space sets a fixed
+   * attraction target at the tap point — particles keep being pulled toward
+   * it after the finger lifts. The next tap anywhere clears it, toggling
+   * back to free movement; it also auto-clears after 8s. A scroll gesture
+   * (movement over 10px) neither sets nor clears the target — while the
+   * finger is moving, live drag-follow attraction runs as usual, and on
+   * release it only reverts to free movement if no target is active. A tap
+   * on a link (or its descendant) is ignored entirely, so it doesn't
+   * interfere with native navigation. Defaults to false.
+   */
+  tapToggle?: boolean;
   /** Extra class name for the canvas element. */
   className?: string;
 }
@@ -73,6 +87,11 @@ const DEFAULT_LINE_ALPHA = 0.15;
 const ATTRACTION_RADIUS = 200;
 const ATTRACTION_STRENGTH = 2.2;
 const POINTER_LERP = 0.25;
+
+// tapToggle — touch-only tap-sets-target mode.
+const TAP_MOVE_THRESHOLD = 10;
+const TAP_DURATION_MS = 300;
+const TARGET_AUTO_CLEAR_MS = 8000;
 
 type Particle = {
   x: number;
@@ -96,6 +115,7 @@ export default function ParticleField({
   lineColor = DEFAULT_LINE_COLOR,
   lineAlpha = DEFAULT_LINE_ALPHA,
   interactionTarget,
+  tapToggle = false,
   className,
 }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -375,32 +395,162 @@ export default function ParticleField({
       // pointercancel and pointermove stops, but touchmove keeps firing
       // for the whole gesture, so attraction keeps tracking the finger
       // while the page scrolls.
-      const onTouchMove = (e: TouchEvent) => {
-        if (e.touches.length > 0) {
+      if (tapToggle) {
+        // Sticky tap-set target, on top of the same live drag-follow as
+        // below. `liveTouchActive` guards the auto-clear timer: if it fires
+        // mid-gesture, the ongoing touchmove/touchend handlers are already
+        // driving `pointer` and stay in charge instead of it.
+        let activeTarget: { x: number; y: number } | null = null;
+        let targetClearTimer: ReturnType<typeof setTimeout> | null = null;
+        let liveTouchActive = false;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartTime = 0;
+        let touchMoved = false;
+        let touchIsLink = false;
+
+        const clearActiveTarget = () => {
+          activeTarget = null;
+          if (targetClearTimer !== null) {
+            clearTimeout(targetClearTimer);
+            targetClearTimer = null;
+          }
+        };
+
+        const setActiveTarget = (x: number, y: number) => {
+          activeTarget = { x, y };
+          if (targetClearTimer !== null) clearTimeout(targetClearTimer);
+          targetClearTimer = setTimeout(() => {
+            activeTarget = null;
+            targetClearTimer = null;
+            if (!liveTouchActive) pointer.active = false;
+          }, TARGET_AUTO_CLEAR_MS);
+        };
+
+        // Shared touchend/touchcancel finalizer. `consideredTap` toggles the
+        // sticky target only for a genuine tap — a scroll release (or a
+        // cancelled gesture) leaves it exactly as it was.
+        const releaseTouch = (consideredTap: boolean) => {
+          liveTouchActive = false;
+
+          if (consideredTap) {
+            if (activeTarget) {
+              clearActiveTarget();
+            } else {
+              setActiveTarget(touchStartX, touchStartY);
+            }
+          }
+
+          if (activeTarget) {
+            pointer.targetX = activeTarget.x;
+            pointer.targetY = activeTarget.y;
+            pointer.active = true;
+          } else {
+            pointer.active = false;
+          }
+        };
+
+        const onTapToggleTouchStart = (e: TouchEvent) => {
+          const touch = e.touches[0];
+          if (!touch) return;
+
+          const touchTarget = touch.target as Element | null;
+          touchIsLink = !!touchTarget?.closest?.('a');
+          if (touchIsLink) return;
+
           const rect = canvas.getBoundingClientRect();
-          pointer.targetX = e.touches[0].clientX - rect.left;
-          pointer.targetY = e.touches[0].clientY - rect.top;
+          touchStartX = touch.clientX - rect.left;
+          touchStartY = touch.clientY - rect.top;
+          touchStartTime = performance.now();
+          touchMoved = false;
+          liveTouchActive = true;
+
+          // Live drag-follow starts immediately, same as the plain-touch mode.
+          pointer.targetX = touchStartX;
+          pointer.targetY = touchStartY;
           pointer.active = true;
-        }
-      };
-      const onTouchEnd = () => {
-        pointer.active = false;
-      };
+        };
 
-      target.addEventListener('touchstart', onTouchMove, { passive: true });
-      target.addEventListener('touchmove', onTouchMove, { passive: true });
-      target.addEventListener('touchend', onTouchEnd, { passive: true });
+        const onTapToggleTouchMove = (e: TouchEvent) => {
+          if (touchIsLink) return;
+          const touch = e.touches[0];
+          if (!touch) return;
 
-      removeInteractionListeners = () => {
-        target.removeEventListener('pointermove', onPointerMove);
-        target.removeEventListener('pointerdown', onPointerDown);
-        target.removeEventListener('pointerup', onPointerDeactivate);
-        target.removeEventListener('pointerleave', onPointerDeactivate);
-        target.removeEventListener('pointercancel', onPointerDeactivate);
-        target.removeEventListener('touchstart', onTouchMove);
-        target.removeEventListener('touchmove', onTouchMove);
-        target.removeEventListener('touchend', onTouchEnd);
-      };
+          const rect = canvas.getBoundingClientRect();
+          const x = touch.clientX - rect.left;
+          const y = touch.clientY - rect.top;
+
+          if (!touchMoved && Math.hypot(x - touchStartX, y - touchStartY) > TAP_MOVE_THRESHOLD) {
+            touchMoved = true;
+          }
+
+          pointer.targetX = x;
+          pointer.targetY = y;
+          pointer.active = true;
+        };
+
+        const onTapToggleTouchEnd = () => {
+          if (touchIsLink) {
+            touchIsLink = false;
+            return;
+          }
+          const duration = performance.now() - touchStartTime;
+          releaseTouch(!touchMoved && duration < TAP_DURATION_MS);
+        };
+
+        const onTapToggleTouchCancel = () => {
+          if (touchIsLink) {
+            touchIsLink = false;
+            return;
+          }
+          releaseTouch(false);
+        };
+
+        target.addEventListener('touchstart', onTapToggleTouchStart, { passive: true });
+        target.addEventListener('touchmove', onTapToggleTouchMove, { passive: true });
+        target.addEventListener('touchend', onTapToggleTouchEnd, { passive: true });
+        target.addEventListener('touchcancel', onTapToggleTouchCancel, { passive: true });
+
+        removeInteractionListeners = () => {
+          target.removeEventListener('pointermove', onPointerMove);
+          target.removeEventListener('pointerdown', onPointerDown);
+          target.removeEventListener('pointerup', onPointerDeactivate);
+          target.removeEventListener('pointerleave', onPointerDeactivate);
+          target.removeEventListener('pointercancel', onPointerDeactivate);
+          target.removeEventListener('touchstart', onTapToggleTouchStart);
+          target.removeEventListener('touchmove', onTapToggleTouchMove);
+          target.removeEventListener('touchend', onTapToggleTouchEnd);
+          target.removeEventListener('touchcancel', onTapToggleTouchCancel);
+          clearActiveTarget();
+        };
+      } else {
+        const onTouchMove = (e: TouchEvent) => {
+          if (e.touches.length > 0) {
+            const rect = canvas.getBoundingClientRect();
+            pointer.targetX = e.touches[0].clientX - rect.left;
+            pointer.targetY = e.touches[0].clientY - rect.top;
+            pointer.active = true;
+          }
+        };
+        const onTouchEnd = () => {
+          pointer.active = false;
+        };
+
+        target.addEventListener('touchstart', onTouchMove, { passive: true });
+        target.addEventListener('touchmove', onTouchMove, { passive: true });
+        target.addEventListener('touchend', onTouchEnd, { passive: true });
+
+        removeInteractionListeners = () => {
+          target.removeEventListener('pointermove', onPointerMove);
+          target.removeEventListener('pointerdown', onPointerDown);
+          target.removeEventListener('pointerup', onPointerDeactivate);
+          target.removeEventListener('pointerleave', onPointerDeactivate);
+          target.removeEventListener('pointercancel', onPointerDeactivate);
+          target.removeEventListener('touchstart', onTouchMove);
+          target.removeEventListener('touchmove', onTouchMove);
+          target.removeEventListener('touchend', onTouchEnd);
+        };
+      }
     }
 
     return () => {
@@ -422,6 +572,7 @@ export default function ParticleField({
     lineColor,
     lineAlpha,
     interactionTarget,
+    tapToggle,
   ]);
 
   return (

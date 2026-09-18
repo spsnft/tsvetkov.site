@@ -6,7 +6,7 @@ export default function LabBackgroundPage() {
       {/* particleColors already matches the component default (ported from
           this same source). Only the connection-line look was hardcoded
           differently in the original — reproduced here via props. */}
-      <ParticleField lineColor="rgb(0, 255, 179)" lineAlpha={0.065} />
+      <ParticleField lineColor="rgb(0, 255, 179)" lineAlpha={0.065} tapToggle />
     </div>
   );
 }
