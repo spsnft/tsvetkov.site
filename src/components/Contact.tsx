@@ -1,11 +1,14 @@
 'use client';
 
+import { useRef } from 'react';
 import { T } from '@/src/theme/tokens';
 import { homePadCSS } from '@/src/theme/homeContainer';
 import { WhatsAppIcon, TelegramIcon, LineIcon, MailIcon } from '@/src/components/home/Icons';
 import ParticleField from '@/src/components/lab/ParticleField';
 
-const PARTICLE_COLORS = ['rgba(245, 243, 238, 0.35)', 'rgba(245, 243, 238, 0.18)'];
+const PARTICLE_COLORS = ['rgba(245, 243, 238, 0.55)', 'rgba(245, 243, 238, 0.28)'];
+// ParticleField's own default maxSize is 2.5 — this block wants that × 1.5.
+const PARTICLE_MAX_SIZE = 3.75;
 
 interface Channel {
   label: string;
@@ -30,8 +33,10 @@ function ChannelIcon({ index }: { index: number }) {
 }
 
 export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
+
   return (
-    <section className="contact" id="contact">
+    <section className="contact" id="contact" ref={sectionRef}>
       <style jsx>{`
         .contact {
           position: relative;
@@ -202,9 +207,13 @@ export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps)
         <ParticleField
           backgroundColor="transparent"
           particleColors={PARTICLE_COLORS}
-          particleCount={30}
-          mobileParticleCount={16}
-          connectionLines={false}
+          particleCount={24}
+          mobileParticleCount={14}
+          maxSize={PARTICLE_MAX_SIZE}
+          connectionLines
+          linesNearPointerOnly
+          lineAlpha={0.15}
+          interactionTarget={sectionRef}
         />
       </div>
 

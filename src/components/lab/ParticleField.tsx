@@ -2,7 +2,8 @@
 
 /**
  * ParticleField — self-contained animated background: dark canvas with
- * floating glowing particles (optionally connected by faint lines).
+ * floating glowing particles (optionally connected by faint lines, and
+ * optionally attracted toward the pointer/touch).
  *
  * Extracted: 2026-09-13
  * Source: tsvetkov.site, pre-rewrite version — src/components/NetworkBackground.tsx
@@ -10,9 +11,13 @@
  * Purpose: archive / reusable copy. This file has zero imports from the
  *   original project (no design tokens, no other local modules) — only
  *   `react` — so it can be copied into any other project as-is.
+ *
+ * Pointer attraction physics (radius, strength, pointer-position smoothing)
+ * are ported 1:1 from NetworkBackground.tsx, not reinvented.
  */
 
 import { useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
 
 export interface ParticleFieldProps {
   /** Canvas background color. Accepts 'transparent'. */
@@ -35,6 +40,23 @@ export interface ParticleFieldProps {
   maxSize?: number;
   /** Draw faint lines between nearby particles. */
   connectionLines?: boolean;
+  /**
+   * When `connectionLines` is on: restrict lines to particles within the
+   * pointer's attraction radius (nothing drawn at rest), fading toward the
+   * radius edge, instead of the default always-on global proximity lines.
+   */
+  linesNearPointerOnly?: boolean;
+  /** Connection line color. */
+  lineColor?: string;
+  /** Connection line peak alpha (at zero distance). */
+  lineAlpha?: number;
+  /**
+   * Element whose pointer/touch events drive the attraction effect.
+   * Defaults to the canvas itself — correct as long as nothing with
+   * pointer-events:none sits on top of it. Pass a ref to an ancestor
+   * when the canvas is a non-interactive background layer instead.
+   */
+  interactionTarget?: RefObject<HTMLElement | null>;
   /** Extra class name for the canvas element. */
   className?: string;
 }
@@ -44,6 +66,13 @@ const MOBILE_BREAKPOINT = 768;
 const DESKTOP_PARTICLE_COUNT = 60;
 const MOBILE_PARTICLE_COUNT = 35;
 const CONNECTION_DISTANCE = 140;
+const DEFAULT_LINE_COLOR = '#ffffff';
+const DEFAULT_LINE_ALPHA = 0.15;
+
+// Pointer attraction — ported as-is from NetworkBackground.tsx.
+const ATTRACTION_RADIUS = 200;
+const ATTRACTION_STRENGTH = 2.2;
+const POINTER_LERP = 0.25;
 
 type Particle = {
   x: number;
@@ -63,6 +92,10 @@ export default function ParticleField({
   minSize = 1,
   maxSize = 2.5,
   connectionLines = true,
+  linesNearPointerOnly = false,
+  lineColor = DEFAULT_LINE_COLOR,
+  lineAlpha = DEFAULT_LINE_ALPHA,
+  interactionTarget,
   className,
 }: ParticleFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -93,6 +126,12 @@ export default function ParticleField({
     let particles: Particle[] = [];
     let animationFrameId: number | null = null;
 
+    // Pointer/touch attraction state — mirrors NetworkBackground.tsx's
+    // `mouse` object. x/y is the smoothed attractor position actually used
+    // for the force; targetX/targetY is the raw last-known pointer
+    // position it eases toward.
+    const pointer = { x: -1000, y: -1000, targetX: -1000, targetY: -1000, active: false };
+
     const createParticles = () => {
       particles = Array.from({ length: resolvedCount }, (_, i) => ({
         x: Math.random() * width,
@@ -117,25 +156,62 @@ export default function ParticleField({
       ctx.fillRect(0, 0, width, height);
 
       if (connectionLines) {
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const p1 = particles[i];
-            const p2 = particles[j];
-            const dx = p1.x - p2.x;
-            const dy = p1.y - p2.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 0.5;
 
-            if (dist < CONNECTION_DISTANCE) {
-              const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.15;
-              ctx.beginPath();
-              ctx.moveTo(p1.x, p1.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
+        if (linesNearPointerOnly) {
+          // Nothing at rest — only particles within the attraction radius
+          // get connected, fading out toward the radius edge.
+          if (pointer.active) {
+            for (let i = 0; i < particles.length; i++) {
+              const p1 = particles[i];
+              const d1 = Math.hypot(pointer.x - p1.x, pointer.y - p1.y);
+              if (d1 > ATTRACTION_RADIUS) continue;
+
+              for (let j = i + 1; j < particles.length; j++) {
+                const p2 = particles[j];
+                const d2 = Math.hypot(pointer.x - p2.x, pointer.y - p2.y);
+                if (d2 > ATTRACTION_RADIUS) continue;
+
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist >= CONNECTION_DISTANCE) continue;
+
+                const proximity = 1 - (d1 + d2) / 2 / ATTRACTION_RADIUS;
+                const alpha = Math.max(0, proximity) * lineAlpha;
+                if (alpha <= 0) continue;
+
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.globalAlpha = alpha;
+                ctx.stroke();
+              }
+            }
+          }
+        } else {
+          // Default — always on, independent of the pointer.
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const p1 = particles[i];
+              const p2 = particles[j];
+              const dx = p1.x - p2.x;
+              const dy = p1.y - p2.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+
+              if (dist < CONNECTION_DISTANCE) {
+                ctx.globalAlpha = (1 - dist / CONNECTION_DISTANCE) * lineAlpha;
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+              }
             }
           }
         }
+
+        ctx.globalAlpha = 1;
       }
 
       ctx.globalAlpha = 0.8;
@@ -152,12 +228,40 @@ export default function ParticleField({
     };
 
     const step = () => {
+      // Ease the attractor toward the last-known pointer position — snap
+      // on the first active frame, same as the original.
+      if (pointer.active) {
+        if (pointer.x === -1000) {
+          pointer.x = pointer.targetX;
+          pointer.y = pointer.targetY;
+        } else {
+          pointer.x += (pointer.targetX - pointer.x) * POINTER_LERP;
+          pointer.y += (pointer.targetY - pointer.y) * POINTER_LERP;
+        }
+      } else {
+        pointer.x = -1000;
+        pointer.y = -1000;
+      }
+
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        if (pointer.active) {
+          const dx = pointer.x - p.x;
+          const dy = pointer.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < ATTRACTION_RADIUS) {
+            const force = (ATTRACTION_RADIUS - dist) / ATTRACTION_RADIUS;
+            p.x += (dx / dist) * force * ATTRACTION_STRENGTH;
+            p.y += (dy / dist) * force * ATTRACTION_STRENGTH;
+          }
+        }
       });
+
       drawFrame();
       animationFrameId = requestAnimationFrame(step);
     };
@@ -233,12 +337,77 @@ export default function ParticleField({
         startLoop();
       }
     }
-    // else: prefers-reduced-motion — leave the static frame already drawn above.
+    // else: prefers-reduced-motion — leave the static frame already drawn
+    // above, and skip attaching the pointer/touch listeners below entirely
+    // (no attraction).
+
+    const target: HTMLElement = interactionTarget?.current ?? canvas;
+    let removeInteractionListeners: (() => void) | null = null;
+
+    if (!prefersReducedMotion) {
+      // Mouse — via Pointer Events, ignoring touch input (handled
+      // separately below via Touch Events, so a touch gesture that starts
+      // scrolling and fires pointercancel doesn't lose tracking).
+      const onPointerMove = (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return;
+        const rect = canvas.getBoundingClientRect();
+        pointer.targetX = e.clientX - rect.left;
+        pointer.targetY = e.clientY - rect.top;
+        pointer.active = true;
+      };
+      const onPointerDown = (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return;
+        onPointerMove(e);
+      };
+      const onPointerDeactivate = (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return;
+        pointer.active = false;
+      };
+
+      target.addEventListener('pointermove', onPointerMove, { passive: true });
+      target.addEventListener('pointerdown', onPointerDown, { passive: true });
+      target.addEventListener('pointerup', onPointerDeactivate, { passive: true });
+      target.addEventListener('pointerleave', onPointerDeactivate, { passive: true });
+      target.addEventListener('pointercancel', onPointerDeactivate, { passive: true });
+
+      // Touch — via Touch Events (as in NetworkBackground.tsx), not
+      // Pointer Events: on touch devices, native scrolling fires
+      // pointercancel and pointermove stops, but touchmove keeps firing
+      // for the whole gesture, so attraction keeps tracking the finger
+      // while the page scrolls.
+      const onTouchMove = (e: TouchEvent) => {
+        if (e.touches.length > 0) {
+          const rect = canvas.getBoundingClientRect();
+          pointer.targetX = e.touches[0].clientX - rect.left;
+          pointer.targetY = e.touches[0].clientY - rect.top;
+          pointer.active = true;
+        }
+      };
+      const onTouchEnd = () => {
+        pointer.active = false;
+      };
+
+      target.addEventListener('touchstart', onTouchMove, { passive: true });
+      target.addEventListener('touchmove', onTouchMove, { passive: true });
+      target.addEventListener('touchend', onTouchEnd, { passive: true });
+
+      removeInteractionListeners = () => {
+        target.removeEventListener('pointermove', onPointerMove);
+        target.removeEventListener('pointerdown', onPointerDown);
+        target.removeEventListener('pointerup', onPointerDeactivate);
+        target.removeEventListener('pointerleave', onPointerDeactivate);
+        target.removeEventListener('pointercancel', onPointerDeactivate);
+        target.removeEventListener('touchstart', onTouchMove);
+        target.removeEventListener('touchmove', onTouchMove);
+        target.removeEventListener('touchend', onTouchEnd);
+      };
+    }
 
     return () => {
       stopLoop();
       resizeObserver.disconnect();
       observer?.disconnect();
+      removeInteractionListeners?.();
     };
   }, [
     backgroundColor,
@@ -249,6 +418,10 @@ export default function ParticleField({
     minSize,
     maxSize,
     connectionLines,
+    linesNearPointerOnly,
+    lineColor,
+    lineAlpha,
+    interactionTarget,
   ]);
 
   return (
