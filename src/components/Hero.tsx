@@ -30,7 +30,7 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           display: flex;
           flex-direction: column;
           gap: 12px;
-          padding: 24px 24px 32px 24px;
+          padding: 32px 24px 32px 24px;
         }
 
         @media (min-width: 768px) {
@@ -71,28 +71,6 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
 
         .cta-btn-mobile:hover {
           background: ${T.home.color.accentHoverLight};
-        }
-
-        .portrait-mobile {
-          width: 100%;
-          background: ${T.home.color.dark};
-          display: flex;
-          justify-content: flex-end;
-          align-items: flex-end;
-          border-bottom: 1px solid ${T.home.color.ruleLight};
-        }
-
-        .portrait-img-mobile {
-          width: 60%;
-          aspect-ratio: 4 / 5;
-          display: block;
-          object-fit: cover;
-        }
-
-        @media (min-width: 768px) {
-          .portrait-mobile {
-            display: none;
-          }
         }
 
         /* Tablet/desktop: grid — pad | text | portrait+pad0 */
@@ -180,23 +158,15 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
 
         .portrait-img {
           width: 100%;
-          aspect-ratio: 4 / 5;
+          height: 100%;
+          flex: 1;
           display: block;
           object-fit: cover;
-          object-position: 50% 50%;
+          object-position: 50% 100%;
         }
       `}</style>
 
       {/* Mobile */}
-      <div className="portrait-mobile">
-        <img
-          className="portrait-img-mobile"
-          src="/hero-45.webp"
-          alt={portraitAlt}
-          loading="eager"
-          fetchPriority="high"
-        />
-      </div>
       <div className="copy-mobile">
         <h1 className="mobile">
           {mobileLines.map((line, i) => (
@@ -236,6 +206,39 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           <img className="portrait-img" src="/hero-45.webp" alt={portraitAlt} />
         </div>
       </div>
+    </section>
+  );
+};
+
+// Rendered as its own section after Proof, mobile only (<768) — the photo
+// that used to sit above the H1 in Hero now lives here instead.
+interface HeroPhotoMobileProps {
+  portraitAlt: string;
+}
+
+export const HeroPhotoMobile = ({ portraitAlt }: HeroPhotoMobileProps) => {
+  return (
+    <section className="hero-photo-mobile">
+      <style jsx>{`
+        .hero-photo-mobile {
+          display: block;
+          background: ${T.home.color.dark};
+        }
+
+        @media (min-width: 768px) {
+          .hero-photo-mobile {
+            display: none;
+          }
+        }
+
+        .hero-photo-mobile-img {
+          width: 100%;
+          aspect-ratio: 4 / 5;
+          display: block;
+          object-fit: cover;
+        }
+      `}</style>
+      <img className="hero-photo-mobile-img" src="/hero-45.webp" alt={portraitAlt} />
     </section>
   );
 };
