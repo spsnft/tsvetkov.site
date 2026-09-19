@@ -20,6 +20,18 @@ interface HeaderProps {
   navLinks: [NavLink, NavLink, NavLink];
 }
 
+// Dark segment's width = the .portrait column's width (--portrait, see
+// homeGridVarsCSS in src/theme/homeContainer.ts) plus the container's own
+// right padding (padExtra) — same tablet/desktop cap values Hero.tsx reads
+// from T.home.container, so the segment's right edge tracks .portrait's
+// right edge (both anchored to the true viewport edge via the matching
+// "+ pad0" term below) without duplicating the --portrait formula itself.
+const { tablet, desktop } = T.home.container;
+const portraitWidthTablet = Math.round(tablet.cap * 0.3);
+const portraitWidthDesktop = Math.round(desktop.cap * 0.3);
+const segmentWidthTablet = portraitWidthTablet + tablet.padExtra;
+const segmentWidthDesktop = portraitWidthDesktop + desktop.padExtra;
+
 export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
@@ -46,6 +58,23 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           background: ${T.home.color.bgLight};
           border-bottom: 1px solid ${T.home.color.ruleLight};
           font-family: ${T.home.font.sans};
+        }
+
+        /* Reserve room for the dark segment so logo/nav-links stop where it
+           begins instead of running underneath it. Same width formula as
+           .dark-segment below — deliberately duplicated (not read off a
+           shared var) since Header and Hero are DOM siblings and Hero's
+           --portrait custom property isn't in scope here. */
+        @media (min-width: 768px) {
+          .home-header {
+            padding-right: calc(max(0px, (100vw - ${tablet.cap}px) / 2) + ${segmentWidthTablet}px);
+          }
+        }
+
+        @media (min-width: 1280px) {
+          .home-header {
+            padding-right: calc(max(0px, (100vw - ${desktop.cap}px) / 2) + ${segmentWidthDesktop}px);
+          }
         }
 
         .logo-block {
@@ -99,6 +128,11 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           }
         }
 
+        /* Hidden 768–1279: the dark segment's width there (--portrait +
+           tablet padExtra) doesn't leave enough room next to the logo for
+           three nav items at a legible size, especially the longer RU
+           labels. Reappears at 1280+, where the desktop segment leaves
+           ~600px — comfortably more than nav needs. */
         .nav-links {
           display: none;
           align-items: center;
@@ -107,7 +141,7 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           font-weight: 400;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1280px) {
           .nav-links {
             display: flex;
           }
@@ -122,6 +156,9 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           color: ${T.home.color.accent};
         }
 
+        /* Mobile only (<768): locale switch + WhatsApp link stay on paper,
+           right-aligned in normal flow — unchanged from before the dark
+           segment existed. */
         .right {
           display: flex;
           align-items: stretch;
@@ -131,7 +168,7 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
 
         @media (min-width: 768px) {
           .right {
-            flex: none;
+            display: none;
           }
         }
 
@@ -142,19 +179,6 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           font-size: 11px;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-        }
-
-        @media (min-width: 768px) {
-          .locale-switch {
-            letter-spacing: 0.1em;
-            margin-left: 24px;
-          }
-        }
-
-        @media (min-width: 1280px) {
-          .locale-switch {
-            margin-left: 0;
-          }
         }
 
         .locale-btn {
@@ -168,18 +192,6 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           padding: 0 6px;
           color: ${T.home.color.textSecondary};
           opacity: ${isPending ? 0.6 : 1};
-        }
-
-        @media (min-width: 768px) {
-          .locale-btn {
-            padding: 0 8px;
-          }
-        }
-
-        @media (min-width: 1280px) {
-          .locale-btn {
-            padding: 0 16px;
-          }
         }
 
         .locale-btn.active {
@@ -199,22 +211,103 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           padding: 0 12px 0 18px;
         }
 
+        .wa-link:hover {
+          color: ${T.home.color.accentHoverLight};
+        }
+
+        /* Tablet/desktop only (≥768): dark segment, same width as .portrait
+           (--portrait + container padExtra), right edge flush with the
+           header's own true right edge (position:absolute against the
+           sticky header's padding box ignores the header's own
+           padding-right, same "+ pad0" full-bleed trick .portrait uses) —
+           so it lines up with .portrait's right edge at every width, not
+           just the 768/1280 cap points. Persists with the sticky header,
+           doesn't disappear on scroll. */
+        .dark-segment {
+          display: none;
+        }
+
         @media (min-width: 768px) {
-          .wa-link {
-            font-size: 13px;
-            padding: 0 24px 0 16px;
+          .dark-segment {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: calc(max(0px, (100vw - ${tablet.cap}px) / 2) + ${segmentWidthTablet}px);
+            background: ${T.home.color.dark};
           }
         }
 
         @media (min-width: 1280px) {
-          .wa-link {
-            border-left: 1px solid ${T.home.color.ruleLight};
+          .dark-segment {
+            width: calc(max(0px, (100vw - ${desktop.cap}px) / 2) + ${segmentWidthDesktop}px);
+          }
+        }
+
+        .locale-switch-dark {
+          display: flex;
+          align-items: center;
+          font-family: ${T.home.font.mono};
+          font-size: 11px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-left: 24px;
+        }
+
+        @media (min-width: 1280px) {
+          .locale-switch-dark {
+            margin-left: 0;
+          }
+        }
+
+        .locale-btn-dark {
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          font-family: inherit;
+          font-size: inherit;
+          letter-spacing: inherit;
+          text-transform: inherit;
+          padding: 0 8px;
+          color: ${T.home.color.textOnDarkMuted};
+          opacity: ${isPending ? 0.6 : 1};
+        }
+
+        @media (min-width: 1280px) {
+          .locale-btn-dark {
+            padding: 0 16px;
+          }
+        }
+
+        .locale-btn-dark.active {
+          color: ${T.home.color.accentHoverDark};
+          font-weight: 500;
+        }
+
+        .wa-link-dark {
+          display: flex;
+          align-items: center;
+          font-family: ${T.home.font.sans};
+          font-weight: 600;
+          color: ${T.home.color.accentHoverDark};
+          text-decoration: none;
+          white-space: nowrap;
+          font-size: 13px;
+          padding: 0 24px 0 16px;
+        }
+
+        @media (min-width: 1280px) {
+          .wa-link-dark {
+            border-left: 1px solid ${T.home.color.darkBorder};
             padding: 0 28px;
           }
         }
 
-        .wa-link:hover {
-          color: ${T.home.color.accentHoverLight};
+        .wa-link-dark:hover {
+          color: ${T.home.color.textOnDarkPrimary};
         }
       `}</style>
 
@@ -231,6 +324,7 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
         ))}
       </nav>
 
+      {/* Mobile (<768) */}
       <div className="right">
         <div className="locale-switch">
           {LOCALES.map((l) => (
@@ -245,6 +339,25 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           ))}
         </div>
         <a className="wa-link" href={waLink} target="_blank" rel="noopener">
+          {whatsappLabel}
+        </a>
+      </div>
+
+      {/* Tablet/desktop (≥768) */}
+      <div className="dark-segment">
+        <div className="locale-switch-dark">
+          {LOCALES.map((l) => (
+            <button
+              key={l}
+              type="button"
+              className={`locale-btn-dark${lang === l ? ' active' : ''}`}
+              onClick={() => switchLang(l)}
+            >
+              {l}
+            </button>
+          ))}
+        </div>
+        <a className="wa-link-dark" href={waLink} target="_blank" rel="noopener">
           {whatsappLabel}
         </a>
       </div>
