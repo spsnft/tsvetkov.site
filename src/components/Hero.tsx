@@ -79,6 +79,14 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           border-bottom: 1px solid ${T.home.color.ruleLight};
         }
 
+        .portrait-img-mobile {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          object-position: 50% 50%;
+        }
+
         @media (min-width: 768px) {
           .portrait-mobile {
             display: none;
@@ -163,10 +171,26 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           grid-column: 3;
           background: ${T.home.color.dark};
         }
+
+        .portrait-img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          object-position: 50% 22%;
+        }
       `}</style>
 
       {/* Mobile */}
-      <div className="portrait-mobile" aria-label={portraitAlt} />
+      <div className="portrait-mobile">
+        <img
+          className="portrait-img-mobile"
+          src="/hero-mobile.webp"
+          alt={portraitAlt}
+          loading="eager"
+          fetchPriority="high"
+        />
+      </div>
       <div className="copy-mobile">
         <h1 className="mobile">
           {mobileLines.map((line, i) => (
@@ -202,7 +226,9 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
             {cta} →
           </a>
         </div>
-        <div className="portrait" aria-label={portraitAlt} />
+        <div className="portrait">
+          <img className="portrait-img" src="/hero-desktop.webp" alt={portraitAlt} />
+        </div>
       </div>
     </section>
   );
