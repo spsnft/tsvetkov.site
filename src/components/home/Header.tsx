@@ -37,6 +37,9 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
       <style jsx>{`
         .home-header {
           ${homePad0CSS()}
+          position: sticky;
+          top: 0;
+          z-index: 100;
           display: flex;
           align-items: stretch;
           justify-content: space-between;
