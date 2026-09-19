@@ -74,7 +74,8 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
         }
 
         .portrait-mobile {
-          height: 200px;
+          width: 100%;
+          aspect-ratio: 4 / 5;
           background: ${T.home.color.dark};
           border-bottom: 1px solid ${T.home.color.ruleLight};
         }
@@ -169,6 +170,8 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
 
         .portrait {
           grid-column: 3;
+          align-self: end;
+          aspect-ratio: 4 / 5;
           background: ${T.home.color.dark};
         }
 
@@ -177,7 +180,7 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           height: 100%;
           display: block;
           object-fit: cover;
-          object-position: 50% 22%;
+          object-position: 50% 50%;
         }
       `}</style>
 
@@ -185,7 +188,7 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
       <div className="portrait-mobile">
         <img
           className="portrait-img-mobile"
-          src="/hero-mobile.webp"
+          src="/hero-45.webp"
           alt={portraitAlt}
           loading="eager"
           fetchPriority="high"
@@ -227,7 +230,7 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           </a>
         </div>
         <div className="portrait">
-          <img className="portrait-img" src="/hero-desktop.webp" alt={portraitAlt} />
+          <img className="portrait-img" src="/hero-45.webp" alt={portraitAlt} />
         </div>
       </div>
     </section>
