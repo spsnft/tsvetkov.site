@@ -1,7 +1,13 @@
 'use client';
 
+import { useRef } from 'react';
 import { T } from '@/src/theme/tokens';
 import { homePadCSS } from '@/src/theme/homeContainer';
+import ParticleField from '@/src/components/lab/ParticleField';
+
+// Same values Contact.tsx uses for its own particle-bg layer.
+const PARTICLE_COLORS = ['rgba(245, 243, 238, 0.55)', 'rgba(245, 243, 238, 0.28)'];
+const PARTICLE_MAX_SIZE = 3.75;
 
 interface Metric {
   value: string;
@@ -15,16 +21,29 @@ interface ProofProps {
 }
 
 export const Proof = ({ metrics, slogan }: ProofProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
+
   return (
-    <section className="proof">
+    <section className="proof" ref={sectionRef}>
       <style jsx>{`
         .proof {
+          position: relative;
+          overflow: hidden;
           background: ${T.home.color.dark};
           color: ${T.home.color.textOnDarkPrimary};
         }
 
+        .particle-bg {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+        }
+
         /* Mobile */
         .mobile {
+          position: relative;
+          z-index: 1;
           display: flex;
           flex-direction: column;
           gap: 24px;
@@ -83,6 +102,8 @@ export const Proof = ({ metrics, slogan }: ProofProps) => {
 
         /* Tablet/desktop */
         .wide {
+          position: relative;
+          z-index: 1;
           display: none;
         }
 
@@ -165,6 +186,20 @@ export const Proof = ({ metrics, slogan }: ProofProps) => {
         }
 
       `}</style>
+
+      <div className="particle-bg" aria-hidden="true">
+        <ParticleField
+          backgroundColor="transparent"
+          particleColors={PARTICLE_COLORS}
+          particleCount={16}
+          mobileParticleCount={10}
+          maxSize={PARTICLE_MAX_SIZE}
+          connectionLines
+          linesNearPointerOnly
+          interactionTarget={sectionRef}
+          tapToggle
+        />
+      </div>
 
       {/* Mobile */}
       <div className="mobile">

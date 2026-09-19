@@ -45,7 +45,6 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           align-items: stretch;
           justify-content: space-between;
           background: ${T.home.color.bgLight};
-          border-bottom: 1px solid ${T.home.color.ruleLight};
           font-family: ${T.home.font.sans};
         }
 
@@ -114,11 +113,15 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           }
         }
 
-        /* Hidden 768–1279: the dark segment's width there (--portrait +
-           tablet padExtra) doesn't leave enough room next to the logo for
-           three nav items at a legible size, especially the longer RU
-           labels. Reappears at 1280+, where the desktop segment leaves
-           ~600px — comfortably more than nav needs. */
+        /* Name hidden 768–1279: only the FT mark stays, freeing up room
+           for nav-links next to the (wider, relative to that range) dark
+           segment. Full "FT + Fedor Tsvetkov" below 768 and at 1280+. */
+        @media (min-width: 768px) and (max-width: 1279px) {
+          .brand-name {
+            display: none;
+          }
+        }
+
         .nav-links {
           display: none;
           align-items: center;
@@ -127,7 +130,7 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           font-weight: 400;
         }
 
-        @media (min-width: 1280px) {
+        @media (min-width: 768px) {
           .nav-links {
             display: flex;
           }
