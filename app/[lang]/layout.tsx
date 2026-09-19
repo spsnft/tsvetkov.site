@@ -3,6 +3,7 @@ import "../globals.css";
 import { CalendlyScript } from "@/src/components/CalendlyScript";
 import StyledJsxRegistry from "@/src/components/StyledJsxRegistry";
 import { SITE_URL } from "@/src/lib/siteUrl";
+import { getDictionary } from "@/src/locales/getDictionary";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -14,35 +15,20 @@ type LayoutProps = {
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
   // Await the params promise
   const { lang } = await params;
-  
-  const meta = {
-    en: {
-      title: "Fedor Tsvetkov — Growth Architect & Performance Marketer",
-      desc: "We build high-ticket growth engines. No fluff, just architecture that scales."
-    },
-    ru: {
-      title: "Фёдор Цветков — Growth Architect & Performance Marketer",
-      desc: "Создаем масштабируемые системы роста. Архитектура, CRM и маркетинг."
-    },
-    th: {
-      title: "Fedor Tsvetkov — สถาปนิกด้านการเติบโตและนักการตลาดประสิทธิภาพ",
-      desc: "เราสร้างกลไกการเติบโตที่มีมูลค่าสูง ไม่มีน้ำ มีแต่สถาปัตยกรรมที่ปรับขนาดได้"
-    }
-  };
 
-  const currentMeta = meta[lang as keyof typeof meta] || meta.en;
-  const locale = lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US';
+  const { meta } = getDictionary(lang).home;
+  const locale = lang === 'ru' ? 'ru_RU' : 'en_US';
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: currentMeta.title,
-    description: currentMeta.desc,
+    title: meta.title,
+    description: meta.description,
     alternates: {
       canonical: `/${lang}`,
     },
     openGraph: {
-      title: currentMeta.title,
-      description: currentMeta.desc,
+      title: meta.title,
+      description: meta.description,
       url: `${SITE_URL}/${lang}`,
       siteName: "Fedor Tsvetkov",
       locale,
@@ -50,8 +36,8 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     },
     twitter: {
       card: "summary",
-      title: currentMeta.title,
-      description: currentMeta.desc,
+      title: meta.title,
+      description: meta.description,
     },
   };
 }
@@ -69,6 +55,27 @@ export default async function RootLayout({ children, params }: LayoutProps) {
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        {/* Homepage v2 only (design/system-report-v2.md §5) — additive, the
+            Space Grotesk link above stays for /hms and /ecommerce. */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
+          rel="stylesheet"
+        />
+        {/* RU locale font — loaded only on its own locale, /en loads none.
+            Archivo has no cyrillic subset, so ru layers its own font in
+            front of the existing stack via --home-font-sans (see
+            src/theme/tokens.ts), scoped with :lang() below. */}
+        {lang === 'ru' && (
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+        )}
+        <style>{`
+          :lang(ru) {
+            --home-font-sans: 'Inter Tight', 'Archivo', system-ui, sans-serif;
+          }
+        `}</style>
         <link rel="preconnect" href="https://calendly.com" />
         <link rel="preconnect" href="https://assets.calendly.com" />
       </head>

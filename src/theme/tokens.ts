@@ -99,6 +99,96 @@ export const T = {
 
   // Breakpoint standard: Mobile <768px / Tablet 768–1023px / Desktop ≥1024px
 
+  // Homepage v2 — light-theme design system (design/system-report-v2.md).
+  // Separate namespace, on purpose: the rest of the site (incl. /hms and
+  // /ecommerce) reads the dark-theme keys above directly, so this doesn't
+  // touch or extend them. Breakpoints/container here are also v2-only —
+  // 768/1280, not the site-wide 1024 standard noted above.
+  home: {
+    color: {
+      accent: '#B8431F',
+      accentHoverLight: '#A03A1A',
+      accentHoverDark: '#E8703F',
+      dark: '#14292D',
+      darkBorder: '#24312F',
+      textPrimary: '#17130F',
+      textSecondary: '#5A544C',
+      textOnDarkMuted: '#9A9E97',
+      textOnDarkFaint: '#C8CCC6',
+      textOnDarkPrimary: '#F5F3EE',
+      bgLight: '#F5F3EE',
+      bgLightAlt: '#E4E2DC',
+      ruleLight: '#DDD7CC',
+      flagRed: '#A51931',
+      flagWhite: '#F4F5F8',
+      flagBlue: '#2D2A4A',
+    },
+
+    // Per-locale font stacks. The literal fallback here is the /en stack
+    // (Archivo/IBM Plex Mono, loaded unconditionally) — --home-font-sans/
+    // --home-font-mono are only defined for lang=ru/th, scoped via :lang()
+    // in app/[lang]/layout.tsx, so /en never resolves the var and never
+    // loads a font it doesn't use.
+    font: {
+      sans: "var(--home-font-sans, 'Archivo', system-ui, sans-serif)",
+      mono: "var(--home-font-mono, 'IBM Plex Mono', ui-monospace, monospace)",
+    },
+
+    // Type scale — 7 desktop steps / 6 mobile steps (design/system-report-v2.md
+    // §2). One value, one name, reused by every section that needs that size —
+    // do not add a component-local px value that duplicates one of these.
+    // Tablet mostly reuses the desktop step; the rare tablet-only size (e.g.
+    // hero H1 52px) is a one-off, kept local to its component.
+    type: {
+      desktop: {
+        display: '90px',  // Hero H1
+        metric:  '80px',  // Proof metric value
+        h2:      '54px',  // Section H2; also Proof metric value on tablet
+        slogan:  '38px',  // Proof slogan
+        body:    '24px',  // Service/How body & titles, Contact channel link
+        base:    '16px',  // Metric note, Contact subtitle, nav link, CTA button, service number
+        label:   '13px',  // Metric field, how-label, status line, footer copyright
+      },
+      mobile: {
+        display: '44px',  // Hero H1, Proof metric value
+        h2:      '30px',  // Section H2
+        body:    '17px',  // Service/How body & titles, Contact channel link
+        base:    '15px',  // Metric note, Contact subtitle, CTA button, service number, brand wordmark
+        label:   '13px',  // how-label, slogan
+        micro:   '12px',  // Metric field, status line, footer copyright
+      },
+    },
+
+    // Vertical rhythm — 8 steps (design/system-report-v2.md §3). One-off
+    // values (hero optical compensation, Proof row→slogan gap, portrait
+    // placeholder height, tablet-only sizes) stay local to their component,
+    // not here — folding them in would make this scale unreadable.
+    space: {
+      xxs: '8px',
+      xs:  '12px',
+      sm:  '16px',
+      md:  '24px',
+      lg:  '32px',
+      xl:  '48px',
+      xxl: '64px',
+      xxxl:'80px',
+    },
+
+    breakpoint: {
+      tablet: 768,
+      desktop: 1280,
+    },
+
+    // Container cap + outer pad (design/system-report-v2.md §4):
+    // pad0 = max(0, (viewport − cap) / 2); --pad = pad0 + padExtra.
+    container: {
+      tablet: { cap: 768, padExtra: 32 },
+      desktop: { cap: 1280, padExtra: 48 },
+      // Mobile has no cap/centering — fixed padding instead.
+      mobilePad: '24px',
+    },
+  },
+
   // Gradients
   linearGradient: 'linear-gradient(135deg, #00E599 0%, #00A3FF 100%)',
   textGradientStyles: {

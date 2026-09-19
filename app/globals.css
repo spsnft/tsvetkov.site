@@ -8,12 +8,24 @@
   box-sizing: border-box; 
 }
 
-/* Фиксация вьюпорта от боковых сдвигов */
+/* Фиксация вьюпорта от боковых сдвигов.
+   overflow-x на body (не только html) заставляет браузер вычислять его
+   overflow-y как auto (CSS fixup для не-visible overflow-x), и body
+   становится отдельным scroll-контейнером, вложенным в html. position:
+   sticky у потомков (например, .home-header) считает свой sticky-range
+   от ЭТОГО контейнера, а не от вьюпорта — и поскольку у body нет
+   независимого скролла, sticky-элементы просто скроллятся вместе со
+   страницей вместо того чтобы прилипать. overflow-x достаточно только
+   на html — сам вьюпорт-скроллер это и так использует, а body без
+   overflow не создаёт лишний scroll-контейнер. */
 html, body {
-  overflow-x: hidden !important;
   width: 100% !important;
   max-width: 100vw !important;
   position: relative;
+}
+
+html {
+  overflow-x: hidden !important;
 }
 
 html { 

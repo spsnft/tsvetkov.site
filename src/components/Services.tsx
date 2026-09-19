@@ -1,300 +1,268 @@
 'use client';
 
-import React from 'react';
 import { T } from '@/src/theme/tokens';
+import { homePadCSS } from '@/src/theme/homeContainer';
 
-const COLOR_EMERALD = '#00E599';
-
-interface StepData {
+interface ServiceItem {
+  n: string;
   title: string;
-  desc: string;
-  impact: string;
+  body: string;
+  link?: string;
+  linkLabel?: string;
 }
 
 interface ServicesProps {
-  dict: {
-    services?: {
-      badge: string;
-      title: string;
-      outcomeLabel?: string;
-      step1Title: string;
-      step1Desc: string;
-      step1Impact: string;
-      step2Title: string;
-      step2Desc: string;
-      step2Impact: string;
-      step3Title: string;
-      step3Desc: string;
-      step3Impact: string;
-    };
-    [key: string]: any;
-  } | null;
+  title: string;
+  items: ServiceItem[];
 }
 
-export const Services = ({ dict }: ServicesProps) => {
-  const t = dict?.services;
-
-  if (!t) return null;
-
-  const steps: (StepData & { num: string })[] = [
-    {
-      num: '01',
-      title: t.step1Title,
-      desc: t.step1Desc,
-      impact: t.step1Impact,
-    },
-    {
-      num: '02',
-      title: t.step2Title,
-      desc: t.step2Desc,
-      impact: t.step2Impact,
-    },
-    {
-      num: '03',
-      title: t.step3Title,
-      desc: t.step3Desc,
-      impact: t.step3Impact,
-    },
-  ];
-
+export const Services = ({ title, items }: ServicesProps) => {
   return (
-    <section id="services" className="services-section">
+    <section className="services" id="services">
       <style jsx>{`
-        .services-section {
-          width: 100%;
-          position: relative;
-          padding: ${T.section.topPad} 0 ${T.section.bottomPad} 0;
-          background: transparent;
-          z-index: 5;
-          scroll-margin-top: 80px;
+        .services {
+          background: ${T.home.color.bgLight};
         }
 
-        .header-box {
-          text-align: center;
-          margin-bottom: ${T.section.titleGap};
+        /* Mobile */
+        .mobile {
           display: flex;
           flex-direction: column;
-          align-items: center;
-        }
-
-        .badge {
-          display: inline-flex;
-          align-items: center;
           gap: 8px;
-          padding: 0.35rem 0.85rem;
-          border-radius: 20px;
-          margin-bottom: ${T.section.badgeGap};
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          background: rgba(0, 229, 153, 0.08);
-          border: 1px solid rgba(0, 229, 153, 0.25);
-          color: ${COLOR_EMERALD};
-          backdrop-filter: blur(12px);
+          padding: 32px 24px;
         }
 
-        .badge-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: ${COLOR_EMERALD};
-          box-shadow: 0 0 8px ${COLOR_EMERALD};
-          animation: pulseDot 1.8s infinite ease-in-out;
-        }
-
-        @keyframes pulseDot {
-          0%, 100% {
-            opacity: 0.4;
-            transform: scale(0.9);
+        @media (min-width: 768px) {
+          .mobile {
+            display: none;
           }
-          50% {
-            opacity: 1;
-            transform: scale(1.3);
+        }
+
+        h2.section-title-mobile {
+          margin: 0;
+          font-family: ${T.home.font.sans};
+          font-weight: 700;
+          letter-spacing: -0.03em;
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.mobile.h2};
+        }
+
+        .row-mobile {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding: 24px 0;
+          border-top: 1px solid ${T.home.color.ruleLight};
+        }
+
+        .row-mobile:first-of-type {
+          border-top: none;
+        }
+
+        .row-mobile:last-of-type {
+          padding-bottom: 0;
+        }
+
+        .title-row-mobile {
+          display: flex;
+          align-items: baseline;
+          gap: 12px;
+        }
+
+        .n-mobile {
+          font-family: ${T.home.font.mono};
+          font-weight: 500;
+          color: ${T.home.color.textPrimary};
+          font-size: 15px;
+        }
+
+        .title-mobile {
+          font-family: ${T.home.font.sans};
+          font-weight: 600;
+          letter-spacing: -0.015em;
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.mobile.body};
+        }
+
+        .body-mobile {
+          margin: 0;
+          font-family: ${T.home.font.sans};
+          color: ${T.home.color.textSecondary};
+          font-size: ${T.home.type.mobile.body};
+          line-height: 1.55;
+          text-wrap: pretty;
+        }
+
+        .link-mobile {
+          align-self: flex-start;
+          font-family: ${T.home.font.sans};
+          font-weight: 500;
+          color: ${T.home.color.accent};
+          text-decoration: none;
+          font-size: ${T.home.type.mobile.base};
+        }
+
+        .link-mobile:hover {
+          color: ${T.home.color.accentHoverLight};
+        }
+
+        /* Tablet/desktop */
+        .wide {
+          display: none;
+        }
+
+        @media (min-width: 768px) {
+          .wide {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 32px;
+          }
+        }
+
+        h2.section-title-wide {
+          margin: 0;
+          ${homePadCSS()}
+          padding-top: 64px;
+          padding-bottom: 32px;
+          font-family: ${T.home.font.sans};
+          font-weight: 700;
+          letter-spacing: -0.03em;
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.desktop.h2};
+        }
+
+        .row {
+          ${homePadCSS()}
+          display: grid;
+          grid-template-columns: max-content max-content 0px minmax(0, 1fr);
+          padding-top: 24px;
+          padding-bottom: 24px;
+          align-items: start;
+          border-top: 1px solid ${T.home.color.ruleLight};
+        }
+
+        .row:first-of-type {
+          border-top: none;
+        }
+
+        .row:last-of-type {
+          padding-bottom: 0;
+        }
+
+        @media (min-width: 1280px) {
+          .row {
+            grid-template-columns: minmax(0, 44px) minmax(0, 340px) minmax(0, 820px) minmax(0, 1fr);
+          }
+        }
+
+        .n {
+          grid-column: 1;
+          align-self: baseline;
+          position: relative;
+          top: -3px;
+          font-family: ${T.home.font.mono};
+          font-weight: 500;
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.desktop.base};
+          padding-right: 12px;
+        }
+
+        @media (min-width: 1280px) {
+          .n {
+            padding-right: 0;
           }
         }
 
         .title {
-          font-size: ${T.section.titleSize};
-          font-weight: 800;
-          line-height: 1.15;
-          letter-spacing: -0.03em;
-          color: #ffffff;
-          margin: 0;
+          grid-column: 2;
+          align-self: baseline;
+          padding-right: 24px;
+          font-family: ${T.home.font.sans};
+          font-weight: 600;
+          letter-spacing: -0.015em;
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.desktop.body};
         }
 
-        /* ТАЙМЛАЙН: сужен до читаемой колонки, не растянут на весь контейнер */
-        .timeline-box {
-          position: relative;
-          padding-left: clamp(2rem, 5vw, 4rem);
-          width: 100%;
-          max-width: 820px;
-          margin: 0 auto;
-        }
-
-        .track-line {
-          position: absolute;
-          left: clamp(0.75rem, 2vw, 1.35rem);
-          top: 1.75rem;
-          bottom: 3rem;
-          width: 2px;
-          background: linear-gradient(
-            180deg,
-            ${COLOR_EMERALD} 0%,
-            ${COLOR_EMERALD} 70%,
-            rgba(0, 229, 153, 0.1) 100%
-          );
-          z-index: 1;
-        }
-
-        .steps-list {
+        .desc {
+          grid-column: 1 / span 4;
+          grid-row: 2;
+          margin-top: 10px;
+          align-self: baseline;
           display: flex;
           flex-direction: column;
-          gap: 2rem;
-          width: 100%;
+          gap: 8px;
         }
 
-        .step-item {
-          position: relative;
-          width: 100%;
-        }
-
-        .step-node {
-          position: absolute;
-          left: calc(-1 * clamp(2rem, 5vw, 4rem) + clamp(0.75rem, 2vw, 1.35rem) - 13px);
-          top: 1.5rem;
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          background: #0A0A0C;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 0.72rem;
-          font-weight: 800;
-          z-index: 2;
-        }
-
-        /* BENTO CARD STYLES */
-        .card-custom {
-          padding: clamp(1.25rem, 3vw, 2rem);
-          border-radius: 20px;
-          background: rgba(12, 12, 16, 0.06);
-          backdrop-filter: blur(4px) saturate(140%);
-          -webkit-backdrop-filter: blur(4px) saturate(140%);
-          border: 1px solid rgba(0, 229, 153, 0.15);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-          transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-          width: 100%;
-        }
-
-        .card-custom:hover {
-          transform: translateY(-2px);
-          border-color: rgba(0, 229, 153, 0.35);
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-title {
-          font-size: clamp(1.2rem, 2.5vw, 1.45rem);
-          font-weight: 700;
-          color: #ffffff;
-          margin: 0 0 8px 0;
-          line-height: 1.25;
-        }
-
-        .card-desc {
-          font-size: 0.9rem;
-          line-height: 1.55;
-          color: rgba(255, 255, 255, 0.68);
-          margin: 0;
-        }
-
-        .outcome-box {
-          border-radius: 10px;
-          padding: 0.75rem 1rem;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          margin-top: 1.25rem;
-        }
-
-        @media (max-width: 640px) {
-          .outcome-box {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.5rem;
+        @media (min-width: 1280px) {
+          .desc {
+            grid-column: 3;
+            grid-row: auto;
+            margin-top: 0;
           }
         }
 
-        .outcome-tag {
-          font-size: 0.65rem;
-          font-weight: 800;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          padding: 3px 6px;
-          border-radius: 4px;
-          flex-shrink: 0;
+        .body {
+          margin: 0;
+          font-family: ${T.home.font.sans};
+          color: ${T.home.color.textSecondary};
+          font-size: ${T.home.type.desktop.body};
+          line-height: 1.45;
+          letter-spacing: -0.012em;
+          max-width: 820px;
+          text-wrap: pretty;
+        }
+
+        .link {
+          font-family: ${T.home.font.sans};
+          font-weight: 500;
+          color: ${T.home.color.accent};
+          text-decoration: none;
+          font-size: ${T.home.type.desktop.base};
+        }
+
+        .link:hover {
+          color: ${T.home.color.accentHoverLight};
         }
       `}</style>
 
-      <div className="container">
-        <div className="header-box">
-          <span className="badge">
-            <span className="badge-dot" />
-            {t.badge}
-          </span>
-          <h2 className="title">{t.title}</h2>
-        </div>
-
-        <div className="timeline-box">
-          <div className="track-line" />
-
-          <div className="steps-list">
-            {steps.map((item, i) => (
-              <div key={i} className="step-item">
-                <div
-                  className="step-node"
-                  style={{
-                    border: `2px solid ${COLOR_EMERALD}`,
-                    color: COLOR_EMERALD,
-                    boxShadow: `0 0 14px ${COLOR_EMERALD}40`
-                  }}
-                >
-                  {item.num}
-                </div>
-
-                <div className="card-custom">
-                  <h3 className="card-title">{item.title}</h3>
-                  <p className="card-desc">{item.desc}</p>
-
-                  <div
-                    className="outcome-box"
-                    style={{
-                      background: `${COLOR_EMERALD}08`,
-                      border: `1px solid ${COLOR_EMERALD}25`
-                    }}
-                  >
-                    <span
-                      className="outcome-tag"
-                      style={{
-                        background: `${COLOR_EMERALD}20`,
-                        color: COLOR_EMERALD
-                      }}
-                    >
-                      {t.outcomeLabel || 'OUTCOME //'}
-                    </span>
-                    <div style={{ fontSize: '0.83rem', lineHeight: 1.4, color: '#ffffff', fontWeight: 600 }}>
-                      {item.impact}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+      {/* Mobile */}
+      <div className="mobile">
+        <h2 className="section-title-mobile">{title}</h2>
+        {items.map((item) => (
+          <div className="row-mobile" key={item.n}>
+            <div className="title-row-mobile">
+              <span className="n-mobile">{item.n}</span>
+              <span className="title-mobile">{item.title}</span>
+            </div>
+            <p className="body-mobile">{item.body}</p>
+            {item.link && item.linkLabel && (
+              <a className="link-mobile" href={item.link}>
+                {item.linkLabel} →
+              </a>
+            )}
           </div>
-        </div>
+        ))}
+      </div>
+
+      {/* Tablet/desktop */}
+      <div className="wide">
+        <h2 className="section-title-wide">{title}</h2>
+        {items.map((item) => (
+          <div className="row" key={item.n}>
+            <span className="n">{item.n}</span>
+            <span className="title">{item.title}</span>
+            <div className="desc">
+              <p className="body">{item.body}</p>
+              {item.link && item.linkLabel && (
+                <a className="link" href={item.link}>
+                  {item.linkLabel} →
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 };
-
-export default Services;
