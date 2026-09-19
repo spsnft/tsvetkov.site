@@ -90,6 +90,7 @@ export const Services = ({ title, items }: ServicesProps) => {
           color: ${T.home.color.textSecondary};
           font-size: ${T.home.type.mobile.body};
           line-height: 1.55;
+          text-wrap: pretty;
         }
 
         .link-mobile {
@@ -209,6 +210,7 @@ export const Services = ({ title, items }: ServicesProps) => {
           line-height: 1.45;
           letter-spacing: -0.012em;
           max-width: 820px;
+          text-wrap: pretty;
         }
 
         .link {

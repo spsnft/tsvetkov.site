@@ -71,6 +71,7 @@ export const HowIWork = ({ title, items }: HowIWorkProps) => {
           color: ${T.home.color.textPrimary};
           font-size: ${T.home.type.mobile.body};
           line-height: 1.55;
+          text-wrap: pretty;
         }
 
         /* Tablet/desktop */
@@ -147,6 +148,7 @@ export const HowIWork = ({ title, items }: HowIWorkProps) => {
           font-size: ${T.home.type.desktop.body};
           line-height: 1.45;
           max-width: 820px;
+          text-wrap: pretty;
         }
       `}</style>
 
