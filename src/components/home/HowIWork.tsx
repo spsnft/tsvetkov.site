@@ -136,11 +136,6 @@ export const HowIWork = ({ title, items }: HowIWorkProps) => {
           font-size: ${T.home.type.desktop.label};
         }
 
-        :global(:lang(th)) .label-mobile,
-        :global(:lang(th)) .label {
-          letter-spacing: 0;
-        }
-
         .body {
           margin: 0;
           font-family: ${T.home.font.sans};

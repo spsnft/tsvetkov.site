@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
   const { lang } = await params;
 
   const { meta } = getDictionary(lang).home;
-  const locale = lang === 'ru' ? 'ru_RU' : lang === 'th' ? 'th_TH' : 'en_US';
+  const locale = lang === 'ru' ? 'ru_RU' : 'en_US';
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -61,30 +61,19 @@ export default async function RootLayout({ children, params }: LayoutProps) {
           href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
           rel="stylesheet"
         />
-        {/* RU/TH locale fonts — loaded only on their own locale, /en loads
-            neither. Archivo has no cyrillic subset and neither Archivo nor
-            IBM Plex Mono has a thai subset, so each locale layers its own
-            font in front of the existing stack via --home-font-sans/-mono
-            (see src/theme/tokens.ts), scoped with :lang() below. */}
+        {/* RU locale font — loaded only on its own locale, /en loads none.
+            Archivo has no cyrillic subset, so ru layers its own font in
+            front of the existing stack via --home-font-sans (see
+            src/theme/tokens.ts), scoped with :lang() below. */}
         {lang === 'ru' && (
           <link
             href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap"
             rel="stylesheet"
           />
         )}
-        {lang === 'th' && (
-          <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-          />
-        )}
         <style>{`
           :lang(ru) {
             --home-font-sans: 'Inter Tight', 'Archivo', system-ui, sans-serif;
-          }
-          :lang(th) {
-            --home-font-sans: 'Archivo', 'IBM Plex Sans Thai', system-ui, sans-serif;
-            --home-font-mono: 'IBM Plex Mono', 'IBM Plex Sans Thai', ui-monospace, monospace;
           }
         `}</style>
         <link rel="preconnect" href="https://calendly.com" />

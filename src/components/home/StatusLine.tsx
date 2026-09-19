@@ -7,7 +7,6 @@ import { FlagThailand } from '@/src/components/home/Icons';
 const DATE_FORMAT_LOCALE: Record<string, string> = {
   en: 'en-US',
   ru: 'ru-RU',
-  th: 'th-TH',
 };
 
 function formatBangkokTime(lang: string) {
@@ -58,10 +57,6 @@ export const StatusLine = ({ lang, place }: { lang: string; place: string }) => 
             gap: 24px;
             font-size: 13px;
           }
-        }
-
-        :global(:lang(th)) .status-line {
-          letter-spacing: 0;
         }
 
         .flag-place {

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
 import { homePad0CSS } from '@/src/theme/homeContainer';
 
-const LOCALES = ['en', 'ru', 'th'] as const;
+const LOCALES = ['en', 'ru'] as const;
 
 interface NavLink {
   href: string;
