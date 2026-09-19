@@ -122,17 +122,26 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           }
         }
 
+        /* padding-right on the container (not margin on the last link) —
+           the gap to the dark segment. 32px 768-1279, 48px at 1280+. */
         .nav-links {
           display: none;
           align-items: center;
           gap: 32px;
           font-size: 16px;
           font-weight: 400;
+          padding-right: 32px;
         }
 
         @media (min-width: 768px) {
           .nav-links {
             display: flex;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          .nav-links {
+            padding-right: 48px;
           }
         }
 
