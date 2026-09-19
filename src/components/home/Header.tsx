@@ -3,7 +3,7 @@
 import { useTransition } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { T } from '@/src/theme/tokens';
-import { homePad0CSS } from '@/src/theme/homeContainer';
+import { homePad0CSS, homeGridVarsCSS } from '@/src/theme/homeContainer';
 
 const LOCALES = ['en', 'ru'] as const;
 
@@ -19,18 +19,6 @@ interface HeaderProps {
   whatsappLabel: string;
   navLinks: [NavLink, NavLink, NavLink];
 }
-
-// Dark segment's width = the .portrait column's width (--portrait, see
-// homeGridVarsCSS in src/theme/homeContainer.ts) plus the container's own
-// right padding (padExtra) — same tablet/desktop cap values Hero.tsx reads
-// from T.home.container, so the segment's right edge tracks .portrait's
-// right edge (both anchored to the true viewport edge via the matching
-// "+ pad0" term below) without duplicating the --portrait formula itself.
-const { tablet, desktop } = T.home.container;
-const portraitWidthTablet = Math.round(tablet.cap * 0.3);
-const portraitWidthDesktop = Math.round(desktop.cap * 0.3);
-const segmentWidthTablet = portraitWidthTablet + tablet.padExtra;
-const segmentWidthDesktop = portraitWidthDesktop + desktop.padExtra;
 
 export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderProps) => {
   const pathname = usePathname();
@@ -49,6 +37,7 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
       <style jsx>{`
         .home-header {
           ${homePad0CSS()}
+          ${homeGridVarsCSS()}
           position: sticky;
           top: 0;
           z-index: 100;
@@ -61,19 +50,16 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
         }
 
         /* Reserve room for the dark segment so logo/nav-links stop where it
-           begins instead of running underneath it. Same width formula as
-           .dark-segment below — deliberately duplicated (not read off a
-           shared var) since Header and Hero are DOM siblings and Hero's
-           --portrait custom property isn't in scope here. */
+           begins instead of running underneath it. --portrait/--pad0 come
+           from homeGridVarsCSS() above — the exact same function Hero.tsx
+           calls for .hero's own --portrait/--pad0 (src/theme/homeContainer.ts)
+           — so this is the same source, not a second hand-typed formula;
+           it can't drift from .portrait's own width (calc(var(--portrait) +
+           var(--pad0)) is .portrait's grid-column-3 track size verbatim).
+           One rule: the vars already switch at 768/1280 on their own. */
         @media (min-width: 768px) {
           .home-header {
-            padding-right: calc(max(0px, (100vw - ${tablet.cap}px) / 2) + ${segmentWidthTablet}px);
-          }
-        }
-
-        @media (min-width: 1280px) {
-          .home-header {
-            padding-right: calc(max(0px, (100vw - ${desktop.cap}px) / 2) + ${segmentWidthDesktop}px);
+            padding-right: calc(var(--portrait) + var(--pad0));
           }
         }
 
@@ -215,14 +201,15 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
           color: ${T.home.color.accentHoverLight};
         }
 
-        /* Tablet/desktop only (≥768): dark segment, same width as .portrait
-           (--portrait + container padExtra), right edge flush with the
-           header's own true right edge (position:absolute against the
-           sticky header's padding box ignores the header's own
-           padding-right, same "+ pad0" full-bleed trick .portrait uses) —
-           so it lines up with .portrait's right edge at every width, not
-           just the 768/1280 cap points. Persists with the sticky header,
-           doesn't disappear on scroll. */
+        /* Tablet/desktop only (≥768): dark segment, width = calc(var(--portrait)
+           + var(--pad0)) — .portrait's own grid-column-3 track size, verbatim,
+           from the same --portrait/--pad0 declared above via homeGridVarsCSS().
+           Right edge flush with the header's own true right edge
+           (position:absolute against the sticky header's padding box ignores
+           the header's own padding-right, same full-bleed trick .portrait's
+           "+ pad0" term uses) — so both edges line up with .portrait's edges
+           at every width, not just the 768/1280 cap points. Persists with the
+           sticky header, doesn't disappear on scroll. */
         .dark-segment {
           display: none;
         }
@@ -236,14 +223,8 @@ export const Header = ({ lang, brand, waLink, whatsappLabel, navLinks }: HeaderP
             top: 0;
             right: 0;
             bottom: 0;
-            width: calc(max(0px, (100vw - ${tablet.cap}px) / 2) + ${segmentWidthTablet}px);
+            width: calc(var(--portrait) + var(--pad0));
             background: ${T.home.color.dark};
-          }
-        }
-
-        @media (min-width: 1280px) {
-          .dark-segment {
-            width: calc(max(0px, (100vw - ${desktop.cap}px) / 2) + ${segmentWidthDesktop}px);
           }
         }
 
