@@ -75,17 +75,18 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
 
         .portrait-mobile {
           width: 100%;
-          aspect-ratio: 4 / 5;
           background: ${T.home.color.dark};
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-end;
           border-bottom: 1px solid ${T.home.color.ruleLight};
         }
 
         .portrait-img-mobile {
-          width: 100%;
-          height: 100%;
+          width: 60%;
+          aspect-ratio: 4 / 5;
           display: block;
           object-fit: cover;
-          object-position: 50% 50%;
         }
 
         @media (min-width: 768px) {
@@ -170,14 +171,16 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
 
         .portrait {
           grid-column: 3;
-          align-self: end;
-          aspect-ratio: 4 / 5;
+          align-self: stretch;
           background: ${T.home.color.dark};
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
         }
 
         .portrait-img {
           width: 100%;
-          height: 100%;
+          aspect-ratio: 4 / 5;
           display: block;
           object-fit: cover;
           object-position: 50% 50%;
