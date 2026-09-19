@@ -1,9 +1,14 @@
 'use client';
 
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { T } from '@/src/theme/tokens';
 import { homeGridVarsCSS } from '@/src/theme/homeContainer';
 import { StatusLine } from '@/src/components/home/StatusLine';
+import ParticleField from '@/src/components/lab/ParticleField';
+
+// Same values Proof.tsx/Contact.tsx use for their own particle-bg layers.
+const PARTICLE_COLORS = ['rgba(245, 243, 238, 0.55)', 'rgba(245, 243, 238, 0.28)'];
+const PARTICLE_MAX_SIZE = 3.75;
 
 interface HeroProps {
   lang: string;
@@ -17,6 +22,8 @@ interface HeroProps {
 }
 
 export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, portraitAlt }: HeroProps) => {
+  const portraitRef = useRef<HTMLDivElement>(null);
+
   return (
     <section className="hero">
       <style jsx>{`
@@ -150,13 +157,24 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
         .portrait {
           grid-column: 3;
           align-self: stretch;
+          position: relative;
+          overflow: hidden;
           background: ${T.home.color.dark};
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
         }
 
+        .portrait-particle-bg {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+        }
+
         .portrait-img {
+          position: relative;
+          z-index: 1;
           width: 100%;
           height: 100%;
           flex: 1;
@@ -202,7 +220,20 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
             {cta} →
           </a>
         </div>
-        <div className="portrait">
+        <div className="portrait" ref={portraitRef}>
+          <div className="portrait-particle-bg" aria-hidden="true">
+            <ParticleField
+              backgroundColor="transparent"
+              particleColors={PARTICLE_COLORS}
+              particleCount={16}
+              mobileParticleCount={10}
+              maxSize={PARTICLE_MAX_SIZE}
+              connectionLines
+              linesNearPointerOnly
+              interactionTarget={portraitRef}
+              tapToggle
+            />
+          </div>
           <img className="portrait-img" src="/hero-45.webp" alt={portraitAlt} />
         </div>
       </div>
