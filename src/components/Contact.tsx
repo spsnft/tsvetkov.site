@@ -21,7 +21,6 @@ interface ContactProps {
   channels: Channel[];
   email: string;
   mailLink: string;
-  portraitAlt?: string;
 }
 
 // Rendered by fixed index (never a component reference stored in a variable
@@ -33,7 +32,7 @@ function ChannelIcon({ index }: { index: number }) {
   return <LineIcon />;
 }
 
-export const Contact = ({ title, sub, channels, email, mailLink, portraitAlt = 'Fedor Tsvetkov' }: ContactProps) => {
+export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
@@ -67,16 +66,6 @@ export const Contact = ({ title, sub, channels, email, mailLink, portraitAlt = '
           .mobile {
             display: none;
           }
-        }
-
-        .photo-mobile {
-          position: relative;
-          z-index: 1;
-          display: block;
-          align-self: center;
-          width: 220px;
-          aspect-ratio: 4 / 5;
-          object-fit: cover;
         }
 
         .header-mobile {
@@ -144,8 +133,8 @@ export const Contact = ({ title, sub, channels, email, mailLink, portraitAlt = '
           .wide {
             ${homePadCSS()}
             display: grid;
-            grid-template-columns: 1fr 240px;
-            gap: 40px;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 48px;
             align-items: center;
             padding-top: 64px;
             padding-bottom: 64px;
@@ -154,31 +143,7 @@ export const Contact = ({ title, sub, channels, email, mailLink, portraitAlt = '
 
         @media (min-width: 1280px) {
           .wide {
-            grid-template-columns: 50% 50%;
-            gap: 0;
             padding-bottom: 32px;
-          }
-        }
-
-        .left {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-        }
-
-        .photo-wide {
-          position: relative;
-          z-index: 1;
-          display: block;
-          justify-self: end;
-          width: 240px;
-          aspect-ratio: 4 / 5;
-          object-fit: cover;
-        }
-
-        @media (min-width: 1280px) {
-          .photo-wide {
-            width: 360px;
           }
         }
 
@@ -208,7 +173,7 @@ export const Contact = ({ title, sub, channels, email, mailLink, portraitAlt = '
         .channels-wide {
           display: flex;
           flex-direction: column;
-          width: 100%;
+          width: max-content;
         }
 
         .channel-wide {
@@ -255,7 +220,6 @@ export const Contact = ({ title, sub, channels, email, mailLink, portraitAlt = '
 
       {/* Mobile */}
       <div className="mobile">
-        <img className="photo-mobile" src="/hero-card.webp" alt={portraitAlt} />
         <div className="header-mobile">
           <h2 className="section-title-mobile">{title}</h2>
           <p className="sub-mobile">{sub}</p>
@@ -276,25 +240,22 @@ export const Contact = ({ title, sub, channels, email, mailLink, portraitAlt = '
 
       {/* Tablet/desktop */}
       <div className="wide">
-        <div className="left">
-          <div className="header-wide">
-            <h2 className="section-title-wide">{title}</h2>
-            <p className="sub-wide">{sub}</p>
-          </div>
-          <div className="channels-wide">
-            {channels.map((c, i) => (
-              <a className="channel-wide" key={c.label} href={c.href} target="_blank" rel="noopener">
-                <ChannelIcon index={i} />
-                <span>{c.label}</span>
-              </a>
-            ))}
-            <a className="channel-wide" href={mailLink}>
-              <MailIcon />
-              <span>{email}</span>
-            </a>
-          </div>
+        <div className="header-wide">
+          <h2 className="section-title-wide">{title}</h2>
+          <p className="sub-wide">{sub}</p>
         </div>
-        <img className="photo-wide" src="/hero-card.webp" alt={portraitAlt} />
+        <div className="channels-wide">
+          {channels.map((c, i) => (
+            <a className="channel-wide" key={c.label} href={c.href} target="_blank" rel="noopener">
+              <ChannelIcon index={i} />
+              <span>{c.label}</span>
+            </a>
+          ))}
+          <a className="channel-wide" href={mailLink}>
+            <MailIcon />
+            <span>{email}</span>
+          </a>
+        </div>
       </div>
     </section>
   );
