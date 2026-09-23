@@ -108,7 +108,7 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
           display: block;
           align-self: center;
           width: 100%;
-          max-width: 400px;
+          max-width: 280px;
           aspect-ratio: 4 / 5;
           object-fit: cover;
         }
@@ -161,20 +161,34 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
           }
         }
 
-        .photo-wide {
+        /* Empty wrapper: as a grid item it contributes no intrinsic height
+           of its own, so the row's auto height — and this wrapper's
+           stretched height — is driven by .metrics alone. The photo is
+           absolutely positioned inside it and capped to that height, so
+           its bottom edge always lands exactly on the metrics column's
+           bottom edge, never past it. */
+        .photo-wide-wrap {
           position: relative;
-          z-index: 1;
-          display: block;
-          width: 100%;
-          align-self: end;
-          aspect-ratio: 4 / 5;
-          object-fit: cover;
         }
 
         @media (min-width: 1280px) {
-          .photo-wide {
+          .photo-wide-wrap {
             display: none;
           }
+        }
+
+        .photo-wide {
+          position: absolute;
+          z-index: 1;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: block;
+          width: 100%;
+          max-height: 100%;
+          aspect-ratio: 4 / 5;
+          object-fit: contain;
+          object-position: 50% 100%;
         }
 
         .metric {
@@ -258,7 +272,7 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
           ))}
         </div>
         <div className="slogan-mobile">{slogan}</div>
-        <img className="photo-mobile" src="/hero-45.webp" alt={portraitAlt} />
+        <img className="photo-mobile" src="/hero-card.webp" alt={portraitAlt} />
       </div>
 
       {/* Tablet/desktop */}
@@ -273,7 +287,9 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
               </div>
             ))}
           </div>
-          <img className="photo-wide" src="/hero-45.webp" alt={portraitAlt} />
+          <div className="photo-wide-wrap">
+            <img className="photo-wide" src="/hero-card.webp" alt={portraitAlt} />
+          </div>
         </div>
         <div className="slogan">{slogan}</div>
       </div>
