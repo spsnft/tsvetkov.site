@@ -141,7 +141,7 @@ export const T = {
     // hero H1 52px) is a one-off, kept local to its component.
     type: {
       desktop: {
-        display: '70px',  // Hero H1
+        display: '90px',  // Hero H1
         metric:  '80px',  // Proof metric value
         h2:      '54px',  // Section H2; also Proof metric value on tablet
         slogan:  '38px',  // Proof slogan

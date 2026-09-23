@@ -21,7 +21,7 @@ interface ProofProps {
   portraitAlt: string;
 }
 
-export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
+export const Proof = ({ metrics, slogan }: ProofProps) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   return (
@@ -41,15 +41,14 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
           pointer-events: none;
         }
 
-        /* Mobile — no bottom padding: the photo sits flush against the
-           section's bottom edge, dark bg showing only on its sides. */
+        /* Mobile */
         .mobile {
           position: relative;
           z-index: 1;
           display: flex;
           flex-direction: column;
           gap: 24px;
-          padding: 24px 24px 0 24px;
+          padding: 24px 24px 32px 24px;
         }
 
         @media (min-width: 768px) {
@@ -100,17 +99,6 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
           overflow-x: auto;
           font-size: ${T.home.type.mobile.label};
           letter-spacing: 0.055em;
-        }
-
-        .photo-mobile {
-          position: relative;
-          z-index: 1;
-          display: block;
-          align-self: center;
-          width: 100%;
-          max-width: 280px;
-          aspect-ratio: 4 / 5;
-          object-fit: cover;
         }
 
         /* Tablet/desktop */
@@ -226,7 +214,6 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
           ))}
         </div>
         <div className="slogan-mobile">{slogan}</div>
-        <img className="photo-mobile" src="/hero-card.webp" alt={portraitAlt} />
       </div>
 
       {/* Tablet/desktop */}
