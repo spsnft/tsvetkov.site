@@ -50,6 +50,33 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
           letter-spacing: -0.038em;
         }
 
+        @media (min-width: 768px) {
+          h1.mobile {
+            display: none;
+          }
+        }
+
+        /* 768–1279: same two-line heroA/heroB copy as the 1280+ H1
+           (h1.desktop below), just at a fixed 60px instead of the
+           desktop.display token — still inside .copy-mobile, so the
+           status line/button underneath keep their current layout. */
+        h1.tablet {
+          display: none;
+          margin: 0;
+          font-family: ${T.home.font.sans};
+          font-weight: 600;
+          color: ${T.home.color.textPrimary};
+          line-height: 0.95;
+          letter-spacing: -0.04em;
+          font-size: 60px;
+        }
+
+        @media (min-width: 768px) {
+          h1.tablet {
+            display: block;
+          }
+        }
+
         .cta-row-mobile {
           display: flex;
           flex-direction: column;
@@ -135,6 +162,12 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
               {line}
             </Fragment>
           ))}
+          <span className="accent-dot">.</span>
+        </h1>
+        <h1 className="tablet">
+          {heroA}
+          <br />
+          {heroB}
           <span className="accent-dot">.</span>
         </h1>
         <div className="cta-row-mobile">
