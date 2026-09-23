@@ -103,7 +103,7 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           display: flex;
           flex-direction: column;
           gap: 21px;
-          padding: 80px 48px 80px 0;
+          padding: 112px 48px 112px 0;
           border-right: 1px solid ${T.home.color.ruleLight};
         }
 
