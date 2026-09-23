@@ -1,14 +1,9 @@
 'use client';
 
-import { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
 import { T } from '@/src/theme/tokens';
-import { homeGridVarsCSS, homePadCSS } from '@/src/theme/homeContainer';
+import { homePadCSS } from '@/src/theme/homeContainer';
 import { StatusLine } from '@/src/components/home/StatusLine';
-import ParticleField from '@/src/components/lab/ParticleField';
-
-// Same values Proof.tsx/Contact.tsx use for their own particle-bg layers.
-const PARTICLE_COLORS = ['rgba(245, 243, 238, 0.55)', 'rgba(245, 243, 238, 0.28)'];
-const PARTICLE_MAX_SIZE = 3.75;
 
 interface HeroProps {
   lang: string;
@@ -22,20 +17,14 @@ interface HeroProps {
 }
 
 export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, portraitAlt }: HeroProps) => {
-  const portraitRef = useRef<HTMLDivElement>(null);
-
   return (
     <section className="hero">
       <style jsx>{`
         .hero {
-          ${homeGridVarsCSS()}
           background: ${T.home.color.bgLight};
         }
 
-        /* Plain flow, no grid — shown up to 1279; the grid/portrait split
-           below takes over only from 1280 (design/system-report-v2.md).
-           Horizontal padding matches Proof/Services at the same width via
-           homePadCSS(), so hero text lines up with metrics and What I do. */
+        /* Below 768: unchanged plain flow. */
         .copy-mobile {
           display: flex;
           flex-direction: column;
@@ -45,7 +34,7 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           ${homePadCSS()}
         }
 
-        @media (min-width: 1280px) {
+        @media (min-width: 768px) {
           .copy-mobile {
             display: none;
           }
@@ -85,26 +74,28 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           background: ${T.home.color.accentHoverLight};
         }
 
-        /* Desktop only (from 1280): grid — pad | text | portrait+pad0.
-           Below 1280 the portrait photo lives inside Proof instead. */
-        .grid {
+        /* From 768: light two-column layout — text left, photo card right. */
+        .wide {
           display: none;
         }
 
-        @media (min-width: 1280px) {
-          .grid {
-            display: grid;
-            grid-template-columns: var(--pad) minmax(0, 1fr) calc(var(--portrait) + var(--pad0));
+        @media (min-width: 768px) {
+          .wide {
+            ${homePadCSS()}
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            padding-top: 48px;
+            padding-bottom: 48px;
           }
         }
 
         .copy {
-          grid-column: 2;
+          flex: 1;
+          min-width: 0;
           display: flex;
           flex-direction: column;
           gap: 21px;
-          padding: 112px 48px 112px 0;
-          border-right: 1px solid ${T.home.color.ruleLight};
         }
 
         @media (min-width: 1280px) {
@@ -125,19 +116,39 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           }
         }
 
+        /* 768–1279: mobile-sized H1 (mobileLines). From 1280: desktop H1
+           (heroA/heroB) takes over — see the two @media rules below. */
+        h1.tablet {
+          display: block;
+          margin: 0;
+          font-family: ${T.home.font.sans};
+          font-weight: 600;
+          color: ${T.home.color.textPrimary};
+          font-size: ${T.home.type.mobile.display};
+          line-height: 0.98;
+          letter-spacing: -0.038em;
+        }
+
+        @media (min-width: 1280px) {
+          h1.tablet {
+            display: none;
+          }
+        }
+
         h1.desktop {
+          display: none;
           margin: 0 0 0 -6px;
           font-family: ${T.home.font.sans};
           font-weight: 600;
           color: ${T.home.color.textPrimary};
           line-height: 0.95;
           letter-spacing: -0.04em;
-          font-size: 52px;
+          font-size: ${T.home.type.desktop.display};
         }
 
         @media (min-width: 1280px) {
           h1.desktop {
-            font-size: ${T.home.type.desktop.display};
+            display: block;
           }
         }
 
@@ -160,37 +171,23 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           background: ${T.home.color.accentHoverLight};
         }
 
-        .portrait {
-          grid-column: 3;
-          align-self: stretch;
-          position: relative;
-          overflow: hidden;
+        .card {
+          flex-shrink: 0;
+          width: min(30%, 320px);
+          aspect-ratio: 4 / 5;
           background: ${T.home.color.dark};
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
         }
 
-        .portrait-particle-bg {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-          pointer-events: none;
-        }
-
-        .portrait-img {
-          position: relative;
-          z-index: 1;
+        .card-img {
+          display: block;
           width: 100%;
           height: 100%;
-          flex: 1;
-          display: block;
           object-fit: cover;
           object-position: 50% 100%;
         }
       `}</style>
 
-      {/* Mobile */}
+      {/* Below 768 */}
       <div className="copy-mobile">
         <h1 className="mobile">
           {mobileLines.map((line, i) => (
@@ -210,11 +207,20 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
         </div>
       </div>
 
-      {/* Tablet/desktop */}
-      <div className="grid">
+      {/* From 768 */}
+      <div className="wide">
         <div className="copy">
           <div className="heading-block">
             <StatusLine key={lang} lang={lang} place={place} />
+            <h1 className="tablet">
+              {mobileLines.map((line, i) => (
+                <Fragment key={i}>
+                  {i > 0 && <br />}
+                  {line}
+                </Fragment>
+              ))}
+              <span className="accent-dot">.</span>
+            </h1>
             <h1 className="desktop">
               {heroA}
               <br />
@@ -226,21 +232,8 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
             {cta} →
           </a>
         </div>
-        <div className="portrait" ref={portraitRef}>
-          <div className="portrait-particle-bg" aria-hidden="true">
-            <ParticleField
-              backgroundColor="transparent"
-              particleColors={PARTICLE_COLORS}
-              particleCount={16}
-              mobileParticleCount={10}
-              maxSize={PARTICLE_MAX_SIZE}
-              connectionLines
-              linesNearPointerOnly
-              interactionTarget={portraitRef}
-              tapToggle
-            />
-          </div>
-          <img className="portrait-img" src="/hero-center.webp" alt={portraitAlt} />
+        <div className="card">
+          <img className="card-img" src="/hero-card.webp" alt={portraitAlt} />
         </div>
       </div>
     </section>

@@ -131,64 +131,18 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
           }
         }
 
-        /* 768–1279: metrics + photo share a 50/50 row (see .metrics-row).
-           From 1280 .metrics-row collapses to a plain block, so this goes
-           back to the original 3-up grid — the only state 1280+ ever saw. */
-        .metrics-row {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          column-gap: 32px;
-        }
-
-        @media (min-width: 1280px) {
-          .metrics-row {
-            display: block;
-          }
-        }
-
         .metrics {
-          display: flex;
-          flex-direction: column;
-          gap: 32px;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          column-gap: 0;
+          justify-content: start;
         }
 
         @media (min-width: 1280px) {
           .metrics {
-            display: grid;
             grid-template-columns: max-content max-content max-content;
             column-gap: 155.5px;
-            justify-content: start;
           }
-        }
-
-        /* Empty wrapper: as a grid item it contributes no intrinsic height
-           of its own, so the row's auto height — and this wrapper's
-           stretched height — is driven by .metrics alone. The photo is
-           absolutely positioned inside it and capped to that height, so
-           its bottom edge always lands exactly on the metrics column's
-           bottom edge, never past it. */
-        .photo-wide-wrap {
-          position: relative;
-        }
-
-        @media (min-width: 1280px) {
-          .photo-wide-wrap {
-            display: none;
-          }
-        }
-
-        .photo-wide {
-          position: absolute;
-          z-index: 1;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          display: block;
-          width: 100%;
-          max-height: 100%;
-          aspect-ratio: 4 / 5;
-          object-fit: contain;
-          object-position: 50% 100%;
         }
 
         .metric {
@@ -277,19 +231,14 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
 
       {/* Tablet/desktop */}
       <div className="wide">
-        <div className="metrics-row">
-          <div className="metrics">
-            {metrics.map((m, i) => (
-              <div className="metric" key={i}>
-                <div className="value">{m.value}</div>
-                <div className="note">{m.note}</div>
-                <div className="field">{m.field}</div>
-              </div>
-            ))}
-          </div>
-          <div className="photo-wide-wrap">
-            <img className="photo-wide" src="/hero-card.webp" alt={portraitAlt} />
-          </div>
+        <div className="metrics">
+          {metrics.map((m, i) => (
+            <div className="metric" key={i}>
+              <div className="value">{m.value}</div>
+              <div className="note">{m.note}</div>
+              <div className="field">{m.field}</div>
+            </div>
+          ))}
         </div>
         <div className="slogan">{slogan}</div>
       </div>
