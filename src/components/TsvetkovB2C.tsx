@@ -1,6 +1,6 @@
 import type { getDictionary } from '@/src/locales/getDictionary';
 import { Header } from '@/src/components/home/Header';
-import { Hero, HeroPhotoMobile } from '@/src/components/Hero';
+import { Hero } from '@/src/components/Hero';
 import { Proof } from '@/src/components/home/Proof';
 import { Services } from '@/src/components/Services';
 import { HowIWork } from '@/src/components/home/HowIWork';
@@ -38,8 +38,11 @@ export default function TsvetkovB2C({ lang, dict }: TsvetkovB2CProps) {
         waLink={home.waLink}
         portraitAlt={home.hero.portraitAlt}
       />
-      <Proof metrics={[home.proof.m1, home.proof.m2, home.proof.m3]} slogan={home.proof.slogan} />
-      <HeroPhotoMobile portraitAlt={home.hero.portraitAlt} />
+      <Proof
+        metrics={[home.proof.m1, home.proof.m2, home.proof.m3]}
+        slogan={home.proof.slogan}
+        portraitAlt={home.hero.portraitAlt}
+      />
       <Services title={home.services.title} items={home.services.items} />
       <HowIWork title={home.how.title} items={[home.how.items[0], home.how.items[1]]} />
       <Contact

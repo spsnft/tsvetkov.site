@@ -2,7 +2,7 @@
 
 import { Fragment, useRef } from 'react';
 import { T } from '@/src/theme/tokens';
-import { homeGridVarsCSS } from '@/src/theme/homeContainer';
+import { homeGridVarsCSS, homePadCSS } from '@/src/theme/homeContainer';
 import { StatusLine } from '@/src/components/home/StatusLine';
 import ParticleField from '@/src/components/lab/ParticleField';
 
@@ -32,22 +32,27 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           background: ${T.home.color.bgLight};
         }
 
-        /* Mobile: plain flow, no grid */
+        /* Plain flow, no grid — shown up to 1279; the grid/portrait split
+           below takes over only from 1280 (design/system-report-v2.md).
+           Horizontal padding matches Proof/Services at the same width via
+           homePadCSS(), so hero text lines up with metrics and What I do. */
         .copy-mobile {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          padding: 32px 24px 32px 24px;
+          padding-top: 32px;
+          padding-bottom: 32px;
+          ${homePadCSS()}
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1280px) {
           .copy-mobile {
             display: none;
           }
         }
 
         h1.mobile {
-          margin: 0 0 0 -3px;
+          margin: 0;
           font-family: ${T.home.font.sans};
           font-weight: 600;
           color: ${T.home.color.textPrimary};
@@ -80,12 +85,13 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
           background: ${T.home.color.accentHoverLight};
         }
 
-        /* Tablet/desktop: grid — pad | text | portrait+pad0 */
+        /* Desktop only (from 1280): grid — pad | text | portrait+pad0.
+           Below 1280 the portrait photo lives inside Proof instead. */
         .grid {
           display: none;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1280px) {
           .grid {
             display: grid;
             grid-template-columns: var(--pad) minmax(0, 1fr) calc(var(--portrait) + var(--pad0));
@@ -234,42 +240,9 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink, port
               tapToggle
             />
           </div>
-          <img className="portrait-img" src="/hero-45.webp" alt={portraitAlt} />
+          <img className="portrait-img" src="/hero-center.webp" alt={portraitAlt} />
         </div>
       </div>
-    </section>
-  );
-};
-
-// Rendered as its own section after Proof, mobile only (<768) — the photo
-// that used to sit above the H1 in Hero now lives here instead.
-interface HeroPhotoMobileProps {
-  portraitAlt: string;
-}
-
-export const HeroPhotoMobile = ({ portraitAlt }: HeroPhotoMobileProps) => {
-  return (
-    <section className="hero-photo-mobile">
-      <style jsx>{`
-        .hero-photo-mobile {
-          display: block;
-          background: ${T.home.color.dark};
-        }
-
-        @media (min-width: 768px) {
-          .hero-photo-mobile {
-            display: none;
-          }
-        }
-
-        .hero-photo-mobile-img {
-          width: 100%;
-          aspect-ratio: 4 / 5;
-          display: block;
-          object-fit: cover;
-        }
-      `}</style>
-      <img className="hero-photo-mobile-img" src="/hero-45.webp" alt={portraitAlt} />
     </section>
   );
 };
