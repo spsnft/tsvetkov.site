@@ -263,6 +263,12 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
           maxSize={1.6}
           connectionLines
           linesNearPointerOnly
+          lineMaxDistance={50}
+          lineMaxCount={20}
+          lineAlpha={0.08}
+          attractionRadius={120}
+          attractionMaxTargets={20}
+          attractionMinDistance={28}
           interactionTarget={sectionRef}
           tapToggle
         />

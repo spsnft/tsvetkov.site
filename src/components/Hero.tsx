@@ -45,7 +45,11 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
 
         h1.copy-h1 {
           order: 0;
-          margin: 0 0 12px 0;
+          /* H1->CTA gap. Commit 1453171 had this as a plain literal (12px
+             below 1280 / 18px from 1280), not a token reference, so per the
+             brief this is restored as 24px / 32px instead of those old
+             numbers. */
+          margin: 0 0 24px 0;
           font-family: ${T.home.font.sans};
           font-weight: 600;
           color: ${T.home.color.textPrimary};
@@ -86,7 +90,7 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
         @media (min-width: 1280px) {
           h1.copy-h1 {
             order: 1;
-            margin-bottom: 18px;
+            margin-bottom: 32px;
             font-size: ${T.home.type.desktop.display};
           }
         }
@@ -141,6 +145,12 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
           }
         }
 
+        /* display:flex (not block) so .cta-btn — an <a>, inline by default —
+           gets blockified by being a flex item again, same as when it sat
+           directly in .wide before the h1 unification: an inline element's
+           own vertical padding doesn't otherwise count toward this
+           wrapper's height, which left the button visually overlapping its
+           neighbor while this box measured only its line-box. */
         .wide-cta {
           order: 2;
           display: none;
@@ -148,7 +158,7 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
 
         @media (min-width: 1280px) {
           .wide-cta {
-            display: block;
+            display: flex;
           }
         }
 

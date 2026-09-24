@@ -59,6 +59,14 @@ export interface ParticleFieldProps {
   lineColor?: string;
   /** Connection line peak alpha (at zero distance). */
   lineAlpha?: number;
+  /** Longest distance between two particles a line is drawn for. Defaults to 140. */
+  lineMaxDistance?: number;
+  /**
+   * Caps how many lines are drawn per frame, keeping the shortest ones
+   * first when there are more qualifying pairs than this. Left undefined
+   * (the default), every qualifying pair is drawn — as before.
+   */
+  lineMaxCount?: number;
   /**
    * Element whose pointer/touch events drive the attraction effect.
    * Defaults to the canvas itself — correct as long as nothing with
@@ -66,6 +74,25 @@ export interface ParticleFieldProps {
    * when the canvas is a non-interactive background layer instead.
    */
   interactionTarget?: RefObject<HTMLElement | null>;
+  /**
+   * Distance within which the pointer/touch target attracts particles
+   * (also bounds `linesNearPointerOnly`, which reuses this same radius).
+   * Defaults to 200.
+   */
+  attractionRadius?: number;
+  /**
+   * Caps how many of the particles within `attractionRadius` actually get
+   * pulled toward the target — the closest ones first; the rest keep
+   * moving as if the target weren't there. Left undefined (the default),
+   * every particle within radius is attracted — as before.
+   */
+  attractionMaxTargets?: number;
+  /**
+   * Floor on how close an attracted particle can get to the target — once
+   * within this distance, the pull on it stops (it doesn't overshoot or
+   * stack on the target point). Defaults to 0 (no floor).
+   */
+  attractionMinDistance?: number;
   /**
    * Touch-only "tap sets target" mode. Mouse behavior is unaffected.
    *
@@ -88,12 +115,15 @@ const DEFAULT_COLORS = ['#00E599', '#00A3FF', '#C084FC'];
 const MOBILE_BREAKPOINT = 768;
 const DESKTOP_PARTICLE_COUNT = 60;
 const MOBILE_PARTICLE_COUNT = 35;
-const CONNECTION_DISTANCE = 140;
+const DEFAULT_LINE_MAX_DISTANCE = 140;
 const DEFAULT_LINE_COLOR = '#ffffff';
 const DEFAULT_LINE_ALPHA = 0.15;
 
-// Pointer attraction — ported as-is from NetworkBackground.tsx.
-const ATTRACTION_RADIUS = 200;
+// Pointer attraction — radius/strength/lerp ported as-is from
+// NetworkBackground.tsx; radius is now overridable (attractionRadius prop),
+// strength/lerp stay fixed (not exposed — brief only asks for radius, the
+// nearest-N cap, and the min-distance floor, all new below).
+const DEFAULT_ATTRACTION_RADIUS = 200;
 const ATTRACTION_STRENGTH = 2.2;
 const POINTER_LERP = 0.25;
 
@@ -131,7 +161,12 @@ export default function ParticleField({
   linesNearPointerOnly = false,
   lineColor = DEFAULT_LINE_COLOR,
   lineAlpha = DEFAULT_LINE_ALPHA,
+  lineMaxDistance = DEFAULT_LINE_MAX_DISTANCE,
+  lineMaxCount,
   interactionTarget,
+  attractionRadius = DEFAULT_ATTRACTION_RADIUS,
+  attractionMaxTargets,
+  attractionMinDistance = 0,
   tapToggle = false,
   className,
 }: ParticleFieldProps) {
@@ -197,33 +232,45 @@ export default function ParticleField({
 
         if (linesNearPointerOnly) {
           // Nothing at rest — only particles within the attraction radius
-          // get connected, fading out toward the radius edge.
+          // get connected, fading out toward the radius edge. Candidates are
+          // collected first so a lineMaxCount cap can keep the shortest ones
+          // instead of whichever happened to be checked first.
           if (pointer.active) {
+            const candidates: { p1: Particle; p2: Particle; dist: number; alpha: number }[] = [];
+
             for (let i = 0; i < particles.length; i++) {
               const p1 = particles[i];
               const d1 = Math.hypot(pointer.x - p1.x, pointer.y - p1.y);
-              if (d1 > ATTRACTION_RADIUS) continue;
+              if (d1 > attractionRadius) continue;
 
               for (let j = i + 1; j < particles.length; j++) {
                 const p2 = particles[j];
                 const d2 = Math.hypot(pointer.x - p2.x, pointer.y - p2.y);
-                if (d2 > ATTRACTION_RADIUS) continue;
+                if (d2 > attractionRadius) continue;
 
                 const dx = p1.x - p2.x;
                 const dy = p1.y - p2.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist >= CONNECTION_DISTANCE) continue;
+                if (dist >= lineMaxDistance) continue;
 
-                const proximity = 1 - (d1 + d2) / 2 / ATTRACTION_RADIUS;
+                const proximity = 1 - (d1 + d2) / 2 / attractionRadius;
                 const alpha = Math.max(0, proximity) * lineAlpha;
                 if (alpha <= 0) continue;
 
-                ctx.beginPath();
-                ctx.moveTo(p1.x, p1.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.globalAlpha = alpha;
-                ctx.stroke();
+                candidates.push({ p1, p2, dist, alpha });
               }
+            }
+
+            candidates.sort((a, b) => a.dist - b.dist);
+            const toDraw =
+              lineMaxCount !== undefined ? candidates.slice(0, lineMaxCount) : candidates;
+
+            for (const { p1, p2, alpha } of toDraw) {
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.globalAlpha = alpha;
+              ctx.stroke();
             }
           }
         } else {
@@ -236,8 +283,8 @@ export default function ParticleField({
               const dy = p1.y - p2.y;
               const dist = Math.sqrt(dx * dx + dy * dy);
 
-              if (dist < CONNECTION_DISTANCE) {
-                ctx.globalAlpha = (1 - dist / CONNECTION_DISTANCE) * lineAlpha;
+              if (dist < lineMaxDistance) {
+                ctx.globalAlpha = (1 - dist / lineMaxDistance) * lineAlpha;
                 ctx.beginPath();
                 ctx.moveTo(p1.x, p1.y);
                 ctx.lineTo(p2.x, p2.y);
@@ -293,19 +340,35 @@ export default function ParticleField({
         p.y += p.vy;
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
+      });
 
-        if (pointer.active) {
+      if (pointer.active) {
+        // Only the particles closest to the target are attracted (capped by
+        // attractionMaxTargets) — the rest, even inside the radius, keep
+        // moving on their own via the drift above.
+        const withinRadius: { p: Particle; dx: number; dy: number; dist: number }[] = [];
+        for (const p of particles) {
           const dx = pointer.x - p.x;
           const dy = pointer.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < ATTRACTION_RADIUS) {
-            const force = (ATTRACTION_RADIUS - dist) / ATTRACTION_RADIUS;
-            p.x += (dx / dist) * force * ATTRACTION_STRENGTH;
-            p.y += (dy / dist) * force * ATTRACTION_STRENGTH;
-          }
+          if (dist < attractionRadius) withinRadius.push({ p, dx, dy, dist });
         }
-      });
+
+        withinRadius.sort((a, b) => a.dist - b.dist);
+        const attracted =
+          attractionMaxTargets !== undefined
+            ? withinRadius.slice(0, attractionMaxTargets)
+            : withinRadius;
+
+        for (const { p, dx, dy, dist } of attracted) {
+          // Floor on how close a particle may approach the target — once
+          // within it, the pull on this particle stops for the frame.
+          if (dist <= attractionMinDistance) continue;
+          const force = (attractionRadius - dist) / attractionRadius;
+          p.x += (dx / dist) * force * ATTRACTION_STRENGTH;
+          p.y += (dy / dist) * force * ATTRACTION_STRENGTH;
+        }
+      }
 
       drawFrame();
       animationFrameId = requestAnimationFrame(step);
@@ -605,7 +668,12 @@ export default function ParticleField({
     linesNearPointerOnly,
     lineColor,
     lineAlpha,
+    lineMaxDistance,
+    lineMaxCount,
     interactionTarget,
+    attractionRadius,
+    attractionMaxTargets,
+    attractionMinDistance,
     tapToggle,
   ]);
 
