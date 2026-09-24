@@ -43,7 +43,7 @@ export default function TsvetkovB2C({ lang, dict }: TsvetkovB2CProps) {
         slogan={home.proof.slogan}
         portraitAlt={home.hero.portraitAlt}
       />
-      <Services title={home.services.title} items={home.services.items} />
+      <Services lang={lang} title={home.services.title} items={home.services.items} />
       <HowIWork title={home.how.title} items={[home.how.items[0], home.how.items[1]]} />
       <Contact
         title={home.contact.title}

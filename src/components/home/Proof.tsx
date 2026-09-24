@@ -5,9 +5,11 @@ import { T } from '@/src/theme/tokens';
 import { homePadCSS, homeGridVarsCSS } from '@/src/theme/homeContainer';
 import ParticleField from '@/src/components/lab/ParticleField';
 
-// Same values Contact.tsx uses for its own particle-bg layer.
-const PARTICLE_COLORS = ['rgba(245, 243, 238, 0.55)', 'rgba(245, 243, 238, 0.28)'];
-const PARTICLE_MAX_SIZE = 3.75;
+// Same value Contact.tsx uses for its own particle-bg layer. Opacity is no
+// longer baked into the color — ParticleField's density mode randomizes and
+// flickers per-particle alpha on top of this flat color (Claude Design
+// "Proof/Contact particle field").
+const PARTICLE_COLOR = 'rgb(245, 243, 238)';
 
 // Fade applied to the portrait at every width — Claude Design "Proof Portrait".
 const PORTRAIT_MASK =
@@ -255,10 +257,10 @@ export const Proof = ({ metrics, slogan, portraitAlt }: ProofProps) => {
       <div className="particle-bg" aria-hidden="true">
         <ParticleField
           backgroundColor="transparent"
-          particleColors={PARTICLE_COLORS}
-          particleCount={16}
-          mobileParticleCount={10}
-          maxSize={PARTICLE_MAX_SIZE}
+          particleColors={[PARTICLE_COLOR]}
+          density={1}
+          minSize={0.5}
+          maxSize={1.6}
           connectionLines
           linesNearPointerOnly
           interactionTarget={sectionRef}

@@ -7,16 +7,22 @@ interface ServiceItem {
   n: string;
   title: string;
   body: string;
-  link?: string;
   linkLabel?: string;
 }
 
 interface ServicesProps {
+  lang: string;
   title: string;
   items: ServiceItem[];
 }
 
-export const Services = ({ title, items }: ServicesProps) => {
+export const Services = ({ lang, title, items }: ServicesProps) => {
+  // The one dictionary item that carries a linkLabel (direct bookings)
+  // always points at the HMS microsite in the current locale — the target
+  // is derived here, not hardcoded in the dictionary, so it never drifts
+  // out of sync with whichever locale the visitor is on.
+  const hmsHref = `/${lang}/hms`;
+
   return (
     <section className="services" id="services">
       <style jsx>{`
@@ -236,8 +242,8 @@ export const Services = ({ title, items }: ServicesProps) => {
               <span className="title-mobile">{item.title}</span>
             </div>
             <p className="body-mobile">{item.body}</p>
-            {item.link && item.linkLabel && (
-              <a className="link-mobile" href={item.link}>
+            {item.linkLabel && (
+              <a className="link-mobile" href={hmsHref}>
                 {item.linkLabel} →
               </a>
             )}
@@ -254,8 +260,8 @@ export const Services = ({ title, items }: ServicesProps) => {
             <span className="title">{item.title}</span>
             <div className="desc">
               <p className="body">{item.body}</p>
-              {item.link && item.linkLabel && (
-                <a className="link" href={item.link}>
+              {item.linkLabel && (
+                <a className="link" href={hmsHref}>
                   {item.linkLabel} →
                 </a>
               )}

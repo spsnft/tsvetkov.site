@@ -6,9 +6,10 @@ import { homePadCSS } from '@/src/theme/homeContainer';
 import { WhatsAppIcon, TelegramIcon, LineIcon, MailIcon } from '@/src/components/home/Icons';
 import ParticleField from '@/src/components/lab/ParticleField';
 
-const PARTICLE_COLORS = ['rgba(245, 243, 238, 0.55)', 'rgba(245, 243, 238, 0.28)'];
-// ParticleField's own default maxSize is 2.5 — this block wants that × 1.5.
-const PARTICLE_MAX_SIZE = 3.75;
+// Opacity is no longer baked into the color — ParticleField's density mode
+// randomizes and flickers per-particle alpha on top of this flat color
+// (Claude Design "Proof/Contact particle field").
+const PARTICLE_COLOR = 'rgb(245, 243, 238)';
 
 interface Channel {
   label: string;
@@ -206,10 +207,10 @@ export const Contact = ({ title, sub, channels, email, mailLink }: ContactProps)
       <div className="particle-bg" aria-hidden="true">
         <ParticleField
           backgroundColor="transparent"
-          particleColors={PARTICLE_COLORS}
-          particleCount={24}
-          mobileParticleCount={14}
-          maxSize={PARTICLE_MAX_SIZE}
+          particleColors={[PARTICLE_COLOR]}
+          density={1}
+          minSize={0.5}
+          maxSize={1.6}
           connectionLines
           linesNearPointerOnly
           lineAlpha={0.15}

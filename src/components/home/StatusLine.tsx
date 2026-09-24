@@ -19,25 +19,39 @@ function formatBangkokTime(lang: string) {
   }).formatToParts(new Date());
 }
 
-// `lang` is only read on mount (via the lazy initializer) and inside the
-// interval closure — the caller remounts this hook's component with
-// `key={lang}` when the locale changes, rather than resyncing state here.
+// `lang` is only read on mount (inside the effect and its interval closure)
+// — the caller remounts this hook's component with `key={lang}` when the
+// locale changes, rather than resyncing state here.
+//
+// `parts` starts `null` — server and first client render both paint the
+// empty state below, so hydration always matches (the server has no way to
+// know the client's clock will land on the same minute: computing a real
+// time in both places is exactly what triggered React error #418). The
+// real time is filled in from `useEffect`, which only ever runs on the
+// client, after hydration is done.
 function useBangkokTime(lang: string) {
-  const [parts, setParts] = useState(() => formatBangkokTime(lang));
+  const [parts, setParts] = useState<Intl.DateTimeFormatPart[] | null>(null);
 
   useEffect(() => {
+    // Deliberate exception to react-hooks/set-state-in-effect: this isn't
+    // state derived from props/state (the anti-pattern the rule targets) —
+    // it's the standard fix for a value that can only be known on the
+    // client (current time) without desyncing SSR/CSR output, per React's
+    // own guidance for hydration-unsafe reads.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setParts(formatBangkokTime(lang));
     const id = setInterval(() => setParts(formatBangkokTime(lang)), 30_000);
     return () => clearInterval(id);
   }, [lang]);
 
-  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '';
-  return { hh: get('hour'), mm: get('minute'), ampm: get('dayPeriod') };
+  const get = (type: string) => parts?.find((p) => p.type === type)?.value ?? '';
+  return { hh: get('hour'), mm: get('minute'), ampm: get('dayPeriod'), ready: parts !== null };
 }
 
 // Mobile: 17×12 flag, 12px text, gap 8. Tablet/desktop: 19×13 flag, 13px
 // text, gap 24 (design/reference-v2.html Hero status line).
 export const StatusLine = ({ lang, place }: { lang: string; place: string }) => {
-  const { hh, mm, ampm } = useBangkokTime(lang);
+  const { hh, mm, ampm, ready } = useBangkokTime(lang);
 
   return (
     <div className="status-line">
@@ -90,6 +104,8 @@ export const StatusLine = ({ lang, place }: { lang: string; place: string }) => 
         }
 
         .time {
+          display: inline-block;
+          min-width: 9ch;
           font-variant-numeric: tabular-nums;
           font-weight: 500;
           color: ${T.home.color.textSecondary};
@@ -103,9 +119,13 @@ export const StatusLine = ({ lang, place }: { lang: string; place: string }) => 
       </span>
       <span className="dot">·</span>
       <span className="time">
-        {hh}
-        <span>:</span>
-        {mm} {ampm}
+        {ready && (
+          <>
+            {hh}
+            <span>:</span>
+            {mm} {ampm}
+          </>
+        )}
       </span>
     </div>
   );

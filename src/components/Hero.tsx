@@ -24,24 +24,28 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
           background: ${T.home.color.bgLight};
         }
 
-        /* Below 1280: single column, mobile-sized H1 built from mobileLines. */
-        .copy-mobile {
+        /* One shared column for status line, H1 and CTA button across every
+           width — visual grouping/order differs below vs from 1280 (see
+           .copy-rest / .wide-status / .wide-cta), but there is exactly one
+           <h1> in the DOM at all times, sized/positioned by CSS alone. */
+        .copy {
           display: flex;
           flex-direction: column;
-          gap: 12px;
           padding-top: 32px;
           padding-bottom: 32px;
           ${homePadCSS()}
         }
 
         @media (min-width: 1280px) {
-          .copy-mobile {
-            display: none;
+          .copy {
+            padding-top: 80px;
+            padding-bottom: 80px;
           }
         }
 
-        h1.mobile {
-          margin: 0;
+        h1.copy-h1 {
+          order: 0;
+          margin: 0 0 12px 0;
           font-family: ${T.home.font.sans};
           font-weight: 600;
           color: ${T.home.color.textPrimary};
@@ -50,37 +54,59 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
           letter-spacing: -0.038em;
         }
 
-        @media (min-width: 768px) {
-          h1.mobile {
+        /* Below 520: mobileLines (manual 4-line break). From 520: the same
+           2-line heroA/heroB copy used at 768+, still at the 44px mobile
+           size until the 768 step below raises it to 60px. */
+        .h1-compact {
+          display: inline;
+        }
+
+        .h1-wide {
+          display: none;
+        }
+
+        @media (min-width: 520px) {
+          .h1-compact {
             display: none;
           }
-        }
 
-        /* 768–1279: same two-line heroA/heroB copy as the 1280+ H1
-           (h1.desktop below), just at a fixed 60px instead of the
-           desktop.display token — still inside .copy-mobile, so the
-           status line/button underneath keep their current layout. */
-        h1.tablet {
-          display: none;
-          margin: 0;
-          font-family: ${T.home.font.sans};
-          font-weight: 600;
-          color: ${T.home.color.textPrimary};
-          line-height: 0.95;
-          letter-spacing: -0.04em;
-          font-size: 60px;
-        }
-
-        @media (min-width: 768px) {
-          h1.tablet {
-            display: block;
+          .h1-wide {
+            display: inline;
           }
         }
 
-        .cta-row-mobile {
+        @media (min-width: 768px) {
+          h1.copy-h1 {
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            font-size: 60px;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          h1.copy-h1 {
+            order: 1;
+            margin-bottom: 18px;
+            font-size: ${T.home.type.desktop.display};
+          }
+        }
+
+        .accent-dot {
+          color: ${T.home.color.accent};
+        }
+
+        /* Below 1280: button + status line grouped together, below the H1. */
+        .copy-rest {
+          order: 1;
           display: flex;
           flex-direction: column;
           gap: 24px;
+        }
+
+        @media (min-width: 1280px) {
+          .copy-rest {
+            display: none;
+          }
         }
 
         .cta-btn-mobile {
@@ -101,40 +127,29 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
           background: ${T.home.color.accentHoverLight};
         }
 
-        /* From 1280: single column, full container width, desktop H1. */
-        .wide {
+        /* From 1280: status line above the H1, CTA button below it — both
+           standalone (not grouped with each other), the H1 in between. */
+        .wide-status {
+          order: 0;
+          display: none;
+          margin-bottom: 19px;
+        }
+
+        @media (min-width: 1280px) {
+          .wide-status {
+            display: block;
+          }
+        }
+
+        .wide-cta {
+          order: 2;
           display: none;
         }
 
         @media (min-width: 1280px) {
-          .wide {
-            ${homePadCSS()}
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            padding-top: 80px;
-            padding-bottom: 80px;
+          .wide-cta {
+            display: block;
           }
-        }
-
-        .heading-block {
-          display: flex;
-          flex-direction: column;
-          gap: 19px;
-        }
-
-        h1.desktop {
-          margin: 0;
-          font-family: ${T.home.font.sans};
-          font-weight: 600;
-          color: ${T.home.color.textPrimary};
-          line-height: 0.95;
-          letter-spacing: -0.04em;
-          font-size: ${T.home.type.desktop.display};
-        }
-
-        .accent-dot {
-          color: ${T.home.color.accent};
         }
 
         .cta-btn {
@@ -153,46 +168,41 @@ export const Hero = ({ lang, place, heroA, heroB, mobileLines, cta, waLink }: He
         }
       `}</style>
 
-      {/* Below 1280 */}
-      <div className="copy-mobile">
-        <h1 className="mobile">
-          {mobileLines.map((line, i) => (
-            <Fragment key={i}>
-              {i > 0 && <br />}
-              {line}
-            </Fragment>
-          ))}
+      <div className="copy">
+        <div className="wide-status">
+          <StatusLine key={lang} lang={lang} place={place} />
+        </div>
+
+        <h1 className="copy-h1">
+          <span className="h1-compact">
+            {mobileLines.map((line, i) => (
+              <Fragment key={i}>
+                {i > 0 && <br />}
+                {line}
+              </Fragment>
+            ))}
+          </span>
+          <span className="h1-wide">
+            {heroA}
+            <br />
+            {heroB}
+          </span>
           <span className="accent-dot">.</span>
         </h1>
-        <h1 className="tablet">
-          {heroA}
-          <br />
-          {heroB}
-          <span className="accent-dot">.</span>
-        </h1>
-        <div className="cta-row-mobile">
+
+        <div className="copy-rest">
           <a className="cta-btn-mobile" href={waLink} target="_blank" rel="noopener">
             {cta}
             <span>→</span>
           </a>
           <StatusLine key={lang} lang={lang} place={place} />
         </div>
-      </div>
 
-      {/* From 1280 */}
-      <div className="wide">
-        <div className="heading-block">
-          <StatusLine key={lang} lang={lang} place={place} />
-          <h1 className="desktop">
-            {heroA}
-            <br />
-            {heroB}
-            <span className="accent-dot">.</span>
-          </h1>
+        <div className="wide-cta">
+          <a className="cta-btn" href={waLink} target="_blank" rel="noopener">
+            {cta} →
+          </a>
         </div>
-        <a className="cta-btn" href={waLink} target="_blank" rel="noopener">
-          {cta} →
-        </a>
       </div>
     </section>
   );

@@ -32,6 +32,15 @@ export interface ParticleFieldProps {
   particleCount?: number;
   /** Particle count below 768px width. Defaults to 35. */
   mobileParticleCount?: number;
+  /**
+   * Opt-in "Design mockup" mode. When set, particle count is derived from
+   * the canvas's own area instead of `particleCount`/`mobileParticleCount`
+   * (`round(width * height / 3200 * density)`), and each particle gets a
+   * random base opacity (0.18–0.68) that flickers over time instead of the
+   * flat 0.8 alpha used otherwise. Left undefined, behavior is unchanged
+   * (existing consumers — e.g. /lab/background — stay exactly as they are).
+   */
+  density?: number;
   /** Multiplier applied to particle velocity. */
   speed?: number;
   /** Minimum particle radius, in px. */
@@ -93,6 +102,11 @@ const TAP_MOVE_THRESHOLD = 10;
 const TAP_DURATION_MS = 300;
 const TARGET_AUTO_CLEAR_MS = 8000;
 
+// Density-mode opacity — Claude Design "Proof/Contact particle field".
+const DENSITY_BASE_ALPHA_MIN = 0.18;
+const DENSITY_BASE_ALPHA_MAX = 0.68;
+const DENSITY_FLICKER_PERIOD_MS = 900;
+
 type Particle = {
   x: number;
   y: number;
@@ -100,6 +114,8 @@ type Particle = {
   vy: number;
   radius: number;
   color: string;
+  baseAlpha: number;
+  phase: number;
 };
 
 export default function ParticleField({
@@ -107,6 +123,7 @@ export default function ParticleField({
   particleColors = DEFAULT_COLORS,
   particleCount,
   mobileParticleCount = MOBILE_PARTICLE_COUNT,
+  density,
   speed = 1,
   minSize = 1,
   maxSize = 2.5,
@@ -134,15 +151,11 @@ export default function ParticleField({
       '(prefers-reduced-motion: reduce)'
     ).matches;
 
-    // Below 768px, mobileParticleCount always applies — independent of
-    // particleCount, which only governs ≥768px.
-    const resolvedCount =
-      window.innerWidth < MOBILE_BREAKPOINT
-        ? mobileParticleCount
-        : (particleCount ?? DESKTOP_PARTICLE_COUNT);
-
     let width = 0;
     let height = 0;
+    // Resolved once the canvas's own size is known, below — legacy mode
+    // (density undefined) keeps using window.innerWidth, exactly as before.
+    let resolvedCount = 0;
     let particles: Particle[] = [];
     let animationFrameId: number | null = null;
 
@@ -160,6 +173,9 @@ export default function ParticleField({
         vy: (Math.random() - 0.5) * 0.3 * speed,
         radius: Math.random() * (maxSize - minSize) + minSize,
         color: particleColors[i % particleColors.length],
+        baseAlpha:
+          Math.random() * (DENSITY_BASE_ALPHA_MAX - DENSITY_BASE_ALPHA_MIN) + DENSITY_BASE_ALPHA_MIN,
+        phase: Math.random() * Math.PI * 2,
       }));
     };
 
@@ -234,8 +250,17 @@ export default function ParticleField({
         ctx.globalAlpha = 1;
       }
 
-      ctx.globalAlpha = 0.8;
+      const now = performance.now();
       particles.forEach((p) => {
+        // Density mode: per-particle base alpha, flickering over time unless
+        // reduced motion is on (static base alpha, no oscillation). Legacy
+        // mode (density undefined): flat 0.8 for every particle, as before.
+        ctx.globalAlpha =
+          density === undefined
+            ? 0.8
+            : prefersReducedMotion
+              ? p.baseAlpha
+              : p.baseAlpha * (0.55 + 0.45 * Math.sin(now / DENSITY_FLICKER_PERIOD_MS + p.phase));
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
@@ -305,6 +330,14 @@ export default function ParticleField({
     const initialRect = parent.getBoundingClientRect();
     width = Math.round(initialRect.width);
     height = Math.round(initialRect.height);
+    // Below 768px, mobileParticleCount always applies in legacy mode —
+    // independent of particleCount, which only governs ≥768px there.
+    resolvedCount =
+      density !== undefined
+        ? Math.round(((width * height) / 3200) * density)
+        : window.innerWidth < MOBILE_BREAKPOINT
+          ? mobileParticleCount
+          : (particleCount ?? DESKTOP_PARTICLE_COUNT);
     applyCanvasBackingSize();
     createParticles();
     drawFrame();
@@ -564,6 +597,7 @@ export default function ParticleField({
     particleColors,
     particleCount,
     mobileParticleCount,
+    density,
     speed,
     minSize,
     maxSize,
