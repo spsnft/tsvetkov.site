@@ -1,0 +1,692 @@
+'use client';
+
+/**
+ * ParticleField — self-contained animated background: dark canvas with
+ * floating glowing particles (optionally connected by faint lines, and
+ * optionally attracted toward the pointer/touch).
+ *
+ * Extracted: 2026-09-13
+ * Source: tsvetkov.site, pre-rewrite version — src/components/NetworkBackground.tsx
+ *   (the background used on the main landing page at the time of extraction).
+ * Purpose: archive / reusable copy. This file has zero imports from the
+ *   original project (no design tokens, no other local modules) — only
+ *   `react` — so it can be copied into any other project as-is.
+ *
+ * Pointer attraction physics (radius, strength, pointer-position smoothing)
+ * are ported 1:1 from NetworkBackground.tsx, not reinvented.
+ */
+
+import { useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
+
+export interface ParticleFieldProps {
+  /** Canvas background color. Accepts 'transparent'. */
+  backgroundColor?: string;
+  /** Palette particles are drawn from, cycled in order. */
+  particleColors?: string[];
+  /**
+   * Particle count on viewports ≥768px wide. Defaults to 60.
+   * Below 768px, `mobileParticleCount` is used instead — always, even
+   * when this prop is set (they're independent, not a single override).
+   */
+  particleCount?: number;
+  /** Particle count below 768px width. Defaults to 35. */
+  mobileParticleCount?: number;
+  /**
+   * Opt-in "Design mockup" mode. When set, particle count is derived from
+   * the canvas's own area instead of `particleCount`/`mobileParticleCount`
+   * (`round(width * height / 3200 * density)`), and each particle gets a
+   * random base opacity (0.18–0.68) that flickers over time instead of the
+   * flat 0.8 alpha used otherwise. Left undefined, behavior is unchanged
+   * (existing consumers — e.g. /lab/background — stay exactly as they are).
+   */
+  density?: number;
+  /** Multiplier applied to particle velocity. */
+  speed?: number;
+  /** Minimum particle radius, in px. */
+  minSize?: number;
+  /** Maximum particle radius, in px. */
+  maxSize?: number;
+  /** Draw faint lines between nearby particles. */
+  connectionLines?: boolean;
+  /**
+   * When `connectionLines` is on: restrict lines to particles within the
+   * pointer's attraction radius (nothing drawn at rest), fading toward the
+   * radius edge, instead of the default always-on global proximity lines.
+   */
+  linesNearPointerOnly?: boolean;
+  /** Connection line color. */
+  lineColor?: string;
+  /** Connection line peak alpha (at zero distance). */
+  lineAlpha?: number;
+  /** Longest distance between two particles a line is drawn for. Defaults to 140. */
+  lineMaxDistance?: number;
+  /**
+   * Caps how many lines are drawn per frame, keeping the shortest ones
+   * first when there are more qualifying pairs than this. Left undefined
+   * (the default), every qualifying pair is drawn — as before.
+   */
+  lineMaxCount?: number;
+  /**
+   * Element whose pointer/touch events drive the attraction effect.
+   * Defaults to the canvas itself — correct as long as nothing with
+   * pointer-events:none sits on top of it. Pass a ref to an ancestor
+   * when the canvas is a non-interactive background layer instead.
+   */
+  interactionTarget?: RefObject<HTMLElement | null>;
+  /**
+   * Distance within which the pointer/touch target attracts particles
+   * (also bounds `linesNearPointerOnly`, which reuses this same radius).
+   * Defaults to 200.
+   */
+  attractionRadius?: number;
+  /**
+   * Caps how many of the particles within `attractionRadius` actually get
+   * pulled toward the target — the closest ones first; the rest keep
+   * moving as if the target weren't there. Left undefined (the default),
+   * every particle within radius is attracted — as before.
+   */
+  attractionMaxTargets?: number;
+  /**
+   * Floor on how close an attracted particle can get to the target — once
+   * within this distance, the pull on it stops (it doesn't overshoot or
+   * stack on the target point). Defaults to 0 (no floor).
+   */
+  attractionMinDistance?: number;
+  /**
+   * Touch-only "tap sets target" mode. Mouse behavior is unaffected.
+   *
+   * A tap (movement under 10px, under 300ms) on empty space sets a fixed
+   * attraction target at the tap point — particles keep being pulled toward
+   * it after the finger lifts. The next tap anywhere clears it, toggling
+   * back to free movement; it also auto-clears after 8s. A scroll gesture
+   * (movement over 10px) neither sets nor clears the target — while the
+   * finger is moving, live drag-follow attraction runs as usual, and on
+   * release it only reverts to free movement if no target is active. A tap
+   * on a link (or its descendant) is ignored entirely, so it doesn't
+   * interfere with native navigation. Defaults to false.
+   */
+  tapToggle?: boolean;
+  /** Extra class name for the canvas element. */
+  className?: string;
+}
+
+const DEFAULT_COLORS = ['#00E599', '#00A3FF', '#C084FC'];
+const MOBILE_BREAKPOINT = 768;
+const DESKTOP_PARTICLE_COUNT = 60;
+const MOBILE_PARTICLE_COUNT = 35;
+const DEFAULT_LINE_MAX_DISTANCE = 140;
+const DEFAULT_LINE_COLOR = '#ffffff';
+const DEFAULT_LINE_ALPHA = 0.15;
+
+// Pointer attraction — radius/strength/lerp ported as-is from
+// NetworkBackground.tsx; radius is now overridable (attractionRadius prop),
+// strength/lerp stay fixed (not exposed — brief only asks for radius, the
+// nearest-N cap, and the min-distance floor, all new below).
+const DEFAULT_ATTRACTION_RADIUS = 200;
+const ATTRACTION_STRENGTH = 2.2;
+const POINTER_LERP = 0.25;
+
+// tapToggle — touch-only tap-sets-target mode.
+const TAP_MOVE_THRESHOLD = 10;
+const TAP_DURATION_MS = 300;
+const TARGET_AUTO_CLEAR_MS = 8000;
+
+// Density-mode opacity — Claude Design "Proof/Contact particle field".
+const DENSITY_BASE_ALPHA_MIN = 0.18;
+const DENSITY_BASE_ALPHA_MAX = 0.68;
+const DENSITY_FLICKER_PERIOD_MS = 900;
+
+type Particle = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  color: string;
+  baseAlpha: number;
+  phase: number;
+};
+
+export default function ParticleField({
+  backgroundColor = '#0A0A0C',
+  particleColors = DEFAULT_COLORS,
+  particleCount,
+  mobileParticleCount = MOBILE_PARTICLE_COUNT,
+  density,
+  speed = 1,
+  minSize = 1,
+  maxSize = 2.5,
+  connectionLines = true,
+  linesNearPointerOnly = false,
+  lineColor = DEFAULT_LINE_COLOR,
+  lineAlpha = DEFAULT_LINE_ALPHA,
+  lineMaxDistance = DEFAULT_LINE_MAX_DISTANCE,
+  lineMaxCount,
+  interactionTarget,
+  attractionRadius = DEFAULT_ATTRACTION_RADIUS,
+  attractionMaxTargets,
+  attractionMinDistance = 0,
+  tapToggle = false,
+  className,
+}: ParticleFieldProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const parent = canvas.parentElement;
+    if (!parent) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    let width = 0;
+    let height = 0;
+    // Resolved once the canvas's own size is known, below — legacy mode
+    // (density undefined) keeps using window.innerWidth, exactly as before.
+    let resolvedCount = 0;
+    let particles: Particle[] = [];
+    let animationFrameId: number | null = null;
+
+    // Pointer/touch attraction state — mirrors NetworkBackground.tsx's
+    // `mouse` object. x/y is the smoothed attractor position actually used
+    // for the force; targetX/targetY is the raw last-known pointer
+    // position it eases toward.
+    const pointer = { x: -1000, y: -1000, targetX: -1000, targetY: -1000, active: false };
+
+    const createParticles = () => {
+      particles = Array.from({ length: resolvedCount }, (_, i) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.3 * speed,
+        vy: (Math.random() - 0.5) * 0.3 * speed,
+        radius: Math.random() * (maxSize - minSize) + minSize,
+        color: particleColors[i % particleColors.length],
+        baseAlpha:
+          Math.random() * (DENSITY_BASE_ALPHA_MAX - DENSITY_BASE_ALPHA_MIN) + DENSITY_BASE_ALPHA_MIN,
+        phase: Math.random() * Math.PI * 2,
+      }));
+    };
+
+    const applyCanvasBackingSize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const drawFrame = () => {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = backgroundColor;
+      ctx.fillRect(0, 0, width, height);
+
+      if (connectionLines) {
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 0.5;
+
+        if (linesNearPointerOnly) {
+          // Nothing at rest — only particles within the attraction radius
+          // get connected, fading out toward the radius edge. Candidates are
+          // collected first so a lineMaxCount cap can keep the shortest ones
+          // instead of whichever happened to be checked first.
+          if (pointer.active) {
+            const candidates: { p1: Particle; p2: Particle; dist: number; alpha: number }[] = [];
+
+            for (let i = 0; i < particles.length; i++) {
+              const p1 = particles[i];
+              const d1 = Math.hypot(pointer.x - p1.x, pointer.y - p1.y);
+              if (d1 > attractionRadius) continue;
+
+              for (let j = i + 1; j < particles.length; j++) {
+                const p2 = particles[j];
+                const d2 = Math.hypot(pointer.x - p2.x, pointer.y - p2.y);
+                if (d2 > attractionRadius) continue;
+
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist >= lineMaxDistance) continue;
+
+                const proximity = 1 - (d1 + d2) / 2 / attractionRadius;
+                const alpha = Math.max(0, proximity) * lineAlpha;
+                if (alpha <= 0) continue;
+
+                candidates.push({ p1, p2, dist, alpha });
+              }
+            }
+
+            candidates.sort((a, b) => a.dist - b.dist);
+            const toDraw =
+              lineMaxCount !== undefined ? candidates.slice(0, lineMaxCount) : candidates;
+
+            for (const { p1, p2, alpha } of toDraw) {
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.globalAlpha = alpha;
+              ctx.stroke();
+            }
+          }
+        } else {
+          // Default — always on, independent of the pointer.
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const p1 = particles[i];
+              const p2 = particles[j];
+              const dx = p1.x - p2.x;
+              const dy = p1.y - p2.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+
+              if (dist < lineMaxDistance) {
+                ctx.globalAlpha = (1 - dist / lineMaxDistance) * lineAlpha;
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        ctx.globalAlpha = 1;
+      }
+
+      const now = performance.now();
+      particles.forEach((p) => {
+        // Density mode: per-particle base alpha, flickering over time unless
+        // reduced motion is on (static base alpha, no oscillation). Legacy
+        // mode (density undefined): flat 0.8 for every particle, as before.
+        ctx.globalAlpha =
+          density === undefined
+            ? 0.8
+            : prefersReducedMotion
+              ? p.baseAlpha
+              : p.baseAlpha * (0.55 + 0.45 * Math.sin(now / DENSITY_FLICKER_PERIOD_MS + p.phase));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+      ctx.globalAlpha = 1;
+    };
+
+    const step = () => {
+      // Ease the attractor toward the last-known pointer position — snap
+      // on the first active frame, same as the original.
+      if (pointer.active) {
+        if (pointer.x === -1000) {
+          pointer.x = pointer.targetX;
+          pointer.y = pointer.targetY;
+        } else {
+          pointer.x += (pointer.targetX - pointer.x) * POINTER_LERP;
+          pointer.y += (pointer.targetY - pointer.y) * POINTER_LERP;
+        }
+      } else {
+        pointer.x = -1000;
+        pointer.y = -1000;
+      }
+
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+      });
+
+      if (pointer.active) {
+        // Only the particles closest to the target are attracted (capped by
+        // attractionMaxTargets) — the rest, even inside the radius, keep
+        // moving on their own via the drift above.
+        const withinRadius: { p: Particle; dx: number; dy: number; dist: number }[] = [];
+        for (const p of particles) {
+          const dx = pointer.x - p.x;
+          const dy = pointer.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < attractionRadius) withinRadius.push({ p, dx, dy, dist });
+        }
+
+        withinRadius.sort((a, b) => a.dist - b.dist);
+        const attracted =
+          attractionMaxTargets !== undefined
+            ? withinRadius.slice(0, attractionMaxTargets)
+            : withinRadius;
+
+        for (const { p, dx, dy, dist } of attracted) {
+          // Floor on how close a particle may approach the target — once
+          // within it, the pull on this particle stops for the frame.
+          if (dist <= attractionMinDistance) continue;
+          const force = (attractionRadius - dist) / attractionRadius;
+          p.x += (dx / dist) * force * ATTRACTION_STRENGTH;
+          p.y += (dy / dist) * force * ATTRACTION_STRENGTH;
+        }
+      }
+
+      drawFrame();
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    const startLoop = () => {
+      if (animationFrameId !== null) return;
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    const stopLoop = () => {
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    };
+
+    // Initial size comes from the parent's own box, read directly rather
+    // than via canvas.clientWidth/clientHeight — the canvas fills it via
+    // CSS 100%/100%, but we size the backing store from the source of
+    // truth so it doesn't depend on that CSS relationship at all.
+    const initialRect = parent.getBoundingClientRect();
+    width = Math.round(initialRect.width);
+    height = Math.round(initialRect.height);
+    // Below 768px, mobileParticleCount always applies in legacy mode —
+    // independent of particleCount, which only governs ≥768px there.
+    resolvedCount =
+      density !== undefined
+        ? Math.round(((width * height) / 3200) * density)
+        : window.innerWidth < MOBILE_BREAKPOINT
+          ? mobileParticleCount
+          : (particleCount ?? DESKTOP_PARTICLE_COUNT);
+    applyCanvasBackingSize();
+    createParticles();
+    drawFrame();
+
+    // Resize never recreates particles — existing positions are rescaled
+    // proportionally to the new size so motion continues smoothly instead
+    // of jumping to a fresh random layout.
+    const handleResize = (newWidthRaw: number, newHeightRaw: number) => {
+      const newWidth = Math.round(newWidthRaw);
+      const newHeight = Math.round(newHeightRaw);
+      if (newWidth <= 0 || newHeight <= 0) return;
+      if (newWidth === width && newHeight === height) return;
+
+      if (width > 0 && height > 0) {
+        const scaleX = newWidth / width;
+        const scaleY = newHeight / height;
+        particles.forEach((p) => {
+          p.x *= scaleX;
+          p.y *= scaleY;
+        });
+      }
+
+      width = newWidth;
+      height = newHeight;
+      applyCanvasBackingSize();
+      drawFrame();
+    };
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      const { width: w, height: h } = entry.contentRect;
+      handleResize(w, h);
+    });
+    resizeObserver.observe(parent);
+
+    let observer: IntersectionObserver | null = null;
+
+    if (!prefersReducedMotion) {
+      if (typeof IntersectionObserver !== 'undefined') {
+        observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) startLoop();
+            else stopLoop();
+          },
+          { threshold: 0 }
+        );
+        observer.observe(canvas);
+      } else {
+        startLoop();
+      }
+    }
+    // else: prefers-reduced-motion — leave the static frame already drawn
+    // above, and skip attaching the pointer/touch listeners below entirely
+    // (no attraction).
+
+    const target: HTMLElement = interactionTarget?.current ?? canvas;
+    let removeInteractionListeners: (() => void) | null = null;
+
+    if (!prefersReducedMotion) {
+      // Mouse — via Pointer Events, ignoring touch input (handled
+      // separately below via Touch Events, so a touch gesture that starts
+      // scrolling and fires pointercancel doesn't lose tracking).
+      const onPointerMove = (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return;
+        const rect = canvas.getBoundingClientRect();
+        pointer.targetX = e.clientX - rect.left;
+        pointer.targetY = e.clientY - rect.top;
+        pointer.active = true;
+      };
+      const onPointerDown = (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return;
+        onPointerMove(e);
+      };
+      const onPointerDeactivate = (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return;
+        pointer.active = false;
+      };
+
+      target.addEventListener('pointermove', onPointerMove, { passive: true });
+      target.addEventListener('pointerdown', onPointerDown, { passive: true });
+      target.addEventListener('pointerup', onPointerDeactivate, { passive: true });
+      target.addEventListener('pointerleave', onPointerDeactivate, { passive: true });
+      target.addEventListener('pointercancel', onPointerDeactivate, { passive: true });
+
+      // Touch — via Touch Events (as in NetworkBackground.tsx), not
+      // Pointer Events: on touch devices, native scrolling fires
+      // pointercancel and pointermove stops, but touchmove keeps firing
+      // for the whole gesture, so attraction keeps tracking the finger
+      // while the page scrolls.
+      if (tapToggle) {
+        // Sticky tap-set target, on top of the same live drag-follow as
+        // below. `liveTouchActive` guards the auto-clear timer: if it fires
+        // mid-gesture, the ongoing touchmove/touchend handlers are already
+        // driving `pointer` and stay in charge instead of it.
+        let activeTarget: { x: number; y: number } | null = null;
+        let targetClearTimer: ReturnType<typeof setTimeout> | null = null;
+        let liveTouchActive = false;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartTime = 0;
+        let touchMoved = false;
+        let touchIsLink = false;
+
+        const clearActiveTarget = () => {
+          activeTarget = null;
+          if (targetClearTimer !== null) {
+            clearTimeout(targetClearTimer);
+            targetClearTimer = null;
+          }
+        };
+
+        const setActiveTarget = (x: number, y: number) => {
+          activeTarget = { x, y };
+          if (targetClearTimer !== null) clearTimeout(targetClearTimer);
+          targetClearTimer = setTimeout(() => {
+            activeTarget = null;
+            targetClearTimer = null;
+            if (!liveTouchActive) pointer.active = false;
+          }, TARGET_AUTO_CLEAR_MS);
+        };
+
+        // Shared touchend/touchcancel finalizer. `consideredTap` toggles the
+        // sticky target only for a genuine tap — a scroll release (or a
+        // cancelled gesture) leaves it exactly as it was.
+        const releaseTouch = (consideredTap: boolean) => {
+          liveTouchActive = false;
+
+          if (consideredTap) {
+            if (activeTarget) {
+              clearActiveTarget();
+            } else {
+              setActiveTarget(touchStartX, touchStartY);
+            }
+          }
+
+          if (activeTarget) {
+            pointer.targetX = activeTarget.x;
+            pointer.targetY = activeTarget.y;
+            pointer.active = true;
+          } else {
+            pointer.active = false;
+          }
+        };
+
+        const onTapToggleTouchStart = (e: TouchEvent) => {
+          const touch = e.touches[0];
+          if (!touch) return;
+
+          const touchTarget = touch.target as Element | null;
+          touchIsLink = !!touchTarget?.closest?.('a');
+          if (touchIsLink) return;
+
+          const rect = canvas.getBoundingClientRect();
+          touchStartX = touch.clientX - rect.left;
+          touchStartY = touch.clientY - rect.top;
+          touchStartTime = performance.now();
+          touchMoved = false;
+          liveTouchActive = true;
+
+          // Live drag-follow starts immediately, same as the plain-touch mode.
+          pointer.targetX = touchStartX;
+          pointer.targetY = touchStartY;
+          pointer.active = true;
+        };
+
+        const onTapToggleTouchMove = (e: TouchEvent) => {
+          if (touchIsLink) return;
+          const touch = e.touches[0];
+          if (!touch) return;
+
+          const rect = canvas.getBoundingClientRect();
+          const x = touch.clientX - rect.left;
+          const y = touch.clientY - rect.top;
+
+          if (!touchMoved && Math.hypot(x - touchStartX, y - touchStartY) > TAP_MOVE_THRESHOLD) {
+            touchMoved = true;
+          }
+
+          pointer.targetX = x;
+          pointer.targetY = y;
+          pointer.active = true;
+        };
+
+        const onTapToggleTouchEnd = () => {
+          if (touchIsLink) {
+            touchIsLink = false;
+            return;
+          }
+          const duration = performance.now() - touchStartTime;
+          releaseTouch(!touchMoved && duration < TAP_DURATION_MS);
+        };
+
+        const onTapToggleTouchCancel = () => {
+          if (touchIsLink) {
+            touchIsLink = false;
+            return;
+          }
+          releaseTouch(false);
+        };
+
+        target.addEventListener('touchstart', onTapToggleTouchStart, { passive: true });
+        target.addEventListener('touchmove', onTapToggleTouchMove, { passive: true });
+        target.addEventListener('touchend', onTapToggleTouchEnd, { passive: true });
+        target.addEventListener('touchcancel', onTapToggleTouchCancel, { passive: true });
+
+        removeInteractionListeners = () => {
+          target.removeEventListener('pointermove', onPointerMove);
+          target.removeEventListener('pointerdown', onPointerDown);
+          target.removeEventListener('pointerup', onPointerDeactivate);
+          target.removeEventListener('pointerleave', onPointerDeactivate);
+          target.removeEventListener('pointercancel', onPointerDeactivate);
+          target.removeEventListener('touchstart', onTapToggleTouchStart);
+          target.removeEventListener('touchmove', onTapToggleTouchMove);
+          target.removeEventListener('touchend', onTapToggleTouchEnd);
+          target.removeEventListener('touchcancel', onTapToggleTouchCancel);
+          clearActiveTarget();
+        };
+      } else {
+        const onTouchMove = (e: TouchEvent) => {
+          if (e.touches.length > 0) {
+            const rect = canvas.getBoundingClientRect();
+            pointer.targetX = e.touches[0].clientX - rect.left;
+            pointer.targetY = e.touches[0].clientY - rect.top;
+            pointer.active = true;
+          }
+        };
+        const onTouchEnd = () => {
+          pointer.active = false;
+        };
+
+        target.addEventListener('touchstart', onTouchMove, { passive: true });
+        target.addEventListener('touchmove', onTouchMove, { passive: true });
+        target.addEventListener('touchend', onTouchEnd, { passive: true });
+
+        removeInteractionListeners = () => {
+          target.removeEventListener('pointermove', onPointerMove);
+          target.removeEventListener('pointerdown', onPointerDown);
+          target.removeEventListener('pointerup', onPointerDeactivate);
+          target.removeEventListener('pointerleave', onPointerDeactivate);
+          target.removeEventListener('pointercancel', onPointerDeactivate);
+          target.removeEventListener('touchstart', onTouchMove);
+          target.removeEventListener('touchmove', onTouchMove);
+          target.removeEventListener('touchend', onTouchEnd);
+        };
+      }
+    }
+
+    return () => {
+      stopLoop();
+      resizeObserver.disconnect();
+      observer?.disconnect();
+      removeInteractionListeners?.();
+    };
+  }, [
+    backgroundColor,
+    particleColors,
+    particleCount,
+    mobileParticleCount,
+    density,
+    speed,
+    minSize,
+    maxSize,
+    connectionLines,
+    linesNearPointerOnly,
+    lineColor,
+    lineAlpha,
+    lineMaxDistance,
+    lineMaxCount,
+    interactionTarget,
+    attractionRadius,
+    attractionMaxTargets,
+    attractionMinDistance,
+    tapToggle,
+  ]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className={className}
+      style={{
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        background: backgroundColor,
+      }}
+    />
+  );
+}
